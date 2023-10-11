@@ -44,7 +44,7 @@
     @include mixins.row-space-between-center();
 
     @include mixins.tablet {
-      width: 60%;
+      width: 50%;
     }
   }
 }
@@ -109,7 +109,7 @@
     align-items: center;
     width: 100%;
     padding: 12px;
-    @include mixins.transparentBackground(0.5, config.$yellow);
+    @include mixins.transparentBackground(0.5, config.$white);
     box-shadow: config.$card-shadow;
 
     p {

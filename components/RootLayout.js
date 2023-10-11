@@ -10,10 +10,27 @@ import logo from "@/assets/logo.png";
 export default function RootLayout({ children }) {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
   const [appLoader, setAppLoader] = useState(true);
 
   const router = useRouter();
   let pathname = router.pathname;
+
+  const handleResize = () => {
+    if (window.innerWidth < 700) {
+      setScreenSize("mobile");
+    } else if (window.innerWidth > 700 && window.innerWidth < 1200) {
+      setScreenSize("tablet");
+    } else {
+      setScreenSize("desktop");
+    }
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     navigationTopBar.map((nav) => {

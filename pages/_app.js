@@ -8,8 +8,8 @@ export default function App({ Component, pageProps }) {
     <StateProvider>
       <RootLayout>
         <DefaultSeo
-          title="کلینیک تخصصی زیبایی بل کلاس"
-          description="نگهبان زندگی"
+          title="اشاره"
+          description="اشاره"
           openGraph={{
             type: "website",
             locale: "fa_IR",

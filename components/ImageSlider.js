@@ -1,10 +1,12 @@
 import { useState, useContext, Fragment, useEffect } from "react";
+import { StateContext } from "@/context/stateContext";
 import classes from "./ImageSlider.module.scss";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Image from "next/legacy/image";
 
 export default function ImageSlider({ sliderData }) {
+  const { screenSize, setScreenSize } = useContext(StateContext);
   const [current, setCurrent] = useState(0);
   const [displayInfo, setDisplayInfo] = useState(false);
 
@@ -16,12 +18,12 @@ export default function ImageSlider({ sliderData }) {
       setCurrent((current) => (current === length - 1 ? 0 : current + 1));
       setTimeout(() => {
         setDisplayInfo(true);
-      }, 100);
+      }, 20);
     }, 5000);
 
     const initialDisplayTimer = setTimeout(() => {
       setDisplayInfo(true);
-    }, 100);
+    }, 20);
 
     return () => {
       clearTimeout(slideTimer);
@@ -41,7 +43,7 @@ export default function ImageSlider({ sliderData }) {
     }
     setTimeout(() => {
       setDisplayInfo(true);
-    }, 100);
+    }, 20);
   };
 
   if (!Array.isArray(sliderData) || sliderData.length <= 0) {
@@ -50,14 +52,18 @@ export default function ImageSlider({ sliderData }) {
 
   return (
     <section className={classes.slider}>
-      <ArrowBackIosIcon
-        className={classes.leftArrow}
-        onClick={() => slideImage("prev")}
-      />
-      <ArrowForwardIosIcon
-        className={classes.rightArrow}
-        onClick={() => slideImage("next")}
-      />
+      {screenSize !== "mobile" && (
+        <Fragment>
+          <ArrowBackIosIcon
+            className={classes.leftArrow}
+            onClick={() => slideImage("prev")}
+          />
+          <ArrowForwardIosIcon
+            className={classes.rightArrow}
+            onClick={() => slideImage("next")}
+          />
+        </Fragment>
+      )}
       {sliderData.map((slide, index) => {
         return (
           <div
