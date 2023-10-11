@@ -40,7 +40,7 @@
   }
 
   .largeNavigation {
-    width: 50%;
+    width: 40%;
     @include mixins.row-space-between-center();
 
     @include mixins.tablet {
@@ -50,12 +50,13 @@
 }
 
 .nav {
-  font-weight: bold !important;
+  color: config.$white;
+  font-size: config.$big-font;
 
   @include mixins.desktop {
     &:hover {
       cursor: pointer;
-      color: config.$gold3;
+      color: config.$white;
     }
   }
 }
@@ -72,8 +73,8 @@
 }
 
 .navActive {
-  color: config.$gold3;
-  font-weight: bold !important;
+  font-size: config.$big-font;
+  color: config.$yellow;
 }
 
 .smallMenu {
@@ -84,7 +85,7 @@
   }
 
   .menuIcon {
-    background: config.$gold1;
+    background: config.$yellow;
 
     @include mixins.desktop {
       &:hover {
@@ -96,7 +97,6 @@
   .topBar {
     width: 100%;
     padding: 12px;
-    height: 50px;
     @include mixins.row-space-between-center();
   }
 
@@ -109,7 +109,7 @@
     align-items: center;
     width: 100%;
     padding: 12px;
-    background: config.$gold1;
+    @include mixins.transparentBackground(0.5, config.$yellow);
     box-shadow: config.$card-shadow;
 
     p {
@@ -119,24 +119,6 @@
 
     @include mixins.desktop {
       display: none;
-    }
-
-    .buttons {
-      display: flex;
-      flex-direction: column;
-
-      button {
-        @include mixins.button(config.$black, config.$black, config.$gold3);
-        margin: 12px 0px;
-
-        @include mixins.desktop {
-          &:hover {
-            cursor: pointer;
-            background: config.$white;
-            color: config.$black;
-          }
-        }
-      }
     }
   }
 }

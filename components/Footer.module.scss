@@ -7,14 +7,13 @@
   align-items: center;
   width: 100%;
   margin-top: 250px;
-  border-top-left-radius: 200px;
-  background: config.$gold1;
+  background: config.$white;
   padding: 12px;
   height: 100%;
-  min-height: 250px;
+  min-height: 100px;
 
   .scroll {
-    background: config.$gold1;
+    background: config.$white;
     border-radius: 50px;
     position: relative;
     bottom: 20px;
@@ -38,7 +37,7 @@
     flex-direction: column;
 
     button {
-      @include mixins.button(config.$black, config.$black, config.$gold3);
+      @include mixins.button(config.$black, config.$black, config.$white);
       margin: 12px;
 
       @include mixins.desktop {

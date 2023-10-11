@@ -4,6 +4,10 @@
 .slider {
   position: relative;
   height: 100vh;
+
+  @include mixins.mobile {
+    height: 600px;
+  }
 }
 
 .rightArrow {
@@ -11,7 +15,7 @@
   height: 100%;
   right: 20px;
   font-size: 2.5rem;
-  color: white;
+  color: config.$white;
   z-index: 10;
   user-select: none;
   cursor: pointer;
@@ -22,7 +26,7 @@
   height: 100%;
   left: 20px;
   font-size: 2.5rem;
-  color: white;
+  color: config.$white;
   z-index: 10;
   user-select: none;
   cursor: pointer;
@@ -35,5 +39,32 @@
 
 .active {
   opacity: 1;
-  transition-duration: 1.5s;
+  transition-duration: 0.5s;
+}
+
+.information {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  width: config.$content-width;
+  text-align: right;
+  color: config.$white;
+
+  h1 {
+    margin-bottom: 12px;
+  }
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+}
+
+.count {
+  position: absolute;
+  z-index: 2;
+  bottom: 20px;
+  left: 20px;
+  color: config.$white;
 }

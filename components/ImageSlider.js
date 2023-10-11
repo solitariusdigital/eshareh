@@ -6,14 +6,42 @@ import Image from "next/legacy/image";
 
 export default function ImageSlider({ sliderData }) {
   const [current, setCurrent] = useState(0);
+  const [displayInfo, setDisplayInfo] = useState(false);
+
   const length = sliderData.length;
 
-  const nextSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);
-  };
+  useEffect(() => {
+    const slideTimer = setTimeout(() => {
+      setDisplayInfo(false);
+      setCurrent((current) => (current === length - 1 ? 0 : current + 1));
+      setTimeout(() => {
+        setDisplayInfo(true);
+      }, 100);
+    }, 5000);
 
-  const prevSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
+    const initialDisplayTimer = setTimeout(() => {
+      setDisplayInfo(true);
+    }, 100);
+
+    return () => {
+      clearTimeout(slideTimer);
+      clearTimeout(initialDisplayTimer);
+    };
+  }, [current, length]);
+
+  const slideImage = (type) => {
+    setDisplayInfo(false);
+    switch (type) {
+      case "next":
+        setCurrent((current) => (current === length - 1 ? 0 : current + 1));
+        break;
+      case "prev":
+        setCurrent((current) => (current === 0 ? length - 1 : current - 1));
+        break;
+    }
+    setTimeout(() => {
+      setDisplayInfo(true);
+    }, 100);
   };
 
   if (!Array.isArray(sliderData) || sliderData.length <= 0) {
@@ -22,8 +50,14 @@ export default function ImageSlider({ sliderData }) {
 
   return (
     <section className={classes.slider}>
-      <ArrowBackIosIcon className={classes.leftArrow} onClick={prevSlide} />
-      <ArrowForwardIosIcon className={classes.rightArrow} onClick={nextSlide} />
+      <ArrowBackIosIcon
+        className={classes.leftArrow}
+        onClick={() => slideImage("prev")}
+      />
+      <ArrowForwardIosIcon
+        className={classes.rightArrow}
+        onClick={() => slideImage("next")}
+      />
       {sliderData.map((slide, index) => {
         return (
           <div
@@ -38,10 +72,22 @@ export default function ImageSlider({ sliderData }) {
                 alt="image"
                 layout="fill"
                 objectFit="cover"
-                loading="eager"
                 priority
               />
             )}
+            {displayInfo && (
+              <div className={classes.information}>
+                <h1 className={`animate__animated animate__fadeInRight`}>
+                  {slide.title}
+                </h1>
+                <h3 className={`animate__animated animate__fadeInRight`}>
+                  {slide.project}
+                </h3>
+              </div>
+            )}
+            <h3 className={classes.count}>
+              {current + 1} / {length}
+            </h3>
           </div>
         );
       })}

@@ -52,14 +52,13 @@ export default function Menu() {
         <div className={classes.largeNavigation}>
           {navigationTopBar
             .map((nav, index) => (
-              <Fragment key={index}>
-                <div
-                  className={!nav.active ? classes.nav : classes.navActive}
-                  onClick={() => activateNav(nav.link, index)}
-                >
-                  <p>{nav.title}</p>
-                </div>
-              </Fragment>
+              <a
+                key={index}
+                className={!nav.active ? classes.nav : classes.navActive}
+                onClick={() => activateNav(nav.link, index)}
+              >
+                {nav.title}
+              </a>
             ))
             .reverse()}
         </div>
@@ -117,24 +116,6 @@ export default function Menu() {
                     </p>
                   </div>
                 )}
-              </div>
-              <div className={classes.buttons}>
-                <button
-                  onClick={() => {
-                    Router.push("/doctors");
-                    setMenuMobile(false);
-                  }}
-                >
-                  رزرو مراجعه حضوری
-                </button>
-                <button
-                  onClick={() => {
-                    Router.push("/assessment");
-                    setMenuMobile(false);
-                  }}
-                >
-                  مشاوره آنلاین رایگان
-                </button>
               </div>
             </div>
           </Fragment>

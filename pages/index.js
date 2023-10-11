@@ -8,21 +8,18 @@ export default function Home() {
   const sliderData = [
     {
       image: one,
+      title: "صنعت خشکبار و حبوبات کوروش",
+      project: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
     },
     {
       image: two,
+      title: "شرکت آریان کیمیا تک",
+      project: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
     },
     {
       image: three,
-    },
-    {
-      image: one,
-    },
-    {
-      image: two,
-    },
-    {
-      image: three,
+      title: "نستله ایران",
+      project: "طراحی بسته‌بندی نوروز",
     },
   ];
 

@@ -35,7 +35,7 @@ $screen-large: 2000px;
     &:hover {
       cursor: pointer;
       background: config.$black;
-      color: config.$gold3;
+      color: config.$white;
     }
   }
 }
@@ -48,7 +48,7 @@ $screen-large: 2000px;
   font-size: config.$small-font;
   outline: none;
   border-radius: 12px;
-  border: 1px solid config.$gold3;
+  border: 1px solid config.$white;
   font-weight: 300;
 
   &:focus {
@@ -69,7 +69,7 @@ $screen-large: 2000px;
   background: config.$background;
   color: config.$black;
   font-size: config.$small-font;
-  border: 1px solid config.$gold3;
+  border: 1px solid config.$white;
 
   &:focus {
     outline: none;
