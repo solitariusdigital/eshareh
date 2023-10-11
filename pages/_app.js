@@ -13,8 +13,8 @@ export default function App({ Component, pageProps }) {
           openGraph={{
             type: "website",
             locale: "fa_IR",
-            url: "https://belleclass.com",
-            siteName: "Belle Class",
+            url: "https://eshareh.com",
+            siteName: "Eshareh",
           }}
         />
         <Component {...pageProps} />
