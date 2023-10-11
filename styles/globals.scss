@@ -6,7 +6,7 @@
   padding: 0;
   margin: 0;
   font-family: config.$font;
-  line-height: 30px;
+  font-weight: 300;
 }
 
 html {
@@ -20,6 +20,24 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+h1 {
+  font-size: 45px !important;
+  @include mixins.mobile {
+    font-size: 27px !important;
+  }
+}
+
+h2 {
+  font-size: 27px !important;
+  @include mixins.mobile {
+    font-size: 19px;
+  }
+}
+
+h3 {
+  font-size: 17px !important;
 }
 
 .main {

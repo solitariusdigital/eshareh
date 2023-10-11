@@ -52,14 +52,6 @@
   text-align: right;
   color: config.$white;
 
-  h1 {
-    margin-bottom: 12px;
-  }
-
-  .count {
-    margin-top: 12px;
-  }
-
   @include mixins.mobile {
     width: calc(100% - 24px);
   }
