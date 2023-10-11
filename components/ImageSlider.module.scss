@@ -1,0 +1,39 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.slider {
+  position: relative;
+  height: 100vh;
+}
+
+.rightArrow {
+  position: absolute;
+  height: 100%;
+  right: 20px;
+  font-size: 2.5rem;
+  color: white;
+  z-index: 10;
+  user-select: none;
+  cursor: pointer;
+}
+
+.leftArrow {
+  position: absolute;
+  height: 100%;
+  left: 20px;
+  font-size: 2.5rem;
+  color: white;
+  z-index: 10;
+  user-select: none;
+  cursor: pointer;
+}
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.active {
+  opacity: 1;
+  transition-duration: 1.5s;
+}

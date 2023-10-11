@@ -50,7 +50,6 @@
 }
 
 .nav {
-  border-bottom: 1px solid config.$background;
   font-weight: bold !important;
 
   @include mixins.desktop {
@@ -59,22 +58,13 @@
       color: config.$gold3;
     }
   }
-
-  @include mixins.mobile {
-    border-bottom: 1px solid config.$gold1;
-  }
 }
 
 .nav::after {
   content: "";
   display: block;
   width: 0;
-  border-bottom: 1px solid config.$gold3;
   transition: width 0.3s;
-
-  @include mixins.mobile {
-    border-bottom: 1px solid config.$gold1;
-  }
 }
 
 .nav:hover::after {
@@ -82,13 +72,8 @@
 }
 
 .navActive {
-  border-bottom: 1px solid config.$gold3;
   color: config.$gold3;
   font-weight: bold !important;
-
-  @include mixins.mobile {
-    border-bottom: 1px solid config.$gold1;
-  }
 }
 
 .smallMenu {
