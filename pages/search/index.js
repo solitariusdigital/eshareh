@@ -23,7 +23,7 @@ export default function Search() {
     <Fragment>
       <NextSeo
         title="جستجو"
-        description="جستجو ... پروژه، مشتری، نوع، سال"
+        description="جستجو ... پروژه، کارفرما، نوع، سال"
         openGraph={{
           type: "website",
           locale: "fa_IR",
@@ -39,7 +39,7 @@ export default function Search() {
             جستجو
           </div>
           <input
-            placeholder="جستجو ... پروژه، مشتری، نوع، سال"
+            placeholder="جستجو ... پروژه، کارفرما، نوع، سال"
             type="text"
             id="search"
             name="search"
