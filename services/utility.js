@@ -40,21 +40,67 @@ export function abbreviateNumber(num) {
   }).format(num);
 }
 
-export function calculatePercentage(percentage, value) {
-  return value * (percentage / 100);
+export function faToEnDigits(input) {
+  if (input == undefined) return;
+  var returnModel = "",
+    symbolMap = {
+      "۱": "1",
+      "۲": "2",
+      "۳": "3",
+      "۴": "4",
+      "۵": "5",
+      "۶": "6",
+      "۷": "7",
+      "۸": "8",
+      "۹": "9",
+      "۰": "0",
+    };
+  input = input.toString();
+  for (var i = 0; i < input.length; i++)
+    if (symbolMap[input[i]]) returnModel += symbolMap[input[i]];
+    else returnModel += input[i];
+  return returnModel;
 }
 
-export function getMonthName(number) {
-  const date = new Date();
-  date.setMonth(monthNumber + 2);
-  return date.toLocaleString("fa-IR", { month: "long" });
+export function enToFaDigits(input) {
+  if (input == undefined) return;
+  var returnModel = "",
+    symbolMap = {
+      1: "۱",
+      2: "۲",
+      3: "۳",
+      4: "۴",
+      5: "۵",
+      6: "۶",
+      7: "۷",
+      8: "۸",
+      9: "۹",
+      0: "۰",
+    };
+  input = input.toString();
+  for (var i = 0; i < input.length; i++)
+    if (symbolMap[input[i]]) returnModel += symbolMap[input[i]];
+    else returnModel += input[i];
+  return returnModel;
 }
 
-export function toFarsiNumber(number) {
-  const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-  return number
-    .toString()
-    .split("")
-    .map((x) => farsiDigits[x])
-    .join("");
+export function onlyLettersAndNumbers(str) {
+  return Boolean(str.match(/^[A-Za-z0-9]*$/));
+}
+
+// upload image into s3 bucket
+export async function uploadImage(image, imageId, imageFolder, format) {
+  const file = image;
+  const res = await fetch(`/api/image?file=${imageFolder}/${imageId}${format}`);
+  const { url, fields } = await res.json();
+
+  const formData = new FormData();
+  Object.entries({ ...fields, file }).forEach(([key, value]) => {
+    formData.append(key, value);
+  });
+
+  await fetch(url, {
+    method: "POST",
+    body: formData,
+  });
 }
