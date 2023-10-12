@@ -11,23 +11,23 @@ export const StateProvider = (props) => {
   );
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
-      title: "بل کلاس",
-      link: "/",
+      title: "پروژه",
+      link: "/work",
       active: false,
     },
     {
-      title: "پرتال",
-      link: "/portal",
+      title: "درباره",
+      link: "/about",
       active: false,
     },
     {
-      title: "پزشکان",
-      link: "/doctors",
+      title: "اخبار",
+      link: "/news",
       active: false,
     },
     {
-      title: "خدمات کلینیک",
-      link: "/expertises",
+      title: "تماس",
+      link: "/contact",
       active: false,
     },
   ]);
