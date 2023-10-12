@@ -126,8 +126,8 @@ $screen-large: 2000px;
 }
 
 @mixin background-anime() {
-  -webkit-animation: kenburns-top 50s ease-out both;
-  animation: kenburns-top 50s ease-out both;
+  -webkit-animation: kenburns-top 15s ease-out both;
+  animation: kenburns-top 15s ease-out both;
 
   @-webkit-keyframes kenburns-top {
     0% {

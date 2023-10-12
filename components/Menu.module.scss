@@ -9,10 +9,6 @@
     width: 100%;
   }
 
-  @include mixins.tablet {
-    width: 100%;
-  }
-
   @include mixins.desktop {
     padding: 12px 0px;
   }

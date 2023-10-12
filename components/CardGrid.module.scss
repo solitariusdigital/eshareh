@@ -1,13 +1,14 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.container,
+.gridDesktop,
 .reverse {
   display: flex;
   flex-direction: row;
-  height: 400px;
+  height: 450px;
   margin: 12px auto;
   width: config.$content-width;
+  max-width: config.$max-width;
 
   .hero {
     position: relative;
@@ -16,6 +17,7 @@
     justify-content: space-between;
     height: 100%;
     width: 50%;
+    margin-right: 12px;
 
     h3 {
       position: absolute;
@@ -23,7 +25,7 @@
       bottom: 0px;
       width: 100%;
       text-align: right;
-      padding: 4px;
+      padding-top: 8px;
       background: config.$white;
     }
 
@@ -32,36 +34,87 @@
         cursor: pointer;
       }
     }
+
+    .image {
+      &:hover {
+        @include mixins.background-anime();
+      }
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(35%, 1fr));
+    gap: 12px;
+    width: 50%;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+      text-align: right;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .box {
+        position: relative;
+        margin-bottom: 8px;
+
+        .image {
+          &:hover {
+            @include mixins.background-anime();
+          }
+        }
+      }
+    }
   }
 }
 
 .reverse {
   flex-direction: row-reverse;
+
+  .hero {
+    margin-left: 12px;
+    margin-right: 0px;
+  }
 }
 
-.grid {
+.responsive {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
   gap: 12px;
-  width: 50%;
+  width: config.$content-width;
+  margin: auto;
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    width: calc(100% - 24px);
+  }
 
   div {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
     text-align: right;
+    height: 300px;
+    margin-bottom: 20px;
 
-    @include mixins.desktop {
-      &:hover {
-        cursor: pointer;
-      }
+    &:hover {
+      cursor: pointer;
     }
 
-    .image {
+    .box {
       position: relative;
       margin-bottom: 8px;
+
+      .image {
+        &:hover {
+          @include mixins.background-anime();
+        }
+      }
     }
   }
 }

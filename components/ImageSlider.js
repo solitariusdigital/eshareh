@@ -4,6 +4,7 @@ import classes from "./ImageSlider.module.scss";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Image from "next/legacy/image";
+import { enToFaDigits } from "@/services/utility";
 
 export default function ImageSlider({ sliderData }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -98,7 +99,7 @@ export default function ImageSlider({ sliderData }) {
                   </h2>
                 )}
                 <h3>
-                  {current + 1} / {length}
+                  {enToFaDigits(current + 1)} / {enToFaDigits(length)}
                 </h3>
               </div>
             )}

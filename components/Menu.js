@@ -42,7 +42,7 @@ export default function Menu() {
       <div className={classes.largeMenu}>
         <Image
           className={classes.logo}
-          width={50}
+          width={120}
           height={50}
           src={logo}
           alt="logo"
@@ -67,7 +67,7 @@ export default function Menu() {
         <div className={classes.topBar}>
           <Image
             className={classes.logo}
-            width={50}
+            width={120}
             height={50}
             src={logo}
             alt="logo"

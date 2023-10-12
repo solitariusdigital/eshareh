@@ -5,6 +5,8 @@ import Image from "next/legacy/image";
 import one from "@/assets/one.jpg";
 import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
+import four from "@/assets/one.jpg";
+import five from "@/assets/two.jpg";
 
 export default function CardGrid({ direction }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -12,25 +14,25 @@ export default function CardGrid({ direction }) {
   return (
     <Fragment>
       {screenSize === "desktop" && (
-        <div className={direction ? classes.container : classes.reverse}>
+        <div className={direction ? classes.gridDesktop : classes.reverse}>
           <div className={classes.hero}>
-            <div className={classes.image}>
-              <Image
-                src={one}
-                blurDataURL={one}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
-            </div>
+            <Image
+              className={classes.image}
+              src={one}
+              blurDataURL={one}
+              placeholder="blur"
+              alt="image"
+              layout="fill"
+              objectFit="cover"
+              priority
+            />
             <h3>صنعت خشکبار و حبوبات کوروش</h3>
           </div>
           <div className={classes.grid}>
             <div>
-              <div className={classes.image}>
+              <div className={classes.box}>
                 <Image
+                  className={classes.image}
                   src={two}
                   blurDataURL={two}
                   placeholder="blur"
@@ -43,8 +45,9 @@ export default function CardGrid({ direction }) {
               <h3>صنعت خشکبار و حبوبات کوروش</h3>
             </div>
             <div>
-              <div className={classes.image}>
+              <div className={classes.box}>
                 <Image
+                  className={classes.image}
                   src={three}
                   blurDataURL={three}
                   placeholder="blur"
@@ -57,10 +60,11 @@ export default function CardGrid({ direction }) {
               <h3>صنعت خشکبار و حبوبات کوروش</h3>
             </div>
             <div>
-              <div className={classes.image}>
+              <div className={classes.box}>
                 <Image
-                  src={one}
-                  blurDataURL={one}
+                  className={classes.image}
+                  src={four}
+                  blurDataURL={four}
                   placeholder="blur"
                   alt="image"
                   layout="fill"
@@ -71,10 +75,11 @@ export default function CardGrid({ direction }) {
               <h3>صنعت خشکبار و حبوبات کوروش</h3>
             </div>
             <div>
-              <div className={classes.image}>
+              <div className={classes.box}>
                 <Image
-                  src={three}
-                  blurDataURL={three}
+                  className={classes.image}
+                  src={five}
+                  blurDataURL={five}
                   placeholder="blur"
                   alt="image"
                   layout="fill"
@@ -87,7 +92,70 @@ export default function CardGrid({ direction }) {
           </div>
         </div>
       )}
-      {screenSize === "tablet" && <p>tablet</p>}
+      {screenSize !== "desktop" && (
+        <div className={classes.responsive}>
+          <div>
+            <div className={classes.box}>
+              <Image
+                className={classes.image}
+                src={one}
+                blurDataURL={one}
+                placeholder="blur"
+                alt="image"
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
+            </div>
+            <h3>صنعت خشکبار و حبوبات کوروش</h3>
+          </div>
+          <div>
+            <div className={classes.box}>
+              <Image
+                className={classes.image}
+                src={two}
+                blurDataURL={two}
+                placeholder="blur"
+                alt="image"
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
+            </div>
+            <h3>صنعت خشکبار و حبوبات کوروش</h3>
+          </div>
+          <div>
+            <div className={classes.box}>
+              <Image
+                className={classes.image}
+                src={three}
+                blurDataURL={three}
+                placeholder="blur"
+                alt="image"
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
+            </div>
+            <h3>صنعت خشکبار و حبوبات کوروش</h3>
+          </div>
+          <div>
+            <div className={classes.box}>
+              <Image
+                className={classes.image}
+                src={four}
+                blurDataURL={four}
+                placeholder="blur"
+                alt="image"
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
+            </div>
+            <h3>صنعت خشکبار و حبوبات کوروش</h3>
+          </div>
+        </div>
+      )}
     </Fragment>
   );
 }
