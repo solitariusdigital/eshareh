@@ -51,7 +51,7 @@ export default function ImageSlider({ sliderData }) {
   }
 
   return (
-    <section className={classes.slider}>
+    <div className={classes.slider}>
       {screenSize !== "mobile" && (
         <Fragment>
           <ArrowBackIosIcon
@@ -105,6 +105,6 @@ export default function ImageSlider({ sliderData }) {
           </div>
         );
       })}
-    </section>
+    </div>
   );
 }

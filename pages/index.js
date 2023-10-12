@@ -1,5 +1,8 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import ImageSlider from "@/components/ImageSlider";
+import CardGrid from "@/components/CardGrid";
+import classes from "./home.module.scss";
+
 import one from "@/assets/one.jpg";
 import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
@@ -40,7 +43,17 @@ export default function Home() {
 
   return (
     <Fragment>
-      <ImageSlider sliderData={sliderData} />
+      <section>
+        <ImageSlider sliderData={sliderData} />
+      </section>
+      <section className={classes.gridWorks}>
+        <CardGrid direction={true} />
+        <CardGrid direction={false} />
+        <CardGrid direction={true} />
+        <CardGrid direction={false} />
+        <CardGrid direction={true} />
+        <CardGrid direction={false} />
+      </section>
     </Fragment>
   );
 }
