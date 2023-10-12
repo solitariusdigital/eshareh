@@ -7,8 +7,8 @@ export default function Footer() {
   return (
     <div className={classes.footer}>
       <div className={classes.copyright}>
-        <p>کليه حقوق اين وب اپلیکیشن به بل کلاس تعلق دارد</p>
-        <p>belleclass.com @Copyright 2023</p>
+        <p>کليه حقوق اين وب اپلیکیشن به اشاره تعلق دارد</p>
+        <p>eshareh.com @Copyright 2023</p>
         <div
           className={classes.row}
           onClick={() =>
