@@ -1,4 +1,5 @@
 import { useState, useContext, Fragment, useEffect } from "react";
+import { StateContext } from "@/context/stateContext";
 import classes from "./work.module.scss";
 import Image from "next/legacy/image";
 import one from "@/assets/one.jpg";
@@ -6,6 +7,8 @@ import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
 
 export default function Work() {
+  const { screenSize, setScreenSize } = useContext(StateContext);
+
   const [category, setCategory] = useState(
     "advertising" || "digital" || "media" || "all"
   );
@@ -87,7 +90,7 @@ export default function Work() {
       <section
         key={category}
         className={`${classes.list} ${
-          window.innerWidth > 1200
+          screenSize === "desktop"
             ? "animate__animated animate__slideInRight"
             : "animate__animated animate__fadeIn"
         }`}

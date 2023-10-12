@@ -48,6 +48,8 @@
 .nav {
   color: config.$black;
   font-size: config.$big-font;
+  @include mixins.row-space-between-center();
+  justify-content: flex-end;
 
   @include mixins.desktop {
     &:hover {
@@ -57,20 +59,11 @@
   }
 }
 
-.nav::after {
-  content: "";
-  display: block;
-  width: 0;
-  transition: width 0.3s;
-}
-
-.nav:hover::after {
-  width: 100%;
-}
-
 .navActive {
   font-size: config.$big-font;
   color: config.$yellow;
+  @include mixins.row-space-between-center();
+  justify-content: flex-end;
 }
 
 .smallMenu {
@@ -105,10 +98,10 @@
     align-items: center;
     width: 100%;
     padding: 12px;
-    @include mixins.transparentBackground(0.5, config.$white);
+    background: config.$yellow;
     box-shadow: config.$card-shadow;
 
-    p {
+    a {
       padding: 8px 0px;
       color: config.$black;
     }

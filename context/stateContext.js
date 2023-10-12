@@ -11,6 +11,11 @@ export const StateProvider = (props) => {
   );
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
+      title: "",
+      link: "/search",
+      active: false,
+    },
+    {
       title: "پروژه",
       link: "/work",
       active: false,

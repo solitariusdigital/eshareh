@@ -20,41 +20,39 @@ $screen-large: 2000px;
   }
 }
 
-@mixin button($color1, $color2, $subColor) {
-  width: 190px;
+@mixin button($color, $subColor) {
+  width: 150px;
   height: 40px;
-  border-radius: 50px;
-  font-size: 16px;
-  border: none;
-  color: $subColor;
-  box-shadow: config.$button-shadow;
-  background: linear-gradient(to left, $color1, $color2);
+  border-radius: 12px;
   font-weight: bold;
+  background: $color;
+  color: $subColor;
+  font-size: 14px;
+  border: none;
+  box-shadow: config.$button-shadow;
 
-  @include desktop {
-    &:hover {
-      cursor: pointer;
-      background: config.$black;
-      color: config.$white;
-    }
+  &:hover {
+    cursor: pointer;
+    color: $color;
+    border: 1px solid $color;
+    background: config.$background;
   }
 }
 
 @mixin input() {
   padding: 12px;
   height: 50px;
-  background: config.$background;
   color: config.$black;
   font-size: config.$small-font;
   outline: none;
-  border-radius: 12px;
-  border: 1px solid config.$white;
+  border: none;
+  border-bottom: 1px solid config.$lightgrey;
   font-weight: 300;
 
   &:focus {
     outline: none;
     background: transparent;
-    border: 1px solid config.$black;
+    border-bottom: 1px solid config.$yellow;
   }
 }
 

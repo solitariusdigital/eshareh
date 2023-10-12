@@ -6,6 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Router from "next/router";
 import Image from "next/legacy/image";
 import logo from "@/assets/logo.png";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function Menu() {
   const { menuMobile, setMenuMobile } = useContext(StateContext);
@@ -58,6 +59,7 @@ export default function Menu() {
                 onClick={() => activateNav(nav.link, index)}
               >
                 {nav.title}
+                {nav.title === "" && <SearchIcon sx={{ fontSize: 30 }} />}
               </a>
             ))
             .reverse()}
@@ -95,14 +97,14 @@ export default function Menu() {
             >
               <div>
                 {navigationTopBar.map((nav, index) => (
-                  <Fragment key={index}>
-                    <div
-                      className={!nav.active ? classes.nav : classes.navActive}
-                      onClick={() => activateNav(nav.link, index)}
-                    >
-                      <p>{nav.title}</p>
-                    </div>
-                  </Fragment>
+                  <a
+                    key={index}
+                    className={!nav.active ? classes.nav : classes.navActive}
+                    onClick={() => activateNav(nav.link, index)}
+                  >
+                    {nav.title}
+                    {nav.title === "" && <SearchIcon sx={{ fontSize: 30 }} />}
+                  </a>
                 ))}
                 {desktop && (
                   <div className={classes.nav}>
