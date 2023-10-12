@@ -1,0 +1,92 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  margin: auto;
+  width: config.$content-width;
+  margin-top: 150px;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+}
+
+.categoryContainer {
+  padding: 12px;
+  margin: auto;
+  margin-bottom: 20px;
+  border-bottom: 1px solid config.$lightgrey;
+  @include mixins.row-space-between-center();
+  justify-content: space-around;
+  user-select: none;
+  height: 40px;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+
+  .category {
+    width: 350px;
+    @include mixins.row-space-between-center();
+    flex-direction: row-reverse;
+
+    @include mixins.mobile {
+      width: 100%;
+      justify-content: space-around;
+    }
+  }
+}
+
+.nav {
+  height: 41px;
+  color: config.$grey;
+  border-bottom: 1px solid config.$lightgrey;
+
+  &:hover {
+    cursor: pointer;
+    color: config.$black;
+  }
+}
+
+.navActive {
+  height: 41px;
+  color: config.$black;
+  border-bottom: 1px solid config.$black;
+}
+
+.nav::after {
+  content: "";
+  display: block;
+  width: 0;
+  border-bottom: 1px solid config.$black;
+  transition: width 0.3s;
+  height: 15px;
+}
+
+.nav:hover::after {
+  width: 100%;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  align-items: flex-start;
+  gap: 20px;
+  direction: rtl;
+  margin-top: 50px;
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  }
+
+  .box {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    margin: 12px 0px;
+  }
+}

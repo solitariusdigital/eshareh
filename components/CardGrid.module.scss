@@ -17,7 +17,7 @@
     justify-content: space-between;
     height: 100%;
     width: 50%;
-    margin-right: 12px;
+    margin-right: 20px;
     color: config.$grey;
 
     &:hover {
@@ -45,7 +45,7 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(35%, 1fr));
-    gap: 12px;
+    gap: 20px;
     width: 50%;
 
     div {
@@ -80,7 +80,7 @@
   flex-direction: row-reverse;
 
   .hero {
-    margin-left: 12px;
+    margin-left: 20px;
     margin-right: 0px;
   }
 }
@@ -103,9 +103,11 @@
     text-align: right;
     height: 300px;
     margin-bottom: 20px;
+    color: config.$grey;
 
     &:hover {
       cursor: pointer;
+      color: config.$black;
     }
 
     .box {

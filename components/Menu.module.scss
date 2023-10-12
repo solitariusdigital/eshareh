@@ -36,7 +36,7 @@
   }
 
   .largeNavigation {
-    width: 40%;
+    width: 30%;
     @include mixins.row-space-between-center();
 
     @include mixins.tablet {
@@ -48,12 +48,10 @@
 .nav {
   color: config.$black;
   font-size: config.$big-font;
-  font-weight: bold !important;
 
   @include mixins.desktop {
     &:hover {
       cursor: pointer;
-      font-weight: bold !important;
       color: config.$yellow;
     }
   }
@@ -73,7 +71,6 @@
 .navActive {
   font-size: config.$big-font;
   color: config.$yellow;
-  font-weight: bold !important;
 }
 
 .smallMenu {
