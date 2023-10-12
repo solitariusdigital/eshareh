@@ -46,13 +46,15 @@
 }
 
 .nav {
-  color: config.$white;
+  color: config.$black;
   font-size: config.$big-font;
+  font-weight: bold !important;
 
   @include mixins.desktop {
     &:hover {
       cursor: pointer;
-      color: config.$white;
+      font-weight: bold !important;
+      color: config.$yellow;
     }
   }
 }
@@ -71,6 +73,7 @@
 .navActive {
   font-size: config.$big-font;
   color: config.$yellow;
+  font-weight: bold !important;
 }
 
 .smallMenu {

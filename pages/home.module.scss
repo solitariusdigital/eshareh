@@ -4,3 +4,15 @@
 .gridWorks {
   margin: 80px 0px;
 }
+
+.message {
+  text-align: center;
+  color: config.$grey;
+  margin: auto;
+  width: config.$content-width;
+
+  &:hover {
+    cursor: pointer;
+    color: config.$black;
+  }
+}

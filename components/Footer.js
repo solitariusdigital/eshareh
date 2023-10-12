@@ -2,13 +2,15 @@ import classes from "./Footer.module.scss";
 import Image from "next/legacy/image";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import MuseTechLab from "@/assets/MuseTechLab.svg";
+import { enToFaDigits } from "@/services/utility";
 
 export default function Footer() {
   return (
     <div className={classes.footer}>
       <div className={classes.copyright}>
-        <p>کليه حقوق اين وب اپلیکیشن به اشاره تعلق دارد</p>
-        <p>eshareh.com @Copyright 2023</p>
+        <p>
+          © {enToFaDigits(1376)} - {enToFaDigits(1402)} eshareh.com
+        </p>
         <div
           className={classes.row}
           onClick={() =>

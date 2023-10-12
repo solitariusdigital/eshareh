@@ -2,6 +2,7 @@ import { useState, useContext, Fragment, useEffect } from "react";
 import ImageSlider from "@/components/ImageSlider";
 import CardGrid from "@/components/CardGrid";
 import classes from "./home.module.scss";
+import Router from "next/router";
 
 import one from "@/assets/one.jpg";
 import two from "@/assets/two.jpg";
@@ -54,6 +55,9 @@ export default function Home() {
         <CardGrid direction={true} />
         <CardGrid direction={false} />
       </section>
+      <div className={classes.message} onClick={() => Router.push("/work")}>
+        <h3>مشاهده پروژه های اشاره</h3>
+      </div>
     </Fragment>
   );
 }
