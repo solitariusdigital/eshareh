@@ -47,10 +47,6 @@ export default function ImageSlider({ sliderData }) {
     }, 20);
   };
 
-  if (!Array.isArray(sliderData) || sliderData.length <= 0) {
-    return null;
-  }
-
   return (
     <div className={classes.slider}>
       {screenSize !== "mobile" && (

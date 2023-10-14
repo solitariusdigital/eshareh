@@ -12,17 +12,26 @@
 }
 
 .categoryContainer {
+  position: relative;
   padding: 12px;
   margin: auto;
-  margin-bottom: 20px;
+  height: 40px;
   border-bottom: 1px solid config.$lightgrey;
   @include mixins.row-space-between-center();
   justify-content: space-around;
-  user-select: none;
-  height: 40px;
 
   @include mixins.mobile {
     width: 100%;
+  }
+
+  h1 {
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+
+    @include mixins.mobile {
+      bottom: 60px;
+    }
   }
 
   .category {
@@ -35,36 +44,75 @@
       justify-content: space-around;
     }
   }
-}
 
-.nav {
-  height: 41px;
-  color: config.$grey;
-  border-bottom: 1px solid config.$lightgrey;
+  .nav {
+    height: 41px;
+    color: config.$grey;
+    border-bottom: 1px solid config.$lightgrey;
 
-  &:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+      font-weight: bold;
+      color: config.$black;
+    }
+  }
+
+  .navActive {
+    height: 41px;
     color: config.$black;
+    font-weight: bold;
+    border-bottom: 1px solid config.$black;
+  }
+
+  .nav::after {
+    content: "";
+    display: block;
+    width: 0;
+    border-bottom: 1px solid config.$black;
+    transition: width 0.3s;
+    height: 15px;
+  }
+
+  .nav:hover::after {
+    width: 100%;
   }
 }
 
-.navActive {
-  height: 41px;
-  color: config.$black;
-  border-bottom: 1px solid config.$black;
-}
+.typeContainer {
+  position: relative;
+  padding: 20px;
+  margin: 20px auto;
+  height: 40px;
+  width: 300px;
+  border: 1px solid config.$yellow;
+  border-radius: 50px;
+  @include mixins.row-space-between-center();
+  justify-content: space-between;
 
-.nav::after {
-  content: "";
-  display: block;
-  width: 0;
-  border-bottom: 1px solid config.$black;
-  transition: width 0.3s;
-  height: 15px;
-}
+  .type {
+    width: 100%;
+    @include mixins.row-space-between-center();
+    flex-direction: row-reverse;
 
-.nav:hover::after {
-  width: 100%;
+    @include mixins.mobile {
+      justify-content: space-around;
+    }
+  }
+
+  .nav {
+    color: config.$grey;
+
+    &:hover {
+      cursor: pointer;
+      font-weight: bold;
+      color: config.$black;
+    }
+  }
+
+  .navActive {
+    color: config.$black;
+    font-weight: bold;
+  }
 }
 
 .list {

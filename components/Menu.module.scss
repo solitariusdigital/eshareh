@@ -54,6 +54,7 @@
   @include mixins.desktop {
     &:hover {
       cursor: pointer;
+      font-weight: bold;
       color: config.$yellow;
     }
   }
@@ -64,6 +65,7 @@
   color: config.$yellow;
   @include mixins.row-space-between-center();
   justify-content: flex-end;
+  font-weight: bold;
 }
 
 .smallMenu {

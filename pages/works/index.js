@@ -12,7 +12,7 @@ export default function Works() {
   const [category, setCategory] = useState(
     "advertising" || "digital" || "media" || "all"
   );
-  const [type, setType] = useState("client" || "work" || "all");
+  const [type, setType] = useState("client" || "work" || "project");
 
   const works = [
     {
@@ -50,6 +50,7 @@ export default function Works() {
   return (
     <div className={classes.container}>
       <div className={classes.categoryContainer}>
+        <h1>پروژه</h1>
         <div className={classes.category}>
           <p
             className={
@@ -81,6 +82,34 @@ export default function Works() {
             className={category === "all" ? classes.navActive : classes.nav}
             onClick={() => {
               setCategory("all");
+            }}
+          >
+            همه
+          </p>
+        </div>
+      </div>
+      <div className={classes.typeContainer}>
+        <div className={classes.type}>
+          <p
+            className={type === "client" ? classes.navActive : classes.nav}
+            onClick={() => {
+              setType("client");
+            }}
+          >
+            نوع کارفرما
+          </p>
+          <p
+            className={type === "work" ? classes.navActive : classes.nav}
+            onClick={() => {
+              setType("work");
+            }}
+          >
+            نوع کار
+          </p>
+          <p
+            className={type === "project" ? classes.navActive : classes.nav}
+            onClick={() => {
+              setType("project");
             }}
           >
             همه
