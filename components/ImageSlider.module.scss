@@ -65,10 +65,8 @@
 }
 
 .information {
-  display: flex;
-  align-items: center;
+  @include mixins.row-space-between-center();
   flex-direction: row-reverse;
-  justify-content: space-between;
   position: absolute;
   z-index: 2;
   left: 50%;
@@ -81,5 +79,9 @@
 
   @include mixins.mobile {
     width: calc(100% - 24px);
+  }
+
+  .loader {
+    @include mixins.row-space-between-center();
   }
 }

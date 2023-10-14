@@ -6,6 +6,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Image from "next/legacy/image";
 import { enToFaDigits, replaceSpacesAndHyphens } from "@/services/utility";
 import Router from "next/router";
+import Loader from "./Loader";
 
 export default function ImageSlider({ sliderData }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -67,12 +68,13 @@ export default function ImageSlider({ sliderData }) {
           <div
             key={index}
             className={index === current ? classes.active : classes.slide}
-            onClick={() =>
-              Router.push(`/works/${replaceSpacesAndHyphens(slide.title)}`)
-            }
           >
             {index === current && (
-              <Fragment>
+              <div
+                onClick={() =>
+                  Router.push(`/works/${replaceSpacesAndHyphens(slide.title)}`)
+                }
+              >
                 {slide.type === "image" ? (
                   <Image
                     className={classes.image}
@@ -96,10 +98,10 @@ export default function ImageSlider({ sliderData }) {
                     />
                   </div>
                 )}
-              </Fragment>
+              </div>
             )}
-            {displayInfo && (
-              <div className={classes.information}>
+            <div className={classes.information}>
+              {displayInfo && (
                 <div
                   className={
                     screenSize !== "mobile"
@@ -110,11 +112,16 @@ export default function ImageSlider({ sliderData }) {
                   <h2>{slide.title}</h2>
                   {screenSize !== "mobile" && <h2>{slide.description}</h2>}
                 </div>
-                <h2 onClick={() => slideImage("next")}>
-                  {enToFaDigits(current + 1)} / {enToFaDigits(length)}
-                </h2>
+              )}
+              <div
+                className={classes.loader}
+                onClick={() => slideImage("next")}
+              >
+                <h2>{enToFaDigits(current + 1)}</h2>
+                <Loader />
+                <h2>{enToFaDigits(length)}</h2>
               </div>
-            )}
+            </div>
           </div>
         );
       })}
