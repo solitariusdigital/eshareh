@@ -104,3 +104,17 @@ export async function uploadImage(image, imageId, imageFolder, format) {
     body: formData,
   });
 }
+
+export function replaceSpacesAndHyphens(str) {
+  let result = "";
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === " ") {
+      result += "-";
+    } else if (str[i] === "-") {
+      result += " ";
+    } else {
+      result += str[i];
+    }
+  }
+  return result;
+}

@@ -8,6 +8,23 @@
   @include mixins.mobile {
     height: 600px;
   }
+
+  .mediaContainer {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+    @include mixins.mobile {
+      height: 600px;
+    }
+
+    .video {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 }
 
 .rightArrow {

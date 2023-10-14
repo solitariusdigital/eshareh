@@ -72,15 +72,30 @@ export default function ImageSlider({ sliderData }) {
             className={index === current ? classes.active : classes.slide}
           >
             {index === current && (
-              <Image
-                src={slide.image}
-                blurDataURL={slide.image}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
+              <Fragment>
+                {slide.type === "image" ? (
+                  <Image
+                    src={slide.image}
+                    blurDataURL={slide.image}
+                    placeholder="blur"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                    priority
+                  />
+                ) : (
+                  <div className={classes.mediaContainer}>
+                    <video
+                      className={classes.video}
+                      preload="metadata"
+                      src="https://delmare.storage.iran.liara.space/landingpage/video.MOV"
+                      autoPlay
+                      loop
+                      muted
+                    />
+                  </div>
+                )}
+              </Fragment>
             )}
             {displayInfo && (
               <div className={classes.information}>

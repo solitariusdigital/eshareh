@@ -1,12 +1,12 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./work.module.scss";
+import classes from "./works.module.scss";
 import Image from "next/legacy/image";
 import one from "@/assets/one.jpg";
 import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
 
-export default function Work() {
+export default function Works() {
   const { screenSize, setScreenSize } = useContext(StateContext);
 
   const [category, setCategory] = useState(

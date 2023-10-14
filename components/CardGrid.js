@@ -7,6 +7,8 @@ import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
 import four from "@/assets/one.jpg";
 import five from "@/assets/two.jpg";
+import Router from "next/router";
+import { replaceSpacesAndHyphens } from "@/services/utility";
 
 export default function CardGrid({ direction }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -15,7 +17,16 @@ export default function CardGrid({ direction }) {
     <Fragment>
       {screenSize === "desktop" && (
         <div className={direction ? classes.gridDesktop : classes.reverse}>
-          <div className={classes.hero}>
+          <div
+            className={classes.hero}
+            onClick={() =>
+              Router.push(
+                `/works/${replaceSpacesAndHyphens(
+                  "صنعت خشکبار و حبوبات کوروش"
+                )}`
+              )
+            }
+          >
             <Image
               className={classes.image}
               src={one}

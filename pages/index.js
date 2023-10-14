@@ -13,31 +13,37 @@ export default function Home() {
       image: one,
       title: "صنعت خشکبار و حبوبات کوروش",
       project: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+      type: "image",
     },
     {
       image: two,
       title: "شرکت آریان کیمیا تک",
       project: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
+      type: "video",
     },
     {
       image: three,
       title: "نستله ایران",
       project: "طراحی بسته‌بندی نوروز",
+      type: "image",
     },
     {
       image: one,
       title: "صنعت خشکبار و حبوبات کوروش",
       project: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+      type: "video",
     },
     {
       image: two,
       title: "شرکت آریان کیمیا تک",
       project: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
+      type: "image",
     },
     {
       image: three,
       title: "نستله ایران",
       project: "طراحی بسته‌بندی نوروز",
+      type: "image",
     },
   ];
 
