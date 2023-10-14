@@ -2,11 +2,6 @@ import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./CardGrid.module.scss";
 import Image from "next/legacy/image";
-import one from "@/assets/one.jpg";
-import two from "@/assets/two.jpg";
-import three from "@/assets/three.jpg";
-import four from "@/assets/one.jpg";
-import five from "@/assets/two.jpg";
 import Router from "next/router";
 import { replaceSpacesAndHyphens, sliceString } from "@/services/utility";
 

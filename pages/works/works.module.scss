@@ -131,6 +131,15 @@
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   }
 
+  .item {
+    cursor: pointer;
+    color: config.$grey;
+
+    &:hover {
+      color: config.$black;
+    }
+  }
+
   .box {
     position: relative;
     width: 100%;
