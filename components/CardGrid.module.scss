@@ -18,11 +18,9 @@
     height: 100%;
     width: 50%;
     margin-right: 20px;
-    color: config.$grey;
 
     &:hover {
       cursor: pointer;
-      color: config.$black;
     }
 
     h3 {
@@ -55,11 +53,9 @@
       width: 100%;
       height: 100%;
       text-align: right;
-      color: config.$grey;
 
       &:hover {
         cursor: pointer;
-        color: config.$black;
       }
 
       .box {
@@ -103,11 +99,9 @@
     text-align: right;
     height: 300px;
     margin-bottom: 20px;
-    color: config.$grey;
 
     &:hover {
       cursor: pointer;
-      color: config.$black;
     }
 
     .box {

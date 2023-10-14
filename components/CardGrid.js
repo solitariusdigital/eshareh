@@ -8,10 +8,11 @@ import three from "@/assets/three.jpg";
 import four from "@/assets/one.jpg";
 import five from "@/assets/two.jpg";
 import Router from "next/router";
-import { replaceSpacesAndHyphens } from "@/services/utility";
+import { replaceSpacesAndHyphens, sliceString } from "@/services/utility";
 
-export default function CardGrid({ direction }) {
+export default function CardGrid({ projects, direction }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const [hoverItem, setHoverItem] = useState(null);
 
   return (
     <Fragment>
@@ -21,150 +22,110 @@ export default function CardGrid({ direction }) {
             className={classes.hero}
             onClick={() =>
               Router.push(
-                `/works/${replaceSpacesAndHyphens(
-                  "صنعت خشکبار و حبوبات کوروش"
-                )}`
+                `/works/${replaceSpacesAndHyphens(projects[0].title)}`
               )
             }
+            onMouseEnter={() => {
+              setHoverItem(0);
+            }}
+            onMouseLeave={() => {
+              setHoverItem(null);
+            }}
           >
             <Image
               className={classes.image}
-              src={one}
-              blurDataURL={one}
+              src={projects[0].image}
+              blurDataURL={projects[0].image}
               placeholder="blur"
               alt="image"
               layout="fill"
               objectFit="cover"
               priority
             />
-            <h3>صنعت خشکبار و حبوبات کوروش</h3>
+            {hoverItem === 0 ? (
+              <h3>... {sliceString(projects[0].description, 80)}</h3>
+            ) : (
+              <h3>{projects[0].title}</h3>
+            )}
           </div>
           <div className={classes.grid}>
-            <div>
-              <div className={classes.box}>
-                <Image
-                  className={classes.image}
-                  src={two}
-                  blurDataURL={two}
-                  placeholder="blur"
-                  alt="image"
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                />
-              </div>
-              <h3>صنعت خشکبار و حبوبات کوروش</h3>
-            </div>
-            <div>
-              <div className={classes.box}>
-                <Image
-                  className={classes.image}
-                  src={three}
-                  blurDataURL={three}
-                  placeholder="blur"
-                  alt="image"
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                />
-              </div>
-              <h3>صنعت خشکبار و حبوبات کوروش</h3>
-            </div>
-            <div>
-              <div className={classes.box}>
-                <Image
-                  className={classes.image}
-                  src={four}
-                  blurDataURL={four}
-                  placeholder="blur"
-                  alt="image"
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                />
-              </div>
-              <h3>صنعت خشکبار و حبوبات کوروش</h3>
-            </div>
-            <div>
-              <div className={classes.box}>
-                <Image
-                  className={classes.image}
-                  src={five}
-                  blurDataURL={five}
-                  placeholder="blur"
-                  alt="image"
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                />
-              </div>
-              <h3>صنعت خشکبار و حبوبات کوروش</h3>
-            </div>
+            {projects
+              .map((project, index) => (
+                <div
+                  key={index}
+                  onClick={() =>
+                    Router.push(
+                      `/works/${replaceSpacesAndHyphens(projects[index].title)}`
+                    )
+                  }
+                  onMouseEnter={() => {
+                    setHoverItem(index);
+                  }}
+                  onMouseLeave={() => {
+                    setHoverItem(null);
+                  }}
+                >
+                  <div className={classes.box}>
+                    <Image
+                      className={classes.image}
+                      src={project.image}
+                      blurDataURL={project.image}
+                      placeholder="blur"
+                      alt="image"
+                      layout="fill"
+                      objectFit="cover"
+                      priority
+                    />
+                  </div>
+                  {hoverItem === index ? (
+                    <h3>... {sliceString(project.description, 40)}</h3>
+                  ) : (
+                    <h3>{project.title}</h3>
+                  )}
+                </div>
+              ))
+              .slice(1, 5)}
           </div>
         </div>
       )}
       {screenSize !== "desktop" && (
         <div className={classes.responsive}>
-          <div>
-            <div className={classes.box}>
-              <Image
-                className={classes.image}
-                src={one}
-                blurDataURL={one}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
-            </div>
-            <h3>صنعت خشکبار و حبوبات کوروش</h3>
-          </div>
-          <div>
-            <div className={classes.box}>
-              <Image
-                className={classes.image}
-                src={two}
-                blurDataURL={two}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
-            </div>
-            <h3>صنعت خشکبار و حبوبات کوروش</h3>
-          </div>
-          <div>
-            <div className={classes.box}>
-              <Image
-                className={classes.image}
-                src={three}
-                blurDataURL={three}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
-            </div>
-            <h3>صنعت خشکبار و حبوبات کوروش</h3>
-          </div>
-          <div>
-            <div className={classes.box}>
-              <Image
-                className={classes.image}
-                src={four}
-                blurDataURL={four}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
-            </div>
-            <h3>صنعت خشکبار و حبوبات کوروش</h3>
-          </div>
+          {projects
+            .map((project, index) => (
+              <div
+                key={index}
+                onClick={() =>
+                  Router.push(
+                    `/works/${replaceSpacesAndHyphens(projects[index].title)}`
+                  )
+                }
+                onMouseEnter={() => {
+                  setHoverItem(index);
+                }}
+                onMouseLeave={() => {
+                  setHoverItem(null);
+                }}
+              >
+                <div className={classes.box}>
+                  <Image
+                    className={classes.image}
+                    src={project.image}
+                    blurDataURL={project.image}
+                    placeholder="blur"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                    priority
+                  />
+                </div>
+                {hoverItem === index ? (
+                  <h3>... {sliceString(project.description, 60)}</h3>
+                ) : (
+                  <h3>{project.title}</h3>
+                )}
+              </div>
+            ))
+            .slice(0, 4)}
         </div>
       )}
     </Fragment>

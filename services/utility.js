@@ -118,3 +118,7 @@ export function replaceSpacesAndHyphens(str) {
   }
   return result;
 }
+
+export function sliceString(string, number) {
+  return string.slice(0, number).split(" ").slice(0, -1).join(" ");
+}

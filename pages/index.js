@@ -12,37 +12,34 @@ export default function Home() {
     {
       image: one,
       title: "صنعت خشکبار و حبوبات کوروش",
-      project: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+      description:
+        "کمپین تلویزیونی  تخمه های آفتاب گردان لانچ و معرفی کرم  تخمه های آفتاب گردان لانچ و معرفی کرم تخمه های آفتاب گردان لانچ و معرفی کرم آبرسان گیاهیات",
       type: "image",
     },
     {
       image: two,
-      title: "شرکت آریان کیمیا تک",
-      project: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
+      title: "شرکت آریان کیمیا ",
+      description: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
       type: "video",
     },
     {
       image: three,
       title: "نستله ایران",
-      project: "طراحی بسته‌بندی نوروز",
+      description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
       type: "image",
     },
     {
-      image: one,
+      image: two,
       title: "صنعت خشکبار و حبوبات کوروش",
-      project: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+      description:
+        "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
       type: "video",
     },
     {
-      image: two,
-      title: "شرکت آریان کیمیا تک",
-      project: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
-      type: "image",
-    },
-    {
       image: three,
-      title: "نستله ایران",
-      project: "طراحی بسته‌بندی نوروز",
+      title: "شرکت آریان کیمیا ",
+      description:
+        "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
       type: "image",
     },
   ];
@@ -53,12 +50,12 @@ export default function Home() {
         <ImageSlider sliderData={sliderData} />
       </section>
       <section className={classes.gridWorks}>
-        <CardGrid direction={true} />
-        <CardGrid direction={false} />
-        <CardGrid direction={true} />
-        <CardGrid direction={false} />
-        <CardGrid direction={true} />
-        <CardGrid direction={false} />
+        <CardGrid projects={sliderData} direction={true} />
+        <CardGrid projects={sliderData} direction={false} />
+        <CardGrid projects={sliderData} direction={true} />
+        <CardGrid projects={sliderData} direction={false} />
+        <CardGrid projects={sliderData} direction={true} />
+        <CardGrid projects={sliderData} direction={false} />
       </section>
       <div className={classes.message} onClick={() => Router.push("/works")}>
         <h3>مشاهده همه پروژه ها </h3>
