@@ -169,7 +169,7 @@ export default function Works() {
                       src={item.image}
                       placeholder="blur"
                       blurDataURL={item.image}
-                      alt="image"
+                      alt={item.title}
                       layout="fill"
                       objectFit="cover"
                       priority

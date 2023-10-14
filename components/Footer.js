@@ -23,7 +23,7 @@ export default function Footer() {
           <Image
             className={classes.image}
             src={MuseTechLab}
-            alt="image"
+            alt="MuseTechLab"
             width={120}
             height={30}
             loading="eager"

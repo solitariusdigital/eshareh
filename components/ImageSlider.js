@@ -81,7 +81,7 @@ export default function ImageSlider({ sliderData }) {
                     src={slide.image}
                     blurDataURL={slide.image}
                     placeholder="blur"
-                    alt="image"
+                    alt={slide.title}
                     layout="fill"
                     objectFit="cover"
                     priority
@@ -113,14 +113,16 @@ export default function ImageSlider({ sliderData }) {
                   {screenSize !== "mobile" && <h2>{slide.description}</h2>}
                 </div>
               )}
-              <div
-                className={classes.loader}
-                onClick={() => slideImage("next")}
-              >
-                <h2>{enToFaDigits(current + 1)}</h2>
-                <Loader />
-                <h2>{enToFaDigits(length)}</h2>
-              </div>
+              {screenSize !== "mobile" && (
+                <div
+                  className={classes.loader}
+                  onClick={() => slideImage("next")}
+                >
+                  <h2>{enToFaDigits(current + 1)}</h2>
+                  <Loader />
+                  <h2>{enToFaDigits(length)}</h2>
+                </div>
+              )}
             </div>
           </div>
         );

@@ -32,7 +32,7 @@ h1 {
 h2 {
   font-size: 27px !important;
   @include mixins.mobile {
-    font-size: 19px;
+    font-size: 19px !important;
   }
 }
 

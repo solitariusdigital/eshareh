@@ -32,7 +32,7 @@ export default function CardGrid({ projects, direction }) {
               src={projects[0].image}
               blurDataURL={projects[0].image}
               placeholder="blur"
-              alt="image"
+              alt={projects[0].title}
               layout="fill"
               objectFit="cover"
               priority
@@ -66,7 +66,7 @@ export default function CardGrid({ projects, direction }) {
                       src={project.image}
                       blurDataURL={project.image}
                       placeholder="blur"
-                      alt="image"
+                      alt={projects[index].title}
                       layout="fill"
                       objectFit="cover"
                       priority
@@ -107,7 +107,7 @@ export default function CardGrid({ projects, direction }) {
                     src={project.image}
                     blurDataURL={project.image}
                     placeholder="blur"
-                    alt="image"
+                    alt={projects[index].title}
                     layout="fill"
                     objectFit="cover"
                     priority
