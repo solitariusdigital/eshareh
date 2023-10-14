@@ -1,5 +1,6 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
+import { useRouter } from "next/router";
 import classes from "./works.module.scss";
 import Image from "next/legacy/image";
 import one from "@/assets/one.jpg";
@@ -8,11 +9,15 @@ import three from "@/assets/three.jpg";
 
 export default function Works() {
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
 
   const [category, setCategory] = useState(
     "advertising" || "digital" || "media" || "all"
   );
   const [type, setType] = useState("client" || "work" || "project");
+
+  const router = useRouter();
+  let pathname = router.pathname;
 
   const works = [
     {
@@ -46,6 +51,18 @@ export default function Works() {
       category: "media",
     },
   ];
+
+  useEffect(() => {
+    navigationTopBar.map((nav) => {
+      if (pathname.includes(nav.link)) {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={classes.container}>

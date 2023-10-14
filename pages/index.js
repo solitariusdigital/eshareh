@@ -61,7 +61,7 @@ export default function Home() {
         <CardGrid direction={false} />
       </section>
       <div className={classes.message} onClick={() => Router.push("/works")}>
-        <h3>مشاهده پروژه های اشاره</h3>
+        <h3>مشاهده همه پروژه ها </h3>
       </div>
     </Fragment>
   );
