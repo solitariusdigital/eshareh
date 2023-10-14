@@ -50,7 +50,7 @@ export default function CardGrid({ projects, direction }) {
                   key={index}
                   onClick={() =>
                     Router.push(
-                      `/works/${replaceSpacesAndHyphens(projects[index].title)}`
+                      `/works/${replaceSpacesAndHyphens(project.title)}`
                     )
                   }
                   onMouseEnter={() => {
@@ -66,7 +66,7 @@ export default function CardGrid({ projects, direction }) {
                       src={project.image}
                       blurDataURL={project.image}
                       placeholder="blur"
-                      alt={projects[index].title}
+                      alt={project.title}
                       layout="fill"
                       objectFit="cover"
                       priority
@@ -91,7 +91,7 @@ export default function CardGrid({ projects, direction }) {
                 key={index}
                 onClick={() =>
                   Router.push(
-                    `/works/${replaceSpacesAndHyphens(projects[index].title)}`
+                    `/works/${replaceSpacesAndHyphens(project.title)}`
                   )
                 }
                 onMouseEnter={() => {
@@ -107,7 +107,7 @@ export default function CardGrid({ projects, direction }) {
                     src={project.image}
                     blurDataURL={project.image}
                     placeholder="blur"
-                    alt={projects[index].title}
+                    alt={project.title}
                     layout="fill"
                     objectFit="cover"
                     priority
