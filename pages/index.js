@@ -60,7 +60,7 @@ export default function Home() {
         <CardGrid direction={true} />
         <CardGrid direction={false} />
       </section>
-      <div className={classes.message} onClick={() => Router.push("/work")}>
+      <div className={classes.message} onClick={() => Router.push("/works")}>
         <h3>مشاهده پروژه های اشاره</h3>
       </div>
     </Fragment>

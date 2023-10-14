@@ -84,8 +84,8 @@
   margin: 20px auto;
   height: 40px;
   width: 300px;
-  border: 1px solid config.$yellow;
   border-radius: 50px;
+  border: 1px solid config.$lightgrey;
   @include mixins.row-space-between-center();
   justify-content: space-between;
 
