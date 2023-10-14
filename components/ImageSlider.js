@@ -84,20 +84,16 @@ export default function ImageSlider({ sliderData }) {
             )}
             {displayInfo && (
               <div className={classes.information}>
-                <h2
+                <div
                   className={
                     screenSize !== "mobile"
                       ? `animate__animated animate__fadeInRight`
                       : ""
                   }
                 >
-                  {slide.title}
-                </h2>
-                {screenSize !== "mobile" && (
-                  <h2 className={`animate__animated animate__fadeInRight`}>
-                    {slide.project}
-                  </h2>
-                )}
+                  <h2>{slide.title}</h2>
+                  {screenSize !== "mobile" && <h2>{slide.project}</h2>}
+                </div>
                 <h3>
                   {enToFaDigits(current + 1)} / {enToFaDigits(length)}
                 </h3>
