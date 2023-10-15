@@ -48,6 +48,7 @@
 .nav {
   font-size: config.$big-font;
   @include mixins.row-space-between-center();
+  justify-content: right;
 
   @include mixins.desktop {
     &:hover {
@@ -61,6 +62,7 @@
   color: config.$yellow;
   font-weight: bold;
   @include mixins.row-space-between-center();
+  justify-content: right;
 }
 
 .smallMenu {
