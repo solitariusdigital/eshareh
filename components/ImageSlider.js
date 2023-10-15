@@ -101,28 +101,27 @@ export default function ImageSlider({ sliderData }) {
               </div>
             )}
             <div className={classes.information}>
-              {displayInfo && (
-                <div
-                  className={
-                    screenSize !== "mobile"
-                      ? `animate__animated animate__fadeInRight`
-                      : ""
-                  }
-                >
-                  <h2>{slide.title}</h2>
-                  {screenSize !== "mobile" && <h2>{slide.description}</h2>}
-                </div>
-              )}
-              {screenSize !== "mobile" && (
-                <div
-                  className={classes.loader}
-                  onClick={() => slideImage("next")}
-                >
+              <div
+                key={displayInfo}
+                className={
+                  screenSize !== "mobile"
+                    ? `animate__animated animate__fadeInRight`
+                    : ""
+                }
+              >
+                <h2>{slide.title}</h2>
+                {screenSize !== "mobile" && <h2>{slide.description}</h2>}
+              </div>
+              <div
+                className={classes.loader}
+                onClick={() => slideImage("next")}
+              >
+                {screenSize !== "mobile" && (
                   <h2>{enToFaDigits(current + 1)}</h2>
-                  <Loader />
-                  <h2>{enToFaDigits(length)}</h2>
-                </div>
-              )}
+                )}
+                <Loader key={displayInfo} />
+                {screenSize !== "mobile" && <h2>{enToFaDigits(length)}</h2>}
+              </div>
             </div>
           </div>
         );

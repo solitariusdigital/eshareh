@@ -46,16 +46,12 @@
 }
 
 .nav {
-  color: config.$black;
   font-size: config.$big-font;
   @include mixins.row-space-between-center();
-  justify-content: flex-end;
 
   @include mixins.desktop {
     &:hover {
       cursor: pointer;
-      font-weight: bold;
-      color: config.$yellow;
     }
   }
 }
@@ -63,9 +59,8 @@
 .navActive {
   font-size: config.$big-font;
   color: config.$yellow;
-  @include mixins.row-space-between-center();
-  justify-content: flex-end;
   font-weight: bold;
+  @include mixins.row-space-between-center();
 }
 
 .smallMenu {

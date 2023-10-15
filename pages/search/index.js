@@ -1,4 +1,5 @@
-import { useState, Fragment } from "react";
+import { useState, useContext, Fragment, useEffect } from "react";
+import { StateContext } from "@/context/stateContext";
 import classes from "./search.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { NextSeo } from "next-seo";
@@ -10,12 +11,18 @@ import {
 } from "@/services/utility";
 
 export default function Search() {
+  const { menuColor, setMenuColor } = useContext(StateContext);
   const [search, setSearch] = useState("");
   const [documents, setDocuments] = useState([]);
   const [selectedItem, setSelectedItem] = useState({});
   const [displayDetails, setDisplayDetails] = useState(false);
   const [searchEmpty, setSearchEmpty] = useState(false);
   const [expandedItem, setExpandedItem] = useState(null);
+
+  useEffect(() => {
+    document.body.style.background = "#ffffff";
+    setMenuColor("#1b1b1b");
+  }, [setMenuColor]);
 
   const searchDocuments = () => {};
 

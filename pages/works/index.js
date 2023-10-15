@@ -10,6 +10,7 @@ import three from "@/assets/three.jpg";
 export default function Works() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+  const { menuColor, setMenuColor } = useContext(StateContext);
 
   const [category, setCategory] = useState(
     "advertising" || "digital" || "media" || "all"
@@ -66,6 +67,11 @@ export default function Works() {
       clientType: "",
     },
   ];
+
+  useEffect(() => {
+    document.body.style.background = "#ffffff";
+    setMenuColor("#1b1b1b");
+  }, [setMenuColor]);
 
   useEffect(() => {
     navigationTopBar.map((nav) => {

@@ -11,6 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 export default function Menu() {
   const { menuMobile, setMenuMobile } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+  const { menuColor, setMenuColor } = useContext(StateContext);
   const [desktop, setDesktop] = useState(false);
 
   useEffect(() => {
@@ -55,6 +56,7 @@ export default function Menu() {
             .map((nav, index) => (
               <a
                 key={index}
+                style={!nav.active ? { color: menuColor } : { color: "" }}
                 className={!nav.active ? classes.nav : classes.navActive}
                 onClick={() => activateNav(nav.link, index)}
               >

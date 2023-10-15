@@ -9,11 +9,8 @@
   font-weight: 300;
 }
 
-html {
-  background: config.$background;
-}
-
 body {
+  background: config.$background;
   user-select: none;
 }
 
