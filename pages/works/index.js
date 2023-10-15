@@ -88,7 +88,7 @@ export default function Works() {
   return (
     <div className={classes.container}>
       <div className={classes.categoryContainer}>
-        <h1>پروژه</h1>
+        <h1>پروژه‌ها</h1>
         <div className={classes.category}>
           <p
             className={

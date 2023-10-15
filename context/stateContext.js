@@ -17,7 +17,7 @@ export const StateProvider = (props) => {
       active: false,
     },
     {
-      title: "پروژه",
+      title: "پروژه‌ها",
       link: "/works",
       active: false,
     },
