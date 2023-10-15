@@ -1,0 +1,31 @@
+import { useState, useContext, Fragment, useEffect } from "react";
+import { StateContext } from "@/context/stateContext";
+import classes from "../works.module.scss";
+import { replaceSpacesAndHyphens } from "@/services/utility";
+
+export default function Customer({ name }) {
+  const { menuColor, setMenuColor } = useContext(StateContext);
+
+  useEffect(() => {
+    document.body.style.background = "#ffffff";
+    setMenuColor("#1b1b1b");
+  }, [setMenuColor]);
+
+  return <div className={classes.container}>{name}</div>;
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    let name = replaceSpacesAndHyphens(context.params.customer);
+    return {
+      props: {
+        name: JSON.parse(JSON.stringify(name)),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
+}

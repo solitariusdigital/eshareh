@@ -6,6 +6,8 @@ import Image from "next/legacy/image";
 import one from "@/assets/one.jpg";
 import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
+import Router from "next/router";
+import { replaceSpacesAndHyphens } from "@/services/utility";
 
 export default function Works() {
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -14,7 +16,7 @@ export default function Works() {
   const [category, setCategory] = useState(
     "advertising" || "digital" || "media"
   );
-  const [type, setType] = useState("client" || "sector" || "all");
+  const [type, setType] = useState("customer" || "sector" || "all");
 
   const router = useRouter();
   let pathname = router.pathname;
@@ -26,7 +28,7 @@ export default function Works() {
       description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
       category: "advertising",
       sector: "Brand",
-      clientType: "Art",
+      customerType: "Art",
     },
 
     {
@@ -35,7 +37,7 @@ export default function Works() {
       description: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
       category: "advertising",
       sector: "Sign",
-      clientType: "Banking",
+      customerType: "Banking",
     },
     {
       image: one,
@@ -43,7 +45,7 @@ export default function Works() {
       description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
       category: "digital",
       sector: "Sign",
-      clientType: "Art",
+      customerType: "Art",
     },
     {
       image: two,
@@ -51,7 +53,7 @@ export default function Works() {
       description: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
       category: "advertising",
       sector: "Sign",
-      clientType: "Banking",
+      customerType: "Banking",
     },
     {
       image: two,
@@ -59,7 +61,7 @@ export default function Works() {
       description: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
       category: "media",
       sector: "Sign",
-      clientType: "Design",
+      customerType: "Design",
     },
     {
       image: three,
@@ -67,7 +69,7 @@ export default function Works() {
       description: "طراحی بسته‌بندی نوروز",
       category: "advertising",
       sector: "Digital",
-      clientType: "Design",
+      customerType: "Design",
     },
     {
       image: one,
@@ -75,7 +77,7 @@ export default function Works() {
       description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
       category: "digital",
       sector: "Industrial",
-      clientType: "Education",
+      customerType: "Education",
     },
     {
       image: one,
@@ -83,7 +85,7 @@ export default function Works() {
       description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
       category: "advertising",
       sector: "Architecture",
-      clientType: "Education",
+      customerType: "Education",
     },
     {
       image: three,
@@ -91,7 +93,7 @@ export default function Works() {
       description: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
       category: "advertising",
       sector: "Architecture",
-      clientType: "Food",
+      customerType: "Food",
     },
     {
       image: one,
@@ -99,7 +101,7 @@ export default function Works() {
       description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
       category: "advertising",
       sector: "Industrial",
-      clientType: "Food",
+      customerType: "Food",
     },
   ];
 
@@ -109,7 +111,7 @@ export default function Works() {
     { name: "media", label: "رسانه" },
   ];
   const types = [
-    { name: "client", label: "نوع کارفرما" },
+    { name: "customer", label: "نوع مشتری" },
     { name: "sector", label: "نوع کار" },
     { name: "all", label: "همه" },
   ];
@@ -138,11 +140,11 @@ export default function Works() {
         case "all":
           uniqueWorks.push(work);
           break;
-        case "client":
+        case "customer":
           if (
             !uniqueWorks.some(
               (uniqueWork) =>
-                uniqueWork.clientType === work.clientType &&
+                uniqueWork.customerType === work.customerType &&
                 uniqueWork.category === work.category
             )
           ) {
@@ -163,6 +165,21 @@ export default function Works() {
       }
     });
     return uniqueWorks;
+  };
+
+  const directCategory = (item) => {
+    const { title, customerType, sector } = item;
+    switch (type) {
+      case "all":
+        Router.push(`/works/${replaceSpacesAndHyphens(title)}`);
+        break;
+      case "customer":
+        Router.push(`/works/customer/${replaceSpacesAndHyphens(customerType)}`);
+        break;
+      case "sector":
+        Router.push(`/works/sector/${replaceSpacesAndHyphens(sector)}`);
+        break;
+    }
   };
 
   return (
@@ -210,55 +227,61 @@ export default function Works() {
       >
         {filterUniqueWorks()
           .filter((item) => item.category === category || category === "all")
-          .map((item, index) => (
-            <Fragment key={index}>
-              {item.image && (
-                <div className={classes.item}>
-                  {type === "client" && (
-                    <div className={classes.title}>
-                      <h2>{item.clientType}</h2>
-                      <p>
-                        {
-                          works.filter(
-                            (work) =>
-                              item.clientType === work.clientType &&
-                              item.category === work.category
-                          ).length
-                        }
-                      </p>
+          .map((item, index) => {
+            const { customerType, sector, image, title } = item;
+            return (
+              <Fragment key={index}>
+                {image && (
+                  <div
+                    className={classes.item}
+                    onClick={() => directCategory(item)}
+                  >
+                    {type === "customer" && (
+                      <div className={classes.title}>
+                        <h2>{customerType}</h2>
+                        <p>
+                          {
+                            works.filter(
+                              (work) =>
+                                customerType === work.customerType &&
+                                item.category === work.category
+                            ).length
+                          }
+                        </p>
+                      </div>
+                    )}
+                    {type === "sector" && (
+                      <div className={classes.title}>
+                        <h2>{sector}</h2>
+                        <p>
+                          {
+                            works.filter(
+                              (work) =>
+                                sector === work.sector &&
+                                item.category === work.category
+                            ).length
+                          }
+                        </p>
+                      </div>
+                    )}
+                    <div className={classes.box}>
+                      <Image
+                        className={classes.image}
+                        src={image}
+                        placeholder="blur"
+                        blurDataURL={image}
+                        alt={title}
+                        layout="fill"
+                        objectFit="cover"
+                        priority
+                      />
                     </div>
-                  )}
-                  {type === "sector" && (
-                    <div className={classes.title}>
-                      <h2>{item.sector}</h2>
-                      <p>
-                        {
-                          works.filter(
-                            (work) =>
-                              item.sector === work.sector &&
-                              item.category === work.category
-                          ).length
-                        }
-                      </p>
-                    </div>
-                  )}
-                  <div className={classes.box}>
-                    <Image
-                      className={classes.image}
-                      src={item.image}
-                      placeholder="blur"
-                      blurDataURL={item.image}
-                      alt={item.title}
-                      layout="fill"
-                      objectFit="cover"
-                      priority
-                    />
+                    {type === "all" && <h3>{title}</h3>}
                   </div>
-                  {type === "all" && <h3>{item.title}</h3>}
-                </div>
-              )}
-            </Fragment>
-          ))}
+                )}
+              </Fragment>
+            );
+          })}
       </section>
     </div>
   );
