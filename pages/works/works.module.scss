@@ -35,7 +35,7 @@
   }
 
   .category {
-    width: 350px;
+    width: 300px;
     @include mixins.row-space-between-center();
     flex-direction: row-reverse;
 
@@ -133,10 +133,13 @@
 
   .item {
     cursor: pointer;
-    color: config.$grey;
 
-    &:hover {
-      color: config.$black;
+    .title {
+      display: flex;
+
+      p {
+        margin-right: 12px;
+      }
     }
   }
 
