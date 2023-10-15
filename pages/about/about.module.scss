@@ -13,9 +13,7 @@
 }
 
 .information {
-  text-align: right;
   @include mixins.row-space-between-center();
-  align-items: flex-start;
   direction: rtl;
   margin-bottom: 80px;
   line-height: 30px;
@@ -32,6 +30,8 @@
 
     @include mixins.mobile {
       width: 100%;
+      margin: 0px;
+
       .image {
         object-position: 10% 0%;
       }
