@@ -16,7 +16,7 @@
   @include mixins.row-space-between-center();
   direction: rtl;
   margin-bottom: 80px;
-  line-height: 30px;
+  line-height: 35px;
 
   @include mixins.mobile {
     flex-direction: column;

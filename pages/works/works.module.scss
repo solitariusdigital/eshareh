@@ -133,6 +133,11 @@
 
   .item {
     cursor: pointer;
+    color: config.$grey;
+
+    &:hover {
+      color: config.$black;
+    }
 
     .title {
       display: flex;
