@@ -219,7 +219,7 @@ export default function Works() {
       </div>
       <section
         key={category}
-        className={`${classes.list} ${
+        className={`${classes.gridList} ${
           screenSize === "desktop"
             ? "animate__animated animate__slideInRight"
             : "animate__animated animate__fadeIn"

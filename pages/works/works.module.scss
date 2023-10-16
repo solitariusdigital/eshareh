@@ -11,6 +11,47 @@
   }
 }
 
+.gridList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  align-items: flex-start;
+  gap: 20px;
+  direction: rtl;
+  margin-top: 50px;
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  }
+
+  .item {
+    cursor: pointer;
+    color: config.$grey;
+
+    &:hover {
+      color: config.$black;
+    }
+
+    .title {
+      display: flex;
+
+      p {
+        margin-right: 12px;
+      }
+    }
+  }
+
+  .box {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    margin: 12px 0px;
+  }
+}
+
 .categoryContainer {
   position: relative;
   padding: 12px;
@@ -112,46 +153,5 @@
   .navActive {
     color: config.$black;
     font-weight: bold;
-  }
-}
-
-.list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  align-items: flex-start;
-  gap: 20px;
-  direction: rtl;
-  margin-top: 50px;
-
-  @include mixins.mobile {
-    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-  }
-
-  @include mixins.tablet {
-    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-  }
-
-  .item {
-    cursor: pointer;
-    color: config.$grey;
-
-    &:hover {
-      color: config.$black;
-    }
-
-    .title {
-      display: flex;
-
-      p {
-        margin-right: 12px;
-      }
-    }
-  }
-
-  .box {
-    position: relative;
-    width: 100%;
-    height: 250px;
-    margin: 12px 0px;
   }
 }
