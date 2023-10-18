@@ -104,7 +104,7 @@ export default function ImageSlider({ sliderData }) {
               <div
                 key={displayInfo}
                 className={
-                  screenSize !== "mobile"
+                  screenSize === "desktop"
                     ? `animate__animated animate__fadeInRight`
                     : ""
                 }

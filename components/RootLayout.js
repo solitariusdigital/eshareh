@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
   const handleResize = () => {
     if (window.innerWidth < 700) {
       setScreenSize("mobile");
-    } else if (window.innerWidth > 700 && window.innerWidth < 1200) {
+    } else if (window.innerWidth > 700 && window.innerWidth < 1400) {
       setScreenSize("tablet");
     } else {
       setScreenSize("desktop");
