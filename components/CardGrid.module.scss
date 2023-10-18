@@ -48,6 +48,7 @@
     width: 50%;
 
     div {
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -63,13 +64,9 @@
         margin-top: 4px;
       }
 
-      .box {
-        position: relative;
-
-        .image {
-          &:hover {
-            @include mixins.background-anime();
-          }
+      .image {
+        &:hover {
+          @include mixins.background-anime();
         }
       }
     }
@@ -98,6 +95,7 @@
   }
 
   div {
+    position: relative;
     display: flex;
     flex-direction: column;
     text-align: right;
@@ -108,16 +106,12 @@
     .details {
       height: 60px;
       min-height: 20%;
+      margin-top: 4px;
     }
 
-    .box {
-      position: relative;
-      margin-bottom: 8px;
-
-      .image {
-        &:hover {
-          @include mixins.background-anime();
-        }
+    .image {
+      &:hover {
+        @include mixins.background-anime();
       }
     }
   }

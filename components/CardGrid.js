@@ -47,7 +47,6 @@ export default function CardGrid({ projects, direction }) {
               )}
             </div>
           </div>
-
           <div className={classes.grid}>
             {projects
               .map((project, index) => (
@@ -65,7 +64,7 @@ export default function CardGrid({ projects, direction }) {
                     setHoverItem(null);
                   }}
                 >
-                  <div className={classes.box}>
+                  <div>
                     <Image
                       className={classes.image}
                       src={project.image}
@@ -108,7 +107,7 @@ export default function CardGrid({ projects, direction }) {
                   setHoverItem(null);
                 }}
               >
-                <div className={classes.box}>
+                <div>
                   <Image
                     className={classes.image}
                     src={project.image}
