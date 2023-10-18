@@ -3,7 +3,7 @@
 
 .slider {
   position: relative;
-  height: 100vh;
+  height: calc(100vh - 80px);
 
   @include mixins.mobile {
     height: 600px;

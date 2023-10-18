@@ -11,7 +11,10 @@ export default function About() {
 
   useEffect(() => {
     document.body.style.background = "#1b1b1b";
-    setMenuColor("#ffffff");
+    setMenuColor({
+      text: "#ffffff",
+      background: "#1b1b1b",
+    });
   }, [setMenuColor]);
 
   const photos = [

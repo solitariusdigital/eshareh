@@ -6,7 +6,10 @@ export const StateProvider = (props) => {
   const [appUsers, setAppUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
-  const [menuColor, setMenuColor] = useState("#ffffff");
+  const [menuColor, setMenuColor] = useState({
+    text: "#1b1b1b",
+    background: "#ffffff",
+  });
   const [screenSize, setScreenSize] = useState(
     "desktop" || "tablet" || "mobile"
   );

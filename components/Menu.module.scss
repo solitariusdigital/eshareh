@@ -2,7 +2,8 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  width: config.$content-width;
+  width: 100%;
+  background: config.$white;
   @include mixins.row-space-between-center();
 
   @include mixins.mobile {
@@ -23,7 +24,9 @@
 }
 
 .largeMenu {
-  width: 100%;
+  width: config.$content-width;
+  margin: auto;
+
   @include mixins.row-space-between-center();
 
   @include mixins.mobile {

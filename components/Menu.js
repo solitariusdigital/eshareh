@@ -40,7 +40,10 @@ export default function Menu() {
   };
 
   return (
-    <div className={classes.container}>
+    <div
+      className={classes.container}
+      style={{ background: menuColor.background, color: menuColor.text }}
+    >
       <div className={classes.largeMenu}>
         <Image
           className={classes.logo}
@@ -56,7 +59,6 @@ export default function Menu() {
             .map((nav, index) => (
               <a
                 key={index}
-                style={!nav.active ? { color: menuColor } : { color: "" }}
                 className={!nav.active ? classes.nav : classes.navActive}
                 onClick={() => activateNav(nav.link, index)}
               >
