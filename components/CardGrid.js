@@ -91,44 +91,40 @@ export default function CardGrid({ projects, direction }) {
       )}
       {screenSize !== "desktop" && (
         <div className={classes.responsive}>
-          {projects
-            .map((project, index) => (
-              <div
-                key={index}
-                onClick={() =>
-                  Router.push(
-                    `/works/${replaceSpacesAndHyphens(project.title)}`
-                  )
-                }
-                onMouseEnter={() => {
-                  setHoverItem(index);
-                }}
-                onMouseLeave={() => {
-                  setHoverItem(null);
-                }}
-              >
-                <div>
-                  <Image
-                    className={classes.image}
-                    src={project.image}
-                    blurDataURL={project.image}
-                    placeholder="blur"
-                    alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
-                    priority
-                  />
-                </div>
-                <div className={classes.details}>
-                  {hoverItem === index ? (
-                    <h3>{sliceString(project.description, 100)}</h3>
-                  ) : (
-                    <h3>{project.title}</h3>
-                  )}
-                </div>
+          {projects.map((project, index) => (
+            <div
+              key={index}
+              onClick={() =>
+                Router.push(`/works/${replaceSpacesAndHyphens(project.title)}`)
+              }
+              onMouseEnter={() => {
+                setHoverItem(index);
+              }}
+              onMouseLeave={() => {
+                setHoverItem(null);
+              }}
+            >
+              <div>
+                <Image
+                  className={classes.image}
+                  src={project.image}
+                  blurDataURL={project.image}
+                  placeholder="blur"
+                  alt={project.title}
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
               </div>
-            ))
-            .slice(0, 4)}
+              <div className={classes.details}>
+                {hoverItem === index ? (
+                  <h3>{sliceString(project.description, 100)}</h3>
+                ) : (
+                  <h3>{project.title}</h3>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </Fragment>
