@@ -120,5 +120,5 @@ export function replaceSpacesAndHyphens(str) {
 }
 
 export function sliceString(string, number) {
-  return string.slice(0, number).split(" ").slice(0, -1).join(" ");
+  return string.slice(0, number).split(" ").slice(0, -1).join(" ") + "...";
 }

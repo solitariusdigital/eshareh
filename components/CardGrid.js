@@ -27,22 +27,27 @@ export default function CardGrid({ projects, direction }) {
               setHoverItem(null);
             }}
           >
-            <Image
-              className={classes.image}
-              src={projects[0].image}
-              blurDataURL={projects[0].image}
-              placeholder="blur"
-              alt={projects[0].title}
-              layout="fill"
-              objectFit="cover"
-              priority
-            />
-            {hoverItem === 0 ? (
-              <h3>... {sliceString(projects[0].description, 80)}</h3>
-            ) : (
-              <h3>{projects[0].title}</h3>
-            )}
+            <div>
+              <Image
+                className={classes.image}
+                src={projects[0].image}
+                blurDataURL={projects[0].image}
+                placeholder="blur"
+                alt={projects[0].title}
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
+            </div>
+            <div className={classes.details}>
+              {hoverItem === 0 ? (
+                <h3>{sliceString(projects[0].description, 100)}</h3>
+              ) : (
+                <h3>{projects[0].title}</h3>
+              )}
+            </div>
           </div>
+
           <div className={classes.grid}>
             {projects
               .map((project, index) => (
@@ -72,11 +77,13 @@ export default function CardGrid({ projects, direction }) {
                       priority
                     />
                   </div>
-                  {hoverItem === index ? (
-                    <h3>... {sliceString(project.description, 40)}</h3>
-                  ) : (
-                    <h3>{project.title}</h3>
-                  )}
+                  <div className={classes.details}>
+                    {hoverItem === index ? (
+                      <h3>{sliceString(project.description, 100)}</h3>
+                    ) : (
+                      <h3>{project.title}</h3>
+                    )}
+                  </div>
                 </div>
               ))
               .slice(1, 5)}
@@ -113,11 +120,13 @@ export default function CardGrid({ projects, direction }) {
                     priority
                   />
                 </div>
-                {hoverItem === index ? (
-                  <h3>... {sliceString(project.description, 60)}</h3>
-                ) : (
-                  <h3>{project.title}</h3>
-                )}
+                <div className={classes.details}>
+                  {hoverItem === index ? (
+                    <h3>{sliceString(project.description, 100)}</h3>
+                  ) : (
+                    <h3>{project.title}</h3>
+                  )}
+                </div>
               </div>
             ))
             .slice(0, 4)}
