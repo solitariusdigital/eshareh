@@ -293,7 +293,7 @@ export default function Home() {
   return (
     <Fragment>
       <section>
-        <ImageSlider sliderData={sliderData} />
+        <ImageSlider sliderData={sliderData.slice(0, 8)} />
       </section>
       <section className={classes.gridWorks}>
         <CardGrid projects={divideArray(sliderData)[0]} direction={true} />

@@ -27,7 +27,7 @@ export default function CardGrid({ projects, direction }) {
               setHoverItem(null);
             }}
           >
-            <div>
+            <div className={classes.box}>
               <Image
                 className={classes.image}
                 src={projects[0].image}
@@ -41,7 +41,7 @@ export default function CardGrid({ projects, direction }) {
             </div>
             <div className={classes.details}>
               {hoverItem === 0 ? (
-                <h3>{sliceString(projects[0].description, 100)}</h3>
+                <h3>{sliceString(projects[0].description, 150)}</h3>
               ) : (
                 <h3>{projects[0].title}</h3>
               )}
@@ -64,7 +64,7 @@ export default function CardGrid({ projects, direction }) {
                     setHoverItem(null);
                   }}
                 >
-                  <div>
+                  <div className={classes.box}>
                     <Image
                       className={classes.image}
                       src={project.image}
@@ -78,7 +78,7 @@ export default function CardGrid({ projects, direction }) {
                   </div>
                   <div className={classes.details}>
                     {hoverItem === index ? (
-                      <h3>{sliceString(project.description, 100)}</h3>
+                      <h3>{sliceString(project.description, 80)}</h3>
                     ) : (
                       <h3>{project.title}</h3>
                     )}
@@ -104,7 +104,7 @@ export default function CardGrid({ projects, direction }) {
                 setHoverItem(null);
               }}
             >
-              <div>
+              <div className={classes.box}>
                 <Image
                   className={classes.image}
                   src={project.image}
