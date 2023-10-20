@@ -24,14 +24,14 @@ export const StateProvider = (props) => {
       link: "/works",
       active: false,
     },
+    // {
+    //   title: "اخبار",
+    //   link: "/news",
+    //   active: false,
+    // },
     {
       title: "درباره",
       link: "/about",
-      active: false,
-    },
-    {
-      title: "اخبار",
-      link: "/news",
       active: false,
     },
     {

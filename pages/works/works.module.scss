@@ -155,3 +155,34 @@
     font-weight: bold;
   }
 }
+
+.workTitle {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  gap: 20px;
+  width: 100%;
+  text-align: right;
+
+  @include mixins.mobile {
+    display: flex;
+    flex-direction: column;
+    flex-direction: column-reverse;
+  }
+}
+
+.fullWidth {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  gap: 20px;
+}
+
+.halfWidth {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  gap: 20px;
+}
+
+.gridItem {
+  background-color: lightgray;
+  padding: 10px;
+}
