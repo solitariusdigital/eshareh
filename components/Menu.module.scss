@@ -26,6 +26,7 @@
 .largeMenu {
   width: config.$content-width;
   margin: auto;
+  position: relative;
 
   @include mixins.row-space-between-center();
 
@@ -44,6 +45,17 @@
 
     @include mixins.tablet {
       width: 50%;
+    }
+  }
+
+  .colorPickerContainer {
+    position: absolute;
+    left: 150px;
+
+    .colorPicker {
+      position: absolute;
+      left: 50px;
+      top: 0px;
     }
   }
 }

@@ -13,6 +13,10 @@ export default function Login() {
   const [alert, setAlert] = useState("");
 
   useEffect(() => {
+    document.body.style.background = "#ffffff";
+  }, []);
+
+  useEffect(() => {
     if (currentUser) {
       Router.push("/");
     }

@@ -6,16 +6,11 @@ import Router from "next/router";
 import team from "@/assets/team.jpg";
 import cover from "@/assets/cover.jpg";
 import { enToFaDigits } from "@/services/utility";
-export default function About() {
-  const { menuColor, setMenuColor } = useContext(StateContext);
 
+export default function About() {
   useEffect(() => {
     document.body.style.background = "#1b1b1b";
-    setMenuColor({
-      text: "#ffffff",
-      background: "#1b1b1b",
-    });
-  }, [setMenuColor]);
+  }, []);
 
   const photos = [
     {

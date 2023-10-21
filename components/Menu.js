@@ -7,12 +7,15 @@ import Router from "next/router";
 import Image from "next/legacy/image";
 import logo from "@/assets/logo.png";
 import SearchIcon from "@mui/icons-material/Search";
+import { CompactPicker } from "react-color";
+import ColorLensIcon from "@mui/icons-material/ColorLens";
 
 export default function Menu() {
   const { menuMobile, setMenuMobile } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { menuColor, setMenuColor } = useContext(StateContext);
   const [desktop, setDesktop] = useState(false);
+  const [colorPicker, setColorPicker] = useState(false);
 
   useEffect(() => {
     const checkDeviceType = () => {
@@ -37,6 +40,13 @@ export default function Menu() {
       }
     });
     setNavigationTopBar([...navigationTopBar]);
+  };
+
+  const handleChangeComplete = (color, event) => {
+    setMenuColor({
+      text: "#1b1b1b",
+      background: color.hex,
+    });
   };
 
   return (
@@ -67,6 +77,18 @@ export default function Menu() {
               </a>
             ))
             .reverse()}
+        </div>
+        <div className={classes.colorPickerContainer}>
+          <ColorLensIcon
+            className="icon"
+            onClick={() => setColorPicker(!colorPicker)}
+            sx={{ color: "#ffcb08" }}
+          />
+          {colorPicker && (
+            <div className={classes.colorPicker}>
+              <CompactPicker onChangeComplete={handleChangeComplete} />
+            </div>
+          )}
         </div>
       </div>
       <div className={classes.smallMenu}>

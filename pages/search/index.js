@@ -11,7 +11,6 @@ import {
 } from "@/services/utility";
 
 export default function Search() {
-  const { menuColor, setMenuColor } = useContext(StateContext);
   const [search, setSearch] = useState("");
   const [documents, setDocuments] = useState([]);
   const [selectedItem, setSelectedItem] = useState({});
@@ -21,8 +20,7 @@ export default function Search() {
 
   useEffect(() => {
     document.body.style.background = "#ffffff";
-    setMenuColor("#1b1b1b");
-  }, [setMenuColor]);
+  }, []);
 
   const searchDocuments = () => {};
 
