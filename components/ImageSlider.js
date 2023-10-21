@@ -103,11 +103,7 @@ export default function ImageSlider({ sliderData }) {
             <div className={classes.information}>
               <div
                 key={displayInfo}
-                className={
-                  screenSize === "desktop"
-                    ? `animate__animated animate__fadeInRight`
-                    : ""
-                }
+                className="animate__animated animate__fadeIn"
               >
                 <h2>{slide.title}</h2>
                 {screenSize !== "mobile" && <h2>{slide.description}</h2>}

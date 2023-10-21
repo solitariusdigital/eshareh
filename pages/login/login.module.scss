@@ -13,7 +13,7 @@
 
 .input {
   margin: 40px auto;
-  width: 40%;
+  width: 500px;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
