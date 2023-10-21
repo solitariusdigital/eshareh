@@ -33,7 +33,7 @@ $screen-large: 2000px;
 
   &:hover {
     cursor: pointer;
-    color: $color;
+    color: $subColor;
     border: 1px solid $color;
     background: config.$background;
   }

@@ -2,8 +2,6 @@ import { useState, createContext } from "react";
 export const StateContext = createContext();
 
 export const StateProvider = (props) => {
-  // application user context
-  const [appUsers, setAppUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuColor, setMenuColor] = useState({
@@ -48,8 +46,6 @@ export const StateProvider = (props) => {
     setNavigationTopBar,
     currentUser,
     setCurrentUser,
-    appUsers,
-    setAppUsers,
     screenSize,
     setScreenSize,
     menuColor,
