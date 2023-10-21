@@ -91,7 +91,7 @@ export default function ImageSlider({ sliderData }) {
                     <video
                       className={classes.video}
                       preload="metadata"
-                      src="https://delmare.storage.iran.liara.space/landingpage/video.MOV"
+                      src="https://www.eshareh.com/wp-content/uploads/2022/06/Fouman-Chimie_Movie_01.mp4"
                       autoPlay
                       loop
                       muted

@@ -14,59 +14,59 @@ export default function Home() {
   const sliderData = [
     {
       image: one,
-      title: "yoyo1 خشکبار و حبوبات کوروش",
+      title: "خشکبار و حبوبات کوروش",
       description:
         "کمپین تلویزیونی  تخمه های آفتاب گردان لانچ و معرفی کرم  تخمه های آفتاب گردان لانچ و معرفی کرم تخمه های ",
       type: "image",
     },
     {
       image: two,
-      title: "yoyo2 آریان کیمیا",
+      title: "آریان کیمیا",
       description: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
       type: "video",
     },
     {
       image: three,
-      title: "yoyo3 ایران",
+      title: "ایران",
       description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
       type: "image",
     },
     {
-      image: two,
-      title: "yoyo4 خشکبار و حبوبات کوروش",
+      image: one,
+      title: "خشکبار و حبوبات کوروش",
       description:
         "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
       type: "video",
     },
     {
-      image: three,
-      title: "yoyo5 آریان کیمیا",
+      image: two,
+      title: "آریان کیمیا",
       description:
         "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
       type: "image",
     },
     {
       image: three,
-      title: "yoyo6 ایران",
+      title: "ایران",
       description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
       type: "image",
     },
     {
-      image: two,
+      image: one,
       title: "صنعت خشکبار و حبوبات کوروش",
       description:
         "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
       type: "video",
     },
     {
-      image: three,
+      image: two,
       title: "شرکت آریان کیمیا",
       description:
         "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
       type: "image",
     },
     {
-      image: one,
+      image: three,
       title: "صنعت خشکبار و حبوبات کوروش",
       description:
         "کمپین تلویزیونی  تخمه های آفتاب گردان لانچ و معرفی کرم  تخمه های آفتاب گردان لانچ و معرفی کرم تخمه های ",
