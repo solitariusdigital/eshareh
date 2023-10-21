@@ -3,6 +3,8 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./login.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import Router from "next/router";
+import AES from "crypto-js/aes";
+import { enc } from "crypto-js";
 
 export default function Login() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -37,6 +39,20 @@ export default function Login() {
       showAlert("ایمیل اشتباه");
       return;
     }
+
+    // Encrypt
+    const cryptedPassword = AES.encrypt(
+      password,
+      process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY
+    ).toString();
+    console.log(cryptedPassword);
+    // Decrypt
+    const decryptedBytes = AES.decrypt(
+      cryptedPassword,
+      process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY
+    );
+    const decryptedPassword = decryptedBytes.toString(enc.Utf8);
+    console.log(decryptedPassword);
   };
 
   return (
