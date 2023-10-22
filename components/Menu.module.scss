@@ -3,7 +3,6 @@
 
 .container {
   width: 100%;
-  background: config.$white;
   @include mixins.row-space-between-center();
 
   @include mixins.mobile {

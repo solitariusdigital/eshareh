@@ -6,16 +6,21 @@ import Footer from "@/components/Footer";
 import secureLocalStorage from "react-secure-storage";
 import Image from "next/legacy/image";
 import logoEnglish from "@/assets/logoEnglish.png";
+import appLoadOne from "@/assets/appLoadOne.png";
+import appLoadTwo from "@/assets/appLoadTwo.png";
+import appLoadThree from "@/assets/appLoadThree.png";
 
 export default function RootLayout({ children }) {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
-  const [appLoader, setAppLoader] = useState(true);
+  const [appLoader, setAppLoader] = useState(false);
 
   const router = useRouter();
   let pathname = router.pathname;
+
+  const appLoadImages = [appLoadOne, appLoadTwo, appLoadThree];
 
   const handleResize = () => {
     if (window.innerWidth < 700) {
@@ -45,6 +50,9 @@ export default function RootLayout({ children }) {
       }
     });
     setNavigationTopBar([...navigationTopBar]);
+    setTimeout(() => {
+      setAppLoader(true);
+    }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -67,10 +75,11 @@ export default function RootLayout({ children }) {
       ) : (
         <div className="appload">
           <Image
-            className="animate__animated animate__heartBeat"
-            width={150}
-            height={150}
-            src={logoEnglish}
+            width={300}
+            height={366.67}
+            src={
+              appLoadImages[Math.floor(Math.random() * appLoadImages.length)]
+            }
             alt="logo"
             priority
           />
