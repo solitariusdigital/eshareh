@@ -5,7 +5,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Router from "next/router";
 import Image from "next/legacy/image";
-import logo from "@/assets/logo.png";
+import logoEnglish from "@/assets/logoEnglish.png";
+import logoFarsi from "@/assets/logoFarsi.png";
+
 import SearchIcon from "@mui/icons-material/Search";
 import { CompactPicker } from "react-color";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
@@ -57,15 +59,17 @@ export default function Menu() {
     >
       {screenSize !== "mobile" && (
         <div className={classes.largeMenu}>
-          <Image
-            className={classes.logo}
-            width={120}
-            height={50}
-            src={logo}
-            alt="logo"
-            onClick={() => window.location.assign("/")}
-            priority
-          />
+          <div className={classes.logo}>
+            <Image
+              className={classes.image}
+              layout="fill"
+              objectFit="cover"
+              src={logoEnglish}
+              alt="logo"
+              onClick={() => window.location.assign("/")}
+              priority
+            />
+          </div>
           <div className={classes.largeNavigation}>
             {navigationTopBar
               .map((nav, index) => (
@@ -85,7 +89,7 @@ export default function Menu() {
             <ColorLensIcon
               className="icon"
               onClick={() => setColorPicker(!colorPicker)}
-              sx={{ color: "#ffcb08" }}
+              sx={{ color: "#fdb714" }}
             />
             {colorPicker && (
               <div className={classes.colorPicker}>
@@ -99,15 +103,18 @@ export default function Menu() {
       {screenSize === "mobile" && (
         <div className={classes.smallMenu}>
           <div className={classes.topBar}>
-            <Image
-              className={classes.logo}
-              width={120}
-              height={50}
-              src={logo}
-              alt="logo"
-              onClick={() => window.location.assign("/")}
-              priority
-            />
+            <div className={classes.logo}>
+              <Image
+                className={classes.image}
+                layout="fill"
+                objectFit="cover"
+                src={logoEnglish}
+                alt="logo"
+                onClick={() => window.location.assign("/")}
+                priority
+              />
+            </div>
+
             {menuMobile ? (
               <CloseIcon
                 className={classes.menuIcon}

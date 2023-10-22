@@ -1,44 +1,119 @@
 import { useState, useContext, Fragment, useEffect } from "react";
+import { StateContext } from "@/context/stateContext";
 import classes from "./works.module.scss";
 import { replaceSpacesAndHyphens } from "@/services/utility";
+import Image from "next/legacy/image";
+import GallerySlider from "@/components/GallerySlider";
+import CloseIcon from "@mui/icons-material/Close";
 import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
 
 export default function Work({ name }) {
+  const [isFullWidth, setIsFullWidth] = useState([]);
+  const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
+
+  const { displayMenu, setDisplayMenu } = useContext(StateContext);
+
   const work = {
-    image: three,
     title: "شرکت آریان کیمیا",
-    description:
-      "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
     type: "image",
+    images: [two, three, two, three, two, three],
+    descriptions: [
+      "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
+      "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
+      "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
+      "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
+      "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
+    ],
   };
 
-  const [isFullWidth, setIsFullWidth] = useState(true);
-  const items = [1, 2, 3, 4, 5, 6, 7];
+  useEffect(() => {
+    setIsFullWidth(Array(work.images.length).fill(true));
+  }, [work.images.length]);
 
-  const toggleGrid = () => {
-    setIsFullWidth(!isFullWidth);
+  const toggleGrid = (index) => {
+    setIsFullWidth((prevState) => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
   };
+
+  useEffect(() => {
+    if (!displayGallerySlider) {
+      let prevScrollY = window.scrollY;
+      const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > prevScrollY) {
+          setDisplayMenu(false);
+        } else if (currentScrollY < prevScrollY) {
+          setDisplayMenu(true);
+        }
+        prevScrollY = currentScrollY;
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, [displayGallerySlider, setDisplayMenu]);
 
   return (
     <div className={classes.container}>
-      <div className={classes.workTitle}>
-        <p>{work.description}</p>
-        <div className={classes.title}>
+      <div className={classes.information}>
+        <p>{work.descriptions[0]}</p>
+        <div>
           <h1>{work.title}</h1>
           <h2>{work.title}</h2>
         </div>
       </div>
-
-      <button onClick={toggleGrid}>Toggle Grid</button>
-
-      <div className={isFullWidth ? classes.fullWidth : classes.halfWidth}>
-        {items.map((item, index) => (
-          <div key={index} className={classes.gridItem}>
-            {item}
+      {work.images.map((image, index) => (
+        <Fragment key={index}>
+          <button onClick={() => toggleGrid(index)} å>
+            Toggle Grid
+          </button>
+          <div
+            className={
+              isFullWidth[index] ? classes.fullWidth : classes.halfWidth
+            }
+            onClick={() => {
+              setDisplayMenu(false);
+              setDisplayGallerySlider(true);
+              window.scrollTo(0, 0);
+              document.body.style.overflow = "hidden";
+            }}
+          >
+            <div className={classes.imageBox}>
+              <Image
+                src={image}
+                blurDataURL={image}
+                placeholder="blur"
+                alt={work.title}
+                layout="responsive"
+                objectFit="cover"
+                priority
+              />
+              <p className={classes.text}>بزرگنمایی +</p>
+            </div>
+            {index % 2 === 0 && <h2>{work.descriptions[index]}</h2>}
           </div>
-        ))}
-      </div>
+        </Fragment>
+      ))}
+      {displayGallerySlider && (
+        <div className={classes.gallerySlider}>
+          <div className={classes.icon}>
+            <CloseIcon
+              onClick={() => {
+                setDisplayMenu(true);
+                setDisplayGallerySlider(false);
+                document.body.style.overflow = "auto";
+              }}
+            />
+          </div>
+          <h3>{work.title}</h3>
+          <GallerySlider images={work.images} />
+        </div>
+      )}
     </div>
   );
 }

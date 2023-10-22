@@ -8,6 +8,7 @@ export const StateProvider = (props) => {
     text: "#1b1b1b",
     background: "#ffffff",
   });
+  const [displayMenu, setDisplayMenu] = useState(true);
   const [screenSize, setScreenSize] = useState(
     "desktop" || "tablet" || "mobile"
   );
@@ -50,6 +51,8 @@ export const StateProvider = (props) => {
     setScreenSize,
     menuColor,
     setMenuColor,
+    displayMenu,
+    setDisplayMenu,
   };
   return (
     <StateContext.Provider value={stateContext}>

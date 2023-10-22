@@ -9,6 +9,51 @@
   @include mixins.mobile {
     width: calc(100% - 24px);
   }
+
+  .information {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    gap: 20px;
+    width: 100%;
+    text-align: right;
+
+    @include mixins.mobile {
+      display: flex;
+      flex-direction: column;
+      flex-direction: column-reverse;
+    }
+  }
+
+  .imageBox {
+    position: relative;
+    cursor: pointer;
+
+    .text {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      border-radius: 50px;
+      padding: 8px 20px;
+      color: config.$white;
+      @include mixins.transparentBackground(0.5, config.$grey);
+    }
+  }
+
+  .fullWidth {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    gap: 20px;
+    margin: 20px 0px;
+    text-align: right;
+  }
+
+  .halfWidth {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    gap: 20px;
+    margin: 20px 0px;
+    text-align: right;
+  }
 }
 
 .gridList {
@@ -156,33 +201,26 @@
   }
 }
 
-.workTitle {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
-  gap: 20px;
+.gallerySlider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 20px;
   width: 100%;
-  text-align: right;
+  height: 100vh;
+  background: config.$white;
 
-  @include mixins.mobile {
-    display: flex;
-    flex-direction: column;
-    flex-direction: column-reverse;
+  h3 {
+    margin: 20px 0px;
   }
-}
 
-.fullWidth {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-  gap: 20px;
-}
-
-.halfWidth {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
-  gap: 20px;
-}
-
-.gridItem {
-  background-color: lightgray;
-  padding: 10px;
+  .icon {
+    display: flex;
+    width: 100%;
+    direction: rtl;
+    cursor: pointer;
+  }
 }

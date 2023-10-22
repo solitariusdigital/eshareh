@@ -5,12 +5,13 @@ import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
 import secureLocalStorage from "react-secure-storage";
 import Image from "next/legacy/image";
-import logo from "@/assets/logo.png";
+import logoEnglish from "@/assets/logoEnglish.png";
 
 export default function RootLayout({ children }) {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const [appLoader, setAppLoader] = useState(true);
 
   const router = useRouter();
@@ -51,9 +52,11 @@ export default function RootLayout({ children }) {
     <Fragment>
       {appLoader ? (
         <Fragment>
-          <section className="menu">
-            <Menu />
-          </section>
+          {displayMenu && (
+            <section className="menu animate__animated animate__slideInDown">
+              <Menu />
+            </section>
+          )}
           <section className="main">
             <main>{children}</main>
           </section>
@@ -67,7 +70,7 @@ export default function RootLayout({ children }) {
             className="animate__animated animate__heartBeat"
             width={150}
             height={150}
-            src={logo}
+            src={logoEnglish}
             alt="logo"
             priority
           />

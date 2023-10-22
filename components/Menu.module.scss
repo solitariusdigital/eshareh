@@ -15,10 +15,12 @@
   }
 
   .logo {
-    @include mixins.desktop {
-      &:hover {
-        cursor: pointer;
-      }
+    position: relative;
+    height: 45px;
+    width: 150px;
+
+    .image {
+      cursor: pointer;
     }
   }
 }
@@ -45,11 +47,12 @@
 
   .colorPickerContainer {
     position: absolute;
-    left: 150px;
+    left: 180px;
+    top: 10px;
 
     .colorPicker {
       position: absolute;
-      left: 50px;
+      left: 40px;
       top: 0px;
     }
   }
