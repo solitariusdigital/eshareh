@@ -8,6 +8,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 export default function GallerySlider({ images }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [current, setCurrent] = useState(0);
+  const length = images.length;
 
   const slideImage = (type) => {
     switch (type) {
@@ -22,34 +23,28 @@ export default function GallerySlider({ images }) {
 
   return (
     <div className={classes.slider}>
-      <Fragment>
-        <ArrowBackIosIcon
-          className={classes.leftArrow}
-          onClick={() => slideImage("prev")}
-        />
-        <ArrowForwardIosIcon
-          className={classes.rightArrow}
-          onClick={() => slideImage("next")}
-        />
-      </Fragment>
-
-      {images.map((image, index) => {
-        return (
-          <div key={index} className={classes.imageBox}>
-            {index === current && (
-              <Image
-                src={image}
-                blurDataURL={image}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
-            )}
-          </div>
-        );
-      })}
+      {screenSize !== "mobile" && (
+        <Fragment>
+          <ArrowBackIosIcon
+            className={classes.leftArrow}
+            onClick={() => slideImage("prev")}
+          />
+          <ArrowForwardIosIcon
+            className={classes.rightArrow}
+            onClick={() => slideImage("next")}
+          />
+        </Fragment>
+      )}
+      <Image
+        onClick={() => slideImage("next")}
+        src={images[current]}
+        blurDataURL={images[current]}
+        placeholder="blur"
+        layout="responsive"
+        objectFit="cover"
+        alt="image"
+        priority
+      />
     </div>
   );
 }
