@@ -27,12 +27,7 @@
   width: config.$content-width;
   margin: auto;
   position: relative;
-
   @include mixins.row-space-between-center();
-
-  @include mixins.mobile {
-    display: none;
-  }
 
   @include mixins.tablet {
     padding: 0px 12px;
@@ -82,10 +77,6 @@
 
 .smallMenu {
   width: 100%;
-
-  @include mixins.desktop {
-    display: none;
-  }
 
   .menuIcon {
     background: config.$yellow;
