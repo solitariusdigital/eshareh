@@ -111,9 +111,9 @@ export default function Work() {
     { name: "media", labelFa: "رسانه", labelEn: "Media" },
   ];
   const types = [
-    { name: "customer", labelFa: "نوع مشتری", labelEn: "Client type" },
-    { name: "sector", labelFa: "نوع کار", labelEn: "Work type" },
-    { name: "all", labelFa: "همه", labelEn: "All works" },
+    { name: "customer", labelFa: "نوع مشتری", labelEn: "Client Type" },
+    { name: "sector", labelFa: "نوع کار", labelEn: "Work Type" },
+    { name: "all", labelFa: "همه", labelEn: "All Work" },
   ];
 
   useEffect(() => {
