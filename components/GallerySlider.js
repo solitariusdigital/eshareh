@@ -4,9 +4,11 @@ import Image from "next/legacy/image";
 import classes from "./GallerySlider.module.scss";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import Progress from "@/components/Progress";
 
 export default function GallerySlider({ images }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const [progressCompleted, setProgressCompleted] = useState(34);
   const [current, setCurrent] = useState(0);
   const length = images.length;
 
@@ -19,6 +21,10 @@ export default function GallerySlider({ images }) {
         setCurrent((current) => (current === 0 ? length - 1 : current - 1));
         break;
     }
+  };
+
+  const calculatePercentage = (index) => {
+    return ((index + 1) / images.length) * 100;
   };
 
   return (
@@ -35,6 +41,9 @@ export default function GallerySlider({ images }) {
           />
         </Fragment>
       )}
+      <div className={classes.progress}>
+        <Progress color={"#fdb714"} completed={calculatePercentage(current)} />
+      </div>
       <Image
         onClick={() => slideImage("next")}
         src={images[current]}
