@@ -10,6 +10,7 @@ import Router from "next/router";
 import { replaceSpacesAndHyphens } from "@/services/utility";
 
 export default function Work() {
+  const { language, setLanguage } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [category, setCategory] = useState(
@@ -105,14 +106,14 @@ export default function Work() {
   ];
 
   const categories = [
-    { name: "advertising", label: "تبلیغات" },
-    { name: "digital", label: "دیجیتال" },
-    { name: "media", label: "رسانه" },
+    { name: "advertising", labelFa: "تبلیغات", labelEn: "Advertisement" },
+    { name: "digital", labelFa: "دیجیتال", labelEn: "Digital" },
+    { name: "media", labelFa: "رسانه", labelEn: "Media" },
   ];
   const types = [
-    { name: "customer", label: "نوع مشتری" },
-    { name: "sector", label: "نوع کار" },
-    { name: "all", label: "همه" },
+    { name: "customer", labelFa: "نوع مشتری", labelEn: "Client type" },
+    { name: "sector", labelFa: "نوع کار", labelEn: "Work type" },
+    { name: "all", labelFa: "همه", labelEn: "All works" },
   ];
 
   useEffect(() => {
@@ -195,7 +196,7 @@ export default function Work() {
                 setCategory(item.name);
               }}
             >
-              {item.label}
+              {language ? item.labelFa : item.labelEn}
             </p>
           ))}
         </div>
@@ -210,7 +211,7 @@ export default function Work() {
                 setType(item.name);
               }}
             >
-              {item.label}
+              {language ? item.labelFa : item.labelEn}
             </p>
           ))}
         </div>
