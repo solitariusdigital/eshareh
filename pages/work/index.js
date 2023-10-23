@@ -184,7 +184,7 @@ export default function Work() {
   return (
     <div className={classes.container}>
       <div className={classes.categoryContainer}>
-        <h1>پروژه‌ها</h1>
+        <h1>{language ? "پروژه‌ها" : "Work"}</h1>
         <div className={classes.category}>
           {categories.map((item) => (
             <p

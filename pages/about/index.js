@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
 import Image from "next/legacy/image";
@@ -8,6 +8,8 @@ import cover from "@/assets/cover.jpg";
 import { enToFaDigits } from "@/services/utility";
 
 export default function About() {
+  const { language, setLanguage } = useContext(StateContext);
+
   useEffect(() => {
     document.body.style.background = "#1b1b1b";
   }, []);
@@ -54,7 +56,7 @@ export default function About() {
             objectFit="cover"
             priority
           />
-          <h1>اشاره</h1>
+          <h1>{language ? "اشاره" : "Eshareh"}</h1>
         </div>
         <p>
           اشاره در سال {enToFaDigits(1376)} به عنوان یک آژانس تبلیغاتی آغاز به
