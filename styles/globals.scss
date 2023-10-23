@@ -2,13 +2,37 @@
 @use "mixins" as mixins;
 
 @font-face {
-  font-family: "English";
+  font-family: "EnglishBold";
+  src: url("../assets/fonts/En/Kalameh-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "FarsiBold";
+  src: url("../assets/fonts/Fa/YekanBakh-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "EnglishMedium";
   src: url("../assets/fonts/En/Kalameh-Medium.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Farsi";
+  font-family: "FarsiMedium";
   src: url("../assets/fonts/Fa/YekanBakh-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "English";
+  src: url("../assets/fonts/En/Kalameh-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Farsi";
+  src: url("../assets/fonts/Fa/YekanBakh-Regular.ttf") format("truetype");
+  font-weight: normal;
 }
 
 * {
@@ -46,7 +70,10 @@ h2 {
 }
 
 h3 {
-  font-size: 17px !important;
+  font-size: 19px !important;
+  @include mixins.mobile {
+    font-size: 17px !important;
+  }
 }
 
 .main {

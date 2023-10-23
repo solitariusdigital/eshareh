@@ -76,12 +76,12 @@ export default function Menu() {
                 <a
                   key={index}
                   style={{
-                    fontFamily: !language ? "English" : "Farsi",
+                    fontFamily: language ? "FarsiMedium" : "EnglishMedium",
                   }}
                   className={!nav.active ? classes.nav : classes.navActive}
                   onClick={() => activateNav(nav.link, index)}
                 >
-                  {!language ? nav.titleEn : nav.titleFa}
+                  {language ? nav.titleFa : nav.titleEn}
                   {nav.titleFa === "" && <SearchIcon sx={{ fontSize: 30 }} />}
                 </a>
               ))
@@ -160,12 +160,12 @@ export default function Menu() {
                     <a
                       key={index}
                       style={{
-                        fontFamily: !language ? "English" : "Farsi",
+                        fontFamily: language ? "FarsiMedium" : "EnglishMedium",
                       }}
                       className={!nav.active ? classes.nav : classes.navActive}
                       onClick={() => activateNav(nav.link, index)}
                     >
-                      {!language ? nav.titleEn : nav.titleFa}
+                      {language ? nav.titleFa : nav.titleEn}
                       {nav.titleFa === "" && (
                         <SearchIcon sx={{ fontSize: 30 }} />
                       )}

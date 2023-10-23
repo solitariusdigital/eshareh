@@ -9,6 +9,7 @@ import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
 
 export default function Home() {
+  const { language, setLanguage } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
 
   const sliderData = [
@@ -305,8 +306,8 @@ export default function Home() {
         <CardGrid projects={divideArray(sliderData)[6]} direction={true} />
         <CardGrid projects={divideArray(sliderData)[7]} direction={false} />
       </section>
-      <div className={classes.message} onClick={() => Router.push("/works")}>
-        <h3>مشاهده همه پروژه‌ها</h3>
+      <div className={classes.message} onClick={() => Router.push("/work")}>
+        {language ? <h3>مشاهده همه پروژه‌ها</h3> : <h3>View all works</h3>}
       </div>
     </Fragment>
   );

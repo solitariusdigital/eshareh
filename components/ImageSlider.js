@@ -9,6 +9,7 @@ import Router from "next/router";
 import Loader from "./Loader";
 
 export default function ImageSlider({ sliderData }) {
+  const { language, setLanguage } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [current, setCurrent] = useState(0);
   const [displayInfo, setDisplayInfo] = useState(false);
@@ -113,10 +114,12 @@ export default function ImageSlider({ sliderData }) {
                 onClick={() => slideImage("next")}
               >
                 {screenSize !== "mobile" && (
-                  <h2>{enToFaDigits(current + 1)}</h2>
+                  <h2>{language ? enToFaDigits(current + 1) : current + 1}</h2>
                 )}
                 <Loader key={displayInfo} />
-                {screenSize !== "mobile" && <h2>{enToFaDigits(length)}</h2>}
+                {screenSize !== "mobile" && (
+                  <h2>{language ? enToFaDigits(length) : length}</h2>
+                )}
               </div>
             </div>
           </div>

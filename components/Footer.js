@@ -1,16 +1,22 @@
+import { useContext } from "react";
+import { StateContext } from "@/context/stateContext";
 import classes from "./Footer.module.scss";
 import Image from "next/legacy/image";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import MuseTechLab from "@/assets/MuseTechLab.svg";
-import { enToFaDigits } from "@/services/utility";
 
 export default function Footer() {
+  const { language, setLanguage } = useContext(StateContext);
+
   return (
-    <div className={classes.footer}>
+    <div
+      className={classes.footer}
+      style={{
+        fontFamily: language ? "English" : "English",
+      }}
+    >
       <div className={classes.copyright}>
-        <p>
-          © {enToFaDigits(1376)} - {enToFaDigits(1402)} eshareh.com
-        </p>
+        <p>© 1376 - 1402 eshareh.com</p>
         <div
           className={classes.row}
           onClick={() =>
@@ -28,7 +34,7 @@ export default function Footer() {
             height={30}
             loading="eager"
           />
-          <p className={classes.action}>طراحی توسعه پشتیبانی</p>
+          <p className={classes.action}>{language ? "توسعه" : "Development"}</p>
           <PrecisionManufacturingIcon sx={{ fontSize: 18 }} />
         </div>
       </div>

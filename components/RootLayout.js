@@ -11,6 +11,8 @@ import appLoadTwo from "@/assets/appLoadTwo.png";
 import appLoadThree from "@/assets/appLoadThree.png";
 
 export default function RootLayout({ children }) {
+  const { language, setLanguage } = useContext(StateContext);
+
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -59,7 +61,11 @@ export default function RootLayout({ children }) {
   return (
     <Fragment>
       {appLoader ? (
-        <Fragment>
+        <div
+          style={{
+            fontFamily: language ? "Farsi" : "English",
+          }}
+        >
           {displayMenu && (
             <section className="menu animate__animated animate__slideInDown">
               <Menu />
@@ -71,7 +77,7 @@ export default function RootLayout({ children }) {
           <section>
             <Footer />
           </section>
-        </Fragment>
+        </div>
       ) : (
         <div className="appload">
           <Image
