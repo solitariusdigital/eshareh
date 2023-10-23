@@ -7,12 +7,12 @@ import Router from "next/router";
 import Image from "next/legacy/image";
 import logoEnglish from "@/assets/logoEnglish.png";
 import logoFarsi from "@/assets/logoFarsi.png";
-
 import SearchIcon from "@mui/icons-material/Search";
 import { CompactPicker } from "react-color";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 
 export default function Menu() {
+  const { language, setLanguage } = useContext(StateContext);
   const { menuMobile, setMenuMobile } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -64,7 +64,7 @@ export default function Menu() {
               className={classes.image}
               layout="fill"
               objectFit="cover"
-              src={logoEnglish}
+              src={!language ? logoEnglish : logoFarsi}
               alt="logo"
               onClick={() => window.location.assign("/")}
               priority
@@ -75,14 +75,27 @@ export default function Menu() {
               .map((nav, index) => (
                 <a
                   key={index}
+                  style={{
+                    fontFamily: !language ? "English" : "Farsi",
+                  }}
                   className={!nav.active ? classes.nav : classes.navActive}
                   onClick={() => activateNav(nav.link, index)}
                 >
-                  {nav.title}
-                  {nav.title === "" && <SearchIcon sx={{ fontSize: 30 }} />}
+                  {!language ? nav.titleEn : nav.titleFa}
+                  {nav.titleFa === "" && <SearchIcon sx={{ fontSize: 30 }} />}
                 </a>
               ))
               .reverse()}
+          </div>
+
+          <div
+            className={classes.languageControl}
+            onClick={() => setLanguage(!language)}
+            style={{
+              fontFamily: language ? "English" : "Farsi",
+            }}
+          >
+            <p>{language ? "English" : "فارسی"}</p>
           </div>
 
           <div className={classes.colorPickerContainer}>
@@ -108,13 +121,21 @@ export default function Menu() {
                 className={classes.image}
                 layout="fill"
                 objectFit="cover"
-                src={logoEnglish}
+                src={!language ? logoEnglish : logoFarsi}
                 alt="logo"
                 onClick={() => window.location.assign("/")}
                 priority
               />
             </div>
-
+            <div
+              className={classes.languageControl}
+              onClick={() => setLanguage(!language)}
+              style={{
+                fontFamily: language ? "English" : "Farsi",
+              }}
+            >
+              <p>{language ? "English" : "فارسی"}</p>
+            </div>
             {menuMobile ? (
               <CloseIcon
                 className={classes.menuIcon}
@@ -138,11 +159,16 @@ export default function Menu() {
                   {navigationTopBar.map((nav, index) => (
                     <a
                       key={index}
+                      style={{
+                        fontFamily: !language ? "English" : "Farsi",
+                      }}
                       className={!nav.active ? classes.nav : classes.navActive}
                       onClick={() => activateNav(nav.link, index)}
                     >
-                      {nav.title}
-                      {nav.title === "" && <SearchIcon sx={{ fontSize: 30 }} />}
+                      {!language ? nav.titleEn : nav.titleFa}
+                      {nav.titleFa === "" && (
+                        <SearchIcon sx={{ fontSize: 30 }} />
+                      )}
                     </a>
                   ))}
                   {desktop && (

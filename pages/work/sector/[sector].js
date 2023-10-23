@@ -1,6 +1,6 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "../works.module.scss";
+import classes from "../work.module.scss";
 import { replaceSpacesAndHyphens } from "@/services/utility";
 
 export default function Sector({ name }) {

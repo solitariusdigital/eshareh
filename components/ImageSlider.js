@@ -72,7 +72,7 @@ export default function ImageSlider({ sliderData }) {
             {index === current && (
               <div
                 onClick={() =>
-                  Router.push(`/works/${replaceSpacesAndHyphens(slide.title)}`)
+                  Router.push(`/work/${replaceSpacesAndHyphens(slide.title)}`)
                 }
               >
                 {slide.type === "image" ? (

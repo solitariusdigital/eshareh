@@ -16,9 +16,7 @@ export default function CardGrid({ projects, direction }) {
           <div
             className={classes.hero}
             onClick={() =>
-              Router.push(
-                `/works/${replaceSpacesAndHyphens(projects[0].title)}`
-              )
+              Router.push(`/work/${replaceSpacesAndHyphens(projects[0].title)}`)
             }
             onMouseEnter={() => {
               setHoverItem(0);
@@ -54,7 +52,7 @@ export default function CardGrid({ projects, direction }) {
                   key={index}
                   onClick={() =>
                     Router.push(
-                      `/works/${replaceSpacesAndHyphens(project.title)}`
+                      `/work/${replaceSpacesAndHyphens(project.title)}`
                     )
                   }
                   onMouseEnter={() => {
@@ -95,7 +93,7 @@ export default function CardGrid({ projects, direction }) {
             <div
               key={index}
               onClick={() =>
-                Router.push(`/works/${replaceSpacesAndHyphens(project.title)}`)
+                Router.push(`/work/${replaceSpacesAndHyphens(project.title)}`)
               }
               onMouseEnter={() => {
                 setHoverItem(index);

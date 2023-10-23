@@ -46,7 +46,7 @@
 
   .colorPickerContainer {
     position: absolute;
-    left: 180px;
+    left: 250px;
     top: 10px;
 
     .colorPicker {
@@ -54,6 +54,17 @@
       left: 40px;
       top: 0px;
     }
+  }
+}
+
+.languageControl {
+  position: absolute;
+  left: 180px;
+  top: 10px;
+  cursor: pointer;
+
+  @include mixins.mobile {
+    top: 30px;
   }
 }
 

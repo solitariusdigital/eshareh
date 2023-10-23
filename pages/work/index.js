@@ -1,7 +1,7 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
-import classes from "./works.module.scss";
+import classes from "./work.module.scss";
 import Image from "next/legacy/image";
 import one from "@/assets/one.jpg";
 import two from "@/assets/two.jpg";
@@ -9,7 +9,7 @@ import three from "@/assets/three.jpg";
 import Router from "next/router";
 import { replaceSpacesAndHyphens } from "@/services/utility";
 
-export default function Works() {
+export default function Work() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [category, setCategory] = useState(
@@ -169,13 +169,13 @@ export default function Works() {
     const { title, customerType, sector } = item;
     switch (type) {
       case "all":
-        Router.push(`/works/${replaceSpacesAndHyphens(title)}`);
+        Router.push(`/work/${replaceSpacesAndHyphens(title)}`);
         break;
       case "customer":
-        Router.push(`/works/customer/${replaceSpacesAndHyphens(customerType)}`);
+        Router.push(`/work/customer/${replaceSpacesAndHyphens(customerType)}`);
         break;
       case "sector":
-        Router.push(`/works/sector/${replaceSpacesAndHyphens(sector)}`);
+        Router.push(`/work/sector/${replaceSpacesAndHyphens(sector)}`);
         break;
     }
   };

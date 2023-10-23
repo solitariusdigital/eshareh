@@ -2,6 +2,7 @@ import { useState, createContext } from "react";
 export const StateContext = createContext();
 
 export const StateProvider = (props) => {
+  const [language, setLanguage] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuColor, setMenuColor] = useState({
@@ -14,33 +15,40 @@ export const StateProvider = (props) => {
   );
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
-      title: "",
+      titleFa: "",
+      titleEn: "",
       link: "/search",
       active: false,
     },
     {
-      title: "پروژه‌ها",
-      link: "/works",
+      titleFa: "پروژه‌ها",
+      titleEn: "Work",
+      link: "/work",
       active: false,
     },
     // {
-    //   title: "اخبار",
+    //   titleFa: "اخبار",
+    //   titleEn: "News",
     //   link: "/news",
     //   active: false,
     // },
     {
-      title: "درباره",
+      titleFa: "درباره",
+      titleEn: "About",
       link: "/about",
       active: false,
     },
     {
-      title: "تماس",
+      titleFa: "تماس",
+      titleEn: "Contact",
       link: "/contact",
       active: false,
     },
   ]);
 
   const stateContext = {
+    language,
+    setLanguage,
     menuMobile,
     setMenuMobile,
     navigationTopBar,
