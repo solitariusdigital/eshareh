@@ -35,7 +35,14 @@ export default function Contact() {
           }
         >
           <h1>{language ? "اشاره" : "eshareh"}</h1>
-          <div className={language ? classes.row : classes.rowReverse}>
+          <div
+            className={language ? classes.row : classes.rowReverse}
+            onClick={() =>
+              window.open(
+                "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7747019,51.3940432,18.89z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu"
+              )
+            }
+          >
             <LocationOnIcon />
             {language ? (
               <p>
@@ -53,15 +60,15 @@ export default function Contact() {
             className={language ? classes.row : classes.rowReverse}
             onClick={() => window.open("tel:+982188044244", "_self")}
           >
-            <PhoneEnabledIcon className="icon" />
+            <PhoneEnabledIcon />
             <p>{language ? "+۹۸ ۲۱ ۸۸۰ ۴۴ ۲۴" : "+98 21 880 44 24"}</p>
           </div>
           <div className={language ? classes.row : classes.rowReverse}>
-            <ReceiptLongIcon className="icon" />
+            <ReceiptLongIcon />
             <p>{language ? "+۹۸ ۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 21 880 60 666"}</p>
           </div>
           <div className={language ? classes.row : classes.rowReverse}>
-            <EmailIcon className="icon" />
+            <EmailIcon />
             <p
               style={{
                 fontFamily: language ? "English" : "English",
