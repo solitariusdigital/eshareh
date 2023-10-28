@@ -7,9 +7,13 @@ import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
 import EmailIcon from "@mui/icons-material/Email";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import NavigationIcon from "@mui/icons-material/Navigation";
 
 export default function Contact() {
   const { language, setLanguage } = useContext(StateContext);
+
+  const locationLink =
+    "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7743132,51.3941519,17z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu";
 
   useEffect(() => {
     document.body.style.background = "#ffffff";
@@ -37,11 +41,7 @@ export default function Contact() {
           <h1>{language ? "اشاره" : "eshareh"}</h1>
           <div
             className={language ? classes.row : classes.rowReverse}
-            onClick={() =>
-              window.open(
-                "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7747019,51.3940432,18.89z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu"
-              )
-            }
+            onClick={() => window.open(locationLink)}
           >
             <LocationOnIcon />
             {language ? (
@@ -55,6 +55,13 @@ export default function Contact() {
                 Iran
               </p>
             )}
+          </div>
+          <div
+            className={language ? classes.row : classes.rowReverse}
+            onClick={() => window.open(locationLink)}
+          >
+            <NavigationIcon />
+            <p>{language ? "موقعیت روی نقشه" : "Location on the map"}</p>
           </div>
           <div
             className={language ? classes.row : classes.rowReverse}

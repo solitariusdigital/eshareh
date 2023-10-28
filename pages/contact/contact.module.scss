@@ -44,7 +44,7 @@
     cursor: pointer;
 
     @include mixins.mobile {
-      padding: 4px;
+      padding: 8px;
       @include mixins.transparentBackground(0.6, config.$white);
       @include mixins.border-radius();
     }
