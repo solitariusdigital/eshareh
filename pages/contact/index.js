@@ -28,44 +28,48 @@ export default function Contact() {
           priority
         />
       </div>
-      <div
-        className={language ? classes.information : classes.informationReverse}
-      >
-        <h1>{language ? "اشاره" : "eshareh"}</h1>
-        <div className={language ? classes.row : classes.rowReverse}>
-          <LocationOnIcon />
-          {language ? (
-            <p>
-              تهران، انتهای شیخ بهایی شمالی، نبش بزرگراه نیایش، کوچه ۲۱، پلاک ۲،
-              ۱۹۹۵۷۷۵۳۵۳
-            </p>
-          ) : (
-            <p>
-              No. 2, 21st Alley, North Sheikh Bahaei St. Tehran, 1995775353,
-              Iran
-            </p>
-          )}
-        </div>
+      <div className={classes.text}>
         <div
-          className={language ? classes.row : classes.rowReverse}
-          onClick={() => window.open("tel:+982188044244", "_self")}
+          className={
+            language ? classes.information : classes.informationReverse
+          }
         >
-          <PhoneEnabledIcon className="icon" />
-          <p>{language ? "+۹۸ ۲۱ ۸۸۰ ۴۴ ۲۴" : "+98 21 880 44 24"}</p>
-        </div>
-        <div className={language ? classes.row : classes.rowReverse}>
-          <ReceiptLongIcon className="icon" />
-          <p>{language ? "+۹۸ ۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 21 880 60 666"}</p>
-        </div>
-        <div className={language ? classes.row : classes.rowReverse}>
-          <EmailIcon className="icon" />
-          <p
-            style={{
-              fontFamily: language ? "English" : "English",
-            }}
+          <h1>{language ? "اشاره" : "eshareh"}</h1>
+          <div className={language ? classes.row : classes.rowReverse}>
+            <LocationOnIcon />
+            {language ? (
+              <p>
+                تهران، انتهای شیخ بهایی شمالی، نبش بزرگراه نیایش، کوچه ۲۱، پلاک
+                ۲، ۱۹۹۵۷۷۵۳۵۳
+              </p>
+            ) : (
+              <p>
+                No. 2, 21st Alley, North Sheikh Bahaei St. Tehran, 1995775353,
+                Iran
+              </p>
+            )}
+          </div>
+          <div
+            className={language ? classes.row : classes.rowReverse}
+            onClick={() => window.open("tel:+982188044244", "_self")}
           >
-            info@eshareh.com
-          </p>
+            <PhoneEnabledIcon className="icon" />
+            <p>{language ? "+۹۸ ۲۱ ۸۸۰ ۴۴ ۲۴" : "+98 21 880 44 24"}</p>
+          </div>
+          <div className={language ? classes.row : classes.rowReverse}>
+            <ReceiptLongIcon className="icon" />
+            <p>{language ? "+۹۸ ۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 21 880 60 666"}</p>
+          </div>
+          <div className={language ? classes.row : classes.rowReverse}>
+            <EmailIcon className="icon" />
+            <p
+              style={{
+                fontFamily: language ? "English" : "English",
+              }}
+            >
+              info@eshareh.com
+            </p>
+          </div>
         </div>
       </div>
     </div>

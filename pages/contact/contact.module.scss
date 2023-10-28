@@ -11,19 +11,29 @@
   }
 }
 
+.text {
+  display: flex;
+  flex-direction: row-reverse;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: config.$content-width;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+}
+
 .information,
 .informationReverse {
-  position: absolute;
-  right: 80px;
-  width: config.$content-width;
+  position: relative;
+  right: 0px;
   text-align: right;
   width: 40%;
 
   @include mixins.mobile {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: calc(100% - 24px);
+    width: 100%;
   }
 }
 
