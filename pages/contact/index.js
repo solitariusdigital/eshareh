@@ -28,7 +28,7 @@ export default function Contact() {
           priority
         />
       </div>
-      <div className={classes.text}>
+      <div className={classes.informationContainer}>
         <div
           className={
             language ? classes.information : classes.informationReverse

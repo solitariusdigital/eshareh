@@ -11,7 +11,7 @@
   }
 }
 
-.text {
+.informationContainer {
   display: flex;
   flex-direction: row-reverse;
   position: absolute;
@@ -35,29 +35,29 @@
   @include mixins.mobile {
     width: 100%;
   }
+
+  .row,
+  .rowReverse {
+    display: flex;
+    align-items: center;
+    margin: 16px 0px;
+
+    @include mixins.mobile {
+      padding: 4px;
+      @include mixins.transparentBackground(0.6, config.$white);
+      @include mixins.border-radius();
+    }
+
+    p {
+      margin: 0px 12px;
+    }
+  }
+
+  .row {
+    flex-direction: row-reverse;
+  }
 }
 
 .informationReverse {
   text-align: left;
-}
-
-.row,
-.rowReverse {
-  display: flex;
-  align-items: center;
-  margin: 16px 0px;
-
-  @include mixins.mobile {
-    padding: 4px;
-    @include mixins.transparentBackground(0.6, config.$white);
-    @include mixins.border-radius();
-  }
-
-  p {
-    margin: 0px 12px;
-  }
-}
-
-.row {
-  flex-direction: row-reverse;
 }
