@@ -16,7 +16,13 @@ export default function Footer() {
       }}
     >
       <div className={classes.copyright}>
-        <p>© 1376 - 1402 eshareh.com</p>
+        {language ? (
+          <p>© 1376 - 1402 eshareh.com</p>
+        ) : (
+          <p>
+            <p>© 1997 - 2023 eshareh.com</p>
+          </p>
+        )}
         <div
           className={classes.row}
           onClick={() =>

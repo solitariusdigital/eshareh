@@ -11,7 +11,8 @@
   }
 }
 
-.inputSearch {
+.inputSearch,
+.inputSearchReverse {
   @include mixins.row-space-between-center();
 
   input {
@@ -33,4 +34,8 @@
       color: config.$black;
     }
   }
+}
+
+.inputSearchReverse {
+  flex-direction: row-reverse;
 }

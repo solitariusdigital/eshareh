@@ -58,7 +58,7 @@ a {
 h1 {
   font-size: 45px !important;
   @include mixins.mobile {
-    font-size: 27px !important;
+    font-size: 30px !important;
   }
 }
 
@@ -74,6 +74,10 @@ h3 {
   @include mixins.mobile {
     font-size: 17px !important;
   }
+}
+
+.englishText {
+  text-align: left;
 }
 
 .main {

@@ -10,3 +10,44 @@
     width: calc(100% - 24px);
   }
 }
+
+.information,
+.informationReverse {
+  position: absolute;
+  right: 80px;
+  width: config.$content-width;
+  text-align: right;
+  width: 40%;
+
+  @include mixins.mobile {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 24px);
+  }
+}
+
+.informationReverse {
+  text-align: left;
+}
+
+.row,
+.rowReverse {
+  display: flex;
+  align-items: center;
+  margin: 16px 0px;
+
+  @include mixins.mobile {
+    padding: 4px;
+    @include mixins.transparentBackground(0.6, config.$white);
+    @include mixins.border-radius();
+  }
+
+  p {
+    margin: 0px 12px;
+  }
+}
+
+.row {
+  flex-direction: row-reverse;
+}

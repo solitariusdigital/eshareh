@@ -11,6 +11,7 @@ import {
 } from "@/services/utility";
 
 export default function Search() {
+  const { language, setLanguage } = useContext(StateContext);
   const [search, setSearch] = useState("");
   const [documents, setDocuments] = useState([]);
   const [selectedItem, setSelectedItem] = useState({});
@@ -27,8 +28,12 @@ export default function Search() {
   return (
     <Fragment>
       <NextSeo
-        title="جستجو"
-        description="جستجو ... پروژه، نوع مشتری، نوع کار، سال"
+        title={language ? "جستجو" : "Search"}
+        description={
+          language
+            ? "جستجو ... پروژه، نوع مشتری، نوع کار، سال"
+            : "Search ... project, client type, work type, year"
+        }
         openGraph={{
           type: "website",
           locale: "fa_IR",
@@ -39,12 +44,23 @@ export default function Search() {
       <div
         className={`${classes.container} animate__animated animate__slideInDown`}
       >
-        <div className={classes.inputSearch}>
+        <div
+          className={
+            language ? classes.inputSearch : classes.inputSearchReverse
+          }
+        >
           <div className={classes.action} onClick={() => searchDocuments()}>
-            جستجو
+            {language ? "جستجو" : "Search"}
           </div>
           <input
-            placeholder="جستجو ... پروژه، نوع مشتری، نوع کار، سال"
+            style={{
+              fontFamily: language ? "Farsi" : "English",
+            }}
+            placeholder={
+              language
+                ? "جستجو ... پروژه، نوع مشتری، نوع کار، سال"
+                : "Search ... project, client type, work type, year"
+            }
             type="text"
             id="search"
             name="search"
@@ -52,7 +68,7 @@ export default function Search() {
             maxLength={30}
             value={search}
             autoComplete="off"
-            dir="rtl"
+            dir={language ? "rtl" : "ltr"}
           />
           <CloseIcon
             className="icon"
