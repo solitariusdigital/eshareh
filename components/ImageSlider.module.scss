@@ -4,6 +4,7 @@
 .slider {
   position: relative;
   height: calc(100vh - 80px);
+  max-height: 2000px;
 
   @include mixins.mobile {
     height: 600px;
@@ -13,6 +14,7 @@
     position: relative;
     width: 100%;
     height: calc(100vh - 80px);
+    max-height: 2000px;
     cursor: pointer;
 
     @include mixins.mobile {
