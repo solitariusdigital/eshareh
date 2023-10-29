@@ -43,14 +43,14 @@ export default function Contact() {
             className={language ? classes.row : classes.rowReverse}
             onClick={() => window.open(locationLink)}
           >
-            <LocationOnIcon />
+            <LocationOnIcon className="icon" />
             {language ? (
-              <p>
+              <p className={classes.click}>
                 تهران، انتهای شیخ بهایی شمالی، نبش بزرگراه نیایش، کوچه ۲۱، پلاک
                 ۲، ۱۹۹۵۷۷۵۳۵۳
               </p>
             ) : (
-              <p>
+              <p className={classes.click}>
                 No. 2, 21st Alley, North Sheikh Bahaei St. Tehran, 1995775353,
                 Iran
               </p>
@@ -60,15 +60,19 @@ export default function Contact() {
             className={language ? classes.row : classes.rowReverse}
             onClick={() => window.open(locationLink)}
           >
-            <NavigationIcon />
-            <p>{language ? "موقعیت روی نقشه" : "Location on the map"}</p>
+            <NavigationIcon className="icon" />
+            <p className={classes.click}>
+              {language ? "موقعیت روی نقشه" : "Get directions"}
+            </p>
           </div>
           <div
             className={language ? classes.row : classes.rowReverse}
             onClick={() => window.open("tel:+982188044244", "_self")}
           >
-            <PhoneEnabledIcon />
-            <p>{language ? "+۹۸ ۲۱ ۸۸۰ ۴۴ ۲۴" : "+98 21 880 44 24"}</p>
+            <PhoneEnabledIcon className="icon" />
+            <p className={classes.click}>
+              {language ? "+۹۸ ۲۱ ۸۸۰ ۴۴ ۲۴" : "+98 21 880 44 24"}
+            </p>
           </div>
           <div className={language ? classes.row : classes.rowReverse}>
             <ReceiptLongIcon />

@@ -41,7 +41,10 @@
     display: flex;
     align-items: center;
     margin: 16px 0px;
-    cursor: pointer;
+
+    .click {
+      cursor: pointer;
+    }
 
     @include mixins.mobile {
       padding: 8px;
