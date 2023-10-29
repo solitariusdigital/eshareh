@@ -10,7 +10,8 @@
     width: calc(100% - 24px);
   }
 
-  .information {
+  .information,
+  .informationReverse {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
     gap: 20px;
@@ -24,6 +25,31 @@
     }
   }
 
+  .informationReverse {
+    direction: rtl;
+    text-align: left;
+  }
+
+  .projectController {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 70px;
+    z-index: 5;
+    background: config.$white;
+    color: config.$grey;
+
+    .controller {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      height: 100%;
+      align-items: center;
+      margin: auto;
+      width: config.$content-width;
+    }
+  }
   .imageBox {
     position: relative;
     cursor: pointer;
@@ -35,7 +61,7 @@
       border-radius: 50px;
       padding: 8px 20px;
       color: config.$white;
-      @include mixins.transparentBackground(0.5, config.$grey);
+      @include mixins.transparentBackground(0.2, config.$lightgrey);
     }
   }
 
