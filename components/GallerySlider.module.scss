@@ -2,16 +2,30 @@
 @use "styles/_mixins.scss" as mixins;
 
 .slider {
-  width: 70%;
-  max-width: 900px;
+  width: 90%;
+  height: 100vh;
 
   @include mixins.mobile {
     width: 100%;
-    margin: auto;
   }
-  @include mixins.tablet {
-    margin: auto;
+
+  .image {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 5px);
+
+    @include mixins.mobile {
+      margin: auto;
+      height: 300px;
+    }
   }
+}
+
+.progress {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
 }
 
 .rightArrow,

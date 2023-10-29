@@ -44,16 +44,18 @@ export default function GallerySlider({ images }) {
       <div className={classes.progress}>
         <Progress color={"#fdb714"} completed={calculatePercentage(current)} />
       </div>
-      <Image
-        onClick={() => slideImage("next")}
-        src={images[current]}
-        blurDataURL={images[current]}
-        placeholder="blur"
-        layout="responsive"
-        objectFit="cover"
-        alt="image"
-        priority
-      />
+      <div className={classes.image}>
+        <Image
+          onClick={() => slideImage("next")}
+          src={images[current]}
+          blurDataURL={images[current]}
+          placeholder="blur"
+          layout="fill"
+          objectFit="cover"
+          alt="image"
+          priority
+        />
+      </div>
     </div>
   );
 }
