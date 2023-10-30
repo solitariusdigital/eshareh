@@ -19,9 +19,7 @@ export default function Footer() {
         {language ? (
           <p>© 1376 - 1402 eshareh.com</p>
         ) : (
-          <p>
-            <p>© 1997 - 2023 eshareh.com</p>
-          </p>
+          <p>© 1997 - 2023 eshareh.com</p>
         )}
         <div
           className={classes.row}

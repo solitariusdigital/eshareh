@@ -51,7 +51,7 @@ export default function GallerySlider({ images }) {
           blurDataURL={images[current]}
           placeholder="blur"
           layout="fill"
-          objectFit="cover"
+          objectFit="contain"
           alt="image"
           priority
         />

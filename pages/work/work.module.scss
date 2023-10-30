@@ -106,12 +106,13 @@
       color: config.$black;
     }
 
-    .title {
+    .information,
+    .informationReverse {
       display: flex;
+    }
 
-      p {
-        margin-right: 12px;
-      }
+    .informationReverse {
+      flex-direction: row-reverse;
     }
   }
 
@@ -136,14 +137,22 @@
     width: 100%;
   }
 
-  h1 {
+  .title,
+  .titleReverse {
     position: absolute;
     right: 0px;
     bottom: 10px;
+    width: 120px;
+    text-align: right;
 
     @include mixins.mobile {
-      bottom: 60px;
+      bottom: 50px;
     }
+  }
+
+  .titleReverse {
+    left: 0px;
+    text-align: left;
   }
 
   .category {

@@ -21,9 +21,15 @@ export const StateProvider = (props) => {
       active: false,
     },
     {
-      titleFa: "پروژه‌ها",
-      titleEn: "Work",
-      link: "/work",
+      titleFa: "تماس",
+      titleEn: "Contact",
+      link: "/contact",
+      active: false,
+    },
+    {
+      titleFa: "درباره",
+      titleEn: "About",
+      link: "/about",
       active: false,
     },
     // {
@@ -33,15 +39,9 @@ export const StateProvider = (props) => {
     //   active: false,
     // },
     {
-      titleFa: "درباره",
-      titleEn: "About",
-      link: "/about",
-      active: false,
-    },
-    {
-      titleFa: "تماس",
-      titleEn: "Contact",
-      link: "/contact",
+      titleFa: "پروژه‌ها",
+      titleEn: "Work",
+      link: "/work",
       active: false,
     },
   ]);
