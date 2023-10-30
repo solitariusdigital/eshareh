@@ -112,7 +112,7 @@ export default function ImageSlider({ sliderData }) {
                 className="animate__animated animate__fadeIn"
               >
                 <h2>{slide[languageType].title}</h2>
-                {screenSize !== "mobile" && (
+                {screenSize === "desktop" && (
                   <h2>{slide[languageType].description}</h2>
                 )}
               </div>
@@ -120,13 +120,9 @@ export default function ImageSlider({ sliderData }) {
                 className={classes.loader}
                 onClick={() => slideImage("next")}
               >
-                {screenSize !== "mobile" && (
-                  <h2>{language ? enToFaDigits(current + 1) : current + 1}</h2>
-                )}
+                <h2>{language ? enToFaDigits(current + 1) : current + 1}</h2>
                 <Loader key={displayInfo} />
-                {screenSize !== "mobile" && (
-                  <h2>{language ? enToFaDigits(length) : length}</h2>
-                )}
+                <h2>{language ? enToFaDigits(length) : length}</h2>
               </div>
             </div>
           </div>

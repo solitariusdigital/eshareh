@@ -140,7 +140,12 @@ export default function CardGrid({ projects, direction }) {
                 className={language ? classes.details : classes.detailsReverse}
               >
                 {hoverItem === index ? (
-                  <h3>{sliceString(project[languageType].description, 80)}</h3>
+                  <h3>
+                    {sliceString(
+                      project[languageType].description,
+                      window.innerWidth > 960 ? 100 : 60
+                    )}
+                  </h3>
                 ) : (
                   <h3>{project[languageType].title}</h3>
                 )}
