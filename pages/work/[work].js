@@ -12,28 +12,30 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 export default function Work({ name }) {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
-
   const [isFullWidth, setIsFullWidth] = useState([]);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayController, setDisplayController] = useState(false);
 
   const work = {
-    title: {
-      fa: "شرکت آریان کیمیا",
-      en: "Arian Kimia Company",
-    },
-    type: "image",
-    images: [three, two, three, two, three, two, three],
-    descriptions: {
-      fa: [
+    fa: {
+      images: [three, two, three, two, three, two, three],
+      type: "image",
+      title: "صنعت خشکبار و حبوبات کوروش",
+      descriptions: [
         "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
         "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
         "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
         "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
         "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
       ],
-      en: [
+    },
+    en: {
+      images: [three, two, three, two, three, two, three],
+      type: "image",
+      title: "Arian Kimia Company",
+      descriptions: [
         "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
         "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
         "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
@@ -44,8 +46,9 @@ export default function Work({ name }) {
   };
 
   useEffect(() => {
-    setIsFullWidth(Array(work.images.length).fill(true));
-  }, [work.images.length]);
+    setIsFullWidth(Array(work[languageType].images.length).fill(true));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const toggleGrid = (index) => {
     setIsFullWidth((prevState) => {
@@ -89,17 +92,13 @@ export default function Work({ name }) {
       <div
         className={language ? classes.information : classes.informationReverse}
       >
-        {language ? (
-          <h2>{work.descriptions.fa[0]}</h2>
-        ) : (
-          <h2>{work.descriptions.en[0]}</h2>
-        )}
+        <h2>{work[languageType].descriptions[0]}</h2>
         <div>
-          {language ? <h1>{work.title.fa}</h1> : <h1>{work.title.en}</h1>}
-          {language ? <h3>{work.title.fa}</h3> : <h3>{work.title.en}</h3>}
+          <h1>{work[languageType].title}</h1>
+          <h3>{work[languageType].title}</h3>
         </div>
       </div>
-      {work.images.map((image, index) => (
+      {work[languageType].images.map((image, index) => (
         <Fragment key={index}>
           <button onClick={() => toggleGrid(index)} å>
             Toggle Grid
@@ -126,9 +125,7 @@ export default function Work({ name }) {
             </div>
             {index % 2 === 0 && (
               <h2 style={{ textAlign: language ? "right" : "left" }}>
-                {language
-                  ? work.descriptions.fa[index]
-                  : work.descriptions.en[index]}
+                {work[languageType].descriptions[index]}
               </h2>
             )}
           </div>
@@ -156,8 +153,8 @@ export default function Work({ name }) {
               }}
             />
           </div>
-          {language ? <h3>{work.title.fa}</h3> : <h3>{work.title.en}</h3>}
-          <GallerySlider images={work.images} />
+          {<h3>{work[languageType].title}</h3>}
+          <GallerySlider images={work[languageType].images} />
         </div>
       )}
     </div>

@@ -85,7 +85,7 @@ export default function About() {
             effective and innovative marketing communications. also since our
             growth directly depends on the growth of our clients brands, we
             believe in a kind of cooperation, a kind of long-term strategic
-            partnership is not merely providing services.
+            partnership is not merely providing services
           </p>
         )}
       </div>

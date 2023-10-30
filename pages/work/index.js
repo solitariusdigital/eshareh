@@ -11,6 +11,7 @@ import { replaceSpacesAndHyphens } from "@/services/utility";
 
 export default function Work() {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [category, setCategory] = useState(
@@ -244,7 +245,6 @@ export default function Work() {
   const filterUniqueWorks = () => {
     const uniqueWorks = [];
     works.forEach((work) => {
-      const languageType = language ? "fa" : "en";
       const { customerType, sector } = work[languageType];
       let isUnique = true;
       switch (type) {
@@ -341,7 +341,6 @@ export default function Work() {
         {filterUniqueWorks()
           .filter((item) => item.category === category || category === "all")
           .map((item, index) => {
-            const languageType = language ? "fa" : "en";
             const { customerType, sector, image, title } = item;
             return (
               <Fragment key={index}>

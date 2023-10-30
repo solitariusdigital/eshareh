@@ -3,6 +3,7 @@ export const StateContext = createContext();
 
 export const StateProvider = (props) => {
   const [language, setLanguage] = useState(true);
+  const [languageType, setLanguageType] = useState("fa");
   const [currentUser, setCurrentUser] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuColor, setMenuColor] = useState({
@@ -15,32 +16,42 @@ export const StateProvider = (props) => {
   );
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
-      titleFa: "",
-      titleEn: "",
+      title: {
+        fa: "",
+        en: "",
+      },
       link: "/search",
       active: false,
     },
     {
-      titleFa: "تماس",
-      titleEn: "Contact",
+      title: {
+        fa: "تماس",
+        en: "Contact",
+      },
       link: "/contact",
       active: false,
     },
     {
-      titleFa: "درباره",
-      titleEn: "About",
+      title: {
+        fa: "درباره",
+        en: "About",
+      },
       link: "/about",
       active: false,
     },
     // {
-    //   titleFa: "اخبار",
-    //   titleEn: "News",
+    //   title: {
+    //     fa: "اخبار",
+    //     en: "News",
+    //   },
     //   link: "/news",
     //   active: false,
     // },
     {
-      titleFa: "پروژه‌ها",
-      titleEn: "Work",
+      title: {
+        fa: "پروژه‌ها",
+        en: "Work",
+      },
       link: "/work",
       active: false,
     },
@@ -49,6 +60,8 @@ export const StateProvider = (props) => {
   const stateContext = {
     language,
     setLanguage,
+    languageType,
+    setLanguageType,
     menuMobile,
     setMenuMobile,
     navigationTopBar,

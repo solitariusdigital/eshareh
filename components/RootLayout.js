@@ -3,26 +3,30 @@ import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
-import secureLocalStorage from "react-secure-storage";
 import Image from "next/legacy/image";
-import logoEnglish from "@/assets/logoEnglish.png";
 import appLoadOne from "@/assets/appLoadOne.png";
 import appLoadTwo from "@/assets/appLoadTwo.png";
 import appLoadThree from "@/assets/appLoadThree.png";
+import secureLocalStorage from "react-secure-storage";
 
 export default function RootLayout({ children }) {
   const { language, setLanguage } = useContext(StateContext);
-
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const [appLoader, setAppLoader] = useState(false);
+  const [randomImage, setRandomImage] = useState(null);
 
   const router = useRouter();
   let pathname = router.pathname;
 
-  const appLoadImages = [appLoadOne, appLoadTwo, appLoadThree];
+  useEffect(() => {
+    const appLoadImages = [appLoadOne, appLoadTwo, appLoadThree];
+    setRandomImage(
+      appLoadImages[Math.floor(Math.random() * appLoadImages.length)]
+    );
+  }, []);
 
   const handleResize = () => {
     if (window.innerWidth < 700) {
@@ -80,15 +84,15 @@ export default function RootLayout({ children }) {
         </div>
       ) : (
         <div className="appload">
-          <Image
-            width={300}
-            height={366.67}
-            src={
-              appLoadImages[Math.floor(Math.random() * appLoadImages.length)]
-            }
-            alt="logo"
-            priority
-          />
+          {randomImage && (
+            <Image
+              width={300}
+              height={366.67}
+              src={randomImage}
+              alt="logo"
+              priority
+            />
+          )}
         </div>
       )}
     </Fragment>

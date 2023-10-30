@@ -13,6 +13,7 @@ import ColorLensIcon from "@mui/icons-material/ColorLens";
 
 export default function Menu() {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { menuMobile, setMenuMobile } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -52,6 +53,11 @@ export default function Menu() {
     });
   };
 
+  const toggleLanguage = () => {
+    setLanguage(!language);
+    setLanguageType(!language ? "fa" : "en");
+  };
+
   return (
     <div
       className={classes.container}
@@ -81,23 +87,23 @@ export default function Menu() {
                   className={!nav.active ? classes.nav : classes.navActive}
                   onClick={() => activateNav(nav.link, index)}
                 >
-                  {language ? nav.titleFa : nav.titleEn}
-                  {nav.titleFa === "" && <SearchIcon sx={{ fontSize: 30 }} />}
+                  {nav.title[languageType]}
+                  {nav.title[languageType] === "" && (
+                    <SearchIcon sx={{ fontSize: 30 }} />
+                  )}
                 </a>
               ))
               .reverse()}
           </div>
-
           <div
             className={classes.languageControl}
-            onClick={() => setLanguage(!language)}
+            onClick={() => toggleLanguage()}
             style={{
               fontFamily: language ? "English" : "Farsi",
             }}
           >
             <p>{language ? "English" : "فارسی"}</p>
           </div>
-
           <div className={classes.colorPickerContainer}>
             <ColorLensIcon
               className="icon"
@@ -129,7 +135,7 @@ export default function Menu() {
             </div>
             <div
               className={classes.languageControl}
-              onClick={() => setLanguage(!language)}
+              onClick={() => toggleLanguage()}
               style={{
                 fontFamily: language ? "English" : "Farsi",
               }}
@@ -156,33 +162,27 @@ export default function Menu() {
                 className={`${classes.menuMobile} animate__animated animate__slideInDown`}
               >
                 <div>
-                  {navigationTopBar.map((nav, index) => (
-                    <a
-                      key={index}
-                      style={{
-                        fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                      }}
-                      className={!nav.active ? classes.nav : classes.navActive}
-                      onClick={() => activateNav(nav.link, index)}
-                    >
-                      {language ? nav.titleFa : nav.titleEn}
-                      {nav.titleFa === "" && (
-                        <SearchIcon sx={{ fontSize: 30 }} />
-                      )}
-                    </a>
-                  ))}
-                  {desktop && (
-                    <div className={classes.nav}>
-                      <p
-                        onClick={() => {
-                          Router.push("/download");
-                          setMenuMobile(false);
+                  {navigationTopBar
+                    .map((nav, index) => (
+                      <a
+                        key={index}
+                        style={{
+                          fontFamily: language
+                            ? "FarsiMedium"
+                            : "EnglishMedium",
                         }}
+                        className={
+                          !nav.active ? classes.nav : classes.navActive
+                        }
+                        onClick={() => activateNav(nav.link, index)}
                       >
-                        راهنمای نصب
-                      </p>
-                    </div>
-                  )}
+                        {nav.title[languageType]}
+                        {nav.title[languageType] === "" && (
+                          <SearchIcon sx={{ fontSize: 30 }} />
+                        )}
+                      </a>
+                    ))
+                    .reverse()}
                 </div>
               </div>
             </Fragment>
