@@ -7,7 +7,7 @@ import one from "@/assets/one.jpg";
 import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
 import Router from "next/router";
-import { replaceSpacesAndHyphens } from "@/services/utility";
+import { replaceSpacesAndHyphens, enToFaDigits } from "@/services/utility";
 
 export default function Work() {
   const { language, setLanguage } = useContext(StateContext);
@@ -27,7 +27,7 @@ export default function Work() {
       fa: {
         image: one,
         title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        description: "کمپین  تلویزیونی تخمه های آفتاب گردان وی نات",
         category: "advertising",
         sector: "برند",
         customerType: "هنر",
@@ -76,6 +76,25 @@ export default function Work() {
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "media",
+        sector: "Sign",
+        customerType: "Banking",
+      },
+    },
+    {
+      fa: {
+        image: three,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        category: "advertising",
+        sector: "نشانه",
+        customerType: "بانکداری",
+      },
+      en: {
+        image: three,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        category: "advertising",
         sector: "Sign",
         customerType: "Banking",
       },
@@ -342,6 +361,16 @@ export default function Work() {
           .filter((item) => item.category === category || category === "all")
           .map((item, index) => {
             const { customerType, sector, image, title } = item;
+            let lengthCustomerType = works.filter(
+              (work) =>
+                customerType === work[languageType].customerType &&
+                item.category === work[languageType].category
+            ).length;
+            let lengthSector = works.filter(
+              (work) =>
+                sector === work[languageType].sector &&
+                item.category === work[languageType].category
+            ).length;
             return (
               <Fragment key={index}>
                 {image && (
@@ -359,14 +388,9 @@ export default function Work() {
                       >
                         <h2>{customerType}</h2>
                         <p>
-                          {
-                            works.filter(
-                              (work) =>
-                                customerType ===
-                                  work[languageType].customerType &&
-                                item.category === work[languageType].category
-                            ).length
-                          }
+                          {language
+                            ? enToFaDigits(lengthCustomerType)
+                            : lengthCustomerType}
                         </p>
                       </div>
                     )}
@@ -380,13 +404,7 @@ export default function Work() {
                       >
                         <h2>{sector}</h2>
                         <p>
-                          {
-                            works.filter(
-                              (work) =>
-                                sector === work[languageType].sector &&
-                                item.category === work[languageType].category
-                            ).length
-                          }
+                          {language ? enToFaDigits(lengthSector) : lengthSector}
                         </p>
                       </div>
                     )}
@@ -402,7 +420,17 @@ export default function Work() {
                         priority
                       />
                     </div>
-                    {type === "all" && <h3>{title}</h3>}
+                    {type === "all" && (
+                      <div
+                        className={
+                          language
+                            ? classes.information
+                            : classes.informationReverse
+                        }
+                      >
+                        <h3>{title}</h3>
+                      </div>
+                    )}
                   </div>
                 )}
               </Fragment>

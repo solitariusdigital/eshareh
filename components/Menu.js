@@ -77,23 +77,21 @@ export default function Menu() {
             />
           </div>
           <div className={classes.largeNavigation}>
-            {navigationTopBar
-              .map((nav, index) => (
-                <a
-                  key={index}
-                  style={{
-                    fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                  }}
-                  className={!nav.active ? classes.nav : classes.navActive}
-                  onClick={() => activateNav(nav.link, index)}
-                >
-                  {nav.title[languageType]}
-                  {nav.title[languageType] === "" && (
-                    <SearchIcon sx={{ fontSize: 30 }} />
-                  )}
-                </a>
-              ))
-              .reverse()}
+            {navigationTopBar.map((nav, index) => (
+              <a
+                key={index}
+                style={{
+                  fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                }}
+                className={!nav.active ? classes.nav : classes.navActive}
+                onClick={() => activateNav(nav.link, index)}
+              >
+                {nav.title[languageType]}
+                {nav.title[languageType] === "" && (
+                  <SearchIcon sx={{ fontSize: 30 }} />
+                )}
+              </a>
+            ))}
           </div>
           <div
             className={classes.languageControl}
@@ -162,27 +160,21 @@ export default function Menu() {
                 className={`${classes.menuMobile} animate__animated animate__slideInDown`}
               >
                 <div>
-                  {navigationTopBar
-                    .map((nav, index) => (
-                      <a
-                        key={index}
-                        style={{
-                          fontFamily: language
-                            ? "FarsiMedium"
-                            : "EnglishMedium",
-                        }}
-                        className={
-                          !nav.active ? classes.nav : classes.navActive
-                        }
-                        onClick={() => activateNav(nav.link, index)}
-                      >
-                        {nav.title[languageType]}
-                        {nav.title[languageType] === "" && (
-                          <SearchIcon sx={{ fontSize: 30 }} />
-                        )}
-                      </a>
-                    ))
-                    .reverse()}
+                  {navigationTopBar.map((nav, index) => (
+                    <a
+                      key={index}
+                      style={{
+                        fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                      }}
+                      className={!nav.active ? classes.nav : classes.navActive}
+                      onClick={() => activateNav(nav.link, index)}
+                    >
+                      {nav.title[languageType]}
+                      {nav.title[languageType] === "" && (
+                        <SearchIcon sx={{ fontSize: 30 }} />
+                      )}
+                    </a>
+                  ))}
                 </div>
               </div>
             </Fragment>

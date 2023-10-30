@@ -5,23 +5,29 @@
 .reverse {
   display: flex;
   flex-direction: row;
-  height: 450px;
-  margin: 16px auto;
+  height: 500px;
+  margin: 20px auto;
   width: config.$content-width;
   max-width: config.$max-width;
 
   .hero {
     position: relative;
     width: 50%;
-    height: 89%;
+    height: 90%;
     margin-right: 20px;
     cursor: pointer;
 
-    .details {
+    .details,
+    .detailsReverse {
       height: 60px;
       text-align: right;
       margin-top: 4px;
       direction: rtl;
+    }
+
+    .detailsReverse {
+      text-align: left;
+      direction: ltr;
     }
   }
 
@@ -57,10 +63,16 @@
       direction: rtl;
       cursor: pointer;
 
-      .details {
+      .details,
+      .detailsReverse {
         height: 60px;
         min-height: 20%;
         margin-top: 4px;
+      }
+
+      .detailsReverse {
+        text-align: left;
+        direction: ltr;
       }
 
       .image {
@@ -102,10 +114,16 @@
     direction: rtl;
     cursor: pointer;
 
-    .details {
+    .details,
+    .detailsReverse {
       height: 60px;
       min-height: 20%;
       margin-top: 4px;
+    }
+
+    .detailsReverse {
+      text-align: left;
+      direction: ltr;
     }
 
     .image {

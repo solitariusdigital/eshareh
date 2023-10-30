@@ -14,269 +14,605 @@ export default function Home() {
 
   const sliderData = [
     {
-      image: one,
-      title: "خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی  تخمه های آفتاب گردان لانچ و معرفی کرم  تخمه های آفتاب گردان لانچ و معرفی کرم تخمه های ",
-      type: "image",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description:
+          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "آریان کیمیا",
-      description: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
-      type: "video",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "video",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "video",
+      },
     },
     {
-      image: three,
-      title: "ایران",
-      description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
-      type: "image",
+      fa: {
+        image: three,
+        title: "شرکت آریان کیمیا",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: three,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: one,
-      title: "خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
-      type: "video",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "آریان کیمیا",
-      description:
-        "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
-      type: "image",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "video",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "video",
+      },
     },
     {
-      image: three,
-      title: "ایران",
-      description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
-      type: "image",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: one,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
-      type: "video",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "شرکت آریان کیمیا",
-      description:
-        "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
-      type: "image",
+      fa: {
+        image: three,
+        title: "شرکت آریان کیمیا",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: three,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی  تخمه های آفتاب گردان لانچ و معرفی کرم  تخمه های آفتاب گردان لانچ و معرفی کرم تخمه های ",
-      type: "image",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "شرکت آریان کیمیا",
-      description: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
-      type: "video",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "نستله ایران",
-      description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
-      type: "image",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
-      type: "video",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "شرکت آریان کیمیا",
-      description:
-        "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
-      type: "image",
+      fa: {
+        image: three,
+        title: "شرکت آریان کیمیا",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: three,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "نستله ایران",
-      description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
-      type: "image",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
-      type: "video",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "شرکت آریان کیمیا",
-      description:
-        "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
-      type: "image",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: one,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی  تخمه های آفتاب گردان لانچ و معرفی کرم  تخمه های آفتاب گردان لانچ و معرفی کرم تخمه های ",
-      type: "image",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "شرکت آریان کیمیا",
-      description: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
-      type: "video",
+      fa: {
+        image: three,
+        title: "شرکت آریان کیمیا",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: three,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "نستله ایران",
-      description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
-      type: "image",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
-      type: "video",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "شرکت آریان کیمیا",
-      description:
-        "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
-      type: "image",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "نستله ایران",
-      description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
-      type: "image",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
-      type: "video",
+      fa: {
+        image: three,
+        title: "شرکت آریان کیمیا",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: three,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "شرکت آریان کیمیا",
-      description:
-        "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
-      type: "image",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: one,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی  تخمه های آفتاب گردان لانچ و معرفی کرم  تخمه های آفتاب گردان لانچ و معرفی کرم تخمه های ",
-      type: "image",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "شرکت آریان کیمیا",
-      description: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
-      type: "video",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "نستله ایران",
-      description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
-      type: "image",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
-      type: "video",
+      fa: {
+        image: three,
+        title: "شرکت آریان کیمیا",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: three,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "شرکت آریان کیمیا",
-      description:
-        "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
-      type: "image",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "نستله ایران",
-      description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
-      type: "image",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
-      type: "video",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "شرکت آریان کیمیا",
-      description:
-        "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
-      type: "image",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: one,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی  تخمه های آفتاب گردان لانچ و معرفی کرم  تخمه های آفتاب گردان لانچ و معرفی کرم تخمه های ",
-      type: "image",
+      fa: {
+        image: three,
+        title: "شرکت آریان کیمیا",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: three,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "شرکت آریان کیمیا",
-      description: "کمپین لانچ و معرفی کرم آبرسان گیاهی شون",
-      type: "video",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "نستله ایران",
-      description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
-      type: "image",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
-      type: "video",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "شرکت آریان کیمیا",
-      description:
-        "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
-      type: "image",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "نستله ایران",
-      description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
-      type: "image",
+      fa: {
+        image: three,
+        title: "شرکت آریان کیمیا",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: three,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: two,
-      title: "صنعت خشکبار و حبوبات کوروش",
-      description:
-        "کمپین تلویزیونی تخمه های  لانچ و معرفی کرم آبرسان گیاهی آفتاب گردان نات",
-      type: "video",
+      fa: {
+        image: two,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
     {
-      image: three,
-      title: "شرکت آریان کیمیا",
-      description:
-        "کمپین لانچ و معرفی کرم لانچ و معرفی کرم آبرسان گیاهی آبرسان گیاهی شون",
-      type: "image",
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        type: "image",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
     },
   ];
 

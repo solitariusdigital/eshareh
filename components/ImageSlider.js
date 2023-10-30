@@ -10,6 +10,7 @@ import Loader from "./Loader";
 
 export default function ImageSlider({ sliderData }) {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [current, setCurrent] = useState(0);
   const [displayInfo, setDisplayInfo] = useState(false);
@@ -73,16 +74,20 @@ export default function ImageSlider({ sliderData }) {
             {index === current && (
               <div
                 onClick={() =>
-                  Router.push(`/work/${replaceSpacesAndHyphens(slide.title)}`)
+                  Router.push(
+                    `/work/${replaceSpacesAndHyphens(
+                      slide[languageType].title
+                    )}`
+                  )
                 }
               >
-                {slide.type === "image" ? (
+                {slide[languageType].type === "image" ? (
                   <Image
                     className={classes.image}
-                    src={slide.image}
-                    blurDataURL={slide.image}
+                    src={slide[languageType].image}
+                    blurDataURL={slide[languageType].image}
                     placeholder="blur"
-                    alt={slide.title}
+                    alt={slide[languageType].title}
                     layout="fill"
                     objectFit="cover"
                     priority
@@ -106,8 +111,10 @@ export default function ImageSlider({ sliderData }) {
                 key={displayInfo}
                 className="animate__animated animate__fadeIn"
               >
-                <h2>{slide.title}</h2>
-                {screenSize !== "mobile" && <h2>{slide.description}</h2>}
+                <h2>{slide[languageType].title}</h2>
+                {screenSize !== "mobile" && (
+                  <h2>{slide[languageType].description}</h2>
+                )}
               </div>
               <div
                 className={classes.loader}
