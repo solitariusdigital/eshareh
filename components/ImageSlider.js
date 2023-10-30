@@ -106,7 +106,11 @@ export default function ImageSlider({ sliderData }) {
                 )}
               </div>
             )}
-            <div className={classes.information}>
+            <div
+              className={
+                language ? classes.information : classes.informationReverse
+              }
+            >
               <div
                 key={displayInfo}
                 className="animate__animated animate__fadeIn"

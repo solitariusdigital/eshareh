@@ -61,16 +61,16 @@
   transition-duration: 1s ease;
 }
 
-.information {
+.information,
+.informationReverse {
   @include mixins.row-space-between-center();
-  flex-direction: row-reverse;
   position: absolute;
   z-index: 2;
   left: 50%;
   transform: translateX(-50%);
   bottom: 20px;
   width: config.$content-width;
-  text-align: right;
+  text-align: left;
   color: config.$white;
   cursor: pointer;
 
@@ -81,4 +81,9 @@
   .loader {
     @include mixins.row-space-between-center();
   }
+}
+
+.information {
+  flex-direction: row-reverse;
+  text-align: right;
 }
