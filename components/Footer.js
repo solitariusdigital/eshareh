@@ -21,14 +21,9 @@ export default function Footer() {
         ) : (
           <p>© 1997 - 2023 eshareh.com</p>
         )}
-        <div
+        {/* <div
           className={classes.row}
-          onClick={() =>
-            window.open(
-              "https://docs.google.com/forms/d/e/1FAIpQLSdqKHLBydQIfm06LTtw0wELHaDJJFGU3GNQFsVWNd3t0jz5hA/viewform?usp=sf_link",
-              "_ self"
-            )
-          }
+          onClick={() => window.open("https://musetechlab.com/")}
         >
           <Image
             className={classes.image}
@@ -40,7 +35,7 @@ export default function Footer() {
           />
           <p className={classes.action}>{language ? "توسعه" : "Development"}</p>
           <PrecisionManufacturingIcon sx={{ fontSize: 18 }} />
-        </div>
+        </div> */}
       </div>
     </div>
   );
