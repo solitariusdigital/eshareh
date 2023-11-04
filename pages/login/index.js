@@ -8,6 +8,7 @@ import { enc } from "crypto-js";
 
 export default function Login() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const { language, setLanguage } = useContext(StateContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
@@ -63,7 +64,12 @@ export default function Login() {
     <div className={classes.container}>
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>
+          <p
+            className={classes.label}
+            style={{
+              fontFamily: language ? "English" : "English",
+            }}
+          >
             <span>*</span>
             Email
           </p>
@@ -84,7 +90,12 @@ export default function Login() {
       </div>
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>
+          <p
+            className={classes.label}
+            style={{
+              fontFamily: language ? "English" : "English",
+            }}
+          >
             <span>*</span>
             Password
           </p>
@@ -105,7 +116,7 @@ export default function Login() {
       </div>
       <div className={classes.formAction}>
         <p className="alert">{alert}</p>
-        <button onClick={() => handleLogin()}>ورود</button>
+        <button onClick={() => handleLogin()}>Login</button>
       </div>
     </div>
   );

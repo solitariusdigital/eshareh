@@ -28,6 +28,7 @@
   width: config.$content-width;
   margin: auto;
   position: relative;
+  max-width: config.$max-width;
   @include mixins.row-space-between-center();
 
   @include mixins.tablet {
