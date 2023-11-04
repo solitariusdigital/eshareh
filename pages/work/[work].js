@@ -5,11 +5,12 @@ import { replaceSpacesAndHyphens } from "@/services/utility";
 import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
-import two from "@/assets/two.jpg";
-import three from "@/assets/three.jpg";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import NextProject from "@/components/NextProject";
+import two from "@/assets/two.jpg";
+import one from "@/assets/one.jpg";
+import three from "@/assets/three.jpg";
 
 export default function Work({ name }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -22,7 +23,7 @@ export default function Work({ name }) {
 
   const work = {
     fa: {
-      images: [three, two, three, two, three, two, three],
+      images: [three, two, one, two, three, two, one],
       type: "image",
       title: "صنعت خشکبار و حبوبات کوروش",
       descriptions: [
@@ -34,7 +35,7 @@ export default function Work({ name }) {
       ],
     },
     en: {
-      images: [three, two, three, two, three, two, three],
+      images: [three, two, one, two, three, two, one],
       type: "image",
       title: "Arian Kimia Company",
       descriptions: [
@@ -149,7 +150,7 @@ export default function Work({ name }) {
                 src={image}
                 blurDataURL={image}
                 placeholder="blur"
-                alt={work.title}
+                alt={work[languageType].title}
                 layout="responsive"
                 objectFit="cover"
                 priority

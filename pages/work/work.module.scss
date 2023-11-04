@@ -251,5 +251,7 @@
 }
 
 .nextProject {
-  border: 1px solid red;
+  border-top: 1px solid config.$lightgrey;
+  padding-top: 100px;
+  margin-top: 100px;
 }
