@@ -19,7 +19,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: config.$content-width;
-  max-width: config.$max-width;
+  max-width: config.$max-widthHeigh;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
