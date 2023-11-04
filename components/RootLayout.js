@@ -15,6 +15,7 @@ export default function RootLayout({ children }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
+  const { displayFooter, setFooter } = useContext(StateContext);
   const [appLoader, setAppLoader] = useState(false);
   const [randomImage, setRandomImage] = useState(null);
 
@@ -78,9 +79,11 @@ export default function RootLayout({ children }) {
           <section className="main">
             <main>{children}</main>
           </section>
-          <section>
-            <Footer />
-          </section>
+          {displayFooter && (
+            <section>
+              <Footer />
+            </section>
+          )}
         </div>
       ) : (
         <div className="appload">

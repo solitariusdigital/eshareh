@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import { useState, useContext, Fragment, useEffect, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./work.module.scss";
 import { replaceSpacesAndHyphens } from "@/services/utility";
@@ -9,14 +9,16 @@ import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import NextProject from "@/components/NextProject";
 
 export default function Work({ name }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
+  const { displayFooter, setFooter } = useContext(StateContext);
   const [isFullWidth, setIsFullWidth] = useState([]);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
-  const [displayController, setDisplayController] = useState(false);
+  const [displayController, setDisplayController] = useState(true);
 
   const work = {
     fa: {
@@ -50,24 +52,49 @@ export default function Work({ name }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const toggleGrid = (index) => {
-    setIsFullWidth((prevState) => {
-      const newState = [...prevState];
-      newState[index] = !newState[index];
-      return newState;
-    });
-  };
+  const targetRef = useRef(null);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5,
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setDisplayController(false);
+          setFooter(false);
+        }
+      });
+    }, options);
+    if (targetRef.current) {
+      observer.observe(targetRef.current);
+    }
+    return () => {
+      if (targetRef.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        observer.unobserve(targetRef.current);
+      }
+    };
+  }, [setFooter]);
 
   useEffect(() => {
     if (!displayGallerySlider) {
       let prevScrollY = window.scrollY;
       const handleScroll = () => {
         const currentScrollY = window.scrollY;
+        const isScrollAtBottom =
+          window.innerHeight + window.scrollY >= document.body.offsetHeight;
         if (currentScrollY > prevScrollY) {
           setDisplayMenu(false);
           setDisplayController(true);
         } else if (currentScrollY < prevScrollY) {
           setDisplayMenu(true);
+          setFooter(true);
+          setDisplayController(false);
+        }
+        if (isScrollAtBottom) {
           setDisplayController(false);
         }
         prevScrollY = currentScrollY;
@@ -77,7 +104,7 @@ export default function Work({ name }) {
         window.removeEventListener("scroll", handleScroll);
       };
     }
-  }, [displayGallerySlider, setDisplayMenu]);
+  }, [displayGallerySlider, setDisplayMenu, setFooter]);
 
   const gallerySlider = () => {
     setDisplayMenu(false);
@@ -85,6 +112,14 @@ export default function Work({ name }) {
     setDisplayGallerySlider(true);
     window.scrollTo(0, 0);
     document.body.style.overflow = "hidden";
+  };
+
+  const toggleGrid = (index) => {
+    setIsFullWidth((prevState) => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
   };
 
   return (
@@ -157,6 +192,9 @@ export default function Work({ name }) {
           <GallerySlider images={work[languageType].images} />
         </div>
       )}
+      <div className={classes.nextProject} ref={targetRef}>
+        <NextProject />
+      </div>
     </div>
   );
 }
