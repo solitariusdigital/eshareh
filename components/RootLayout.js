@@ -7,6 +7,7 @@ import Image from "next/legacy/image";
 import appLoadOne from "@/assets/appLoadOne.png";
 import appLoadTwo from "@/assets/appLoadTwo.png";
 import appLoadThree from "@/assets/appLoadThree.png";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import secureLocalStorage from "react-secure-storage";
 
 export default function RootLayout({ children }) {
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
   const [appLoader, setAppLoader] = useState(false);
+  const [scrollArrow, setScrollArrow] = useState(false);
   const [randomImage, setRandomImage] = useState(null);
 
   const router = useRouter();
@@ -63,6 +65,23 @@ export default function RootLayout({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    let prevScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY <= 0) {
+        setScrollArrow(false);
+      } else if (currentScrollY > prevScrollY) {
+        setScrollArrow(true);
+      }
+      prevScrollY = currentScrollY;
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollArrow]);
+
   return (
     <Fragment>
       {appLoader ? (
@@ -83,6 +102,20 @@ export default function RootLayout({ children }) {
             <section>
               <Footer />
             </section>
+          )}
+          {scrollArrow && (
+            <div
+              className="scrollArrow"
+              onClick={() =>
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: "smooth",
+                })
+              }
+            >
+              <KeyboardArrowUpIcon sx={{ fontSize: 35 }} />
+            </div>
           )}
         </div>
       ) : (

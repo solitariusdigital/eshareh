@@ -15,7 +15,7 @@ export default function Work() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [category, setCategory] = useState(
-    "advertising" || "digital" || "media"
+    "advertising" || "digital" || "media" || "health" || "consulting"
   );
   const [type, setType] = useState("customer" || "sector" || "all");
 
@@ -38,6 +38,44 @@ export default function Work() {
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "advertising",
+        sector: "Brand",
+        customerType: "Art",
+      },
+    },
+    {
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین  تلویزیونی تخمه های آفتاب گردان وی نات",
+        category: "consulting",
+        sector: "برند",
+        customerType: "بانکداری",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        category: "consulting",
+        sector: "Brand",
+        customerType: "Banking",
+      },
+    },
+    {
+      fa: {
+        image: one,
+        title: "صنعت خشکبار و حبوبات کوروش",
+        description: "کمپین  تلویزیونی تخمه های آفتاب گردان وی نات",
+        category: "health",
+        sector: "برند",
+        customerType: "هنر",
+      },
+      en: {
+        image: one,
+        title: "Lorem ipsum is placeholder ",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        category: "health",
         sector: "Brand",
         customerType: "Art",
       },
@@ -238,6 +276,8 @@ export default function Work() {
     { name: "advertising", labelFa: "تبلیغات", labelEn: "Advertisement" },
     { name: "digital", labelFa: "دیجیتال", labelEn: "Digital" },
     { name: "media", labelFa: "رسانه", labelEn: "Media" },
+    { name: "health", labelFa: "تندرستی", labelEn: "Health" },
+    { name: "consulting", labelFa: "مشاوره", labelEn: "Consulting" },
   ];
   const types = [
     { name: "customer", labelFa: "نوع مشتری", labelEn: "Client Type" },
