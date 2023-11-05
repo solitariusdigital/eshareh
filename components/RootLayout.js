@@ -91,7 +91,7 @@ export default function RootLayout({ children }) {
           }}
         >
           {displayMenu && (
-            <section className="menu animate__animated animate__slideInDown">
+            <section className="menu">
               <Menu />
             </section>
           )}
