@@ -19,7 +19,7 @@ export default function Work({ name }) {
   const { displayFooter, setFooter } = useContext(StateContext);
   const [isFullWidth, setIsFullWidth] = useState([]);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
-  const [displayController, setDisplayController] = useState(true);
+  const [displayController, setDisplayController] = useState(false);
 
   const work = {
     fa: {
