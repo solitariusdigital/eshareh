@@ -13,6 +13,35 @@
     padding: 12px 0px;
   }
 
+  .logoContainer,
+  .logoContainerReverse {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    flex-direction: row-reverse;
+
+    .colorPicker {
+      position: absolute;
+      right: 280px;
+      top: 0px;
+    }
+
+    .languageControl {
+      margin: 0px 20px;
+      cursor: pointer;
+    }
+  }
+
+  .logoContainerReverse {
+    flex-direction: row;
+
+    .colorPicker {
+      left: 280px;
+    }
+  }
+
   .logo {
     position: relative;
     height: 45px;
@@ -24,7 +53,8 @@
   }
 }
 
-.largeMenu {
+.largeMenu,
+.largeMenuReverse {
   width: config.$content-width;
   margin: auto;
   position: relative;
@@ -44,29 +74,10 @@
       width: 50%;
     }
   }
-
-  .colorPickerContainer {
-    position: absolute;
-    left: 250px;
-    top: 10px;
-
-    .colorPicker {
-      position: absolute;
-      left: 40px;
-      top: 0px;
-    }
-  }
 }
 
-.languageControl {
-  position: absolute;
-  left: 180px;
-  top: 10px;
-  cursor: pointer;
-
-  @include mixins.mobile {
-    top: 30px;
-  }
+.largeMenuReverse {
+  flex-direction: row-reverse;
 }
 
 .nav {
@@ -92,33 +103,40 @@
 .smallMenu {
   width: 100%;
 
-  .menuIcon {
-    background: config.$yellow;
-
-    @include mixins.desktop {
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-
-  .topBar {
+  .topBar,
+  .topBarReverse {
     width: 100%;
     padding: 12px;
     @include mixins.row-space-between-center();
+    flex-direction: row-reverse;
+
+    .logoContainer,
+    .logoContainerReverse {
+      @include mixins.row-space-between-center();
+      flex-direction: row-reverse;
+    }
+
+    .logoContainerReverse {
+      flex-direction: row;
+    }
+  }
+
+  .topBarReverse {
+    flex-direction: row;
   }
 
   .menuMobile {
     position: fixed;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    text-align: right;
-    align-items: center;
     width: 100%;
     padding: 12px;
     background: config.$yellow;
     box-shadow: config.$card-shadow;
+
+    .menuItems {
+      width: 100%;
+      @include mixins.row-space-between-center();
+      justify-content: space-around;
+    }
 
     a {
       padding: 8px 0px;

@@ -88,10 +88,8 @@ export default function Work({ name }) {
         const isScrollAtBottom =
           window.innerHeight + window.scrollY >= document.body.offsetHeight;
         if (currentScrollY > prevScrollY) {
-          setDisplayMenu(false);
           setDisplayController(true);
         } else if (currentScrollY < prevScrollY) {
-          setDisplayMenu(true);
           setFooter(true);
           setDisplayController(false);
         }
@@ -105,7 +103,7 @@ export default function Work({ name }) {
         window.removeEventListener("scroll", handleScroll);
       };
     }
-  }, [displayGallerySlider, setDisplayMenu, setFooter]);
+  }, [displayGallerySlider, setFooter]);
 
   const gallerySlider = () => {
     setDisplayMenu(false);

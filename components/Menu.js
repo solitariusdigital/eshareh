@@ -64,62 +64,14 @@ export default function Menu() {
       style={{ background: menuColor.background, color: menuColor.text }}
     >
       {screenSize !== "mobile" && (
-        <div className={classes.largeMenu}>
-          <div className={classes.logo}>
-            <Image
-              className={classes.image}
-              layout="fill"
-              objectFit="cover"
-              src={!language ? logoEnglish : logoFarsi}
-              alt="logo"
-              onClick={() => window.location.assign("/")}
-              priority
-            />
-          </div>
-          <div className={classes.largeNavigation}>
-            {navigationTopBar.map((nav, index) => (
-              <a
-                key={index}
-                style={{
-                  fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                }}
-                className={!nav.active ? classes.nav : classes.navActive}
-                onClick={() => activateNav(nav.link, index)}
-              >
-                {nav.title[languageType]}
-                {nav.title[languageType] === "" && (
-                  <SearchIcon sx={{ fontSize: 30 }} />
-                )}
-              </a>
-            ))}
-          </div>
+        <div
+          className={language ? classes.largeMenuReverse : classes.largeMenu}
+        >
           <div
-            className={classes.languageControl}
-            onClick={() => toggleLanguage()}
-            style={{
-              fontFamily: language ? "English" : "Farsi",
-            }}
+            className={
+              language ? classes.logoContainer : classes.logoContainerReverse
+            }
           >
-            <p>{language ? "English" : "فارسی"}</p>
-          </div>
-          <div className={classes.colorPickerContainer}>
-            <ColorLensIcon
-              className="icon"
-              onClick={() => setColorPicker(!colorPicker)}
-              sx={{ color: "#fdb714" }}
-            />
-            {colorPicker && (
-              <div className={classes.colorPicker}>
-                <CompactPicker onChangeComplete={handleChangeComplete} />
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {screenSize === "mobile" && (
-        <div className={classes.smallMenu}>
-          <div className={classes.topBar}>
             <div className={classes.logo}>
               <Image
                 className={classes.image}
@@ -140,27 +92,23 @@ export default function Menu() {
             >
               <p>{language ? "English" : "فارسی"}</p>
             </div>
-            {menuMobile ? (
-              <CloseIcon
-                className={classes.menuIcon}
-                onClick={() => setMenuMobile(!menuMobile)}
-                sx={{ fontSize: 30 }}
+            <div>
+              <ColorLensIcon
+                className="icon"
+                onClick={() => setColorPicker(!colorPicker)}
+                sx={{ color: "#fdb714" }}
               />
-            ) : (
-              <MenuIcon
-                className={classes.menuIcon}
-                onClick={() => setMenuMobile(!menuMobile)}
-                sx={{ fontSize: 30 }}
-              />
-            )}
+              {colorPicker && (
+                <div className={classes.colorPicker}>
+                  <CompactPicker onChangeComplete={handleChangeComplete} />
+                </div>
+              )}
+            </div>
           </div>
-          {menuMobile && (
-            <Fragment>
-              <div
-                className={`${classes.menuMobile} animate__animated animate__slideInDown`}
-              >
-                <div>
-                  {navigationTopBar.map((nav, index) => (
+          <div className={classes.largeNavigation}>
+            {language
+              ? navigationTopBar
+                  .map((nav, index) => (
                     <a
                       key={index}
                       style={{
@@ -174,7 +122,116 @@ export default function Menu() {
                         <SearchIcon sx={{ fontSize: 30 }} />
                       )}
                     </a>
-                  ))}
+                  ))
+                  .reverse()
+              : navigationTopBar.map((nav, index) => (
+                  <a
+                    key={index}
+                    style={{
+                      fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                    }}
+                    className={!nav.active ? classes.nav : classes.navActive}
+                    onClick={() => activateNav(nav.link, index)}
+                  >
+                    {nav.title[languageType]}
+                    {nav.title[languageType] === "" && (
+                      <SearchIcon sx={{ fontSize: 30 }} />
+                    )}
+                  </a>
+                ))}
+          </div>
+        </div>
+      )}
+      {screenSize === "mobile" && (
+        <div className={classes.smallMenu}>
+          <div className={language ? classes.topBar : classes.topBarReverse}>
+            <div
+              className={
+                language ? classes.logoContainer : classes.logoContainerReverse
+              }
+            >
+              <div className={classes.logo}>
+                <Image
+                  className={classes.image}
+                  layout="fill"
+                  objectFit="cover"
+                  src={!language ? logoEnglish : logoFarsi}
+                  alt="logo"
+                  onClick={() => window.location.assign("/")}
+                  priority
+                />
+              </div>
+              <div
+                className={classes.languageControl}
+                onClick={() => toggleLanguage()}
+                style={{
+                  fontFamily: language ? "English" : "Farsi",
+                }}
+              >
+                <p>{language ? "English" : "فارسی"}</p>
+              </div>
+            </div>
+            {menuMobile ? (
+              <CloseIcon
+                className="icon"
+                onClick={() => setMenuMobile(!menuMobile)}
+                sx={{ fontSize: 30 }}
+              />
+            ) : (
+              <MenuIcon
+                className="icon"
+                onClick={() => setMenuMobile(!menuMobile)}
+                sx={{ fontSize: 30 }}
+              />
+            )}
+          </div>
+          {menuMobile && (
+            <Fragment>
+              <div
+                className={`${classes.menuMobile} animate__animated animate__slideInDown`}
+              >
+                <div className={classes.menuItems}>
+                  {language
+                    ? navigationTopBar
+                        .map((nav, index) => (
+                          <a
+                            key={index}
+                            style={{
+                              fontFamily: language
+                                ? "FarsiMedium"
+                                : "EnglishMedium",
+                            }}
+                            className={
+                              !nav.active ? classes.nav : classes.navActive
+                            }
+                            onClick={() => activateNav(nav.link, index)}
+                          >
+                            {nav.title[languageType]}
+                            {nav.title[languageType] === "" && (
+                              <SearchIcon sx={{ fontSize: 30 }} />
+                            )}
+                          </a>
+                        ))
+                        .reverse()
+                    : navigationTopBar.map((nav, index) => (
+                        <a
+                          key={index}
+                          style={{
+                            fontFamily: language
+                              ? "FarsiMedium"
+                              : "EnglishMedium",
+                          }}
+                          className={
+                            !nav.active ? classes.nav : classes.navActive
+                          }
+                          onClick={() => activateNav(nav.link, index)}
+                        >
+                          {nav.title[languageType]}
+                          {nav.title[languageType] === "" && (
+                            <SearchIcon sx={{ fontSize: 30 }} />
+                          )}
+                        </a>
+                      ))}
                 </div>
               </div>
             </Fragment>
