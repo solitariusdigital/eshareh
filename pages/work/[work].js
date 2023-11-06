@@ -95,6 +95,7 @@ export default function Work({ name }) {
         }
         if (isScrollAtBottom) {
           setDisplayController(false);
+          setFooter(false);
         }
         prevScrollY = currentScrollY;
       };
