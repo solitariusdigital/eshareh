@@ -77,7 +77,7 @@ export default function Menu() {
                 className={classes.image}
                 layout="fill"
                 objectFit="cover"
-                src={!language ? logoEnglish : logoFarsi}
+                src={language ? logoFarsi : logoEnglish}
                 alt="logo"
                 onClick={() => window.location.assign("/")}
                 priority
