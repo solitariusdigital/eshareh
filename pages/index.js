@@ -638,9 +638,6 @@ export default function Home() {
         <CardGrid projects={divideArray(sliderData)[2]} direction={true} />
         <CardGrid projects={divideArray(sliderData)[3]} direction={false} />
         <CardGrid projects={divideArray(sliderData)[4]} direction={true} />
-        <CardGrid projects={divideArray(sliderData)[5]} direction={false} />
-        <CardGrid projects={divideArray(sliderData)[6]} direction={true} />
-        <CardGrid projects={divideArray(sliderData)[7]} direction={false} />
       </section>
       <div className={classes.message} onClick={() => Router.push("/work")}>
         {language ? <h3>مشاهده همه پروژه‌ها</h3> : <h3>View all works</h3>}
