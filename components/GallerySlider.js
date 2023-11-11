@@ -12,6 +12,9 @@ export default function GallerySlider({ images }) {
   const [current, setCurrent] = useState(0);
   const length = images.length;
 
+  const [startX, setStartX] = useState(null);
+  const [endX, setEndX] = useState(null);
+
   const slideImage = (type) => {
     switch (type) {
       case "next":
@@ -25,6 +28,29 @@ export default function GallerySlider({ images }) {
 
   const calculatePercentage = (index) => {
     return ((index + 1) / images.length) * 100;
+  };
+
+  const handleTouchStart = (e) => {
+    setStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (startX && endX) {
+      const deltaX = endX - startX;
+
+      if (deltaX > 0) {
+        slideImage("prev");
+      } else if (deltaX < 0) {
+        slideImage("next");
+      }
+    }
+
+    setStartX(null);
+    setEndX(null);
   };
 
   return (
@@ -44,7 +70,12 @@ export default function GallerySlider({ images }) {
       <div className={classes.progress}>
         <Progress color={"#fdb714"} completed={calculatePercentage(current)} />
       </div>
-      <div className={classes.image}>
+      <div
+        className={classes.image}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <Image
           onClick={() => slideImage("next")}
           src={images[current]}

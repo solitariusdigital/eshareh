@@ -2,6 +2,8 @@
 @use "styles/_mixins.scss" as mixins;
 
 .slider {
+  display: flex;
+  flex-direction: column;
   width: 90%;
   height: 100vh;
 
@@ -12,12 +14,7 @@
   .image {
     position: relative;
     width: 100%;
-    height: calc(100% - 5px);
-
-    @include mixins.mobile {
-      margin: auto;
-      height: 300px;
-    }
+    height: 100%;
   }
 }
 

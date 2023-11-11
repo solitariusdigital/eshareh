@@ -15,6 +15,8 @@ export default function ImageSlider({ sliderData }) {
   const [current, setCurrent] = useState(0);
   const [displayInfo, setDisplayInfo] = useState(false);
 
+  const [startX, setStartX] = useState(null);
+  const [endX, setEndX] = useState(null);
   const length = sliderData.length;
 
   useEffect(() => {
@@ -50,9 +52,6 @@ export default function ImageSlider({ sliderData }) {
       setDisplayInfo(true);
     }, 20);
   };
-
-  const [startX, setStartX] = useState(null);
-  const [endX, setEndX] = useState(null);
 
   const handleTouchStart = (e) => {
     setStartX(e.touches[0].clientX);

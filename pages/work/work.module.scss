@@ -64,6 +64,11 @@
       padding: 8px 20px;
       color: config.$white;
       @include mixins.transparentBackground(0.2, config.$lightgrey);
+
+      @include mixins.mobile {
+        bottom: 10px;
+        left: 10px;
+      }
     }
   }
 
