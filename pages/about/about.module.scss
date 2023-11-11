@@ -34,12 +34,12 @@
       margin: 0px;
 
       .image {
-        object-position: 10% 0%;
+        object-position: 50% 0%;
       }
     }
     @include mixins.tablet {
       .image {
-        object-position: 10% 0%;
+        object-position: 50% 0%;
       }
     }
 
