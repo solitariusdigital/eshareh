@@ -3,6 +3,10 @@
 
 .gridWorks {
   margin: 80px 0px;
+
+  @include mixins.mobile {
+    margin: 20px 0px;
+  }
 }
 
 .message {

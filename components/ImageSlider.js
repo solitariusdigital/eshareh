@@ -51,6 +51,32 @@ export default function ImageSlider({ sliderData }) {
     }, 20);
   };
 
+  const [startX, setStartX] = useState(null);
+  const [endX, setEndX] = useState(null);
+
+  const handleTouchStart = (e) => {
+    setStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (startX && endX) {
+      const deltaX = endX - startX;
+
+      if (deltaX > 0) {
+        slideImage("prev");
+      } else if (deltaX < 0) {
+        slideImage("next");
+      }
+    }
+
+    setStartX(null);
+    setEndX(null);
+  };
+
   return (
     <div className={classes.slider}>
       {screenSize !== "mobile" && (
@@ -73,6 +99,9 @@ export default function ImageSlider({ sliderData }) {
           >
             {index === current && (
               <div
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
                 onClick={() =>
                   Router.push(
                     `/work/${replaceSpacesAndHyphens(

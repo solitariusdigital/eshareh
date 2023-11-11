@@ -9,7 +9,7 @@
   margin: auto;
 
   @include mixins.mobile {
-    height: 600px;
+    height: 400px;
   }
 
   .mediaContainer {
@@ -20,7 +20,7 @@
     cursor: pointer;
 
     @include mixins.mobile {
-      height: 600px;
+      height: 400px;
     }
 
     .video {

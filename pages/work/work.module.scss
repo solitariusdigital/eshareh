@@ -111,6 +111,7 @@
     .information,
     .informationReverse {
       display: flex;
+      flex-direction: row;
     }
 
     .informationReverse {
