@@ -60,7 +60,7 @@ export default function RootLayout({ children }) {
     });
     setNavigationTopBar([...navigationTopBar]);
     setTimeout(() => {
-      setAppLoader(true);
+      // setAppLoader(true);
     }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

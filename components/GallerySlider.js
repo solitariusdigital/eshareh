@@ -70,14 +70,12 @@ export default function GallerySlider({ images }) {
       <div className={classes.progress}>
         <Progress color={"#fdb714"} completed={calculatePercentage(current)} />
       </div>
-      <div
-        className={classes.image}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
+      <div className={classes.image}>
         <Image
           onClick={() => slideImage("next")}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           src={images[current]}
           blurDataURL={images[current]}
           placeholder="blur"

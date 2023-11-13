@@ -124,8 +124,11 @@ h3 {
 .appload {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: calc(100vh - 80px);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
 }
 
 .scrollArrow {
