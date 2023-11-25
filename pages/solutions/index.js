@@ -9,13 +9,13 @@ import three from "@/assets/three.jpg";
 import Router from "next/router";
 import { replaceSpacesAndHyphens, enToFaDigits } from "@/services/utility";
 
-export default function Work() {
+export default function Solutions() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [category, setCategory] = useState(
-    "advertising" || "digital" || "media" || "health" || "consulting"
+    "advertising" || "media" || "digital"
   );
   const [type, setType] = useState("customer" || "sector" || "all");
 
@@ -274,15 +274,8 @@ export default function Work() {
 
   const categories = [
     { name: "advertising", labelFa: "تبلیغات", labelEn: "Advertisement" },
-    { name: "digital", labelFa: "دیجیتال", labelEn: "Digital" },
     { name: "media", labelFa: "رسانه", labelEn: "Media" },
-    { name: "health", labelFa: "تندرستی", labelEn: "Health" },
-    { name: "consulting", labelFa: "مشاوره", labelEn: "Consulting" },
-  ];
-  const types = [
-    { name: "customer", labelFa: "نوع مشتری", labelEn: "Client Type" },
-    { name: "sector", labelFa: "نوع کار", labelEn: "Work Type" },
-    { name: "all", labelFa: "همه", labelEn: "All Work" },
+    { name: "digital", labelFa: "دیجیتال", labelEn: "Digital" },
   ];
 
   useEffect(() => {
@@ -355,9 +348,6 @@ export default function Work() {
   return (
     <div className={classes.container}>
       <div className={classes.categoryContainer}>
-        <h1 className={language ? classes.title : classes.titleReverse}>
-          {language ? "پروژه‌ها" : "Work"}
-        </h1>
         <div className={classes.category}>
           {categories.map((item) => (
             <p
@@ -367,21 +357,6 @@ export default function Work() {
               }
               onClick={() => {
                 setCategory(item.name);
-              }}
-            >
-              {language ? item.labelFa : item.labelEn}
-            </p>
-          ))}
-        </div>
-      </div>
-      <div className={classes.typeContainer}>
-        <div className={classes.type}>
-          {types.map((item) => (
-            <p
-              key={item.name}
-              className={type === item.name ? classes.navActive : classes.nav}
-              onClick={() => {
-                setType(item.name);
               }}
             >
               {language ? item.labelFa : item.labelEn}
@@ -400,17 +375,7 @@ export default function Work() {
         {filterUniqueWorks()
           .filter((item) => item.category === category || category === "all")
           .map((item, index) => {
-            const { customerType, sector, image, title } = item;
-            let lengthCustomerType = works.filter(
-              (work) =>
-                customerType === work[languageType].customerType &&
-                item.category === work[languageType].category
-            ).length;
-            let lengthSector = works.filter(
-              (work) =>
-                sector === work[languageType].sector &&
-                item.category === work[languageType].category
-            ).length;
+            const { image, title } = item;
             return (
               <Fragment key={index}>
                 {image && (
@@ -418,36 +383,6 @@ export default function Work() {
                     className={classes.item}
                     onClick={() => directCategory(item)}
                   >
-                    {type === "customer" && (
-                      <div
-                        className={
-                          language
-                            ? classes.information
-                            : classes.informationReverse
-                        }
-                      >
-                        <h2>{customerType}</h2>
-                        <p>
-                          {language
-                            ? enToFaDigits(lengthCustomerType)
-                            : lengthCustomerType}
-                        </p>
-                      </div>
-                    )}
-                    {type === "sector" && (
-                      <div
-                        className={
-                          language
-                            ? classes.information
-                            : classes.informationReverse
-                        }
-                      >
-                        <h2>{sector}</h2>
-                        <p>
-                          {language ? enToFaDigits(lengthSector) : lengthSector}
-                        </p>
-                      </div>
-                    )}
                     <div className={classes.box}>
                       <Image
                         className={classes.image}
@@ -460,17 +395,15 @@ export default function Work() {
                         priority
                       />
                     </div>
-                    {type === "all" && (
-                      <div
-                        className={
-                          language
-                            ? classes.information
-                            : classes.informationReverse
-                        }
-                      >
-                        <h3>{title}</h3>
-                      </div>
-                    )}
+                    <div
+                      className={
+                        language
+                          ? classes.information
+                          : classes.informationReverse
+                      }
+                    >
+                      <h3>{title}</h3>
+                    </div>
                   </div>
                 )}
               </Fragment>

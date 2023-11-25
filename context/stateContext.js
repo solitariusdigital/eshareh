@@ -19,9 +19,9 @@ export const StateProvider = (props) => {
     {
       title: {
         fa: "پروژه‌ها",
-        en: "Work",
+        en: "SOLUTIONS",
       },
-      link: "/work",
+      link: "/solutions",
       active: false,
     },
     // {
@@ -35,7 +35,7 @@ export const StateProvider = (props) => {
     {
       title: {
         fa: "درباره",
-        en: "About",
+        en: "ABOUT",
       },
       link: "/about",
       active: false,
@@ -43,7 +43,7 @@ export const StateProvider = (props) => {
     {
       title: {
         fa: "تماس",
-        en: "Contact",
+        en: "CONTACT",
       },
       link: "/contact",
       active: false,

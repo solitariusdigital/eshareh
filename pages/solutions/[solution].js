@@ -12,7 +12,7 @@ import two from "@/assets/two.jpg";
 import one from "@/assets/one.jpg";
 import three from "@/assets/three.jpg";
 
-export default function Work({ name }) {
+export default function Solution({ name }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);

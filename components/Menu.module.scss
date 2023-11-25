@@ -4,7 +4,7 @@
 .container {
   width: 100%;
   @include mixins.row-space-between-center();
-
+  border-bottom: 1px solid config.$lightgrey;
   @include mixins.mobile {
     width: 100%;
   }
@@ -24,7 +24,7 @@
 
     .colorPicker {
       position: absolute;
-      right: 280px;
+      right: 200px;
       top: 0px;
     }
   }
@@ -33,7 +33,7 @@
     flex-direction: row;
 
     .colorPicker {
-      left: 280px;
+      left: 200px;
     }
   }
 
@@ -71,8 +71,8 @@
   color: config.$white;
   display: flex;
   justify-content: center;
-  padding: 4px;
-  width: 35px;
+  padding: 2px;
+  width: 30px;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -82,7 +82,7 @@
 }
 
 .nav {
-  font-size: config.$big-font;
+  font-size: config.$small-font;
   @include mixins.row-space-between-center();
   justify-content: right;
 
@@ -94,7 +94,7 @@
 }
 
 .navActive {
-  font-size: config.$big-font;
+  font-size: config.$small-font;
   color: config.$yellow;
   font-weight: bold;
   @include mixins.row-space-between-center();
