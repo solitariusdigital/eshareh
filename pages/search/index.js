@@ -19,10 +19,6 @@ export default function Search() {
   const [searchEmpty, setSearchEmpty] = useState(false);
   const [expandedItem, setExpandedItem] = useState(null);
 
-  useEffect(() => {
-    document.body.style.background = "#ffffff";
-  }, []);
-
   const searchDocuments = () => {};
 
   return (

@@ -279,10 +279,6 @@ export default function Solutions() {
   ];
 
   useEffect(() => {
-    document.body.style.background = "#ffffff";
-  }, []);
-
-  useEffect(() => {
     navigationTopBar.map((nav) => {
       if (pathname.includes(nav.link)) {
         nav.active = true;

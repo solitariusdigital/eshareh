@@ -125,7 +125,7 @@ export default function Menu() {
                       >
                         {nav.title[languageType]}
                         {nav.title[languageType] === "" && (
-                          <SearchIcon sx={{ fontSize: 30 }} />
+                          <SearchIcon sx={{ fontSize: 24 }} />
                         )}
                       </a>
                     </Fragment>
@@ -142,7 +142,7 @@ export default function Menu() {
                     >
                       {nav.title[languageType]}
                       {nav.title[languageType] === "" && (
-                        <SearchIcon sx={{ fontSize: 30 }} />
+                        <SearchIcon sx={{ fontSize: 24 }} />
                       )}
                     </a>
                     {index === navigationTopBar.length - 1 && (
@@ -233,7 +233,7 @@ export default function Menu() {
                           >
                             {nav.title[languageType]}
                             {nav.title[languageType] === "" && (
-                              <SearchIcon sx={{ fontSize: 30 }} />
+                              <SearchIcon sx={{ fontSize: 24 }} />
                             )}
                           </a>
                         ))
@@ -253,7 +253,7 @@ export default function Menu() {
                         >
                           {nav.title[languageType]}
                           {nav.title[languageType] === "" && (
-                            <SearchIcon sx={{ fontSize: 30 }} />
+                            <SearchIcon sx={{ fontSize: 24 }} />
                           )}
                         </a>
                       ))}

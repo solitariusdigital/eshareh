@@ -15,10 +15,6 @@ export default function Contact() {
   const locationLink =
     "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7743132,51.3941519,17z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu";
 
-  useEffect(() => {
-    document.body.style.background = "#ffffff";
-  }, []);
-
   return (
     <div className={classes.container}>
       <div className={classes.cover}>

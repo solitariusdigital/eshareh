@@ -10,10 +10,6 @@ import { enToFaDigits } from "@/services/utility";
 export default function About() {
   const { language, setLanguage } = useContext(StateContext);
 
-  useEffect(() => {
-    document.body.style.background = "#1b1b1b";
-  }, []);
-
   const photos = [
     {
       image: team,

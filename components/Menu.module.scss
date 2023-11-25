@@ -138,10 +138,14 @@
 
   .menuMobile {
     position: fixed;
-    width: 100%;
     padding: 12px;
     background: config.$yellow;
     box-shadow: config.$card-shadow;
+    width: config.$content-width;
+
+    @include mixins.mobile {
+      width: 100%;
+    }
 
     .menuItems {
       width: 100%;
