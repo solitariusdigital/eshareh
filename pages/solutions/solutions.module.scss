@@ -129,20 +129,17 @@
 
 .category {
   position: relative;
-  margin: auto;
-  width: 600px;
   font-size: 45px !important;
-  @include mixins.row-space-between-center();
-  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
   @include mixins.mobile {
     font-size: 30px !important;
-    width: 50%;
   }
 
   @include mixins.tablet {
     font-size: 30px !important;
-    width: 50%;
   }
 
   span {
