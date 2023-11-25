@@ -132,7 +132,6 @@
   padding: 12px;
   margin: auto;
   height: 40px;
-  border-bottom: 1px solid config.$lightgrey;
   @include mixins.row-space-between-center();
   justify-content: space-around;
 
@@ -141,7 +140,6 @@
   }
 
   .category {
-    width: 500px;
     @include mixins.row-space-between-center();
     flex-direction: row-reverse;
 
@@ -151,26 +149,25 @@
     }
   }
 
+  span {
+    color: config.$black;
+    margin: 12px;
+  }
+
   .nav {
     display: flex;
     align-items: center;
-    height: 41px;
-    color: config.$grey;
-    border-bottom: 1px solid config.$lightgrey;
 
     &:hover {
       cursor: pointer;
-      color: config.$black;
-      border-bottom: 1px solid config.$black;
+      color: config.$yellow;
     }
   }
 
   .navActive {
     display: flex;
     align-items: center;
-    height: 41px;
-    color: config.$black;
-    border-bottom: 1px solid config.$black;
+    color: config.$yellow;
   }
 }
 

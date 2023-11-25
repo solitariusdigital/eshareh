@@ -70,7 +70,7 @@
   z-index: 2;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 20px;
+  bottom: 40px;
   width: config.$content-width;
   text-align: left;
   color: config.$white;
@@ -78,10 +78,18 @@
 
   @include mixins.mobile {
     width: calc(100% - 24px);
+    bottom: 20px;
   }
 
   .loader {
     @include mixins.row-space-between-center();
+    span {
+      font-size: 27px !important;
+      margin: 12px;
+      @include mixins.mobile {
+        font-size: 19px !important;
+      }
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import { useState, useContext, Fragment, useEffect, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./work.module.scss";
+import classes from "./solutions.module.scss";
 import { replaceSpacesAndHyphens } from "@/services/utility";
 import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
@@ -202,8 +202,8 @@ export default function Solution({ name }) {
 // initial connection to db
 export async function getServerSideProps(context) {
   try {
-    let name = replaceSpacesAndHyphens(context.params.work);
-
+    let name = replaceSpacesAndHyphens(context.params.solutions);
+    console.log(name);
     return {
       props: {
         name: JSON.parse(JSON.stringify(name)),

@@ -19,7 +19,7 @@ export default function CardGrid({ projects, direction }) {
             className={classes.hero}
             onClick={() =>
               Router.push(
-                `/work/${replaceSpacesAndHyphens(
+                `/solutions/${replaceSpacesAndHyphens(
                   projects[0][languageType].title
                 )}`
               )
@@ -65,7 +65,7 @@ export default function CardGrid({ projects, direction }) {
                   key={index}
                   onClick={() =>
                     Router.push(
-                      `/work/${replaceSpacesAndHyphens(
+                      `/solutions/${replaceSpacesAndHyphens(
                         project[languageType].title
                       )}`
                     )
@@ -118,7 +118,7 @@ export default function CardGrid({ projects, direction }) {
               key={index}
               onClick={() =>
                 Router.push(
-                  `/work/${replaceSpacesAndHyphens(
+                  `/solutions/${replaceSpacesAndHyphens(
                     project[languageType].title
                   )}`
                 )

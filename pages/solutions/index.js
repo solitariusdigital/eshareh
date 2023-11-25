@@ -1,7 +1,7 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
-import classes from "./work.module.scss";
+import classes from "./solutions.module.scss";
 import Image from "next/legacy/image";
 import one from "@/assets/one.jpg";
 import two from "@/assets/two.jpg";
@@ -273,9 +273,9 @@ export default function Solutions() {
   ];
 
   const categories = [
-    { name: "advertising", labelFa: "تبلیغات", labelEn: "Advertisement" },
-    { name: "media", labelFa: "رسانه", labelEn: "Media" },
     { name: "digital", labelFa: "دیجیتال", labelEn: "Digital" },
+    { name: "media", labelFa: "رسانه", labelEn: "Media" },
+    { name: "advertising", labelFa: "تبلیغات", labelEn: "Advertisement" },
   ];
 
   useEffect(() => {
@@ -331,18 +331,8 @@ export default function Solutions() {
   };
 
   const directCategory = (item) => {
-    const { title, customerType, sector } = item;
-    switch (type) {
-      case "all":
-        Router.push(`/work/${replaceSpacesAndHyphens(title)}`);
-        break;
-      case "customer":
-        Router.push(`/work/customer/${replaceSpacesAndHyphens(customerType)}`);
-        break;
-      case "sector":
-        Router.push(`/work/sector/${replaceSpacesAndHyphens(sector)}`);
-        break;
-    }
+    const { title } = item;
+    Router.push(`/solutions/${replaceSpacesAndHyphens(title)}`);
   };
 
   return (
@@ -350,7 +340,7 @@ export default function Solutions() {
       <div className={classes.categoryContainer}>
         <div className={classes.category}>
           {categories.map((item) => (
-            <p
+            <h2
               key={item.name}
               className={
                 category === item.name ? classes.navActive : classes.nav
@@ -359,8 +349,8 @@ export default function Solutions() {
                 setCategory(item.name);
               }}
             >
-              {language ? item.labelFa : item.labelEn}
-            </p>
+              {language ? item.labelFa : item.labelEn} <span>/</span>
+            </h2>
           ))}
         </div>
       </div>

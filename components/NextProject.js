@@ -42,7 +42,7 @@ export default function NextProject() {
       className={classes.container}
       onClick={() =>
         Router.push(
-          `/work/${replaceSpacesAndHyphens(work[languageType].title)}`
+          `/solutions/${replaceSpacesAndHyphens(work[languageType].title)}`
         )
       }
     >

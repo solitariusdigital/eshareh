@@ -6,7 +6,6 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Image from "next/legacy/image";
 import { enToFaDigits, replaceSpacesAndHyphens } from "@/services/utility";
 import Router from "next/router";
-import Loader from "./Loader";
 
 export default function ImageSlider({ sliderData }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -103,7 +102,7 @@ export default function ImageSlider({ sliderData }) {
                 onTouchEnd={handleTouchEnd}
                 onClick={() =>
                   Router.push(
-                    `/work/${replaceSpacesAndHyphens(
+                    `/solutions/${replaceSpacesAndHyphens(
                       slide[languageType].title
                     )}`
                   )
@@ -153,7 +152,7 @@ export default function ImageSlider({ sliderData }) {
                 onClick={() => slideImage("next")}
               >
                 <h2>{language ? enToFaDigits(current + 1) : current + 1}</h2>
-                <Loader key={displayInfo} />
+                <span> / </span>
                 <h2>{language ? enToFaDigits(length) : length}</h2>
               </div>
             </div>
