@@ -47,7 +47,7 @@ body {
   user-select: none;
   max-width: config.$max-pageWidth;
   margin: auto;
-  margin-top: 80px;
+  margin-top: 100px;
 }
 
 a {
@@ -91,7 +91,7 @@ h3 {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 80px;
+  height: 100px;
   max-width: config.$max-pageWidth;
 }
 
@@ -134,7 +134,7 @@ h3 {
 .scrollArrow {
   width: 40px;
   height: 40px;
-  border-radius: 50px;
+  border-radius: 12px;
   background: config.$yellow;
   color: config.$white;
   align-items: center;

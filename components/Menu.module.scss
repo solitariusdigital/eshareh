@@ -27,11 +27,6 @@
       right: 280px;
       top: 0px;
     }
-
-    .languageControl {
-      margin: 0px 20px;
-      cursor: pointer;
-    }
   }
 
   .logoContainerReverse {
@@ -61,19 +56,25 @@
   max-width: config.$max-widthHeigh;
   @include mixins.row-space-between-center();
 
-  @include mixins.tablet {
-    padding: 0px 12px;
-    width: 100%;
-  }
-
   .largeNavigation {
-    width: 30%;
+    width: 35%;
     @include mixins.row-space-between-center();
 
     @include mixins.tablet {
       width: 50%;
     }
   }
+}
+
+.languageControl {
+  background: config.$black;
+  color: config.$white;
+  display: flex;
+  justify-content: center;
+  padding: 4px;
+  width: 35px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .largeMenuReverse {

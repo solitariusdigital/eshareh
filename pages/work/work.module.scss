@@ -38,8 +38,8 @@
     width: 100%;
     height: 70px;
     z-index: 5;
-    background: config.$white;
     color: config.$grey;
+    @include mixins.transparentBackground(0.95, config.$white);
 
     .controller {
       display: flex;
