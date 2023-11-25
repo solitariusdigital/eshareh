@@ -3,15 +3,10 @@
 
 .container {
   width: 100%;
-  @include mixins.row-space-between-center();
   border-bottom: 1px solid config.$lightgrey;
-  @include mixins.mobile {
-    width: 100%;
-  }
+  max-width: config.$max-widthHeigh;
 
-  @include mixins.desktop {
-    padding: 12px 0px;
-  }
+  @include mixins.row-space-between-center();
 
   .logoContainer,
   .logoContainerReverse {
@@ -50,19 +45,24 @@
 
 .largeMenu,
 .largeMenuReverse {
-  width: config.$content-width;
   margin: auto;
   position: relative;
+  width: config.$content-width;
   max-width: config.$max-widthHeigh;
   @include mixins.row-space-between-center();
 
   .largeNavigation {
     width: 35%;
     @include mixins.row-space-between-center();
+  }
+}
 
-    @include mixins.tablet {
-      width: 50%;
-    }
+.menuWrapper,
+.menuWrapperReverse {
+  @include mixins.row-space-between-center();
+
+  .languageControl {
+    margin: 0px 20px;
   }
 }
 
@@ -72,9 +72,14 @@
   display: flex;
   justify-content: center;
   padding: 2px;
-  width: 30px;
-  border-radius: 8px;
+  width: 28px;
+  border-radius: 4px;
+  font-size: 14px;
   cursor: pointer;
+}
+
+.menuWrapperReverse {
+  flex-direction: row-reverse;
 }
 
 .largeMenuReverse {
@@ -102,7 +107,12 @@
 }
 
 .smallMenu {
-  width: 100%;
+  margin: auto;
+  width: config.$content-width;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
 
   .topBar,
   .topBarReverse {

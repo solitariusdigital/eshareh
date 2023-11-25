@@ -273,9 +273,9 @@ export default function Solutions() {
   ];
 
   const categories = [
-    { name: "digital", labelFa: "دیجیتال", labelEn: "Digital" },
+    { name: "advertising", labelFa: "تبلیغات", labelEn: "Advertising" },
     { name: "media", labelFa: "رسانه", labelEn: "Media" },
-    { name: "advertising", labelFa: "تبلیغات", labelEn: "Advertisement" },
+    { name: "digital", labelFa: "دیجیتال", labelEn: "Digital" },
   ];
 
   useEffect(() => {
@@ -337,22 +337,19 @@ export default function Solutions() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.categoryContainer}>
-        <div className={classes.category}>
-          {categories.map((item) => (
-            <h2
-              key={item.name}
-              className={
-                category === item.name ? classes.navActive : classes.nav
-              }
-              onClick={() => {
-                setCategory(item.name);
-              }}
-            >
-              {language ? item.labelFa : item.labelEn} <span>/</span>
-            </h2>
-          ))}
-        </div>
+      <div className={classes.category}>
+        {categories.map((item, index) => (
+          <p
+            key={item.name}
+            className={category === item.name ? classes.navActive : classes.nav}
+            onClick={() => {
+              setCategory(item.name);
+            }}
+          >
+            {language ? item.labelFa : item.labelEn}
+            {index !== 2 && <span>/</span>}
+          </p>
+        ))}
       </div>
       <section
         key={category}

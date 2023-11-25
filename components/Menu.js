@@ -63,7 +63,7 @@ export default function Menu() {
       className={classes.container}
       style={{ background: menuColor.background, color: menuColor.text }}
     >
-      {screenSize !== "mobile" && (
+      {screenSize === "desktop" && (
         <div
           className={language ? classes.largeMenuReverse : classes.largeMenu}
         >
@@ -161,7 +161,7 @@ export default function Menu() {
           </div>
         </div>
       )}
-      {screenSize === "mobile" && (
+      {screenSize !== "desktop" && (
         <div className={classes.smallMenu}>
           <div className={language ? classes.topBar : classes.topBarReverse}>
             <div
@@ -180,29 +180,35 @@ export default function Menu() {
                   priority
                 />
               </div>
+            </div>
+            <div
+              className={
+                language ? classes.menuWrapper : classes.menuWrapperReverse
+              }
+            >
+              {menuMobile ? (
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setMenuMobile(!menuMobile)}
+                  sx={{ fontSize: 30 }}
+                />
+              ) : (
+                <MenuIcon
+                  className="icon"
+                  onClick={() => setMenuMobile(!menuMobile)}
+                  sx={{ fontSize: 30 }}
+                />
+              )}
               <div
                 className={classes.languageControl}
                 onClick={() => toggleLanguage()}
                 style={{
-                  fontFamily: language ? "English" : "Farsi",
+                  fontFamily: language ? "English" : "English",
                 }}
               >
-                <p>{language ? "English" : "فارسی"}</p>
+                <p>{language ? "En" : "Fa"}</p>
               </div>
             </div>
-            {menuMobile ? (
-              <CloseIcon
-                className="icon"
-                onClick={() => setMenuMobile(!menuMobile)}
-                sx={{ fontSize: 30 }}
-              />
-            ) : (
-              <MenuIcon
-                className="icon"
-                onClick={() => setMenuMobile(!menuMobile)}
-                sx={{ fontSize: 30 }}
-              />
-            )}
           </div>
           {menuMobile && (
             <Fragment>

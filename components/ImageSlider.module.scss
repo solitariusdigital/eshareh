@@ -3,7 +3,7 @@
 
 .slider {
   position: relative;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 100px);
   max-height: config.$max-widthHeigh;
   max-width: config.$max-widthHeigh;
   margin: auto;
@@ -70,7 +70,7 @@
   z-index: 2;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 40px;
+  bottom: 20px;
   width: config.$content-width;
   text-align: left;
   color: config.$white;
@@ -78,7 +78,6 @@
 
   @include mixins.mobile {
     width: calc(100% - 24px);
-    bottom: 20px;
   }
 
   .loader {
