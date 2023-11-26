@@ -16,7 +16,23 @@ export default function Home() {
     {
       fa: {
         image: two,
-        title: "صنعت خشکبار و حبوبات کوروش",
+        title: "خشکبار و حبوبات کوروش",
+        description:
+          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
+        type: "image",
+      },
+      en: {
+        image: two,
+        title: "publishing industries for previewing",
+        description:
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        type: "image",
+      },
+    },
+    {
+      fa: {
+        image: two,
+        title: "خشکبار و حبوبات کوروش",
         description:
           "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
         type: "image",
@@ -160,7 +176,7 @@ export default function Home() {
     {
       fa: {
         image: one,
-        title: "صنعت خشکبار و حبوبات کوروش",
+        title: "خشکبار و حبوبات کوروش",
         description:
           "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
         type: "image",
@@ -177,7 +193,7 @@ export default function Home() {
 
   const divideArray = (array) => {
     const dividedArrays = [];
-    let chunkLength = screenSize === "desktop" ? 5 : 4;
+    let chunkLength = screenSize === "desktop" ? 5 : 10;
     let index = 0;
     while (index < array.length) {
       dividedArrays.push(array.slice(index, index + chunkLength));
@@ -193,7 +209,9 @@ export default function Home() {
       </section>
       <section className={classes.gridWorks}>
         <CardGrid projects={divideArray(sliderData)[0]} direction={true} />
-        <CardGrid projects={divideArray(sliderData)[1]} direction={false} />
+        {screenSize === "desktop" && (
+          <CardGrid projects={divideArray(sliderData)[1]} direction={false} />
+        )}
       </section>
       <div className={classes.message} onClick={() => Router.push("/work")}>
         {language ? <h3>مشاهده همه پروژه‌ها</h3> : <h3>View all works</h3>}

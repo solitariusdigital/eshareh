@@ -67,7 +67,7 @@ export default function Contact() {
           >
             <PhoneEnabledIcon className="icon" />
             <p className={classes.click}>
-              {language ? "+۹۸ ۲۱ ۸۸۰ ۴۴ ۲۴" : "+98 21 880 44 24"}
+              {language ? "+۹۸ ۲۱ ۸۸۰ ۴۴ ۲۴۴" : "+98 21 880 44 244"}
             </p>
           </div>
           <div className={language ? classes.row : classes.rowReverse}>

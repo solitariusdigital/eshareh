@@ -5,7 +5,7 @@
   margin: auto;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
-  margin-top: 120px;
+  margin-top: 150px;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
