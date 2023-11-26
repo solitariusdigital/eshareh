@@ -52,7 +52,7 @@
   @include mixins.row-space-between-center();
 
   .largeNavigation {
-    width: 35%;
+    width: 50%;
     @include mixins.row-space-between-center();
   }
 }

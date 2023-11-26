@@ -213,7 +213,10 @@ export default function Home() {
           <CardGrid projects={divideArray(sliderData)[1]} direction={false} />
         )}
       </section>
-      <div className={classes.message} onClick={() => Router.push("/work")}>
+      <div
+        className={classes.message}
+        onClick={() => Router.push("/solutions")}
+      >
         {language ? <h3>مشاهده همه پروژه‌ها</h3> : <h3>View all works</h3>}
       </div>
     </Fragment>
