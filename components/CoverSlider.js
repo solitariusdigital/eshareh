@@ -1,18 +1,20 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./ImageSlider.module.scss";
+import classes from "./CoverSlider.module.scss";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Image from "next/legacy/image";
 import { enToFaDigits, replaceSpacesAndHyphens } from "@/services/utility";
 import Router from "next/router";
+import Progress from "@/components/Progress";
 
-export default function ImageSlider({ sliderData }) {
+export default function CoverSlider({ sliderData }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [current, setCurrent] = useState(0);
   const [displayInfo, setDisplayInfo] = useState(false);
+  const [progressCompleted, setProgressCompleted] = useState(34);
 
   const [startX, setStartX] = useState(null);
   const [endX, setEndX] = useState(null);
@@ -75,6 +77,10 @@ export default function ImageSlider({ sliderData }) {
     setEndX(null);
   };
 
+  const calculatePercentage = (index) => {
+    return ((index + 1) / sliderData.length) * 100;
+  };
+
   return (
     <div className={classes.slider}>
       {screenSize !== "mobile" && (
@@ -89,6 +95,9 @@ export default function ImageSlider({ sliderData }) {
           />
         </Fragment>
       )}
+      <div className={classes.progress}>
+        <Progress color={"#fdb714"} completed={calculatePercentage(current)} />
+      </div>
       {sliderData.map((slide, index) => {
         return (
           <div

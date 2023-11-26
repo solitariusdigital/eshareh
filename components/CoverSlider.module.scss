@@ -15,7 +15,7 @@
   .mediaContainer {
     position: relative;
     width: 100%;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 100px);
     max-height: config.$max-widthHeigh;
     cursor: pointer;
 
@@ -33,6 +33,14 @@
 
   .image {
     cursor: pointer;
+  }
+
+  .progress {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 5;
   }
 }
 

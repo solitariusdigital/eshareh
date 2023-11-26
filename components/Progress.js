@@ -4,7 +4,6 @@ export default function Progress(props) {
   const progress = {
     height: 5,
     width: "100%",
-    backgroundColor: "#ffffff",
   };
 
   const filler = {

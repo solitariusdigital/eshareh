@@ -1,6 +1,6 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
-import ImageSlider from "@/components/ImageSlider";
+import ImageSlider from "@/components/CoverSlider";
 import CardGrid from "@/components/CardGrid";
 import classes from "./home.module.scss";
 import Router from "next/router";
