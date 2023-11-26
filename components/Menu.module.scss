@@ -118,6 +118,7 @@
   .topBarReverse {
     width: 100%;
     padding: 12px;
+    height: 100px;
     @include mixins.row-space-between-center();
     flex-direction: row-reverse;
 
@@ -148,7 +149,6 @@
     }
 
     .menuItems {
-      width: 100%;
       @include mixins.row-space-between-center();
       justify-content: space-around;
     }
