@@ -1,18 +1,76 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.gridWorks {
-  margin: 80px 0px;
+.information,
+.informationReverse {
+  margin: 50px auto;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  direction: rtl;
 
   @include mixins.mobile {
-    margin: 20px 0px;
+    width: calc(100% - 24px);
   }
+
+  .gridLayout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    align-items: center;
+    margin-top: 20px;
+
+    @include mixins.mobile {
+      display: flex;
+      flex-direction: column;
+      flex-direction: column-reverse;
+    }
+    @include mixins.tablet {
+      display: flex;
+      flex-direction: column;
+      flex-direction: column-reverse;
+    }
+  }
+
+  .image {
+    position: relative;
+    right: 80px;
+    width: 70%;
+    margin: auto;
+
+    @include mixins.tablet {
+      width: 50%;
+      right: 0px;
+    }
+    @include mixins.mobile {
+      width: 50%;
+      right: 0px;
+    }
+  }
+}
+
+.informationReverse {
+  direction: ltr;
+
+  .image {
+    left: 80px;
+
+    @include mixins.tablet {
+      left: 0px;
+    }
+    @include mixins.mobile {
+      left: 0px;
+    }
+  }
+}
+
+.gridWorks {
+  margin: 50px 0px;
 }
 
 .message {
   text-align: center;
   color: config.$grey;
   margin: auto;
+  margin-top: 100px;
   width: config.$content-width;
 
   &:hover {

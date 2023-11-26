@@ -7,6 +7,9 @@ import Router from "next/router";
 import one from "@/assets/one.jpg";
 import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
+import Image from "next/legacy/image";
+import profession from "@/assets/profession.png";
+import { enToFaDigits } from "@/services/utility";
 
 export default function Home() {
   const { language, setLanguage } = useContext(StateContext);
@@ -206,6 +209,38 @@ export default function Home() {
     <Fragment>
       <section>
         <ImageSlider sliderData={sliderData.slice(0, 8)} />
+      </section>
+      <section
+        className={language ? classes.information : classes.informationReverse}
+      >
+        <h1>{language ? "حرفه ما" : "What We Do"}</h1>
+        <div className={classes.gridLayout}>
+          {language ? (
+            <h2>
+              اشاره در سال {enToFaDigits(1376)} به عنوان یک آژانس تبلیغاتی آغاز
+              به کار کرد. در نتیجه‌ی فرآیندی اُرگانیک، به یک آژانس ارتباطات
+              بازاریابی فول سرویس با رویکردی راه‌حل‌گرا تبدیل شد
+            </h2>
+          ) : (
+            <h2>
+              Eshareh, was established in 1996 as an advertising agency. Through
+              an organic growth the agency has transformed into a full-service
+              marketing communications agency with a solution based approach
+            </h2>
+          )}
+          <div className={classes.image}>
+            <Image
+              src={profession}
+              blurDataURL={profession}
+              placeholder="blur"
+              alt="image"
+              layout="responsive"
+              objectFit="contain"
+              as="image"
+              priority
+            />
+          </div>
+        </div>
       </section>
       <section className={classes.gridWorks}>
         <CardGrid projects={divideArray(sliderData)[0]} direction={true} />

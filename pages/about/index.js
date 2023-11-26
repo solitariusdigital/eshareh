@@ -86,7 +86,6 @@ export default function About() {
           </p>
         )}
       </div>
-
       <div className={classes.grid}>
         {photos.map((photo, index) => (
           <div key={index}>
