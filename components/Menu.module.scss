@@ -57,12 +57,16 @@
   }
 }
 
-.menuWrapper,
+.menuWrapper {
+  @include mixins.row-space-between-center();
+  .languageControl {
+    margin-right: 20px;
+  }
+}
 .menuWrapperReverse {
   @include mixins.row-space-between-center();
-
   .languageControl {
-    margin: 0px 20px;
+    margin-left: 20px;
   }
 }
 

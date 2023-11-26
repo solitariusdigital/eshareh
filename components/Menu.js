@@ -103,14 +103,31 @@ export default function Menu() {
                   .map((nav, index) => (
                     <Fragment key={index}>
                       {index === navigationTopBar.length - 1 && (
-                        <div
-                          className={classes.languageControl}
-                          onClick={() => toggleLanguage()}
-                          style={{
-                            fontFamily: language ? "English" : "English",
-                          }}
-                        >
-                          <p>{language ? "En" : "Fa"}</p>
+                        <div className={classes.menuWrapper}>
+                          <div
+                            className={classes.languageControl}
+                            onClick={() => toggleLanguage()}
+                            style={{
+                              fontFamily: language ? "English" : "English",
+                            }}
+                          >
+                            <p>{language ? "En" : "Fa"}</p>
+                          </div>
+                          <a
+                            style={{
+                              fontFamily: language
+                                ? "FarsiMedium"
+                                : "EnglishMedium",
+                            }}
+                            className={
+                              !nav.active ? classes.nav : classes.navActive
+                            }
+                            onClick={() => activateNav(nav.link, index)}
+                          >
+                            {nav.title[languageType] === "" && (
+                              <SearchIcon sx={{ fontSize: 24 }} />
+                            )}
+                          </a>
                         </div>
                       )}
                       <a
@@ -125,9 +142,6 @@ export default function Menu() {
                         onClick={() => activateNav(nav.link, index)}
                       >
                         {nav.title[languageType]}
-                        {nav.title[languageType] === "" && (
-                          <SearchIcon sx={{ fontSize: 24 }} />
-                        )}
                       </a>
                     </Fragment>
                   ))
@@ -142,19 +156,33 @@ export default function Menu() {
                       onClick={() => activateNav(nav.link, index)}
                     >
                       {nav.title[languageType]}
-                      {nav.title[languageType] === "" && (
-                        <SearchIcon sx={{ fontSize: 24 }} />
-                      )}
                     </a>
                     {index === navigationTopBar.length - 1 && (
-                      <div
-                        className={classes.languageControl}
-                        onClick={() => toggleLanguage()}
-                        style={{
-                          fontFamily: language ? "English" : "English",
-                        }}
-                      >
-                        <p>{language ? "En" : "Fa"}</p>
+                      <div className={classes.menuWrapperReverse}>
+                        <div
+                          className={classes.languageControl}
+                          onClick={() => toggleLanguage()}
+                          style={{
+                            fontFamily: language ? "English" : "English",
+                          }}
+                        >
+                          <p>{language ? "En" : "Fa"}</p>
+                        </div>
+                        <a
+                          style={{
+                            fontFamily: language
+                              ? "FarsiMedium"
+                              : "EnglishMedium",
+                          }}
+                          className={
+                            !nav.active ? classes.nav : classes.navActive
+                          }
+                          onClick={() => activateNav(nav.link, index)}
+                        >
+                          {nav.title[languageType] === "" && (
+                            <SearchIcon sx={{ fontSize: 24 }} />
+                          )}
+                        </a>
                       </div>
                     )}
                   </Fragment>
@@ -187,6 +215,15 @@ export default function Menu() {
                 language ? classes.menuWrapper : classes.menuWrapperReverse
               }
             >
+              <div
+                className={classes.languageControl}
+                onClick={() => toggleLanguage()}
+                style={{
+                  fontFamily: language ? "English" : "English",
+                }}
+              >
+                <p>{language ? "En" : "Fa"}</p>
+              </div>
               {menuMobile ? (
                 <CloseIcon
                   className="icon"
@@ -200,15 +237,6 @@ export default function Menu() {
                   sx={{ fontSize: 30 }}
                 />
               )}
-              <div
-                className={classes.languageControl}
-                onClick={() => toggleLanguage()}
-                style={{
-                  fontFamily: language ? "English" : "English",
-                }}
-              >
-                <p>{language ? "En" : "Fa"}</p>
-              </div>
             </div>
           </div>
           {menuMobile && (
