@@ -75,8 +75,7 @@
   color: config.$white;
   display: flex;
   justify-content: center;
-  padding: 2px;
-  width: 28px;
+  width: 25px;
   border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
@@ -93,13 +92,7 @@
 .nav {
   font-size: config.$small-font;
   @include mixins.row-space-between-center();
-  justify-content: right;
-
-  @include mixins.desktop {
-    &:hover {
-      cursor: pointer;
-    }
-  }
+  cursor: pointer;
 }
 
 .navActive {
@@ -107,7 +100,6 @@
   color: config.$yellow;
   font-weight: bold;
   @include mixins.row-space-between-center();
-  justify-content: right;
 }
 
 .smallMenu {

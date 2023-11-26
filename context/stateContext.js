@@ -2,8 +2,8 @@ import { useState, createContext } from "react";
 export const StateContext = createContext();
 
 export const StateProvider = (props) => {
-  const [language, setLanguage] = useState(true);
-  const [languageType, setLanguageType] = useState("fa");
+  const [language, setLanguage] = useState(false);
+  const [languageType, setLanguageType] = useState("en");
   const [currentUser, setCurrentUser] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuColor, setMenuColor] = useState({

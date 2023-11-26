@@ -23,11 +23,10 @@ $screen-large: 2000px;
 @mixin button($color, $subColor) {
   width: 150px;
   height: 40px;
-  border-radius: 12px;
+  border-radius: 4px;
   font-weight: bold;
   background: $color;
   color: $subColor;
-  font-size: 14px;
   border: none;
   box-shadow: config.$button-shadow;
 

@@ -112,7 +112,7 @@ export default function RootLayout({ children }) {
         <div className="appload">
           <Image
             width={250}
-            height={250}
+            height={143.79}
             src={logo}
             alt="logo"
             as="image"
