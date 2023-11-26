@@ -25,6 +25,7 @@ export default function Contact() {
           alt="cover"
           layout="fill"
           objectFit="cover"
+          as="image"
           priority
         />
       </div>

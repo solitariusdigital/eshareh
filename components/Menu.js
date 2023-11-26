@@ -80,6 +80,7 @@ export default function Menu() {
                 src={language ? logoFarsi : logoEnglish}
                 alt="logo"
                 onClick={() => window.location.assign("/")}
+                as="image"
                 priority
               />
             </div>

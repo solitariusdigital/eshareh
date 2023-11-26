@@ -50,6 +50,7 @@ export default function About() {
             alt="cover"
             layout="fill"
             objectFit="cover"
+            as="image"
             priority
           />
           <h1>{language ? "اشاره" : "eshareh"}</h1>
@@ -98,6 +99,7 @@ export default function About() {
                 alt={photo.title}
                 layout="fill"
                 objectFit="cover"
+                as="image"
                 priority
               />
             </div>

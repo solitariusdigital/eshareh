@@ -375,6 +375,7 @@ export default function Solutions() {
                         alt={title}
                         layout="fill"
                         objectFit="cover"
+                        as="image"
                         priority
                       />
                     </div>

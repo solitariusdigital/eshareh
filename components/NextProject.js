@@ -66,6 +66,7 @@ export default function NextProject() {
           alt={work[languageType].title}
           layout="fill"
           objectFit="cover"
+          as="image"
           priority
         />
       </div>

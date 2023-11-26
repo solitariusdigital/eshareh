@@ -126,6 +126,7 @@ export default function CoverSlider({ sliderData }) {
                     alt={slide[languageType].title}
                     layout="fill"
                     objectFit="cover"
+                    as="image"
                     priority
                   />
                 ) : (

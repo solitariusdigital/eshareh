@@ -32,6 +32,7 @@ export default function Footer() {
             width={120}
             height={30}
             loading="eager"
+            as="image"
           />
           <p className={classes.action}>{language ? "توسعه" : "Development"}</p>
           <PrecisionManufacturingIcon sx={{ fontSize: 18 }} />

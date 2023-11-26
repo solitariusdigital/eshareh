@@ -152,6 +152,7 @@ export default function Solution({ name }) {
                 alt={work[languageType].title}
                 layout="responsive"
                 objectFit="cover"
+                as="image"
                 priority
               />
               <p className={classes.text}>

@@ -40,6 +40,7 @@ export default function CardGrid({ projects, direction }) {
                 alt={projects[0].title}
                 layout="fill"
                 objectFit="cover"
+                as="image"
                 priority
               />
             </div>
@@ -86,6 +87,7 @@ export default function CardGrid({ projects, direction }) {
                       alt={project[languageType].title}
                       layout="fill"
                       objectFit="cover"
+                      as="image"
                       priority
                     />
                   </div>
@@ -139,6 +141,7 @@ export default function CardGrid({ projects, direction }) {
                   alt={project[languageType].title}
                   layout="fill"
                   objectFit="cover"
+                  as="image"
                   priority
                 />
               </div>

@@ -82,6 +82,7 @@ export default function GallerySlider({ images }) {
           layout="fill"
           objectFit="contain"
           alt="image"
+          as="image"
           priority
         />
       </div>
