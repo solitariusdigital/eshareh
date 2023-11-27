@@ -62,11 +62,15 @@
 .swiper {
   margin-top: 50px;
   background: config.$yellow;
-  height: 800px;
+  height: 600px;
   text-align: center;
-}
 
-.image {
-  width: 200px;
-  height: 400px;
+  .image {
+    width: 200px;
+    height: 400px;
+  }
+
+  .details {
+    margin-top: 20px;
+  }
 }

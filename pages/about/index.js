@@ -13,59 +13,218 @@ import "swiper/css/navigation";
 
 export default function About() {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
-  const [activeSwipe, setActiveSwipe] = useState(null);
+  const [activeSwipe, setActiveSwipe] = useState(0);
 
   const photos = [
     {
-      image: teamone,
-      title: "سیامک 1",
-      position: "مدیر واحد خلاقیت",
+      fa: {
+        image: teamone,
+        title: "سحر",
+
+        position: "1 مدیر",
+      },
+      en: {
+        image: teamone,
+        title: "Sahar",
+        position: "Manager 1",
+      },
     },
     {
-      image: team,
-      title: "سیامک 2",
-      position: "مدیر واحد خلاقیت",
+      fa: {
+        image: team,
+        title: "سیامک",
+
+        position: "مدیر واحد خلاقیت",
+      },
+      en: {
+        image: team,
+        title: "Siamak",
+        position: "Accounts 1",
+      },
     },
     {
-      image: team,
-      title: "سیامک 3",
-      position: "مدیر واحد خلاقیت",
+      fa: {
+        image: teamone,
+        title: "سحر",
+
+        position: "مدیر",
+      },
+      en: {
+        image: teamone,
+        title: "Sahar",
+        position: "Manager",
+      },
     },
     {
-      image: team,
-      title: "سیامک 4",
-      position: "مدیر واحد خلاقیت",
+      fa: {
+        image: team,
+        title: "سیامک",
+
+        position: "مدیر واحد خلاقیت",
+      },
+      en: {
+        image: team,
+        title: "Siamak",
+        position: "Accounts",
+      },
     },
     {
-      image: team,
-      title: "سیامک 5",
-      position: "مدیر واحد خلاقیت",
+      fa: {
+        image: teamone,
+        title: "سحر",
+
+        position: "مدیر",
+      },
+      en: {
+        image: teamone,
+        title: "Sahar",
+        position: "Manager",
+      },
     },
     {
-      image: team,
-      title: "سیامک 6",
-      position: "مدیر واحد خلاقیت",
+      fa: {
+        image: team,
+        title: "سیامک",
+
+        position: "مدیر واحد خلاقیت",
+      },
+      en: {
+        image: team,
+        title: "Siamak",
+        position: "Accounts",
+      },
     },
     {
-      image: team,
-      title: "سیامک 7",
-      position: "مدیر واحد خلاقیت",
+      fa: {
+        image: teamone,
+        title: "سحر",
+
+        position: "مدیر",
+      },
+      en: {
+        image: teamone,
+        title: "Sahar",
+        position: "Manager",
+      },
     },
     {
-      image: team,
-      title: "سیامک 8",
-      position: "مدیر واحد خلاقیت",
+      fa: {
+        image: team,
+        title: "سیامک",
+
+        position: "مدیر واحد خلاقیت",
+      },
+      en: {
+        image: team,
+        title: "Siamak",
+        position: "Accounts",
+      },
     },
     {
-      image: team,
-      title: "سیامک 9",
-      position: "مدیر واحد خلاقیت",
+      fa: {
+        image: teamone,
+        title: "سحر",
+
+        position: "مدیر",
+      },
+      en: {
+        image: teamone,
+        title: "Sahar",
+        position: "Manager",
+      },
     },
     {
-      image: team,
-      title: "سیامک 10",
-      position: "مدیر واحد خلاقیت",
+      fa: {
+        image: team,
+        title: "سیامک",
+
+        position: "مدیر واحد خلاقیت",
+      },
+      en: {
+        image: team,
+        title: "Siamak",
+        position: "Accounts",
+      },
+    },
+    {
+      fa: {
+        image: teamone,
+        title: "سحر",
+
+        position: "مدیر",
+      },
+      en: {
+        image: teamone,
+        title: "Sahar",
+        position: "Manager",
+      },
+    },
+    {
+      fa: {
+        image: team,
+        title: "سیامک",
+
+        position: "مدیر واحد خلاقیت",
+      },
+      en: {
+        image: team,
+        title: "Siamak",
+        position: "Accounts",
+      },
+    },
+    {
+      fa: {
+        image: teamone,
+        title: "سحر",
+
+        position: "مدیر",
+      },
+      en: {
+        image: teamone,
+        title: "Sahar",
+        position: "Manager",
+      },
+    },
+    {
+      fa: {
+        image: team,
+        title: "سیامک",
+
+        position: "مدیر واحد خلاقیت",
+      },
+      en: {
+        image: team,
+        title: "Siamak",
+        position: "Accounts",
+      },
+    },
+    {
+      fa: {
+        image: teamone,
+        title: "سحر",
+
+        position: "مدیر",
+      },
+      en: {
+        image: teamone,
+        title: "Sahar",
+        position: "Manager",
+      },
+    },
+    {
+      fa: {
+        image: team,
+        title: "سیامک",
+
+        position: "مدیر واحد خلاقیت",
+      },
+      en: {
+        image: team,
+        title: "Siamak",
+        position: "Accounts",
+      },
     },
   ];
 
@@ -147,10 +306,10 @@ export default function About() {
             <SwiperSlide key={index}>
               <div className={classes.image}>
                 <Image
-                  src={photo.image}
-                  blurDataURL={photo.image}
+                  src={photo[languageType].image}
+                  blurDataURL={photo[languageType].image}
                   placeholder="blur"
-                  alt={photo.title}
+                  alt={photo[languageType].title}
                   layout="fill"
                   objectFit="cover"
                   as="image"
@@ -160,8 +319,10 @@ export default function About() {
             </SwiperSlide>
           ))}
         </Swiper>
-        <h2>{photos[activeSwipe]?.title}</h2>
-        <p>{photos[activeSwipe]?.position}</p>
+        <div className={classes.details}>
+          <h2>{photos[activeSwipe][languageType].title}</h2>
+          <p>{photos[activeSwipe][languageType].position}</p>
+        </div>
       </div>
     </div>
   );
