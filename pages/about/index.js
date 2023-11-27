@@ -1,15 +1,14 @@
-import { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
 import Image from "next/legacy/image";
-import Router from "next/router";
-import team from "@/assets/team.jpg";
-import teamone from "@/assets/teamone.jpg";
 import { enToFaDigits } from "@/services/utility";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
+import { Navigation, Mousewheel, Keyboard } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import team from "@/assets/team.jpg";
+import teamone from "@/assets/teamone.jpg";
 
 export default function About() {
   const { language, setLanguage } = useContext(StateContext);
@@ -294,11 +293,10 @@ export default function About() {
           spaceBetween={0}
           centeredSlides={true}
           navigation={true}
-          pagination={true}
           mousewheel={true}
           keyboard={true}
           loop={true}
-          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+          modules={[Navigation, Mousewheel, Keyboard]}
           style={{ "--swiper-navigation-color": "#ffffff" }}
           onSlideChange={updateIndex}
         >
@@ -320,7 +318,13 @@ export default function About() {
           ))}
         </Swiper>
         <div className={classes.details}>
-          <h2>{photos[activeSwipe][languageType].title}</h2>
+          <h2
+            style={{
+              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+            }}
+          >
+            {photos[activeSwipe][languageType].title}
+          </h2>
           <p>{photos[activeSwipe][languageType].position}</p>
         </div>
       </div>

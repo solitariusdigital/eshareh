@@ -46,15 +46,19 @@ export default function NextProject() {
         )
       }
     >
-      <h3 className={classes.text}>
-        {language ? "پروژه بعدی" : "Next Project"}
-      </h3>
+      <p className={classes.text}>{language ? "پروژه بعدی" : "Next Project"}</p>
       <div
         className={language ? classes.information : classes.informationReverse}
       >
-        <h2>{work[languageType].descriptions[0]}</h2>
+        <h3>{work[languageType].descriptions[0]}</h3>
         <div>
-          <h1>{work[languageType].title}</h1>
+          <h2
+            style={{
+              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+            }}
+          >
+            {work[languageType].title}
+          </h2>
           <h3>{work[languageType].title}</h3>
         </div>
       </div>
