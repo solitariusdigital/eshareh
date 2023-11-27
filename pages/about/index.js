@@ -231,10 +231,10 @@ export default function About() {
     let count = 0;
     switch (screenSize) {
       case "desktop":
-        count = 7;
+        count = 9;
         break;
       case "tablet":
-        count = 3;
+        count = 5;
         break;
       case "mobile":
         count = 1;

@@ -1,7 +1,7 @@
 @use "config" as config;
 
 $screen-mobile: 700px;
-$screen-tablet: 1200px;
+$screen-tablet: 1400px;
 $screen-large: 2000px;
 
 @mixin mobile {
@@ -24,8 +24,8 @@ $screen-large: 2000px;
   width: 150px;
   height: 40px;
   border-radius: 4px;
-  font-weight: bold;
   background: $color;
+  font-size: config.$small-font;
   color: $subColor;
   border: none;
   box-shadow: config.$button-shadow;
@@ -44,14 +44,13 @@ $screen-large: 2000px;
   color: config.$black;
   font-size: config.$small-font;
   outline: none;
-  border: none;
-  border-bottom: 1px solid config.$lightgrey;
+  border: 1px solid config.$lightgrey;
   font-weight: 300;
+  border-radius: 4px;
 
   &:focus {
     outline: none;
-    background: transparent;
-    border-bottom: 1px solid config.$yellow;
+    border: 1px solid config.$yellow;
   }
 }
 

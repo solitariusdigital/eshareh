@@ -87,6 +87,7 @@ export default function Footer() {
             fontFamily: language ? "FarsiBold" : "EnglishMedium",
           }}
           className={classes.button}
+          onClick={() => Router.push("/portal")}
         >
           {language ? "پرتال" : "Portal"}
         </button>

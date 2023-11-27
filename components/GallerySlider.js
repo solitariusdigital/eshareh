@@ -2,6 +2,7 @@ import { useState } from "react";
 import Image from "next/legacy/image";
 import classes from "./GallerySlider.module.scss";
 import Progress from "@/components/Progress";
+import Router from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Mousewheel, Keyboard } from "swiper/modules";
 import "swiper/css";

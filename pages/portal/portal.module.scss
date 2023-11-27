@@ -1,0 +1,120 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  margin: auto;
+  max-width: config.$max-widthHeigh;
+  margin-top: 150px;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+
+  h1 {
+    position: relative;
+    z-index: 5;
+    margin: auto;
+    width: config.$content-width;
+
+    @include mixins.mobile {
+      width: 100%;
+    }
+  }
+
+  .background {
+    @include mixins.desktop {
+      position: relative;
+      bottom: 70px;
+      height: 100vh;
+      background: linear-gradient(
+        to bottom,
+        config.$white 50%,
+        config.$black 50%
+      );
+    }
+    @include mixins.tablet {
+      height: 100%;
+      bottom: 0px;
+    }
+    @include mixins.mobile {
+      height: 100%;
+      bottom: 0px;
+    }
+  }
+
+  .gridLayout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    align-items: center;
+    margin-top: 20px;
+    margin: auto;
+    width: config.$content-width;
+
+    @include mixins.mobile {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    @include mixins.tablet {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .image {
+    position: relative;
+    left: 0px;
+    width: 100%;
+    margin: auto;
+  }
+}
+
+.form {
+  width: 400px;
+
+  @include mixins.desktop {
+    position: relative;
+    top: 30px;
+  }
+  @include mixins.tablet {
+    margin-bottom: 100px;
+  }
+  @include mixins.mobile {
+    width: 100%;
+    margin-bottom: 100px;
+  }
+  .input {
+    margin: 20px auto;
+
+    .bar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .label {
+      color: config.$grey;
+      font-size: config.$small-font;
+      margin-bottom: 8px;
+    }
+
+    input {
+      @include mixins.input();
+      width: 100%;
+    }
+  }
+
+  .formAction {
+    display: flex;
+    flex-direction: column;
+    @include mixins.mobile {
+      align-items: center;
+    }
+    @include mixins.tablet {
+      align-items: center;
+    }
+    button {
+      @include mixins.button(config.$yellow, config.$black);
+    }
+  }
+}
