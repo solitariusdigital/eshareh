@@ -1,111 +1,167 @@
-import { useContext, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
 import Image from "next/legacy/image";
 import Router from "next/router";
 import team from "@/assets/team.jpg";
-import cover from "@/assets/cover.jpg";
+import teamone from "@/assets/teamone.jpg";
 import { enToFaDigits } from "@/services/utility";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 export default function About() {
   const { language, setLanguage } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
+  const [activeSwipe, setActiveSwipe] = useState(null);
 
   const photos = [
     {
-      image: team,
-      title: "سیامک پورجبار",
+      image: teamone,
+      title: "سیامک 1",
       position: "مدیر واحد خلاقیت",
     },
     {
       image: team,
-      title: "سیامک پورجبار",
+      title: "سیامک 2",
       position: "مدیر واحد خلاقیت",
     },
     {
       image: team,
-      title: "سیامک پورجبار",
+      title: "سیامک 3",
       position: "مدیر واحد خلاقیت",
     },
     {
       image: team,
-      title: "سیامک پورجبار",
+      title: "سیامک 4",
       position: "مدیر واحد خلاقیت",
     },
     {
       image: team,
-      title: "سیامک پورجبار",
+      title: "سیامک 5",
+      position: "مدیر واحد خلاقیت",
+    },
+    {
+      image: team,
+      title: "سیامک 6",
+      position: "مدیر واحد خلاقیت",
+    },
+    {
+      image: team,
+      title: "سیامک 7",
+      position: "مدیر واحد خلاقیت",
+    },
+    {
+      image: team,
+      title: "سیامک 8",
+      position: "مدیر واحد خلاقیت",
+    },
+    {
+      image: team,
+      title: "سیامک 9",
+      position: "مدیر واحد خلاقیت",
+    },
+    {
+      image: team,
+      title: "سیامک 10",
       position: "مدیر واحد خلاقیت",
     },
   ];
 
+  const generateSwipeCount = () => {
+    let count = 0;
+    switch (screenSize) {
+      case "desktop":
+        count = 7;
+        break;
+      case "tablet":
+        count = 3;
+        break;
+      case "mobile":
+        count = 1;
+        break;
+    }
+    return count;
+  };
+
+  const updateIndex = (swiperInstance) => {
+    if (swiperInstance === null) return;
+    const currentSlide = swiperInstance?.realIndex;
+    setActiveSwipe(currentSlide);
+  };
+
   return (
     <div className={classes.container}>
-      <div className={classes.information}>
-        <div className={classes.cover}>
-          <Image
-            className={classes.image}
-            src={cover}
-            blurDataURL={cover}
-            placeholder="blur"
-            alt="cover"
-            layout="fill"
-            objectFit="cover"
-            as="image"
-            priority
-          />
-          <h1>{language ? "اشاره" : "eshareh"}</h1>
-        </div>
+      <div
+        className={language ? classes.information : classes.informationReverse}
+      >
+        <h1>{language ? "تیم" : "Team"}</h1>
         {language ? (
-          <p>
-            اشاره در سال {enToFaDigits(1376)} به عنوان یک آژانس تبلیغاتی آغاز به
-            کار کرد. در نتیجه‌ی فرآیندی اُرگانیک، به یک آژانس ارتباطات بازاریابی
-            فول سرویس با رویکردی راه‌حل‌گرا تبدیل شد. در حال حاضر، آژانس اشاره
-            به‌‌ عنوان عضوی از خانواده <bdi>dnaunion</bdi> به طیفی گسترده از
-            مشتریان بومی و بین‌المللی خدمات کیفی ارائه می‌دهد. به عنوان یک آژانس
-            خلاق، با تکیه بر خلاقیت که جوهر کار ماست، باور داریم که می‌توانیم
-            بوسیله دانش حرفه‌ای روزآمد، پژوهش مدار و بومی شده اعضای تیم‌مان، چشم
-            انداز خود را در ارتباطات بازاریابی موثر و نوین، تحقق بخشیم. همچنین
-            از آنجا که رشد ما، بطور مستقیم به رشد برندهای مشتریان ما بستگی دارد،
-            ما به نوعی از همکاری اعتقاد داریم که گونه‌ای شراکت راهبردی بلند مدت
-            است و نه صرفاً ارائه خدمات
-          </p>
+          <div>
+            <h3
+              style={{
+                fontFamily: "FarsiBold",
+              }}
+            >
+              اشاره یک استودیوی طراحی چند رشته ای و مستقل است
+            </h3>
+            <p>
+              اشاره در سال {enToFaDigits(1376)} به عنوان یک آژانس تبلیغاتی آغاز
+              به کار کرد. در نتیجه‌ی فرآیندی اُرگانیک، به یک آژانس ارتباطات
+              بازاریابی فول سرویس با رویکردی راه‌حل‌گرا تبدیل شد
+            </p>
+          </div>
         ) : (
-          <p className="englishText">
-            Eshareh started in 1997 as an advertising agency. As a result of an
-            organic process, to a marketing communications agency Full service
-            became with a solution-oriented approach. Now, the agency pointed
-            out As a member of the dnaunion family, a wide range of quality
-            services to local and international customers. As an agency
-            creative, relying on creativity which is the essence of our work, we
-            believe that we can by the up-to-date, research-oriented and
-            localized professional knowledge of our team members, your style in
-            effective and innovative marketing communications. also since our
-            growth directly depends on the growth of our clients brands, we
-            believe in a kind of cooperation, a kind of long-term strategic
-            partnership is not merely providing services
-          </p>
+          <div>
+            <h3
+              style={{
+                fontFamily: "EnglishMedium",
+              }}
+            >
+              Eshareh is a multidisciplinary, independently owned design studio
+            </h3>
+            <p>
+              Eshareh, was established in 1996 as an advertising agency. Through
+              an organic growth the agency has transformed into a full-service
+              marketing communications agency with a solution based approach
+            </p>
+          </div>
         )}
       </div>
-      <div className={classes.grid}>
-        {photos.map((photo, index) => (
-          <div key={index}>
-            <div className={classes.box}>
-              <Image
-                className={classes.image}
-                src={photo.image}
-                blurDataURL={photo.image}
-                placeholder="blur"
-                alt={photo.title}
-                layout="fill"
-                objectFit="cover"
-                as="image"
-                priority
-              />
-            </div>
-            <h3>{photo.title}</h3>
-            <h3 className={classes.position}>{photo.position}</h3>
-          </div>
-        ))}
+      <div className={classes.swiper}>
+        <Swiper
+          slidesPerView={generateSwipeCount()}
+          spaceBetween={0}
+          centeredSlides={true}
+          navigation={true}
+          pagination={true}
+          mousewheel={true}
+          keyboard={true}
+          loop={true}
+          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+          style={{ "--swiper-navigation-color": "#ffffff" }}
+          onSlideChange={updateIndex}
+        >
+          {photos.map((photo, index) => (
+            <SwiperSlide key={index}>
+              <div className={classes.image}>
+                <Image
+                  src={photo.image}
+                  blurDataURL={photo.image}
+                  placeholder="blur"
+                  alt={photo.title}
+                  layout="fill"
+                  objectFit="cover"
+                  as="image"
+                  priority
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <h2>{photos[activeSwipe]?.title}</h2>
+        <p>{photos[activeSwipe]?.position}</p>
       </div>
     </div>
   );
