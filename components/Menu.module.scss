@@ -136,17 +136,25 @@
   .menuMobile {
     position: fixed;
     padding: 12px;
-    background: config.$yellow;
     box-shadow: config.$card-shadow;
     width: config.$content-width;
+    @include mixins.transparentBackground(0.95, config.$yellow);
 
     @include mixins.mobile {
       width: 100%;
     }
 
     .menuItems {
-      @include mixins.row-space-between-center();
-      justify-content: space-around;
+      @include mixins.tablet {
+        @include mixins.row-space-between-center();
+        justify-content: space-around;
+      }
+      @include mixins.mobile {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        text-align: right;
+        direction: rtl;
+      }
     }
 
     a {
