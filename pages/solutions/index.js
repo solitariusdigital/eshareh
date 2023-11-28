@@ -15,9 +15,8 @@ export default function Solutions() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [category, setCategory] = useState(
-    "advertising" || "media" || "digital"
+    "all" || "advertising" || "media" || "digital"
   );
-  const [type, setType] = useState("customer" || "sector" || "all");
 
   const router = useRouter();
   let pathname = router.pathname;
@@ -290,44 +289,8 @@ export default function Solutions() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const filterUniqueWorks = () => {
-    const uniqueWorks = [];
-    works.forEach((work) => {
-      const { customerType, sector } = work[languageType];
-      let isUnique = true;
-      switch (type) {
-        case "all":
-          isUnique = !uniqueWorks.some(
-            (uniqueWork) =>
-              uniqueWork.customerType === customerType &&
-              uniqueWork.sector === sector &&
-              uniqueWork.category === category
-          );
-          break;
-        case "customer":
-          isUnique = !uniqueWorks.some(
-            (uniqueWork) =>
-              uniqueWork.customerType === customerType &&
-              uniqueWork.category === category
-          );
-          break;
-        case "sector":
-          isUnique = !uniqueWorks.some(
-            (uniqueWork) =>
-              uniqueWork.sector === sector && uniqueWork.category === category
-          );
-          break;
-      }
-      if (isUnique) {
-        uniqueWorks.push(work[languageType]);
-      }
-    });
-
-    return uniqueWorks;
-  };
-
-  const directCategory = (item) => {
-    const { title } = item;
+  const directCategory = (work) => {
+    const { title } = work;
     Router.push(`/solutions/${replaceSpacesAndHyphens(title)}`);
   };
 
@@ -355,16 +318,19 @@ export default function Solutions() {
             : "animate__animated animate__fadeIn"
         }`}
       >
-        {filterUniqueWorks()
-          .filter((item) => item.category === category || category === "all")
-          .map((item, index) => {
-            const { image, title } = item;
+        {works
+          .filter(
+            (work) =>
+              work[languageType].category === category || category === "all"
+          )
+          .map((work, index) => {
+            const { image, title } = work[languageType];
             return (
               <Fragment key={index}>
                 {image && (
                   <div
-                    className={classes.item}
-                    onClick={() => directCategory(item)}
+                    className={classes.work}
+                    onClick={() => directCategory(work[languageType])}
                   >
                     <div className={classes.box}>
                       <Image
@@ -381,9 +347,7 @@ export default function Solutions() {
                     </div>
                     <div
                       className={
-                        language
-                          ? classes.information
-                          : classes.informationReverse
+                        language ? classes.title : classes.titleReverse
                       }
                     >
                       <h3>{title}</h3>

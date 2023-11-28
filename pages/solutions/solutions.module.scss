@@ -96,10 +96,8 @@
 .gridList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  align-items: flex-start;
   gap: 20px;
   direction: rtl;
-  margin-top: 10px;
 
   @include mixins.mobile {
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
@@ -109,7 +107,7 @@
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   }
 
-  .item {
+  .work {
     cursor: pointer;
     color: config.$grey;
 
@@ -117,13 +115,13 @@
       color: config.$black;
     }
 
-    .information,
-    .informationReverse {
+    .title,
+    .titleReverse {
       display: flex;
       flex-direction: row;
     }
 
-    .informationReverse {
+    .titleReverse {
       flex-direction: row-reverse;
     }
   }
@@ -142,6 +140,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 40px;
 
   @include mixins.mobile {
     font-size: 30px !important;
@@ -153,7 +152,7 @@
 
   span {
     color: config.$black;
-    margin: 12px;
+    margin: 0px 12px;
   }
 
   .nav {
