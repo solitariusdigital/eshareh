@@ -31,7 +31,6 @@
     flex-direction: column;
   }
   @include mixins.tablet {
-    width: calc(100% - 24px);
     flex-direction: column;
   }
 
