@@ -26,7 +26,7 @@ export default function Home() {
       },
       en: {
         image: two,
-        title: "publishing industries for previewing",
+        title: "publishing",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         type: "image",
@@ -35,7 +35,7 @@ export default function Home() {
     {
       fa: {
         image: two,
-        title: "خشکبار و حبوبات کوروش",
+        title: "حبوبات کوروش",
         description:
           "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
         type: "image",
@@ -44,7 +44,7 @@ export default function Home() {
         image: two,
         title: "publishing industries for previewing",
         description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+          "Lorem ipsum is placeholder text commonly used in the graphic, print",
         type: "image",
       },
     },
@@ -59,8 +59,7 @@ export default function Home() {
       en: {
         image: one,
         title: "publishing industries for previewing",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        description: "Lorem ipsum is placeholder text commonly used",
         type: "video",
       },
     },
@@ -74,7 +73,7 @@ export default function Home() {
       },
       en: {
         image: three,
-        title: "publishing industries for previewing",
+        title: "previewing",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         type: "image",
@@ -92,7 +91,7 @@ export default function Home() {
         image: two,
         title: "publishing industries for previewing",
         description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries",
         type: "image",
       },
     },
@@ -108,7 +107,7 @@ export default function Home() {
         image: one,
         title: "publishing industries for previewing",
         description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries",
         type: "video",
       },
     },
@@ -124,7 +123,7 @@ export default function Home() {
         image: two,
         title: "publishing industries for previewing",
         description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+          "Lorem ipsum is placeholder text commonly used in the graphic",
         type: "image",
       },
     },
@@ -155,8 +154,7 @@ export default function Home() {
       en: {
         image: three,
         title: "publishing industries for previewing",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+        description: "Lorem ipsum is placeholder text commonly used",
         type: "image",
       },
     },

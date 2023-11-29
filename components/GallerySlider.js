@@ -4,7 +4,7 @@ import classes from "./GallerySlider.module.scss";
 import Progress from "@/components/Progress";
 import Router from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Mousewheel, Keyboard } from "swiper/modules";
+import { Navigation, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -32,9 +32,8 @@ export default function GallerySlider({ images }) {
           spaceBetween={0}
           navigation={true}
           mousewheel={true}
-          keyboard={true}
           loop={true}
-          modules={[Navigation, Mousewheel, Keyboard]}
+          modules={[Navigation, Mousewheel]}
           style={{ "--swiper-navigation-color": "#ffffff" }}
           onSlideChange={updateIndex}
         >

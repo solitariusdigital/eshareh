@@ -4,7 +4,7 @@ import classes from "./about.module.scss";
 import Image from "next/legacy/image";
 import { enToFaDigits } from "@/services/utility";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Mousewheel, Keyboard } from "swiper/modules";
+import { Navigation, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import team from "@/assets/team.jpg";
@@ -14,7 +14,7 @@ export default function About() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
-  const [activeSwipe, setActiveSwipe] = useState(0);
+  const [current, setCurrent] = useState(0);
 
   const photos = [
     {
@@ -246,7 +246,7 @@ export default function About() {
   const updateIndex = (swiperInstance) => {
     if (swiperInstance === null) return;
     const currentSlide = swiperInstance?.realIndex;
-    setActiveSwipe(currentSlide);
+    setCurrent(currentSlide);
   };
 
   return (
@@ -294,9 +294,8 @@ export default function About() {
           centeredSlides={true}
           navigation={true}
           mousewheel={true}
-          keyboard={true}
           loop={true}
-          modules={[Navigation, Mousewheel, Keyboard]}
+          modules={[Navigation, Mousewheel]}
           style={{ "--swiper-navigation-color": "#ffffff" }}
           onSlideChange={updateIndex}
         >
@@ -323,9 +322,9 @@ export default function About() {
               fontFamily: language ? "FarsiMedium" : "EnglishMedium",
             }}
           >
-            {photos[activeSwipe][languageType].title}
+            {photos[current][languageType].title}
           </h2>
-          <p>{photos[activeSwipe][languageType].position}</p>
+          <p>{photos[current][languageType].position}</p>
         </div>
       </div>
     </div>
