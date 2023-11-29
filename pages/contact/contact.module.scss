@@ -5,8 +5,8 @@
 .containerReverse {
   display: flex;
   flex-direction: row;
-  width: config.$content-width;
   max-width: config.$max-widthHeigh;
+  width: config.$content-width;
   margin: auto;
 
   @include mixins.mobile {
@@ -32,7 +32,6 @@
 }
 
 .informationContainer {
-  display: flex;
   margin: auto;
   width: 100%;
 
@@ -41,12 +40,10 @@
   }
 
   .title {
-    position: relative;
-    z-index: 2;
-    font-size: 220px !important;
+    font-size: 200px !important;
 
     @include mixins.mobile {
-      font-size: 45px !important;
+      font-size: 70px !important;
     }
     @include mixins.tablet {
       font-size: 100px !important;
@@ -109,8 +106,6 @@
     align-items: center;
     margin: 8px 0px;
     color: config.$grey;
-    position: relative;
-    z-index: 3;
 
     .click {
       cursor: pointer;
