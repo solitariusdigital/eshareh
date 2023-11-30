@@ -39,7 +39,7 @@ export default function Footer() {
           className={classes.social}
           onClick={() =>
             window.open(
-              "https://www.linkedin.com/in/pouyanmadanipour/",
+              "https://www.linkedin.com/company/esharehmarcom/",
               "_ self"
             )
           }
@@ -48,7 +48,7 @@ export default function Footer() {
           className={classes.social}
           onClick={() =>
             window.open(
-              "https://www.linkedin.com/in/pouyanmadanipour/",
+              "https://www.linkedin.com/company/esharehmarcom/",
               "_ self"
             )
           }
@@ -57,7 +57,7 @@ export default function Footer() {
           className={classes.social}
           onClick={() =>
             window.open(
-              "https://www.linkedin.com/in/pouyanmadanipour/",
+              "https://www.linkedin.com/company/esharehmarcom/",
               "_ self"
             )
           }
