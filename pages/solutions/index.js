@@ -21,6 +21,24 @@ export default function Solutions() {
   const router = useRouter();
   let pathname = router.pathname;
 
+  const categories = [
+    {
+      name: "advertising",
+      labelFa: "تبلیغات",
+      labelEn: "Advertising",
+    },
+    {
+      name: "media",
+      labelFa: "رسانه",
+      labelEn: "Media",
+    },
+    {
+      name: "digital",
+      labelFa: "دیجیتال",
+      labelEn: "Digital",
+    },
+  ];
+
   const works = [
     {
       fa: {
@@ -33,7 +51,7 @@ export default function Solutions() {
       },
       en: {
         image: one,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "advertising",
@@ -52,7 +70,7 @@ export default function Solutions() {
       },
       en: {
         image: one,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "consulting",
@@ -71,7 +89,7 @@ export default function Solutions() {
       },
       en: {
         image: one,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "health",
@@ -90,7 +108,7 @@ export default function Solutions() {
       },
       en: {
         image: one,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "advertising",
@@ -109,7 +127,7 @@ export default function Solutions() {
       },
       en: {
         image: two,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "media",
@@ -128,7 +146,7 @@ export default function Solutions() {
       },
       en: {
         image: three,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "advertising",
@@ -147,7 +165,7 @@ export default function Solutions() {
       },
       en: {
         image: three,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "media",
@@ -166,7 +184,7 @@ export default function Solutions() {
       },
       en: {
         image: one,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "media",
@@ -185,7 +203,7 @@ export default function Solutions() {
       },
       en: {
         image: one,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "media",
@@ -204,7 +222,7 @@ export default function Solutions() {
       },
       en: {
         image: two,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "advertising",
@@ -223,7 +241,7 @@ export default function Solutions() {
       },
       en: {
         image: three,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "digital",
@@ -242,7 +260,7 @@ export default function Solutions() {
       },
       en: {
         image: one,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "media",
@@ -261,7 +279,7 @@ export default function Solutions() {
       },
       en: {
         image: two,
-        title: "Lorem ipsum is placeholder ",
+        title: "Lorem ipsum is placeholder",
         description:
           "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
         category: "digital",
@@ -271,11 +289,20 @@ export default function Solutions() {
     },
   ];
 
-  const categories = [
-    { name: "advertising", labelFa: "تبلیغات", labelEn: "Advertising" },
-    { name: "media", labelFa: "رسانه", labelEn: "Media" },
-    { name: "digital", labelFa: "دیجیتال", labelEn: "Digital" },
-  ];
+  const information = {
+    advertising: {
+      fa: "تلویزیونی تخمه های آفتاب گردان کمپین های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
+      en: "Advertising Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+    },
+    media: {
+      fa: "تلویزیونی تخمه های آفتاب گردان کمپین های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
+      en: "Media Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+    },
+    digital: {
+      fa: "تلویزیونی تخمه های آفتاب گردان کمپین های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
+      en: "Digital Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+    },
+  };
 
   useEffect(() => {
     navigationTopBar.map((nav) => {
@@ -289,7 +316,7 @@ export default function Solutions() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const directCategory = (work) => {
+  const directSolution = (work) => {
     const { title } = work;
     Router.push(`/solutions/${replaceSpacesAndHyphens(title)}`);
   };
@@ -310,6 +337,17 @@ export default function Solutions() {
           </p>
         ))}
       </div>
+      {category !== "all" && (
+        <div className={"animate__animated animate__zoomIn"}>
+          <p
+            className={
+              language ? classes.description : classes.descriptionReverse
+            }
+          >
+            {information[category][languageType]}
+          </p>
+        </div>
+      )}
       <section
         key={category}
         className={`${classes.gridList} ${
@@ -325,12 +363,13 @@ export default function Solutions() {
           )
           .map((work, index) => {
             const { image, title } = work[languageType];
+            <p>yoyo</p>;
             return (
               <Fragment key={index}>
                 {image && (
                   <div
                     className={classes.work}
-                    onClick={() => directCategory(work[languageType])}
+                    onClick={() => directSolution(work[languageType])}
                   >
                     <div className={classes.box}>
                       <Image

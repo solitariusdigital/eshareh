@@ -35,6 +35,17 @@
     }
   }
 
+  .description,
+  .descriptionReverse {
+    margin-bottom: 50px;
+    color: config.$grey;
+    text-align: right;
+  }
+  .descriptionReverse {
+    margin-bottom: 50px;
+    text-align: left;
+  }
+
   .informationReverse {
     direction: rtl;
     text-align: left;
