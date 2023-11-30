@@ -249,6 +249,11 @@ export default function About() {
     setCurrent(currentSlide);
   };
 
+  const style = {
+    borderLeft: "1px solid #fdb714",
+    borderRight: "1px solid #fdb714",
+  };
+
   return (
     <div className={classes.container}>
       <div
@@ -300,7 +305,7 @@ export default function About() {
           onSlideChange={updateIndex}
         >
           {photos.map((photo, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} style={index === current ? style : {}}>
               <div className={classes.image}>
                 <Image
                   src={photo[languageType].image}
