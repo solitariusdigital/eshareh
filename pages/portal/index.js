@@ -3,10 +3,12 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./portal.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import Router from "next/router";
+import secureLocalStorage from "react-secure-storage";
 import AES from "crypto-js/aes";
 import { enc } from "crypto-js";
 import Image from "next/legacy/image";
 import portal from "@/assets/portal.png";
+import { createUserApi, getUsersApi } from "@/services/api";
 
 export default function Portal() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -15,6 +17,7 @@ export default function Portal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
+  const [formType, setFormType] = useState(true);
 
   useEffect(() => {
     navigationTopBar.map((nav, i) => {
@@ -38,27 +41,83 @@ export default function Portal() {
 
   const handleLogin = () => {
     if (!email || !password) {
-      showAlert("ایمیل و پسورد الزامیست");
+      showAlert(
+        language ? "ایمیل و پسورد الزامیست" : "Email & Password required"
+      );
       return;
     }
     if (!validateEmail(email)) {
-      showAlert("ایمیل اشتباه");
+      showAlert(language ? "ایمیل اشتباه" : "Invalid email");
+      return;
+    }
+    if (password.length < 8) {
+      showAlert(
+        language
+          ? "رمز عبور باید 8 کاراکتر باشد"
+          : "Password must be 8 characters"
+      );
       return;
     }
 
-    // Encrypt
-    const cryptedPassword = AES.encrypt(
-      password,
+    if (formType) {
+      signinUser();
+    } else {
+      signupUser();
+    }
+  };
+
+  // signin existing user
+  const signinUser = async () => {
+    const users = await getUsersApi();
+    const userData = users.find((user) => user.email === email);
+    if (userData) {
+      if (decryptPassword(userData.password) === password) {
+        setCurrentUser(userData);
+        secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
+      } else {
+        showAlert(language ? "پسورد اشتباه" : "Wrong password");
+      }
+    } else {
+      showAlert(language ? "ایمیل وجود ندارد" : "Email does not exist");
+    }
+  };
+
+  // signup new user into db/state/localstorage
+  const signupUser = async () => {
+    const user = {
+      name: "",
+      email: email.trim(),
+      password: cryptPassword(),
+      permission: "user",
+    };
+    try {
+      const userData = await createUserApi(user);
+      if (userData.hasOwnProperty("error")) {
+        showAlert("خطا در برقراری ارتباط");
+      } else {
+        setCurrentUser(userData);
+        secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
+      }
+    } catch (error) {
+      showAlert("خطا در برقراری ارتباط");
+    }
+  };
+
+  // encrypt password
+  const cryptPassword = () => {
+    return AES.encrypt(
+      password.trim(),
       process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY
     ).toString();
-    console.log(cryptedPassword);
-    // Decrypt
-    const decryptedBytes = AES.decrypt(
-      cryptedPassword,
+  };
+
+  // dencrypt password
+  const decryptPassword = (password) => {
+    let decryptedBytes = AES.decrypt(
+      password,
       process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY
     );
-    const decryptedPassword = decryptedBytes.toString(enc.Utf8);
-    console.log(decryptedPassword);
+    return decryptedBytes.toString(enc.Utf8);
   };
 
   return (
@@ -75,7 +134,7 @@ export default function Portal() {
                     fontFamily: language ? "English" : "English",
                   }}
                 >
-                  Email
+                  {language ? "ایمیل" : "Email"}
                 </p>
                 <CloseIcon
                   className="icon"
@@ -100,7 +159,7 @@ export default function Portal() {
                     fontFamily: language ? "English" : "English",
                   }}
                 >
-                  Password
+                  {language ? "پسورد" : "Password"}
                 </p>
                 <CloseIcon
                   className="icon"
@@ -118,15 +177,36 @@ export default function Portal() {
               />
             </div>
             <div className={classes.formAction}>
-              <p className="alert">{alert}</p>
+              <p
+                className={classes.alert}
+                style={{
+                  fontFamily: language ? "Farsi" : "English",
+                }}
+              >
+                {alert}
+              </p>
               <button
                 onClick={() => handleLogin()}
                 style={{
                   fontFamily: language ? "FarsiBold" : "EnglishMedium",
                 }}
               >
-                {language ? "ورود" : "Sign in"}
+                {formType ? (
+                  <>{language ? "ورود" : "Sign in"}</>
+                ) : (
+                  <>{language ? "ثبت نام" : "Sign up"}</>
+                )}
               </button>
+              <div
+                className={classes.create}
+                onClick={() => setFormType(!formType)}
+              >
+                {formType ? (
+                  <>{language ? "ایجاد حساب کاربری" : "Create an account"}</>
+                ) : (
+                  <>{language ? "حساب کاربری دارم" : "Have an account"}</>
+                )}
+              </div>
             </div>
           </div>
           <div className={classes.image}>

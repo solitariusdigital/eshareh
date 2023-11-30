@@ -35,13 +35,13 @@
     }
   }
 
-  .description,
-  .descriptionReverse {
+  .categoryDescription,
+  .categoryDescriptionReverse {
     margin-bottom: 50px;
     color: config.$grey;
     text-align: right;
   }
-  .descriptionReverse {
+  .categoryDescriptionReverse {
     margin-bottom: 50px;
     text-align: left;
   }

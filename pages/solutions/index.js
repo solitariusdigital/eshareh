@@ -341,7 +341,9 @@ export default function Solutions() {
         <div className={"animate__animated animate__zoomIn"}>
           <p
             className={
-              language ? classes.description : classes.descriptionReverse
+              language
+                ? classes.categoryDescription
+                : classes.categoryDescriptionReverse
             }
           >
             {information[category][languageType]}

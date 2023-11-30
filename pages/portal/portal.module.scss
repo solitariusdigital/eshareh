@@ -81,7 +81,7 @@
 
   @include mixins.desktop {
     position: relative;
-    top: 30px;
+    top: 50px;
   }
   @include mixins.tablet {
     margin-bottom: 100px;
@@ -123,6 +123,31 @@
     }
     button {
       @include mixins.button(config.$yellow, config.$black);
+    }
+  }
+
+  .create {
+    cursor: pointer;
+    color: config.$white;
+
+    @include mixins.tablet {
+      color: config.$black;
+    }
+    @include mixins.mobile {
+      color: config.$black;
+    }
+    margin-top: 20px;
+  }
+
+  .alert {
+    margin: 16px 0px;
+    color: config.$white;
+
+    @include mixins.tablet {
+      color: config.$red;
+    }
+    @include mixins.mobile {
+      color: config.$red;
     }
   }
 }
