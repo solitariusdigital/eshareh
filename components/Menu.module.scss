@@ -113,10 +113,13 @@
   .topBar,
   .topBarReverse {
     width: 100%;
-    padding: 12px;
     height: 100px;
     @include mixins.row-space-between-center();
     flex-direction: row-reverse;
+
+    @include mixins.mobile {
+      padding: 12px;
+    }
 
     .logoContainer,
     .logoContainerReverse {

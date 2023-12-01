@@ -1,0 +1,13 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  margin: auto;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  margin-top: 150px;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+}
