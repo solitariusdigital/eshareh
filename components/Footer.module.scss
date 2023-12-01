@@ -45,8 +45,10 @@
 
   .nav {
     font-size: config.$small-font;
-    @include mixins.row-space-between-center();
+    width: fit-content;
     cursor: pointer;
+    @include mixins.row-space-between-center();
+
     @include mixins.mobile {
       justify-content: center;
       margin: 4px 0px;
@@ -58,6 +60,7 @@
     color: config.$yellow;
     font-weight: bold;
     @include mixins.row-space-between-center();
+
     @include mixins.mobile {
       justify-content: center;
       margin: 4px 0px;
@@ -79,6 +82,8 @@
 
 .button {
   @include mixins.button(config.$yellow, config.$black);
+  position: relative;
+  z-index: 2;
   width: 80px;
   height: 30px;
   margin: 0px 20px;
