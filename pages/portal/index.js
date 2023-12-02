@@ -27,6 +27,16 @@ export default function Portal() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (
+      JSON.parse(secureLocalStorage.getItem("currentUser")) &&
+      JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] ===
+        "admin"
+    ) {
+      Router.push("/admin");
+    }
+  }, []);
+
   const validateEmail = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(value);
@@ -74,6 +84,11 @@ export default function Portal() {
       if (decryptPassword(userData.password) === password) {
         setCurrentUser(userData);
         secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
+        if (userData.permission === "admin") {
+          Router.push("/admin");
+        } else {
+          Router.push("/");
+        }
       } else {
         showAlert(language ? "پسورد اشتباه" : "Wrong password");
       }

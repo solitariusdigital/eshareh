@@ -2,18 +2,18 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  gap: 12px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  width: 50%;
   font-weight: 300;
 
   .input {
-    margin: 12px;
+    margin: 12px 0px;
   }
 
   .bar,
@@ -62,10 +62,49 @@
 }
 
 .formAction {
-  margin: 12px;
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
+
+  .mediaContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    gap: 12px;
+    width: 100%;
+
+    .media {
+      width: 100%;
+    }
+  }
+
   button {
     @include mixins.button(config.$yellow, config.$black);
-    margin: 20px auto;
+    margin: auto;
+  }
+
+  .clearMedia {
+    margin-top: 20px;
+    cursor: pointer;
+  }
+
+  .preview {
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+
+    .video {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+  }
+
+  .alert {
+    margin: 16px 0px;
+    color: config.$red;
   }
 }
