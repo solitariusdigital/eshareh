@@ -45,7 +45,6 @@
 
   .nav {
     font-size: config.$small-font;
-    width: fit-content;
     cursor: pointer;
     @include mixins.row-space-between-center();
 
@@ -70,14 +69,6 @@
 
 .navigationReverse {
   width: 220px;
-
-  @include mixins.mobile {
-    display: flex;
-    flex-direction: column;
-    direction: ltr;
-    width: 100%;
-    left: 0px;
-  }
 }
 
 .button {

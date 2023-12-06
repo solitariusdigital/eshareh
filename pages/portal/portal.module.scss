@@ -68,7 +68,7 @@
     margin: auto;
 
     @include mixins.mobile {
-      bottom: 20px;
+      bottom: 50px;
     }
     @include mixins.tablet {
       bottom: 20px;
