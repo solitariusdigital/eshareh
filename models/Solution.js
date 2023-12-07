@@ -20,7 +20,8 @@ const SolutionSchema = new Schema(
       year: Number,
       category: String,
     },
-    media: [{ link: String, type: String }],
+    media: [],
+    active: Boolean,
   },
   { timestamps: true }
 );

@@ -1,7 +1,7 @@
-import Media from "@/models/Media";
+import Solution from "@/models/Solution";
 import dbConnect from "@/services/dbConnect";
 
-export default async function mediasHandler(req, res) {
+export default async function solutionsHandler(req, res) {
   res.setHeader("Cache-Control", "s-maxage=10");
   const { method, body } = req;
   await dbConnect();
@@ -9,21 +9,21 @@ export default async function mediasHandler(req, res) {
   switch (method) {
     case "POST":
       try {
-        const newMedia = await Media.create(body);
-        return res.status(200).json(newMedia);
+        const newSolution = await Solution.create(body);
+        return res.status(200).json(newSolution);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
     case "GET":
       try {
-        const medias = await Media.find();
-        return res.status(200).json(medias);
+        const solutions = await Solution.find();
+        return res.status(200).json(solutions);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
     case "PUT":
       try {
-        const updateMedia = await Media.findByIdAndUpdate(
+        const updateSolution = await Solution.findByIdAndUpdate(
           body.id || body["_id"],
           body,
           {
@@ -31,10 +31,10 @@ export default async function mediasHandler(req, res) {
             runValidators: true,
           }
         );
-        if (!updateMedia) {
+        if (!updateSolution) {
           return res.status(400).json({ msg: err.message });
         }
-        return res.status(200).json(updateMedia);
+        return res.status(200).json(updateSolution);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }

@@ -5,6 +5,7 @@ import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";
 import { fourGenerator, sixGenerator, uploadMedia } from "@/services/utility";
+import { createSolutionApi } from "@/services/api";
 
 export default function SolutionsForm() {
   const { language, setLanguage } = useContext(StateContext);
@@ -15,7 +16,7 @@ export default function SolutionsForm() {
   const [problem, setProblem] = useState({ en: "", fa: "" });
   const [solution, setSolution] = useState({ en: "", fa: "" });
   const [year, setYear] = useState({ en: "", fa: "" });
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState({ en: "", fa: "" });
 
   const [imagesPreview, setImagesPreview] = useState([]);
   const [videosPreview, setVideosPreview] = useState([]);
@@ -114,8 +115,6 @@ export default function SolutionsForm() {
       }
     }
 
-    console.log(mediaLinks);
-
     let solutionData = {
       fa: {
         title: title.fa,
@@ -124,7 +123,7 @@ export default function SolutionsForm() {
         problem: problem.fa,
         solution: solution.fa,
         year: year.fa,
-        category: category,
+        category: category.fa,
       },
       en: {
         title: title.en,
@@ -133,12 +132,14 @@ export default function SolutionsForm() {
         problem: problem.en,
         solution: solution.en,
         year: year.en,
-        category: category,
+        category: category.en,
       },
       media: mediaLinks,
+      active: false,
     };
 
-    console.log(solutionData);
+    await createSolutionApi(solutionData);
+    window.location.assign("/solutions");
   };
 
   const areAllStatesValid = (states) => {
@@ -386,7 +387,12 @@ export default function SolutionsForm() {
             </div>
             <select
               defaultValue={"default"}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={(e) =>
+                setCategory({
+                  fa: e.target.value,
+                  en: e.target.value,
+                })
+              }
             >
               <option value="default" disabled>
                 Select

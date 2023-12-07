@@ -1,7 +1,7 @@
-import Media from "@/models/Media";
+import Solution from "@/models/Solution";
 import dbConnect from "@/services/dbConnect";
 
-export default async function mediaHandler(req, res) {
+export default async function solutionHandler(req, res) {
   res.setHeader("Cache-Control", "s-maxage=10");
   const { method } = req;
 
@@ -10,8 +10,8 @@ export default async function mediaHandler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const media = await Media.findById(req.query.id);
-        return res.status(200).json(media);
+        const solution = await Solution.findById(req.query.id);
+        return res.status(200).json(solution);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
