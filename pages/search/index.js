@@ -33,8 +33,8 @@ export default function Search() {
         openGraph={{
           type: "website",
           locale: "fa_IR",
-          url: "https://eshareh.com/",
-          siteName: "Eshareh",
+          url: "https://eshareh.com/search",
+          siteName: "Eshareh Advertising Agency",
         }}
       />
       <div

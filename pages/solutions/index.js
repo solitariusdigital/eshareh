@@ -8,6 +8,7 @@ import two from "@/assets/two.jpg";
 import three from "@/assets/three.jpg";
 import Router from "next/router";
 import { replaceSpacesAndHyphens, enToFaDigits } from "@/services/utility";
+import { NextSeo } from "next-seo";
 
 export default function Solutions() {
   const { language, setLanguage } = useContext(StateContext);
@@ -322,83 +323,101 @@ export default function Solutions() {
   };
 
   return (
-    <div className={classes.container}>
-      <div className={classes.category}>
-        {categories.map((item, index) => (
-          <p
-            key={item.name}
-            className={category === item.name ? classes.navActive : classes.nav}
-            onClick={() => {
-              setCategory(item.name);
-            }}
-          >
-            {language ? item.labelFa : item.labelEn}
-            {index !== 2 && <span>/</span>}
-          </p>
-        ))}
-      </div>
-      {category !== "all" && (
-        <div className={"animate__animated animate__zoomIn"}>
-          <p
-            className={
-              language
-                ? classes.categoryDescription
-                : classes.categoryDescriptionReverse
-            }
-          >
-            {information[category][languageType]}
-          </p>
+    <Fragment>
+      <NextSeo
+        title={language ? "راه حل‌ها" : "Solutions"}
+        description={
+          language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio"
+        }
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://eshareh.com/solutions",
+          siteName: "Eshareh Advertising Agency",
+        }}
+      />
+      <div className={classes.container}>
+        <div className={classes.category}>
+          {categories.map((item, index) => (
+            <p
+              key={item.name}
+              className={
+                category === item.name ? classes.navActive : classes.nav
+              }
+              onClick={() => {
+                setCategory(item.name);
+              }}
+            >
+              {language ? item.labelFa : item.labelEn}
+              {index !== 2 && <span>/</span>}
+            </p>
+          ))}
         </div>
-      )}
-      <section
-        key={category}
-        className={`${classes.gridList} ${
-          screenSize === "desktop"
-            ? "animate__animated animate__slideInRight"
-            : "animate__animated animate__fadeIn"
-        }`}
-      >
-        {works
-          .filter(
-            (work) =>
-              work[languageType].category === category || category === "all"
-          )
-          .map((work, index) => {
-            const { image, title } = work[languageType];
-            <p>yoyo</p>;
-            return (
-              <Fragment key={index}>
-                {image && (
-                  <div
-                    className={classes.work}
-                    onClick={() => directSolution(work[languageType])}
-                  >
-                    <div className={classes.box}>
-                      <Image
-                        className={classes.image}
-                        src={image}
-                        placeholder="blur"
-                        blurDataURL={image}
-                        alt={title}
-                        layout="fill"
-                        objectFit="cover"
-                        as="image"
-                        priority
-                      />
-                    </div>
+        {category !== "all" && (
+          <div className={"animate__animated animate__zoomIn"}>
+            <p
+              className={
+                language
+                  ? classes.categoryDescription
+                  : classes.categoryDescriptionReverse
+              }
+            >
+              {information[category][languageType]}
+            </p>
+          </div>
+        )}
+        <section
+          key={category}
+          className={`${classes.gridList} ${
+            screenSize === "desktop"
+              ? "animate__animated animate__slideInRight"
+              : "animate__animated animate__fadeIn"
+          }`}
+        >
+          {works
+            .filter(
+              (work) =>
+                work[languageType].category === category || category === "all"
+            )
+            .map((work, index) => {
+              const { image, title } = work[languageType];
+              <p>yoyo</p>;
+              return (
+                <Fragment key={index}>
+                  {image && (
                     <div
-                      className={
-                        language ? classes.title : classes.titleReverse
-                      }
+                      className={classes.work}
+                      onClick={() => directSolution(work[languageType])}
                     >
-                      <h3>{title}</h3>
+                      <div className={classes.box}>
+                        <Image
+                          className={classes.image}
+                          src={image}
+                          placeholder="blur"
+                          blurDataURL={image}
+                          alt={title}
+                          layout="fill"
+                          objectFit="cover"
+                          as="image"
+                          priority
+                        />
+                      </div>
+                      <div
+                        className={
+                          language ? classes.title : classes.titleReverse
+                        }
+                      >
+                        <h3>{title}</h3>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </Fragment>
-            );
-          })}
-      </section>
-    </div>
+                  )}
+                </Fragment>
+              );
+            })}
+        </section>
+      </div>
+    </Fragment>
   );
 }

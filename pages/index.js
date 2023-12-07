@@ -10,6 +10,7 @@ import three from "@/assets/three.jpg";
 import Image from "next/legacy/image";
 import profession from "@/assets/profession.png";
 import { enToFaDigits } from "@/services/utility";
+import { NextSeo } from "next-seo";
 
 export default function Home() {
   const { language, setLanguage } = useContext(StateContext);
@@ -205,6 +206,20 @@ export default function Home() {
 
   return (
     <Fragment>
+      <NextSeo
+        title={language ? "آژانس تبلیغاتی اشاره" : "Eshareh Advertising Agency"}
+        description={
+          language
+            ? "آژانس تبلیغاتی اشاره - خدمات تبلیغات، برند، رسانه و ارتباطات بازاریابی فول سرویس"
+            : "Eshareh Advertising Agency - Advertising, Branding, Media & Full Service Marketing Communication in Iran"
+        }
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://eshareh.com",
+          siteName: "Eshareh Advertising Agency",
+        }}
+      />
       <section>
         <ImageSlider sliderData={sliderData.slice(0, 8)} />
       </section>

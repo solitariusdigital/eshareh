@@ -11,6 +11,7 @@ import NextProject from "@/components/NextProject";
 import two from "@/assets/two.jpg";
 import one from "@/assets/one.jpg";
 import three from "@/assets/three.jpg";
+import { NextSeo } from "next-seo";
 
 export default function Solution({ name }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -123,88 +124,106 @@ export default function Solution({ name }) {
   };
 
   return (
-    <div className={classes.container}>
-      <div
-        className={language ? classes.information : classes.informationReverse}
-      >
-        <h3 className={classes.description}>
-          {work[languageType].descriptions[0]}
-        </h3>
-        <div>
-          <h2
-            style={{
-              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-            }}
-          >
-            {work[languageType].title}
-          </h2>
-          <h3>{work[languageType].title}</h3>
-        </div>
-      </div>
-      {work[languageType].images.map((image, index) => (
-        <Fragment key={index}>
-          <button onClick={() => toggleGrid(index)} å>
-            Toggle Grid
-          </button>
-          <div
-            className={
-              isFullWidth[index] ? classes.fullWidth : classes.halfWidth
-            }
-            onClick={() => gallerySlider()}
-          >
-            <div className={classes.imageBox}>
-              <Image
-                src={image}
-                blurDataURL={image}
-                placeholder="blur"
-                alt={work[languageType].title}
-                layout="responsive"
-                objectFit="cover"
-                as="image"
-                priority
-              />
-              <p className={classes.text}>
-                {language ? "بزرگنمایی +" : "+ Enlarge"}
-              </p>
-            </div>
-            {index % 2 === 0 && (
-              <h2 style={{ textAlign: language ? "right" : "left" }}>
-                {work[languageType].descriptions[index]}
-              </h2>
-            )}
-          </div>
-        </Fragment>
-      ))}
-      {displayController && (
+    <Fragment>
+      <NextSeo
+        title={name}
+        description={
+          language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio"
+        }
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: `https://eshareh.com/${replaceSpacesAndHyphens(name)}`,
+          siteName: "Eshareh Advertising Agency",
+        }}
+      />
+      <div className={classes.container}>
         <div
-          className={`${classes.projectController}  animate__animated animate__slideInUp`}
+          className={
+            language ? classes.information : classes.informationReverse
+          }
         >
-          <div className={classes.controller}>
-            <ArrowBackIosIcon className="icon" />
-            <p>NEXT</p>
-            <ArrowForwardIosIcon className="icon" />
-          </div>
-        </div>
-      )}
-      {displayGallerySlider && (
-        <div className={classes.gallerySlider}>
-          <div className={classes.icon}>
-            <CloseIcon
-              onClick={() => {
-                setDisplayMenu(true);
-                setDisplayGallerySlider(false);
-                document.body.style.overflow = "auto";
+          <h3 className={classes.description}>
+            {work[languageType].descriptions[0]}
+          </h3>
+          <div>
+            <h2
+              style={{
+                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
               }}
-            />
+            >
+              {work[languageType].title}
+            </h2>
+            <h3>{work[languageType].title}</h3>
           </div>
-          {<h3>{work[languageType].title}</h3>}
-          <GallerySlider images={work[languageType].images} />
         </div>
-      )}
-      <div className={classes.nextProject} ref={targetRef}>
-        <NextProject />
+        {work[languageType].images.map((image, index) => (
+          <Fragment key={index}>
+            <button onClick={() => toggleGrid(index)} å>
+              Toggle Grid
+            </button>
+            <div
+              className={
+                isFullWidth[index] ? classes.fullWidth : classes.halfWidth
+              }
+              onClick={() => gallerySlider()}
+            >
+              <div className={classes.imageBox}>
+                <Image
+                  src={image}
+                  blurDataURL={image}
+                  placeholder="blur"
+                  alt={work[languageType].title}
+                  layout="responsive"
+                  objectFit="cover"
+                  as="image"
+                  priority
+                />
+                <p className={classes.text}>
+                  {language ? "بزرگنمایی +" : "+ Enlarge"}
+                </p>
+              </div>
+              {index % 2 === 0 && (
+                <h2 style={{ textAlign: language ? "right" : "left" }}>
+                  {work[languageType].descriptions[index]}
+                </h2>
+              )}
+            </div>
+          </Fragment>
+        ))}
+        {displayController && (
+          <div
+            className={`${classes.projectController}  animate__animated animate__slideInUp`}
+          >
+            <div className={classes.controller}>
+              <ArrowBackIosIcon className="icon" />
+              <p>NEXT</p>
+              <ArrowForwardIosIcon className="icon" />
+            </div>
+          </div>
+        )}
+        {displayGallerySlider && (
+          <div className={classes.gallerySlider}>
+            <div className={classes.icon}>
+              <CloseIcon
+                onClick={() => {
+                  setDisplayMenu(true);
+                  setDisplayGallerySlider(false);
+                  document.body.style.overflow = "auto";
+                }}
+              />
+            </div>
+            {<h3>{work[languageType].title}</h3>}
+            <GallerySlider images={work[languageType].images} />
+          </div>
+        )}
+        <div className={classes.nextProject} ref={targetRef}>
+          <NextProject />
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 
@@ -212,7 +231,6 @@ export default function Solution({ name }) {
 export async function getServerSideProps(context) {
   try {
     let name = replaceSpacesAndHyphens(context.params.solutions);
-    console.log(name);
     return {
       props: {
         name: JSON.parse(JSON.stringify(name)),

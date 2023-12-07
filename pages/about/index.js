@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
 import Image from "next/legacy/image";
@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { NextSeo } from "next-seo";
 import team from "@/assets/team.jpg";
 import teamone from "@/assets/teamone.jpg";
 
@@ -255,83 +256,103 @@ export default function About() {
   };
 
   return (
-    <div className={classes.container}>
-      <div
-        className={language ? classes.information : classes.informationReverse}
-      >
-        <h1>{language ? "تیم" : "Team"}</h1>
-        {language ? (
-          <div>
-            <h3
-              style={{
-                fontFamily: "FarsiBold",
-              }}
-            >
-              اشاره یک استودیوی طراحی چند رشته ای و مستقل است
-            </h3>
-            <p>
-              اشاره در سال {enToFaDigits(1376)} به عنوان یک آژانس تبلیغاتی آغاز
-              به کار کرد. در نتیجه‌ی فرآیندی اُرگانیک، به یک آژانس ارتباطات
-              بازاریابی فول سرویس با رویکردی راه‌حل‌گرا تبدیل شد
-            </p>
-          </div>
-        ) : (
-          <div>
-            <h3
-              style={{
-                fontFamily: "EnglishMedium",
-              }}
-            >
-              Eshareh is a multidisciplinary, independently owned design studio
-            </h3>
-            <p>
-              Eshareh, was established in 1996 as an advertising agency. Through
-              an organic growth the agency has transformed into a full-service
-              marketing communications agency with a solution based approach
-            </p>
-          </div>
-        )}
-      </div>
-      <div className={classes.swiper}>
-        <Swiper
-          slidesPerView={generateSwipeCount()}
-          spaceBetween={0}
-          centeredSlides={true}
-          navigation={true}
-          mousewheel={true}
-          loop={true}
-          modules={[Navigation, Mousewheel]}
-          style={{ "--swiper-navigation-color": "#ffffff" }}
-          onSlideChange={updateIndex}
+    <Fragment>
+      <NextSeo
+        title={language ? "درباره" : "About"}
+        description={
+          language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio"
+        }
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://eshareh.com/about",
+          siteName: "Eshareh Advertising Agency",
+        }}
+      />
+      <div className={classes.container}>
+        <div
+          className={
+            language ? classes.information : classes.informationReverse
+          }
         >
-          {photos.map((photo, index) => (
-            <SwiperSlide key={index} style={index === current ? style : {}}>
-              <div className={classes.image}>
-                <Image
-                  src={photo[languageType].image}
-                  blurDataURL={photo[languageType].image}
-                  placeholder="blur"
-                  alt={photo[languageType].title}
-                  layout="fill"
-                  objectFit="cover"
-                  as="image"
-                  priority
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <div className={classes.details}>
-          <h2
-            style={{
-              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-            }}
+          <h1>{language ? "تیم" : "Team"}</h1>
+          {language ? (
+            <div>
+              <h3
+                style={{
+                  fontFamily: "FarsiBold",
+                }}
+              >
+                اشاره یک استودیوی طراحی چند رشته ای و مستقل است
+              </h3>
+              <p>
+                اشاره در سال {enToFaDigits(1376)} به عنوان یک آژانس تبلیغاتی
+                آغاز به کار کرد. در نتیجه‌ی فرآیندی اُرگانیک، به یک آژانس
+                ارتباطات بازاریابی فول سرویس با رویکردی راه‌حل‌گرا تبدیل شد
+              </p>
+            </div>
+          ) : (
+            <div>
+              <h3
+                style={{
+                  fontFamily: "EnglishMedium",
+                }}
+              >
+                Eshareh is a multidisciplinary, independently owned design
+                studio
+              </h3>
+              <p>
+                Eshareh, was established in 1996 as an advertising agency.
+                Through an organic growth the agency has transformed into a
+                full-service marketing communications agency with a solution
+                based approach
+              </p>
+            </div>
+          )}
+        </div>
+        <div className={classes.swiper}>
+          <Swiper
+            slidesPerView={generateSwipeCount()}
+            spaceBetween={0}
+            centeredSlides={true}
+            navigation={true}
+            mousewheel={true}
+            loop={true}
+            modules={[Navigation, Mousewheel]}
+            style={{ "--swiper-navigation-color": "#ffffff" }}
+            onSlideChange={updateIndex}
           >
-            {photos[current][languageType].title}
-          </h2>
-          <p>{photos[current][languageType].position}</p>
+            {photos.map((photo, index) => (
+              <SwiperSlide key={index} style={index === current ? style : {}}>
+                <div className={classes.image}>
+                  <Image
+                    src={photo[languageType].image}
+                    blurDataURL={photo[languageType].image}
+                    placeholder="blur"
+                    alt={photo[languageType].title}
+                    layout="fill"
+                    objectFit="cover"
+                    as="image"
+                    priority
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className={classes.details}>
+            <h2
+              style={{
+                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              }}
+            >
+              {photos[current][languageType].title}
+            </h2>
+            <p>{photos[current][languageType].position}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
