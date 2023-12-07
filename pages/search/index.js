@@ -19,10 +19,6 @@ export default function Search() {
   const [searchEmpty, setSearchEmpty] = useState(false);
   const [expandedItem, setExpandedItem] = useState(null);
 
-  useEffect(() => {
-    document.body.style.background = "#ffffff";
-  }, []);
-
   const searchDocuments = () => {};
 
   return (
@@ -31,8 +27,8 @@ export default function Search() {
         title={language ? "جستجو" : "Search"}
         description={
           language
-            ? "جستجو ... پروژه، نوع مشتری، نوع کار، سال"
-            : "Search ... project, client type, work type, year"
+            ? "جستجو ... پروژه، نوع کار، سال"
+            : "Search ... project, work type, year"
         }
         openGraph={{
           type: "website",
@@ -58,8 +54,8 @@ export default function Search() {
             }}
             placeholder={
               language
-                ? "جستجو ... پروژه، نوع مشتری، نوع کار، سال"
-                : "Search ... project, client type, work type, year"
+                ? "جستجو ... پروژه، نوع کار، سال"
+                : "Search ... project, work type, year"
             }
             type="text"
             id="search"

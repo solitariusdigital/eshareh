@@ -25,6 +25,10 @@
       flex-direction: column;
       flex-direction: column-reverse;
     }
+
+    h2 {
+      color: config.$yellow;
+    }
   }
 
   .informationReverse {
@@ -38,6 +42,10 @@
     width: 100%;
     height: 200px;
     margin-top: 50px;
+
+    @include mixins.mobile {
+      height: 100px;
+    }
   }
 
   .text {

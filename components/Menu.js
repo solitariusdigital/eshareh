@@ -63,7 +63,7 @@ export default function Menu() {
       className={classes.container}
       style={{ background: menuColor.background, color: menuColor.text }}
     >
-      {screenSize !== "mobile" && (
+      {screenSize === "desktop" && (
         <div
           className={language ? classes.largeMenuReverse : classes.largeMenu}
         >
@@ -80,6 +80,7 @@ export default function Menu() {
                 src={language ? logoFarsi : logoEnglish}
                 alt="logo"
                 onClick={() => window.location.assign("/")}
+                as="image"
                 priority
               />
             </div>
@@ -102,14 +103,31 @@ export default function Menu() {
                   .map((nav, index) => (
                     <Fragment key={index}>
                       {index === navigationTopBar.length - 1 && (
-                        <div
-                          className={classes.languageControl}
-                          onClick={() => toggleLanguage()}
-                          style={{
-                            fontFamily: language ? "English" : "English",
-                          }}
-                        >
-                          <p>{language ? "En" : "Fa"}</p>
+                        <div className={classes.menuWrapper}>
+                          <div
+                            className={classes.languageControl}
+                            onClick={() => toggleLanguage()}
+                            style={{
+                              fontFamily: language ? "English" : "English",
+                            }}
+                          >
+                            <p>{language ? "En" : "Fa"}</p>
+                          </div>
+                          <a
+                            style={{
+                              fontFamily: language
+                                ? "FarsiMedium"
+                                : "EnglishMedium",
+                            }}
+                            className={
+                              !nav.active ? classes.nav : classes.navActive
+                            }
+                            onClick={() => activateNav(nav.link, index)}
+                          >
+                            {nav.title[languageType] === "" && (
+                              <SearchIcon sx={{ fontSize: 24 }} />
+                            )}
+                          </a>
                         </div>
                       )}
                       <a
@@ -124,9 +142,6 @@ export default function Menu() {
                         onClick={() => activateNav(nav.link, index)}
                       >
                         {nav.title[languageType]}
-                        {nav.title[languageType] === "" && (
-                          <SearchIcon sx={{ fontSize: 30 }} />
-                        )}
                       </a>
                     </Fragment>
                   ))
@@ -141,19 +156,33 @@ export default function Menu() {
                       onClick={() => activateNav(nav.link, index)}
                     >
                       {nav.title[languageType]}
-                      {nav.title[languageType] === "" && (
-                        <SearchIcon sx={{ fontSize: 30 }} />
-                      )}
                     </a>
                     {index === navigationTopBar.length - 1 && (
-                      <div
-                        className={classes.languageControl}
-                        onClick={() => toggleLanguage()}
-                        style={{
-                          fontFamily: language ? "English" : "English",
-                        }}
-                      >
-                        <p>{language ? "En" : "Fa"}</p>
+                      <div className={classes.menuWrapperReverse}>
+                        <div
+                          className={classes.languageControl}
+                          onClick={() => toggleLanguage()}
+                          style={{
+                            fontFamily: language ? "English" : "English",
+                          }}
+                        >
+                          <p>{language ? "En" : "Fa"}</p>
+                        </div>
+                        <a
+                          style={{
+                            fontFamily: language
+                              ? "FarsiMedium"
+                              : "EnglishMedium",
+                          }}
+                          className={
+                            !nav.active ? classes.nav : classes.navActive
+                          }
+                          onClick={() => activateNav(nav.link, index)}
+                        >
+                          {nav.title[languageType] === "" && (
+                            <SearchIcon sx={{ fontSize: 24 }} />
+                          )}
+                        </a>
                       </div>
                     )}
                   </Fragment>
@@ -161,7 +190,7 @@ export default function Menu() {
           </div>
         </div>
       )}
-      {screenSize === "mobile" && (
+      {screenSize !== "desktop" && (
         <div className={classes.smallMenu}>
           <div className={language ? classes.topBar : classes.topBarReverse}>
             <div
@@ -180,29 +209,35 @@ export default function Menu() {
                   priority
                 />
               </div>
+            </div>
+            <div
+              className={
+                language ? classes.menuWrapper : classes.menuWrapperReverse
+              }
+            >
               <div
                 className={classes.languageControl}
                 onClick={() => toggleLanguage()}
                 style={{
-                  fontFamily: language ? "English" : "Farsi",
+                  fontFamily: language ? "English" : "English",
                 }}
               >
-                <p>{language ? "English" : "فارسی"}</p>
+                <p>{language ? "En" : "Fa"}</p>
               </div>
+              {menuMobile ? (
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setMenuMobile(!menuMobile)}
+                  sx={{ fontSize: 30 }}
+                />
+              ) : (
+                <MenuIcon
+                  className="icon"
+                  onClick={() => setMenuMobile(!menuMobile)}
+                  sx={{ fontSize: 30 }}
+                />
+              )}
             </div>
-            {menuMobile ? (
-              <CloseIcon
-                className="icon"
-                onClick={() => setMenuMobile(!menuMobile)}
-                sx={{ fontSize: 30 }}
-              />
-            ) : (
-              <MenuIcon
-                className="icon"
-                onClick={() => setMenuMobile(!menuMobile)}
-                sx={{ fontSize: 30 }}
-              />
-            )}
           </div>
           {menuMobile && (
             <Fragment>
@@ -210,47 +245,21 @@ export default function Menu() {
                 className={`${classes.menuMobile} animate__animated animate__slideInDown`}
               >
                 <div className={classes.menuItems}>
-                  {language
-                    ? navigationTopBar
-                        .map((nav, index) => (
-                          <a
-                            key={index}
-                            style={{
-                              fontFamily: language
-                                ? "FarsiMedium"
-                                : "EnglishMedium",
-                            }}
-                            className={
-                              !nav.active ? classes.nav : classes.navActive
-                            }
-                            onClick={() => activateNav(nav.link, index)}
-                          >
-                            {nav.title[languageType]}
-                            {nav.title[languageType] === "" && (
-                              <SearchIcon sx={{ fontSize: 30 }} />
-                            )}
-                          </a>
-                        ))
-                        .reverse()
-                    : navigationTopBar.map((nav, index) => (
-                        <a
-                          key={index}
-                          style={{
-                            fontFamily: language
-                              ? "FarsiMedium"
-                              : "EnglishMedium",
-                          }}
-                          className={
-                            !nav.active ? classes.nav : classes.navActive
-                          }
-                          onClick={() => activateNav(nav.link, index)}
-                        >
-                          {nav.title[languageType]}
-                          {nav.title[languageType] === "" && (
-                            <SearchIcon sx={{ fontSize: 30 }} />
-                          )}
-                        </a>
-                      ))}
+                  {navigationTopBar.map((nav, index) => (
+                    <a
+                      key={index}
+                      style={{
+                        fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                      }}
+                      className={!nav.active ? classes.nav : classes.navActive}
+                      onClick={() => activateNav(nav.link, index)}
+                    >
+                      {nav.title[languageType]}
+                      {nav.title[languageType] === "" && (
+                        <SearchIcon sx={{ fontSize: 24 }} />
+                      )}
+                    </a>
+                  ))}
                 </div>
               </div>
             </Fragment>

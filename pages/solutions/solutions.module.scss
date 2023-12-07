@@ -1,0 +1,214 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  margin: auto;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  margin-top: 150px;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+
+  .information,
+  .informationReverse {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    width: 100%;
+    text-align: right;
+
+    @include mixins.mobile {
+      display: flex;
+      flex-direction: column;
+      flex-direction: column-reverse;
+    }
+
+    h2 {
+      color: config.$yellow;
+    }
+
+    .description {
+      @include mixins.mobile {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .categoryDescription,
+  .categoryDescriptionReverse {
+    margin-bottom: 50px;
+    color: config.$grey;
+    text-align: right;
+  }
+  .categoryDescriptionReverse {
+    margin-bottom: 50px;
+    text-align: left;
+  }
+
+  .informationReverse {
+    direction: rtl;
+    text-align: left;
+  }
+
+  .projectController {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 70px;
+    z-index: 5;
+    color: config.$grey;
+    @include mixins.transparentBackground(0.95, config.$white);
+
+    .controller {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      height: 100%;
+      align-items: center;
+      margin: auto;
+      max-width: config.$max-widthHeigh;
+      width: config.$content-width;
+    }
+  }
+  .imageBox {
+    position: relative;
+    cursor: pointer;
+
+    .text {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      border-radius: 50px;
+      padding: 8px 20px;
+      color: config.$white;
+      @include mixins.transparentBackground(0.2, config.$lightgrey);
+    }
+  }
+
+  .fullWidth {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    gap: 20px;
+    margin: 20px 0px;
+    text-align: right;
+  }
+
+  .halfWidth {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    gap: 20px;
+    margin: 20px 0px;
+    text-align: right;
+  }
+}
+
+.gridList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  gap: 20px;
+  direction: rtl;
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  }
+
+  .work {
+    cursor: pointer;
+    color: config.$grey;
+
+    &:hover {
+      color: config.$black;
+    }
+
+    .title,
+    .titleReverse {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .titleReverse {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .box {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    margin: 12px 0px;
+  }
+}
+
+.category {
+  position: relative;
+  font-size: 45px !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 40px;
+
+  @include mixins.mobile {
+    font-size: 30px !important;
+  }
+
+  @include mixins.tablet {
+    font-size: 30px !important;
+  }
+
+  span {
+    color: config.$black;
+    margin: 0px 12px;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+      color: config.$yellow;
+    }
+  }
+
+  .navActive {
+    display: flex;
+    align-items: center;
+    color: config.$yellow;
+  }
+}
+
+.gallerySlider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 20px 12px;
+  width: 100%;
+  height: 100vh;
+  background: config.$white;
+
+  h3 {
+    margin: 20px 0px;
+  }
+
+  .icon {
+    display: flex;
+    width: 100%;
+    direction: rtl;
+    cursor: pointer;
+  }
+}
+
+.nextProject {
+  border-top: 1px solid config.$lightgrey;
+  padding-top: 100px;
+  margin-top: 100px;
+}

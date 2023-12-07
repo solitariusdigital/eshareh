@@ -1,0 +1,110 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  gap: 12px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
+
+  .input {
+    margin: 12px 0px;
+  }
+
+  .bar,
+  .barReverse {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 30px;
+  }
+  .barReverse {
+    flex-direction: row-reverse;
+  }
+
+  .label {
+    color: config.$grey;
+    font-size: config.$small-font;
+
+    span {
+      color: config.$red;
+      font-size: config.$tiny-font;
+    }
+  }
+
+  textarea,
+  input {
+    @include mixins.input();
+    width: 100%;
+  }
+
+  textarea {
+    height: 200px;
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+
+  .title {
+    text-align: center;
+    font-size: config.$big-font;
+    font-weight: bold;
+    height: 30px;
+  }
+}
+
+.formAction {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
+
+  .mediaContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    gap: 12px;
+    width: 100%;
+
+    .media {
+      width: 100%;
+    }
+  }
+
+  button {
+    @include mixins.button(config.$yellow, config.$black);
+    margin: auto;
+  }
+
+  .clearMedia {
+    margin-top: 20px;
+    cursor: pointer;
+  }
+
+  .preview {
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+
+    .video {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+  }
+
+  .alert {
+    margin: 16px 0px;
+    color: config.$red;
+  }
+}

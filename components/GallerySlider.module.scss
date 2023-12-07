@@ -4,18 +4,20 @@
 .slider {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 70%;
   height: 100vh;
+  margin: auto;
 
   @include mixins.mobile {
     width: 100%;
   }
-
-  .image {
-    position: relative;
+  @include mixins.tablet {
     width: 100%;
-    height: calc(100% - 80px);
   }
+}
+
+.image {
+  height: calc(100vh - 180px);
 }
 
 .progress {
@@ -23,22 +25,4 @@
   top: 0px;
   left: 0px;
   width: 100%;
-}
-
-.rightArrow,
-.leftArrow {
-  position: absolute;
-  height: 100%;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2.5rem;
-  color: config.$black;
-  z-index: 10;
-  user-select: none;
-  cursor: pointer;
-}
-
-.leftArrow {
-  left: 20px;
 }

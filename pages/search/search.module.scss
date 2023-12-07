@@ -20,6 +20,8 @@
     @include mixins.input();
     width: 100%;
     margin: 0px 20px;
+    border: none;
+    border-bottom: 1px solid config.$lightgrey;
   }
 
   input::placeholder {

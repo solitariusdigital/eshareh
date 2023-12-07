@@ -4,9 +4,7 @@ import { useRouter } from "next/router";
 import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
 import Image from "next/legacy/image";
-import appLoadOne from "@/assets/appLoadOne.png";
-import appLoadTwo from "@/assets/appLoadTwo.png";
-import appLoadThree from "@/assets/appLoadThree.png";
+import logo from "@/assets/logo.png";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import secureLocalStorage from "react-secure-storage";
 
@@ -19,17 +17,9 @@ export default function RootLayout({ children }) {
   const { displayFooter, setFooter } = useContext(StateContext);
   const [appLoader, setAppLoader] = useState(false);
   const [scrollArrow, setScrollArrow] = useState(false);
-  const [randomImage, setRandomImage] = useState(null);
 
   const router = useRouter();
   let pathname = router.pathname;
-
-  useEffect(() => {
-    const appLoadImages = [appLoadOne, appLoadTwo, appLoadThree];
-    setRandomImage(
-      appLoadImages[Math.floor(Math.random() * appLoadImages.length)]
-    );
-  }, []);
 
   const handleResize = () => {
     if (window.innerWidth < 700) {
@@ -120,15 +110,14 @@ export default function RootLayout({ children }) {
         </div>
       ) : (
         <div className="appload">
-          {randomImage && (
-            <Image
-              width={300}
-              height={366.67}
-              src={randomImage}
-              alt="logo"
-              priority
-            />
-          )}
+          <Image
+            width={250}
+            height={143.79}
+            src={logo}
+            alt="logo"
+            as="image"
+            priority
+          />
         </div>
       )}
     </Fragment>

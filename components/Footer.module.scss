@@ -2,31 +2,105 @@
 @use "styles/_mixins.scss" as mixins;
 
 .footer {
-  width: 100%;
-  margin-top: 80px;
-  padding: 12px;
+  margin: auto;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  margin-top: 100px;
+  margin-bottom: 20px;
+  @include mixins.row-space-between-center();
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+.container {
+  display: flex;
+
+  @include mixins.mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+}
+
+.navigation,
+.navigationReverse {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+  width: 170px;
+  height: 100%;
+  position: relative;
+  left: 55px;
+
+  @include mixins.mobile {
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+    left: 0px;
+  }
+
+  .nav {
+    font-size: config.$small-font;
+    cursor: pointer;
+    @include mixins.row-space-between-center();
+
+    @include mixins.mobile {
+      justify-content: center;
+      margin: 4px 0px;
+    }
+  }
+
+  .navActive {
+    font-size: config.$small-font;
+    color: config.$yellow;
+    font-weight: bold;
+    @include mixins.row-space-between-center();
+
+    @include mixins.mobile {
+      justify-content: center;
+      margin: 4px 0px;
+    }
+  }
+}
+
+.navigationReverse {
+  width: 220px;
+}
+
+.button {
+  @include mixins.button(config.$yellow, config.$black);
+  position: relative;
+  z-index: 2;
+  width: 80px;
+  height: 30px;
+  margin: 0px 20px;
+
+  @include mixins.mobile {
+    margin: 30px 0px;
+  }
+}
+
+.social {
+  margin-right: 20px;
+  cursor: pointer;
+}
+.copyright {
+  font-size: config.$tiny-font;
   color: config.$grey;
 }
 
-.copyright {
+.musetech {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  font-size: config.$tiny-font;
+  color: config.$grey;
+  cursor: pointer;
 
-  .row {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    margin: 4px 0px;
-
-    @include mixins.desktop {
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .action {
-      margin: 0px 8px;
-    }
+  .text {
+    margin: 0px 8px;
   }
 }

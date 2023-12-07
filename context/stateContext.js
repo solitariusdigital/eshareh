@@ -2,8 +2,8 @@ import { useState, createContext } from "react";
 export const StateContext = createContext();
 
 export const StateProvider = (props) => {
-  const [language, setLanguage] = useState(true);
-  const [languageType, setLanguageType] = useState("fa");
+  const [language, setLanguage] = useState(false);
+  const [languageType, setLanguageType] = useState("en");
   const [currentUser, setCurrentUser] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuColor, setMenuColor] = useState({
@@ -18,32 +18,40 @@ export const StateProvider = (props) => {
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
       title: {
-        fa: "پروژه‌ها",
-        en: "Work",
+        fa: "راه حل‌ها",
+        en: "SOLUTIONS",
       },
-      link: "/work",
+      link: "/solutions",
       active: false,
     },
-    // {
-    //   title: {
-    //     fa: "اخبار",
-    //     en: "News",
-    //   },
-    //   link: "/news",
-    //   active: false,
-    // },
     {
       title: {
         fa: "درباره",
-        en: "About",
+        en: "ABOUT",
       },
       link: "/about",
       active: false,
     },
     {
       title: {
+        fa: "حرفه ما",
+        en: "WHAT WE DO",
+      },
+      link: "/profession",
+      active: false,
+    },
+    {
+      title: {
+        fa: "اخبار",
+        en: "NEWS",
+      },
+      link: "/news",
+      active: false,
+    },
+    {
+      title: {
         fa: "تماس",
-        en: "Contact",
+        en: "CONTACT",
       },
       link: "/contact",
       active: false,

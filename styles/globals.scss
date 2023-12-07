@@ -25,14 +25,12 @@
 
 @font-face {
   font-family: "English";
-  src: url("../assets/fonts/En/Kalameh-Regular.ttf") format("truetype");
-  font-weight: normal;
+  src: url("../assets/fonts/En/Kalameh-Light.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Farsi";
-  src: url("../assets/fonts/Fa/YekanBakh-Regular.ttf") format("truetype");
-  font-weight: normal;
+  src: url("../assets/fonts/Fa/YekanBakh-Light.ttf") format("truetype");
 }
 
 * {
@@ -76,10 +74,6 @@ h3 {
   }
 }
 
-.englishText {
-  text-align: left;
-}
-
 .main {
   min-height: 100vh;
 }
@@ -99,15 +93,11 @@ h3 {
   cursor: pointer;
 }
 
-.alert,
 .message {
-  text-align: center;
   color: config.$red;
   margin: 16px 0px;
   font-size: config.$tiny-font;
-}
-
-.message {
+  text-align: center;
   color: config.$grey;
 }
 
@@ -144,4 +134,24 @@ h3 {
   right: 10px;
   bottom: 10px;
   cursor: pointer;
+}
+
+// input file
+label.file input[type="file"] {
+  position: absolute;
+  top: -1000px;
+}
+.file {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid config.$grey;
+  padding: 8px;
+  color: config.$grey;
+  height: 50px;
+  cursor: pointer;
+}
+.file:hover {
+  color: config.$black;
+  border: 1px solid config.$yellow;
 }

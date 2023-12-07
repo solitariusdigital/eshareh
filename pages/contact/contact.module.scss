@@ -1,60 +1,118 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.container {
-  margin: auto;
+.container,
+.containerReverse {
+  display: flex;
+  flex-direction: row;
+  max-width: config.$max-widthHeigh;
   width: config.$content-width;
-  margin-top: 150px;
+  margin: auto;
 
   @include mixins.mobile {
-    width: calc(100% - 24px);
+    flex-direction: column-reverse !important;
+    width: 100%;
+    margin-top: 150px;
+  }
+}
+
+.containerReverse {
+  flex-direction: row-reverse;
+}
+
+.image {
+  width: 300px;
+  cursor: pointer;
+
+  @include mixins.mobile {
+    margin: auto;
+    margin-top: 50px;
+    width: 50%;
   }
 }
 
 .informationContainer {
-  display: flex;
-  flex-direction: row-reverse;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: config.$content-width;
-  max-width: config.$max-widthHeigh;
+  margin: auto;
+  width: 100%;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
+  }
+
+  .title {
+    font-size: 200px !important;
+
+    @include mixins.mobile {
+      font-size: 70px !important;
+    }
+    @include mixins.tablet {
+      font-size: 100px !important;
+    }
   }
 }
 
 .information,
 .informationReverse {
   position: relative;
-  right: 0px;
+  width: 100%;
   text-align: right;
-  width: 40%;
 
   @include mixins.mobile {
     width: 100%;
+  }
+
+  .details {
+    position: relative;
+    bottom: 80px;
+    @include mixins.mobile {
+      bottom: 0px;
+    }
+    @include mixins.tablet {
+      bottom: 0px;
+    }
+  }
+
+  .tag,
+  .tagReverse {
+    display: flex;
+    align-items: center;
+    color: config.$grey;
+    position: relative;
+    top: 100px;
+
+    @include mixins.mobile {
+      top: 0px;
+    }
+    @include mixins.tablet {
+      top: 0px;
+    }
+  }
+
+  .tag {
+    flex-direction: row-reverse;
+    top: 50px;
+
+    @include mixins.mobile {
+      top: 0px;
+    }
+    @include mixins.tablet {
+      top: 0px;
+    }
   }
 
   .row,
   .rowReverse {
     display: flex;
     align-items: center;
-    margin: 16px 0px;
+    margin: 8px 0px;
+    color: config.$grey;
 
     .click {
       cursor: pointer;
     }
 
-    @include mixins.mobile {
-      padding: 8px;
-      @include mixins.transparentBackground(0.6, config.$white);
-      @include mixins.border-radius();
-    }
-
     p {
-      margin: 0px 12px;
+      margin-right: 12px;
     }
   }
 

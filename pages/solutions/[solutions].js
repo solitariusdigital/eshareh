@@ -1,0 +1,226 @@
+import { useState, useContext, Fragment, useEffect, useRef } from "react";
+import { StateContext } from "@/context/stateContext";
+import classes from "./solutions.module.scss";
+import { replaceSpacesAndHyphens } from "@/services/utility";
+import Image from "next/legacy/image";
+import GallerySlider from "@/components/GallerySlider";
+import CloseIcon from "@mui/icons-material/Close";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import NextProject from "@/components/NextProject";
+import two from "@/assets/two.jpg";
+import one from "@/assets/one.jpg";
+import three from "@/assets/three.jpg";
+
+export default function Solution({ name }) {
+  const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
+  const { displayMenu, setDisplayMenu } = useContext(StateContext);
+  const { displayFooter, setFooter } = useContext(StateContext);
+  const [isFullWidth, setIsFullWidth] = useState([]);
+  const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
+  const [displayController, setDisplayController] = useState(false);
+
+  const work = {
+    fa: {
+      images: [three, two, one, two, three, two, one],
+      type: "image",
+      title: "صنعت خشکبار و حبوبات کوروش",
+      descriptions: [
+        "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
+        "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
+      ],
+    },
+    en: {
+      images: [three, two, one, two, three, two, one],
+      type: "image",
+      title: "Arian Kimia Company",
+      descriptions: [
+        "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
+        "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
+        "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
+        "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
+        "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
+      ],
+    },
+  };
+
+  useEffect(() => {
+    setIsFullWidth(Array(work[languageType].images.length).fill(true));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const targetRef = useRef(null);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5,
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setDisplayController(false);
+          setFooter(false);
+        }
+      });
+    }, options);
+    if (targetRef.current) {
+      observer.observe(targetRef.current);
+    }
+    return () => {
+      if (targetRef.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        observer.unobserve(targetRef.current);
+      }
+    };
+  }, [setFooter]);
+
+  useEffect(() => {
+    if (!displayGallerySlider) {
+      let prevScrollY = window.scrollY;
+      const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+        const isScrollAtBottom =
+          window.innerHeight + window.scrollY >= document.body.offsetHeight;
+        if (currentScrollY > prevScrollY) {
+          setDisplayController(true);
+        } else if (currentScrollY < prevScrollY) {
+          setFooter(true);
+          setDisplayController(false);
+        }
+        if (isScrollAtBottom) {
+          setDisplayController(false);
+          setFooter(false);
+        }
+        prevScrollY = currentScrollY;
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, [displayGallerySlider, setFooter]);
+
+  const gallerySlider = () => {
+    setDisplayMenu(false);
+    setDisplayController(false);
+    setDisplayGallerySlider(true);
+    window.scrollTo(0, 0);
+    document.body.style.overflow = "hidden";
+  };
+
+  const toggleGrid = (index) => {
+    setIsFullWidth((prevState) => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
+  };
+
+  return (
+    <div className={classes.container}>
+      <div
+        className={language ? classes.information : classes.informationReverse}
+      >
+        <h3 className={classes.description}>
+          {work[languageType].descriptions[0]}
+        </h3>
+        <div>
+          <h2
+            style={{
+              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+            }}
+          >
+            {work[languageType].title}
+          </h2>
+          <h3>{work[languageType].title}</h3>
+        </div>
+      </div>
+      {work[languageType].images.map((image, index) => (
+        <Fragment key={index}>
+          <button onClick={() => toggleGrid(index)} å>
+            Toggle Grid
+          </button>
+          <div
+            className={
+              isFullWidth[index] ? classes.fullWidth : classes.halfWidth
+            }
+            onClick={() => gallerySlider()}
+          >
+            <div className={classes.imageBox}>
+              <Image
+                src={image}
+                blurDataURL={image}
+                placeholder="blur"
+                alt={work[languageType].title}
+                layout="responsive"
+                objectFit="cover"
+                as="image"
+                priority
+              />
+              <p className={classes.text}>
+                {language ? "بزرگنمایی +" : "+ Enlarge"}
+              </p>
+            </div>
+            {index % 2 === 0 && (
+              <h2 style={{ textAlign: language ? "right" : "left" }}>
+                {work[languageType].descriptions[index]}
+              </h2>
+            )}
+          </div>
+        </Fragment>
+      ))}
+      {displayController && (
+        <div
+          className={`${classes.projectController}  animate__animated animate__slideInUp`}
+        >
+          <div className={classes.controller}>
+            <ArrowBackIosIcon className="icon" />
+            <p>NEXT</p>
+            <ArrowForwardIosIcon className="icon" />
+          </div>
+        </div>
+      )}
+      {displayGallerySlider && (
+        <div className={classes.gallerySlider}>
+          <div className={classes.icon}>
+            <CloseIcon
+              onClick={() => {
+                setDisplayMenu(true);
+                setDisplayGallerySlider(false);
+                document.body.style.overflow = "auto";
+              }}
+            />
+          </div>
+          {<h3>{work[languageType].title}</h3>}
+          <GallerySlider images={work[languageType].images} />
+        </div>
+      )}
+      <div className={classes.nextProject} ref={targetRef}>
+        <NextProject />
+      </div>
+    </div>
+  );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    let name = replaceSpacesAndHyphens(context.params.solutions);
+    console.log(name);
+    return {
+      props: {
+        name: JSON.parse(JSON.stringify(name)),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
+}

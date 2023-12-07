@@ -1,0 +1,69 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.slider {
+  position: relative;
+  max-height: config.$max-widthHeigh;
+  max-width: config.$max-widthHeigh;
+  margin: auto;
+
+  .media {
+    width: 100%;
+    height: calc(100vh - 100px);
+    max-height: config.$max-widthHeigh;
+
+    cursor: pointer;
+
+    @include mixins.mobile {
+      height: 400px;
+    }
+  }
+
+  .video {
+    width: 100%;
+    height: calc(100vh - 100px);
+    object-fit: cover;
+  }
+
+  .progress {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 5;
+  }
+}
+
+.information,
+.informationReverse {
+  @include mixins.row-space-between-center();
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  width: config.$content-width;
+  text-align: left;
+  color: config.$white;
+  cursor: pointer;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+
+  .loader {
+    @include mixins.row-space-between-center();
+    span {
+      font-size: 27px !important;
+      margin: 12px;
+      @include mixins.mobile {
+        font-size: 19px !important;
+      }
+    }
+  }
+}
+
+.information {
+  flex-direction: row-reverse;
+  text-align: right;
+}
