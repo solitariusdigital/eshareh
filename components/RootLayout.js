@@ -7,6 +7,7 @@ import Image from "next/legacy/image";
 import logo from "@/assets/logo.png";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import secureLocalStorage from "react-secure-storage";
+import { getUserApi } from "@/services/api";
 
 export default function RootLayout({ children }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -37,6 +38,28 @@ export default function RootLayout({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // checks user login and set user data
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const currentUser = JSON.parse(
+          secureLocalStorage.getItem("currentUser")
+        );
+        if (currentUser) {
+          const userData = await getUserApi(currentUser["_id"]);
+          setCurrentUser(userData);
+          secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+    setTimeout(() => {
+      setAppLoader(true);
+    }, 1000);
+  }, [setCurrentUser]);
+
   useEffect(() => {
     navigationTopBar.map((nav) => {
       if (nav.link === "/") {
@@ -49,12 +72,10 @@ export default function RootLayout({ children }) {
       }
     });
     setNavigationTopBar([...navigationTopBar]);
-    setTimeout(() => {
-      setAppLoader(true);
-    }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // detect scroll postion on app to toggle scroll arrow visibility
   useEffect(() => {
     let prevScrollY = window.scrollY;
     const handleScroll = () => {

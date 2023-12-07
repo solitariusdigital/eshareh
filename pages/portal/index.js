@@ -112,6 +112,7 @@ export default function Portal() {
       } else {
         setCurrentUser(userData);
         secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
+        Router.push("/");
       }
     } catch (error) {
       showAlert("خطا در برقراری ارتباط");
