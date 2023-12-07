@@ -9,6 +9,7 @@ const SolutionSchema = new Schema(
       problem: String,
       solution: String,
       year: Number,
+      category: String,
     },
     en: {
       title: String,
@@ -17,6 +18,7 @@ const SolutionSchema = new Schema(
       problem: String,
       solution: String,
       year: Number,
+      category: String,
     },
     media: [{ link: String, type: String }],
   },

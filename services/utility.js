@@ -88,10 +88,18 @@ export function onlyLettersAndNumbers(str) {
   return Boolean(str.match(/^[A-Za-z0-9]*$/));
 }
 
-// upload image into s3 bucket
-export async function uploadImage(image, imageId, imageFolder, format) {
-  const file = image;
-  const res = await fetch(`/api/image?file=${imageFolder}/${imageId}${format}`);
+// upload media into s3 bucket
+export async function uploadMedia(
+  media,
+  mediaId,
+  mediaFolder,
+  subFolder,
+  format
+) {
+  const file = media;
+  const res = await fetch(
+    `/api/upload?file=${mediaFolder}/${subFolder}/${mediaId}${format}`
+  );
   const { url, fields } = await res.json();
 
   const formData = new FormData();

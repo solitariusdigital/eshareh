@@ -4,6 +4,7 @@ import classes from "./SolutionsForm.module.scss";
 import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";
+import { fourGenerator, sixGenerator, uploadMedia } from "@/services/utility";
 
 export default function SolutionsForm() {
   const { language, setLanguage } = useContext(StateContext);
@@ -14,16 +15,24 @@ export default function SolutionsForm() {
   const [problem, setProblem] = useState({ en: "", fa: "" });
   const [solution, setSolution] = useState({ en: "", fa: "" });
   const [year, setYear] = useState({ en: "", fa: "" });
+  const [category, setCategory] = useState("");
 
   const [imagesPreview, setImagesPreview] = useState([]);
   const [videosPreview, setVideosPreview] = useState([]);
+  const categories = ["advertising", "media", "digital"];
+
+  const [uploadImages, setUploadImages] = useState([]);
+  const [uploadVideos, setUploadVideos] = useState([]);
 
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
 
+  const sourceLink = "https://eshareh.storage.iran.liara.space";
+
   const handleImageChange = (event) => {
     const array = Array.from(event.target.files);
+    setUploadImages(array);
     setImagesPreview(
       array.map((item) => ({
         file: item,
@@ -33,6 +42,7 @@ export default function SolutionsForm() {
   };
   const handleVideoChange = (event) => {
     const array = Array.from(event.target.files);
+    setUploadVideos(array);
     setVideosPreview(
       array.map((item) => ({
         file: item,
@@ -50,7 +60,7 @@ export default function SolutionsForm() {
     input.value = null;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const isValid = areAllStatesValid([
       title,
       subtitle,
@@ -58,6 +68,7 @@ export default function SolutionsForm() {
       problem,
       solution,
       year,
+      category,
     ]);
 
     if (!isValid) {
@@ -65,8 +76,45 @@ export default function SolutionsForm() {
       return;
     }
 
+    if (imagesPreview.length === 0 && videosPreview.length === 0) {
+      showAlert("انتخاب عکس یا ویدئو");
+      return;
+    }
+
     setDisableButton(true);
     setLoader(true);
+
+    let mediaLinks = [];
+    const mediaFolder = "solutions";
+    const subFolder = `sol${sixGenerator()}`;
+
+    if (imagesPreview.length > 0) {
+      const imageFormat = ".jpg";
+      for (const media of uploadImages) {
+        const mediaId = `img${fourGenerator()}`;
+        const mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${imageFormat}`;
+        await uploadMedia(media, mediaId, mediaFolder, subFolder, imageFormat);
+        mediaLinks.push({
+          link: mediaLink,
+          type: "image",
+        });
+      }
+    }
+
+    if (videosPreview.length > 0) {
+      const videoFormat = ".mp4";
+      for (const media of uploadVideos) {
+        const mediaId = `vid${fourGenerator()}`;
+        const mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${videoFormat}`;
+        await uploadMedia(media, mediaId, mediaFolder, subFolder, videoFormat);
+        mediaLinks.push({
+          link: mediaLink,
+          type: "video",
+        });
+      }
+    }
+
+    console.log(mediaLinks);
 
     let solutionData = {
       fa: {
@@ -76,6 +124,7 @@ export default function SolutionsForm() {
         problem: problem.fa,
         solution: solution.fa,
         year: year.fa,
+        category: category,
       },
       en: {
         title: title.en,
@@ -84,12 +133,9 @@ export default function SolutionsForm() {
         problem: problem.en,
         solution: solution.en,
         year: year.en,
+        category: category,
       },
-      media: [
-        { link: "", type: "image" },
-        { link: "", type: "video" },
-        { link: "", type: "image" },
-      ],
+      media: mediaLinks,
     };
 
     console.log(solutionData);
@@ -330,6 +376,29 @@ export default function SolutionsForm() {
               value={year.en}
               autoComplete="off"
             />
+          </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                Category
+                <span>*</span>
+              </p>
+            </div>
+            <select
+              defaultValue={"default"}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="default" disabled>
+                Select
+              </option>
+              {categories.map((category, index) => {
+                return (
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                );
+              })}
+            </select>
           </div>
         </div>
         <div
