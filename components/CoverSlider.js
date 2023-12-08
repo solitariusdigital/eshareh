@@ -10,22 +10,35 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function CoverSlider({ sliderData }) {
+export default function CoverSlider({ solutions }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [current, setCurrent] = useState(0);
 
-  const length = sliderData.length;
+  const length = solutions.length;
 
   const calculatePercentage = (index) => {
-    return ((index + 1) / sliderData.length) * 100;
+    return ((index + 1) / solutions.length) * 100;
   };
 
   const updateIndex = (swiperInstance) => {
     if (swiperInstance === null) return;
     const currentSlide = swiperInstance?.realIndex;
     setCurrent(currentSlide);
+  };
+
+  const directSolution = (project) => {
+    let link = `/solutions/${replaceSpacesAndHyphens(
+      project[languageType].title
+    )}`;
+    Router.push(
+      {
+        pathname: link,
+        query: { id: project["_id"] },
+      },
+      link
+    );
   };
 
   return (
@@ -45,24 +58,18 @@ export default function CoverSlider({ sliderData }) {
         style={{ "--swiper-navigation-color": "#ffffff" }}
         onSlideChange={updateIndex}
       >
-        {sliderData.map((slide, index) => (
+        {solutions.map((project, index) => (
           <SwiperSlide key={index}>
             <div
               className={classes.media}
-              onClick={() =>
-                Router.push(
-                  `/solutions/${replaceSpacesAndHyphens(
-                    slide[languageType].title
-                  )}`
-                )
-              }
+              onClick={() => directSolution(project)}
             >
-              {slide[languageType].type === "image" ? (
+              {project.media[0].type === "image" ? (
                 <Image
-                  src={slide[languageType].image}
-                  blurDataURL={slide[languageType].image}
+                  src={project.media[0].link}
+                  blurDataURL={project.media[0].link}
                   placeholder="blur"
-                  alt={slide[languageType].title}
+                  alt={project[languageType].title}
                   layout="fill"
                   objectFit="cover"
                   as="image"
@@ -73,7 +80,7 @@ export default function CoverSlider({ sliderData }) {
                   <video
                     className={classes.video}
                     preload="metadata"
-                    src="https://www.eshareh.com/wp-content/uploads/2022/06/Fouman-Chimie_Movie_01.mp4"
+                    src={project.media[0].link}
                     autoPlay
                     loop
                     muted
@@ -88,9 +95,9 @@ export default function CoverSlider({ sliderData }) {
         className={language ? classes.information : classes.informationReverse}
       >
         <div>
-          <h2>{sliderData[current][languageType].title}</h2>
+          <h2>{solutions[current][languageType].title}</h2>
           {screenSize === "desktop" && (
-            <h2>{sliderData[current][languageType].description}</h2>
+            <h2>{solutions[current][languageType].summary}</h2>
           )}
         </div>
         <div className={classes.loader}>

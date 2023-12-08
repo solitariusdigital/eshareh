@@ -5,7 +5,7 @@ import Image from "next/legacy/image";
 import Router from "next/router";
 import { replaceSpacesAndHyphens, sliceString } from "@/services/utility";
 
-export default function CardGrid({ projects, direction }) {
+export default function CardGrid({ solutions, direction }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -20,7 +20,7 @@ export default function CardGrid({ projects, direction }) {
             onClick={() =>
               Router.push(
                 `/solutions/${replaceSpacesAndHyphens(
-                  projects[0][languageType].title
+                  solutions[0][languageType].title
                 )}`
               )
             }
@@ -34,10 +34,10 @@ export default function CardGrid({ projects, direction }) {
             <div className={classes.box}>
               <Image
                 className={classes.image}
-                src={projects[0][languageType].image}
-                blurDataURL={projects[0][languageType].image}
+                src={solutions[0].media[0].link}
+                blurDataURL={solutions[0].media[0].link}
                 placeholder="blur"
-                alt={projects[0].title}
+                alt={solutions[0][languageType].title}
                 layout="fill"
                 objectFit="cover"
                 as="image"
@@ -50,17 +50,17 @@ export default function CardGrid({ projects, direction }) {
               {hoverItem === 0 ? (
                 <h3>
                   {sliceString(
-                    projects[0][languageType].description,
+                    solutions[0][languageType].summary,
                     language ? 150 : 100
                   )}
                 </h3>
               ) : (
-                <h3>{projects[0][languageType].title}</h3>
+                <h3>{solutions[0][languageType].title}</h3>
               )}
             </div>
           </div>
           <div className={classes.grid}>
-            {projects
+            {solutions
               .map((project, index) => (
                 <div
                   key={index}
@@ -81,8 +81,8 @@ export default function CardGrid({ projects, direction }) {
                   <div className={classes.box}>
                     <Image
                       className={classes.image}
-                      src={project[languageType].image}
-                      blurDataURL={project[languageType].image}
+                      src={project.media[0].link}
+                      blurDataURL={project.media[0].link}
                       placeholder="blur"
                       alt={project[languageType].title}
                       layout="fill"
@@ -99,7 +99,7 @@ export default function CardGrid({ projects, direction }) {
                     {hoverItem === index ? (
                       <h3>
                         {sliceString(
-                          project[languageType].description,
+                          project[languageType].summary,
                           language ? 50 : 40
                         )}
                       </h3>
@@ -115,7 +115,7 @@ export default function CardGrid({ projects, direction }) {
       )}
       {screenSize !== "desktop" && (
         <div className={classes.responsive}>
-          {projects.map((project, index) => (
+          {solutions.map((project, index) => (
             <div
               key={index}
               onClick={() =>
@@ -135,8 +135,8 @@ export default function CardGrid({ projects, direction }) {
               <div className={classes.box}>
                 <Image
                   className={classes.image}
-                  src={project[languageType].image}
-                  blurDataURL={project[languageType].image}
+                  src={project.media[0].link}
+                  blurDataURL={project.media[0].link}
                   placeholder="blur"
                   alt={project[languageType].title}
                   layout="fill"
@@ -151,7 +151,7 @@ export default function CardGrid({ projects, direction }) {
                 {hoverItem === index ? (
                   <h3>
                     {sliceString(
-                      project[languageType].description,
+                      project[languageType].summary,
                       language ? 100 : 70
                     )}
                   </h3>

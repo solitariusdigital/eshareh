@@ -6,7 +6,7 @@ import Router from "next/router";
 import secureLocalStorage from "react-secure-storage";
 
 export default function Admin() {
-  const [displayPage, setDisplayPage] = useState(false);
+  const [displaySolutionsForm, setDisplaySolutionsForm] = useState(false);
 
   useEffect(() => {
     if (
@@ -16,11 +16,13 @@ export default function Admin() {
     ) {
       Router.push("/");
     } else {
-      setDisplayPage(true);
+      setDisplaySolutionsForm(true);
     }
   }, []);
 
   return (
-    <div className={classes.container}>{displayPage && <SolutionsForm />}</div>
+    <div className={classes.container}>
+      {displaySolutionsForm && <SolutionsForm />}
+    </div>
   );
 }

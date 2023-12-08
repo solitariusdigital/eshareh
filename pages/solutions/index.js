@@ -3,14 +3,13 @@ import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./solutions.module.scss";
 import Image from "next/legacy/image";
-import one from "@/assets/one.jpg";
-import two from "@/assets/two.jpg";
-import three from "@/assets/three.jpg";
 import Router from "next/router";
 import { replaceSpacesAndHyphens, enToFaDigits } from "@/services/utility";
 import { NextSeo } from "next-seo";
+import dbConnect from "@/services/dbConnect";
+import solutionModel from "@/models/Solution";
 
-export default function Solutions() {
+export default function Solutions({ solutions }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -37,256 +36,6 @@ export default function Solutions() {
       name: "digital",
       labelFa: "دیجیتال",
       labelEn: "Digital",
-    },
-  ];
-
-  const works = [
-    {
-      fa: {
-        image: one,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین  تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "advertising",
-        sector: "برند",
-        customerType: "هنر",
-      },
-      en: {
-        image: one,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "advertising",
-        sector: "Brand",
-        customerType: "Art",
-      },
-    },
-    {
-      fa: {
-        image: one,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین  تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "consulting",
-        sector: "برند",
-        customerType: "بانکداری",
-      },
-      en: {
-        image: one,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "consulting",
-        sector: "Brand",
-        customerType: "Banking",
-      },
-    },
-    {
-      fa: {
-        image: one,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین  تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "health",
-        sector: "برند",
-        customerType: "هنر",
-      },
-      en: {
-        image: one,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "health",
-        sector: "Brand",
-        customerType: "Art",
-      },
-    },
-    {
-      fa: {
-        image: one,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "advertising",
-        sector: "برند",
-        customerType: "هنر",
-      },
-      en: {
-        image: one,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "advertising",
-        sector: "Brand",
-        customerType: "Art",
-      },
-    },
-    {
-      fa: {
-        image: two,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "media",
-        sector: "نشانه",
-        customerType: "بانکداری",
-      },
-      en: {
-        image: two,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "media",
-        sector: "Sign",
-        customerType: "Banking",
-      },
-    },
-    {
-      fa: {
-        image: three,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "advertising",
-        sector: "نشانه",
-        customerType: "بانکداری",
-      },
-      en: {
-        image: three,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "advertising",
-        sector: "Sign",
-        customerType: "Banking",
-      },
-    },
-    {
-      fa: {
-        image: three,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "media",
-        sector: "نشانه",
-        customerType: "هنر",
-      },
-      en: {
-        image: three,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "media",
-        sector: "Sign",
-        customerType: "Art",
-      },
-    },
-    {
-      fa: {
-        image: one,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "media",
-        sector: "نشانه",
-        customerType: "بانکداری",
-      },
-      en: {
-        image: one,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "media",
-        sector: "Sign",
-        customerType: "Banking",
-      },
-    },
-    {
-      fa: {
-        image: one,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "media",
-        sector: "نشانه",
-        customerType: "هنر",
-      },
-      en: {
-        image: one,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "media",
-        sector: "Sign",
-        customerType: "Art",
-      },
-    },
-    {
-      fa: {
-        image: two,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "advertising",
-        sector: "نشانه",
-        customerType: "طرح",
-      },
-      en: {
-        image: two,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "advertising",
-        sector: "Sign",
-        customerType: "Design",
-      },
-    },
-    {
-      fa: {
-        image: three,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "digital",
-        sector: "دیجیتال",
-        customerType: "طرح",
-      },
-      en: {
-        image: three,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "digital",
-        sector: "Digital",
-        customerType: "Design",
-      },
-    },
-    {
-      fa: {
-        image: one,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "media",
-        sector: "صنعتی",
-        customerType: "تحصیلات",
-      },
-      en: {
-        image: one,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "media",
-        sector: "Industrial",
-        customerType: "Education",
-      },
-    },
-    {
-      fa: {
-        image: two,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description: "کمپین تلویزیونی تخمه های آفتاب گردان وی نات",
-        category: "digital",
-        sector: "معماری",
-        customerType: "غذا",
-      },
-      en: {
-        image: two,
-        title: "Lorem ipsum is placeholder",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        category: "digital",
-        sector: "Architecture",
-        customerType: "Food",
-      },
     },
   ];
 
@@ -317,9 +66,17 @@ export default function Solutions() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const directSolution = (work) => {
-    const { title } = work;
-    Router.push(`/solutions/${replaceSpacesAndHyphens(title)}`);
+  const directSolution = (project) => {
+    let link = `/solutions/${replaceSpacesAndHyphens(
+      project[languageType].title
+    )}`;
+    Router.push(
+      {
+        pathname: link,
+        query: { id: project["_id"] },
+      },
+      link
+    );
   };
 
   return (
@@ -376,27 +133,28 @@ export default function Solutions() {
               : "animate__animated animate__fadeIn"
           }`}
         >
-          {works
+          {solutions
             .filter(
-              (work) =>
-                work[languageType].category === category || category === "all"
+              (project) =>
+                project[languageType].category === category ||
+                category === "all"
             )
-            .map((work, index) => {
-              const { image, title } = work[languageType];
-              <p>yoyo</p>;
+            .map((project, index) => {
+              const { title } = project[languageType];
+              const { media } = project;
               return (
                 <Fragment key={index}>
-                  {image && (
+                  {project.active && (
                     <div
-                      className={classes.work}
-                      onClick={() => directSolution(work[languageType])}
+                      className={classes.project}
+                      onClick={() => directSolution(project)}
                     >
                       <div className={classes.box}>
                         <Image
                           className={classes.image}
-                          src={image}
+                          src={media[0].link}
                           placeholder="blur"
-                          blurDataURL={image}
+                          blurDataURL={media[0].link}
                           alt={title}
                           layout="fill"
                           objectFit="cover"
@@ -420,4 +178,23 @@ export default function Solutions() {
       </div>
     </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const solutions = await solutionModel.find();
+    solutions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    return {
+      props: {
+        solutions: JSON.parse(JSON.stringify(solutions)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }

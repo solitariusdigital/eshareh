@@ -1,6 +1,6 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
-import ImageSlider from "@/components/CoverSlider";
+import CoverSlider from "@/components/CoverSlider";
 import CardGrid from "@/components/CardGrid";
 import classes from "./home.module.scss";
 import Router from "next/router";
@@ -11,194 +11,24 @@ import Image from "next/legacy/image";
 import profession from "@/assets/profession.png";
 import { enToFaDigits } from "@/services/utility";
 import { NextSeo } from "next-seo";
+import dbConnect from "@/services/dbConnect";
+import solutionModel from "@/models/Solution";
 
-export default function Home() {
+export default function Home({ solutions }) {
   const { language, setLanguage } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const [activeSolutions, setActiveSolutions] = useState([]);
 
-  const sliderData = [
-    {
-      fa: {
-        image: two,
-        title: "خشکبار و حبوبات کوروش",
-        description:
-          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
-        type: "image",
-      },
-      en: {
-        image: two,
-        title: "publishing",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        type: "image",
-      },
-    },
-    {
-      fa: {
-        image: two,
-        title: "حبوبات کوروش",
-        description:
-          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
-        type: "image",
-      },
-      en: {
-        image: two,
-        title: "publishing industries for previewing",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print",
-        type: "image",
-      },
-    },
-    {
-      fa: {
-        image: one,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description:
-          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
-        type: "video",
-      },
-      en: {
-        image: one,
-        title: "publishing industries for previewing",
-        description: "Lorem ipsum is placeholder text commonly used",
-        type: "video",
-      },
-    },
-    {
-      fa: {
-        image: three,
-        title: "شرکت آریان کیمیا",
-        description:
-          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
-        type: "image",
-      },
-      en: {
-        image: three,
-        title: "previewing",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        type: "image",
-      },
-    },
-    {
-      fa: {
-        image: two,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description:
-          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
-        type: "image",
-      },
-      en: {
-        image: two,
-        title: "publishing industries for previewing",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries",
-        type: "image",
-      },
-    },
-    {
-      fa: {
-        image: one,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description:
-          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
-        type: "video",
-      },
-      en: {
-        image: one,
-        title: "publishing industries for previewing",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries",
-        type: "video",
-      },
-    },
-    {
-      fa: {
-        image: two,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description:
-          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
-        type: "image",
-      },
-      en: {
-        image: two,
-        title: "publishing industries for previewing",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic",
-        type: "image",
-      },
-    },
-    {
-      fa: {
-        image: one,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description:
-          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
-        type: "image",
-      },
-      en: {
-        image: one,
-        title: "publishing industries for previewing",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        type: "image",
-      },
-    },
-    {
-      fa: {
-        image: three,
-        title: "شرکت آریان کیمیا",
-        description:
-          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
-        type: "image",
-      },
-      en: {
-        image: three,
-        title: "publishing industries for previewing",
-        description: "Lorem ipsum is placeholder text commonly used",
-        type: "image",
-      },
-    },
-    {
-      fa: {
-        image: two,
-        title: "صنعت خشکبار و حبوبات کوروش",
-        description:
-          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
-        type: "image",
-      },
-      en: {
-        image: two,
-        title: "publishing industries for previewing",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        type: "image",
-      },
-    },
-    {
-      fa: {
-        image: one,
-        title: "خشکبار و حبوبات کوروش",
-        description:
-          "تلویزیونی تخمه های آفتاب گردان کمپین  تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
-        type: "image",
-      },
-      en: {
-        image: one,
-        title: "publishing industries for previewing",
-        description:
-          "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
-        type: "image",
-      },
-    },
-  ];
+  useEffect(() => {
+    setActiveSolutions(solutions.filter((project) => project.active));
+  }, [solutions]);
 
-  const divideArray = (array) => {
+  const divideArray = (solutions) => {
     const dividedArrays = [];
     let chunkLength = screenSize === "desktop" ? 5 : 10;
     let index = 0;
-    while (index < array.length) {
-      dividedArrays.push(array.slice(index, index + chunkLength));
+    while (index < solutions.length) {
+      dividedArrays.push(solutions.slice(index, index + chunkLength));
       index += chunkLength;
     }
     return dividedArrays;
@@ -221,7 +51,7 @@ export default function Home() {
         }}
       />
       <section>
-        <ImageSlider sliderData={sliderData.slice(0, 8)} />
+        <CoverSlider solutions={solutions.slice(0, 8)} />
       </section>
       <section
         className={language ? classes.information : classes.informationReverse}
@@ -255,12 +85,20 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={classes.gridWorks}>
-        <CardGrid projects={divideArray(sliderData)[0]} direction={true} />
-        {screenSize === "desktop" && (
-          <CardGrid projects={divideArray(sliderData)[1]} direction={false} />
-        )}
-      </section>
+      {activeSolutions.length >= 10 && (
+        <section className={classes.gridWorks}>
+          <CardGrid
+            solutions={divideArray(activeSolutions)[0]}
+            direction={true}
+          />
+          {screenSize === "desktop" && (
+            <CardGrid
+              solutions={divideArray(activeSolutions)[1]}
+              direction={false}
+            />
+          )}
+        </section>
+      )}
       <div
         className={classes.message}
         onClick={() => Router.push("/solutions")}
@@ -269,4 +107,23 @@ export default function Home() {
       </div>
     </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const solutions = await solutionModel.find();
+    solutions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    return {
+      props: {
+        solutions: JSON.parse(JSON.stringify(solutions)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }

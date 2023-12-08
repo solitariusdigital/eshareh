@@ -8,12 +8,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import NextProject from "@/components/NextProject";
-import two from "@/assets/two.jpg";
-import one from "@/assets/one.jpg";
-import three from "@/assets/three.jpg";
 import { NextSeo } from "next-seo";
+import dbConnect from "@/services/dbConnect";
+import solutionModel from "@/models/Solution";
 
-export default function Solution({ name }) {
+export default function Solution({ project }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
@@ -22,35 +21,8 @@ export default function Solution({ name }) {
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayController, setDisplayController] = useState(false);
 
-  const work = {
-    fa: {
-      images: [three, two, one, two, three, two, one],
-      type: "image",
-      title: "صنعت خشکبار و حبوبات کوروش",
-      descriptions: [
-        "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
-        "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
-        "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
-        "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
-        "طراحی بسته‌بندی لانچ و معرفی کرم آبرسان گیاهی نوروزلانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان آبرسان آبرسان گیاهی نوروز لانچ و معرفی کرم آبرسان گیاهی نوروز",
-      ],
-    },
-    en: {
-      images: [three, two, one, two, three, two, one],
-      type: "image",
-      title: "Arian Kimia Company",
-      descriptions: [
-        "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
-        "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
-        "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
-        "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
-        "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
-      ],
-    },
-  };
-
   useEffect(() => {
-    setIsFullWidth(Array(work[languageType].images.length).fill(true));
+    setIsFullWidth(Array(project.media.length).fill(true));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -126,7 +98,7 @@ export default function Solution({ name }) {
   return (
     <Fragment>
       <NextSeo
-        title={name}
+        title={project[languageType].title}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
@@ -135,7 +107,9 @@ export default function Solution({ name }) {
         openGraph={{
           type: "website",
           locale: "fa_IR",
-          url: `https://eshareh.com/${replaceSpacesAndHyphens(name)}`,
+          url: `https://eshareh.com/${replaceSpacesAndHyphens(
+            project[languageType].title
+          )}`,
           siteName: "Eshareh Advertising Agency",
         }}
       />
@@ -146,24 +120,22 @@ export default function Solution({ name }) {
           }
         >
           <h3 className={classes.description}>
-            {work[languageType].descriptions[0]}
+            {project[languageType].summary}
           </h3>
           <div>
             <h2
               style={{
                 fontFamily: language ? "FarsiMedium" : "EnglishMedium",
               }}
+              className={classes.title}
             >
-              {work[languageType].title}
+              {project[languageType].title}
             </h2>
-            <h3>{work[languageType].title}</h3>
+            <h3>{project[languageType].subtitle}</h3>
           </div>
         </div>
-        {work[languageType].images.map((image, index) => (
+        {project.media.map((image, index) => (
           <Fragment key={index}>
-            <button onClick={() => toggleGrid(index)} å>
-              Toggle Grid
-            </button>
             <div
               className={
                 isFullWidth[index] ? classes.fullWidth : classes.halfWidth
@@ -172,11 +144,11 @@ export default function Solution({ name }) {
             >
               <div className={classes.imageBox}>
                 <Image
-                  src={image}
-                  blurDataURL={image}
+                  src={image.link}
+                  blurDataURL={image.link}
                   placeholder="blur"
-                  alt={work[languageType].title}
-                  layout="responsive"
+                  alt={project[languageType].title}
+                  layout="fill"
                   objectFit="cover"
                   as="image"
                   priority
@@ -185,10 +157,33 @@ export default function Solution({ name }) {
                   {language ? "بزرگنمایی +" : "+ Enlarge"}
                 </p>
               </div>
-              {index % 2 === 0 && (
-                <h2 style={{ textAlign: language ? "right" : "left" }}>
-                  {work[languageType].descriptions[index]}
-                </h2>
+              {index === 0 && (
+                <div
+                  className={
+                    language ? classes.informationReverse : classes.information
+                  }
+                >
+                  <h2
+                    className={classes.info}
+                    style={{ textAlign: language ? "right" : "left" }}
+                  >
+                    {project[languageType].solution}
+                  </h2>
+                </div>
+              )}
+              {index === 2 && (
+                <div
+                  className={
+                    language ? classes.informationReverse : classes.information
+                  }
+                >
+                  <h2
+                    className={classes.info}
+                    style={{ textAlign: language ? "right" : "left" }}
+                  >
+                    {project[languageType].problem}
+                  </h2>
+                </div>
               )}
             </div>
           </Fragment>
@@ -215,8 +210,8 @@ export default function Solution({ name }) {
                 }}
               />
             </div>
-            {<h3>{work[languageType].title}</h3>}
-            <GallerySlider images={work[languageType].images} />
+            {<h3>{project[languageType].title}</h3>}
+            <GallerySlider images={project.media} />
           </div>
         )}
         <div className={classes.nextProject} ref={targetRef}>
@@ -230,10 +225,12 @@ export default function Solution({ name }) {
 // initial connection to db
 export async function getServerSideProps(context) {
   try {
-    let name = replaceSpacesAndHyphens(context.params.solutions);
+    await dbConnect();
+    let id = context.query.id;
+    const project = await solutionModel.findById(id);
     return {
       props: {
-        name: JSON.parse(JSON.stringify(name)),
+        project: JSON.parse(JSON.stringify(project)),
       },
     };
   } catch (error) {
