@@ -24,6 +24,11 @@
       flex-direction: column;
       flex-direction: column-reverse;
     }
+    @include mixins.tablet {
+      display: flex;
+      flex-direction: column;
+      flex-direction: column-reverse;
+    }
 
     .title {
       color: config.$yellow;
@@ -89,6 +94,12 @@
       padding: 8px 20px;
       color: config.$white;
       @include mixins.transparentBackground(0.2, config.$lightgrey);
+    }
+
+    .video {
+      width: 100%;
+      height: 600px;
+      object-fit: cover;
     }
   }
 }

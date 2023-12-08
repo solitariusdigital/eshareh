@@ -129,19 +129,32 @@ export default function Solution({ project }) {
         {project.media.map((image, index) => (
           <Fragment key={index}>
             <div className={classes.imageBox} onClick={() => gallerySlider()}>
-              <Image
-                src={image.link}
-                blurDataURL={image.link}
-                placeholder="blur"
-                alt={project[languageType].title}
-                layout="fill"
-                objectFit="cover"
-                as="image"
-                priority
-              />
-              <p className={classes.text}>
-                {language ? "بزرگنمایی +" : "+ Enlarge"}
-              </p>
+              {image.type === "image" ? (
+                <Fragment>
+                  <Image
+                    src={image.link}
+                    blurDataURL={image.link}
+                    placeholder="blur"
+                    alt={project[languageType].title}
+                    layout="fill"
+                    objectFit="cover"
+                    as="image"
+                    priority
+                  />
+                  <p className={classes.text}>
+                    {language ? "بزرگنمایی +" : "+ Enlarge"}
+                  </p>
+                </Fragment>
+              ) : (
+                <div>
+                  <video
+                    className={classes.video}
+                    src={image.link}
+                    preload="metadata"
+                    controls
+                  />
+                </div>
+              )}
             </div>
             {index === 0 && (
               <div
@@ -149,10 +162,7 @@ export default function Solution({ project }) {
                   language ? classes.informationReverse : classes.information
                 }
               >
-                <h2
-                  className={classes.info}
-                  style={{ textAlign: language ? "right" : "left" }}
-                >
+                <h2 style={{ textAlign: language ? "right" : "left" }}>
                   {project[languageType].solution}
                 </h2>
               </div>
@@ -163,10 +173,7 @@ export default function Solution({ project }) {
                   language ? classes.informationReverse : classes.information
                 }
               >
-                <h2
-                  className={classes.info}
-                  style={{ textAlign: language ? "right" : "left" }}
-                >
+                <h2 style={{ textAlign: language ? "right" : "left" }}>
                   {project[languageType].problem}
                 </h2>
               </div>
@@ -196,7 +203,7 @@ export default function Solution({ project }) {
               />
             </div>
             {<h3>{project[languageType].title}</h3>}
-            <GallerySlider images={project.media} />
+            <GallerySlider media={project.media} />
           </div>
         )}
         <div className={classes.nextProject} ref={targetRef}>

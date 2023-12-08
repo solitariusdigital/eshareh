@@ -8,11 +8,11 @@ import { Navigation, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function GallerySlider({ images }) {
+export default function GallerySlider({ media }) {
   const [current, setCurrent] = useState(0);
 
   const calculatePercentage = (index) => {
-    return ((index + 1) / images.length) * 100;
+    return ((index + 1) / media.length) * 100;
   };
 
   const updateIndex = (swiperInstance) => {
@@ -37,19 +37,30 @@ export default function GallerySlider({ images }) {
           style={{ "--swiper-navigation-color": "#ffffff" }}
           onSlideChange={updateIndex}
         >
-          {images.map((photo, index) => (
+          {media.map((image, index) => (
             <SwiperSlide key={index}>
               <div className={classes.image}>
-                <Image
-                  src={photo}
-                  blurDataURL={photo}
-                  placeholder="blur"
-                  alt={photo}
-                  layout="fill"
-                  objectFit="cover"
-                  as="image"
-                  priority
-                />
+                {image.type === "image" ? (
+                  <Image
+                    src={image.link}
+                    blurDataURL={image.link}
+                    placeholder="blur"
+                    alt={image.link}
+                    layout="fill"
+                    objectFit="cover"
+                    as="image"
+                    priority
+                  />
+                ) : (
+                  <div>
+                    <video
+                      className={classes.video}
+                      src={image.link}
+                      preload="metadata"
+                      controls
+                    />
+                  </div>
+                )}
               </div>
             </SwiperSlide>
           ))}

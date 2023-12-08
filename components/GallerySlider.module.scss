@@ -20,6 +20,11 @@
   height: calc(100vh - 180px);
 }
 
+.video {
+  width: 100%;
+  height: calc(100vh - 180px);
+  object-fit: cover;
+}
 .progress {
   position: absolute;
   top: 0px;
