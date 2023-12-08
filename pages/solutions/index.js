@@ -144,17 +144,25 @@ export default function Solutions({ solutions }) {
                       onClick={() => directSolution(project)}
                     >
                       <div className={classes.box}>
-                        <Image
-                          className={classes.image}
-                          src={media[0].link}
-                          placeholder="blur"
-                          blurDataURL={media[0].link}
-                          alt={title}
-                          layout="fill"
-                          objectFit="cover"
-                          as="image"
-                          priority
-                        />
+                        {media[0].type === "image" ? (
+                          <Image
+                            className={classes.image}
+                            src={media[0].link}
+                            placeholder="blur"
+                            blurDataURL={media[0].link}
+                            alt={title}
+                            layout="fill"
+                            objectFit="cover"
+                            as="image"
+                            priority
+                          />
+                        ) : (
+                          <video
+                            className={classes.video}
+                            src={media[0].link}
+                            preload="metadata"
+                          />
+                        )}
                       </div>
                       <div
                         className={

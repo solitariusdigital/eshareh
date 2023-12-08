@@ -11,6 +11,10 @@ export default function CardGrid({ solutions, direction }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [hoverItem, setHoverItem] = useState(null);
 
+  useEffect(() => {
+    console.log(solutions);
+  }, [solutions]);
+
   return (
     <Fragment>
       {screenSize === "desktop" && (
@@ -32,17 +36,25 @@ export default function CardGrid({ solutions, direction }) {
             }}
           >
             <div className={classes.box}>
-              <Image
-                className={classes.image}
-                src={solutions[0].media[0].link}
-                blurDataURL={solutions[0].media[0].link}
-                placeholder="blur"
-                alt={solutions[0][languageType].title}
-                layout="fill"
-                objectFit="cover"
-                as="image"
-                priority
-              />
+              {solutions[0].media[0].type === "image" ? (
+                <Image
+                  className={classes.image}
+                  src={solutions[0].media[0].link}
+                  blurDataURL={solutions[0].media[0].link}
+                  placeholder="blur"
+                  alt={solutions[0][languageType].title}
+                  layout="fill"
+                  objectFit="cover"
+                  as="image"
+                  priority
+                />
+              ) : (
+                <video
+                  className={classes.video}
+                  src={solutions[0].media[0].link}
+                  preload="metadata"
+                />
+              )}
             </div>
             <div
               className={language ? classes.details : classes.detailsReverse}
@@ -79,17 +91,25 @@ export default function CardGrid({ solutions, direction }) {
                   }}
                 >
                   <div className={classes.box}>
-                    <Image
-                      className={classes.image}
-                      src={project.media[0].link}
-                      blurDataURL={project.media[0].link}
-                      placeholder="blur"
-                      alt={project[languageType].title}
-                      layout="fill"
-                      objectFit="cover"
-                      as="image"
-                      priority
-                    />
+                    {project.media[0].type === "image" ? (
+                      <Image
+                        className={classes.image}
+                        src={project.media[0].link}
+                        blurDataURL={project.media[0].link}
+                        placeholder="blur"
+                        alt={project[languageType].title}
+                        layout="fill"
+                        objectFit="cover"
+                        as="image"
+                        priority
+                      />
+                    ) : (
+                      <video
+                        className={classes.video}
+                        src={project.media[0].link}
+                        preload="metadata"
+                      />
+                    )}
                   </div>
                   <div
                     className={
@@ -133,17 +153,25 @@ export default function CardGrid({ solutions, direction }) {
               }}
             >
               <div className={classes.box}>
-                <Image
-                  className={classes.image}
-                  src={project.media[0].link}
-                  blurDataURL={project.media[0].link}
-                  placeholder="blur"
-                  alt={project[languageType].title}
-                  layout="fill"
-                  objectFit="cover"
-                  as="image"
-                  priority
-                />
+                {project.media[0].type === "image" ? (
+                  <Image
+                    className={classes.image}
+                    src={project.media[0].link}
+                    blurDataURL={project.media[0].link}
+                    placeholder="blur"
+                    alt={project[languageType].title}
+                    layout="fill"
+                    objectFit="cover"
+                    as="image"
+                    priority
+                  />
+                ) : (
+                  <video
+                    className={classes.video}
+                    src={project.media[0].link}
+                    preload="metadata"
+                  />
+                )}
               </div>
               <div
                 className={language ? classes.details : classes.detailsReverse}

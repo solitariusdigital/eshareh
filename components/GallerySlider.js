@@ -52,14 +52,12 @@ export default function GallerySlider({ media }) {
                     priority
                   />
                 ) : (
-                  <div>
-                    <video
-                      className={classes.video}
-                      src={image.link}
-                      preload="metadata"
-                      controls
-                    />
-                  </div>
+                  <video
+                    className={classes.video}
+                    src={image.link}
+                    preload="metadata"
+                    controls
+                  />
                 )}
               </div>
             </SwiperSlide>

@@ -9,10 +9,11 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import NextProject from "@/components/NextProject";
 import { NextSeo } from "next-seo";
+import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 
-export default function Solution({ project }) {
+export default function Solution({ project, previousProject, nextProject }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
@@ -146,14 +147,12 @@ export default function Solution({ project }) {
                   </p>
                 </Fragment>
               ) : (
-                <div>
-                  <video
-                    className={classes.video}
-                    src={image.link}
-                    preload="metadata"
-                    controls
-                  />
-                </div>
+                <video
+                  className={classes.video}
+                  src={image.link}
+                  preload="metadata"
+                  controls
+                />
               )}
             </div>
             {index === 0 && (
@@ -185,9 +184,27 @@ export default function Solution({ project }) {
             className={`${classes.projectController}  animate__animated animate__slideInUp`}
           >
             <div className={classes.controller}>
-              <ArrowBackIosIcon className="icon" />
-              <p>NEXT</p>
-              <ArrowForwardIosIcon className="icon" />
+              <ArrowBackIosIcon
+                className={classes.icon}
+                onClick={() =>
+                  Router.push(
+                    `/solutions/${replaceSpacesAndHyphens(
+                      previousProject[languageType].title
+                    )}`
+                  )
+                }
+              />
+              <p>{project[languageType].title}</p>
+              <ArrowForwardIosIcon
+                className={classes.icon}
+                onClick={() =>
+                  Router.push(
+                    `/solutions/${replaceSpacesAndHyphens(
+                      nextProject[languageType].title
+                    )}`
+                  )
+                }
+              />
             </div>
           </div>
         )}
@@ -207,7 +224,7 @@ export default function Solution({ project }) {
           </div>
         )}
         <div className={classes.nextProject} ref={targetRef}>
-          <NextProject />
+          <NextProject project={nextProject} />
         </div>
       </div>
     </Fragment>
@@ -224,9 +241,17 @@ export async function getServerSideProps(context) {
         p.en.title === replaceSpacesAndHyphens(context.query.solutions) ||
         p.fa.title === replaceSpacesAndHyphens(context.query.solutions)
     );
+    // Find the index of the project with the given id
+    let index = projects.findIndex((p) => p["_id"] === project["_id"]);
+    let previousProject =
+      index === 0 ? projects[projects.length - 1] : projects[index - 1];
+    let nextProject =
+      index === projects.length - 1 ? projects[0] : projects[index + 1];
     return {
       props: {
         project: JSON.parse(JSON.stringify(project)),
+        previousProject: JSON.parse(JSON.stringify(previousProject)),
+        nextProject: JSON.parse(JSON.stringify(nextProject)),
       },
     };
   } catch (error) {

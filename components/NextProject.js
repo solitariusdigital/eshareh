@@ -6,7 +6,7 @@ import { replaceSpacesAndHyphens } from "@/services/utility";
 import Router from "next/router";
 import two from "@/assets/two.jpg";
 
-export default function NextProject() {
+export default function NextProject({ project }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
 
@@ -42,7 +42,7 @@ export default function NextProject() {
       className={classes.container}
       onClick={() =>
         Router.push(
-          `/solutions/${replaceSpacesAndHyphens(work[languageType].title)}`
+          `/solutions/${replaceSpacesAndHyphens(project[languageType].title)}`
         )
       }
     >
@@ -50,29 +50,38 @@ export default function NextProject() {
       <div
         className={language ? classes.information : classes.informationReverse}
       >
-        <h3>{work[languageType].descriptions[0]}</h3>
+        <h3>{project[languageType].summary}</h3>
         <div>
           <h2
             style={{
               fontFamily: language ? "FarsiMedium" : "EnglishMedium",
             }}
           >
-            {work[languageType].title}
+            {project[languageType].title}
           </h2>
-          <h3>{work[languageType].title}</h3>
+          <h3>{project[languageType].title}</h3>
         </div>
       </div>
       <div className={classes.imageBox}>
-        <Image
-          src={work[languageType].image}
-          blurDataURL={work[languageType].image}
-          placeholder="blur"
-          alt={work[languageType].title}
-          layout="fill"
-          objectFit="cover"
-          as="image"
-          priority
-        />
+        {project.media[0].type === "image" ? (
+          <Image
+            className={classes.image}
+            src={project.media[0].link}
+            blurDataURL={project.media[0].link}
+            placeholder="blur"
+            alt={project[languageType].title}
+            layout="fill"
+            objectFit="cover"
+            as="image"
+            priority
+          />
+        ) : (
+          <video
+            className={classes.video}
+            preload="metadata"
+            src={project.media[0].link}
+          />
+        )}
       </div>
     </div>
   );
