@@ -87,14 +87,6 @@ export default function Solution({ project }) {
     document.body.style.overflow = "hidden";
   };
 
-  const toggleGrid = (index) => {
-    setIsFullWidth((prevState) => {
-      const newState = [...prevState];
-      newState[index] = !newState[index];
-      return newState;
-    });
-  };
-
   return (
     <Fragment>
       <NextSeo
@@ -136,56 +128,49 @@ export default function Solution({ project }) {
         </div>
         {project.media.map((image, index) => (
           <Fragment key={index}>
-            <div
-              className={
-                isFullWidth[index] ? classes.fullWidth : classes.halfWidth
-              }
-              onClick={() => gallerySlider()}
-            >
-              <div className={classes.imageBox}>
-                <Image
-                  src={image.link}
-                  blurDataURL={image.link}
-                  placeholder="blur"
-                  alt={project[languageType].title}
-                  layout="fill"
-                  objectFit="cover"
-                  as="image"
-                  priority
-                />
-                <p className={classes.text}>
-                  {language ? "بزرگنمایی +" : "+ Enlarge"}
-                </p>
-              </div>
-              {index === 0 && (
-                <div
-                  className={
-                    language ? classes.informationReverse : classes.information
-                  }
-                >
-                  <h2
-                    className={classes.info}
-                    style={{ textAlign: language ? "right" : "left" }}
-                  >
-                    {project[languageType].solution}
-                  </h2>
-                </div>
-              )}
-              {index === 2 && (
-                <div
-                  className={
-                    language ? classes.informationReverse : classes.information
-                  }
-                >
-                  <h2
-                    className={classes.info}
-                    style={{ textAlign: language ? "right" : "left" }}
-                  >
-                    {project[languageType].problem}
-                  </h2>
-                </div>
-              )}
+            <div className={classes.imageBox} onClick={() => gallerySlider()}>
+              <Image
+                src={image.link}
+                blurDataURL={image.link}
+                placeholder="blur"
+                alt={project[languageType].title}
+                layout="fill"
+                objectFit="cover"
+                as="image"
+                priority
+              />
+              <p className={classes.text}>
+                {language ? "بزرگنمایی +" : "+ Enlarge"}
+              </p>
             </div>
+            {index === 0 && (
+              <div
+                className={
+                  language ? classes.informationReverse : classes.information
+                }
+              >
+                <h2
+                  className={classes.info}
+                  style={{ textAlign: language ? "right" : "left" }}
+                >
+                  {project[languageType].solution}
+                </h2>
+              </div>
+            )}
+            {index === 2 && (
+              <div
+                className={
+                  language ? classes.informationReverse : classes.information
+                }
+              >
+                <h2
+                  className={classes.info}
+                  style={{ textAlign: language ? "right" : "left" }}
+                >
+                  {project[languageType].problem}
+                </h2>
+              </div>
+            )}
           </Fragment>
         ))}
         {displayController && (
@@ -226,8 +211,12 @@ export default function Solution({ project }) {
 export async function getServerSideProps(context) {
   try {
     await dbConnect();
-    let id = context.query.id;
-    const project = await solutionModel.findById(id);
+    const projects = await solutionModel.find();
+    let project = projects.find(
+      (p) =>
+        p.en.title === replaceSpacesAndHyphens(context.query.solutions) ||
+        p.fa.title === replaceSpacesAndHyphens(context.query.solutions)
+    );
     return {
       props: {
         project: JSON.parse(JSON.stringify(project)),

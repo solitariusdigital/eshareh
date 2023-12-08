@@ -32,13 +32,7 @@ export default function CoverSlider({ solutions }) {
     let link = `/solutions/${replaceSpacesAndHyphens(
       project[languageType].title
     )}`;
-    Router.push(
-      {
-        pathname: link,
-        query: { id: project["_id"] },
-      },
-      link
-    );
+    Router.push(link);
   };
 
   return (
