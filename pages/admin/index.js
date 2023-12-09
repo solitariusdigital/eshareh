@@ -3,7 +3,6 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./admin.module.scss";
 import SolutionsForm from "@/components/SolutionsForm";
 import Router from "next/router";
-import secureLocalStorage from "react-secure-storage";
 
 export default function Admin() {
   const [displaySolutionsForm, setDisplaySolutionsForm] = useState(false);

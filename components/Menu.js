@@ -12,7 +12,6 @@ import { CompactPicker } from "react-color";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import CreateIcon from "@mui/icons-material/Create";
 import { getControlsApi, updateControlApi } from "@/services/api";
-import secureLocalStorage from "react-secure-storage";
 
 export default function Menu() {
   const { language, setLanguage } = useContext(StateContext);
