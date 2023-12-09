@@ -10,7 +10,7 @@ import logoFarsi from "@/assets/logoFarsi.png";
 import SearchIcon from "@mui/icons-material/Search";
 import { CompactPicker } from "react-color";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
-import CreateIcon from "@mui/icons-material/Create";
+import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import { getControlsApi, updateControlApi } from "@/services/api";
 
 export default function Menu() {
@@ -123,7 +123,7 @@ export default function Menu() {
                   }}
                   sx={{ color: colorPicker ? "#fdb714" : "#d6d6d6" }}
                 />
-                <CreateIcon
+                <AutoFixNormalIcon
                   className="icon"
                   onClick={() => {
                     setTextPicker(!textPicker);
