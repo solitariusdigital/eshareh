@@ -85,20 +85,14 @@ export default function Home({ solutions }) {
           </div>
         </div>
       </section>
-      {activeSolutions.length >= 10 && (
-        <section className={classes.gridWorks}>
-          <CardGrid
-            solutions={divideArray(activeSolutions)[0]}
-            direction={true}
-          />
-          {screenSize === "desktop" && (
-            <CardGrid
-              solutions={divideArray(activeSolutions)[1]}
-              direction={false}
-            />
-          )}
-        </section>
-      )}
+      {/* {activeSolutions.length >= 10 && ( */}
+      <section className={classes.gridWorks}>
+        <CardGrid solutions={divideArray(solutions)[0]} direction={true} />
+        {screenSize === "desktop" && (
+          <CardGrid solutions={divideArray(solutions)[1]} direction={false} />
+        )}
+      </section>
+      {/* )} */}
       <div
         className={classes.message}
         onClick={() => Router.push("/solutions")}

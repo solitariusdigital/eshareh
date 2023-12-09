@@ -12,8 +12,16 @@ export default function CardGrid({ solutions, direction }) {
   const [hoverItem, setHoverItem] = useState(null);
 
   useEffect(() => {
-    console.log(solutions);
-  }, [solutions]);
+    let videos = document.querySelectorAll("video");
+    videos.forEach((video) => {
+      video.addEventListener("mouseover", () => {
+        video.play();
+      });
+      video.addEventListener("mouseout", () => {
+        video.pause();
+      });
+    });
+  }, []);
 
   return (
     <Fragment>
