@@ -169,7 +169,9 @@ export default function Menu() {
                             onClick={() => activateNav(nav.link, index)}
                           >
                             {nav.title[languageType] === "" && (
-                              <SearchIcon sx={{ fontSize: 24 }} />
+                              <SearchIcon
+                                sx={{ fontSize: 24, color: menuColor.text }}
+                              />
                             )}
                           </a>
                         </div>
@@ -224,7 +226,9 @@ export default function Menu() {
                           onClick={() => activateNav(nav.link, index)}
                         >
                           {nav.title[languageType] === "" && (
-                            <SearchIcon sx={{ fontSize: 24 }} />
+                            <SearchIcon
+                              sx={{ fontSize: 24, color: menuColor.text }}
+                            />
                           )}
                         </a>
                       </div>
@@ -272,13 +276,13 @@ export default function Menu() {
                 <CloseIcon
                   className="icon"
                   onClick={() => setMenuMobile(!menuMobile)}
-                  sx={{ fontSize: 30 }}
+                  sx={{ fontSize: 30, color: "#000000" }}
                 />
               ) : (
                 <MenuIcon
                   className="icon"
                   onClick={() => setMenuMobile(!menuMobile)}
-                  sx={{ fontSize: 30 }}
+                  sx={{ fontSize: 30, color: "#000000" }}
                 />
               )}
             </div>
