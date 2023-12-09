@@ -170,34 +170,34 @@ export default function Solution({ solutions, projectTitle }) {
             }}
           />
           <div className={classes.container}>
-            {permissionControl === "admin" && (
-              <div className={classes.controlPanel}>
-                {project.active ? (
-                  <VerifiedUserIcon sx={{ color: "#57a361" }} />
-                ) : (
-                  <VisibilityOffIcon sx={{ color: "#d40d12" }} />
-                )}
-                {!project.active ? (
-                  <TaskAltIcon
-                    className="icon"
-                    sx={{ color: "#57a361" }}
-                    onClick={() => manageSolution(project["_id"], "show")}
-                  />
-                ) : (
-                  <CloseIcon
-                    className="icon"
-                    sx={{ color: "#cd3d2c" }}
-                    onClick={() => manageSolution(project["_id"], "hide")}
-                  />
-                )}
-                <EditIcon className="icon" sx={{ color: "#fdb714" }} />
-              </div>
-            )}
             <div
               className={
                 language ? classes.information : classes.informationReverse
               }
             >
+              {permissionControl === "admin" && !displayGallerySlider && (
+                <div className={classes.controlPanel}>
+                  {project.active ? (
+                    <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                  ) : (
+                    <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                  )}
+                  {!project.active ? (
+                    <TaskAltIcon
+                      className="icon"
+                      sx={{ color: "#57a361" }}
+                      onClick={() => manageSolution(project["_id"], "show")}
+                    />
+                  ) : (
+                    <CloseIcon
+                      className="icon"
+                      sx={{ color: "#cd3d2c" }}
+                      onClick={() => manageSolution(project["_id"], "hide")}
+                    />
+                  )}
+                  <EditIcon className="icon" sx={{ color: "#fdb714" }} />
+                </div>
+              )}
               <h3 className={classes.description}>
                 {project[languageType].summary}
               </h3>
