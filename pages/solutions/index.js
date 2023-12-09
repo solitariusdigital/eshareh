@@ -138,41 +138,39 @@ export default function Solutions({ solutions }) {
               const { media } = project;
               return (
                 <Fragment key={index}>
-                  {project.active && (
-                    <div
-                      className={classes.project}
-                      onClick={() => directSolution(project)}
-                    >
-                      <div className={classes.box}>
-                        {media[0].type === "image" ? (
-                          <Image
-                            className={classes.image}
-                            src={media[0].link}
-                            placeholder="blur"
-                            blurDataURL={media[0].link}
-                            alt={title}
-                            layout="fill"
-                            objectFit="cover"
-                            as="image"
-                            priority
-                          />
-                        ) : (
-                          <video
-                            className={classes.video}
-                            src={media[0].link}
-                            preload="metadata"
-                          />
-                        )}
-                      </div>
-                      <div
-                        className={
-                          language ? classes.title : classes.titleReverse
-                        }
-                      >
-                        <h3>{title}</h3>
-                      </div>
+                  <div
+                    className={classes.project}
+                    onClick={() => directSolution(project)}
+                  >
+                    <div className={classes.box}>
+                      {media[0].type === "image" ? (
+                        <Image
+                          className={classes.image}
+                          src={media[0].link}
+                          placeholder="blur"
+                          blurDataURL={media[0].link}
+                          alt={title}
+                          layout="fill"
+                          objectFit="cover"
+                          as="image"
+                          priority
+                        />
+                      ) : (
+                        <video
+                          className={classes.video}
+                          src={media[0].link}
+                          preload="metadata"
+                        />
+                      )}
                     </div>
-                  )}
+                    <div
+                      className={
+                        language ? classes.title : classes.titleReverse
+                      }
+                    >
+                      <h3>{title}</h3>
+                    </div>
+                  </div>
                 </Fragment>
               );
             })}
@@ -187,10 +185,13 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const solutions = await solutionModel.find();
-    solutions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    let activeSolutions = solutions
+      .filter((project) => project.active)
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
     return {
       props: {
-        solutions: JSON.parse(JSON.stringify(solutions)),
+        solutions: JSON.parse(JSON.stringify(activeSolutions)),
       },
     };
   } catch (error) {

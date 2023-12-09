@@ -4,9 +4,6 @@ import CoverSlider from "@/components/CoverSlider";
 import CardGrid from "@/components/CardGrid";
 import classes from "./home.module.scss";
 import Router from "next/router";
-import one from "@/assets/one.jpg";
-import two from "@/assets/two.jpg";
-import three from "@/assets/three.jpg";
 import Image from "next/legacy/image";
 import profession from "@/assets/profession.png";
 import { enToFaDigits } from "@/services/utility";
@@ -17,11 +14,6 @@ import solutionModel from "@/models/Solution";
 export default function Home({ solutions }) {
   const { language, setLanguage } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
-  const [activeSolutions, setActiveSolutions] = useState([]);
-
-  useEffect(() => {
-    setActiveSolutions(solutions.filter((project) => project.active));
-  }, [solutions]);
 
   const divideArray = (solutions) => {
     const dividedArrays = [];
@@ -85,14 +77,14 @@ export default function Home({ solutions }) {
           </div>
         </div>
       </section>
-      {/* {activeSolutions.length >= 10 && ( */}
-      <section className={classes.gridWorks}>
-        <CardGrid solutions={divideArray(solutions)[0]} direction={true} />
-        {screenSize === "desktop" && (
-          <CardGrid solutions={divideArray(solutions)[1]} direction={false} />
-        )}
-      </section>
-      {/* )} */}
+      {solutions.length >= 10 && (
+        <section className={classes.gridWorks}>
+          <CardGrid solutions={divideArray(solutions)[0]} direction={true} />
+          {screenSize === "desktop" && (
+            <CardGrid solutions={divideArray(solutions)[1]} direction={false} />
+          )}
+        </section>
+      )}
       <div
         className={classes.message}
         onClick={() => Router.push("/solutions")}
@@ -108,10 +100,12 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const solutions = await solutionModel.find();
-    solutions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    let activeSolutions = solutions
+      .filter((project) => project.active)
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     return {
       props: {
-        solutions: JSON.parse(JSON.stringify(solutions)),
+        solutions: JSON.parse(JSON.stringify(activeSolutions)),
       },
     };
   } catch (error) {
