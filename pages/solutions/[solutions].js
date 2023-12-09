@@ -18,14 +18,57 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { getSolutionApi, updateSolutionApi } from "@/services/api";
 
-export default function Solution({ project, previousProject, nextProject }) {
+export default function Solution({ solutions, projectTitle }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
-  const [displayController, setDisplayController] = useState(false);
+  const [displayNextController, setDisplayNextController] = useState(false);
+  const [project, setProject] = useState(null);
+  const [previousProject, setPreviousProject] = useState(null);
+  const [nextProject, setNextProject] = useState(null);
+
+  useEffect(() => {
+    let project = null;
+    let nextProject = null;
+    let previousProject = null;
+    let solutionsData = null;
+
+    if (permissionControl === "admin") {
+      project = solutions.find(
+        (p) => p.en.title === projectTitle || p.fa.title === projectTitle
+      );
+      solutionsData = solutions;
+    } else {
+      let activeSolutions = solutions
+        .filter((project) => project.active)
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      project = activeSolutions.find(
+        (p) => p.en.title === projectTitle || p.fa.title === projectTitle
+      );
+      solutionsData = activeSolutions;
+    }
+    if (!project) {
+      Router.push("/404");
+      return;
+    }
+    // Find the index of the project with the given id
+    let index = solutionsData.findIndex((p) => p["_id"] === project["_id"]);
+    previousProject =
+      index === 0
+        ? solutionsData[solutionsData.length - 1]
+        : solutionsData[index - 1];
+    nextProject =
+      index === solutionsData.length - 1
+        ? solutionsData[0]
+        : solutionsData[index + 1];
+
+    setProject(project);
+    setNextProject(nextProject);
+    setPreviousProject(previousProject);
+  }, [permissionControl, project, projectTitle, solutions]);
 
   const targetRef = useRef(null);
 
@@ -38,7 +81,7 @@ export default function Solution({ project, previousProject, nextProject }) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setDisplayController(false);
+          setDisplayNextController(false);
           setFooter(false);
         }
       });
@@ -62,13 +105,13 @@ export default function Solution({ project, previousProject, nextProject }) {
         const isScrollAtBottom =
           window.innerHeight + window.scrollY >= document.body.offsetHeight;
         if (currentScrollY > prevScrollY) {
-          setDisplayController(true);
+          setDisplayNextController(true);
         } else if (currentScrollY < prevScrollY) {
           setFooter(true);
-          setDisplayController(false);
+          setDisplayNextController(false);
         }
         if (isScrollAtBottom) {
-          setDisplayController(false);
+          setDisplayNextController(false);
           setFooter(false);
         }
         prevScrollY = currentScrollY;
@@ -82,7 +125,7 @@ export default function Solution({ project, previousProject, nextProject }) {
 
   const gallerySlider = () => {
     setDisplayMenu(false);
-    setDisplayController(false);
+    setDisplayNextController(false);
     setDisplayGallerySlider(true);
     window.scrollTo(0, 0);
     document.body.style.overflow = "hidden";
@@ -108,166 +151,177 @@ export default function Solution({ project, previousProject, nextProject }) {
 
   return (
     <Fragment>
-      <NextSeo
-        title={project[languageType].title}
-        description={
-          language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
-            : "Eshareh is a multidisciplinary, independently owned design studio"
-        }
-        openGraph={{
-          type: "website",
-          locale: "fa_IR",
-          url: `https://eshareh.com/${replaceSpacesAndHyphens(
-            project[languageType].title
-          )}`,
-          siteName: "Eshareh Advertising Agency",
-        }}
-      />
-      <div className={classes.container}>
-        {permissionControl === "admin" && (
-          <div className={classes.controlPanel}>
-            {project.active ? (
-              <VerifiedUserIcon sx={{ color: "#57a361" }} />
-            ) : (
-              <VisibilityOffIcon sx={{ color: "#d40d12" }} />
-            )}
-            {!project.active ? (
-              <TaskAltIcon
-                className="icon"
-                sx={{ color: "#57a361" }}
-                onClick={() => manageSolution(project["_id"], "show")}
-              />
-            ) : (
-              <CloseIcon
-                className="icon"
-                sx={{ color: "#cd3d2c" }}
-                onClick={() => manageSolution(project["_id"], "hide")}
-              />
-            )}
-            <EditIcon className="icon" sx={{ color: "#fdb714" }} />
-          </div>
-        )}
-        <div
-          className={
-            language ? classes.information : classes.informationReverse
-          }
-        >
-          <h3 className={classes.description}>
-            {project[languageType].summary}
-          </h3>
-          <div>
-            <h2
-              style={{
-                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-              }}
-              className={classes.title}
-            >
-              {project[languageType].title}
-            </h2>
-            <h3>{project[languageType].subtitle}</h3>
-          </div>
-        </div>
-        {project.media.map((image, index) => (
-          <Fragment key={index}>
-            <div className={classes.imageBox} onClick={() => gallerySlider()}>
-              {image.type === "image" ? (
-                <Fragment>
-                  <Image
-                    src={image.link}
-                    blurDataURL={image.link}
-                    placeholder="blur"
-                    alt={project[languageType].title}
-                    layout="fill"
-                    objectFit="cover"
-                    as="image"
-                    priority
+      {project && (
+        <Fragment>
+          <NextSeo
+            title={project[languageType].title}
+            description={
+              language
+                ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+                : "Eshareh is a multidisciplinary, independently owned design studio"
+            }
+            openGraph={{
+              type: "website",
+              locale: "fa_IR",
+              url: `https://eshareh.com/${replaceSpacesAndHyphens(
+                project[languageType].title
+              )}`,
+              siteName: "Eshareh Advertising Agency",
+            }}
+          />
+          <div className={classes.container}>
+            {permissionControl === "admin" && (
+              <div className={classes.controlPanel}>
+                {project.active ? (
+                  <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                ) : (
+                  <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                )}
+                {!project.active ? (
+                  <TaskAltIcon
+                    className="icon"
+                    sx={{ color: "#57a361" }}
+                    onClick={() => manageSolution(project["_id"], "show")}
                   />
-                  <p className={classes.text}>
-                    {language ? "بزرگنمایی +" : "+ Enlarge"}
-                  </p>
-                </Fragment>
-              ) : (
-                <video
-                  className={classes.video}
-                  src={image.link}
-                  preload="metadata"
-                  controls
-                />
-              )}
-            </div>
-            {index === 0 && (
-              <div
-                className={
-                  language ? classes.informationReverse : classes.information
-                }
-              >
-                <h2 style={{ textAlign: language ? "right" : "left" }}>
-                  {project[languageType].solution}
-                </h2>
+                ) : (
+                  <CloseIcon
+                    className="icon"
+                    sx={{ color: "#cd3d2c" }}
+                    onClick={() => manageSolution(project["_id"], "hide")}
+                  />
+                )}
+                <EditIcon className="icon" sx={{ color: "#fdb714" }} />
               </div>
             )}
-            {index === 2 && (
-              <div
-                className={
-                  language ? classes.informationReverse : classes.information
-                }
-              >
-                <h2 style={{ textAlign: language ? "right" : "left" }}>
-                  {project[languageType].problem}
+            <div
+              className={
+                language ? classes.information : classes.informationReverse
+              }
+            >
+              <h3 className={classes.description}>
+                {project[languageType].summary}
+              </h3>
+              <div>
+                <h2
+                  style={{
+                    fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                  }}
+                  className={classes.title}
+                >
+                  {project[languageType].title}
                 </h2>
+                <h3>{project[languageType].subtitle}</h3>
+              </div>
+            </div>
+            {project.media.map((image, index) => (
+              <Fragment key={index}>
+                <div
+                  className={classes.imageBox}
+                  onClick={() => gallerySlider()}
+                >
+                  {image.type === "image" ? (
+                    <Fragment>
+                      <Image
+                        src={image.link}
+                        blurDataURL={image.link}
+                        placeholder="blur"
+                        alt={project[languageType].title}
+                        layout="fill"
+                        objectFit="cover"
+                        as="image"
+                        priority
+                      />
+                      <p className={classes.text}>
+                        {language ? "بزرگنمایی +" : "+ Enlarge"}
+                      </p>
+                    </Fragment>
+                  ) : (
+                    <video
+                      className={classes.video}
+                      src={image.link}
+                      preload="metadata"
+                      controls
+                    />
+                  )}
+                </div>
+                {index === 0 && (
+                  <div
+                    className={
+                      language
+                        ? classes.informationReverse
+                        : classes.information
+                    }
+                  >
+                    <h2 style={{ textAlign: language ? "right" : "left" }}>
+                      {project[languageType].solution}
+                    </h2>
+                  </div>
+                )}
+                {index === 2 && (
+                  <div
+                    className={
+                      language
+                        ? classes.informationReverse
+                        : classes.information
+                    }
+                  >
+                    <h2 style={{ textAlign: language ? "right" : "left" }}>
+                      {project[languageType].problem}
+                    </h2>
+                  </div>
+                )}
+              </Fragment>
+            ))}
+            {displayNextController && (
+              <div
+                className={`${classes.projectController}  animate__animated animate__slideInUp`}
+              >
+                <div className={classes.controller}>
+                  <ArrowBackIosIcon
+                    className={classes.icon}
+                    onClick={() =>
+                      Router.push(
+                        `/solutions/${replaceSpacesAndHyphens(
+                          previousProject[languageType].title
+                        )}`
+                      )
+                    }
+                  />
+                  <p>{project[languageType].title}</p>
+                  <ArrowForwardIosIcon
+                    className={classes.icon}
+                    onClick={() =>
+                      Router.push(
+                        `/solutions/${replaceSpacesAndHyphens(
+                          nextProject[languageType].title
+                        )}`
+                      )
+                    }
+                  />
+                </div>
               </div>
             )}
-          </Fragment>
-        ))}
-        {displayController && (
-          <div
-            className={`${classes.projectController}  animate__animated animate__slideInUp`}
-          >
-            <div className={classes.controller}>
-              <ArrowBackIosIcon
-                className={classes.icon}
-                onClick={() =>
-                  Router.push(
-                    `/solutions/${replaceSpacesAndHyphens(
-                      previousProject[languageType].title
-                    )}`
-                  )
-                }
-              />
-              <p>{project[languageType].title}</p>
-              <ArrowForwardIosIcon
-                className={classes.icon}
-                onClick={() =>
-                  Router.push(
-                    `/solutions/${replaceSpacesAndHyphens(
-                      nextProject[languageType].title
-                    )}`
-                  )
-                }
-              />
+            {displayGallerySlider && (
+              <div className={classes.gallerySlider}>
+                <div className={classes.icon}>
+                  <CloseIcon
+                    onClick={() => {
+                      setDisplayMenu(true);
+                      setDisplayGallerySlider(false);
+                      document.body.style.overflow = "auto";
+                    }}
+                  />
+                </div>
+                {<h3>{project[languageType].title}</h3>}
+                <GallerySlider media={project.media} />
+              </div>
+            )}
+            <div className={classes.nextProject} ref={targetRef}>
+              <NextProject project={nextProject} />
             </div>
           </div>
-        )}
-        {displayGallerySlider && (
-          <div className={classes.gallerySlider}>
-            <div className={classes.icon}>
-              <CloseIcon
-                onClick={() => {
-                  setDisplayMenu(true);
-                  setDisplayGallerySlider(false);
-                  document.body.style.overflow = "auto";
-                }}
-              />
-            </div>
-            {<h3>{project[languageType].title}</h3>}
-            <GallerySlider media={project.media} />
-          </div>
-        )}
-        <div className={classes.nextProject} ref={targetRef}>
-          <NextProject project={nextProject} />
-        </div>
-      </div>
+        </Fragment>
+      )}
     </Fragment>
   );
 }
@@ -277,29 +331,12 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const solutions = await solutionModel.find();
-    let activeSolutions = solutions
-      .filter((project) => project.active)
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    let project = activeSolutions.find(
-      (p) =>
-        p.en.title === replaceSpacesAndHyphens(context.query.solutions) ||
-        p.fa.title === replaceSpacesAndHyphens(context.query.solutions)
-    );
-    // Find the index of the project with the given id
-    let index = activeSolutions.findIndex((p) => p["_id"] === project["_id"]);
-    let previousProject =
-      index === 0
-        ? activeSolutions[activeSolutions.length - 1]
-        : activeSolutions[index - 1];
-    let nextProject =
-      index === activeSolutions.length - 1
-        ? activeSolutions[0]
-        : activeSolutions[index + 1];
     return {
       props: {
-        project: JSON.parse(JSON.stringify(project)),
-        previousProject: JSON.parse(JSON.stringify(previousProject)),
-        nextProject: JSON.parse(JSON.stringify(nextProject)),
+        solutions: JSON.parse(JSON.stringify(solutions)),
+        projectTitle: JSON.parse(
+          JSON.stringify(replaceSpacesAndHyphens(context.query.solutions))
+        ),
       },
     };
   } catch (error) {

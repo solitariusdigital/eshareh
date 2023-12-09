@@ -8,15 +8,27 @@ import { replaceSpacesAndHyphens, enToFaDigits } from "@/services/utility";
 import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-export default function Solutions({ solutions }) {
+export default function Solutions({ activeSolutions, adminSolutions }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+  const [solutions, setSolutions] = useState([]);
   const [category, setCategory] = useState(
     "all" || "advertising" || "media" || "digital"
   );
+
+  useEffect(() => {
+    if (permissionControl === "admin") {
+      setSolutions(adminSolutions);
+    } else {
+      setSolutions(activeSolutions);
+    }
+  }, [activeSolutions, adminSolutions, permissionControl]);
 
   const router = useRouter();
   let pathname = router.pathname;
@@ -142,6 +154,15 @@ export default function Solutions({ solutions }) {
                     className={classes.project}
                     onClick={() => directSolution(project)}
                   >
+                    {permissionControl === "admin" && (
+                      <div className={classes.controlPanel}>
+                        {project.active ? (
+                          <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                        ) : (
+                          <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                        )}
+                      </div>
+                    )}
                     <div className={classes.box}>
                       {media[0].type === "image" ? (
                         <Image
@@ -188,10 +209,10 @@ export async function getServerSideProps(context) {
     let activeSolutions = solutions
       .filter((project) => project.active)
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
     return {
       props: {
-        solutions: JSON.parse(JSON.stringify(activeSolutions)),
+        activeSolutions: JSON.parse(JSON.stringify(activeSolutions)),
+        adminSolutions: JSON.parse(JSON.stringify(solutions)),
       },
     };
   } catch (error) {
