@@ -12,6 +12,7 @@ import { CompactPicker } from "react-color";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import CreateIcon from "@mui/icons-material/Create";
 import { getControlsApi, updateControlApi } from "@/services/api";
+import secureLocalStorage from "react-secure-storage";
 
 export default function Menu() {
   const { language, setLanguage } = useContext(StateContext);
@@ -112,34 +113,39 @@ export default function Menu() {
                 priority
               />
             </div>
-            <div>
-              <ColorLensIcon
-                className="icon"
-                onClick={() => {
-                  setColorPicker(!colorPicker);
-                  setTextPicker(false);
-                }}
-                sx={{ color: colorPicker ? "#fdb714" : "#d6d6d6" }}
-              />
-              <CreateIcon
-                className="icon"
-                onClick={() => {
-                  setTextPicker(!textPicker);
-                  setColorPicker(false);
-                }}
-                sx={{ color: textPicker ? "#fdb714" : "#d6d6d6" }}
-              />
-              {colorPicker && (
-                <div className={classes.colorPicker}>
-                  <CompactPicker onChangeComplete={handleChangeColor} />
+            {JSON.parse(secureLocalStorage.getItem("currentUser")) &&
+              JSON.parse(secureLocalStorage.getItem("currentUser"))[
+                "permission"
+              ] === "admin" && (
+                <div>
+                  <ColorLensIcon
+                    className="icon"
+                    onClick={() => {
+                      setColorPicker(!colorPicker);
+                      setTextPicker(false);
+                    }}
+                    sx={{ color: colorPicker ? "#fdb714" : "#d6d6d6" }}
+                  />
+                  <CreateIcon
+                    className="icon"
+                    onClick={() => {
+                      setTextPicker(!textPicker);
+                      setColorPicker(false);
+                    }}
+                    sx={{ color: textPicker ? "#fdb714" : "#d6d6d6" }}
+                  />
+                  {colorPicker && (
+                    <div className={classes.colorPicker}>
+                      <CompactPicker onChangeComplete={handleChangeColor} />
+                    </div>
+                  )}
+                  {textPicker && (
+                    <div className={classes.textPicker}>
+                      <CompactPicker onChangeComplete={handleChangeText} />
+                    </div>
+                  )}
                 </div>
               )}
-              {textPicker && (
-                <div className={classes.textPicker}>
-                  <CompactPicker onChangeComplete={handleChangeText} />
-                </div>
-              )}
-            </div>
           </div>
           <div className={classes.largeNavigation}>
             {language
