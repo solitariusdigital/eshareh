@@ -12,20 +12,20 @@ import { NextSeo } from "next-seo";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { getSolutionApi, updateSolutionApi } from "@/services/api";
 
 export default function Solution({ project, previousProject, nextProject }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
-  const [isFullWidth, setIsFullWidth] = useState([]);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayController, setDisplayController] = useState(false);
-
-  useEffect(() => {
-    setIsFullWidth(Array(project.media.length).fill(true));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const targetRef = useRef(null);
 
@@ -88,6 +88,24 @@ export default function Solution({ project, previousProject, nextProject }) {
     document.body.style.overflow = "hidden";
   };
 
+  const manageSolution = async (id, type) => {
+    const message = `${type === "show" ? "انتشار مطمئنی؟" : "پنهان مطمئنی؟"}`;
+    const confirm = window.confirm(message);
+    if (confirm) {
+      let data = await getSolutionApi(id);
+      switch (type) {
+        case "show":
+          data.active = true;
+          break;
+        case "hide":
+          data.active = false;
+          break;
+      }
+      await updateSolutionApi(data);
+      window.location.reload();
+    }
+  };
+
   return (
     <Fragment>
       <NextSeo
@@ -107,6 +125,29 @@ export default function Solution({ project, previousProject, nextProject }) {
         }}
       />
       <div className={classes.container}>
+        {permissionControl === "admin" && (
+          <div className={classes.controlPanel}>
+            {project.active ? (
+              <VerifiedUserIcon sx={{ color: "#57a361" }} />
+            ) : (
+              <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+            )}
+            {!project.active ? (
+              <TaskAltIcon
+                className="icon"
+                sx={{ color: "#57a361" }}
+                onClick={() => manageSolution(project["_id"], "show")}
+              />
+            ) : (
+              <CloseIcon
+                className="icon"
+                sx={{ color: "#cd3d2c" }}
+                onClick={() => manageSolution(project["_id"], "hide")}
+              />
+            )}
+            <EditIcon className="icon" sx={{ color: "#fdb714" }} />
+          </div>
+        )}
         <div
           className={
             language ? classes.information : classes.informationReverse
