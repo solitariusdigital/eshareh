@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
   const { language, setLanguage } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
@@ -50,6 +51,11 @@ export default function RootLayout({ children }) {
           const userData = await getUserApi(currentUser["_id"]);
           setCurrentUser(userData);
           secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
+          if (userData.permission === "admin") {
+            setPermissionControl("admin");
+          } else {
+            setPermissionControl("user");
+          }
         }
         const colorObject = await getControlsApi();
         setMenuColor(colorObject[0].menu);
@@ -61,7 +67,7 @@ export default function RootLayout({ children }) {
     setTimeout(() => {
       setAppLoader(true);
     }, 1000);
-  }, [setCurrentUser, setMenuColor]);
+  }, [setCurrentUser, setMenuColor, setPermissionControl]);
 
   useEffect(() => {
     navigationTopBar.map((nav) => {

@@ -7,18 +7,15 @@ import secureLocalStorage from "react-secure-storage";
 
 export default function Admin() {
   const [displaySolutionsForm, setDisplaySolutionsForm] = useState(false);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
 
   useEffect(() => {
-    if (
-      !JSON.parse(secureLocalStorage.getItem("currentUser")) ||
-      JSON.parse(secureLocalStorage.getItem("currentUser"))["permission"] !==
-        "admin"
-    ) {
-      Router.push("/");
+    if (permissionControl !== "admin") {
+      Router.push("/portal");
     } else {
       setDisplaySolutionsForm(true);
     }
-  }, []);
+  }, [permissionControl]);
 
   return (
     <div className={classes.container}>

@@ -12,6 +12,7 @@ export const StateProvider = (props) => {
   const [screenSize, setScreenSize] = useState(
     "desktop" || "tablet" || "mobile"
   );
+  const [permissionControl, setPermissionControl] = useState("user" || "admin");
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
       title: {
@@ -82,6 +83,8 @@ export const StateProvider = (props) => {
     setDisplayMenu,
     displayFooter,
     setFooter,
+    permissionControl,
+    setPermissionControl,
   };
   return (
     <StateContext.Provider value={stateContext}>

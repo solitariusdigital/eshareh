@@ -20,6 +20,7 @@ export default function Menu() {
   const { menuMobile, setMenuMobile } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { menuColor, setMenuColor } = useContext(StateContext);
   const [desktop, setDesktop] = useState(false);
   const [colorPicker, setColorPicker] = useState(false);
@@ -113,39 +114,36 @@ export default function Menu() {
                 priority
               />
             </div>
-            {JSON.parse(secureLocalStorage.getItem("currentUser")) &&
-              JSON.parse(secureLocalStorage.getItem("currentUser"))[
-                "permission"
-              ] === "admin" && (
-                <div>
-                  <ColorLensIcon
-                    className="icon"
-                    onClick={() => {
-                      setColorPicker(!colorPicker);
-                      setTextPicker(false);
-                    }}
-                    sx={{ color: colorPicker ? "#fdb714" : "#d6d6d6" }}
-                  />
-                  <CreateIcon
-                    className="icon"
-                    onClick={() => {
-                      setTextPicker(!textPicker);
-                      setColorPicker(false);
-                    }}
-                    sx={{ color: textPicker ? "#fdb714" : "#d6d6d6" }}
-                  />
-                  {colorPicker && (
-                    <div className={classes.colorPicker}>
-                      <CompactPicker onChangeComplete={handleChangeColor} />
-                    </div>
-                  )}
-                  {textPicker && (
-                    <div className={classes.textPicker}>
-                      <CompactPicker onChangeComplete={handleChangeText} />
-                    </div>
-                  )}
-                </div>
-              )}
+            {permissionControl === "admin" && (
+              <div>
+                <ColorLensIcon
+                  className="icon"
+                  onClick={() => {
+                    setColorPicker(!colorPicker);
+                    setTextPicker(false);
+                  }}
+                  sx={{ color: colorPicker ? "#fdb714" : "#d6d6d6" }}
+                />
+                <CreateIcon
+                  className="icon"
+                  onClick={() => {
+                    setTextPicker(!textPicker);
+                    setColorPicker(false);
+                  }}
+                  sx={{ color: textPicker ? "#fdb714" : "#d6d6d6" }}
+                />
+                {colorPicker && (
+                  <div className={classes.colorPicker}>
+                    <CompactPicker onChangeComplete={handleChangeColor} />
+                  </div>
+                )}
+                {textPicker && (
+                  <div className={classes.textPicker}>
+                    <CompactPicker onChangeComplete={handleChangeText} />
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           <div className={classes.largeNavigation}>
             {language
