@@ -7,7 +7,7 @@ import Image from "next/legacy/image";
 import logo from "@/assets/logo.png";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import secureLocalStorage from "react-secure-storage";
-import { getUserApi } from "@/services/api";
+import { getUserApi, getControlsApi } from "@/services/api";
 
 export default function RootLayout({ children }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
+  const { menuColor, setMenuColor } = useContext(StateContext);
   const [appLoader, setAppLoader] = useState(false);
   const [scrollArrow, setScrollArrow] = useState(false);
 
@@ -50,6 +51,8 @@ export default function RootLayout({ children }) {
           setCurrentUser(userData);
           secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
         }
+        const colorObject = await getControlsApi();
+        setMenuColor(colorObject[0].menu);
       } catch (error) {
         console.error(error);
       }
@@ -58,7 +61,7 @@ export default function RootLayout({ children }) {
     setTimeout(() => {
       setAppLoader(true);
     }, 1000);
-  }, [setCurrentUser]);
+  }, [setCurrentUser, setMenuColor]);
 
   useEffect(() => {
     navigationTopBar.map((nav) => {

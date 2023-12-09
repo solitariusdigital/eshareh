@@ -77,3 +77,34 @@ export const getSolutionsApi = async () => {
   });
   return await response.json();
 };
+
+// controls api
+export const updateControlApi = async (data) => {
+  const response = await fetch("/api/controls", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createControlApi = async (data) => {
+  const response = await fetch("/api/controls", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getControlsApi = async () => {
+  const response = await fetch("/api/controls", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

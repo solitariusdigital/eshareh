@@ -10,6 +10,8 @@ import logoFarsi from "@/assets/logoFarsi.png";
 import SearchIcon from "@mui/icons-material/Search";
 import { CompactPicker } from "react-color";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
+import CreateIcon from "@mui/icons-material/Create";
+import { getControlsApi, updateControlApi } from "@/services/api";
 
 export default function Menu() {
   const { language, setLanguage } = useContext(StateContext);
@@ -20,6 +22,7 @@ export default function Menu() {
   const { menuColor, setMenuColor } = useContext(StateContext);
   const [desktop, setDesktop] = useState(false);
   const [colorPicker, setColorPicker] = useState(false);
+  const [textPicker, setTextPicker] = useState(false);
 
   useEffect(() => {
     const checkDeviceType = () => {
@@ -46,11 +49,36 @@ export default function Menu() {
     setNavigationTopBar([...navigationTopBar]);
   };
 
-  const handleChangeComplete = (color, event) => {
-    setMenuColor({
-      text: "#1b1b1b",
+  const handleChangeColor = async (color, event) => {
+    setMenuColor((prevData) => ({
+      ...prevData,
       background: color.hex,
-    });
+    }));
+    let data = {
+      menu: {
+        ...menuColor,
+        background: color.hex,
+      },
+    };
+    saveColorObject(data);
+  };
+  const handleChangeText = async (color, event) => {
+    setMenuColor((prevData) => ({
+      ...prevData,
+      text: color.hex,
+    }));
+    let data = {
+      menu: {
+        ...menuColor,
+        text: color.hex,
+      },
+    };
+    saveColorObject(data);
+  };
+  const saveColorObject = async (data) => {
+    let colorObject = await getControlsApi();
+    data.id = colorObject[0]["_id"];
+    await updateControlApi(data);
   };
 
   const toggleLanguage = () => {
@@ -87,12 +115,28 @@ export default function Menu() {
             <div>
               <ColorLensIcon
                 className="icon"
-                onClick={() => setColorPicker(!colorPicker)}
-                sx={{ color: "#fdb714" }}
+                onClick={() => {
+                  setColorPicker(!colorPicker);
+                  setTextPicker(false);
+                }}
+                sx={{ color: colorPicker ? "#fdb714" : "#d6d6d6" }}
+              />
+              <CreateIcon
+                className="icon"
+                onClick={() => {
+                  setTextPicker(!textPicker);
+                  setColorPicker(false);
+                }}
+                sx={{ color: textPicker ? "#fdb714" : "#d6d6d6" }}
               />
               {colorPicker && (
                 <div className={classes.colorPicker}>
-                  <CompactPicker onChangeComplete={handleChangeComplete} />
+                  <CompactPicker onChangeComplete={handleChangeColor} />
+                </div>
+              )}
+              {textPicker && (
+                <div className={classes.textPicker}>
+                  <CompactPicker onChangeComplete={handleChangeText} />
                 </div>
               )}
             </div>

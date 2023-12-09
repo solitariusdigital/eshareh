@@ -6,10 +6,7 @@ export const StateProvider = (props) => {
   const [languageType, setLanguageType] = useState("en");
   const [currentUser, setCurrentUser] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
-  const [menuColor, setMenuColor] = useState({
-    text: "#1b1b1b",
-    background: "#ffffff",
-  });
+  const [menuColor, setMenuColor] = useState({});
   const [displayMenu, setDisplayMenu] = useState(true);
   const [displayFooter, setFooter] = useState(true);
   const [screenSize, setScreenSize] = useState(

@@ -19,7 +19,13 @@
 
     .colorPicker {
       position: absolute;
-      right: 200px;
+      right: 220px;
+      top: 0px;
+    }
+
+    .textPicker {
+      position: absolute;
+      right: 220px;
       top: 0px;
     }
   }
@@ -28,7 +34,11 @@
     flex-direction: row;
 
     .colorPicker {
-      left: 200px;
+      left: 220px;
+    }
+
+    .textPicker {
+      left: 220px;
     }
   }
 
