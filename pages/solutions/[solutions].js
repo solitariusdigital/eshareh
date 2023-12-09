@@ -235,18 +235,25 @@ export default function Solution({ project, previousProject, nextProject }) {
 export async function getServerSideProps(context) {
   try {
     await dbConnect();
-    const projects = await solutionModel.find();
-    let project = projects.find(
+    const solutions = await solutionModel.find();
+    let activeSolutions = solutions
+      .filter((project) => project.active)
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    let project = activeSolutions.find(
       (p) =>
         p.en.title === replaceSpacesAndHyphens(context.query.solutions) ||
         p.fa.title === replaceSpacesAndHyphens(context.query.solutions)
     );
     // Find the index of the project with the given id
-    let index = projects.findIndex((p) => p["_id"] === project["_id"]);
+    let index = activeSolutions.findIndex((p) => p["_id"] === project["_id"]);
     let previousProject =
-      index === 0 ? projects[projects.length - 1] : projects[index - 1];
+      index === 0
+        ? activeSolutions[activeSolutions.length - 1]
+        : activeSolutions[index - 1];
     let nextProject =
-      index === projects.length - 1 ? projects[0] : projects[index + 1];
+      index === activeSolutions.length - 1
+        ? activeSolutions[0]
+        : activeSolutions[index + 1];
     return {
       props: {
         project: JSON.parse(JSON.stringify(project)),
