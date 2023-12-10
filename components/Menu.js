@@ -12,6 +12,7 @@ import { CompactPicker } from "react-color";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import { getControlsApi, updateControlApi } from "@/services/api";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Menu() {
   const { language, setLanguage } = useContext(StateContext);
@@ -115,22 +116,27 @@ export default function Menu() {
             </div>
             {permissionControl === "admin" && (
               <div>
-                <ColorLensIcon
-                  className="icon"
-                  onClick={() => {
-                    setColorPicker(!colorPicker);
-                    setTextPicker(false);
-                  }}
-                  sx={{ color: colorPicker ? "#fdb714" : "#1b1b1b" }}
-                />
-                <AutoFixNormalIcon
-                  className="icon"
-                  onClick={() => {
-                    setTextPicker(!textPicker);
-                    setColorPicker(false);
-                  }}
-                  sx={{ color: textPicker ? "#fdb714" : "#1b1b1b" }}
-                />
+                <Tooltip title="Background">
+                  <ColorLensIcon
+                    className="icon"
+                    onClick={() => {
+                      setColorPicker(!colorPicker);
+                      setTextPicker(false);
+                    }}
+                    sx={{ color: colorPicker ? "#fdb714" : "#1b1b1b" }}
+                  />
+                </Tooltip>
+                <Tooltip title="Text">
+                  <AutoFixNormalIcon
+                    className="icon"
+                    onClick={() => {
+                      setTextPicker(!textPicker);
+                      setColorPicker(false);
+                    }}
+                    sx={{ color: textPicker ? "#fdb714" : "#1b1b1b" }}
+                  />
+                </Tooltip>
+
                 {colorPicker && (
                   <div className={classes.colorPicker}>
                     <CompactPicker onChangeComplete={handleChangeColor} />
