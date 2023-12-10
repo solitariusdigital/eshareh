@@ -4,22 +4,45 @@ import classes from "./search.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { NextSeo } from "next-seo";
 import Image from "next/legacy/image";
-import {
-  enToFaDigits,
-  onlyLettersAndNumbers,
-  faToEnDigits,
-} from "@/services/utility";
+import dbConnect from "@/services/dbConnect";
+import solutionModel from "@/models/Solution";
+import { replaceSpacesAndHyphens } from "@/services/utility";
+import Router from "next/router";
 
-export default function Search() {
+export default function Search({ activeSolutions }) {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
   const [search, setSearch] = useState("");
-  const [documents, setDocuments] = useState([]);
-  const [selectedItem, setSelectedItem] = useState({});
-  const [displayDetails, setDisplayDetails] = useState(false);
+  const [solutions, setSolutions] = useState([]);
   const [searchEmpty, setSearchEmpty] = useState(false);
-  const [expandedItem, setExpandedItem] = useState(null);
 
-  const searchDocuments = () => {};
+  const searchSolutions = () => {
+    setSearchEmpty(false);
+    let searchSolutions = [];
+    if (search) {
+      searchSolutions = activeSolutions.filter((item) => {
+        let matches = [];
+        matches.push(
+          Object.values(item[languageType]).some((val) =>
+            String(val).includes(search.trim().slice(0, 20))
+          )
+        );
+        return matches.every((match) => match);
+      });
+      setSolutions(searchSolutions);
+    }
+    if (searchSolutions.length === 0) {
+      setSearchEmpty(true);
+    }
+  };
+
+  const directSolution = (project) => {
+    let link = `/solutions/${replaceSpacesAndHyphens(
+      project[languageType].title
+    )}`;
+    Router.push(link);
+  };
 
   return (
     <Fragment>
@@ -45,7 +68,7 @@ export default function Search() {
             language ? classes.inputSearch : classes.inputSearchReverse
           }
         >
-          <div className={classes.action} onClick={() => searchDocuments()}>
+          <div className={classes.action} onClick={() => searchSolutions()}>
             {language ? "جستجو" : "Search"}
           </div>
           <input
@@ -69,7 +92,7 @@ export default function Search() {
           <CloseIcon
             className="icon"
             onClick={() => {
-              setDocuments([]);
+              setSolutions([]);
               setSearch("");
               setSearchEmpty(false);
             }}
@@ -79,7 +102,69 @@ export default function Search() {
         {searchEmpty && (
           <p className="message">مطلبی برای نمایش موجود نیست جستجو کنید</p>
         )}
+        <div className={classes.gridList}>
+          {solutions.map((project, index) => {
+            const { title } = project[languageType];
+            const { media } = project;
+            return (
+              <Fragment key={index}>
+                <div
+                  className={classes.project}
+                  onClick={() => directSolution(project)}
+                >
+                  <div className={classes.box}>
+                    {media[0].type === "image" ? (
+                      <Image
+                        className={classes.image}
+                        src={media[0].link}
+                        placeholder="blur"
+                        blurDataURL={media[0].link}
+                        alt={title}
+                        layout="fill"
+                        objectFit="cover"
+                        as="image"
+                        priority
+                      />
+                    ) : (
+                      <video
+                        className={classes.video}
+                        src={media[0].link}
+                        preload="metadata"
+                      />
+                    )}
+                  </div>
+                  <div
+                    className={language ? classes.title : classes.titleReverse}
+                  >
+                    <h3>{title}</h3>
+                  </div>
+                </div>
+              </Fragment>
+            );
+          })}
+        </div>
       </div>
     </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const solutions = await solutionModel.find();
+    let activeSolutions = solutions
+      .filter((project) => project.active)
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    return {
+      props: {
+        activeSolutions: JSON.parse(JSON.stringify(activeSolutions)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }

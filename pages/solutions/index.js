@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import classes from "./solutions.module.scss";
 import Image from "next/legacy/image";
 import Router from "next/router";
-import { replaceSpacesAndHyphens, enToFaDigits } from "@/services/utility";
+import { replaceSpacesAndHyphens } from "@/services/utility";
 import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
