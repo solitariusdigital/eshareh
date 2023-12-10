@@ -12,7 +12,6 @@ import Router from "next/router";
 export default function Search({ activeSolutions }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
-  const { screenSize, setScreenSize } = useContext(StateContext);
   const [search, setSearch] = useState("");
   const [solutions, setSolutions] = useState([]);
   const [searchEmpty, setSearchEmpty] = useState(false);
