@@ -5,6 +5,7 @@ export const StateProvider = (props) => {
   const [language, setLanguage] = useState(false);
   const [languageType, setLanguageType] = useState("en");
   const [currentUser, setCurrentUser] = useState(null);
+  const [editSolution, setEditSolution] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuColor, setMenuColor] = useState({});
   const [displayMenu, setDisplayMenu] = useState(true);
@@ -85,6 +86,8 @@ export const StateProvider = (props) => {
     setFooter,
     permissionControl,
     setPermissionControl,
+    editSolution,
+    setEditSolution,
   };
   return (
     <StateContext.Provider value={stateContext}>

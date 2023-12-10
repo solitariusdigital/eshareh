@@ -15,6 +15,8 @@ export default function Portal() {
   const { language, setLanguage } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
+  const { editSolution, setEditSolution } = useContext(StateContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
@@ -31,8 +33,9 @@ export default function Portal() {
   useEffect(() => {
     if (permissionControl === "admin") {
       Router.push("/admin");
+      setEditSolution(null);
     }
-  }, [permissionControl]);
+  }, [permissionControl, setEditSolution]);
 
   const validateEmail = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -24,6 +24,7 @@ export default function Solution({ solutions, projectTitle }) {
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
+  const { editSolution, setEditSolution } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayNextController, setDisplayNextController] = useState(false);
   const [project, setProject] = useState(null);
@@ -195,7 +196,14 @@ export default function Solution({ solutions, projectTitle }) {
                       onClick={() => manageSolution(project["_id"], "hide")}
                     />
                   )}
-                  <EditIcon className="icon" sx={{ color: "#fdb714" }} />
+                  <EditIcon
+                    className="icon"
+                    sx={{ color: "#fdb714" }}
+                    onClick={() => {
+                      Router.push("/admin");
+                      setEditSolution(project);
+                    }}
+                  />
                 </div>
               )}
               <h3 className={classes.description}>

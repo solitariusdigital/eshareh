@@ -9,13 +9,39 @@ import { createSolutionApi } from "@/services/api";
 
 export default function SolutionsForm() {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
+  const { editSolution, setEditSolution } = useContext(StateContext);
 
-  const [title, setTitle] = useState({ en: "", fa: "" });
-  const [subtitle, setSubtitle] = useState({ en: "", fa: "" });
-  const [summary, setSummary] = useState({ en: "", fa: "" });
-  const [problem, setProblem] = useState({ en: "", fa: "" });
-  const [solution, setSolution] = useState({ en: "", fa: "" });
-  const [year, setYear] = useState({ en: "", fa: "" });
+  const [title, setTitle] = useState(
+    editSolution
+      ? { en: editSolution.en.title, fa: editSolution.fa.title }
+      : { en: "", fa: "" }
+  );
+  const [subtitle, setSubtitle] = useState(
+    editSolution
+      ? { en: editSolution.en.subtitle, fa: editSolution.fa.subtitle }
+      : { en: "", fa: "" }
+  );
+  const [summary, setSummary] = useState(
+    editSolution
+      ? { en: editSolution.en.summary, fa: editSolution.fa.summary }
+      : { en: "", fa: "" }
+  );
+  const [problem, setProblem] = useState(
+    editSolution
+      ? { en: editSolution.en.problem, fa: editSolution.fa.problem }
+      : { en: "", fa: "" }
+  );
+  const [solution, setSolution] = useState(
+    editSolution
+      ? { en: editSolution.en.solution, fa: editSolution.fa.solution }
+      : { en: "", fa: "" }
+  );
+  const [year, setYear] = useState(
+    editSolution
+      ? { en: editSolution.en.year, fa: editSolution.fa.year }
+      : { en: "", fa: "" }
+  );
   const [category, setCategory] = useState("");
 
   const [imagesPreview, setImagesPreview] = useState([]);
@@ -405,7 +431,10 @@ export default function SolutionsForm() {
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="default" disabled>
-                Select
+                {editSolution
+                  ? editSolution.en.category.charAt(0).toUpperCase() +
+                    editSolution.en.category.slice(1)
+                  : "Select"}
               </option>
               {categories.map((category, index) => {
                 return (
@@ -621,7 +650,7 @@ export default function SolutionsForm() {
             </div>
             <input
               style={{
-                fontFamily: "Farsi",
+                fontFamily: "English",
               }}
               type="tel"
               id="year"
