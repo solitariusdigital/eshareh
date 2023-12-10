@@ -35,17 +35,17 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
 
   const categories = [
     {
-      name: "advertising",
+      name: { en: "advertising", fa: "تبلیغات" },
       labelFa: "تبلیغات",
       labelEn: "Advertising",
     },
     {
-      name: "media",
+      name: { en: "media", fa: "رسانه" },
       labelFa: "رسانه",
       labelEn: "Media",
     },
     {
-      name: "digital",
+      name: { en: "digital", fa: "دیجیتال" },
       labelFa: "دیجیتال",
       labelEn: "Digital",
     },
@@ -56,11 +56,23 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
       fa: "تلویزیونی تخمه های آفتاب گردان کمپین های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
       en: "Advertising Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
     },
+    تبلیغات: {
+      fa: "تلویزیونی تخمه های آفتاب گردان کمپین های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
+      en: "Advertising Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+    },
     media: {
       fa: "تلویزیونی تخمه های آفتاب گردان کمپین های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
       en: "Media Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
     },
+    رسانه: {
+      fa: "تلویزیونی تخمه های آفتاب گردان کمپین های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
+      en: "Media Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+    },
     digital: {
+      fa: "تلویزیونی تخمه های آفتاب گردان کمپین های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
+      en: "Digital Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
+    },
+    دیجیتال: {
       fa: "تلویزیونی تخمه های آفتاب گردان کمپین های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های های آفتاب گردان کمپین  تلویزیونی  تخمه های تلویزیونی تخمه های آفتاب گردان تلویزیونی تخمه های آفتاب گردان وی نات",
       en: "Digital Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts",
     },
@@ -105,12 +117,14 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
         <div className={classes.category}>
           {categories.map((item, index) => (
             <p
-              key={item.name}
+              key={index}
               className={
-                category === item.name ? classes.navActive : classes.nav
+                category === item.name[languageType]
+                  ? classes.navActive
+                  : classes.nav
               }
               onClick={() => {
-                setCategory(item.name);
+                setCategory(item.name[languageType]);
               }}
             >
               {language ? item.labelFa : item.labelEn}

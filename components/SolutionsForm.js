@@ -16,11 +16,11 @@ export default function SolutionsForm() {
   const [problem, setProblem] = useState({ en: "", fa: "" });
   const [solution, setSolution] = useState({ en: "", fa: "" });
   const [year, setYear] = useState({ en: "", fa: "" });
-  const [category, setCategory] = useState({ en: "", fa: "" });
+  const [category, setCategory] = useState("");
 
   const [imagesPreview, setImagesPreview] = useState([]);
   const [videosPreview, setVideosPreview] = useState([]);
-  const categories = ["advertising", "media", "digital"];
+  const categories = ["Advertising", "Media", "Digital"];
 
   const [uploadImages, setUploadImages] = useState([]);
   const [uploadVideos, setUploadVideos] = useState([]);
@@ -30,6 +30,21 @@ export default function SolutionsForm() {
   const [loader, setLoader] = useState(false);
 
   const sourceLink = "https://eshareh.storage.iran.liara.space";
+
+  const selectCategories = {
+    Advertising: {
+      fa: "تبلیغات",
+      en: "advertising",
+    },
+    Media: {
+      fa: "رسانه",
+      en: "media",
+    },
+    Digital: {
+      fa: "دیجیتال",
+      en: "digital",
+    },
+  };
 
   const handleImageChange = (event) => {
     const array = Array.from(event.target.files);
@@ -123,7 +138,7 @@ export default function SolutionsForm() {
         problem: problem.fa,
         solution: solution.fa,
         year: year.fa,
-        category: category.fa,
+        category: selectCategories[category].fa,
       },
       en: {
         title: title.en,
@@ -132,7 +147,7 @@ export default function SolutionsForm() {
         problem: problem.en,
         solution: solution.en,
         year: year.en,
-        category: category.en,
+        category: selectCategories[category].en,
       },
       media: mediaLinks,
       active: false,
@@ -387,12 +402,7 @@ export default function SolutionsForm() {
             </div>
             <select
               defaultValue={"default"}
-              onChange={(e) =>
-                setCategory({
-                  fa: e.target.value,
-                  en: e.target.value,
-                })
-              }
+              onChange={(e) => setCategory(e.target.value)}
             >
               <option value="default" disabled>
                 Select
