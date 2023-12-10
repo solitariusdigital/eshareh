@@ -16,21 +16,21 @@ export default function Search({ activeSolutions }) {
   const [solutions, setSolutions] = useState([]);
   const [searchEmpty, setSearchEmpty] = useState(false);
 
-  const searchSolutions = () => {
+  const searchSolutions = (event) => {
+    setSearch(event);
     setSearchEmpty(false);
     let searchSolutions = [];
-    if (search) {
-      searchSolutions = activeSolutions.filter((item) => {
-        let matches = [];
-        matches.push(
-          Object.values(item[languageType]).some((val) =>
-            String(val).includes(search.trim().slice(0, 20))
-          )
-        );
-        return matches.every((match) => match);
-      });
-      setSolutions(searchSolutions);
-    }
+    searchSolutions = activeSolutions.filter((item) => {
+      let matches = [];
+      matches.push(
+        Object.values(item[languageType]).some((val) =>
+          String(val).includes(search.trim().slice(0, 20))
+        )
+      );
+      return matches.every((match) => match);
+    });
+    setSolutions(searchSolutions);
+
     if (searchSolutions.length === 0) {
       setSearchEmpty(true);
     }
@@ -82,7 +82,7 @@ export default function Search({ activeSolutions }) {
             type="text"
             id="search"
             name="search"
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => searchSolutions(e.target.value)}
             maxLength={30}
             value={search}
             autoComplete="off"
@@ -101,7 +101,7 @@ export default function Search({ activeSolutions }) {
         {searchEmpty && (
           <p className="message">
             {language
-              ? "مطلبی برای نمایش موجود نیست جستجو کنید"
+              ? "مطلبی برای نمایش نیست، دوباره جستجو کن"
               : "There is no content to display, search again"}
           </p>
         )}

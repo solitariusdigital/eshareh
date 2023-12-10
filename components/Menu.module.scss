@@ -101,14 +101,15 @@
 
 .nav {
   font-size: config.$small-font;
-  @include mixins.row-space-between-center();
   cursor: pointer;
+  @include mixins.row-space-between-center();
 }
 
 .navActive {
   font-size: config.$small-font;
   color: config.$yellow;
   font-weight: bold;
+  cursor: pointer;
   @include mixins.row-space-between-center();
 }
 

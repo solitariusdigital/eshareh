@@ -172,9 +172,7 @@ export default function Menu() {
                             onClick={() => activateNav(nav.link, index)}
                           >
                             {nav.title[languageType] === "" && (
-                              <SearchIcon
-                                sx={{ fontSize: 24, color: menuColor.text }}
-                              />
+                              <SearchIcon sx={{ fontSize: 24 }} />
                             )}
                           </a>
                         </div>
@@ -229,9 +227,7 @@ export default function Menu() {
                           onClick={() => activateNav(nav.link, index)}
                         >
                           {nav.title[languageType] === "" && (
-                            <SearchIcon
-                              sx={{ fontSize: 24, color: menuColor.text }}
-                            />
+                            <SearchIcon sx={{ fontSize: 24 }} />
                           )}
                         </a>
                       </div>
