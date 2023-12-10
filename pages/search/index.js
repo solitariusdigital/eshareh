@@ -99,7 +99,11 @@ export default function Search({ activeSolutions }) {
           />
         </div>
         {searchEmpty && (
-          <p className="message">مطلبی برای نمایش موجود نیست جستجو کنید</p>
+          <p className="message">
+            {language
+              ? "مطلبی برای نمایش موجود نیست جستجو کنید"
+              : "There is no content to display, search again"}
+          </p>
         )}
         <div className={classes.gridList}>
           {solutions.map((project, index) => {

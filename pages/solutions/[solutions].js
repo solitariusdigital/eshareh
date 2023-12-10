@@ -16,6 +16,7 @@ import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import Tooltip from "@mui/material/Tooltip";
 import { getSolutionApi, updateSolutionApi } from "@/services/api";
 
 export default function Solution({ solutions, projectTitle }) {
@@ -170,42 +171,49 @@ export default function Solution({ solutions, projectTitle }) {
               siteName: "Eshareh Advertising Agency",
             }}
           />
+          {permissionControl === "admin" && !displayGallerySlider && (
+            <div className={classes.controlPanel}>
+              {project.active ? (
+                <Tooltip title="Visible">
+                  <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                </Tooltip>
+              ) : (
+                <Tooltip title="Hidden">
+                  <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                </Tooltip>
+              )}
+              {!project.active ? (
+                <Tooltip title="Publish">
+                  <TaskAltIcon
+                    className="icon"
+                    onClick={() => manageSolution(project["_id"], "show")}
+                  />
+                </Tooltip>
+              ) : (
+                <Tooltip title="Hide">
+                  <CloseIcon
+                    className="icon"
+                    onClick={() => manageSolution(project["_id"], "hide")}
+                  />
+                </Tooltip>
+              )}
+              <Tooltip title="Edit">
+                <EditIcon
+                  className="icon"
+                  onClick={() => {
+                    Router.push("/admin");
+                    setEditSolution(project);
+                  }}
+                />
+              </Tooltip>
+            </div>
+          )}
           <div className={classes.container}>
             <div
               className={
                 language ? classes.information : classes.informationReverse
               }
             >
-              {permissionControl === "admin" && !displayGallerySlider && (
-                <div className={classes.controlPanel}>
-                  {project.active ? (
-                    <VerifiedUserIcon sx={{ color: "#57a361" }} />
-                  ) : (
-                    <VisibilityOffIcon sx={{ color: "#d40d12" }} />
-                  )}
-                  {!project.active ? (
-                    <TaskAltIcon
-                      className="icon"
-                      sx={{ color: "#57a361" }}
-                      onClick={() => manageSolution(project["_id"], "show")}
-                    />
-                  ) : (
-                    <CloseIcon
-                      className="icon"
-                      sx={{ color: "#cd3d2c" }}
-                      onClick={() => manageSolution(project["_id"], "hide")}
-                    />
-                  )}
-                  <EditIcon
-                    className="icon"
-                    sx={{ color: "#fdb714" }}
-                    onClick={() => {
-                      Router.push("/admin");
-                      setEditSolution(project);
-                    }}
-                  />
-                </div>
-              )}
               <h3 className={classes.description}>
                 {project[languageType].summary}
               </h3>

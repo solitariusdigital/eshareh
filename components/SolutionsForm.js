@@ -1,15 +1,19 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./SolutionsForm.module.scss";
 import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";
-import { fourGenerator, sixGenerator, uploadMedia } from "@/services/utility";
-import { createSolutionApi } from "@/services/api";
+import {
+  fourGenerator,
+  sixGenerator,
+  uploadMedia,
+  replaceSpacesAndHyphens,
+} from "@/services/utility";
+import { createSolutionApi, updateSolutionApi } from "@/services/api";
 
 export default function SolutionsForm() {
   const { language, setLanguage } = useContext(StateContext);
-  const { languageType, setLanguageType } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
 
   const [title, setTitle] = useState(
@@ -42,7 +46,11 @@ export default function SolutionsForm() {
       ? { en: editSolution.en.year, fa: editSolution.fa.year }
       : { en: "", fa: "" }
   );
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(
+    editSolution
+      ? { en: editSolution.en.category, fa: editSolution.fa.category }
+      : { en: "", fa: "" }
+  );
 
   const [imagesPreview, setImagesPreview] = useState([]);
   const [videosPreview, setVideosPreview] = useState([]);
@@ -78,7 +86,7 @@ export default function SolutionsForm() {
     setImagesPreview(
       array.map((item) => ({
         file: item,
-        url: URL.createObjectURL(item),
+        link: URL.createObjectURL(item),
       }))
     );
   };
@@ -88,7 +96,7 @@ export default function SolutionsForm() {
     setVideosPreview(
       array.map((item) => ({
         file: item,
-        url: URL.createObjectURL(item),
+        link: URL.createObjectURL(item),
       }))
     );
   };
@@ -118,7 +126,11 @@ export default function SolutionsForm() {
       return;
     }
 
-    if (imagesPreview.length === 0 && videosPreview.length === 0) {
+    if (
+      !editSolution &&
+      imagesPreview.length === 0 &&
+      videosPreview.length === 0
+    ) {
       showAlert("انتخاب عکس یا ویدئو");
       return;
     }
@@ -164,7 +176,7 @@ export default function SolutionsForm() {
         problem: problem.fa,
         solution: solution.fa,
         year: year.fa,
-        category: selectCategories[category].fa,
+        category: category.fa,
       },
       en: {
         title: title.en,
@@ -173,14 +185,19 @@ export default function SolutionsForm() {
         problem: problem.en,
         solution: solution.en,
         year: year.en,
-        category: selectCategories[category].en,
+        category: category.en,
       },
-      media: mediaLinks,
+      media: editSolution ? editSolution.media : mediaLinks,
       active: false,
     };
-
-    await createSolutionApi(solutionData);
-    window.location.assign("/solutions");
+    if (editSolution) {
+      solutionData.id = editSolution["_id"];
+      await updateSolutionApi(solutionData);
+    } else {
+      await createSolutionApi(solutionData);
+    }
+    let link = `/solutions/${replaceSpacesAndHyphens(solutionData.en.title)}`;
+    window.location.assign(link);
   };
 
   const areAllStatesValid = (states) => {
@@ -428,7 +445,12 @@ export default function SolutionsForm() {
             </div>
             <select
               defaultValue={"default"}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={(e) =>
+                setCategory({
+                  fa: selectCategories[e.target.value].fa,
+                  en: selectCategories[e.target.value].en,
+                })
+              }
             >
               <option value="default" disabled>
                 {editSolution
@@ -674,72 +696,74 @@ export default function SolutionsForm() {
           fontFamily: language ? "Farsi" : "Farsi",
         }}
       >
-        <div className={classes.mediaContainer}>
-          <div className={classes.media}>
-            <label className="file">
-              <input
-                onChange={handleImageChange}
-                id="inputImage"
-                type="file"
-                accept="image/*"
-                multiple
-              />
-              <p>عکس</p>
-            </label>
-            <CloseIcon
-              className={classes.clearMedia}
-              onClick={() => {
-                setImagesPreview([]);
-                removeImageInputFile();
-              }}
-              sx={{ fontSize: 16 }}
-            />
-            <div className={classes.preview}>
-              {imagesPreview.map((image, index) => (
-                <Image
-                  key={index}
-                  width={300}
-                  height={200}
-                  objectFit="contain"
-                  src={image.url}
-                  alt="image"
-                  priority
+        {!editSolution && (
+          <div className={classes.mediaContainer}>
+            <div className={classes.media}>
+              <label className="file">
+                <input
+                  onChange={handleImageChange}
+                  id="inputImage"
+                  type="file"
+                  accept="image/*"
+                  multiple
                 />
-              ))}
+                <p>عکس</p>
+              </label>
+              <CloseIcon
+                className={classes.clearMedia}
+                onClick={() => {
+                  setImagesPreview([]);
+                  removeImageInputFile();
+                }}
+                sx={{ fontSize: 16 }}
+              />
+              <div className={classes.preview}>
+                {imagesPreview.map((image, index) => (
+                  <Image
+                    key={index}
+                    width={300}
+                    height={200}
+                    objectFit="contain"
+                    src={image.link}
+                    alt="image"
+                    priority
+                  />
+                ))}
+              </div>
+            </div>
+            <div className={classes.media}>
+              <label className="file">
+                <input
+                  onChange={handleVideoChange}
+                  id="inputVideo"
+                  type="file"
+                  accept="video/*"
+                  multiple
+                />
+                <p>ویدئو</p>
+              </label>
+              <CloseIcon
+                className={classes.clearMedia}
+                onClick={() => {
+                  setVideosPreview([]);
+                  removeVideoInputFile();
+                }}
+                sx={{ fontSize: 16 }}
+              />
+              <div className={classes.preview}>
+                {videosPreview.map((video, index) => (
+                  <video
+                    key={index}
+                    className={classes.video}
+                    preload="metadata"
+                    src={video.link}
+                    controls
+                  />
+                ))}
+              </div>
             </div>
           </div>
-          <div className={classes.media}>
-            <label className="file">
-              <input
-                onChange={handleVideoChange}
-                id="inputVideo"
-                type="file"
-                accept="video/*"
-                multiple
-              />
-              <p>ویدئو</p>
-            </label>
-            <CloseIcon
-              className={classes.clearMedia}
-              onClick={() => {
-                setVideosPreview([]);
-                removeVideoInputFile();
-              }}
-              sx={{ fontSize: 16 }}
-            />
-            <div className={classes.preview}>
-              {videosPreview.map((video, index) => (
-                <video
-                  key={index}
-                  className={classes.video}
-                  preload="metadata"
-                  src={video.url}
-                  controls
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+        )}
         <p className={classes.alert}>{alert}</p>
         {loader && (
           <div>

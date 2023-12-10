@@ -10,6 +10,7 @@ import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Solutions({ activeSolutions, adminSolutions }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -169,11 +170,15 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
                     onClick={() => directSolution(project)}
                   >
                     {permissionControl === "admin" && (
-                      <div className={classes.controlPanel}>
+                      <div className={classes.visibility}>
                         {project.active ? (
-                          <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                          <Tooltip title="Visible">
+                            <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                          </Tooltip>
                         ) : (
-                          <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                          <Tooltip title="Hidden">
+                            <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                          </Tooltip>
                         )}
                       </div>
                     )}

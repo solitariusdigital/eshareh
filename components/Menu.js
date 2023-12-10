@@ -121,7 +121,7 @@ export default function Menu() {
                     setColorPicker(!colorPicker);
                     setTextPicker(false);
                   }}
-                  sx={{ color: colorPicker ? "#fdb714" : "#d6d6d6" }}
+                  sx={{ color: colorPicker ? "#fdb714" : "#1b1b1b" }}
                 />
                 <AutoFixNormalIcon
                   className="icon"
@@ -129,7 +129,7 @@ export default function Menu() {
                     setTextPicker(!textPicker);
                     setColorPicker(false);
                   }}
-                  sx={{ color: textPicker ? "#fdb714" : "#d6d6d6" }}
+                  sx={{ color: textPicker ? "#fdb714" : "#1b1b1b" }}
                 />
                 {colorPicker && (
                   <div className={classes.colorPicker}>
