@@ -1,4 +1,4 @@
-import { useContext, Fragment } from "react";
+import { useContext, Fragment, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./contact.module.scss";
 import Image from "next/legacy/image";
@@ -7,6 +7,7 @@ import { NextSeo } from "next-seo";
 
 export default function Contact() {
   const { language, setLanguage } = useContext(StateContext);
+  const [tag, setTag] = useState(false);
 
   const locationLink =
     "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7743132,51.3941519,17z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu";
@@ -31,6 +32,12 @@ export default function Contact() {
         <div
           className={classes.image}
           onClick={() => window.open(locationLink)}
+          onMouseEnter={() => {
+            setTag(true);
+          }}
+          onMouseLeave={() => {
+            setTag(false);
+          }}
         >
           <Image
             src={map}
@@ -42,6 +49,16 @@ export default function Contact() {
             as="image"
             priority
           />
+          {tag && (
+            <h3
+              className={language ? classes.tag : classes.tagReverse}
+              style={{
+                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              }}
+            >
+              {language ? "آژانس تبلیغاتی اشاره" : "Eshareh Advertising Agency"}
+            </h3>
+          )}
         </div>
         <div className={classes.informationContainer}>
           <div

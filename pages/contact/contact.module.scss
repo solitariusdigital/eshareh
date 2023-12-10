@@ -23,11 +23,27 @@
 .image {
   width: 300px;
   cursor: pointer;
+  position: relative;
 
   @include mixins.mobile {
     margin: auto;
     margin-top: 50px;
     width: 50%;
+  }
+
+  .tag,
+  .tagReverse {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+    text-align: right;
+    width: fit-content;
+  }
+
+  .tagReverse {
+    text-align: left;
+    width: 180px;
   }
 }
 
