@@ -108,7 +108,7 @@ export default function Menu() {
       )}
       {currentUser && dropDown && screenSize === "desktop" && (
         <div
-          className={classes.dropDown}
+          className={`${classes.dropDown}  animate__animated animate__zoomIn`}
           style={{
             fontFamily: language ? "English" : "English",
           }}

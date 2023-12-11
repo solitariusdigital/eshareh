@@ -31,6 +31,8 @@ export default function Solution({ solutions, projectTitle }) {
   const [project, setProject] = useState(null);
   const [previousProject, setPreviousProject] = useState(null);
   const [nextProject, setNextProject] = useState(null);
+  const [dropDown, setDropDpwn] = useState(false);
+  const [confirmMessage, setConfirmMessage] = useState("");
 
   useEffect(() => {
     let project = null;
@@ -133,24 +135,24 @@ export default function Solution({ solutions, projectTitle }) {
     document.body.style.overflow = "hidden";
   };
 
-  const manageSolution = async (id, type) => {
-    const message = `${type === "show" ? "انتشار مطمئنی؟" : "پنهان مطمئنی؟"}`;
-    const confirm = window.confirm(message);
-    if (confirm) {
-      let data = await getSolutionApi(id);
-      switch (type) {
-        case "show":
-          data.active = true;
-          break;
-        case "hide":
-          data.active = false;
-          break;
-      }
-      await updateSolutionApi(data);
-      window.location.reload();
-    }
+  const manageSolution = (type) => {
+    setDropDpwn(!dropDown);
+    setConfirmMessage(type === "show" ? "Publish" : "Hide");
   };
 
+  const updateSolution = async (id) => {
+    let data = await getSolutionApi(id);
+    switch (confirmMessage) {
+      case "Publish":
+        data.active = true;
+        break;
+      case "Hide":
+        data.active = false;
+        break;
+    }
+    await updateSolutionApi(data);
+    window.location.reload();
+  };
   return (
     <Fragment>
       {project && (
@@ -172,41 +174,67 @@ export default function Solution({ solutions, projectTitle }) {
             }}
           />
           {permissionControl === "admin" && !displayGallerySlider && (
-            <div className={classes.controlPanel}>
-              {project.active ? (
-                <Tooltip title="Visible">
-                  <VerifiedUserIcon sx={{ color: "#57a361" }} />
-                </Tooltip>
-              ) : (
-                <Tooltip title="Hidden">
-                  <VisibilityOffIcon sx={{ color: "#d40d12" }} />
-                </Tooltip>
-              )}
-              {!project.active ? (
-                <Tooltip title="Publish">
-                  <TaskAltIcon
+            <Fragment>
+              <div className={classes.controlPanel}>
+                {project.active ? (
+                  <Tooltip title="Visible">
+                    <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Hidden">
+                    <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                  </Tooltip>
+                )}
+                {!project.active ? (
+                  <Tooltip title="Publish">
+                    <TaskAltIcon
+                      className="icon"
+                      onClick={() => manageSolution("show")}
+                    />
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Hide">
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => manageSolution("hide")}
+                    />
+                  </Tooltip>
+                )}
+                <Tooltip title="Edit">
+                  <EditIcon
                     className="icon"
-                    onClick={() => manageSolution(project["_id"], "show")}
+                    onClick={() => {
+                      Router.push("/admin");
+                      setEditSolution(project);
+                    }}
                   />
                 </Tooltip>
-              ) : (
-                <Tooltip title="Hide">
-                  <CloseIcon
-                    className="icon"
-                    onClick={() => manageSolution(project["_id"], "hide")}
-                  />
-                </Tooltip>
-              )}
-              <Tooltip title="Edit">
-                <EditIcon
-                  className="icon"
-                  onClick={() => {
-                    Router.push("/admin");
-                    setEditSolution(project);
+              </div>
+              {dropDown && (
+                <div
+                  className={classes.dropDown}
+                  style={{
+                    fontFamily: language ? "English" : "English",
                   }}
-                />
-              </Tooltip>
-            </div>
+                >
+                  <h3>{confirmMessage}</h3>
+                  <div className={classes.action}>
+                    <p
+                      className={classes.cancel}
+                      onClick={() => setDropDpwn(false)}
+                    >
+                      Cancel
+                    </p>
+                    <p
+                      className={classes.confirm}
+                      onClick={() => updateSolution(project["_id"])}
+                    >
+                      Confirm
+                    </p>
+                  </div>
+                </div>
+              )}
+            </Fragment>
           )}
           <div className={classes.container}>
             <div
