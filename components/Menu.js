@@ -80,7 +80,7 @@ export default function Menu() {
     setLanguageType(!language ? "fa" : "en");
   };
 
-  const logOut = () => {
+  const signOut = () => {
     window.location.assign("/");
     secureLocalStorage.removeItem("currentUser");
     setCurrentUser(null);
@@ -116,7 +116,7 @@ export default function Menu() {
           {currentUser.permission === "admin" && (
             <p onClick={() => Router.push("/admin")}>Admin</p>
           )}
-          <p onClick={() => logOut()}>Logout</p>
+          <p onClick={() => signOut()}>Sign out</p>
         </div>
       )}
       {screenSize === "desktop" && (
