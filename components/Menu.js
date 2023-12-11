@@ -102,7 +102,7 @@ export default function Menu() {
           <div className={classes.profile}>
             {currentUser.permission === "admin" && <MilitaryTechIcon />}
             {currentUser.permission === "user" && <Person4Icon />}
-            <p>{currentUser.email}</p>
+            <p>{currentUser.email.split("@")[0]}</p>
           </div>
         </div>
       )}
