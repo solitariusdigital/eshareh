@@ -51,6 +51,48 @@
       cursor: pointer;
     }
   }
+
+  .profileContainer {
+    position: absolute;
+    right: 20px;
+    font-size: config.$tiny-font;
+    cursor: pointer;
+
+    &:hover {
+      color: config.$yellow;
+    }
+
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .dropDown {
+    position: absolute;
+    right: 10px;
+    top: 110px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 50px;
+    background: config.$white;
+    border-radius: 4px;
+    font-size: config.$tiny-font;
+    box-shadow: config.$image-shadow;
+    border: 1px solid config.$yellow;
+
+    p {
+      margin: 5px 10px;
+      cursor: pointer;
+
+      &:hover {
+        color: config.$yellow;
+      }
+    }
+  }
 }
 
 .largeMenu,

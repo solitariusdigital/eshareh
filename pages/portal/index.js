@@ -85,9 +85,9 @@ export default function Portal() {
         setCurrentUser(userData);
         secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
         if (userData.permission === "admin") {
-          Router.push("/admin");
+          window.location.assign("/admin");
         } else {
-          Router.push("/");
+          window.location.assign("/");
         }
       } else {
         showAlert(language ? "پسورد اشتباه" : "Wrong password");
@@ -112,7 +112,7 @@ export default function Portal() {
       } else {
         setCurrentUser(userData);
         secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
-        Router.push("/");
+        window.location.assign("/");
       }
     } catch (error) {
       showAlert("خطا در برقراری ارتباط");

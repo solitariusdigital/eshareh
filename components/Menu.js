@@ -13,6 +13,9 @@ import ColorLensIcon from "@mui/icons-material/ColorLens";
 import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import { getControlsApi, updateControlApi } from "@/services/api";
 import Tooltip from "@mui/material/Tooltip";
+import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
+import Person4Icon from "@mui/icons-material/Person4";
+import secureLocalStorage from "react-secure-storage";
 
 export default function Menu() {
   const { language, setLanguage } = useContext(StateContext);
@@ -21,22 +24,11 @@ export default function Menu() {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { menuColor, setMenuColor } = useContext(StateContext);
-  const [desktop, setDesktop] = useState(false);
   const [colorPicker, setColorPicker] = useState(false);
   const [textPicker, setTextPicker] = useState(false);
-
-  useEffect(() => {
-    const checkDeviceType = () => {
-      if (
-        !window.matchMedia("(display-mode: standalone)").matches &&
-        navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)/i)
-      ) {
-        setDesktop(true);
-      }
-    };
-    checkDeviceType();
-  }, [setDesktop]);
+  const [dropDown, setDropDpwn] = useState(false);
 
   const activateNav = (link, index) => {
     setMenuMobile(false);
@@ -88,11 +80,45 @@ export default function Menu() {
     setLanguageType(!language ? "fa" : "en");
   };
 
+  const logOut = () => {
+    window.location.assign("/");
+    secureLocalStorage.removeItem("currentUser");
+    setCurrentUser(null);
+  };
+
   return (
     <div
       className={classes.container}
       style={{ background: menuColor.background, color: menuColor.text }}
     >
+      {currentUser && screenSize === "desktop" && (
+        <div
+          className={classes.profileContainer}
+          onClick={() => setDropDpwn(!dropDown)}
+          style={{
+            fontFamily: language ? "English" : "English",
+          }}
+        >
+          <div className={classes.profile}>
+            {currentUser.permission === "admin" && <MilitaryTechIcon />}
+            {currentUser.permission === "user" && <Person4Icon />}
+            <p>{currentUser.email}</p>
+          </div>
+        </div>
+      )}
+      {currentUser && dropDown && screenSize === "desktop" && (
+        <div
+          className={classes.dropDown}
+          style={{
+            fontFamily: language ? "English" : "English",
+          }}
+        >
+          {currentUser.permission === "admin" && (
+            <p onClick={() => Router.push("/admin")}>Admin</p>
+          )}
+          <p onClick={() => logOut()}>Logout</p>
+        </div>
+      )}
       {screenSize === "desktop" && (
         <div
           className={language ? classes.largeMenuReverse : classes.largeMenu}
