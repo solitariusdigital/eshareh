@@ -59,6 +59,7 @@ export default function GallerySlider({ media }) {
                     src={image.link}
                     preload="metadata"
                     controls
+                    playsinline
                   />
                 )}
               </div>

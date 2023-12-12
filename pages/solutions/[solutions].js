@@ -286,6 +286,7 @@ export default function Solution({ solutions, projectTitle }) {
                       src={image.link}
                       preload="metadata"
                       controls
+                      playsinline
                     />
                   )}
                 </div>

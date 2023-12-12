@@ -52,6 +52,7 @@ export default function NextProject({ project }) {
             className={classes.video}
             preload="metadata"
             src={project.media[0].link}
+            playsinline
           />
         )}
       </div>

@@ -78,6 +78,7 @@ export default function CoverSlider({ solutions }) {
                     autoPlay
                     loop
                     muted
+                    playsinline
                   />
                 </div>
               )}

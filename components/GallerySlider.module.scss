@@ -17,14 +17,10 @@
 }
 
 .swiper {
-  margin: auto;
   width: 100%;
 
   @include mixins.mobile {
-    position: relative;
-    left: 50%;
-    top: 20%;
-    transform: translate(-50%, -50%);
+    margin-top: 100px;
   }
 }
 

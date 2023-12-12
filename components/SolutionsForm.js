@@ -758,6 +758,7 @@ export default function SolutionsForm() {
                     preload="metadata"
                     src={video.link}
                     controls
+                    playsinline
                   />
                 ))}
               </div>

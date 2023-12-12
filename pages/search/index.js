@@ -134,6 +134,7 @@ export default function Search({ activeSolutions }) {
                         className={classes.video}
                         src={media[0].link}
                         preload="metadata"
+                        playsinline
                       />
                     )}
                   </div>

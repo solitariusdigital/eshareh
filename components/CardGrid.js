@@ -63,6 +63,7 @@ export default function CardGrid({ solutions, direction }) {
                     src={solutions[0].media[0].link}
                     preload="metadata"
                     muted
+                    playsinline
                   />
                 </div>
               )}
@@ -121,6 +122,7 @@ export default function CardGrid({ solutions, direction }) {
                           src={project.media[0].link}
                           preload="metadata"
                           muted
+                          playsinline
                         />
                       </div>
                     )}
@@ -186,6 +188,7 @@ export default function CardGrid({ solutions, direction }) {
                       src={project.media[0].link}
                       preload="metadata"
                       muted
+                      playsinline
                     />
                   </div>
                 )}
