@@ -282,7 +282,8 @@ export default function Solution({ solutions, projectTitle }) {
                       className={classes.video}
                       src={image.link}
                       controls
-                      playsinline
+                      playsInline
+                      preload="auto"
                     />
                   )}
                 </div>

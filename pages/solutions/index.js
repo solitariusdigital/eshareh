@@ -201,7 +201,8 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
                           id={project["_id"]}
                           src={media[0].link}
                           muted
-                          playsinline
+                          playsInline
+                          preload="auto"
                         />
                       )}
                     </div>

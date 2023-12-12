@@ -757,7 +757,8 @@ export default function SolutionsForm() {
                     className={classes.video}
                     src={video.link}
                     controls
-                    playsinline
+                    playsInline
+                    preload="auto"
                   />
                 ))}
               </div>

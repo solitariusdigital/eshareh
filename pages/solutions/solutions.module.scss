@@ -76,6 +76,10 @@
       max-width: config.$max-widthHeigh;
       width: config.$content-width;
 
+      @include mixins.mobile {
+        width: calc(100% - 24px);
+      }
+
       .icon {
         color: config.$grey;
         cursor: pointer;
