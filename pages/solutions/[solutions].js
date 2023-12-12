@@ -109,6 +109,7 @@ export default function Solution({ solutions, projectTitle }) {
         const isScrollAtBottom =
           window.innerHeight + window.scrollY >= document.body.offsetHeight;
         if (currentScrollY > prevScrollY) {
+          setFooter(false);
           setDisplayNextController(true);
         } else if (currentScrollY < prevScrollY) {
           setFooter(true);

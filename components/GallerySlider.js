@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { StateContext } from "@/context/stateContext";
 import Image from "next/legacy/image";
 import classes from "./GallerySlider.module.scss";
 import Progress from "@/components/Progress";
@@ -10,6 +11,7 @@ import "swiper/css/navigation";
 
 export default function GallerySlider({ media }) {
   const [current, setCurrent] = useState(0);
+  const { screenSize, setScreenSize } = useContext(StateContext);
 
   const calculatePercentage = (index) => {
     return ((index + 1) / media.length) * 100;
@@ -30,7 +32,7 @@ export default function GallerySlider({ media }) {
         <Swiper
           slidesPerView="auto"
           spaceBetween={0}
-          navigation={true}
+          navigation={screenSize !== "mobile" ? true : false}
           mousewheel={true}
           loop={true}
           modules={[Navigation, Mousewheel]}
