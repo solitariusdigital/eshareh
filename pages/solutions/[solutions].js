@@ -280,10 +280,10 @@ export default function Solution({ solutions, projectTitle }) {
                   ) : (
                     <video
                       className={classes.video}
-                      src={image.link}
+                      src={image.link + "#t=0.1"}
                       controls
                       playsInline
-                      preload="auto"
+                      preload="metadata"
                     />
                   )}
                 </div>

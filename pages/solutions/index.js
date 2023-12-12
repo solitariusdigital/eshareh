@@ -199,10 +199,10 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
                         <video
                           className={classes.video}
                           id={project["_id"]}
-                          src={media[0].link}
+                          src={media[0].link + "#t=0.1"}
                           muted
                           playsInline
-                          preload="auto"
+                          preload="metadata"
                         />
                       )}
                     </div>

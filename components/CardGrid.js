@@ -59,10 +59,10 @@ export default function CardGrid({ solutions, direction }) {
               ) : (
                 <video
                   className={classes.video}
-                  src={solutions[0].media[0].link}
+                  src={solutions[0].media[0].link + "#t=0.1"}
                   muted
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                 />
               )}
             </div>
@@ -116,10 +116,10 @@ export default function CardGrid({ solutions, direction }) {
                     ) : (
                       <video
                         className={classes.video}
-                        src={project.media[0].link}
+                        src={project.media[0].link + "#t=0.1"}
                         muted
                         playsInline
-                        preload="auto"
+                        preload="metadata"
                       />
                     )}
                   </div>
@@ -180,10 +180,10 @@ export default function CardGrid({ solutions, direction }) {
                 ) : (
                   <video
                     className={classes.video}
-                    src={project.media[0].link}
+                    src={project.media[0].link + "#t=0.1"}
                     muted
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                   />
                 )}
               </div>

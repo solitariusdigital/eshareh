@@ -755,10 +755,10 @@ export default function SolutionsForm() {
                   <video
                     key={index}
                     className={classes.video}
-                    src={video.link}
+                    src={video.link + "#t=0.1"}
                     controls
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                   />
                 ))}
               </div>

@@ -72,12 +72,12 @@ export default function CoverSlider({ solutions }) {
               ) : (
                 <video
                   className={classes.video}
-                  src={project.media[0].link}
+                  src={project.media[0].link + "#t=0.1"}
                   autoPlay
                   loop
                   muted
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                 />
               )}
             </div>

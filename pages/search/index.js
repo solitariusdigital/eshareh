@@ -132,9 +132,9 @@ export default function Search({ activeSolutions }) {
                     ) : (
                       <video
                         className={classes.video}
-                        src={media[0].link}
+                        src={media[0].link + "#t=0.1"}
                         playsInline
-                        preload="auto"
+                        preload="metadata"
                       />
                     )}
                   </div>
