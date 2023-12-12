@@ -28,7 +28,7 @@ export default function News() {
           fontFamily: language ? "English" : "English",
         }}
       >
-        <p>News page ... coming soon</p>
+        <p>News ... coming soon</p>
       </div>
     </Fragment>
   );

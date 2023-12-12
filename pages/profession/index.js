@@ -28,7 +28,7 @@ export default function Profession() {
           fontFamily: language ? "English" : "English",
         }}
       >
-        <p>Profession page ... coming soon</p>
+        <p>What We Do ... coming soon</p>
       </div>
     </Fragment>
   );
