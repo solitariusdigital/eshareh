@@ -22,8 +22,13 @@ export default function Profession() {
           siteName: "Eshareh Advertising Agency",
         }}
       />
-      <div className={classes.container}>
-        <p>Profession</p>
+      <div
+        className={classes.container}
+        style={{
+          fontFamily: language ? "English" : "English",
+        }}
+      >
+        <p>Profession page ... coming soon</p>
       </div>
     </Fragment>
   );

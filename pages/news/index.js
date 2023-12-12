@@ -22,8 +22,13 @@ export default function News() {
           siteName: "Eshareh Advertising Agency",
         }}
       />
-      <div className={classes.container}>
-        <p>news</p>
+      <div
+        className={classes.container}
+        style={{
+          fontFamily: language ? "English" : "English",
+        }}
+      >
+        <p>News page ... coming soon</p>
       </div>
     </Fragment>
   );

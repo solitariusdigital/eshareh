@@ -225,13 +225,16 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const solutions = await solutionModel.find();
+    let adminSolutions = solutions.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
     let activeSolutions = solutions
       .filter((project) => project.active)
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     return {
       props: {
         activeSolutions: JSON.parse(JSON.stringify(activeSolutions)),
-        adminSolutions: JSON.parse(JSON.stringify(solutions)),
+        adminSolutions: JSON.parse(JSON.stringify(adminSolutions)),
       },
     };
   } catch (error) {
