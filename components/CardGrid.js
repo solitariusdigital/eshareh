@@ -57,12 +57,14 @@ export default function CardGrid({ solutions, direction }) {
                   priority
                 />
               ) : (
-                <video
-                  className={classes.video}
-                  src={solutions[0].media[0].link}
-                  preload="metadata"
-                  muted
-                />
+                <div className={classes.videoContainer}>
+                  <video
+                    className={classes.video}
+                    src={solutions[0].media[0].link}
+                    preload="metadata"
+                    muted
+                  />
+                </div>
               )}
             </div>
             <div
@@ -113,12 +115,14 @@ export default function CardGrid({ solutions, direction }) {
                         priority
                       />
                     ) : (
-                      <video
-                        className={classes.video}
-                        src={project.media[0].link}
-                        preload="metadata"
-                        muted
-                      />
+                      <div className={classes.videoContainer}>
+                        <video
+                          className={classes.video}
+                          src={project.media[0].link}
+                          preload="metadata"
+                          muted
+                        />
+                      </div>
                     )}
                   </div>
                   <div
@@ -176,12 +180,14 @@ export default function CardGrid({ solutions, direction }) {
                     priority
                   />
                 ) : (
-                  <video
-                    className={classes.video}
-                    src={project.media[0].link}
-                    preload="metadata"
-                    muted
-                  />
+                  <div className={classes.videoContainer}>
+                    <video
+                      className={classes.video}
+                      src={project.media[0].link}
+                      preload="metadata"
+                      muted
+                    />
+                  </div>
                 )}
               </div>
               <div

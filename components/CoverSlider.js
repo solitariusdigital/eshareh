@@ -70,14 +70,16 @@ export default function CoverSlider({ solutions }) {
                   priority
                 />
               ) : (
-                <video
-                  className={classes.video}
-                  preload="metadata"
-                  src={project.media[0].link}
-                  autoPlay
-                  loop
-                  muted
-                />
+                <div>
+                  <video
+                    className={classes.video}
+                    preload="metadata"
+                    src={project.media[0].link}
+                    autoPlay
+                    loop
+                    muted
+                  />
+                </div>
               )}
             </div>
           </SwiperSlide>

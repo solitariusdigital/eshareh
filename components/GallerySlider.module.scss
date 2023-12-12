@@ -19,10 +19,18 @@
 .swiper {
   margin: auto;
   width: 100%;
+
+  @include mixins.mobile {
+    position: relative;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .image {
   height: calc(100vh - 180px);
+
   @include mixins.mobile {
     height: 300px;
   }
