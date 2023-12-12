@@ -215,15 +215,25 @@
       @include mixins.tablet {
         @include mixins.row-space-between-center();
         justify-content: space-around;
+        flex-direction: row-reverse;
       }
       @include mixins.mobile {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-        text-align: right;
         direction: rtl;
       }
     }
-
+    .menuItemsReverse {
+      @include mixins.tablet {
+        @include mixins.row-space-between-center();
+        justify-content: space-around;
+      }
+      @include mixins.mobile {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        direction: ltr;
+      }
+    }
     a {
       padding: 8px 0px;
       color: config.$black;

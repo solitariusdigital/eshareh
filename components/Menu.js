@@ -325,7 +325,11 @@ export default function Menu() {
               <div
                 className={`${classes.menuMobile} animate__animated animate__slideInDown`}
               >
-                <div className={classes.menuItems}>
+                <div
+                  className={
+                    language ? classes.menuItems : classes.menuItemsReverse
+                  }
+                >
                   {navigationTopBar.map((nav, index) => (
                     <a
                       key={index}
