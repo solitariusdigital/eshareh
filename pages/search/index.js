@@ -133,7 +133,6 @@ export default function Search({ activeSolutions }) {
                       <video
                         className={classes.video}
                         src={media[0].link}
-                        preload="metadata"
                         playsinline
                       />
                     )}

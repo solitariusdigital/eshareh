@@ -57,7 +57,6 @@ export default function GallerySlider({ media }) {
                   <video
                     className={classes.video}
                     src={image.link}
-                    preload="metadata"
                     controls
                     playsinline
                   />

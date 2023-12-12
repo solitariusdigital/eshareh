@@ -755,7 +755,6 @@ export default function SolutionsForm() {
                   <video
                     key={index}
                     className={classes.video}
-                    preload="metadata"
                     src={video.link}
                     controls
                     playsinline

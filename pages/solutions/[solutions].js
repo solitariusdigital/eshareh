@@ -260,12 +260,9 @@ export default function Solution({ solutions, projectTitle }) {
             </div>
             {project.media.map((image, index) => (
               <Fragment key={index}>
-                <div
-                  className={classes.imageBox}
-                  onClick={() => gallerySlider()}
-                >
+                <div className={classes.imageBox}>
                   {image.type === "image" ? (
-                    <Fragment>
+                    <div onClick={() => gallerySlider()}>
                       <Image
                         src={image.link}
                         blurDataURL={image.link}
@@ -279,12 +276,11 @@ export default function Solution({ solutions, projectTitle }) {
                       <p className={classes.text}>
                         {language ? "بزرگنمایی +" : "+ Enlarge"}
                       </p>
-                    </Fragment>
+                    </div>
                   ) : (
                     <video
                       className={classes.video}
                       src={image.link}
-                      preload="metadata"
                       controls
                       playsinline
                     />

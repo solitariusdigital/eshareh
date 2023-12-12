@@ -198,8 +198,9 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
                       ) : (
                         <video
                           className={classes.video}
+                          id={project["_id"]}
                           src={media[0].link}
-                          preload="metadata"
+                          muted
                           playsinline
                         />
                       )}

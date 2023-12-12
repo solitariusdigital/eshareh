@@ -50,7 +50,6 @@ export default function NextProject({ project }) {
         ) : (
           <video
             className={classes.video}
-            preload="metadata"
             src={project.media[0].link}
             playsinline
           />
