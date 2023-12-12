@@ -20,17 +20,18 @@ export default function Search({ activeSolutions }) {
     setSearch(event);
     setSearchEmpty(false);
     let searchSolutions = [];
-    searchSolutions = activeSolutions.filter((item) => {
-      let matches = [];
-      matches.push(
-        Object.values(item[languageType]).some((val) =>
-          String(val).includes(search.trim().slice(0, 20))
-        )
-      );
-      return matches.every((match) => match);
-    });
-    setSolutions(searchSolutions);
-
+    if (search) {
+      searchSolutions = activeSolutions.filter((item) => {
+        let matches = [];
+        matches.push(
+          Object.values(item[languageType]).some((val) =>
+            String(val).includes(search.trim().slice(0, 20))
+          )
+        );
+        return matches.every((match) => match);
+      });
+      setSolutions(searchSolutions);
+    }
     if (searchSolutions.length === 0) {
       setSearchEmpty(true);
     }
