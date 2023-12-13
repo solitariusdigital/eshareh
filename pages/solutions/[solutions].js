@@ -277,7 +277,7 @@ export default function Solution({ solutions, projectTitle }) {
             {project.media.map((image, index) => (
               <Fragment key={index}>
                 <div className={classes.imageBox}>
-                  {!displayGallerySlider && (
+                  {permissionControl === "admin" && !displayGallerySlider && (
                     <p
                       className={classes.cover}
                       onClick={() => makeCover(index)}
