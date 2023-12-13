@@ -102,12 +102,23 @@
       height: 300px;
     }
 
-    .text {
+    .enlarge {
       position: absolute;
       bottom: 10px;
       left: 10px;
       border-radius: 50px;
       padding: 8px 20px;
+      color: config.$white;
+      @include mixins.transparentBackground(0.2, config.$lightgrey);
+    }
+
+    .cover {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      border-radius: 50px;
+      padding: 8px 20px;
+      z-index: 1;
       color: config.$white;
       @include mixins.transparentBackground(0.2, config.$lightgrey);
     }

@@ -154,6 +154,22 @@ export default function Solution({ solutions, projectTitle }) {
     await updateSolutionApi(data);
     window.location.reload();
   };
+
+  const makeCover = async (index) => {
+    project.media.forEach((item, i) => {
+      if (i === index) {
+        project.media.splice(i, 1);
+        project.media.unshift(item);
+      }
+    });
+    let dataObject = {
+      ...project,
+      media: project.media,
+    };
+    await updateSolutionApi(dataObject);
+    window.location.reload();
+  };
+
   return (
     <Fragment>
       {project && (
@@ -261,6 +277,14 @@ export default function Solution({ solutions, projectTitle }) {
             {project.media.map((image, index) => (
               <Fragment key={index}>
                 <div className={classes.imageBox}>
+                  {!displayGallerySlider && (
+                    <p
+                      className={classes.cover}
+                      onClick={() => makeCover(index)}
+                    >
+                      Make Cover
+                    </p>
+                  )}
                   {image.type === "image" ? (
                     <div onClick={() => gallerySlider()}>
                       <Image
@@ -273,7 +297,7 @@ export default function Solution({ solutions, projectTitle }) {
                         as="image"
                         priority
                       />
-                      <p className={classes.text}>
+                      <p className={classes.enlarge}>
                         {language ? "بزرگنمایی +" : "+ Enlarge"}
                       </p>
                     </div>
