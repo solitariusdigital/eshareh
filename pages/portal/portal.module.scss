@@ -3,47 +3,43 @@
 
 .container {
   margin: auto;
-  max-width: config.$max-widthHeigh;
   background: linear-gradient(to bottom, config.$white 50%, config.$black 50%);
+  height: 100vh;
+  display: flex;
+  align-items: center;
 
   @include mixins.desktop {
     height: calc(100vh - 100px);
   }
   @include mixins.tablet {
-    margin-top: 150px;
     height: 100%;
   }
   @include mixins.mobile {
     height: 100%;
-    margin-top: 150px;
-  }
-
-  h1 {
-    position: relative;
-    margin: auto;
-    width: config.$content-width;
-
-    @include mixins.desktop {
-      top: 25px;
-    }
-    @include mixins.mobile {
-      text-align: center;
-      width: 100%;
-      top: 0px;
-    }
-    @include mixins.tablet {
-      text-align: center;
-      width: 100%;
-      top: 0px;
-    }
   }
 
   .gridLayout {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     margin: auto;
     width: config.$content-width;
+    max-width: config.$max-widthHeigh;
+    margin-top: 40px;
+    position: relative;
+
+    h1 {
+      position: absolute;
+      top: 20px;
+
+      @include mixins.mobile {
+        top: 0px;
+      }
+      @include mixins.tablet {
+        top: 0px;
+      }
+    }
 
     @include mixins.desktop {
       position: relative;
@@ -53,6 +49,7 @@
       width: 100%;
       display: flex;
       flex-direction: column;
+      margin-top: 0px;
     }
     @include mixins.tablet {
       display: flex;
@@ -61,38 +58,34 @@
   }
 
   .image {
-    position: relative;
-    bottom: 60px;
-    width: 100%;
-    scale: 0.85;
-
-    @include mixins.desktop {
-      left: 60px;
-    }
+    width: 50%;
     @include mixins.mobile {
-      left: 0px;
+      width: 100%;
     }
     @include mixins.tablet {
-      left: 0px;
-      bottom: 0px;
+      width: 100%;
     }
   }
 }
 
 .form {
   position: relative;
-  width: 500px;
+  width: 30%;
+  min-width: 400px;
 
+  @include mixins.fourk {
+    top: 120px;
+  }
   @include mixins.desktop {
-    bottom: 20px;
+    top: 10px;
   }
   @include mixins.tablet {
     width: 100%;
-    margin-top: 50px;
+    margin: 100px 0px;
   }
   @include mixins.mobile {
     width: calc(100% - 24px);
-    margin-bottom: 100px;
+    margin: 50px 0px;
   }
 
   .input {
@@ -146,7 +139,7 @@
   .alert {
     height: 25px;
     margin: 16px 0px;
-    color: config.$white;
+    color: config.$red;
 
     @include mixins.tablet {
       color: config.$red;
