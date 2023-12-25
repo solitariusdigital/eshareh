@@ -70,14 +70,14 @@ export default function CardGrid({ solutions, direction }) {
               className={language ? classes.details : classes.detailsReverse}
             >
               {hoverItem === 0 ? (
-                <h3>
+                <h4>
                   {sliceString(
                     solutions[0][languageType].summary,
-                    language ? 150 : 100
+                    language ? 150 : 120
                   )}
-                </h3>
+                </h4>
               ) : (
-                <h3>{solutions[0][languageType].title}</h3>
+                <h4>{solutions[0][languageType].title}</h4>
               )}
             </div>
           </div>
@@ -129,14 +129,14 @@ export default function CardGrid({ solutions, direction }) {
                     }
                   >
                     {hoverItem === index ? (
-                      <h3>
+                      <h4>
                         {sliceString(
                           project[languageType].summary,
-                          language ? 50 : 40
+                          language ? 80 : 60
                         )}
-                      </h3>
+                      </h4>
                     ) : (
-                      <h3>{project[languageType].title}</h3>
+                      <h4>{project[languageType].title}</h4>
                     )}
                   </div>
                 </div>
@@ -191,14 +191,14 @@ export default function CardGrid({ solutions, direction }) {
                 className={language ? classes.details : classes.detailsReverse}
               >
                 {hoverItem === index ? (
-                  <h3>
+                  <h4>
                     {sliceString(
                       project[languageType].summary,
-                      language ? 100 : 70
+                      language ? 120 : 90
                     )}
-                  </h3>
+                  </h4>
                 ) : (
-                  <h3>{project[languageType].title}</h3>
+                  <h4>{project[languageType].title}</h4>
                 )}
               </div>
             </div>

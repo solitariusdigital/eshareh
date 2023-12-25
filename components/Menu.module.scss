@@ -149,8 +149,9 @@
 }
 
 .nav {
-  font-size: config.$small-font;
+  font-size: config.$tiny-font;
   cursor: pointer;
+  font-weight: bold;
   @include mixins.row-space-between-center();
 
   &:hover {
@@ -159,7 +160,7 @@
 }
 
 .navActive {
-  font-size: config.$small-font;
+  font-size: config.$tiny-font;
   color: config.$yellow;
   font-weight: bold;
   cursor: pointer;
