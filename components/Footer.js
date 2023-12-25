@@ -72,7 +72,7 @@ export default function Footer() {
             <Fragment key={index}>
               <a
                 style={{
-                  fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                  fontFamily: language ? "FarsiBold" : "EnglishBold",
                 }}
                 className={!nav.active ? classes.nav : classes.navActive}
                 onClick={() => activateNav(nav.link, index)}

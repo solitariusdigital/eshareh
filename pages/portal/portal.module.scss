@@ -4,41 +4,37 @@
 .container {
   margin: auto;
   max-width: config.$max-widthHeigh;
-  margin-top: 150px;
+  background: linear-gradient(to bottom, config.$white 50%, config.$black 50%);
+
+  @include mixins.desktop {
+    height: calc(100vh - 100px);
+  }
+  @include mixins.tablet {
+    margin-top: 150px;
+    height: 100%;
+  }
+  @include mixins.mobile {
+    height: 100%;
+    margin-top: 150px;
+  }
 
   h1 {
     position: relative;
-    z-index: 5;
     margin: auto;
     width: config.$content-width;
 
+    @include mixins.desktop {
+      top: 25px;
+    }
     @include mixins.mobile {
       text-align: center;
       width: 100%;
+      top: 0px;
     }
     @include mixins.tablet {
       text-align: center;
-    }
-  }
-
-  .background {
-    background: linear-gradient(
-      to bottom,
-      config.$white 50%,
-      config.$black 50%
-    );
-    @include mixins.desktop {
-      position: relative;
-      bottom: 70px;
-      height: 100vh;
-    }
-    @include mixins.tablet {
-      height: 100%;
-      bottom: 0px;
-    }
-    @include mixins.mobile {
-      height: 100%;
-      bottom: 0px;
+      width: 100%;
+      top: 0px;
     }
   }
 
@@ -46,10 +42,13 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
     align-items: center;
-    margin-top: 20px;
     margin: auto;
     width: config.$content-width;
 
+    @include mixins.desktop {
+      position: relative;
+      bottom: 40px;
+    }
     @include mixins.mobile {
       width: 100%;
       display: flex;
@@ -63,28 +62,33 @@
 
   .image {
     position: relative;
-    left: 0px;
+    bottom: 60px;
     width: 100%;
-    margin: auto;
+    scale: 0.85;
 
+    @include mixins.desktop {
+      left: 60px;
+    }
     @include mixins.mobile {
-      bottom: 50px;
+      left: 0px;
     }
     @include mixins.tablet {
-      bottom: 20px;
+      left: 0px;
+      bottom: 0px;
     }
   }
 }
 
 .form {
-  width: 400px;
+  position: relative;
+  width: 500px;
 
   @include mixins.desktop {
-    position: relative;
-    top: 50px;
+    bottom: 20px;
   }
   @include mixins.tablet {
-    margin-bottom: 100px;
+    width: 100%;
+    margin-top: 50px;
   }
   @include mixins.mobile {
     width: calc(100% - 24px);
@@ -92,7 +96,7 @@
   }
 
   .input {
-    margin: 20px auto;
+    margin: 10px auto;
 
     .bar {
       display: flex;
@@ -140,6 +144,7 @@
   }
 
   .alert {
+    height: 25px;
     margin: 16px 0px;
     color: config.$white;
 

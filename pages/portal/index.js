@@ -139,104 +139,102 @@ export default function Portal() {
   return (
     <div className={classes.container}>
       <h1>{language ? "پرتال" : "Portal"}</h1>
-      <div className={classes.background}>
-        <div className={classes.gridLayout}>
-          <div className={classes.form}>
-            <div className={classes.input}>
-              <div className={classes.bar}>
-                <p
-                  className={classes.label}
-                  style={{
-                    fontFamily: language ? "English" : "English",
-                  }}
-                >
-                  {language ? "ایمیل" : "Email"}
-                </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setEmail("")}
-                  sx={{ fontSize: 16 }}
-                />
-              </div>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                autoComplete="off"
-              />
-            </div>
-            <div className={classes.input}>
-              <div className={classes.bar}>
-                <p
-                  className={classes.label}
-                  style={{
-                    fontFamily: language ? "English" : "English",
-                  }}
-                >
-                  {language ? "پسورد" : "Password"}
-                </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setPassword("")}
-                  sx={{ fontSize: 16 }}
-                />
-              </div>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                autoComplete="off"
-              />
-            </div>
-            <div className={classes.formAction}>
+      <div className={classes.gridLayout}>
+        <div className={classes.form}>
+          <div className={classes.input}>
+            <div className={classes.bar}>
               <p
-                className={classes.alert}
+                className={classes.label}
                 style={{
-                  fontFamily: language ? "Farsi" : "English",
+                  fontFamily: language ? "English" : "English",
                 }}
               >
-                {alert}
+                {language ? "ایمیل" : "Email"}
               </p>
-              <button
-                onClick={() => handleLogin()}
-                style={{
-                  fontFamily: language ? "FarsiBold" : "EnglishMedium",
-                }}
-              >
-                {formType ? (
-                  <>{language ? "ورود" : "Sign in"}</>
-                ) : (
-                  <>{language ? "ثبت نام" : "Sign up"}</>
-                )}
-              </button>
-              <div
-                className={classes.create}
-                onClick={() => setFormType(!formType)}
-              >
-                {formType ? (
-                  <>{language ? "ایجاد حساب کاربری" : "Create an account"}</>
-                ) : (
-                  <>{language ? "حساب کاربری دارم" : "Have an account"}</>
-                )}
-              </div>
+              <CloseIcon
+                className="icon"
+                onClick={() => setEmail("")}
+                sx={{ fontSize: 16 }}
+              />
             </div>
-          </div>
-          <div className={classes.image}>
-            <Image
-              src={portal}
-              blurDataURL={portal}
-              placeholder="blur"
-              alt="image"
-              layout="responsive"
-              objectFit="contain"
-              as="image"
-              priority
+            <input
+              type="email"
+              id="email"
+              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              autoComplete="off"
             />
           </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p
+                className={classes.label}
+                style={{
+                  fontFamily: language ? "English" : "English",
+                }}
+              >
+                {language ? "پسورد" : "Password"}
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setPassword("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              autoComplete="off"
+            />
+          </div>
+          <div className={classes.formAction}>
+            <p
+              className={classes.alert}
+              style={{
+                fontFamily: language ? "Farsi" : "English",
+              }}
+            >
+              {alert}
+            </p>
+            <button
+              onClick={() => handleLogin()}
+              style={{
+                fontFamily: language ? "FarsiBold" : "EnglishMedium",
+              }}
+            >
+              {formType ? (
+                <>{language ? "ورود" : "Sign in"}</>
+              ) : (
+                <>{language ? "ثبت نام" : "Sign up"}</>
+              )}
+            </button>
+            <div
+              className={classes.create}
+              onClick={() => setFormType(!formType)}
+            >
+              {formType ? (
+                <>{language ? "ایجاد حساب کاربری" : "Create an account"}</>
+              ) : (
+                <>{language ? "حساب کاربری دارم" : "Have an account"}</>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className={classes.image}>
+          <Image
+            src={portal}
+            blurDataURL={portal}
+            placeholder="blur"
+            alt="image"
+            layout="responsive"
+            objectFit="contain"
+            as="image"
+            priority
+          />
         </div>
       </div>
     </div>
