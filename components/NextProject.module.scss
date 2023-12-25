@@ -8,10 +8,6 @@
   position: relative;
   cursor: pointer;
 
-  @include mixins.mobile {
-    width: calc(100% - 24px);
-  }
-
   .information,
   .informationReverse {
     display: grid;

@@ -18,7 +18,9 @@ export default function NextProject({ project }) {
         )
       }
     >
-      <p className={classes.text}>{language ? "پروژه بعدی" : "Next Project"}</p>
+      <h4 className={classes.text}>
+        {language ? "پروژه بعدی" : "Next Project"}
+      </h4>
       <div
         className={language ? classes.information : classes.informationReverse}
       >
@@ -31,7 +33,7 @@ export default function NextProject({ project }) {
           >
             {project[languageType].title}
           </h2>
-          <h3>{project[languageType].title}</h3>
+          <h4>{project[languageType].title}</h4>
         </div>
       </div>
       <div className={classes.imageBox}>
