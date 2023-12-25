@@ -271,7 +271,8 @@ export default function Solution({ solutions, projectTitle }) {
                 >
                   {project[languageType].title}
                 </h2>
-                <h3>{project[languageType].subtitle}</h3>
+                <h4>{project[languageType].subtitle}</h4>
+                <h4>{project[languageType].year}</h4>
               </div>
             </div>
             {project.media.map((image, index) => (
