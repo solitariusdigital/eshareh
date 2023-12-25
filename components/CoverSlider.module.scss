@@ -48,6 +48,10 @@
     width: calc(100% - 24px);
   }
 
+  h3 {
+    max-width: 1500px;
+  }
+
   .loader {
     @include mixins.row-space-between-center();
     span {

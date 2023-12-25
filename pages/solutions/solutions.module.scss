@@ -36,6 +36,7 @@
 
     .description {
       max-width: 600px;
+
       @include mixins.mobile {
         margin-top: 20px;
       }

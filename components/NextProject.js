@@ -24,7 +24,7 @@ export default function NextProject({ project }) {
       <div
         className={language ? classes.information : classes.informationReverse}
       >
-        <h3>{project[languageType].summary}</h3>
+        <h3 className={classes.description}>{project[languageType].summary}</h3>
         <div>
           <h2
             style={{
