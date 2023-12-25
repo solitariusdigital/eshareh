@@ -3,9 +3,6 @@
 
 .container {
   width: 100%;
-  border-bottom: 1px solid config.$lightgrey;
-  max-width: config.$max-widthHeigh;
-
   @include mixins.row-space-between-center();
 
   .logoContainer,
@@ -105,6 +102,7 @@
 
   .largeNavigation {
     width: 50%;
+    max-width: 600px;
     @include mixins.row-space-between-center();
   }
 }
@@ -129,7 +127,7 @@
   justify-content: center;
   width: 25px;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: config.$tiny-font;
   cursor: pointer;
 
   @include mixins.desktop {

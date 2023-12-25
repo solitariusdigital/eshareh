@@ -5,7 +5,8 @@
 .reverse {
   display: flex;
   flex-direction: row;
-  height: 400px;
+  height: 65vh;
+  max-height: 800px;
   margin: 20px auto;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;

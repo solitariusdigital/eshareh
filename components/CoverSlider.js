@@ -90,7 +90,7 @@ export default function CoverSlider({ solutions }) {
         <div>
           <h2>{solutions[current][languageType].title}</h2>
           {screenSize === "desktop" && (
-            <h2>{solutions[current][languageType].summary}</h2>
+            <h3>{solutions[current][languageType].summary}</h3>
           )}
         </div>
         <div className={classes.loader}>

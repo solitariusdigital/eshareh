@@ -3,15 +3,11 @@
 
 .slider {
   position: relative;
-  max-height: config.$max-widthHeigh;
-  max-width: config.$max-widthHeigh;
   margin: auto;
 
   .media {
     width: 100%;
     height: calc(100vh - 100px);
-    max-height: config.$max-widthHeigh;
-
     cursor: pointer;
 
     @include mixins.mobile {
@@ -42,9 +38,10 @@
   left: 50%;
   transform: translateX(-50%);
   bottom: 20px;
-  width: config.$content-width;
   text-align: left;
   color: config.$white;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
   cursor: pointer;
 
   @include mixins.mobile {
