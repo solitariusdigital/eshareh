@@ -4,7 +4,7 @@ import classes from "./about.module.scss";
 import Image from "next/legacy/image";
 import { enToFaDigits } from "@/services/utility";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Mousewheel } from "swiper/modules";
+import { Navigation, Mousewheel, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { NextSeo } from "next-seo";
@@ -320,9 +320,15 @@ export default function About() {
             navigation={true}
             mousewheel={true}
             loop={true}
-            modules={[Navigation, Mousewheel]}
+            modules={[Navigation, Mousewheel, Autoplay]}
             style={{ "--swiper-navigation-color": "#ffffff" }}
             onSlideChange={updateIndex}
+            autoplay={{
+              delay: 500,
+              disableOnInteraction: true,
+            }}
+            speed={500}
+            // slideToClickedSlide={true}
           >
             {photos.map((photo, index) => (
               <SwiperSlide key={index} style={index === current ? style : {}}>
