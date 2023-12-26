@@ -31,8 +31,12 @@
 
     h1 {
       position: absolute;
-      top: 0px;
-
+      @include mixins.fourk {
+        top: -40px;
+      }
+      @include mixins.desktop {
+        top: 0px;
+      }
       @include mixins.mobile {
         top: 0px;
       }
