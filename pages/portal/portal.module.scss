@@ -62,8 +62,12 @@
   }
 
   .image {
+    position: relative;
     width: 50%;
-
+    @include mixins.fourk {
+      top: 100px;
+      scale: 1.2;
+    }
     @include mixins.mobile {
       width: 100%;
     }
@@ -75,8 +79,7 @@
 
 .form {
   position: relative;
-  width: 30%;
-  min-width: 400px;
+  width: 40%;
 
   @include mixins.fourk {
     top: 200px;
