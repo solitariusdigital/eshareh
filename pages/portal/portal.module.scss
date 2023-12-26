@@ -59,6 +59,7 @@
 
   .image {
     width: 50%;
+
     @include mixins.mobile {
       width: 100%;
     }

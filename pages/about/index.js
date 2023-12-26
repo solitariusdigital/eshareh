@@ -232,10 +232,10 @@ export default function About() {
     let count = 0;
     switch (screenSize) {
       case "desktop":
-        count = 9;
+        count = 11;
         break;
       case "tablet":
-        count = 5;
+        count = 7;
         break;
       case "mobile":
         count = 1;
