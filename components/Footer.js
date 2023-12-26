@@ -72,7 +72,7 @@ export default function Footer() {
             <Fragment key={index}>
               <a
                 style={{
-                  fontFamily: language ? "FarsiBold" : "EnglishBold",
+                  fontFamily: language ? "FarsiBold" : "EnglishMedium",
                 }}
                 className={!nav.active ? classes.nav : classes.navActive}
                 onClick={() => activateNav(nav.link, index)}
@@ -91,7 +91,10 @@ export default function Footer() {
         >
           {language ? "پرتال" : "Portal"}
         </button>
-        <div>
+        <div
+          className={classes.logo}
+          onClick={() => window.location.assign("/")}
+        >
           <Image
             width={150}
             height={86.27}

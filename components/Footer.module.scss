@@ -18,7 +18,6 @@
 
 .container {
   display: flex;
-  // border: 1px solid red;
 
   @include mixins.mobile {
     display: flex;
@@ -26,17 +25,19 @@
     align-items: center;
     margin-bottom: 20px;
   }
+
+  .logo {
+    cursor: pointer;
+  }
 }
 
 .navigation,
 .navigationReverse {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
-  width: 200px;
-  height: 100%;
+  width: 180px;
   position: relative;
   left: 20px;
-  // border: 1px solid red;
 
   @include mixins.mobile {
     display: flex;
@@ -53,6 +54,11 @@
     @include mixins.mobile {
       justify-content: center;
       margin: 4px 0px;
+    }
+
+    &:hover {
+      color: config.$yellow;
+      font-weight: bold;
     }
   }
 
