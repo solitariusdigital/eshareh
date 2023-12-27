@@ -117,7 +117,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
       <div className={classes.container}>
         <div className={classes.category}>
           {categories.map((item, index) => (
-            <p
+            <h2
               key={index}
               className={
                 category === item.name[languageType]
@@ -130,12 +130,12 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
             >
               {language ? item.labelFa : item.labelEn}
               {index !== 2 && <span>/</span>}
-            </p>
+            </h2>
           ))}
         </div>
         {category !== "all" && (
           <div className={"animate__animated animate__zoomIn"}>
-            <p
+            <h3
               className={
                 language
                   ? classes.categoryDescription
@@ -143,7 +143,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
               }
             >
               {information[category][languageType]}
-            </p>
+            </h3>
           </div>
         )}
         <section
