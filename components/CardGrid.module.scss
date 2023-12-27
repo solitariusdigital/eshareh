@@ -2,7 +2,7 @@
 @use "styles/_mixins.scss" as mixins;
 
 .gridDesktop,
-.reverse {
+.gridDesktopReverse {
   display: flex;
   flex-direction: row;
   height: 60vh;
@@ -15,15 +15,18 @@
   .hero {
     position: relative;
     width: 50%;
-    height: 89.5%;
     margin-right: 20px;
+    height: 89%;
     cursor: pointer;
+
+    @include mixins.extraDesktop {
+      height: 90%;
+    }
 
     .details,
     .detailsReverse {
       height: 60px;
       text-align: right;
-      margin-top: 4px;
       direction: rtl;
     }
 
@@ -67,7 +70,7 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(35%, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
     gap: 20px;
     width: 50%;
 
@@ -86,7 +89,6 @@
       .detailsReverse {
         height: 60px;
         min-height: 20%;
-        margin-top: 4px;
       }
 
       .detailsReverse {
@@ -121,7 +123,7 @@
   }
 }
 
-.reverse {
+.gridDesktopReverse {
   flex-direction: row-reverse;
 
   .hero {
@@ -157,7 +159,6 @@
     .detailsReverse {
       height: 60px;
       min-height: 20%;
-      margin-top: 4px;
     }
 
     .detailsReverse {

@@ -3,7 +3,7 @@
 $screen-mobile: 700px;
 $screen-tablet: 1400px;
 $screen-large: 2000px;
-$screen-extraLarge: 4000px;
+$screen-fourK: 4000px;
 
 @mixin mobile {
   @media (max-width: #{$screen-mobile}) {
@@ -20,8 +20,13 @@ $screen-extraLarge: 4000px;
     @content;
   }
 }
-@mixin fourk {
-  @media (min-width: #{$screen-large} ) and (max-width: #{$screen-extraLarge}) {
+@mixin extraDesktop {
+  @media (min-width: #{$screen-large}) {
+    @content;
+  }
+}
+@mixin fourK {
+  @media (min-width: #{$screen-large} ) and (max-width: #{$screen-fourK}) {
     @content;
   }
 }

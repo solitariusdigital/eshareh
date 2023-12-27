@@ -26,7 +26,11 @@ export default function CardGrid({ solutions, direction }) {
   return (
     <Fragment>
       {screenSize === "desktop" && (
-        <div className={direction ? classes.gridDesktop : classes.reverse}>
+        <div
+          className={
+            direction ? classes.gridDesktop : classes.gridDesktopReverse
+          }
+        >
           <div
             className={classes.hero}
             onClick={() =>

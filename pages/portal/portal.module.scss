@@ -31,7 +31,7 @@
 
     h1 {
       position: absolute;
-      @include mixins.fourk {
+      @include mixins.fourK {
         top: -40px;
       }
       @include mixins.desktop {
@@ -64,7 +64,7 @@
   .image {
     position: relative;
     width: 50%;
-    @include mixins.fourk {
+    @include mixins.fourK {
       top: 100px;
       scale: 1.2;
     }
@@ -81,7 +81,7 @@
   position: relative;
   width: 40%;
 
-  @include mixins.fourk {
+  @include mixins.fourK {
     top: 200px;
   }
   @include mixins.desktop {

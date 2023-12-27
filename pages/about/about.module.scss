@@ -27,10 +27,9 @@
   margin: auto;
   height: 30vh;
 
-  @include mixins.fourk {
+  @include mixins.fourK {
     height: 20vh;
   }
-
   @include mixins.mobile {
     width: calc(100% - 24px);
     flex-direction: column;
@@ -71,7 +70,7 @@
   .image {
     height: 35vh;
 
-    @include mixins.fourk {
+    @include mixins.fourK {
       height: 45vh;
     }
   }

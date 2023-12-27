@@ -43,7 +43,7 @@
     height: 200px;
     margin-top: 50px;
 
-    @include mixins.fourk {
+    @include mixins.fourK {
       height: 300px;
     }
     @include mixins.mobile {
