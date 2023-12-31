@@ -102,7 +102,7 @@
     cursor: pointer;
 
     @include mixins.mobile {
-      height: 300px;
+      height: 250px;
     }
 
     .enlarge {
@@ -133,7 +133,7 @@
       object-fit: cover;
 
       @include mixins.mobile {
-        height: 300px;
+        height: 250px;
       }
     }
   }
