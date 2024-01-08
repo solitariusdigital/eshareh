@@ -28,7 +28,7 @@ export default function Contact() {
           siteName: "Eshareh Advertising Agency",
         }}
       />
-      <div className={language ? classes.container : classes.containerReverse}>
+      <div className={classes.container}>
         <div
           className={classes.image}
           onClick={() => window.open(locationLink)}
@@ -49,78 +49,58 @@ export default function Contact() {
             as="image"
             priority
           />
-          {tag && (
-            <h3
-              className={language ? classes.tag : classes.tagReverse}
-              style={{
-                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-              }}
-            >
-              {language ? "آژانس تبلیغاتی اشاره" : "Eshareh Advertising Agency"}
-            </h3>
-          )}
         </div>
-        <div className={classes.informationContainer}>
-          <div
-            className={
-              language ? classes.information : classes.informationReverse
-            }
+        {tag && (
+          <h3
+            className={classes.mapTag}
+            style={{
+              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+            }}
           >
-            <div className={language ? classes.tag : classes.tagReverse}>
-              {language ? (
-                <p className={classes.click}>دفتر ما را پیدا کنید</p>
-              ) : (
-                <p className={classes.click}>Find our office</p>
-              )}
-            </div>
-            <h1
-              className={classes.title}
+            {language ? "آژانس تبلیغاتی اشاره" : "Eshareh Advertising Agency"}
+          </h3>
+        )}
+        <div className={classes.location}>
+          {language ? <p>دفتر ما را پیدا کنید</p> : <p>Find our office</p>}
+        </div>
+        <div className={classes.information}>
+          <div
+            className={language ? classes.row : classes.rowReverse}
+            onClick={() => window.open(locationLink)}
+          >
+            {language ? (
+              <p className={classes.click}>
+                تهران، انتهای شیخ بهایی شمالی، نبش بزرگراه نیایش، کوچه ۲۱، پلاک
+                ۲، ۱۹۹۵۷۷۵۳۵۳
+              </p>
+            ) : (
+              <p className={classes.click}>
+                No. 2, 21st Alley, North Sheikh Bahaei St. Tehran, 1995775353,
+                Iran
+              </p>
+            )}
+          </div>
+          <div
+            className={language ? classes.row : classes.rowReverse}
+            onClick={() => window.open("tel:+982188044244", "_self")}
+          >
+            <p className={classes.click}>{language ? "تماس" : "Tel"}</p>
+            <p className={classes.click}>
+              {language ? "+۹۸ ۲۱ ۸۸۰ ۴۴ ۲۴۴" : "+98 21 880 44 244"}
+            </p>
+          </div>
+          <div className={language ? classes.row : classes.rowReverse}>
+            <p>{language ? "فکس" : "Fax"}</p>
+            <p>{language ? "+۹۸ ۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 21 880 60 666"}</p>
+          </div>
+          <div className={language ? classes.row : classes.rowReverse}>
+            <p
               style={{
-                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                fontFamily: language ? "English" : "English",
               }}
             >
-              {language ? "اشاره" : "eshareh"}
-            </h1>
-            <div className={classes.details}>
-              <div
-                className={language ? classes.row : classes.rowReverse}
-                onClick={() => window.open(locationLink)}
-              >
-                {language ? (
-                  <p className={classes.click}>
-                    تهران، انتهای شیخ بهایی شمالی، نبش بزرگراه نیایش، کوچه ۲۱،
-                    پلاک ۲، ۱۹۹۵۷۷۵۳۵۳
-                  </p>
-                ) : (
-                  <p className={classes.click}>
-                    No. 2, 21st Alley, North Sheikh Bahaei St. Tehran,
-                    1995775353, Iran
-                  </p>
-                )}
-              </div>
-              <div
-                className={language ? classes.row : classes.rowReverse}
-                onClick={() => window.open("tel:+982188044244", "_self")}
-              >
-                <p className={classes.click}>{language ? "تماس" : "Tel"}</p>
-                <p className={classes.click}>
-                  {language ? "+۹۸ ۲۱ ۸۸۰ ۴۴ ۲۴۴" : "+98 21 880 44 244"}
-                </p>
-              </div>
-              <div className={language ? classes.row : classes.rowReverse}>
-                <p>{language ? "فکس" : "Fax"}</p>
-                <p>{language ? "+۹۸ ۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 21 880 60 666"}</p>
-              </div>
-              <div className={language ? classes.row : classes.rowReverse}>
-                <p
-                  style={{
-                    fontFamily: language ? "English" : "English",
-                  }}
-                >
-                  info@eshareh.com
-                </p>
-              </div>
-            </div>
+              info@eshareh.com
+            </p>
           </div>
         </div>
       </div>

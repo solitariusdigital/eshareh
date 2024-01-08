@@ -1,119 +1,49 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.container,
-.containerReverse {
-  display: flex;
-  flex-direction: row;
+.container {
+  position: relative;
+  width: 100%;
   max-width: config.$max-widthHeigh;
   width: config.$content-width;
   margin: auto;
-
-  @include mixins.mobile {
-    flex-direction: column-reverse !important;
-    width: 100%;
-    margin-top: 150px;
-  }
-}
-
-.containerReverse {
-  flex-direction: row-reverse;
-}
-
-.image {
-  width: 300px;
   cursor: pointer;
-  position: relative;
 
   @include mixins.mobile {
     margin: auto;
-    margin-top: 50px;
-    width: 50%;
-  }
-
-  .tag,
-  .tagReverse {
-    position: absolute;
-    left: 50%;
-    top: 20%;
-    transform: translate(-50%, -50%);
-    text-align: right;
-    width: fit-content;
-  }
-
-  .tagReverse {
-    text-align: left;
-    width: 180px;
-  }
-}
-
-.informationContainer {
-  margin: auto;
-  width: 100%;
-
-  @include mixins.mobile {
+    height: 100%;
     width: calc(100% - 24px);
   }
 
-  .title {
-    font-size: 200px !important;
+  .mapTag {
+    position: absolute;
+    right: -120px;
+    top: 30%;
+    width: 180px;
+    text-align: left;
 
     @include mixins.mobile {
-      font-size: 70px !important;
-    }
-    @include mixins.tablet {
-      font-size: 100px !important;
+      right: -30px;
+      top: 15%;
     }
   }
 }
 
-.information,
-.informationReverse {
-  position: relative;
-  width: 100%;
-  text-align: right;
+.location {
+  position: absolute;
+  top: 45%;
+  color: config.$grey;
+}
+
+.information {
+  position: absolute;
+  bottom: -20px;
 
   @include mixins.mobile {
-    width: 100%;
+    top: 280px;
   }
-
-  .details {
-    position: relative;
-    bottom: 80px;
-    @include mixins.mobile {
-      bottom: 0px;
-    }
-    @include mixins.tablet {
-      bottom: 0px;
-    }
-  }
-
-  .tag,
-  .tagReverse {
-    display: flex;
-    align-items: center;
-    color: config.$grey;
-    position: relative;
-    top: 100px;
-
-    @include mixins.mobile {
-      top: 0px;
-    }
-    @include mixins.tablet {
-      top: 0px;
-    }
-  }
-
-  .tag {
-    flex-direction: row-reverse;
-    top: 50px;
-
-    @include mixins.mobile {
-      top: 0px;
-    }
-    @include mixins.tablet {
-      top: 0px;
-    }
+  @include mixins.tablet {
+    top: 350px;
   }
 
   .row,
@@ -135,8 +65,4 @@
   .row {
     flex-direction: row-reverse;
   }
-}
-
-.informationReverse {
-  text-align: left;
 }

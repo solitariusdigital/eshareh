@@ -7,7 +7,7 @@ import MuseTechLab from "@/assets/MuseTechLab.svg";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import logo from "@/assets/logo.png";
+import logofooter from "@/assets/logofooter.png";
 import Router from "next/router";
 
 export default function Footer() {
@@ -96,9 +96,9 @@ export default function Footer() {
           onClick={() => window.location.assign("/")}
         >
           <Image
-            width={150}
-            height={86.27}
-            src={logo}
+            width={100}
+            height={43.22}
+            src={logofooter}
             alt="logo"
             as="image"
             priority
