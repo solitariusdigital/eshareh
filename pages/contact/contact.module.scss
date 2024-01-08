@@ -21,11 +21,6 @@
     top: 30%;
     width: 180px;
     text-align: left;
-
-    @include mixins.mobile {
-      right: -30px;
-      top: 15%;
-    }
   }
 }
 

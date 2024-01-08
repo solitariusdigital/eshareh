@@ -7,6 +7,7 @@ import { NextSeo } from "next-seo";
 
 export default function Contact() {
   const { language, setLanguage } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
   const [tag, setTag] = useState(false);
 
   const locationLink =
@@ -50,7 +51,7 @@ export default function Contact() {
             priority
           />
         </div>
-        {tag && (
+        {tag && screenSize === "desktop" && (
           <h3
             className={classes.mapTag}
             style={{
