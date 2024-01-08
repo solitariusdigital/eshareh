@@ -250,11 +250,6 @@ export default function About() {
     setCurrent(currentSlide);
   };
 
-  const style = {
-    borderLeft: "1px solid #fdb714",
-    borderRight: "1px solid #fdb714",
-  };
-
   return (
     <Fragment>
       <NextSeo
@@ -312,8 +307,9 @@ export default function About() {
             </div>
           )}
         </div>
-        <div className={classes.swiper}>
+        <div className={classes.swiperContainer}>
           <Swiper
+            className={classes.swiper}
             slidesPerView={generateSwipeCount()}
             spaceBetween={0}
             centeredSlides={true}
@@ -324,14 +320,17 @@ export default function About() {
             style={{ "--swiper-navigation-color": "#ffffff" }}
             onSlideChange={updateIndex}
             autoplay={{
-              delay: 500,
+              delay: 1000,
               disableOnInteraction: true,
             }}
-            speed={500}
+            speed={1000}
             // slideToClickedSlide={true}
+            // onSlideChangeEnd={(swiper) => {
+            //   swiper.fixLoop();
+            // }}
           >
             {photos.map((photo, index) => (
-              <SwiperSlide key={index} style={index === current ? style : {}}>
+              <SwiperSlide key={index} className={classes.swiperSlide}>
                 <div className={classes.image}>
                   <Image
                     src={photo[languageType].image}

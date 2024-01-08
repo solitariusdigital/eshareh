@@ -10,9 +10,11 @@
 
   @include mixins.mobile {
     width: 100%;
+    min-height: 700px;
   }
   @include mixins.tablet {
     width: 100%;
+    min-height: 700px;
   }
 }
 
@@ -33,9 +35,12 @@
   @include mixins.mobile {
     width: calc(100% - 24px);
     flex-direction: column;
+    height: 300px;
   }
+
   @include mixins.tablet {
     flex-direction: column;
+    height: 300px;
   }
 
   div {
@@ -50,11 +55,13 @@
     @include mixins.mobile {
       margin-top: 40px;
       width: calc(100% - 24px);
+      height: 300px;
     }
 
     @include mixins.tablet {
       margin-top: 40px;
       width: calc(100% - 24px);
+      height: 300px;
     }
   }
 }
@@ -63,12 +70,31 @@
   direction: ltr;
 }
 
-.swiper {
+.swiperContainer {
   height: 70vh;
   text-align: center;
 
+  .swiper {
+    height: 50%;
+    @include mixins.fourK {
+      height: 80%;
+    }
+    @include mixins.mobile {
+      height: 60%;
+    }
+  }
+  .swiperSlide {
+    height: 80%;
+    @include mixins.mobile {
+      height: 100%;
+    }
+  }
   .image {
     height: 35vh;
+
+    @include mixins.mobile {
+      min-height: 400px;
+    }
 
     @include mixins.fourK {
       height: 45vh;
