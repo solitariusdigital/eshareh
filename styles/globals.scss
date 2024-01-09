@@ -167,16 +167,8 @@ label.file input[type="file"] {
 }
 
 .about_swiperSlide__KLdpq.swiper-slide-active {
-  @include mixins.desktop {
-    clip-path: polygon(50% 100%, 0% 90%, 0% 0%, 100% 0%, 100% 90%);
-    transform: scale(1.5, 1.5);
-    position: relative;
-    z-index: 5;
-  }
-  @include mixins.fourK {
-    clip-path: polygon(50% 100%, 0% 90%, 0% 0%, 100% 0%, 100% 90%);
-    transform: scale(1.5, 1.5);
-    position: relative;
-    z-index: 5;
-  }
+  clip-path: polygon(50% 100%, 0% 90%, 0% 0%, 100% 0%, 100% 90%);
+  transform: scale(1.5, 1.5) !important;
+  position: relative;
+  z-index: 5;
 }

@@ -238,7 +238,7 @@ export default function About() {
         count = 7;
         break;
       case "mobile":
-        count = 1;
+        count = 3;
         break;
     }
     return count;

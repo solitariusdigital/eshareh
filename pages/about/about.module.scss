@@ -79,15 +79,10 @@
     @include mixins.fourK {
       height: 80%;
     }
-    @include mixins.mobile {
-      height: 60%;
-    }
   }
+
   .swiperSlide {
     height: 80%;
-    @include mixins.mobile {
-      height: 100%;
-    }
   }
 
   .details {
