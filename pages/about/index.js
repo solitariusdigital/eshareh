@@ -331,18 +331,16 @@ export default function About() {
           >
             {photos.map((photo, index) => (
               <SwiperSlide key={index} className={classes.swiperSlide}>
-                <div className={classes.image}>
-                  <Image
-                    src={photo[languageType].image}
-                    blurDataURL={photo[languageType].image}
-                    placeholder="blur"
-                    alt={photo[languageType].title}
-                    layout="fill"
-                    objectFit="cover"
-                    as="image"
-                    priority
-                  />
-                </div>
+                <Image
+                  src={photo[languageType].image}
+                  blurDataURL={photo[languageType].image}
+                  placeholder="blur"
+                  alt={photo[languageType].title}
+                  layout="fill"
+                  objectFit="cover"
+                  as="image"
+                  priority
+                />
               </SwiperSlide>
             ))}
           </Swiper>

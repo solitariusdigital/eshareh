@@ -89,17 +89,6 @@
       height: 100%;
     }
   }
-  .image {
-    height: 35vh;
-
-    @include mixins.mobile {
-      min-height: 400px;
-    }
-
-    @include mixins.fourK {
-      height: 45vh;
-    }
-  }
 
   .details {
     margin-top: 20px;
