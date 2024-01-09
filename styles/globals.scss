@@ -170,5 +170,5 @@ label.file input[type="file"] {
   clip-path: polygon(50% 100%, 0% 90%, 0% 0%, 100% 0%, 100% 90%);
   transform: scale(1.5, 1.5) !important;
   position: relative;
-  z-index: 5;
+  z-index: 5 !important;
 }
