@@ -167,8 +167,8 @@ label.file input[type="file"] {
 }
 
 .about_swiperSlide__KLdpq.swiper-slide-active {
-  clip-path: polygon(50% 100%, 0% 90%, 0% 0%, 100% 0%, 100% 90%);
-  transform: scale(1.5, 1.5) !important;
-  position: relative;
+  position: relative !important;
   z-index: 5 !important;
+  transform: scale(1.5, 1.5) !important;
+  clip-path: polygon(50% 100%, 0% 90%, 0% 0%, 100% 0%, 100% 90%) !important;
 }
