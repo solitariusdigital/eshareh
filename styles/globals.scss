@@ -166,16 +166,17 @@ label.file input[type="file"] {
   border: 1px solid config.$yellow;
 }
 
+.about_swiperSlide__KLdpq.swiper-slide-prev {
+  position: relative !important;
+  z-index: 2 !important;
+}
+.about_swiperSlide__KLdpq.swiper-slide-next {
+  position: relative !important;
+  z-index: 2 !important;
+}
 .about_swiperSlide__KLdpq.swiper-slide-active {
   position: relative !important;
   z-index: 5 !important;
   transform: scale(1.5, 1.5) !important;
   clip-path: polygon(50% 100%, 0% 90%, 0% 0%, 100% 0%, 100% 90%) !important;
-}
-
-.about_swiperSlide__KLdpq.swiper-slide-prev {
-  z-index: 4 !important;
-}
-.about_swiperSlide__KLdpq.swiper-slide-next {
-  z-index: 4 !important;
 }
