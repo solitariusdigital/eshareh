@@ -172,3 +172,10 @@ label.file input[type="file"] {
   transform: scale(1.5, 1.5) !important;
   clip-path: polygon(50% 100%, 0% 90%, 0% 0%, 100% 0%, 100% 90%) !important;
 }
+
+.about_swiperSlide__KLdpq.swiper-slide-prev {
+  z-index: 4 !important;
+}
+.about_swiperSlide__KLdpq.swiper-slide-next {
+  z-index: 4 !important;
+}
