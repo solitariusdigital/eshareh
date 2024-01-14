@@ -52,7 +52,7 @@ export default function Portal() {
   const handleLogin = () => {
     if (!email || !password) {
       showAlert(
-        language ? "ایمیل و پسورد الزامیست" : "Email & Password required"
+        language ? "ایمیل و پسورد الزامیست" : "Email & Password are required"
       );
       return;
     }
@@ -62,9 +62,7 @@ export default function Portal() {
     }
     if (password.length < 8) {
       showAlert(
-        language
-          ? "رمز عبور باید 8 کاراکتر باشد"
-          : "Password must be 8 characters"
+        language ? "پسورد باید 8 کاراکتر باشد" : "Password must be 8 characters"
       );
       return;
     }

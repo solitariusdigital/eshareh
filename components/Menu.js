@@ -118,6 +118,7 @@ export default function Menu() {
           {currentUser.permission === "admin" && (
             <p onClick={() => Router.push("/admin")}>Admin</p>
           )}
+          <p onClick={() => Router.push("/password")}>Password</p>
           <p onClick={() => signOut()}>Sign out</p>
         </div>
       )}
