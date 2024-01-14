@@ -29,6 +29,7 @@ export default function Solution({ solutions, projectTitle }) {
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayNextController, setDisplayNextController] = useState(false);
   const [project, setProject] = useState(null);
+
   const [previousProject, setPreviousProject] = useState(null);
   const [nextProject, setNextProject] = useState(null);
   const [dropDown, setDropDpwn] = useState(false);
@@ -170,6 +171,18 @@ export default function Solution({ solutions, projectTitle }) {
     window.location.reload();
   };
 
+  const moveUp = async (index) => {
+    const updatedProject = [...project.media];
+    const itemToMove = updatedProject.splice(index, 1)[0];
+    updatedProject.splice(index - 1, 0, itemToMove);
+    let dataObject = {
+      ...project,
+      media: updatedProject,
+    };
+    await updateSolutionApi(dataObject);
+    window.location.reload();
+  };
+
   return (
     <Fragment>
       {project && (
@@ -278,6 +291,11 @@ export default function Solution({ solutions, projectTitle }) {
             {project.media.map((image, index) => (
               <Fragment key={index}>
                 <div className={classes.imageBox}>
+                  {permissionControl === "admin" && !displayGallerySlider && (
+                    <p className={classes.move} onClick={() => moveUp(index)}>
+                      Move up
+                    </p>
+                  )}
                   {permissionControl === "admin" && !displayGallerySlider && (
                     <p
                       className={classes.cover}

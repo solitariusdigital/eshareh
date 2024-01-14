@@ -115,7 +115,8 @@
       @include mixins.transparentBackground(0.2, config.$lightgrey);
     }
 
-    .cover {
+    .cover,
+    .move {
       position: absolute;
       top: 10px;
       left: 10px;
@@ -124,6 +125,14 @@
       z-index: 1;
       color: config.$white;
       @include mixins.transparentBackground(0.2, config.$lightgrey);
+
+      &:hover {
+        color: config.$yellow;
+      }
+    }
+
+    .move {
+      left: 150px;
     }
 
     .video {
