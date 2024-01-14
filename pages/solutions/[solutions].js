@@ -291,18 +291,27 @@ export default function Solution({ solutions, projectTitle }) {
             {project.media.map((image, index) => (
               <Fragment key={index}>
                 <div className={classes.imageBox}>
-                  {permissionControl === "admin" && !displayGallerySlider && (
-                    <p className={classes.move} onClick={() => moveUp(index)}>
-                      Move up
-                    </p>
-                  )}
-                  {permissionControl === "admin" && !displayGallerySlider && (
-                    <p
-                      className={classes.cover}
-                      onClick={() => makeCover(index)}
-                    >
-                      Make Cover
-                    </p>
+                  {index > 0 && (
+                    <Fragment>
+                      {permissionControl === "admin" &&
+                        !displayGallerySlider && (
+                          <p
+                            className={classes.move}
+                            onClick={() => moveUp(index)}
+                          >
+                            Move up
+                          </p>
+                        )}
+                      {permissionControl === "admin" &&
+                        !displayGallerySlider && (
+                          <p
+                            className={classes.cover}
+                            onClick={() => makeCover(index)}
+                          >
+                            Make Cover
+                          </p>
+                        )}
+                    </Fragment>
                   )}
                   {image.type === "image" ? (
                     <div onClick={() => gallerySlider()}>
