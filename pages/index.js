@@ -89,7 +89,7 @@ export default function Home({ solutions }) {
         className={classes.message}
         onClick={() => Router.push("/solutions")}
       >
-        {language ? <h3>مشاهده همه پروژه‌ها</h3> : <h3>View all works</h3>}
+        {language ? <h3>مشاهده راه حل‌ها</h3> : <h3>View solutions</h3>}
       </div>
     </Fragment>
   );
