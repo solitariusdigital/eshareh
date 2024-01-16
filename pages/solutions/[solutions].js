@@ -18,6 +18,10 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import Tooltip from "@mui/material/Tooltip";
 import { getSolutionApi, updateSolutionApi } from "@/services/api";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Mousewheel } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 export default function Solution({ solutions, projectTitle }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -183,6 +187,32 @@ export default function Solution({ solutions, projectTitle }) {
     window.location.reload();
   };
 
+  const makeGroup = async (index) => {
+    let groupMedia = [...project.groupMedia, project.media[index]];
+    let findIndex = project.media.indexOf(project.media[index]);
+    project.media.splice(findIndex, 1);
+    let dataObject = {
+      ...project,
+      media: project.media,
+      groupMedia: groupMedia,
+    };
+    await updateSolutionApi(dataObject);
+    window.location.reload();
+  };
+
+  const removeGroup = async (index) => {
+    let media = [...project.media, project.groupMedia[index]];
+    let findIndex = project.groupMedia.indexOf(project.groupMedia[index]);
+    project.groupMedia.splice(findIndex, 1);
+    let dataObject = {
+      ...project,
+      media: media,
+      groupMedia: project.groupMedia,
+    };
+    await updateSolutionApi(dataObject);
+    window.location.reload();
+  };
+
   return (
     <Fragment>
       {project && (
@@ -292,7 +322,7 @@ export default function Solution({ solutions, projectTitle }) {
               <Fragment key={index}>
                 <div className={classes.imageBox}>
                   {index > 0 && (
-                    <Fragment>
+                    <div className={classes.control}>
                       {permissionControl === "admin" &&
                         !displayGallerySlider && (
                           <p
@@ -311,7 +341,16 @@ export default function Solution({ solutions, projectTitle }) {
                             Make Cover
                           </p>
                         )}
-                    </Fragment>
+                      {permissionControl === "admin" &&
+                        !displayGallerySlider && (
+                          <p
+                            className={classes.group}
+                            onClick={() => makeGroup(index)}
+                          >
+                            Group
+                          </p>
+                        )}
+                    </div>
                   )}
                   {image.type === "image" ? (
                     <div onClick={() => gallerySlider()}>
@@ -367,6 +406,57 @@ export default function Solution({ solutions, projectTitle }) {
                 )}
               </Fragment>
             ))}
+            {project.groupMedia && project.groupMedia.length > 0 && (
+              <div className={classes.swiper} onClick={() => gallerySlider()}>
+                <Swiper
+                  slidesPerView="auto"
+                  spaceBetween={0}
+                  navigation={true}
+                  mousewheel={true}
+                  loop={true}
+                  modules={[Navigation, Mousewheel]}
+                  style={{ "--swiper-navigation-color": "#ffffff" }}
+                >
+                  {project.groupMedia.map((image, index) => (
+                    <SwiperSlide key={index}>
+                      <div className={classes.control}>
+                        {permissionControl === "admin" &&
+                          !displayGallerySlider && (
+                            <p
+                              className={classes.removeGroup}
+                              onClick={() => removeGroup(index)}
+                            >
+                              Remove
+                            </p>
+                          )}
+                      </div>
+                      <div className={classes.image}>
+                        {image.type === "image" ? (
+                          <Image
+                            src={image.link}
+                            blurDataURL={image.link}
+                            placeholder="blur"
+                            alt={image.link}
+                            layout="fill"
+                            objectFit="cover"
+                            as="image"
+                            priority
+                          />
+                        ) : (
+                          <video
+                            className={classes.video}
+                            src={image.link + "#t=0.1"}
+                            controls
+                            playsInline
+                            preload="metadata"
+                          />
+                        )}
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            )}
             {displayNextController && (
               <div
                 className={`${classes.projectController}  animate__animated animate__slideInUp`}
@@ -408,7 +498,9 @@ export default function Solution({ solutions, projectTitle }) {
                   />
                 </div>
                 {<h3>{project[languageType].title}</h3>}
-                <GallerySlider media={project.media} />
+                <GallerySlider
+                  media={project.media.concat(project.groupMedia)}
+                />
               </div>
             )}
             <div className={classes.nextProject} ref={targetRef}>
