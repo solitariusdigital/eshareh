@@ -25,7 +25,7 @@ export default function Search({ activeSolutions }) {
         let matches = [];
         matches.push(
           Object.values(item[languageType]).some((val) =>
-            String(val).includes(search.trim().slice(0, 20))
+            String(val).toLowerCase().includes(search.trim().slice(0, 20))
           )
         );
         return matches.every((match) => match);
