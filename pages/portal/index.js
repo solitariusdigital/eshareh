@@ -9,6 +9,7 @@ import { enc } from "crypto-js";
 import Image from "next/legacy/image";
 import portal from "@/assets/portal.png";
 import { createUserApi, getUsersApi } from "@/services/api";
+import { validateEmail } from "@/services/utility";
 
 export default function Portal() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -37,11 +38,6 @@ export default function Portal() {
     }
   }, [permissionControl, setEditSolution]);
 
-  const validateEmail = (value) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(value);
-  };
-
   const showAlert = (message) => {
     setAlert(message);
     setTimeout(() => {
@@ -62,7 +58,9 @@ export default function Portal() {
     }
     if (password.length < 8) {
       showAlert(
-        language ? "پسورد باید 8 کاراکتر باشد" : "Password must be 8 characters"
+        language
+          ? "پسورد باید حداقل 8 کاراکتر باشد"
+          : "Password must be 8 minimum characters"
       );
       return;
     }
@@ -210,7 +208,7 @@ export default function Portal() {
                 <>{language ? "ثبت نام" : "Sign up"}</>
               )}
             </button>
-            <div
+            {/* <div
               className={classes.create}
               onClick={() => setFormType(!formType)}
             >
@@ -219,7 +217,7 @@ export default function Portal() {
               ) : (
                 <>{language ? "حساب کاربری دارم" : "Have an account"}</>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
         <div className={classes.image}>

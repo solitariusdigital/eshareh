@@ -45,8 +45,8 @@ export default function Password() {
     if (password.length < 8) {
       showAlert(
         language
-          ? "پسورد جدید باید 8 کاراکتر باشد"
-          : "New password must be 8 characters"
+          ? "پسورد جدید باید حداقل 8 کاراکتر باشد"
+          : "New password must be 8 minimum characters"
       );
       return;
     }

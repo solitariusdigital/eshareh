@@ -130,3 +130,20 @@ export function replaceSpacesAndHyphens(str) {
 export function sliceString(string, number) {
   return string.slice(0, number).split(" ").slice(0, -1).join(" ") + "...";
 }
+
+export function areAllStatesValid(states) {
+  for (const state of states) {
+    const values = Object.values(state);
+    for (const value of values) {
+      if (value === "") {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+export function validateEmail(value) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(value);
+}

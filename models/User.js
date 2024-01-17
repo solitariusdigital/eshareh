@@ -2,7 +2,14 @@ import { Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema(
   {
-    name: String,
+    name: {
+      fa: String,
+      en: String,
+    },
+    title: {
+      fa: String,
+      en: String,
+    },
     email: {
       type: String,
       required: true,
@@ -12,7 +19,9 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    media: String,
     permission: String,
+    active: Boolean,
   },
   { timestamps: true }
 );

@@ -9,6 +9,7 @@ import {
   sixGenerator,
   uploadMedia,
   replaceSpacesAndHyphens,
+  areAllStatesValid,
 } from "@/services/utility";
 import { createSolutionApi, updateSolutionApi } from "@/services/api";
 
@@ -199,18 +200,6 @@ export default function SolutionsForm() {
     }
     let link = `/solutions/${replaceSpacesAndHyphens(solutionData.en.title)}`;
     window.location.assign(link);
-  };
-
-  const areAllStatesValid = (states) => {
-    for (const state of states) {
-      const values = Object.values(state);
-      for (const value of values) {
-        if (value === "") {
-          return false;
-        }
-      }
-    }
-    return true;
   };
 
   const showAlert = (message) => {

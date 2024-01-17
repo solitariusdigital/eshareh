@@ -82,13 +82,13 @@
   width: 40%;
 
   @include mixins.fourK {
-    top: 200px;
+    top: 180px;
   }
   @include mixins.desktop {
-    top: 10px;
+    top: 0px;
   }
   @include mixins.tablet {
-    width: 100%;
+    width: 500px;
     margin: 100px 0px;
   }
   @include mixins.mobile {

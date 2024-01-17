@@ -11,3 +11,33 @@
     width: calc(100% - 24px);
   }
 }
+
+.types {
+  width: 350px;
+  margin: auto;
+  margin-bottom: 50px;
+  border-radius: 50px;
+  height: 40px;
+  border: 1px solid config.$lightgrey;
+  text-transform: capitalize;
+  @include mixins.row-space-between-center();
+  justify-content: space-around;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+
+  .nav {
+    font-weight: bold !important;
+
+    &:hover {
+      cursor: pointer;
+      color: config.$yellow;
+    }
+  }
+
+  .navActive {
+    color: config.$yellow;
+    font-weight: bold !important;
+  }
+}
