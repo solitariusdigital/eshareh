@@ -12,6 +12,7 @@ import {
   validateEmail,
 } from "@/services/utility";
 import loaderImage from "@/assets/loader.png";
+import AES from "crypto-js/aes";
 
 export default function TeamForm() {
   const { language, setLanguage } = useContext(StateContext);
@@ -77,13 +78,21 @@ export default function TeamForm() {
         en: title.en,
       },
       email: email,
-      password: password,
+      password: cryptPassword(),
       media: mediaLink,
       permission: "user",
       active: true,
     };
     await createUserApi(user);
     window.location.assign("/admin");
+  };
+
+  // encrypt password
+  const cryptPassword = () => {
+    return AES.encrypt(
+      password.trim(),
+      process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY
+    ).toString();
   };
 
   return (
