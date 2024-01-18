@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
 import Image from "next/legacy/image";
@@ -8,225 +8,28 @@ import { Navigation, Mousewheel, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { NextSeo } from "next-seo";
-import team from "@/assets/team.jpg";
-import teamone from "@/assets/teamone.jpg";
+import { getUsersApi } from "@/services/api";
+import balloon from "@/assets/balloon.png";
 
 export default function About() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+
+  const [users, setUsers] = useState([]);
   const [current, setCurrent] = useState(0);
 
-  const photos = [
-    {
-      fa: {
-        image: teamone,
-        title: "سحر",
-
-        position: "1 مدیر",
-      },
-      en: {
-        image: teamone,
-        title: "Sahar",
-        position: "Manager 1",
-      },
-    },
-    {
-      fa: {
-        image: team,
-        title: "سیامک",
-
-        position: "مدیر واحد خلاقیت",
-      },
-      en: {
-        image: team,
-        title: "Siamak",
-        position: "Accounts 1",
-      },
-    },
-    {
-      fa: {
-        image: teamone,
-        title: "سحر",
-
-        position: "مدیر",
-      },
-      en: {
-        image: teamone,
-        title: "Sahar",
-        position: "Manager",
-      },
-    },
-    {
-      fa: {
-        image: team,
-        title: "سیامک",
-
-        position: "مدیر واحد خلاقیت",
-      },
-      en: {
-        image: team,
-        title: "Siamak",
-        position: "Accounts",
-      },
-    },
-    {
-      fa: {
-        image: teamone,
-        title: "سحر",
-
-        position: "مدیر",
-      },
-      en: {
-        image: teamone,
-        title: "Sahar",
-        position: "Manager",
-      },
-    },
-    {
-      fa: {
-        image: team,
-        title: "سیامک",
-
-        position: "مدیر واحد خلاقیت",
-      },
-      en: {
-        image: team,
-        title: "Siamak",
-        position: "Accounts",
-      },
-    },
-    {
-      fa: {
-        image: teamone,
-        title: "سحر",
-
-        position: "مدیر",
-      },
-      en: {
-        image: teamone,
-        title: "Sahar",
-        position: "Manager",
-      },
-    },
-    {
-      fa: {
-        image: team,
-        title: "سیامک",
-
-        position: "مدیر واحد خلاقیت",
-      },
-      en: {
-        image: team,
-        title: "Siamak",
-        position: "Accounts",
-      },
-    },
-    {
-      fa: {
-        image: teamone,
-        title: "سحر",
-
-        position: "مدیر",
-      },
-      en: {
-        image: teamone,
-        title: "Sahar",
-        position: "Manager",
-      },
-    },
-    {
-      fa: {
-        image: team,
-        title: "سیامک",
-
-        position: "مدیر واحد خلاقیت",
-      },
-      en: {
-        image: team,
-        title: "Siamak",
-        position: "Accounts",
-      },
-    },
-    {
-      fa: {
-        image: teamone,
-        title: "سحر",
-
-        position: "مدیر",
-      },
-      en: {
-        image: teamone,
-        title: "Sahar",
-        position: "Manager",
-      },
-    },
-    {
-      fa: {
-        image: team,
-        title: "سیامک",
-
-        position: "مدیر واحد خلاقیت",
-      },
-      en: {
-        image: team,
-        title: "Siamak",
-        position: "Accounts",
-      },
-    },
-    {
-      fa: {
-        image: teamone,
-        title: "سحر",
-
-        position: "مدیر",
-      },
-      en: {
-        image: teamone,
-        title: "Sahar",
-        position: "Manager",
-      },
-    },
-    {
-      fa: {
-        image: team,
-        title: "سیامک",
-
-        position: "مدیر واحد خلاقیت",
-      },
-      en: {
-        image: team,
-        title: "Siamak",
-        position: "Accounts",
-      },
-    },
-    {
-      fa: {
-        image: teamone,
-        title: "سحر",
-
-        position: "مدیر",
-      },
-      en: {
-        image: teamone,
-        title: "Sahar",
-        position: "Manager",
-      },
-    },
-    {
-      fa: {
-        image: team,
-        title: "سیامک",
-
-        position: "مدیر واحد خلاقیت",
-      },
-      en: {
-        image: team,
-        title: "Siamak",
-        position: "Accounts",
-      },
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const users = await getUsersApi();
+        setUsers(users);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const generateSwipeCount = () => {
     let count = 0;
@@ -307,54 +110,56 @@ export default function About() {
             </div>
           )}
         </div>
-        <div className={classes.swiperContainer}>
-          <Swiper
-            className={classes.swiper}
-            slidesPerView={generateSwipeCount()}
-            spaceBetween={0}
-            centeredSlides={true}
-            navigation={true}
-            mousewheel={true}
-            loop={true}
-            modules={[Navigation, Mousewheel, Autoplay]}
-            style={{ "--swiper-navigation-color": "#ffffff" }}
-            onSlideChange={updateIndex}
-            autoplay={{
-              delay: 1000,
-              disableOnInteraction: true,
-            }}
-            speed={1000}
-            // slideToClickedSlide={true}
-            // onSlideChangeEnd={(swiper) => {
-            //   swiper.fixLoop();
-            // }}
-          >
-            {photos.map((photo, index) => (
-              <SwiperSlide key={index} className={classes.swiperSlide}>
-                <Image
-                  src={photo[languageType].image}
-                  blurDataURL={photo[languageType].image}
-                  placeholder="blur"
-                  alt={photo[languageType].title}
-                  layout="fill"
-                  objectFit="cover"
-                  as="image"
-                  priority
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <div className={classes.details}>
-            <h2
-              style={{
-                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+        {users.length > 0 && (
+          <div className={classes.swiperContainer}>
+            <Swiper
+              className={classes.swiper}
+              slidesPerView={generateSwipeCount()}
+              spaceBetween={0}
+              centeredSlides={true}
+              navigation={true}
+              mousewheel={true}
+              loop={true}
+              modules={[Navigation, Mousewheel, Autoplay]}
+              style={{ "--swiper-navigation-color": "#ffffff" }}
+              onSlideChange={updateIndex}
+              autoplay={{
+                delay: 1000,
+                disableOnInteraction: true,
               }}
+              speed={1000}
+              // slideToClickedSlide={true}
+              // onSlideChangeEnd={(swiper) => {
+              //   swiper.fixLoop();
+              // }}
             >
-              {photos[current][languageType].title}
-            </h2>
-            <p>{photos[current][languageType].position}</p>
+              {users.map((user, index) => (
+                <SwiperSlide key={index} className={classes.swiperSlide}>
+                  <Image
+                    src={user.media ? user.media : balloon}
+                    blurDataURL={user.media ? user.media : balloon}
+                    placeholder="blur"
+                    alt={user.name[languageType]}
+                    layout="fill"
+                    objectFit="cover"
+                    as="image"
+                    priority
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className={classes.details}>
+              <h2
+                style={{
+                  fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                }}
+              >
+                {users[current]["name"][languageType]}
+              </h2>
+              <p>{users[current]["title"][languageType]}</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </Fragment>
   );
