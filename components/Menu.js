@@ -13,9 +13,8 @@ import ColorLensIcon from "@mui/icons-material/ColorLens";
 import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import { getControlsApi, updateControlApi } from "@/services/api";
 import Tooltip from "@mui/material/Tooltip";
-import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
-import Person4Icon from "@mui/icons-material/Person4";
 import secureLocalStorage from "react-secure-storage";
+import balloon from "@/assets/balloon.png";
 
 export default function Menu() {
   const { language, setLanguage } = useContext(StateContext);
@@ -93,21 +92,6 @@ export default function Menu() {
       className={classes.container}
       style={{ background: menuColor.background, color: menuColor.text }}
     >
-      {currentUser && screenSize === "desktop" && (
-        <div
-          className={classes.profileContainer}
-          onClick={() => setDropDpwn(!dropDown)}
-          style={{
-            fontFamily: language ? "English" : "English",
-          }}
-        >
-          <div className={classes.profile}>
-            {currentUser.permission === "admin" && <MilitaryTechIcon />}
-            {currentUser.permission === "user" && <Person4Icon />}
-            <p>{currentUser.name.fa}</p>
-          </div>
-        </div>
-      )}
       {currentUser && dropDown && screenSize === "desktop" && (
         <div
           className={`${classes.dropDown}  animate__animated animate__zoomIn`}
@@ -126,6 +110,22 @@ export default function Menu() {
         <div
           className={language ? classes.largeMenuReverse : classes.largeMenu}
         >
+          {currentUser && screenSize === "desktop" && (
+            <div
+              className={classes.profile}
+              onClick={() => setDropDpwn(!dropDown)}
+            >
+              <Image
+                src={currentUser.media ? currentUser.media : balloon}
+                blurDataURL={currentUser.media ? currentUser.media : balloon}
+                layout="fill"
+                objectFit="cover"
+                alt="image"
+                as="image"
+                priority
+              />
+            </div>
+          )}
           <div
             className={
               language ? classes.logoContainer : classes.logoContainerReverse

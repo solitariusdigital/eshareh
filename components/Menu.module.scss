@@ -49,23 +49,6 @@
     }
   }
 
-  .profileContainer {
-    position: absolute;
-    right: 50px;
-    font-size: config.$tiny-font;
-    cursor: pointer;
-
-    &:hover {
-      color: config.$yellow;
-    }
-
-    .profile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-
   .dropDown {
     position: absolute;
     right: 10px;
@@ -104,6 +87,16 @@
     width: 50%;
     max-width: 700px;
     @include mixins.row-space-between-center();
+  }
+
+  .profile {
+    position: absolute;
+    right: -100px;
+    bottom: -15px;
+    width: 60px;
+    height: 90px;
+    clip-path: polygon(50% 100%, 0% 90%, 0% 0%, 100% 0%, 100% 90%) !important;
+    cursor: pointer;
   }
 }
 
