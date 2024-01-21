@@ -48,31 +48,6 @@
       cursor: pointer;
     }
   }
-
-  .dropDown {
-    position: absolute;
-    right: 10px;
-    top: 110px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    height: 50px;
-    background: config.$white;
-    border-radius: 4px;
-    font-size: config.$tiny-font;
-    box-shadow: config.$image-shadow;
-    border: 1px solid config.$yellow;
-
-    p {
-      margin: 5px 10px;
-      cursor: pointer;
-
-      &:hover {
-        color: config.$yellow;
-      }
-    }
-  }
 }
 
 .largeMenu,
@@ -97,6 +72,31 @@
     height: 90px;
     clip-path: polygon(50% 100%, 0% 90%, 0% 0%, 100% 0%, 100% 90%) !important;
     cursor: pointer;
+  }
+
+  .dropDown {
+    position: absolute;
+    right: -100px;
+    top: 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 50px;
+    background: config.$white;
+    border-radius: 4px;
+    font-size: config.$tiny-font;
+    box-shadow: config.$card-shadow;
+    border: 1px solid config.$yellow;
+
+    p {
+      margin: 5px 10px;
+      cursor: pointer;
+
+      &:hover {
+        color: config.$yellow;
+      }
+    }
   }
 }
 

@@ -92,20 +92,6 @@ export default function Menu() {
       className={classes.container}
       style={{ background: menuColor.background, color: menuColor.text }}
     >
-      {currentUser && dropDown && screenSize === "desktop" && (
-        <div
-          className={`${classes.dropDown}  animate__animated animate__zoomIn`}
-          style={{
-            fontFamily: language ? "English" : "English",
-          }}
-        >
-          {currentUser.permission === "admin" && (
-            <p onClick={() => Router.push("/admin")}>Admin</p>
-          )}
-          <p onClick={() => Router.push("/password")}>Password</p>
-          <p onClick={() => signOut()}>Sign out</p>
-        </div>
-      )}
       {screenSize === "desktop" && (
         <div
           className={language ? classes.largeMenuReverse : classes.largeMenu}
@@ -124,6 +110,20 @@ export default function Menu() {
                 as="image"
                 priority
               />
+            </div>
+          )}
+          {dropDown && currentUser && screenSize === "desktop" && (
+            <div
+              className={`${classes.dropDown}  animate__animated animate__zoomIn`}
+              style={{
+                fontFamily: language ? "English" : "English",
+              }}
+            >
+              {currentUser.permission === "admin" && (
+                <p onClick={() => Router.push("/admin")}>Admin</p>
+              )}
+              <p onClick={() => Router.push("/password")}>Password</p>
+              <p onClick={() => signOut()}>Sign out</p>
             </div>
           )}
           <div
