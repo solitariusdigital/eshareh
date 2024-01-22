@@ -60,7 +60,7 @@ export default function Portal() {
       showAlert(
         language
           ? "پسورد باید حداقل 8 کاراکتر باشد"
-          : "Password must be 8 minimum characters"
+          : "Password must be minimum 8 characters"
       );
       return;
     }

@@ -46,7 +46,7 @@ export default function Password() {
       showAlert(
         language
           ? "پسورد جدید باید حداقل 8 کاراکتر باشد"
-          : "New password must be 8 minimum characters"
+          : "New password must be minimum 8 characters"
       );
       return;
     }
