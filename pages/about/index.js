@@ -8,8 +8,10 @@ import { Navigation, Mousewheel, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { NextSeo } from "next-seo";
-import { getUsersApi } from "@/services/api";
+import { getUsersApi, updateUserApi } from "@/services/api";
 import balloon from "@/assets/balloon.png";
+import Tooltip from "@mui/material/Tooltip";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function About() {
   const { language, setLanguage } = useContext(StateContext);
@@ -23,7 +25,7 @@ export default function About() {
     const fetchData = async () => {
       try {
         const users = await getUsersApi();
-        setUsers(users);
+        setUsers(users.filter((user) => user.active));
       } catch (error) {
         console.error(error);
       }
@@ -51,6 +53,19 @@ export default function About() {
     if (swiperInstance === null) return;
     const currentSlide = swiperInstance?.realIndex;
     setCurrent(currentSlide);
+  };
+
+  const deactivateUser = async (index) => {
+    let confirmationMessage = "آرشیو و پنهان، مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    let user = {
+      ...users[index],
+      active: false,
+    };
+    if (confirm) {
+      await updateUserApi(user);
+      window.location.assign("/about");
+    }
   };
 
   return (
@@ -157,6 +172,13 @@ export default function About() {
                 {users[current]["name"][languageType]}
               </h2>
               <p>{users[current]["title"][languageType]}</p>
+              <Tooltip title="Remove">
+                <CloseIcon
+                  className="icon"
+                  sx={{ color: "#d40d12" }}
+                  onClick={() => deactivateUser(current)}
+                />
+              </Tooltip>
             </div>
           </div>
         )}
