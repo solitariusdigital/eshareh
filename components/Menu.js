@@ -199,7 +199,7 @@ export default function Menu() {
                             style={{
                               fontFamily: language
                                 ? "FarsiMedium"
-                                : "EnglishMedium",
+                                : "EnglishBold",
                             }}
                             className={
                               !nav.active ? classes.nav : classes.navActive
@@ -214,9 +214,7 @@ export default function Menu() {
                       )}
                       <a
                         style={{
-                          fontFamily: language
-                            ? "FarsiMedium"
-                            : "EnglishMedium",
+                          fontFamily: language ? "FarsiMedium" : "EnglishBold",
                         }}
                         className={
                           !nav.active ? classes.nav : classes.navActive
@@ -232,7 +230,7 @@ export default function Menu() {
                   <Fragment key={index}>
                     <a
                       style={{
-                        fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                        fontFamily: language ? "FarsiMedium" : "EnglishBold",
                       }}
                       className={!nav.active ? classes.nav : classes.navActive}
                       onClick={() => activateNav(nav.link, index)}
@@ -254,7 +252,7 @@ export default function Menu() {
                           style={{
                             fontFamily: language
                               ? "FarsiMedium"
-                              : "EnglishMedium",
+                              : "EnglishBold",
                           }}
                           className={
                             !nav.active ? classes.nav : classes.navActive

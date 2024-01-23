@@ -72,7 +72,7 @@ export default function Footer() {
             <Fragment key={index}>
               <a
                 style={{
-                  fontFamily: language ? "FarsiBold" : "EnglishMedium",
+                  fontFamily: language ? "FarsiBold" : "EnglishBold",
                 }}
                 className={!nav.active ? classes.nav : classes.navActive}
                 onClick={() => activateNav(nav.link, index)}
@@ -84,7 +84,7 @@ export default function Footer() {
         </div>
         <button
           style={{
-            fontFamily: language ? "FarsiBold" : "EnglishMedium",
+            fontFamily: language ? "FarsiBold" : "EnglishBold",
           }}
           className={classes.button}
           onClick={() => Router.push("/portal")}
