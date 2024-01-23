@@ -287,7 +287,7 @@ export default function SolutionsForm() {
               autoComplete="off"
             />
           </div>
-          <div className={classes.input}>
+          <div className={classes.inputTextArea}>
             <div className={classes.bar}>
               <p className={classes.label}>
                 Summary
@@ -322,7 +322,7 @@ export default function SolutionsForm() {
               autoComplete="off"
             ></textarea>
           </div>
-          <div className={classes.input}>
+          <div className={classes.inputTextArea}>
             <div className={classes.bar}>
               <p className={classes.label}>
                 Problem
@@ -357,7 +357,7 @@ export default function SolutionsForm() {
               autoComplete="off"
             ></textarea>
           </div>
-          <div className={classes.input}>
+          <div className={classes.inputTextArea}>
             <div className={classes.bar}>
               <p className={classes.label}>
                 Solution
@@ -535,7 +535,7 @@ export default function SolutionsForm() {
               dir="rtl"
             />
           </div>
-          <div className={classes.input}>
+          <div className={classes.inputTextArea}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
@@ -571,7 +571,7 @@ export default function SolutionsForm() {
               dir="rtl"
             ></textarea>
           </div>
-          <div className={classes.input}>
+          <div className={classes.inputTextArea}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
@@ -607,7 +607,7 @@ export default function SolutionsForm() {
               dir="rtl"
             ></textarea>
           </div>
-          <div className={classes.input}>
+          <div className={classes.inputTextArea}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
