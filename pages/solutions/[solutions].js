@@ -187,7 +187,7 @@ export default function Solution({ solutions, projectTitle }) {
     window.location.reload();
   };
 
-  const makeGroup = async (index) => {
+  const makeSlide = async (index) => {
     let groupMedia = [...project.groupMedia, project.media[index]];
     let findIndex = project.media.indexOf(project.media[index]);
     project.media.splice(findIndex, 1);
@@ -345,9 +345,9 @@ export default function Solution({ solutions, projectTitle }) {
                         !displayGallerySlider && (
                           <p
                             className={classes.group}
-                            onClick={() => makeGroup(index)}
+                            onClick={() => makeSlide(index)}
                           >
-                            Group
+                            Slide
                           </p>
                         )}
                     </div>

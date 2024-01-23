@@ -55,7 +55,7 @@ export default function Contact() {
           <h3
             className={classes.mapTag}
             style={{
-              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              fontFamily: language ? "FarsiBold" : "EnglishBold",
             }}
           >
             {language ? "آژانس تبلیغاتی اشاره" : "Eshareh Advertising Agency"}

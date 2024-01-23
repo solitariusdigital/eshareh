@@ -134,7 +134,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
           ))}
         </div>
         {category !== "all" && (
-          <div className={"animate__animated animate__zoomIn"}>
+          <div>
             <h3
               className={
                 language
@@ -148,11 +148,9 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
         )}
         <section
           key={category}
-          className={`${classes.gridList} ${
-            screenSize === "desktop"
-              ? "animate__animated animate__slideInRight"
-              : "animate__animated animate__fadeIn"
-          }`}
+          className={`${
+            classes.gridList
+          } ${"animate__animated animate__fadeIn"}`}
         >
           {solutions
             .filter(
