@@ -24,6 +24,15 @@ export default function CardGrid({ solutions, direction }) {
     });
   }, []);
 
+  useEffect(() => {
+    let element = document.getElementById("detailsInformation");
+    if (element) {
+      let elemHeight = element.getBoundingClientRect().height;
+      setHeroHeight(elemHeight);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Fragment>
       {screenSize === "desktop" && (

@@ -31,7 +31,6 @@ export default function Contact() {
       />
       <div className={classes.container}>
         <div
-          className={classes.image}
           onClick={() => window.open(locationLink)}
           onMouseEnter={() => {
             setTag(true);
