@@ -48,7 +48,13 @@ export default function Home({ solutions }) {
       <section
         className={language ? classes.information : classes.informationReverse}
       >
-        <h1>{language ? "حرفه ما" : "What We Do"}</h1>
+        <h1
+          style={{
+            fontFamily: language ? "FarsiBold" : "EnglishBold",
+          }}
+        >
+          {language ? "حرفه ما" : "What We Do"}
+        </h1>
         <div className={classes.gridLayout}>
           {language ? (
             <h2>

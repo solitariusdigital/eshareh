@@ -1,19 +1,23 @@
-import { useContext, Fragment } from "react";
+import { useContext, Fragment, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Footer.module.scss";
 import Image from "next/legacy/image";
-import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
-import MuseTechLab from "@/assets/MuseTechLab.svg";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import logofooter from "@/assets/logofooter.png";
+import aparat from "@/assets/aparat.svg";
+import aparatHover from "@/assets/aparatHover.svg";
 import Router from "next/router";
+import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
+import MuseTechLab from "@/assets/MuseTechLab.svg";
 
 export default function Footer() {
   const { language, setLanguage } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
+
+  const [hover, setHover] = useState(false);
 
   const activateNav = (link, index) => {
     navigationTopBar.map((nav, i) => {
@@ -62,6 +66,39 @@ export default function Footer() {
             )
           }
         />
+        {!hover ? (
+          <Image
+            onClick={() =>
+              window.open(
+                "https://www.linkedin.com/company/esharehmarcom/",
+                "_ self"
+              )
+            }
+            onMouseEnter={() => setHover(true)}
+            width={25}
+            height={25}
+            src={aparat}
+            alt="aparat"
+            as="image"
+            priority
+          />
+        ) : (
+          <Image
+            onClick={() =>
+              window.open(
+                "https://www.linkedin.com/company/esharehmarcom/",
+                "_ self"
+              )
+            }
+            onMouseLeave={() => setHover(false)}
+            width={25}
+            height={25}
+            src={aparatHover}
+            alt="aparat"
+            as="image"
+            priority
+          />
+        )}
         <p className={classes.copyright}>© eshareh 2023 all rights reserved</p>
       </div>
       <div className={classes.container}>

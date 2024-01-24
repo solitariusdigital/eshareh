@@ -95,7 +95,10 @@ p {
 }
 
 .icon {
-  cursor: pointer;
+  &:hover {
+    color: config.$yellow;
+    cursor: pointer;
+  }
 }
 
 .message {
@@ -166,6 +169,7 @@ label.file input[type="file"] {
   border: 1px solid config.$yellow;
 }
 
+// swiper
 .about_swiperSlide__KLdpq.swiper-slide-prev {
   position: relative !important;
   z-index: -1 !important;
@@ -177,4 +181,22 @@ label.file input[type="file"] {
 .about_swiperSlide__KLdpq.swiper-slide-active {
   transform: scale(1.5, 1.5) !important;
   clip-path: polygon(50% 100%, 0% 90%, 0% 0%, 100% 0%, 100% 90%) !important;
+}
+.swiper-button-prev {
+  background-image: url("../assets/loader.png") !important;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+.swiper-button-next {
+  background-image: url("../assets/loader.png") !important;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+.swiper-button-next::after {
+  display: none;
+}
+.swiper-button-prev::after {
+  display: none;
 }
