@@ -31,6 +31,14 @@ export default function Contact() {
       />
       <div className={classes.container}>
         <div
+          className={classes.resume}
+          style={{
+            fontFamily: language ? "Farsi" : "English",
+          }}
+        >
+          {language ? <p>رزومه ارسال کنید</p> : <p>Send your resume</p>}
+        </div>
+        <div
           onClick={() => window.open(locationLink)}
           onMouseEnter={() => {
             setTag(true);
@@ -63,44 +71,67 @@ export default function Contact() {
         <div className={classes.location}>
           {language ? <p>دفتر ما را پیدا کنید</p> : <p>Find our office</p>}
         </div>
-        <div className={classes.information}>
-          <div
-            className={language ? classes.row : classes.rowReverse}
-            onClick={() => window.open(locationLink)}
-          >
-            {language ? (
-              <p className={classes.click}>
-                تهران، انتهای شیخ بهایی شمالی، نبش بزرگراه نیایش، کوچه ۲۱، پلاک
-                ۲، ۱۹۹۵۷۷۵۳۵۳
-              </p>
-            ) : (
-              <p className={classes.click}>
-                No. 2, 21st Alley, North Sheikh Bahaei St. Tehran, 1995775353,
-                Iran
-              </p>
-            )}
-          </div>
-          <div
-            className={language ? classes.row : classes.rowReverse}
-            onClick={() => window.open("tel:+982188044244", "_self")}
-          >
-            <p className={classes.click}>{language ? "تماس" : "Tel"}</p>
-            <p className={classes.click}>
-              {language ? "+۹۸ ۲۱ ۸۸۰ ۴۴ ۲۴۴" : "+98 21 880 44 244"}
-            </p>
-          </div>
-          <div className={language ? classes.row : classes.rowReverse}>
-            <p>{language ? "فکس" : "Fax"}</p>
-            <p>{language ? "+۹۸ ۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 21 880 60 666"}</p>
-          </div>
-          <div className={language ? classes.row : classes.rowReverse}>
-            <p
-              style={{
-                fontFamily: language ? "English" : "English",
-              }}
+        <div
+          className={
+            language ? classes.information : classes.informationReverse
+          }
+        >
+          <div className={classes.details}>
+            <div
+              className={language ? classes.row : classes.rowReverse}
+              onClick={() => window.open(locationLink)}
             >
-              info@eshareh.com
-            </p>
+              {language ? (
+                <p className={classes.click}>تهران، انتهای شیخ بهایی شمالی</p>
+              ) : (
+                <p className={classes.click}>No. 2, 21st Alley,</p>
+              )}
+            </div>
+            <div
+              className={language ? classes.row : classes.rowReverse}
+              onClick={() => window.open(locationLink)}
+            >
+              {language ? (
+                <p className={classes.click}>نبش بزرگراه نیایش</p>
+              ) : (
+                <p className={classes.click}>North Sheikh Bahaei St.</p>
+              )}
+            </div>
+            <div
+              className={language ? classes.row : classes.rowReverse}
+              onClick={() => window.open(locationLink)}
+            >
+              {language ? (
+                <p className={classes.click}>کوچه ۲۱ پلاک ۲، ۱۹۹۵۷۷۵۳۵۳</p>
+              ) : (
+                <p className={classes.click}>Tehran, 1995775353, Iran</p>
+              )}
+            </div>
+          </div>
+          <div className={classes.details}>
+            <div
+              className={language ? classes.row : classes.rowReverse}
+              onClick={() => window.open("tel:+982188044244", "_self")}
+            >
+              <p className={classes.click}>{language ? ": تماس" : "Tel :"}</p>
+              <p className={classes.click}>
+                {language ? "+۹۸ (۲۱) ۸۸۰ ۴۴ ۲۴۴" : "+98 (21) 880 44 244"}
+              </p>
+            </div>
+            <div className={language ? classes.row : classes.rowReverse}>
+              <p>{language ? ": فکس" : "Fax :"}</p>
+              <p>{language ? "+۹۸ (۲۱) ۸۸۰ ۶۰ ۶۶۶" : "+98 (21) 880 60 666"}</p>
+            </div>
+            <div className={language ? classes.row : classes.rowReverse}>
+              <p
+                className={classes.email}
+                style={{
+                  fontFamily: language ? "English" : "English",
+                }}
+              >
+                info@eshareh.com
+              </p>
+            </div>
           </div>
         </div>
       </div>

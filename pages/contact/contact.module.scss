@@ -24,32 +24,74 @@
   }
 }
 
+.resume {
+  position: absolute;
+  top: 0px;
+  background: config.$yellow;
+  font-size: config.$tiny-font;
+  color: config.$black;
+  padding: 0px 10px;
+  height: 40px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  p {
+    position: relative;
+    bottom: 2px;
+  }
+
+  &:hover {
+    background: config.$black;
+    color: config.$yellow;
+  }
+}
+
 .location {
   position: absolute;
   top: 45%;
-  color: config.$grey;
-}
-
-.information {
-  position: absolute;
-  bottom: -20px;
+  color: config.$black;
 
   @include mixins.mobile {
-    top: 280px;
+    top: 40%;
   }
+}
+
+.information,
+.informationReverse {
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  @include mixins.mobile {
+    bottom: -70px;
+  }
+
   @include mixins.tablet {
-    top: 350px;
+    bottom: -20px;
+  }
+
+  .details {
+    height: 80px;
+    margin-right: 10px;
   }
 
   .row,
   .rowReverse {
     display: flex;
     align-items: center;
-    margin: 8px 0px;
-    color: config.$grey;
+    color: config.$black;
 
     .click {
       cursor: pointer;
+    }
+
+    .email {
+      color: config.$yellow;
     }
 
     p {
@@ -60,4 +102,8 @@
   .row {
     flex-direction: row-reverse;
   }
+}
+
+.information {
+  flex-direction: row-reverse;
 }
