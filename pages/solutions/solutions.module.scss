@@ -108,6 +108,11 @@
       max-height: 500px;
     }
 
+    .image {
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+
     .enlarge {
       position: absolute;
       bottom: 10px;
@@ -142,7 +147,8 @@
       }
     }
 
-    .video {
+    .video,
+    .videoRadius {
       width: 100%;
       height: 90vh;
       max-height: 900px;
@@ -152,12 +158,24 @@
         height: 250px;
       }
     }
+
+    .videoRadius {
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+    }
   }
 }
 
 .swiper {
+  margin-bottom: 20px;
+
   &:hover {
     cursor: pointer;
+  }
+
+  .slide {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
   }
 
   .control {
@@ -373,6 +391,7 @@
   position: absolute;
   top: 0px;
   left: 0px;
+  z-index: 1;
   padding: 20px 12px;
   width: 100%;
   height: 100vh;

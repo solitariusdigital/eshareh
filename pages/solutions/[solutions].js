@@ -200,7 +200,7 @@ export default function Solution({ solutions, projectTitle }) {
     window.location.reload();
   };
 
-  const removeGroup = async (index) => {
+  const removeSlide = async (index) => {
     let media = [...project.media, project.groupMedia[index]];
     let findIndex = project.groupMedia.indexOf(project.groupMedia[index]);
     project.groupMedia.splice(findIndex, 1);
@@ -318,6 +318,61 @@ export default function Solution({ solutions, projectTitle }) {
                 <h4>{project[languageType].year}</h4>
               </div>
             </div>
+            {project.groupMedia && project.groupMedia.length > 0 && (
+              <div className={classes.swiper}>
+                <Swiper
+                  className={classes.slide}
+                  slidesPerView="auto"
+                  spaceBetween={0}
+                  navigation={true}
+                  mousewheel={true}
+                  loop={true}
+                  modules={[Navigation, Mousewheel]}
+                  style={{ "--swiper-navigation-color": "#ffffff" }}
+                >
+                  {project.groupMedia.map((image, index) => (
+                    <SwiperSlide key={index}>
+                      <div className={classes.control}>
+                        {permissionControl === "admin" &&
+                          !displayGallerySlider && (
+                            <p
+                              className={classes.removeGroup}
+                              onClick={() => removeSlide(index)}
+                            >
+                              Remove
+                            </p>
+                          )}
+                      </div>
+                      <div
+                        className={classes.image}
+                        onClick={() => gallerySlider()}
+                      >
+                        {image.type === "image" ? (
+                          <Image
+                            src={image.link}
+                            blurDataURL={image.link}
+                            placeholder="blur"
+                            alt={image.link}
+                            layout="fill"
+                            objectFit="cover"
+                            as="image"
+                            priority
+                          />
+                        ) : (
+                          <video
+                            className={classes.video}
+                            src={image.link + "#t=0.1"}
+                            controls
+                            playsInline
+                            preload="metadata"
+                          />
+                        )}
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            )}
             {project.media.map((image, index) => (
               <Fragment key={index}>
                 <div className={classes.imageBox}>
@@ -355,6 +410,11 @@ export default function Solution({ solutions, projectTitle }) {
                   {image.type === "image" ? (
                     <div onClick={() => gallerySlider()}>
                       <Image
+                        className={
+                          index === 0 && project.groupMedia.length === 0
+                            ? classes.image
+                            : ""
+                        }
                         src={image.link}
                         blurDataURL={image.link}
                         placeholder="blur"
@@ -370,7 +430,11 @@ export default function Solution({ solutions, projectTitle }) {
                     </div>
                   ) : (
                     <video
-                      className={classes.video}
+                      className={
+                        index === 0 && project.groupMedia.length === 0
+                          ? classes.videoRadius
+                          : classes.video
+                      }
                       src={image.link + "#t=0.1"}
                       controls
                       playsInline
@@ -406,57 +470,6 @@ export default function Solution({ solutions, projectTitle }) {
                 )}
               </Fragment>
             ))}
-            {project.groupMedia && project.groupMedia.length > 0 && (
-              <div className={classes.swiper} onClick={() => gallerySlider()}>
-                <Swiper
-                  slidesPerView="auto"
-                  spaceBetween={0}
-                  navigation={true}
-                  mousewheel={true}
-                  loop={true}
-                  modules={[Navigation, Mousewheel]}
-                  style={{ "--swiper-navigation-color": "#ffffff" }}
-                >
-                  {project.groupMedia.map((image, index) => (
-                    <SwiperSlide key={index}>
-                      <div className={classes.control}>
-                        {permissionControl === "admin" &&
-                          !displayGallerySlider && (
-                            <p
-                              className={classes.removeGroup}
-                              onClick={() => removeGroup(index)}
-                            >
-                              Remove
-                            </p>
-                          )}
-                      </div>
-                      <div className={classes.image}>
-                        {image.type === "image" ? (
-                          <Image
-                            src={image.link}
-                            blurDataURL={image.link}
-                            placeholder="blur"
-                            alt={image.link}
-                            layout="fill"
-                            objectFit="cover"
-                            as="image"
-                            priority
-                          />
-                        ) : (
-                          <video
-                            className={classes.video}
-                            src={image.link + "#t=0.1"}
-                            controls
-                            playsInline
-                            preload="metadata"
-                          />
-                        )}
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
-            )}
             {displayNextController && (
               <div
                 className={`${classes.projectController}  animate__animated animate__slideInUp`}
