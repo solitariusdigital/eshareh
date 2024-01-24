@@ -9,6 +9,7 @@ export default function CardGrid({ solutions, direction }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const { heroHeight, setHeroHeight } = useContext(StateContext);
   const [hoverItem, setHoverItem] = useState(null);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ export default function CardGrid({ solutions, direction }) {
         >
           <div
             className={classes.hero}
+            style={{ height: `calc(100% - ${heroHeight}px)` }}
             onClick={() =>
               Router.push(
                 `/solutions/${replaceSpacesAndHyphens(
@@ -131,6 +133,7 @@ export default function CardGrid({ solutions, direction }) {
                     className={
                       language ? classes.details : classes.detailsReverse
                     }
+                    id="detailsInformation"
                   >
                     {hoverItem === index ? (
                       <h4>

@@ -13,6 +13,7 @@ export const StateProvider = (props) => {
   const [screenSize, setScreenSize] = useState(
     "desktop" || "tablet" || "mobile"
   );
+  const [heroHeight, setHeroHeight] = useState(null);
   const [permissionControl, setPermissionControl] = useState("user" || "admin");
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
@@ -88,6 +89,8 @@ export const StateProvider = (props) => {
     setPermissionControl,
     editSolution,
     setEditSolution,
+    heroHeight,
+    setHeroHeight,
   };
   return (
     <StateContext.Provider value={stateContext}>

@@ -16,12 +16,7 @@
     position: relative;
     width: 50%;
     margin-right: 20px;
-    height: 89%;
     cursor: pointer;
-
-    @include mixins.extraDesktop {
-      height: 90%;
-    }
 
     .details,
     .detailsReverse {

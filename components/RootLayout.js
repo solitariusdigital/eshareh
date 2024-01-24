@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
   const { menuColor, setMenuColor } = useContext(StateContext);
+  const { heroHeight, setHeroHeight } = useContext(StateContext);
   const [appLoader, setAppLoader] = useState(false);
   const [scrollArrow, setScrollArrow] = useState(false);
 
@@ -25,6 +26,11 @@ export default function RootLayout({ children }) {
   let pathname = router.pathname;
 
   const handleResize = () => {
+    let element = document.getElementById("detailsInformation");
+    if (element) {
+      let elemHeight = element.getBoundingClientRect().height;
+      setHeroHeight(elemHeight);
+    }
     if (window.innerWidth < 700) {
       setScreenSize("mobile");
     } else if (window.innerWidth > 700 && window.innerWidth < 1400) {
