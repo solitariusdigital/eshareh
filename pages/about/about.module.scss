@@ -76,8 +76,9 @@
 
   .swiper {
     height: 50%;
+
     @include mixins.fourK {
-      height: 80%;
+      height: 60%;
     }
   }
 
@@ -85,8 +86,9 @@
     object-fit: cover;
     height: 500px;
   }
+
   .swiperSlide {
-    height: 80%;
+    height: 70%;
   }
 
   .details {
