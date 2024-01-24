@@ -146,12 +146,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
             </h3>
           </div>
         )}
-        <section
-          key={category}
-          className={`${
-            classes.gridList
-          } ${"animate__animated animate__fadeIn"}`}
-        >
+        <section key={category} className={classes.gridList}>
           {solutions
             .filter(
               (project) =>
