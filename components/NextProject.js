@@ -34,7 +34,6 @@ export default function NextProject({ project }) {
             {project[languageType].title}
           </h2>
           <h4>{project[languageType].subtitle}</h4>
-          <h4>{project[languageType].year}</h4>
         </div>
       </div>
       <div className={classes.imageBox}>

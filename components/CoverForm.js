@@ -2,26 +2,23 @@ import { useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
-import { createUserApi } from "@/services/api";
+import { createCoverApi } from "@/services/api";
 import Image from "next/legacy/image";
 import {
   fourGenerator,
   sixGenerator,
   uploadMedia,
   areAllStatesValid,
-  validateEmail,
 } from "@/services/utility";
 import loaderImage from "@/assets/loader.png";
-import AES from "crypto-js/aes";
 
-export default function TeamForm() {
+export default function CoverForm() {
   const { language, setLanguage } = useContext(StateContext);
 
-  const [name, setName] = useState({ en: "", fa: "" });
   const [title, setTitle] = useState({ en: "", fa: "" });
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [media, setMedia] = useState("");
+  const [link, setLink] = useState("");
+  const [color, setColor] = useState("");
 
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
@@ -36,21 +33,9 @@ export default function TeamForm() {
   };
 
   const handleSubmit = async () => {
-    const isValid = areAllStatesValid([name, title]);
-    if (!isValid || !email || !password) {
+    const isValid = areAllStatesValid([title]);
+    if (!isValid || !link || !color || !media) {
       showAlert("همه موارد الزامیست");
-      return;
-    }
-    if (!validateEmail(email)) {
-      showAlert(language ? "ایمیل اشتباه" : "Invalid email");
-      return;
-    }
-    if (password.length < 8) {
-      showAlert(
-        language
-          ? "پسورد باید حداقل 8 کاراکتر باشد"
-          : "Password must be minimum 8 characters"
-      );
       return;
     }
 
@@ -61,38 +46,25 @@ export default function TeamForm() {
     let mediaLink = "";
     if (media) {
       let mediaFormat = ".jpg";
-      let mediaFolder = "team";
-      const subFolder = `usr${sixGenerator()}`;
+      let mediaFolder = "cover";
+      const subFolder = `cov${sixGenerator()}`;
       let mediaId = `img${fourGenerator()}`;
       mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
       await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
     }
 
-    const user = {
-      name: {
-        fa: name.fa,
-        en: name.en,
-      },
+    const cover = {
       title: {
         fa: title.fa,
         en: title.en,
       },
-      email: email,
-      password: cryptPassword(),
       media: mediaLink,
-      permission: "user",
+      link: link,
+      color: color,
       active: true,
     };
-    await createUserApi(user);
+    await createCoverApi(cover);
     window.location.assign("/admin");
-  };
-
-  // encrypt password
-  const cryptPassword = () => {
-    return AES.encrypt(
-      password.trim(),
-      process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY
-    ).toString();
   };
 
   return (
@@ -103,40 +75,6 @@ export default function TeamForm() {
             fontFamily: "English",
           }}
         >
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p className={classes.label}>
-                Name
-                <span>*</span>
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() =>
-                  setName((prevData) => ({
-                    ...prevData,
-                    en: "",
-                  }))
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              style={{
-                fontFamily: "English",
-              }}
-              type="text"
-              id="nameEn"
-              name="name"
-              onChange={(e) =>
-                setName((prevData) => ({
-                  ...prevData,
-                  en: e.target.value,
-                }))
-              }
-              value={name.en}
-              autoComplete="off"
-            />
-          </div>
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
@@ -171,47 +109,62 @@ export default function TeamForm() {
               autoComplete="off"
             />
           </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                Link
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setLink("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "English",
+              }}
+              type="text"
+              id="link"
+              name="link"
+              onChange={(e) => setLink(e.target.value)}
+              value={link}
+              autoComplete="off"
+            />
+          </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                Hex color code
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setColor("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              placeholder="fdb714"
+              style={{
+                fontFamily: "English",
+              }}
+              type="text"
+              id="color"
+              name="color"
+              onChange={(e) => setColor(e.target.value)}
+              value={color}
+              autoComplete="off"
+              maxLength={6}
+            />
+          </div>
         </div>
         <div
           style={{
             fontFamily: "Farsi",
           }}
         >
-          <div className={classes.input}>
-            <div className={classes.barReverse}>
-              <p className={classes.label}>
-                <span>*</span>
-                نام
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() =>
-                  setName((prevData) => ({
-                    ...prevData,
-                    fa: "",
-                  }))
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              style={{
-                fontFamily: "Farsi",
-              }}
-              type="text"
-              id="nameFa"
-              name="name"
-              onChange={(e) =>
-                setName((prevData) => ({
-                  ...prevData,
-                  fa: e.target.value,
-                }))
-              }
-              value={name.fa}
-              autoComplete="off"
-              dir="rtl"
-            />
-          </div>
           <div className={classes.input}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
@@ -249,66 +202,6 @@ export default function TeamForm() {
           </div>
         </div>
       </div>
-      <div className={classes.formSection}>
-        <div
-          className={classes.input}
-          style={{
-            fontFamily: "English",
-          }}
-        >
-          <div className={classes.bar}>
-            <p className={classes.label}>
-              Email
-              <span>*</span>
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() => setEmail("")}
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <input
-            style={{
-              fontFamily: "English",
-            }}
-            type="email"
-            id="email"
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            autoComplete="off"
-          />
-        </div>
-        <div
-          className={classes.input}
-          style={{
-            fontFamily: "English",
-          }}
-        >
-          <div className={classes.bar}>
-            <p className={classes.label}>
-              Password
-              <span>*</span>
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() => setPassword("")}
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <input
-            style={{
-              fontFamily: "English",
-            }}
-            type="password"
-            id="password"
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            autoComplete="off"
-          />
-        </div>
-      </div>
 
       <div
         className={classes.input}
@@ -324,7 +217,7 @@ export default function TeamForm() {
             type="file"
             accept="image/*"
           />
-          <p>عکس اختیاری</p>
+          <p>عکس</p>
         </label>
         {media !== "" && (
           <div className={classes.preview}>

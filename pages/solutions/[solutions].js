@@ -188,26 +188,26 @@ export default function Solution({ solutions, projectTitle }) {
   };
 
   const makeSlide = async (index) => {
-    let groupMedia = [...project.groupMedia, project.media[index]];
+    let slideMedia = [...project.slideMedia, project.media[index]];
     let findIndex = project.media.indexOf(project.media[index]);
     project.media.splice(findIndex, 1);
     let dataObject = {
       ...project,
       media: project.media,
-      groupMedia: groupMedia,
+      slideMedia: slideMedia,
     };
     await updateSolutionApi(dataObject);
     window.location.reload();
   };
 
   const removeSlide = async (index) => {
-    let media = [...project.media, project.groupMedia[index]];
-    let findIndex = project.groupMedia.indexOf(project.groupMedia[index]);
-    project.groupMedia.splice(findIndex, 1);
+    let media = [...project.media, project.slideMedia[index]];
+    let findIndex = project.slideMedia.indexOf(project.slideMedia[index]);
+    project.slideMedia.splice(findIndex, 1);
     let dataObject = {
       ...project,
       media: media,
-      groupMedia: project.groupMedia,
+      slideMedia: project.slideMedia,
     };
     await updateSolutionApi(dataObject);
     window.location.reload();
@@ -315,10 +315,9 @@ export default function Solution({ solutions, projectTitle }) {
                   {project[languageType].title}
                 </h2>
                 <h4>{project[languageType].subtitle}</h4>
-                <h4>{project[languageType].year}</h4>
               </div>
             </div>
-            {project.groupMedia && project.groupMedia.length > 0 && (
+            {project.slideMedia && project.slideMedia.length > 0 && (
               <div className={classes.swiper}>
                 <Swiper
                   className={classes.slide}
@@ -330,7 +329,7 @@ export default function Solution({ solutions, projectTitle }) {
                   modules={[Navigation, Mousewheel]}
                   style={{ "--swiper-navigation-color": "#ffffff" }}
                 >
-                  {project.groupMedia.map((image, index) => (
+                  {project.slideMedia.map((image, index) => (
                     <SwiperSlide key={index}>
                       <div className={classes.control}>
                         {permissionControl === "admin" &&
@@ -376,42 +375,32 @@ export default function Solution({ solutions, projectTitle }) {
             {project.media.map((image, index) => (
               <Fragment key={index}>
                 <div className={classes.imageBox}>
-                  {index > 0 && (
+                  {permissionControl === "admin" && !displayGallerySlider && (
                     <div className={classes.control}>
-                      {permissionControl === "admin" &&
-                        !displayGallerySlider && (
-                          <p
-                            className={classes.move}
-                            onClick={() => moveUp(index)}
-                          >
-                            Move up
-                          </p>
-                        )}
-                      {permissionControl === "admin" &&
-                        !displayGallerySlider && (
-                          <p
-                            className={classes.cover}
-                            onClick={() => makeCover(index)}
-                          >
-                            Make Cover
-                          </p>
-                        )}
-                      {permissionControl === "admin" &&
-                        !displayGallerySlider && (
-                          <p
-                            className={classes.group}
-                            onClick={() => makeSlide(index)}
-                          >
-                            Slide
-                          </p>
-                        )}
+                      <p className={classes.move} onClick={() => moveUp(index)}>
+                        Move up
+                      </p>
+
+                      <p
+                        className={classes.cover}
+                        onClick={() => makeCover(index)}
+                      >
+                        Make Cover
+                      </p>
+
+                      <p
+                        className={classes.group}
+                        onClick={() => makeSlide(index)}
+                      >
+                        Slide
+                      </p>
                     </div>
                   )}
                   {image.type === "image" ? (
                     <div onClick={() => gallerySlider()}>
                       <Image
                         className={
-                          index === 0 && project.groupMedia.length === 0
+                          index === 0 && project.slideMedia.length === 0
                             ? classes.image
                             : ""
                         }
@@ -431,7 +420,7 @@ export default function Solution({ solutions, projectTitle }) {
                   ) : (
                     <video
                       className={
-                        index === 0 && project.groupMedia.length === 0
+                        index === 0 && project.slideMedia.length === 0
                           ? classes.videoRadius
                           : classes.video
                       }
@@ -512,7 +501,7 @@ export default function Solution({ solutions, projectTitle }) {
                 </div>
                 {<h3>{project[languageType].title}</h3>}
                 <GallerySlider
-                  media={project.media.concat(project.groupMedia)}
+                  media={project.media.concat(project.slideMedia)}
                 />
               </div>
             )}

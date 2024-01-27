@@ -189,7 +189,8 @@ export default function SolutionsForm() {
         category: category.en,
       },
       media: editSolution ? editSolution.media : mediaLinks,
-      groupMedia: [],
+      slideMedia: [],
+      coverMedia: "",
       active: false,
     };
     if (editSolution) {

@@ -108,3 +108,34 @@ export const getControlsApi = async () => {
   });
   return await response.json();
 };
+
+// covers api
+export const updateCoverApi = async (data) => {
+  const response = await fetch("/api/covers", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createCoverApi = async (data) => {
+  const response = await fetch("/api/covers", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getCoversApi = async () => {
+  const response = await fetch("/api/covers", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
