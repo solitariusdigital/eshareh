@@ -16,8 +16,13 @@ import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import StarIcon from "@mui/icons-material/Star";
 import Tooltip from "@mui/material/Tooltip";
-import { getSolutionApi, updateSolutionApi } from "@/services/api";
+import {
+  getSolutionApi,
+  updateSolutionApi,
+  createCoverApi,
+} from "@/services/api";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Mousewheel } from "swiper/modules";
 import "swiper/css";
@@ -161,15 +166,11 @@ export default function Solution({ solutions, projectTitle }) {
   };
 
   const makeCover = async (index) => {
-    project.media.forEach((item, i) => {
-      if (i === index) {
-        project.media.splice(i, 1);
-        project.media.unshift(item);
-      }
-    });
+    project.media.push(project.coverMedia);
     let dataObject = {
       ...project,
-      media: project.media,
+      media: project.media.filter((item, i) => i !== index),
+      coverMedia: project.media[index],
     };
     await updateSolutionApi(dataObject);
     window.location.reload();
@@ -213,6 +214,21 @@ export default function Solution({ solutions, projectTitle }) {
     window.location.reload();
   };
 
+  const manageHomeSlide = async () => {
+    const cover = {
+      title: {
+        fa: project[languageType].title,
+        en: project[languageType].title,
+      },
+      coverMedia: project.coverMedia,
+      link: `solutions/${replaceSpacesAndHyphens(project[languageType].title)}`,
+      color: "000000",
+      active: false,
+    };
+    await createCoverApi(cover);
+    window.location.assign("/admin");
+  };
+
   return (
     <Fragment>
       {project && (
@@ -227,7 +243,7 @@ export default function Solution({ solutions, projectTitle }) {
             openGraph={{
               type: "website",
               locale: "fa_IR",
-              url: `https://eshareh.com/${replaceSpacesAndHyphens(
+              url: `https://eshareh.com/solutions/${replaceSpacesAndHyphens(
                 project[languageType].title
               )}`,
               siteName: "Eshareh Advertising Agency",
@@ -260,6 +276,12 @@ export default function Solution({ solutions, projectTitle }) {
                     />
                   </Tooltip>
                 )}
+                <Tooltip title="Home Slide">
+                  <StarIcon
+                    className="icon"
+                    onClick={() => manageHomeSlide()}
+                  />
+                </Tooltip>
                 <Tooltip title="Edit">
                   <EditIcon
                     className="icon"
@@ -385,7 +407,7 @@ export default function Solution({ solutions, projectTitle }) {
                         className={classes.cover}
                         onClick={() => makeCover(index)}
                       >
-                        Make Cover
+                        Cover
                       </p>
 
                       <p

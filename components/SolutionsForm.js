@@ -190,7 +190,7 @@ export default function SolutionsForm() {
       },
       media: editSolution ? editSolution.media : mediaLinks,
       slideMedia: [],
-      coverMedia: "",
+      coverMedia: media[0],
       active: false,
     };
     if (editSolution) {

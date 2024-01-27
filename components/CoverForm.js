@@ -19,6 +19,7 @@ export default function CoverForm() {
   const [media, setMedia] = useState("");
   const [link, setLink] = useState("");
   const [color, setColor] = useState("");
+  const [mediaType, setMediaType] = useState("image" || "video");
 
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
@@ -45,7 +46,7 @@ export default function CoverForm() {
     // upload media
     let mediaLink = "";
     if (media) {
-      let mediaFormat = ".jpg";
+      let mediaFormat = mediaType === "image" ? ".jpg" : ".mp4";
       let mediaFolder = "cover";
       const subFolder = `cov${sixGenerator()}`;
       let mediaId = `img${fourGenerator()}`;
@@ -58,7 +59,10 @@ export default function CoverForm() {
         fa: title.fa,
         en: title.en,
       },
-      media: mediaLink,
+      coverMedia: {
+        link: mediaLink,
+        type: mediaType,
+      },
       link: link,
       color: color,
       active: true,
@@ -202,42 +206,97 @@ export default function CoverForm() {
           </div>
         </div>
       </div>
-
-      <div
-        className={classes.input}
-        style={{
-          fontFamily: "Farsi",
-        }}
-      >
-        <label className="file">
-          <input
-            onChange={(e) => {
-              setMedia(e.target.files[0]);
-            }}
-            type="file"
-            accept="image/*"
-          />
-          <p>عکس</p>
-        </label>
-        {media !== "" && (
-          <div className={classes.preview}>
-            <CloseIcon
-              className="icon"
-              onClick={() => setMedia("")}
-              sx={{ fontSize: 16 }}
-            />
-            <Image
-              className={classes.image}
-              width={170}
-              height={200}
-              objectFit="contain"
-              src={URL.createObjectURL(media)}
-              alt="image"
-              priority
-            />
-          </div>
-        )}
+      <div className={classes.navigation}>
+        <p
+          className={mediaType === "video" ? classes.navActive : classes.nav}
+          onClick={() => {
+            setMediaType("video");
+            setMedia("");
+          }}
+        >
+          ویدئو
+        </p>
+        <p
+          className={mediaType === "image" ? classes.navActive : classes.nav}
+          onClick={() => {
+            setMediaType("image");
+            setMedia("");
+          }}
+        >
+          عکس
+        </p>
       </div>
+      {mediaType === "image" && (
+        <div
+          className={classes.input}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
+          <label className="file">
+            <input
+              onChange={(e) => {
+                setMedia(e.target.files[0]);
+              }}
+              type="file"
+              accept="image/*"
+            />
+            <p>عکس</p>
+          </label>
+          {media !== "" && (
+            <div className={classes.preview}>
+              <CloseIcon
+                className="icon"
+                onClick={() => setMedia("")}
+                sx={{ fontSize: 16 }}
+              />
+              <Image
+                className={classes.media}
+                width={170}
+                height={200}
+                objectFit="contain"
+                src={URL.createObjectURL(media)}
+                alt="image"
+                priority
+              />
+            </div>
+          )}
+        </div>
+      )}
+      {mediaType === "video" && (
+        <div
+          className={classes.input}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
+          <label className="file">
+            <input
+              onChange={(e) => {
+                setMedia(e.target.files[0]);
+              }}
+              type="file"
+              accept="video/*"
+            />
+            <p>ویدئو</p>
+          </label>
+          {media !== "" && (
+            <div className={classes.preview}>
+              <CloseIcon
+                className="icon"
+                onClick={() => setMedia("")}
+                sx={{ fontSize: 16 }}
+              />
+              <video
+                className={classes.media}
+                preload="metadata"
+                src={URL.createObjectURL(media)}
+                controls
+              />
+            </div>
+          )}
+        </div>
+      )}
       <div className={classes.formAction}>
         <p className={classes.alert}>{alert}</p>
         {loader && (

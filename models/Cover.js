@@ -6,7 +6,7 @@ const CoverSchema = new Schema(
       fa: "",
       en: "",
     },
-    media: "",
+    coverMedia: {},
     link: "",
     color: "",
     active: Boolean,

@@ -10,8 +10,9 @@ import { enToFaDigits } from "@/services/utility";
 import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
+import coverModel from "@/models/Cover";
 
-export default function Home({ solutions }) {
+export default function Home({ solutions, covers }) {
   const { language, setLanguage } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
 
@@ -43,7 +44,7 @@ export default function Home({ solutions }) {
         }}
       />
       <section>
-        <CoverSlider solutions={solutions.slice(0, 8)} />
+        <CoverSlider covers={covers} />
       </section>
       <section
         className={language ? classes.information : classes.informationReverse}
@@ -106,12 +107,18 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const solutions = await solutionModel.find();
+    const covers = await coverModel.find();
+
     let activeSolutions = solutions
       .filter((project) => project.active)
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    let activeCovers = covers.filter((project) => project.active);
+
     return {
       props: {
         solutions: JSON.parse(JSON.stringify(activeSolutions)),
+        covers: JSON.parse(JSON.stringify(activeCovers)),
       },
     };
   } catch (error) {

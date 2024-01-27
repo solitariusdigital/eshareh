@@ -63,3 +63,46 @@
     color: config.$red;
   }
 }
+
+.navigation {
+  @include mixins.row-space-between-center();
+  justify-content: space-around;
+  height: 40px;
+  width: 200px;
+  margin: auto;
+  border: 1px solid config.$lightgrey;
+  border-radius: 50px;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+}
+
+.nav {
+  @include mixins.desktop {
+    &:hover {
+      cursor: pointer;
+      color: config.$yellow;
+    }
+  }
+}
+
+.navActive {
+  color: config.$yellow;
+  font-weight: bold !important;
+}
+
+.preview {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+
+  .media {
+    width: 50%;
+    object-fit: cover;
+    margin-top: 20px;
+    height: 300px;
+  }
+}

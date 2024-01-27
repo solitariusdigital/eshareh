@@ -155,7 +155,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
             )
             .map((project, index) => {
               const { title } = project[languageType];
-              const { media } = project;
+              const { coverMedia } = project;
               return (
                 <Fragment key={index}>
                   <div
@@ -176,12 +176,12 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
                       </div>
                     )}
                     <div className={classes.box}>
-                      {media[0].type === "image" ? (
+                      {coverMedia.type === "image" ? (
                         <Image
                           className={classes.image}
-                          src={media[0].link}
+                          src={coverMedia.link}
                           placeholder="blur"
-                          blurDataURL={media[0].link}
+                          blurDataURL={coverMedia.link}
                           alt={title}
                           layout="fill"
                           objectFit="cover"
@@ -192,7 +192,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
                         <video
                           className={classes.video}
                           id={project["_id"]}
-                          src={media[0].link + "#t=0.1"}
+                          src={coverMedia.link + "#t=0.1"}
                           muted
                           playsInline
                           preload="metadata"

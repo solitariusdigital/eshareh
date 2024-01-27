@@ -22,7 +22,7 @@ const SolutionSchema = new Schema(
     },
     media: [],
     slideMedia: [],
-    coverMedia: "",
+    coverMedia: {},
     active: Boolean,
   },
   { timestamps: true }

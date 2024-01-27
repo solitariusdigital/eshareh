@@ -158,10 +158,11 @@ label.file input[type="file"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid config.$grey;
+  border: 1px solid config.$lightgrey;
   padding: 8px;
   color: config.$grey;
   height: 50px;
+  border-radius: 4px;
   cursor: pointer;
 }
 .file:hover {
