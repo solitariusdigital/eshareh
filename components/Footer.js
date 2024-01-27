@@ -40,7 +40,7 @@ export default function Footer() {
     >
       <div>
         <LinkedInIcon
-          className={classes.social}
+          className={classes.icon}
           onClick={() =>
             window.open(
               "https://www.linkedin.com/company/esharehmarcom/",
@@ -49,7 +49,7 @@ export default function Footer() {
           }
         />
         <InstagramIcon
-          className={classes.social}
+          className={classes.icon}
           onClick={() =>
             window.open(
               "https://www.linkedin.com/company/esharehmarcom/",
@@ -58,7 +58,7 @@ export default function Footer() {
           }
         />
         <YouTubeIcon
-          className={classes.social}
+          className={classes.icon}
           onClick={() =>
             window.open(
               "https://www.linkedin.com/company/esharehmarcom/",
@@ -68,6 +68,7 @@ export default function Footer() {
         />
         {!hover ? (
           <Image
+            className={classes.icon}
             onClick={() =>
               window.open(
                 "https://www.linkedin.com/company/esharehmarcom/",
@@ -84,6 +85,7 @@ export default function Footer() {
           />
         ) : (
           <Image
+            className={classes.icon}
             onClick={() =>
               window.open(
                 "https://www.linkedin.com/company/esharehmarcom/",
