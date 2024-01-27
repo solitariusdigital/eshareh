@@ -214,7 +214,7 @@ export default function Solution({ solutions, projectTitle }) {
     window.location.reload();
   };
 
-  const manageHomeSlide = async () => {
+  const manageCoverSlide = async () => {
     const cover = {
       title: {
         fa: project[languageType].title,
@@ -276,10 +276,10 @@ export default function Solution({ solutions, projectTitle }) {
                     />
                   </Tooltip>
                 )}
-                <Tooltip title="Home Slide">
+                <Tooltip title="Cover Slide">
                   <StarIcon
                     className="icon"
-                    onClick={() => manageHomeSlide()}
+                    onClick={() => manageCoverSlide()}
                   />
                 </Tooltip>
                 <Tooltip title="Edit">
@@ -324,9 +324,6 @@ export default function Solution({ solutions, projectTitle }) {
                 language ? classes.information : classes.informationReverse
               }
             >
-              <h3 className={classes.description}>
-                {project[languageType].summary}
-              </h3>
               <div>
                 <h2
                   style={{
@@ -337,6 +334,16 @@ export default function Solution({ solutions, projectTitle }) {
                   {project[languageType].title}
                 </h2>
                 <h4>{project[languageType].subtitle}</h4>
+                <h3 className={classes.description}>
+                  <span
+                    style={{
+                      fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                    }}
+                  >
+                    {language ? "خلاصه :" : "Brief :"}
+                  </span>{" "}
+                  {project[languageType].summary}
+                </h3>
               </div>
             </div>
             {project.slideMedia && project.slideMedia.length > 0 && (
@@ -398,7 +405,12 @@ export default function Solution({ solutions, projectTitle }) {
               <Fragment key={index}>
                 <div className={classes.imageBox}>
                   {permissionControl === "admin" && !displayGallerySlider && (
-                    <div className={classes.control}>
+                    <div
+                      className={classes.control}
+                      style={{
+                        fontFamily: language ? "English" : "English",
+                      }}
+                    >
                       <p className={classes.move} onClick={() => moveUp(index)}>
                         Move up
                       </p>

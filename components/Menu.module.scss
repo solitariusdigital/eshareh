@@ -118,7 +118,9 @@
   color: config.$white;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 25px;
+  height: 25px;
   border-radius: 4px;
   font-size: config.$tiny-font;
   cursor: pointer;

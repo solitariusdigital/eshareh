@@ -13,33 +13,16 @@
 
   .information,
   .informationReverse {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
     width: 100%;
     text-align: right;
     margin: 50px 0px;
-
-    @include mixins.mobile {
-      display: flex;
-      flex-direction: column;
-      flex-direction: column-reverse;
-    }
-    @include mixins.tablet {
-      display: flex;
-      flex-direction: column;
-      flex-direction: column-reverse;
-    }
 
     .title {
       color: config.$yellow;
     }
 
     .description {
-      max-width: 700px;
-
-      @include mixins.mobile {
-        margin-top: 20px;
-      }
+      margin-top: 20px;
     }
   }
 
