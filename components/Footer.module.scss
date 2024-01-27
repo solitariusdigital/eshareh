@@ -92,13 +92,19 @@
   }
 }
 
-.icon {
+.icon,
+.youtube {
   margin-right: 20px;
 
   &:hover {
     color: config.$yellow;
     cursor: pointer;
   }
+}
+
+.youtube {
+  position: relative;
+  top: 2px;
 }
 
 .copyright {

@@ -58,7 +58,8 @@ export default function Footer() {
           }
         />
         <YouTubeIcon
-          className={classes.icon}
+          sx={{ fontSize: 30 }}
+          className={classes.youtube}
           onClick={() =>
             window.open(
               "https://www.linkedin.com/company/esharehmarcom/",
