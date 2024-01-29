@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
 import Image from "next/legacy/image";
-import logo from "@/assets/logo.png";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import logo from "@/assets/logo.svg";
+import arrowUp from "@/assets/arrowUp.svg";
 import secureLocalStorage from "react-secure-storage";
 import { getUserApi, getControlsApi } from "@/services/api";
 
@@ -140,7 +140,14 @@ export default function RootLayout({ children }) {
                 })
               }
             >
-              <KeyboardArrowUpIcon sx={{ fontSize: 35 }} />
+              <Image
+                layout="fill"
+                objectFit="cover"
+                src={arrowUp}
+                alt="logo"
+                as="image"
+                priority
+              />
             </div>
           )}
         </div>
@@ -148,7 +155,7 @@ export default function RootLayout({ children }) {
         <div className="appload">
           <Image
             width={250}
-            height={143.79}
+            height={145.29}
             src={logo}
             alt="logo"
             as="image"

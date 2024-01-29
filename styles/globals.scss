@@ -130,14 +130,8 @@ p {
 }
 
 .scrollArrow {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: config.$yellow;
-  color: config.$white;
-  align-items: center;
-  justify-content: center;
-  display: flex;
+  width: 45px;
+  height: 45px;
   position: fixed;
   right: 30px;
   bottom: 30px;
@@ -185,16 +179,18 @@ label.file input[type="file"] {
   height: 100% !important;
 }
 .swiper-button-prev {
-  background-image: url("../assets/loader.png") !important;
+  background-image: url("../assets/prev.svg") !important;
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center;
+  opacity: 0.7;
 }
 .swiper-button-next {
-  background-image: url("../assets/loader.png") !important;
+  background-image: url("../assets/next.svg") !important;
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center;
+  opacity: 0.7;
 }
 .swiper-button-next::after {
   display: none;

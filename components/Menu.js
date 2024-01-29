@@ -5,9 +5,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Router from "next/router";
 import Image from "next/legacy/image";
-import logoEnglish from "@/assets/logoEnglish.png";
-import logoFarsi from "@/assets/logoFarsi.png";
-import SearchIcon from "@mui/icons-material/Search";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 import { CompactPicker } from "react-color";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
@@ -15,6 +14,12 @@ import { getControlsApi, updateControlApi } from "@/services/api";
 import Tooltip from "@mui/material/Tooltip";
 import secureLocalStorage from "react-secure-storage";
 import balloon from "@/assets/balloon.png";
+import search from "@/assets/search.svg";
+import searchHover from "@/assets/searchHover.svg";
+import english from "@/assets/english.svg";
+import englishHover from "@/assets/englishHover.svg";
+import farsi from "@/assets/farsi.svg";
+import farsiHover from "@/assets/farsiHover.svg";
 
 export default function Menu() {
   const { language, setLanguage } = useContext(StateContext);
@@ -29,6 +34,8 @@ export default function Menu() {
   const [colorPicker, setColorPicker] = useState(false);
   const [textPicker, setTextPicker] = useState(false);
   const [dropDown, setDropDpwn] = useState(false);
+  const [hover, setHover] = useState(false);
+  const [hoverLanguage, setHoverLanguage] = useState(false);
 
   const activateNav = (link, index) => {
     setMenuMobile(false);
@@ -77,6 +84,7 @@ export default function Menu() {
   };
 
   const toggleLanguage = () => {
+    setHoverLanguage(false);
     setLanguage(!language);
     setLanguageType(!language ? "fa" : "en");
   };
@@ -188,11 +196,28 @@ export default function Menu() {
                           <div
                             className={classes.languageControl}
                             onClick={() => toggleLanguage()}
-                            style={{
-                              fontFamily: language ? "English" : "English",
-                            }}
                           >
-                            <p>{language ? "En" : "Fa"}</p>
+                            {!hoverLanguage ? (
+                              <Image
+                                width={25}
+                                height={25}
+                                src={english}
+                                alt="logo"
+                                as="image"
+                                priority
+                                onMouseEnter={() => setHoverLanguage(true)}
+                              />
+                            ) : (
+                              <Image
+                                width={25}
+                                height={25}
+                                src={englishHover}
+                                alt="logo"
+                                as="image"
+                                priority
+                                onMouseLeave={() => setHoverLanguage(false)}
+                              />
+                            )}
                           </div>
                           <a
                             style={{
@@ -206,7 +231,29 @@ export default function Menu() {
                             onClick={() => activateNav(nav.link, index)}
                           >
                             {nav.title[languageType] === "" && (
-                              <SearchIcon sx={{ fontSize: 24 }} />
+                              <Fragment>
+                                {!hover ? (
+                                  <Image
+                                    width={20}
+                                    height={20}
+                                    src={search}
+                                    alt="logo"
+                                    as="image"
+                                    priority
+                                    onMouseEnter={() => setHover(true)}
+                                  />
+                                ) : (
+                                  <Image
+                                    width={20}
+                                    height={20}
+                                    src={searchHover}
+                                    alt="logo"
+                                    as="image"
+                                    priority
+                                    onMouseLeave={() => setHover(false)}
+                                  />
+                                )}
+                              </Fragment>
                             )}
                           </a>
                         </div>
@@ -241,11 +288,28 @@ export default function Menu() {
                         <div
                           className={classes.languageControl}
                           onClick={() => toggleLanguage()}
-                          style={{
-                            fontFamily: language ? "English" : "English",
-                          }}
                         >
-                          <p>{language ? "En" : "Fa"}</p>
+                          {!hoverLanguage ? (
+                            <Image
+                              width={25}
+                              height={25}
+                              src={farsi}
+                              alt="logo"
+                              as="image"
+                              priority
+                              onMouseEnter={() => setHoverLanguage(true)}
+                            />
+                          ) : (
+                            <Image
+                              width={25}
+                              height={25}
+                              src={farsiHover}
+                              alt="logo"
+                              as="image"
+                              priority
+                              onMouseLeave={() => setHoverLanguage(false)}
+                            />
+                          )}
                         </div>
                         <a
                           style={{
@@ -257,7 +321,29 @@ export default function Menu() {
                           onClick={() => activateNav(nav.link, index)}
                         >
                           {nav.title[languageType] === "" && (
-                            <SearchIcon sx={{ fontSize: 24 }} />
+                            <Fragment>
+                              {!hover ? (
+                                <Image
+                                  width={20}
+                                  height={20}
+                                  src={search}
+                                  alt="logo"
+                                  as="image"
+                                  priority
+                                  onMouseEnter={() => setHover(true)}
+                                />
+                              ) : (
+                                <Image
+                                  width={20}
+                                  height={20}
+                                  src={searchHover}
+                                  alt="logo"
+                                  as="image"
+                                  priority
+                                  onMouseLeave={() => setHover(false)}
+                                />
+                              )}
+                            </Fragment>
                           )}
                         </a>
                       </div>
@@ -295,11 +381,28 @@ export default function Menu() {
               <div
                 className={classes.languageControl}
                 onClick={() => toggleLanguage()}
-                style={{
-                  fontFamily: language ? "English" : "English",
-                }}
               >
-                <p>{language ? "En" : "Fa"}</p>
+                {!hoverLanguage ? (
+                  <Image
+                    width={25}
+                    height={25}
+                    src={language ? english : farsi}
+                    alt="logo"
+                    as="image"
+                    priority
+                    onMouseEnter={() => setHoverLanguage(true)}
+                  />
+                ) : (
+                  <Image
+                    width={25}
+                    height={25}
+                    src={language ? englishHover : farsiHover}
+                    alt="logo"
+                    as="image"
+                    priority
+                    onMouseLeave={() => setHoverLanguage(false)}
+                  />
+                )}
               </div>
               {menuMobile ? (
                 <CloseIcon
@@ -337,7 +440,14 @@ export default function Menu() {
                     >
                       {nav.title[languageType]}
                       {nav.title[languageType] === "" && (
-                        <SearchIcon sx={{ fontSize: 24 }} />
+                        <Image
+                          width={20}
+                          height={20}
+                          src={search}
+                          alt="logo"
+                          as="image"
+                          priority
+                        />
                       )}
                     </a>
                   ))}
