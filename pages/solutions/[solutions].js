@@ -22,6 +22,8 @@ import {
   getSolutionApi,
   updateSolutionApi,
   createCoverApi,
+  getCoversApi,
+  updateCoverApi,
 } from "@/services/api";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Mousewheel } from "swiper/modules";
@@ -38,11 +40,31 @@ export default function Solution({ solutions, projectTitle }) {
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayNextController, setDisplayNextController] = useState(false);
   const [project, setProject] = useState(null);
+  const [coverSlide, setCoverSlide] = useState(false);
 
   const [previousProject, setPreviousProject] = useState(null);
   const [nextProject, setNextProject] = useState(null);
   const [dropDown, setDropDpwn] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let getCovers = await getCoversApi();
+        const foundCover = getCovers.find(
+          (cover) => cover.title.en === project.en.title
+        );
+        if (foundCover) {
+          setCoverSlide(true);
+        } else {
+          setCoverSlide(false);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [project]);
 
   useEffect(() => {
     let project = null;
@@ -85,7 +107,6 @@ export default function Solution({ solutions, projectTitle }) {
   }, [permissionControl, project, projectTitle, solutions]);
 
   const targetRef = useRef(null);
-
   useEffect(() => {
     const options = {
       root: null,
@@ -165,17 +186,6 @@ export default function Solution({ solutions, projectTitle }) {
     window.location.reload();
   };
 
-  const makeCover = async (index) => {
-    project.media.push(project.coverMedia);
-    let dataObject = {
-      ...project,
-      media: project.media.filter((item, i) => i !== index),
-      coverMedia: project.media[index],
-    };
-    await updateSolutionApi(dataObject);
-    window.location.reload();
-  };
-
   const moveUp = async (index) => {
     const updatedProject = [...project.media];
     const itemToMove = updatedProject.splice(index, 1)[0];
@@ -214,18 +224,55 @@ export default function Solution({ solutions, projectTitle }) {
     window.location.reload();
   };
 
-  const manageCoverSlide = async () => {
-    const cover = {
-      title: {
-        fa: project[languageType].title,
-        en: project[languageType].title,
-      },
-      coverMedia: project.coverMedia,
-      link: `solutions/${replaceSpacesAndHyphens(project[languageType].title)}`,
-      color: "000000",
-      active: false,
+  const makeCover = async (index) => {
+    project.media.push(project.coverMedia);
+    let dataObject = {
+      ...project,
+      media: project.media.filter((item, i) => i !== index),
+      coverMedia: project.media[index],
     };
-    await createCoverApi(cover);
+    await updateSolutionApi(dataObject);
+
+    let getCovers = await getCoversApi();
+    const foundCover = getCovers.find(
+      (cover) => cover.title.en === project.en.title
+    );
+    if (foundCover) {
+      const cover = {
+        ...foundCover,
+        coverMedia: project.media[index],
+      };
+      await updateCoverApi(cover);
+    }
+    window.location.reload();
+  };
+
+  const manageCoverSlide = async () => {
+    let getCovers = await getCoversApi();
+    const foundCover = getCovers.find(
+      (cover) => cover.title.en === project.en.title
+    );
+    if (foundCover) {
+      const cover = {
+        ...foundCover,
+        coverMedia: project.coverMedia,
+      };
+      await updateCoverApi(cover);
+    } else {
+      const cover = {
+        title: {
+          fa: project[languageType].title,
+          en: project[languageType].title,
+        },
+        coverMedia: project.coverMedia,
+        link: `solutions/${replaceSpacesAndHyphens(
+          project[languageType].title
+        )}`,
+        color: "000000",
+        active: false,
+      };
+      await createCoverApi(cover);
+    }
     window.location.assign("/admin");
   };
 
@@ -261,6 +308,22 @@ export default function Solution({ solutions, projectTitle }) {
                     <VisibilityOffIcon sx={{ color: "#d40d12" }} />
                   </Tooltip>
                 )}
+                {coverSlide ? (
+                  <Tooltip title="Cover Slide">
+                    <StarIcon
+                      className="icon"
+                      sx={{ color: "#fdb714" }}
+                      onClick={() => manageCoverSlide()}
+                    />
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Cover Slide">
+                    <StarIcon
+                      className="icon"
+                      onClick={() => manageCoverSlide()}
+                    />
+                  </Tooltip>
+                )}
                 {!project.active ? (
                   <Tooltip title="Publish">
                     <TaskAltIcon
@@ -276,12 +339,7 @@ export default function Solution({ solutions, projectTitle }) {
                     />
                   </Tooltip>
                 )}
-                <Tooltip title="Cover Slide">
-                  <StarIcon
-                    className="icon"
-                    onClick={() => manageCoverSlide()}
-                  />
-                </Tooltip>
+
                 <Tooltip title="Edit">
                   <EditIcon
                     className="icon"

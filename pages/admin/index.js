@@ -77,6 +77,7 @@ export default function Admin({ covers }) {
             <div key={index} className={classes.mediaContainer}>
               <Fragment>
                 <h3
+                  onClick={() => Router.push(project.link)}
                   style={{
                     fontFamily: language ? "FarsiMedium" : "EnglishMedium",
                   }}

@@ -66,6 +66,13 @@
 
       object-fit: cover;
     }
+
+    h3 {
+      cursor: pointer;
+      &:hover {
+        color: config.$yellow;
+      }
+    }
   }
 
   .action {
