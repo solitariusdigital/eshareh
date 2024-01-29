@@ -308,15 +308,7 @@ export default function Solution({ solutions, projectTitle }) {
                     <VisibilityOffIcon sx={{ color: "#d40d12" }} />
                   </Tooltip>
                 )}
-                {coverSlide ? (
-                  <Tooltip title="Cover Slide">
-                    <StarIcon
-                      className="icon"
-                      sx={{ color: "#fdb714" }}
-                      onClick={() => manageCoverSlide()}
-                    />
-                  </Tooltip>
-                ) : (
+                {!coverSlide && (
                   <Tooltip title="Cover Slide">
                     <StarIcon
                       className="icon"
