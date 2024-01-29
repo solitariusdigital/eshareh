@@ -165,7 +165,6 @@ export default function Menu() {
                     sx={{ color: textPicker ? "#fdb714" : "#1b1b1b" }}
                   />
                 </Tooltip>
-
                 {colorPicker && (
                   <div className={classes.colorPicker}>
                     <CompactPicker onChangeComplete={handleChangeColor} />
