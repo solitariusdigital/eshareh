@@ -12,10 +12,20 @@
   }
 
   .information,
-  .informationReverse {
+  .informationReverse,
+  .details,
+  .detailsReverse {
     width: 100%;
     text-align: right;
     margin: 50px 0px;
+
+    .item {
+      cursor: pointer;
+
+      &:hover {
+        color: config.$yellow;
+      }
+    }
 
     .title {
       color: config.$yellow;
@@ -26,6 +36,12 @@
     }
   }
 
+  .informationReverse,
+  .detailsReverse {
+    direction: rtl;
+    text-align: left;
+  }
+
   .categoryDescription,
   .categoryDescriptionReverse {
     margin-bottom: 50px;
@@ -34,11 +50,6 @@
   }
   .categoryDescriptionReverse {
     margin-bottom: 50px;
-    text-align: left;
-  }
-
-  .informationReverse {
-    direction: rtl;
     text-align: left;
   }
 
@@ -76,7 +87,9 @@
     }
   }
 
-  .imageBox {
+  .imageBox,
+  .imageBoxDouble,
+  .imageBoxQuadruple {
     position: relative;
     width: 100%;
     height: 90vh;
@@ -106,30 +119,6 @@
       @include mixins.transparentBackground(0.2, config.$lightgrey);
     }
 
-    .control {
-      position: relative;
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      display: flex;
-      flex-direction: row;
-
-      .cover,
-      .move,
-      .group {
-        border-radius: 50px;
-        padding: 8px 20px;
-        z-index: 1;
-        margin-right: 10px;
-        color: config.$white;
-        @include mixins.transparentBackground(0.2, config.$lightgrey);
-
-        &:hover {
-          color: config.$yellow;
-        }
-      }
-    }
-
     .video,
     .videoRadius {
       width: 100%;
@@ -149,6 +138,54 @@
   }
 }
 
+.imageBoxDouble,
+.imageBoxQuadruple {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+
+  .imageBox {
+    width: 100%;
+  }
+  .image {
+    border-radius: 0px !important;
+  }
+}
+
+.imageBoxQuadruple {
+  .imageBox {
+    height: 100%;
+  }
+}
+
+.control {
+  position: relative;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .item {
+    border-radius: 50px;
+    padding: 8px 20px;
+    z-index: 1;
+    margin-right: 10px;
+    color: config.$black;
+    @include mixins.transparentBackground(0.5, config.$lightgrey);
+
+    &:hover {
+      color: config.$yellow;
+    }
+
+    @include mixins.mobile {
+      margin-bottom: 10px;
+    }
+  }
+}
+
 .swiper {
   margin-bottom: 20px;
 
@@ -159,29 +196,6 @@
   .slide {
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
-  }
-
-  .control {
-    position: relative;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    display: flex;
-    flex-direction: row;
-
-    .removeGroup {
-      border-radius: 50px;
-      padding: 8px 20px;
-      z-index: 1;
-      margin-right: 10px;
-      color: config.$white;
-      @include mixins.transparentBackground(0.2, config.$lightgrey);
-
-      &:hover {
-        cursor: pointer;
-        color: config.$yellow;
-      }
-    }
   }
 
   .image {

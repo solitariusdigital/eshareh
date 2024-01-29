@@ -21,6 +21,8 @@ const SolutionSchema = new Schema(
       category: String,
     },
     media: [],
+    mediaDouble: [],
+    mediaQuadruple: [],
     slideMedia: [],
     coverMedia: {},
     active: Boolean,

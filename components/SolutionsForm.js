@@ -169,6 +169,14 @@ export default function SolutionsForm() {
       }
     }
 
+    mediaLinks.push({
+      link: {
+        fa: problem.fa,
+        en: problem.en,
+      },
+      type: "text",
+    });
+
     let solutionData = {
       fa: {
         title: title.fa,
@@ -189,8 +197,10 @@ export default function SolutionsForm() {
         category: category.en,
       },
       media: editSolution ? editSolution.media : mediaLinks,
+      mediaDouble: [],
+      mediaQuadruple: [],
       slideMedia: [],
-      coverMedia: media[0],
+      coverMedia: mediaLinks[0],
       active: false,
     };
     if (editSolution) {
