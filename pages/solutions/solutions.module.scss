@@ -19,6 +19,10 @@
     text-align: right;
     margin: 50px 0px;
 
+    @include mixins.mobile {
+      margin-top: 30px;
+    }
+
     .item {
       cursor: pointer;
 
@@ -150,6 +154,12 @@
   }
   .image {
     border-radius: 0px !important;
+  }
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    gap: 10px;
+    height: 100% !important;
   }
 }
 
