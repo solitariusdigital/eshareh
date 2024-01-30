@@ -104,7 +104,7 @@ export default function Menu() {
         <div
           className={language ? classes.largeMenuReverse : classes.largeMenu}
         >
-          {currentUser && screenSize === "desktop" && (
+          {currentUser && (
             <div
               className={classes.profile}
               onClick={() => setDropDpwn(!dropDown)}

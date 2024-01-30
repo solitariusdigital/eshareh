@@ -59,11 +59,11 @@ export default function CardGrid({ solutions, direction }) {
             }}
           >
             <div className={classes.box}>
-              {solutions[0].media[0].type === "image" ? (
+              {solutions[0].coverMedia.type === "image" ? (
                 <Image
                   className={classes.image}
-                  src={solutions[0].media[0].link}
-                  blurDataURL={solutions[0].media[0].link}
+                  src={solutions[0].coverMedia.link}
+                  blurDataURL={solutions[0].coverMedia.link}
                   placeholder="blur"
                   alt={solutions[0][languageType].title}
                   layout="fill"
@@ -74,7 +74,7 @@ export default function CardGrid({ solutions, direction }) {
               ) : (
                 <video
                   className={classes.video}
-                  src={solutions[0].media[0].link + "#t=0.1"}
+                  src={solutions[0].coverMedia.link + "#t=0.1"}
                   muted
                   playsInline
                   preload="metadata"
@@ -116,11 +116,11 @@ export default function CardGrid({ solutions, direction }) {
                   }}
                 >
                   <div className={classes.box}>
-                    {project.media[0].type === "image" ? (
+                    {project.coverMedia.type === "image" ? (
                       <Image
                         className={classes.image}
-                        src={project.media[0].link}
-                        blurDataURL={project.media[0].link}
+                        src={project.coverMedia.link}
+                        blurDataURL={project.coverMedia.link}
                         placeholder="blur"
                         alt={project[languageType].title}
                         layout="fill"
@@ -131,7 +131,7 @@ export default function CardGrid({ solutions, direction }) {
                     ) : (
                       <video
                         className={classes.video}
-                        src={project.media[0].link + "#t=0.1"}
+                        src={project.coverMedia.link + "#t=0.1"}
                         muted
                         playsInline
                         preload="metadata"
@@ -181,11 +181,11 @@ export default function CardGrid({ solutions, direction }) {
               }}
             >
               <div className={classes.box}>
-                {project.media[0].type === "image" ? (
+                {project.coverMedia.type === "image" ? (
                   <Image
                     className={classes.image}
-                    src={project.media[0].link}
-                    blurDataURL={project.media[0].link}
+                    src={project.coverMedia.link}
+                    blurDataURL={project.coverMedia.link}
                     placeholder="blur"
                     alt={project[languageType].title}
                     layout="fill"
@@ -196,7 +196,7 @@ export default function CardGrid({ solutions, direction }) {
                 ) : (
                   <video
                     className={classes.video}
-                    src={project.media[0].link + "#t=0.1"}
+                    src={project.coverMedia.link + "#t=0.1"}
                     muted
                     playsInline
                     preload="metadata"

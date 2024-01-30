@@ -540,12 +540,6 @@ export default function Solution({ solutions, projectTitle }) {
                       >
                         <p
                           className={classes.item}
-                          onClick={() => moveUp(index)}
-                        >
-                          Move up
-                        </p>
-                        <p
-                          className={classes.item}
                           onClick={() => makeCover(index)}
                         >
                           Cover
@@ -556,12 +550,18 @@ export default function Solution({ solutions, projectTitle }) {
                         >
                           Slide
                         </p>
+                        <p
+                          className={classes.item}
+                          onClick={() => moveUp(index)}
+                        >
+                          Up
+                        </p>
                         {project.mediaDouble.length < 2 && (
                           <p
                             className={classes.item}
                             onClick={() => makeDouble(index)}
                           >
-                            Double
+                            2x
                           </p>
                         )}
                         {project.mediaQuadruple.length < 4 && (
@@ -569,7 +569,7 @@ export default function Solution({ solutions, projectTitle }) {
                             className={classes.item}
                             onClick={() => makeQuadruple(index)}
                           >
-                            Quadruple
+                            4x
                           </p>
                         )}
                       </div>

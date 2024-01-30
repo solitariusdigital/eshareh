@@ -120,7 +120,11 @@
       border-radius: 50px;
       padding: 8px 20px;
       color: config.$white;
-      @include mixins.transparentBackground(0.2, config.$lightgrey);
+      @include mixins.transparentBackground(0.5, config.$lightgrey);
+
+      &:hover {
+        color: config.$yellow;
+      }
     }
 
     .video,
