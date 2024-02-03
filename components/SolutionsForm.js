@@ -146,6 +146,7 @@ export default function SolutionsForm() {
         mediaLinks.push({
           link: mediaLink,
           type: "image",
+          active: true,
         });
       }
     }
@@ -159,6 +160,7 @@ export default function SolutionsForm() {
         mediaLinks.push({
           link: mediaLink,
           type: "video",
+          active: true,
         });
       }
     }
@@ -169,6 +171,7 @@ export default function SolutionsForm() {
         en: solution.en,
       },
       type: "text",
+      active: true,
     });
 
     let solutionData = {

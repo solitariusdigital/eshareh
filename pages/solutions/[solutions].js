@@ -334,6 +334,16 @@ export default function Solution({ solutions, projectTitle }) {
     window.location.reload();
   };
 
+  const imageActivation = async (value, index) => {
+    project.media[index].active = value;
+    let dataObject = {
+      ...project,
+      media: project.media,
+    };
+    await updateSolutionApi(dataObject);
+    window.location.reload();
+  };
+
   return (
     <Fragment>
       {project && (
@@ -389,7 +399,6 @@ export default function Solution({ solutions, projectTitle }) {
                     />
                   </Tooltip>
                 )}
-
                 <Tooltip title="Edit">
                   <EditIcon
                     className="icon"
@@ -513,182 +522,144 @@ export default function Solution({ solutions, projectTitle }) {
                 </Swiper>
               </div>
             )}
-            {project.media.map((image, index) => (
-              <Fragment key={index}>
-                <div
-                  className={classes.imageBox}
-                  style={{
-                    height: image.type === "text" ? "100%" : "none",
-                  }}
-                >
-                  {permissionControl === "admin" &&
-                    !displayGallerySlider &&
-                    image.type !== "text" && (
-                      <div
-                        className={classes.control}
-                        style={{
-                          fontFamily: language ? "English" : "English",
-                        }}
-                      >
-                        <p
-                          className={classes.item}
-                          onClick={() => makeCover(index)}
+            {project.media
+              .filter((image) => image.active || permissionControl === "admin")
+              .map((image, index) => (
+                <Fragment key={index}>
+                  <div
+                    className={classes.imageBox}
+                    style={{
+                      height: image.type === "text" ? "100%" : "none",
+                    }}
+                  >
+                    {permissionControl === "admin" &&
+                      !displayGallerySlider &&
+                      image.type !== "text" && (
+                        <div
+                          className={classes.control}
+                          style={{
+                            fontFamily: language ? "English" : "English",
+                          }}
                         >
-                          Cover
-                        </p>
-                        <p
-                          className={classes.item}
-                          onClick={() => makeSlide(index)}
-                        >
-                          Slide
-                        </p>
-                        <p
-                          className={classes.item}
-                          onClick={() => moveUp(index)}
-                        >
-                          Up
-                        </p>
-                        {project.mediaDouble.length < 2 && (
+                          <div className={classes.item}>
+                            {image.active ? (
+                              <Tooltip title="Hide">
+                                <CloseIcon
+                                  className="icon"
+                                  onClick={() => imageActivation(false, index)}
+                                  sx={{ color: "#d40d12" }}
+                                />
+                              </Tooltip>
+                            ) : (
+                              <Tooltip title="Show">
+                                <TaskAltIcon
+                                  className="icon"
+                                  onClick={() => imageActivation(true, index)}
+                                  sx={{ color: "#57a361" }}
+                                />
+                              </Tooltip>
+                            )}
+                          </div>
                           <p
                             className={classes.item}
-                            onClick={() => makeDouble(index)}
+                            onClick={() => makeCover(index)}
                           >
-                            2x
+                            Cover
                           </p>
-                        )}
-                        {project.mediaQuadruple.length < 4 && (
                           <p
                             className={classes.item}
-                            onClick={() => makeQuadruple(index)}
+                            onClick={() => makeSlide(index)}
                           >
-                            4x
+                            Slide
                           </p>
-                        )}
-                      </div>
-                    )}
-                  {image.type === "image" && (
-                    <div onClick={() => gallerySlider()}>
-                      <Image
-                        className={
-                          index === 0 && project.slideMedia.length === 0
-                            ? classes.image
-                            : ""
-                        }
-                        src={image.link}
-                        blurDataURL={image.link}
-                        placeholder="blur"
-                        alt={project[languageType].title}
-                        layout="fill"
-                        objectFit="cover"
-                        as="image"
-                        priority
-                      />
-                      <p className={classes.enlarge}>
-                        {language ? "بزرگنمایی +" : "+ Enlarge"}
-                      </p>
-                    </div>
-                  )}
-                  {image.type === "video" && (
-                    <video
-                      className={
-                        index === 0 && project.slideMedia.length === 0
-                          ? classes.videoRadius
-                          : classes.video
-                      }
-                      src={image.link + "#t=0.1"}
-                      controls
-                      playsInline
-                      preload="metadata"
-                    />
-                  )}
-                  {image.type === "text" && (
-                    <div
-                      className={
-                        language
-                          ? classes.information
-                          : classes.informationReverse
-                      }
-                    >
-                      {permissionControl === "admin" &&
-                        !displayGallerySlider && (
                           <p
-                            style={{
-                              fontFamily: language ? "English" : "English",
-                            }}
                             className={classes.item}
                             onClick={() => moveUp(index)}
                           >
-                            Move up
+                            Up
                           </p>
-                        )}
-                      <p style={{ textAlign: language ? "right" : "left" }}>
-                        {project[languageType].solution}
-                      </p>
-                    </div>
-                  )}
-                </div>
-                {index === 0 && project.mediaDouble.length > 0 && (
-                  <div className={classes.imageBoxDouble}>
-                    {project.mediaDouble.map((image, index) => (
-                      <div key={index} className={classes.imageBox}>
+                          {project.mediaDouble.length < 2 && (
+                            <p
+                              className={classes.item}
+                              onClick={() => makeDouble(index)}
+                            >
+                              2x
+                            </p>
+                          )}
+                          {project.mediaQuadruple.length < 4 && (
+                            <p
+                              className={classes.item}
+                              onClick={() => makeQuadruple(index)}
+                            >
+                              4x
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    {image.type === "image" && (
+                      <div onClick={() => gallerySlider()}>
+                        <Image
+                          className={
+                            index === 0 && project.slideMedia.length === 0
+                              ? classes.image
+                              : ""
+                          }
+                          src={image.link}
+                          blurDataURL={image.link}
+                          placeholder="blur"
+                          alt={project[languageType].title}
+                          layout="fill"
+                          objectFit="cover"
+                          as="image"
+                          priority
+                        />
+                        <p className={classes.enlarge}>
+                          {language ? "بزرگنمایی +" : "+ Enlarge"}
+                        </p>
+                      </div>
+                    )}
+                    {image.type === "video" && (
+                      <video
+                        className={
+                          index === 0 && project.slideMedia.length === 0
+                            ? classes.videoRadius
+                            : classes.video
+                        }
+                        src={image.link + "#t=0.1"}
+                        controls
+                        playsInline
+                        preload="metadata"
+                      />
+                    )}
+                    {image.type === "text" && (
+                      <div
+                        className={
+                          language
+                            ? classes.information
+                            : classes.informationReverse
+                        }
+                      >
                         {permissionControl === "admin" &&
                           !displayGallerySlider && (
-                            <div
-                              className={classes.control}
+                            <p
                               style={{
                                 fontFamily: language ? "English" : "English",
                               }}
+                              className={classes.item}
+                              onClick={() => moveUp(index)}
                             >
-                              <p
-                                className={classes.item}
-                                onClick={() => removeDouble(index)}
-                              >
-                                Remove
-                              </p>
-                            </div>
-                          )}
-                        {image.type === "image" ? (
-                          <div onClick={() => gallerySlider()}>
-                            <Image
-                              className={
-                                index === 0 && project.slideMedia.length === 0
-                                  ? classes.image
-                                  : ""
-                              }
-                              src={image.link}
-                              blurDataURL={image.link}
-                              placeholder="blur"
-                              alt={project[languageType].title}
-                              layout="fill"
-                              objectFit="cover"
-                              as="image"
-                              priority
-                            />
-                            <p className={classes.enlarge}>
-                              {language ? "بزرگنمایی +" : "+ Enlarge"}
+                              Move up
                             </p>
-                          </div>
-                        ) : (
-                          <video
-                            className={
-                              index === 0 && project.slideMedia.length === 0
-                                ? classes.videoRadius
-                                : classes.video
-                            }
-                            src={image.link + "#t=0.1"}
-                            controls
-                            playsInline
-                            preload="metadata"
-                          />
-                        )}
+                          )}
+                        <p style={{ textAlign: language ? "right" : "left" }}>
+                          {project[languageType].solution}
+                        </p>
                       </div>
-                    ))}
+                    )}
                   </div>
-                )}
-                {index === project.media.length - 1 &&
-                  project.mediaQuadruple.length > 0 && (
-                    <div className={classes.imageBoxQuadruple}>
-                      {project.mediaQuadruple.map((image, index) => (
+                  {index === 0 && project.mediaDouble.length > 0 && (
+                    <div className={classes.imageBoxDouble}>
+                      {project.mediaDouble.map((image, index) => (
                         <div key={index} className={classes.imageBox}>
                           {permissionControl === "admin" &&
                             !displayGallerySlider && (
@@ -700,7 +671,7 @@ export default function Solution({ solutions, projectTitle }) {
                               >
                                 <p
                                   className={classes.item}
-                                  onClick={() => removeQuadruple(index)}
+                                  onClick={() => removeDouble(index)}
                                 >
                                   Remove
                                 </p>
@@ -744,8 +715,70 @@ export default function Solution({ solutions, projectTitle }) {
                       ))}
                     </div>
                   )}
-              </Fragment>
-            ))}
+                  {index === project.media.length - 1 &&
+                    project.mediaQuadruple.length > 0 && (
+                      <div className={classes.imageBoxQuadruple}>
+                        {project.mediaQuadruple.map((image, index) => (
+                          <div key={index} className={classes.imageBox}>
+                            {permissionControl === "admin" &&
+                              !displayGallerySlider && (
+                                <div
+                                  className={classes.control}
+                                  style={{
+                                    fontFamily: language
+                                      ? "English"
+                                      : "English",
+                                  }}
+                                >
+                                  <p
+                                    className={classes.item}
+                                    onClick={() => removeQuadruple(index)}
+                                  >
+                                    Remove
+                                  </p>
+                                </div>
+                              )}
+                            {image.type === "image" ? (
+                              <div onClick={() => gallerySlider()}>
+                                <Image
+                                  className={
+                                    index === 0 &&
+                                    project.slideMedia.length === 0
+                                      ? classes.image
+                                      : ""
+                                  }
+                                  src={image.link}
+                                  blurDataURL={image.link}
+                                  placeholder="blur"
+                                  alt={project[languageType].title}
+                                  layout="fill"
+                                  objectFit="cover"
+                                  as="image"
+                                  priority
+                                />
+                                <p className={classes.enlarge}>
+                                  {language ? "بزرگنمایی +" : "+ Enlarge"}
+                                </p>
+                              </div>
+                            ) : (
+                              <video
+                                className={
+                                  index === 0 && project.slideMedia.length === 0
+                                    ? classes.videoRadius
+                                    : classes.video
+                                }
+                                src={image.link + "#t=0.1"}
+                                controls
+                                playsInline
+                                preload="metadata"
+                              />
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                </Fragment>
+              ))}
             {displayNextController && (
               <div
                 className={`${classes.projectController}  animate__animated animate__slideInUp`}
