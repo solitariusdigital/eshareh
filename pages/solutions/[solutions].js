@@ -26,7 +26,7 @@ import {
   updateCoverApi,
 } from "@/services/api";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Mousewheel } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -462,7 +462,7 @@ export default function Solution({ solutions, projectTitle }) {
                   spaceBetween={0}
                   mousewheel={true}
                   loop={true}
-                  modules={[Mousewheel, Autoplay]}
+                  modules={[Autoplay]}
                   autoplay={{
                     delay: 1000,
                     disableOnInteraction: true,
