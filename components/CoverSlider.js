@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./CoverSlider.module.scss";
 import Image from "next/legacy/image";
-import { enToFaDigits, replaceSpacesAndHyphens } from "@/services/utility";
+import { enToFaDigits, sliceString } from "@/services/utility";
 import Router from "next/router";
 import Progress from "@/components/Progress";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -81,7 +81,9 @@ export default function CoverSlider({ covers }) {
         style={{ color: `#${covers[current].color}` }}
         className={language ? classes.information : classes.informationReverse}
       >
-        <h2>{covers[current].title[languageType]}</h2>
+        {covers[current].text && screenSize !== "mobile" && (
+          <h2>{covers[current].title[languageType]}</h2>
+        )}
         <div className={classes.loader}>
           <h2>{language ? enToFaDigits(current + 1) : current + 1}</h2>
           <span> / </span>

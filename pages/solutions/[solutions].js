@@ -268,31 +268,19 @@ export default function Solution({ solutions, projectTitle }) {
   };
 
   const manageCoverSlide = async () => {
-    let getCovers = await getCoversApi();
-    const foundCover = getCovers.find(
-      (cover) => cover.title.en === project.en.title
-    );
-    if (foundCover) {
-      const cover = {
-        ...foundCover,
-        coverMedia: project.coverMedia,
-      };
-      await updateCoverApi(cover);
-    } else {
-      const cover = {
-        title: {
-          fa: project[languageType].title,
-          en: project[languageType].title,
-        },
-        coverMedia: project.coverMedia,
-        link: `solutions/${replaceSpacesAndHyphens(
-          project[languageType].title
-        )}`,
-        color: "000000",
-        active: false,
-      };
-      await createCoverApi(cover);
-    }
+    const cover = {
+      title: {
+        fa: project[languageType].title,
+        en: project[languageType].title,
+      },
+      coverMedia: project.coverMedia,
+      link: `solutions/${replaceSpacesAndHyphens(project[languageType].title)}`,
+      color: "000000",
+      active: false,
+      text: false,
+    };
+    await createCoverApi(cover);
+
     window.location.assign("/admin");
   };
 

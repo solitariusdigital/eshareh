@@ -35,7 +35,7 @@ export default function CoverForm() {
 
   const handleSubmit = async () => {
     const isValid = areAllStatesValid([title]);
-    if (!isValid || !link || !color || !media) {
+    if (!isValid || !color || !media) {
       showAlert("همه موارد الزامیست");
       return;
     }
@@ -65,7 +65,8 @@ export default function CoverForm() {
       },
       link: link,
       color: color,
-      active: true,
+      active: false,
+      text: false,
     };
     await createCoverApi(cover);
     window.location.assign("/admin");
@@ -115,10 +116,7 @@ export default function CoverForm() {
           </div>
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p className={classes.label}>
-                Link
-                <span>*</span>
-              </p>
+              <p className={classes.label}>Link</p>
               <CloseIcon
                 className="icon"
                 onClick={() => setLink("")}

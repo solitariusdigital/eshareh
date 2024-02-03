@@ -43,6 +43,7 @@
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
   cursor: pointer;
+  height: 50px;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
@@ -54,6 +55,10 @@
 
   .loader {
     @include mixins.row-space-between-center();
+    position: fixed;
+    right: 0px;
+    width: fit-content;
+
     span {
       font-size: 27px !important;
       margin: 12px;
@@ -67,4 +72,8 @@
 .information {
   flex-direction: row-reverse;
   text-align: right;
+
+  .loader {
+    left: 0px;
+  }
 }

@@ -86,9 +86,15 @@
     z-index: 3;
 
     .input {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
       input {
         @include mixins.input();
         height: 20px;
+        width: 100px;
+        margin-right: 10px;
       }
     }
   }

@@ -13,6 +13,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { updateCoverApi } from "@/services/api";
 
 export default function Admin({ covers }) {
@@ -20,6 +22,7 @@ export default function Admin({ covers }) {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const [coversGrid, setCoversGrid] = useState(covers);
+  const [text, setText] = useState(false);
 
   const [formType, setFormType] = useState("solutions" || "team") || "cover";
   const types = ["solutions", "team", "cover"];
@@ -37,6 +40,7 @@ export default function Admin({ covers }) {
       ...coversGrid[index],
       color: coversGrid[index].color,
       active: type === "show" ? true : false,
+      text: text,
     };
     await updateCoverApi(cover);
     window.location.assign("/admin");
@@ -47,6 +51,15 @@ export default function Admin({ covers }) {
     const coverIndex = newCovers.findIndex((object) => object["_id"] === id);
     newCovers[coverIndex].color = value;
     setCoversGrid(newCovers);
+    setText(true);
+  };
+
+  const handleText = (value, id) => {
+    const newCovers = [...coversGrid];
+    const coverIndex = newCovers.findIndex((object) => object["_id"] === id);
+    newCovers[coverIndex].text = value;
+    setCoversGrid(newCovers);
+    setText(value);
   };
 
   return (
@@ -112,6 +125,21 @@ export default function Admin({ covers }) {
                       autoComplete="off"
                       maxLength={6}
                     />
+                    {project.text ? (
+                      <Tooltip title="Hide">
+                        <RadioButtonCheckedIcon
+                          className="icon"
+                          onClick={() => handleText(false, project["_id"])}
+                        />
+                      </Tooltip>
+                    ) : (
+                      <Tooltip title="Show">
+                        <RadioButtonUncheckedIcon
+                          className="icon"
+                          onClick={() => handleText(true, project["_id"])}
+                        />
+                      </Tooltip>
+                    )}
                   </div>
                   <div>
                     <Tooltip title="Hide">

@@ -10,6 +10,7 @@ const CoverSchema = new Schema(
     link: "",
     color: "",
     active: Boolean,
+    text: Boolean,
   },
   { timestamps: true }
 );
