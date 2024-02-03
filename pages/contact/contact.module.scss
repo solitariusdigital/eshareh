@@ -81,17 +81,17 @@
 .information,
 .informationReverse {
   position: absolute;
-  bottom: 0px;
+  bottom: 50px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 
   @include mixins.mobile {
-    bottom: -70px;
+    bottom: -50px;
   }
 
   @include mixins.tablet {
-    bottom: -20px;
+    bottom: 0px;
   }
 
   .details {
