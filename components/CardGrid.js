@@ -87,7 +87,7 @@ export default function CardGrid({ solutions, direction }) {
               {hoverItem === 0 ? (
                 <h4>
                   {sliceString(
-                    solutions[0][languageType].summary,
+                    solutions[0][languageType].brief,
                     language ? 150 : 120
                   )}
                 </h4>
@@ -147,7 +147,7 @@ export default function CardGrid({ solutions, direction }) {
                     {hoverItem === index ? (
                       <h4>
                         {sliceString(
-                          project[languageType].summary,
+                          project[languageType].brief,
                           language ? 80 : 60
                         )}
                       </h4>
@@ -209,7 +209,7 @@ export default function CardGrid({ solutions, direction }) {
                 {hoverItem === index ? (
                   <h4>
                     {sliceString(
-                      project[languageType].summary,
+                      project[languageType].brief,
                       language ? 120 : 90
                     )}
                   </h4>

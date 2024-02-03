@@ -24,7 +24,6 @@ export default function NextProject({ project }) {
       <div
         className={language ? classes.information : classes.informationReverse}
       >
-        <h3 className={classes.description}>{project[languageType].summary}</h3>
         <div>
           <h2
             style={{
@@ -33,15 +32,25 @@ export default function NextProject({ project }) {
           >
             {project[languageType].title}
           </h2>
-          <h4>{project[languageType].subtitle}</h4>
+          <h3>{project[languageType].subtitle}</h3>
+          <p className={classes.description}>
+            <span
+              style={{
+                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              }}
+            >
+              {language ? "خلاصه |" : "Brief |"}
+            </span>{" "}
+            {project[languageType].brief}
+          </p>
         </div>
       </div>
       <div className={classes.imageBox}>
-        {project.media[0].type === "image" ? (
+        {project.coverMedia.type === "image" ? (
           <Image
             className={classes.image}
-            src={project.media[0].link}
-            blurDataURL={project.media[0].link}
+            src={project.coverMedia.link}
+            blurDataURL={project.coverMedia.link}
             placeholder="blur"
             alt={project[languageType].title}
             layout="fill"
@@ -52,7 +61,7 @@ export default function NextProject({ project }) {
         ) : (
           <video
             className={classes.video}
-            src={project.media[0].link + "#t=0.1"}
+            src={project.coverMedia.link + "#t=0.1"}
             playsInline
             preload="metadata"
           />

@@ -27,14 +27,9 @@ export default function SolutionsForm() {
       ? { en: editSolution.en.subtitle, fa: editSolution.fa.subtitle }
       : { en: "", fa: "" }
   );
-  const [summary, setSummary] = useState(
+  const [brief, setBrief] = useState(
     editSolution
-      ? { en: editSolution.en.summary, fa: editSolution.fa.summary }
-      : { en: "", fa: "" }
-  );
-  const [problem, setProblem] = useState(
-    editSolution
-      ? { en: editSolution.en.problem, fa: editSolution.fa.problem }
+      ? { en: editSolution.en.brief, fa: editSolution.fa.brief }
       : { en: "", fa: "" }
   );
   const [solution, setSolution] = useState(
@@ -115,8 +110,7 @@ export default function SolutionsForm() {
     const isValid = areAllStatesValid([
       title,
       subtitle,
-      summary,
-      problem,
+      brief,
       solution,
       year,
       category,
@@ -171,8 +165,8 @@ export default function SolutionsForm() {
 
     mediaLinks.push({
       link: {
-        fa: problem.fa,
-        en: problem.en,
+        fa: solution.fa,
+        en: solution.en,
       },
       type: "text",
     });
@@ -181,8 +175,7 @@ export default function SolutionsForm() {
       fa: {
         title: title.fa,
         subtitle: subtitle.fa,
-        summary: summary.fa,
-        problem: problem.fa,
+        brief: brief.fa,
         solution: solution.fa,
         year: year.fa,
         category: category.fa,
@@ -190,8 +183,7 @@ export default function SolutionsForm() {
       en: {
         title: title.en,
         subtitle: subtitle.en,
-        summary: summary.en,
-        problem: problem.en,
+        brief: brief.en,
         solution: solution.en,
         year: year.en,
         category: category.en,
@@ -301,13 +293,13 @@ export default function SolutionsForm() {
           <div className={classes.inputTextArea}>
             <div className={classes.bar}>
               <p className={classes.label}>
-                Summary
+                Brief
                 <span>*</span>
               </p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
-                  setSummary((prevData) => ({
+                  setBrief((prevData) => ({
                     ...prevData,
                     en: "",
                   }))
@@ -321,53 +313,19 @@ export default function SolutionsForm() {
               }}
               placeholder="..."
               type="text"
-              id="summary"
-              name="summary"
+              id="brief"
+              name="brief"
               onChange={(e) =>
-                setSummary((prevData) => ({
+                setBrief((prevData) => ({
                   ...prevData,
                   en: e.target.value,
                 }))
               }
-              value={summary.en}
+              value={brief.en}
               autoComplete="off"
             ></textarea>
           </div>
-          <div className={classes.inputTextArea}>
-            <div className={classes.bar}>
-              <p className={classes.label}>
-                Problem
-                <span>*</span>
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() =>
-                  setProblem((prevData) => ({
-                    ...prevData,
-                    en: "",
-                  }))
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <textarea
-              style={{
-                fontFamily: "English",
-              }}
-              placeholder="..."
-              type="text"
-              id="problem"
-              name="problem"
-              onChange={(e) =>
-                setProblem((prevData) => ({
-                  ...prevData,
-                  en: e.target.value,
-                }))
-              }
-              value={problem.en}
-              autoComplete="off"
-            ></textarea>
-          </div>
+
           <div className={classes.inputTextArea}>
             <div className={classes.bar}>
               <p className={classes.label}>
@@ -555,7 +513,7 @@ export default function SolutionsForm() {
               <CloseIcon
                 className="icon"
                 onClick={() =>
-                  setSummary((prevData) => ({
+                  setBrief((prevData) => ({
                     ...prevData,
                     fa: "",
                   }))
@@ -569,51 +527,15 @@ export default function SolutionsForm() {
               }}
               placeholder="..."
               type="text"
-              id="summary"
-              name="summary"
+              id="brief"
+              name="brief"
               onChange={(e) =>
-                setSummary((prevData) => ({
+                setBrief((prevData) => ({
                   ...prevData,
                   fa: e.target.value,
                 }))
               }
-              value={summary.fa}
-              autoComplete="off"
-              dir="rtl"
-            ></textarea>
-          </div>
-          <div className={classes.inputTextArea}>
-            <div className={classes.barReverse}>
-              <p className={classes.label}>
-                <span>*</span>
-                صورت مساله
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() =>
-                  setProblem((prevData) => ({
-                    ...prevData,
-                    fa: "",
-                  }))
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <textarea
-              style={{
-                fontFamily: "Farsi",
-              }}
-              placeholder="..."
-              type="text"
-              id="problem"
-              name="problem"
-              onChange={(e) =>
-                setProblem((prevData) => ({
-                  ...prevData,
-                  fa: e.target.value,
-                }))
-              }
-              value={problem.fa}
+              value={brief.fa}
               autoComplete="off"
               dir="rtl"
             ></textarea>

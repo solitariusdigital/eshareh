@@ -5,7 +5,7 @@ import Image from "next/legacy/image";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import logofooter from "@/assets/logofooter.svg";
+import logo from "@/assets/logo.svg";
 import aparat from "@/assets/aparat.svg";
 import aparatHover from "@/assets/aparatHover.svg";
 import Router from "next/router";
@@ -137,8 +137,8 @@ export default function Footer() {
         >
           <Image
             width={100}
-            height={48.77}
-            src={logofooter}
+            height={58.11}
+            src={logo}
             alt="logo"
             as="image"
             priority

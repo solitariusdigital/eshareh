@@ -199,8 +199,8 @@ export default function Menu() {
                           >
                             {!hoverLanguage ? (
                               <Image
-                                width={25}
-                                height={25}
+                                width={20}
+                                height={20}
                                 src={english}
                                 alt="logo"
                                 as="image"
@@ -209,8 +209,8 @@ export default function Menu() {
                               />
                             ) : (
                               <Image
-                                width={25}
-                                height={25}
+                                width={20}
+                                height={20}
                                 src={englishHover}
                                 alt="logo"
                                 as="image"
@@ -291,8 +291,8 @@ export default function Menu() {
                         >
                           {!hoverLanguage ? (
                             <Image
-                              width={25}
-                              height={25}
+                              width={20}
+                              height={20}
                               src={farsi}
                               alt="logo"
                               as="image"
@@ -301,8 +301,8 @@ export default function Menu() {
                             />
                           ) : (
                             <Image
-                              width={25}
-                              height={25}
+                              width={20}
+                              height={20}
                               src={farsiHover}
                               alt="logo"
                               as="image"
@@ -384,8 +384,8 @@ export default function Menu() {
               >
                 {!hoverLanguage ? (
                   <Image
-                    width={25}
-                    height={25}
+                    width={20}
+                    height={20}
                     src={language ? english : farsi}
                     alt="logo"
                     as="image"
@@ -394,8 +394,8 @@ export default function Menu() {
                   />
                 ) : (
                   <Image
-                    width={25}
-                    height={25}
+                    width={20}
+                    height={20}
                     src={language ? englishHover : farsiHover}
                     alt="logo"
                     as="image"

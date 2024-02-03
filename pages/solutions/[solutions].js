@@ -26,7 +26,7 @@ import {
   updateCoverApi,
 } from "@/services/api";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Mousewheel } from "swiper/modules";
+import { Autoplay, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -192,8 +192,8 @@ export default function Solution({ solutions, projectTitle }) {
         ...project.media,
         {
           link: {
-            fa: project.fa.problem,
-            en: project.en.problem,
+            fa: project.fa.solution,
+            en: project.en.solution,
           },
           type: "text",
         },
@@ -445,25 +445,25 @@ export default function Solution({ solutions, projectTitle }) {
               }
             >
               <div>
-                <h2
+                <h1
                   style={{
                     fontFamily: language ? "FarsiMedium" : "EnglishMedium",
                   }}
                   className={classes.title}
                 >
                   {project[languageType].title}
-                </h2>
-                <h4>{project[languageType].subtitle}</h4>
-                <h3 className={classes.description}>
+                </h1>
+                <h3>{project[languageType].subtitle}</h3>
+                <p className={classes.description}>
                   <span
                     style={{
                       fontFamily: language ? "FarsiMedium" : "EnglishMedium",
                     }}
                   >
-                    {language ? "خلاصه :" : "Brief :"}
+                    {language ? "خلاصه |" : "Brief |"}
                   </span>{" "}
-                  {project[languageType].summary}
-                </h3>
+                  {project[languageType].brief}
+                </p>
               </div>
             </div>
             {project.slideMedia && project.slideMedia.length > 0 && (
@@ -472,10 +472,14 @@ export default function Solution({ solutions, projectTitle }) {
                   className={classes.slide}
                   slidesPerView="auto"
                   spaceBetween={0}
-                  navigation={true}
                   mousewheel={true}
                   loop={true}
-                  modules={[Navigation, Mousewheel]}
+                  modules={[Mousewheel, Autoplay]}
+                  autoplay={{
+                    delay: 1000,
+                    disableOnInteraction: true,
+                  }}
+                  speed={1000}
                   style={{ "--swiper-navigation-color": "#ffffff" }}
                 >
                   {project.slideMedia.map((image, index) => (
@@ -629,9 +633,9 @@ export default function Solution({ solutions, projectTitle }) {
                             Move up
                           </p>
                         )}
-                      <h2 style={{ textAlign: language ? "right" : "left" }}>
-                        {project[languageType].problem}
-                      </h2>
+                      <p style={{ textAlign: language ? "right" : "left" }}>
+                        {project[languageType].solution}
+                      </p>
                     </div>
                   )}
                 </div>
