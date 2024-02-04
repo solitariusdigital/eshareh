@@ -36,32 +36,34 @@ export default function GallerySlider({ media }) {
           style={{ "--swiper-navigation-color": "#ffffff" }}
           onSlideChange={updateIndex}
         >
-          {media.map((image, index) => (
-            <SwiperSlide key={index}>
-              <div className={classes.image}>
-                {image.type === "image" ? (
-                  <Image
-                    src={image.link}
-                    blurDataURL={image.link}
-                    placeholder="blur"
-                    alt={image.link}
-                    layout="fill"
-                    objectFit="cover"
-                    as="image"
-                    priority
-                  />
-                ) : (
-                  <video
-                    className={classes.video}
-                    src={image.link + "#t=0.1"}
-                    controls
-                    playsInline
-                    preload="metadata"
-                  />
-                )}
-              </div>
-            </SwiperSlide>
-          ))}
+          {media
+            .filter((image) => image.active)
+            .map((image, index) => (
+              <SwiperSlide key={index}>
+                <div className={classes.image}>
+                  {image.type === "image" ? (
+                    <Image
+                      src={image.link}
+                      blurDataURL={image.link}
+                      placeholder="blur"
+                      alt={image.link}
+                      layout="fill"
+                      objectFit="cover"
+                      as="image"
+                      priority
+                    />
+                  ) : (
+                    <video
+                      className={classes.video}
+                      src={image.link + "#t=0.1"}
+                      controls
+                      playsInline
+                      preload="metadata"
+                    />
+                  )}
+                </div>
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
     </div>
