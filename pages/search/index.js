@@ -109,7 +109,7 @@ export default function Search({ activeSolutions }) {
         <div className={classes.gridList}>
           {solutions.map((project, index) => {
             const { title } = project[languageType];
-            const { media } = project;
+            const { coverMedia } = project;
             return (
               <Fragment key={index}>
                 <div
@@ -117,12 +117,12 @@ export default function Search({ activeSolutions }) {
                   onClick={() => directSolution(project)}
                 >
                   <div className={classes.box}>
-                    {media[0].type === "image" ? (
+                    {coverMedia.type === "image" ? (
                       <Image
                         className={classes.image}
-                        src={media[0].link}
+                        src={coverMedia.link}
                         placeholder="blur"
-                        blurDataURL={media[0].link}
+                        blurDataURL={coverMedia.link}
                         alt={title}
                         layout="fill"
                         objectFit="cover"
@@ -132,7 +132,7 @@ export default function Search({ activeSolutions }) {
                     ) : (
                       <video
                         className={classes.video}
-                        src={media[0].link + "#t=0.1"}
+                        src={coverMedia.link + "#t=0.1"}
                         playsInline
                         preload="metadata"
                       />

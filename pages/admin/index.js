@@ -141,20 +141,23 @@ export default function Admin({ covers }) {
                       </Tooltip>
                     )}
                   </div>
-                  <div>
+                  {project.active ? (
                     <Tooltip title="Hide">
                       <CloseIcon
+                        sx={{ color: "#d40d12" }}
                         className="icon"
                         onClick={() => manageCover("hide", index)}
                       />
                     </Tooltip>
-                    <Tooltip title="Publish">
+                  ) : (
+                    <Tooltip title="Show">
                       <TaskAltIcon
+                        sx={{ color: "#57a361" }}
                         className="icon"
                         onClick={() => manageCover("show", index)}
                       />
                     </Tooltip>
-                  </div>
+                  )}
                 </div>
                 {project.coverMedia.type === "image" ? (
                   <Image
