@@ -141,7 +141,7 @@ export default function Admin({ covers }) {
                       </Tooltip>
                     )}
                   </div>
-                  {project.active ? (
+                  <div>
                     <Tooltip title="Hide">
                       <CloseIcon
                         sx={{ color: "#d40d12" }}
@@ -149,7 +149,7 @@ export default function Admin({ covers }) {
                         onClick={() => manageCover("hide", index)}
                       />
                     </Tooltip>
-                  ) : (
+
                     <Tooltip title="Show">
                       <TaskAltIcon
                         sx={{ color: "#57a361" }}
@@ -157,7 +157,7 @@ export default function Admin({ covers }) {
                         onClick={() => manageCover("show", index)}
                       />
                     </Tooltip>
-                  )}
+                  </div>
                 </div>
                 {project.coverMedia.type === "image" ? (
                   <Image
