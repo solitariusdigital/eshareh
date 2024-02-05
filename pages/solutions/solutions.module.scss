@@ -201,12 +201,14 @@
     color: config.$black;
     @include mixins.transparentBackground(0.5, config.$lightgrey);
 
-    &:hover {
-      color: config.$yellow;
-    }
-
     @include mixins.mobile {
       margin-bottom: 10px;
+    }
+  }
+
+  p {
+    &:hover {
+      color: config.$yellow;
     }
   }
 }

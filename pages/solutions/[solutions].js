@@ -543,56 +543,72 @@ export default function Solution({ solutions, projectTitle }) {
                         >
                           <div className={classes.item}>
                             {image.active ? (
-                              <Tooltip title="Hide">
-                                <CloseIcon
-                                  className="icon"
-                                  onClick={() => imageActivation(false, index)}
-                                  sx={{ color: "#d40d12" }}
-                                />
-                              </Tooltip>
+                              <Fragment>
+                                <Tooltip title="Visible">
+                                  <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                                </Tooltip>
+                                <Tooltip title="Hide">
+                                  <CloseIcon
+                                    className="icon"
+                                    onClick={() =>
+                                      imageActivation(false, index)
+                                    }
+                                  />
+                                </Tooltip>
+                              </Fragment>
                             ) : (
-                              <Tooltip title="Show">
-                                <TaskAltIcon
-                                  className="icon"
-                                  onClick={() => imageActivation(true, index)}
-                                  sx={{ color: "#57a361" }}
-                                />
-                              </Tooltip>
+                              <Fragment>
+                                <Tooltip title="Hidden">
+                                  <VisibilityOffIcon
+                                    sx={{ color: "#d40d12" }}
+                                  />
+                                </Tooltip>
+                                <Tooltip title="Show">
+                                  <TaskAltIcon
+                                    className="icon"
+                                    onClick={() => imageActivation(true, index)}
+                                  />
+                                </Tooltip>
+                              </Fragment>
                             )}
                           </div>
-                          <p
-                            className={classes.item}
-                            onClick={() => makeCover(index)}
-                          >
-                            Cover
-                          </p>
-                          <p
-                            className={classes.item}
-                            onClick={() => makeSlide(index)}
-                          >
-                            Slide
-                          </p>
-                          <p
-                            className={classes.item}
-                            onClick={() => moveUp(index)}
-                          >
-                            Up
-                          </p>
-                          {project.mediaDouble.length < 2 && (
-                            <p
-                              className={classes.item}
-                              onClick={() => makeDouble(index)}
-                            >
-                              2x
-                            </p>
-                          )}
-                          {project.mediaQuadruple.length < 4 && (
-                            <p
-                              className={classes.item}
-                              onClick={() => makeQuadruple(index)}
-                            >
-                              4x
-                            </p>
+                          {image.active && (
+                            <Fragment>
+                              <p
+                                className={classes.item}
+                                onClick={() => makeCover(index)}
+                              >
+                                Cover
+                              </p>
+                              <p
+                                className={classes.item}
+                                onClick={() => makeSlide(index)}
+                              >
+                                Slide
+                              </p>
+                              <p
+                                className={classes.item}
+                                onClick={() => moveUp(index)}
+                              >
+                                Up
+                              </p>
+                              {project.mediaDouble.length < 2 && (
+                                <p
+                                  className={classes.item}
+                                  onClick={() => makeDouble(index)}
+                                >
+                                  2x
+                                </p>
+                              )}
+                              {project.mediaQuadruple.length < 4 && (
+                                <p
+                                  className={classes.item}
+                                  onClick={() => makeQuadruple(index)}
+                                >
+                                  4x
+                                </p>
+                              )}
+                            </Fragment>
                           )}
                         </div>
                       )}

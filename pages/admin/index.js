@@ -144,7 +144,6 @@ export default function Admin({ covers }) {
                   <div>
                     <Tooltip title="Hide">
                       <CloseIcon
-                        sx={{ color: "#d40d12" }}
                         className="icon"
                         onClick={() => manageCover("hide", index)}
                       />
@@ -152,7 +151,6 @@ export default function Admin({ covers }) {
 
                     <Tooltip title="Show">
                       <TaskAltIcon
-                        sx={{ color: "#57a361" }}
                         className="icon"
                         onClick={() => manageCover("show", index)}
                       />
