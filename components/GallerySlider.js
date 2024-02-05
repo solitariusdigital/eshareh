@@ -11,7 +11,7 @@ export default function GallerySlider({ media }) {
   const [current, setCurrent] = useState(0);
 
   const calculatePercentage = (index) => {
-    return ((index + 1) / media.length) * 100;
+    return ((index + 1) / media.filter((image) => image.active).length) * 100;
   };
 
   const updateIndex = (swiperInstance) => {

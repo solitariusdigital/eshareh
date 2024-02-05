@@ -169,6 +169,9 @@
   .image {
     border-radius: 0px !important;
   }
+  .videoRadius {
+    border-radius: 0px !important;
+  }
 
   @include mixins.mobile {
     display: flex;
