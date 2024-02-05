@@ -192,10 +192,10 @@ export default function SolutionsForm() {
         category: category.en,
       },
       media: editSolution ? editSolution.media : mediaLinks,
-      mediaDouble: [],
-      mediaQuadruple: [],
-      slideMedia: [],
-      coverMedia: mediaLinks[0],
+      mediaDouble: editSolution ? editSolution.mediaDouble : [],
+      mediaQuadruple: editSolution ? editSolution.mediaQuadruple : [],
+      slideMedia: editSolution ? editSolution.slideMedia : [],
+      coverMedia: editSolution ? editSolution.coverMedia : mediaLinks[0],
       active: false,
     };
     if (editSolution) {
