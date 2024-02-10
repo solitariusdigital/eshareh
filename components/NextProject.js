@@ -33,16 +33,22 @@ export default function NextProject({ project }) {
             {project[languageType].title}
           </h2>
           <h3>{project[languageType].subtitle}</h3>
-          <p className={classes.description}>
-            <span
+          <div
+            style={{
+              fontFamily: language ? "FarsiLight" : "EnglishLight",
+            }}
+            className={classes.description}
+          >
+            <p
               style={{
-                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                fontFamily: language ? "FarsiBold" : "EnglishBold",
               }}
             >
-              {language ? "خلاصه |" : "Brief |"}
-            </span>{" "}
-            {project[languageType].brief}
-          </p>
+              {language ? "خلاصه" : "Brief"}
+            </p>
+            <p className={classes.seperation}>|</p>
+            <p>{project[languageType].brief}</p>
+          </div>
         </div>
       </div>
       <div className={classes.imageBox}>

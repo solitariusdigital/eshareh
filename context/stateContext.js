@@ -18,7 +18,7 @@ export const StateProvider = (props) => {
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
       title: {
-        fa: "راه حل‌ها",
+        fa: "راهکار‌ها",
         en: "SOLUTIONS",
       },
       link: "/solutions",

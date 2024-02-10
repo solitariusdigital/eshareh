@@ -13,12 +13,19 @@
     width: 100%;
     text-align: right;
 
-    h2 {
-      color: config.$yellow;
+    h3 {
+      color: config.$grey;
+      margin-bottom: 50px;
     }
 
     .description {
-      margin-top: 20px;
+      display: flex;
+      flex-direction: row-reverse;
+
+      .seperation {
+        color: config.$grey;
+        margin: 0px 10px;
+      }
     }
   }
 

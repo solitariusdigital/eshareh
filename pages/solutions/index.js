@@ -101,7 +101,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "راه حل‌ها" : "Solutions"}
+        title={language ? "راهکار" : "Solutions"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
@@ -115,7 +115,12 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
         }}
       />
       <div className={classes.container}>
-        <div className={classes.category}>
+        <div
+          className={classes.category}
+          style={{
+            fontFamily: language ? "FarsiLight" : "EnglishLight",
+          }}
+        >
           {categories.map((item, index) => (
             <h2
               key={index}
@@ -134,17 +139,18 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
           ))}
         </div>
         {category !== "all" && (
-          <div>
-            <h3
-              className={
-                language
-                  ? classes.categoryDescription
-                  : classes.categoryDescriptionReverse
-              }
-            >
-              {information[category][languageType]}
-            </h3>
-          </div>
+          <h3
+            style={{
+              fontFamily: language ? "FarsiLight" : "EnglishLight",
+            }}
+            className={
+              language
+                ? classes.categoryDescription
+                : classes.categoryDescriptionReverse
+            }
+          >
+            {information[category][languageType]}
+          </h3>
         )}
         <section key={category} className={classes.gridList}>
           {solutions

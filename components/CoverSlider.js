@@ -82,9 +82,20 @@ export default function CoverSlider({ covers }) {
         className={language ? classes.information : classes.informationReverse}
       >
         {covers[current].text && screenSize !== "mobile" && (
-          <h2>{covers[current].title[languageType]}</h2>
+          <h2
+            style={{
+              fontFamily: language ? "FarsiLight" : "EnglishLight",
+            }}
+          >
+            {covers[current].title[languageType]}
+          </h2>
         )}
-        <div className={classes.loader}>
+        <div
+          className={classes.loader}
+          style={{
+            fontFamily: language ? "English" : "English",
+          }}
+        >
           <h2>{language ? enToFaDigits(current + 1) : current + 1}</h2>
           <span> / </span>
           <h2>{language ? enToFaDigits(length) : length}</h2>

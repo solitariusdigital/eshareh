@@ -35,7 +35,7 @@ export default function Footer() {
     <div
       className={classes.footer}
       style={{
-        fontFamily: language ? "English" : "English",
+        fontFamily: language ? "EnglishLight" : "EnglishLight",
       }}
     >
       <div>

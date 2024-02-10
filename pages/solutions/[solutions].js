@@ -444,23 +444,28 @@ export default function Solution({ solutions, projectTitle }) {
               <div>
                 <h1
                   style={{
-                    fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                    fontFamily: language ? "FarsiBold" : "EnglishBold",
                   }}
-                  className={classes.title}
                 >
                   {project[languageType].title}
                 </h1>
                 <h3>{project[languageType].subtitle}</h3>
-                <p className={classes.description}>
-                  <span
+                <div
+                  style={{
+                    fontFamily: language ? "FarsiLight" : "EnglishLight",
+                  }}
+                  className={classes.description}
+                >
+                  <p
                     style={{
-                      fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                      fontFamily: language ? "FarsiBold" : "EnglishBold",
                     }}
                   >
-                    {language ? "خلاصه |" : "Brief |"}
-                  </span>{" "}
-                  {project[languageType].brief}
-                </p>
+                    {language ? "خلاصه" : "Brief"}
+                  </p>
+                  <p className={classes.seperation}>|</p>
+                  <p>{project[languageType].brief}</p>
+                </div>
               </div>
             </div>
             {project.slideMedia && project.slideMedia.length > 0 && (
@@ -667,9 +672,26 @@ export default function Solution({ solutions, projectTitle }) {
                               Move up
                             </p>
                           )}
-                        <p style={{ textAlign: language ? "right" : "left" }}>
-                          {project[languageType].solution}
-                        </p>
+                        <div
+                          style={{
+                            fontFamily: language
+                              ? "FarsiLight"
+                              : "EnglishLight",
+                          }}
+                          className={classes.description}
+                        >
+                          <p
+                            style={{
+                              fontFamily: language
+                                ? "FarsiBold"
+                                : "EnglishBold",
+                            }}
+                          >
+                            {language ? "راهکار" : "Solution"}
+                          </p>
+                          <p className={classes.seperation}>|</p>
+                          <p>{project[languageType].solution}</p>
+                        </div>
                       </div>
                     )}
                   </div>

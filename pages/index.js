@@ -56,7 +56,12 @@ export default function Home({ solutions, covers }) {
         >
           {language ? "حرفه ما" : "What We Do"}
         </h1>
-        <div className={classes.gridLayout}>
+        <div
+          className={classes.gridLayout}
+          style={{
+            fontFamily: language ? "FarsiLight" : "EnglishLight",
+          }}
+        >
           {language ? (
             <h2>
               اشاره در سال {enToFaDigits(1376)} به عنوان یک آژانس تبلیغاتی آغاز
@@ -96,7 +101,7 @@ export default function Home({ solutions, covers }) {
         className={classes.message}
         onClick={() => Router.push("/solutions")}
       >
-        {language ? <h3>مشاهده راه حل‌ها</h3> : <h3>View solutions</h3>}
+        {language ? <h3>مشاهده راهکار‌ها</h3> : <h3>View solutions</h3>}
       </div>
     </Fragment>
   );
