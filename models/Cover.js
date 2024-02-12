@@ -3,12 +3,12 @@ import { Schema, model, models } from "mongoose";
 const CoverSchema = new Schema(
   {
     title: {
-      fa: "",
-      en: "",
+      fa: String,
+      en: String,
     },
     coverMedia: {},
-    link: "",
-    color: "",
+    link: String,
+    color: String,
     active: Boolean,
     text: Boolean,
   },
