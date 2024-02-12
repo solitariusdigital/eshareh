@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import { useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import CoverSlider from "@/components/CoverSlider";
 import CardGrid from "@/components/CardGrid";

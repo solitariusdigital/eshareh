@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./password.module.scss";
 import Router from "next/router";

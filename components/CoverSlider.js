@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./CoverSlider.module.scss";
 import Image from "next/legacy/image";
-import { enToFaDigits, sliceString } from "@/services/utility";
+import { enToFaDigits } from "@/services/utility";
 import Router from "next/router";
 import Progress from "@/components/Progress";
 import { Swiper, SwiperSlide } from "swiper/react";

@@ -122,7 +122,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
           }}
         >
           {categories.map((item, index) => (
-            <h2
+            <p
               key={index}
               className={
                 category === item.name[languageType]
@@ -135,7 +135,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
             >
               {language ? item.labelFa : item.labelEn}
               {index !== 2 && <span>/</span>}
-            </h2>
+            </p>
           ))}
         </div>
         {category !== "all" && (

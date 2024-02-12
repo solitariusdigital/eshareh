@@ -27,7 +27,7 @@ export default function NextProject({ project }) {
         <div>
           <h2
             style={{
-              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              fontFamily: language ? "FarsiBold" : "EnglishBold",
             }}
           >
             {project[languageType].title}

@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState, useEffect } from "react";
+import { Fragment, useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./SolutionsForm.module.scss";
 import Image from "next/legacy/image";
