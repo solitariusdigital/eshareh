@@ -38,11 +38,11 @@ export default function Solution({ solutions, projectTitle }) {
   const { displayFooter, setFooter } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
+
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayNextController, setDisplayNextController] = useState(false);
   const [project, setProject] = useState(null);
   const [coverSlide, setCoverSlide] = useState(false);
-
   const [previousProject, setPreviousProject] = useState(null);
   const [nextProject, setNextProject] = useState(null);
   const [dropDown, setDropDpwn] = useState(false);
@@ -495,7 +495,12 @@ export default function Solution({ solutions, projectTitle }) {
                 >
                   {project.slideMedia.map((image, index) => (
                     <SwiperSlide key={index}>
-                      <div className={classes.control}>
+                      <div
+                        className={classes.control}
+                        style={{
+                          fontFamily: language ? "English" : "English",
+                        }}
+                      >
                         {permissionControl === "admin" &&
                           !displayGallerySlider && (
                             <p
