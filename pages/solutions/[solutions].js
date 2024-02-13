@@ -36,6 +36,7 @@ export default function Solution({ solutions, projectTitle }) {
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayNextController, setDisplayNextController] = useState(false);
@@ -186,7 +187,7 @@ export default function Solution({ solutions, projectTitle }) {
     window.location.reload();
   };
 
-  const moveUp = async (index) => {
+  const moveItem = async (index, direction) => {
     if (index === "text") {
       const updatedProject = [
         ...project.media,
@@ -199,7 +200,11 @@ export default function Solution({ solutions, projectTitle }) {
         },
       ];
       const itemToMove = updatedProject.splice(1, 1)[0];
-      updatedProject.splice(1 - 1, 0, itemToMove);
+      if (direction === "up") {
+        updatedProject.splice(1 - 1, 0, itemToMove);
+      } else {
+        updatedProject.splice(1 + 1, 0, itemToMove);
+      }
       let dataObject = {
         ...project,
         media: updatedProject,
@@ -208,7 +213,11 @@ export default function Solution({ solutions, projectTitle }) {
     } else {
       const updatedProject = [...project.media];
       const itemToMove = updatedProject.splice(index, 1)[0];
-      updatedProject.splice(index - 1, 0, itemToMove);
+      if (direction === "up") {
+        updatedProject.splice(index - 1, 0, itemToMove);
+      } else {
+        updatedProject.splice(index + 1, 0, itemToMove);
+      }
       let dataObject = {
         ...project,
         media: updatedProject,
@@ -449,7 +458,7 @@ export default function Solution({ solutions, projectTitle }) {
                 >
                   {project[languageType].title}
                 </h1>
-                <h3>{project[languageType].subtitle}</h3>
+                <h2>{project[languageType].subtitle}</h2>
                 <div
                   style={{
                     fontFamily: language ? "FarsiLight" : "EnglishLight",
@@ -464,7 +473,7 @@ export default function Solution({ solutions, projectTitle }) {
                     {language ? "خلاصه" : "Brief"}
                   </p>
                   <p className={classes.seperation}>|</p>
-                  <p>{project[languageType].brief}</p>
+                  <p className={classes.text}>{project[languageType].brief}</p>
                 </div>
               </div>
             </div>
@@ -478,10 +487,10 @@ export default function Solution({ solutions, projectTitle }) {
                   loop={true}
                   modules={[Autoplay]}
                   autoplay={{
-                    delay: 1000,
+                    delay: 3000,
                     disableOnInteraction: true,
                   }}
-                  speed={1000}
+                  speed={1500}
                   style={{ "--swiper-navigation-color": "#ffffff" }}
                 >
                   {project.slideMedia.map((image, index) => (
@@ -498,17 +507,20 @@ export default function Solution({ solutions, projectTitle }) {
                           )}
                       </div>
                       <div
-                        className={classes.image}
+                        className={classes.imageContainer}
                         onClick={() => gallerySlider()}
                       >
                         {image.type === "image" ? (
                           <Image
+                            className={classes.image}
                             src={image.link}
                             blurDataURL={image.link}
                             placeholder="blur"
                             alt={image.link}
                             layout="fill"
-                            objectFit="cover"
+                            objectFit={
+                              screenSize === "desktop" ? "contain" : "cover"
+                            }
                             as="image"
                             priority
                           />
@@ -593,9 +605,15 @@ export default function Solution({ solutions, projectTitle }) {
                               </p>
                               <p
                                 className={classes.item}
-                                onClick={() => moveUp(index)}
+                                onClick={() => moveItem(index, "up")}
                               >
                                 Up
+                              </p>
+                              <p
+                                className={classes.item}
+                                onClick={() => moveItem(index, "down")}
+                              >
+                                Down
                               </p>
                               {project.mediaDouble.length < 2 && (
                                 <p
@@ -618,7 +636,10 @@ export default function Solution({ solutions, projectTitle }) {
                         </div>
                       )}
                     {image.type === "image" && (
-                      <div onClick={() => gallerySlider()}>
+                      <div
+                        onClick={() => gallerySlider()}
+                        className={classes.imageContainer}
+                      >
                         <Image
                           className={
                             index === 0 && project.slideMedia.length === 0
@@ -630,7 +651,7 @@ export default function Solution({ solutions, projectTitle }) {
                           placeholder="blur"
                           alt={project[languageType].title}
                           layout="fill"
-                          objectFit="cover"
+                          objectFit="contain"
                           as="image"
                           priority
                         />
@@ -662,15 +683,26 @@ export default function Solution({ solutions, projectTitle }) {
                       >
                         {permissionControl === "admin" &&
                           !displayGallerySlider && (
-                            <p
-                              style={{
-                                fontFamily: language ? "English" : "English",
-                              }}
-                              className={classes.item}
-                              onClick={() => moveUp(index)}
-                            >
-                              Move up
-                            </p>
+                            <div className={classes.controlText}>
+                              <p
+                                style={{
+                                  fontFamily: language ? "English" : "English",
+                                }}
+                                className={classes.item}
+                                onClick={() => moveItem(index, "up")}
+                              >
+                                Up
+                              </p>
+                              <p
+                                style={{
+                                  fontFamily: language ? "English" : "English",
+                                }}
+                                className={classes.item}
+                                onClick={() => moveItem(index, "down")}
+                              >
+                                Down
+                              </p>
+                            </div>
                           )}
                         <div
                           style={{
@@ -690,7 +722,9 @@ export default function Solution({ solutions, projectTitle }) {
                             {language ? "راهکار" : "Solution"}
                           </p>
                           <p className={classes.seperation}>|</p>
-                          <p>{project[languageType].solution}</p>
+                          <p className={classes.text}>
+                            {project[languageType].solution}
+                          </p>
                         </div>
                       </div>
                     )}
@@ -832,7 +866,7 @@ export default function Solution({ solutions, projectTitle }) {
                       )
                     }
                   />
-                  <p>{project[languageType].title}</p>
+                  <h3>{project[languageType].title}</h3>
                   <ArrowForwardIosIcon
                     className={classes.icon}
                     onClick={() =>
@@ -857,7 +891,7 @@ export default function Solution({ solutions, projectTitle }) {
                     }}
                   />
                 </div>
-                {<h3>{project[languageType].title}</h3>}
+                {<h2>{project[languageType].title}</h2>}
                 <GallerySlider
                   media={project.media
                     .concat(project.slideMedia)

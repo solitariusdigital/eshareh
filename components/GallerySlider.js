@@ -48,7 +48,7 @@ export default function GallerySlider({ media }) {
                       placeholder="blur"
                       alt={image.link}
                       layout="fill"
-                      objectFit="cover"
+                      objectFit="contain"
                       as="image"
                       priority
                     />

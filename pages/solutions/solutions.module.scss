@@ -31,7 +31,7 @@
       }
     }
 
-    h3 {
+    h2 {
       color: config.$grey;
       margin-bottom: 50px;
     }
@@ -45,12 +45,20 @@
         margin: 0px 10px;
       }
     }
+
+    .text {
+      direction: rtl;
+    }
   }
 
   .informationReverse,
   .detailsReverse {
     direction: rtl;
     text-align: left;
+
+    .text {
+      direction: ltr;
+    }
   }
 
   .categoryDescription,
@@ -112,7 +120,11 @@
       height: 250px;
     }
     @include mixins.tablet {
-      max-height: 500px;
+      height: 450px;
+    }
+
+    .imageTest {
+      object-fit: 0% 0%;
     }
 
     .image {
@@ -132,18 +144,17 @@
       &:hover {
         color: config.$yellow;
       }
+
+      @include mixins.mobile {
+        scale: 0.8;
+      }
     }
 
     .video,
     .videoRadius {
       width: 100%;
-      height: 90vh;
-      max-height: 900px;
+      height: 100%;
       object-fit: cover;
-
-      @include mixins.mobile {
-        height: 250px;
-      }
     }
 
     .videoRadius {
@@ -188,6 +199,16 @@
   }
 }
 
+.controlText {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 10px;
+
+  p {
+    margin-right: 10px;
+  }
+}
+
 .control {
   position: relative;
   position: absolute;
@@ -210,6 +231,8 @@
 
     @include mixins.mobile {
       margin-bottom: 10px;
+      scale: 0.8;
+      margin: 0px;
     }
   }
 
@@ -221,40 +244,41 @@
 }
 
 .swiper {
+  cursor: pointer;
   margin-bottom: 20px;
-
-  &:hover {
-    cursor: pointer;
-  }
 
   .slide {
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
   }
 
-  .image {
-    height: 90vh;
-    max-height: 900px;
+  .imageContainer {
+    position: relative;
+    height: 80vh;
+    max-height: 780px;
+
+    .image {
+      object-position: 0% 0%;
+    }
 
     @include mixins.mobile {
-      height: 250px;
+      height: 200px;
     }
     @include mixins.tablet {
-      max-height: 500px;
+      height: 450px;
     }
   }
 
   .video {
     width: 100%;
-    height: 90vh;
-    max-height: 900px;
+    height: 100%;
     object-fit: cover;
 
     @include mixins.mobile {
       height: 250px;
     }
     @include mixins.tablet {
-      max-height: 500px;
+      height: 450px;
     }
   }
 }
@@ -349,9 +373,9 @@
   .box {
     position: relative;
     width: 100%;
-    height: 28vh;
+    height: 30vh;
     min-height: 200px;
-    max-height: 280px;
+    max-height: 300px;
     margin: 12px 0px;
 
     @include mixins.mobile {
@@ -430,13 +454,13 @@
   top: 0px;
   left: 0px;
   z-index: 1;
-  padding: 20px 12px;
+  padding: 20px;
   width: 100%;
   height: 100vh;
   background: config.$white;
 
-  h3 {
-    margin: 20px 0px;
+  h2 {
+    margin-bottom: 20px;
   }
 
   .icon {

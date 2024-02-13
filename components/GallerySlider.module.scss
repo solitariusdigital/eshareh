@@ -4,7 +4,7 @@
 .slider {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
   height: 100vh;
   margin: auto;
 
@@ -17,13 +17,14 @@
 }
 
 .swiper {
+  text-align: center;
   @include mixins.mobile {
     margin-top: 100px;
   }
 }
 
 .image {
-  height: calc(100vh - 180px);
+  height: calc(100vh - 130px);
 
   @include mixins.mobile {
     height: 300px;
@@ -31,12 +32,14 @@
 }
 
 .video {
-  width: 100%;
-  height: calc(100vh - 180px);
+  width: 80%;
+  height: 100%;
   object-fit: cover;
 
   @include mixins.mobile {
+    width: 100%;
     height: 300px;
+    object-fit: contain;
   }
 }
 

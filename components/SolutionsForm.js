@@ -50,10 +50,13 @@ export default function SolutionsForm() {
 
   const [imagesPreview, setImagesPreview] = useState([]);
   const [videosPreview, setVideosPreview] = useState([]);
+  const [voicesPreview, setVoicesPreview] = useState([]);
+
   const categories = ["Advertising", "Media", "Digital"];
 
   const [uploadImages, setUploadImages] = useState([]);
   const [uploadVideos, setUploadVideos] = useState([]);
+  const [uploadVoices, setUploadVoices] = useState([]);
 
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
@@ -96,6 +99,16 @@ export default function SolutionsForm() {
       }))
     );
   };
+  const handleVoiceChange = (event) => {
+    const array = Array.from(event.target.files);
+    setUploadVoices(array);
+    setVoicesPreview(
+      array.map((item) => ({
+        file: item,
+        link: URL.createObjectURL(item),
+      }))
+    );
+  };
 
   const removeImageInputFile = () => {
     const input = document.getElementById("inputImage");
@@ -103,6 +116,10 @@ export default function SolutionsForm() {
   };
   const removeVideoInputFile = () => {
     const input = document.getElementById("inputVideo");
+    input.value = null;
+  };
+  const removeVoiceInputFile = () => {
+    const input = document.getElementById("inputVoice");
     input.value = null;
   };
 
@@ -689,6 +706,38 @@ export default function SolutionsForm() {
                 ))}
               </div>
             </div>
+            {/* <div className={classes.media}>
+              <label className="file">
+                <input
+                  onChange={handleVoiceChange}
+                  id="inputVoice"
+                  type="file"
+                  accept="audio/*"
+                  multiple
+                />
+                <p>صوتی</p>
+              </label>
+              <CloseIcon
+                className={classes.clearMedia}
+                onClick={() => {
+                  setVoicesPreview([]);
+                  removeVoiceInputFile();
+                }}
+                sx={{ fontSize: 16 }}
+              />
+              <div className={classes.preview}>
+                {voicesPreview.map((voice, index) => (
+                  <audio
+                    key={index}
+                    className={classes.voice}
+                    preload="metadata"
+                    controls
+                  >
+                    <source src={voice.link} />
+                  </audio>
+                ))}
+              </div>
+            </div> */}
           </div>
         )}
         <p className={classes.alert}>{alert}</p>

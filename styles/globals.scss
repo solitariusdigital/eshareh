@@ -218,3 +218,28 @@ label.file input[type="file"] {
 .swiper-button-prev::after {
   display: none;
 }
+
+.GallerySlider_swiper__DIjwm {
+  .swiper-button-prev {
+    background-image: url("../assets/prevYellow.svg") !important;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    opacity: 0.5;
+    @include mixins.mobile {
+      background-image: url("../assets/prev.svg") !important;
+      opacity: 0.7;
+    }
+  }
+  .swiper-button-next {
+    background-image: url("../assets/nextYellow.svg") !important;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+    opacity: 0.5;
+    @include mixins.mobile {
+      background-image: url("../assets/next.svg") !important;
+      opacity: 0.7;
+    }
+  }
+}

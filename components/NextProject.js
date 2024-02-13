@@ -18,7 +18,7 @@ export default function NextProject({ project }) {
         )
       }
     >
-      <h4 className={classes.text}>
+      <h4 className={classes.next}>
         {language ? "پروژه بعدی" : "Next Project"}
       </h4>
       <div
@@ -47,7 +47,7 @@ export default function NextProject({ project }) {
               {language ? "خلاصه" : "Brief"}
             </p>
             <p className={classes.seperation}>|</p>
-            <p>{project[languageType].brief}</p>
+            <p className={classes.text}>{project[languageType].brief}</p>
           </div>
         </div>
       </div>

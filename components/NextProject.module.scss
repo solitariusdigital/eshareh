@@ -27,11 +27,19 @@
         margin: 0px 10px;
       }
     }
+
+    .text {
+      direction: rtl;
+    }
   }
 
   .informationReverse {
     direction: rtl;
     text-align: left;
+
+    .text {
+      direction: ltr;
+    }
   }
 
   .imageBox {
@@ -60,7 +68,7 @@
     }
   }
 
-  .text {
+  .next {
     position: absolute;
     top: -80px;
     left: 0px;
