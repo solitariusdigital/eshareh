@@ -760,7 +760,7 @@ export default function Solution({ solutions, projectTitle }) {
                                 className={
                                   index === 0 && project.slideMedia.length === 0
                                     ? classes.image
-                                    : ""
+                                    : classes.imageFrame
                                 }
                                 src={image.link}
                                 blurDataURL={image.link}

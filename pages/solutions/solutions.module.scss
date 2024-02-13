@@ -174,14 +174,30 @@
   grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
   gap: 20px;
 
+  @include mixins.mobile {
+    display: flex;
+    flex-direction: column;
+    height: 100% !important;
+    gap: 0px;
+  }
+
   .imageBox {
     width: 100%;
 
+    @include mixins.mobile {
+      height: 100vh !important;
+    }
     @include mixins.desktop {
       height: 100%;
     }
     @include mixins.fourK {
       height: 100%;
+    }
+
+    .imageFrame {
+      @include mixins.mobile {
+        object-position: 0% 100%;
+      }
     }
   }
   .image {
@@ -189,13 +205,6 @@
   }
   .videoRadius {
     border-radius: 0px !important;
-  }
-
-  @include mixins.mobile {
-    display: flex;
-    flex-direction: column;
-    height: 100% !important;
-    gap: 0px;
   }
 }
 
