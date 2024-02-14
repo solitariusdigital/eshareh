@@ -20,11 +20,6 @@ $screen-fourK: 6000px;
     @content;
   }
 }
-@mixin extraDesktop {
-  @media (min-width: #{$screen-large}) {
-    @content;
-  }
-}
 @mixin fourK {
   @media (min-width: #{$screen-large} ) and (max-width: #{$screen-fourK}) {
     @content;
