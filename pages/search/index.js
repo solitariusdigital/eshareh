@@ -140,6 +140,9 @@ export default function Search({ activeSolutions }) {
                   </div>
                   <div
                     className={language ? classes.title : classes.titleReverse}
+                    style={{
+                      fontFamily: language ? "FarsiLight" : "EnglishLight",
+                    }}
                   >
                     <h3>{title}</h3>
                   </div>

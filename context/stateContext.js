@@ -34,7 +34,7 @@ export const StateProvider = (props) => {
     },
     {
       title: {
-        fa: "حرفه ما",
+        fa: "چه میکنیم",
         en: "WHAT WE DO",
       },
       link: "/profession",
@@ -42,7 +42,7 @@ export const StateProvider = (props) => {
     },
     {
       title: {
-        fa: "اخبار",
+        fa: "خبر",
         en: "NEWS",
       },
       link: "/news",
@@ -50,7 +50,7 @@ export const StateProvider = (props) => {
     },
     {
       title: {
-        fa: "تماس",
+        fa: "تماس با ما",
         en: "CONTACT",
       },
       link: "/contact",

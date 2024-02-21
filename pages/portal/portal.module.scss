@@ -58,6 +58,7 @@
     @include mixins.tablet {
       display: flex;
       flex-direction: column;
+      width: config.$content-widthTablet;
     }
   }
 

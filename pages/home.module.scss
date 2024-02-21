@@ -8,6 +8,10 @@
   max-width: config.$max-widthHeigh;
   direction: rtl;
 
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+
   @include mixins.mobile {
     width: calc(100% - 24px);
   }
@@ -71,6 +75,10 @@
   margin-top: 100px;
   width: config.$content-width;
 
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+
   &:hover {
     cursor: pointer;
     color: config.$black;
@@ -82,6 +90,10 @@
   width: config.$content-width;
   margin-top: 150px;
   text-align: center;
+
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
 
   @include mixins.mobile {
     width: calc(100% - 24px);

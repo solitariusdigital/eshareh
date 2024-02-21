@@ -139,7 +139,7 @@ export default function About() {
               style={{ "--swiper-navigation-color": "#ffffff" }}
               onSlideChange={updateIndex}
               autoplay={{
-                delay: 1000,
+                delay: 500,
                 disableOnInteraction: true,
               }}
               speed={1000}

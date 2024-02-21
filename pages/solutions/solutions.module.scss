@@ -10,6 +10,9 @@
   @include mixins.mobile {
     width: calc(100% - 24px);
   }
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
 
   .information,
   .informationReverse,
@@ -64,7 +67,6 @@
   .categoryDescription,
   .categoryDescriptionReverse {
     margin-bottom: 50px;
-    color: config.$grey;
     text-align: right;
   }
   .categoryDescriptionReverse {
@@ -94,6 +96,9 @@
       @include mixins.mobile {
         width: calc(100% - 24px);
       }
+      @include mixins.tablet {
+        width: config.$content-widthTablet;
+      }
 
       .icon {
         color: config.$grey;
@@ -120,7 +125,7 @@
       height: 250px;
     }
     @include mixins.tablet {
-      height: 450px;
+      height: 500px;
     }
 
     .imageTest {
@@ -274,7 +279,7 @@
       height: 200px;
     }
     @include mixins.tablet {
-      height: 450px;
+      height: 500px;
     }
   }
 
@@ -284,10 +289,10 @@
     object-fit: cover;
 
     @include mixins.mobile {
-      height: 250px;
+      height: 200px;
     }
     @include mixins.tablet {
-      height: 450px;
+      height: 500px;
     }
   }
 }
@@ -410,10 +415,11 @@
   }
 }
 
-.category {
+.category,
+.categoryReverse {
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 40px;
@@ -453,6 +459,10 @@
     align-items: center;
     color: config.$yellow;
   }
+}
+
+.categoryReverse {
+  flex-direction: row;
 }
 
 .gallerySlider {

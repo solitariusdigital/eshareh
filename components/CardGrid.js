@@ -34,7 +34,11 @@ export default function CardGrid({ solutions, direction }) {
   }, []);
 
   return (
-    <Fragment>
+    <div
+      style={{
+        fontFamily: language ? "FarsiLight" : "English",
+      }}
+    >
       {screenSize === "desktop" && (
         <div
           className={
@@ -221,6 +225,6 @@ export default function CardGrid({ solutions, direction }) {
           ))}
         </div>
       )}
-    </Fragment>
+    </div>
   );
 }

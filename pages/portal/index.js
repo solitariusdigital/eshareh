@@ -135,7 +135,7 @@ export default function Portal() {
   return (
     <div className={classes.container}>
       <div className={classes.gridLayout}>
-        <h1>{language ? "پرتال" : "Portal"}</h1>
+        <h1>{language ? "پورتال" : "Portal"}</h1>
         <div className={classes.form}>
           <div className={classes.input}>
             <div className={classes.bar}>

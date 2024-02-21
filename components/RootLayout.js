@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
 import Image from "next/legacy/image";
-import logo from "@/assets/logo.svg";
+import logoLoadEnglish from "@/assets/logoLoadEnglish.svg";
+import logoLoadFarsi from "@/assets/logoLoadFarsi.svg";
 import arrowUp from "@/assets/arrowUp.svg";
 import secureLocalStorage from "react-secure-storage";
 import { getUserApi, getControlsApi } from "@/services/api";
@@ -156,7 +157,7 @@ export default function RootLayout({ children }) {
           <Image
             width={250}
             height={145.29}
-            src={logo}
+            src={language ? logoLoadFarsi : logoLoadEnglish}
             alt="logo"
             as="image"
             priority

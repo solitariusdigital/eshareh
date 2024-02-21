@@ -93,7 +93,7 @@ export default function CoverSlider({ covers }) {
         <div
           className={classes.loader}
           style={{
-            fontFamily: language ? "English" : "English",
+            fontFamily: language ? "FarsiLight" : "English",
           }}
         >
           <h2>{language ? enToFaDigits(current + 1) : current + 1}</h2>

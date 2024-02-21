@@ -14,7 +14,7 @@
   }
 
   @include mixins.tablet {
-    width: 100%;
+    width: config.$content-widthTablet;
     margin-top: 0px;
   }
 }

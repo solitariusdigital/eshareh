@@ -13,6 +13,10 @@
   max-width: config.$max-widthHeigh;
   margin-top: 30px;
 
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+
   .hero {
     position: relative;
     width: 50%;
@@ -126,6 +130,10 @@
   gap: 20px;
   margin: 20px auto;
   width: config.$content-width;
+
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
 
   @include mixins.mobile {
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));

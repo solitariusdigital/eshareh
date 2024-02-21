@@ -9,7 +9,7 @@ export default function News() {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "اخبار" : "News"}
+        title={language ? "خبر" : "News"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"

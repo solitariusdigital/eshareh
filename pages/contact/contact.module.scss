@@ -21,6 +21,7 @@
   @include mixins.tablet {
     position: relative;
     bottom: 0px;
+    width: config.$content-widthTablet;
   }
   @include mixins.tablet {
     position: relative;
@@ -76,6 +77,9 @@
   @include mixins.mobile {
     top: 40%;
   }
+  @include mixins.fourK {
+    top: 50%;
+  }
 }
 
 .information,
@@ -87,16 +91,24 @@
   align-items: flex-start;
 
   @include mixins.mobile {
-    bottom: -50px;
+    bottom: -140px;
+    flex-direction: column;
   }
 
   @include mixins.tablet {
     bottom: 0px;
   }
+  @include mixins.fourK {
+    bottom: 100px;
+  }
 
   .details {
     height: 80px;
     margin-right: 10px;
+
+    @include mixins.mobile {
+      margin-bottom: 10px;
+    }
   }
 
   .row,
@@ -125,4 +137,8 @@
 
 .information {
   flex-direction: row-reverse;
+
+  @include mixins.mobile {
+    flex-direction: column;
+  }
 }

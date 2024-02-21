@@ -45,6 +45,10 @@
   cursor: pointer;
   height: 50px;
 
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+
   @include mixins.mobile {
     width: calc(100% - 24px);
   }

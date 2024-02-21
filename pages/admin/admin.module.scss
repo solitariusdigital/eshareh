@@ -7,6 +7,10 @@
   max-width: config.$max-widthHeigh;
   margin-top: 150px;
 
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+
   @include mixins.mobile {
     width: calc(100% - 24px);
   }

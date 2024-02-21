@@ -54,7 +54,7 @@ export default function Home({ solutions, covers }) {
             fontFamily: language ? "FarsiBold" : "EnglishBold",
           }}
         >
-          {language ? "حرفه ما" : "What We Do"}
+          {language ? "چه میکنیم" : "What We Do"}
         </h1>
         <div
           className={classes.gridLayout}

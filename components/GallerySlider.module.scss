@@ -41,6 +41,9 @@
     height: 300px;
     object-fit: contain;
   }
+  @include mixins.tablet {
+    object-fit: contain;
+  }
 }
 
 .progress {

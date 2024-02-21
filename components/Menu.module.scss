@@ -58,6 +58,10 @@
   max-width: config.$max-widthHeigh;
   @include mixins.row-space-between-center();
 
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+
   .largeNavigation {
     width: 50%;
     max-width: 700px;
@@ -158,6 +162,9 @@
   margin: auto;
   width: config.$content-width;
 
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
   @include mixins.mobile {
     width: 100%;
   }
@@ -194,6 +201,10 @@
     box-shadow: config.$card-shadow;
     width: config.$content-width;
     @include mixins.transparentBackground(0.95, config.$yellow);
+
+    @include mixins.tablet {
+      width: config.$content-widthTablet;
+    }
 
     @include mixins.mobile {
       width: 100%;

@@ -5,12 +5,11 @@ import Image from "next/legacy/image";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import logo from "@/assets/logo.svg";
+import logoLoadEnglish from "@/assets/logoLoadEnglish.svg";
+import logoLoadFarsi from "@/assets/logoLoadFarsi.svg";
 import aparat from "@/assets/aparat.svg";
 import aparatHover from "@/assets/aparatHover.svg";
 import Router from "next/router";
-import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
-import MuseTechLab from "@/assets/MuseTechLab.svg";
 
 export default function Footer() {
   const { language, setLanguage } = useContext(StateContext);
@@ -43,7 +42,7 @@ export default function Footer() {
           className={classes.icon}
           onClick={() =>
             window.open(
-              "https://www.linkedin.com/company/esharehmarcom/",
+              "https://www.linkedin.com/company/esharehmarcom",
               "_ self"
             )
           }
@@ -51,10 +50,7 @@ export default function Footer() {
         <InstagramIcon
           className={classes.icon}
           onClick={() =>
-            window.open(
-              "https://www.linkedin.com/company/esharehmarcom/",
-              "_ self"
-            )
+            window.open("https://www.instagram.com/esharehmarcom/", "_ self")
           }
         />
         <YouTubeIcon
@@ -62,7 +58,7 @@ export default function Footer() {
           className={classes.youtube}
           onClick={() =>
             window.open(
-              "https://www.linkedin.com/company/esharehmarcom/",
+              "https://www.youtube.com/channel/UCO5L7FnGyEvme6Ckr9kBaOw",
               "_ self"
             )
           }
@@ -71,10 +67,7 @@ export default function Footer() {
           <Image
             className={classes.icon}
             onClick={() =>
-              window.open(
-                "https://www.linkedin.com/company/esharehmarcom/",
-                "_ self"
-              )
+              window.open("https://www.aparat.com/esharehmarcom", "_ self")
             }
             onMouseEnter={() => setHover(true)}
             width={25}
@@ -88,10 +81,7 @@ export default function Footer() {
           <Image
             className={classes.icon}
             onClick={() =>
-              window.open(
-                "https://www.linkedin.com/company/esharehmarcom/",
-                "_ self"
-              )
+              window.open("https://www.aparat.com/esharehmarcom", "_ self")
             }
             onMouseLeave={() => setHover(false)}
             width={25}
@@ -112,7 +102,7 @@ export default function Footer() {
             <Fragment key={index}>
               <a
                 style={{
-                  fontFamily: language ? "FarsiBold" : "EnglishBold",
+                  fontFamily: language ? "FarsiMedium" : "EnglishBold",
                 }}
                 className={!nav.active ? classes.nav : classes.navActive}
                 onClick={() => activateNav(nav.link, index)}
@@ -124,43 +114,27 @@ export default function Footer() {
         </div>
         <button
           style={{
-            fontFamily: language ? "FarsiBold" : "EnglishBold",
+            fontFamily: language ? "FarsiMedium" : "EnglishBold",
           }}
           className={classes.button}
           onClick={() => Router.push("/portal")}
         >
-          {language ? "پرتال" : "Portal"}
+          {language ? "پورتال" : "Portal"}
         </button>
         <div
           className={classes.logo}
           onClick={() => window.location.assign("/")}
         >
           <Image
-            width={100}
-            height={58.11}
-            src={logo}
+            width={150}
+            height={82.5}
+            src={language ? logoLoadFarsi : logoLoadEnglish}
             alt="logo"
             as="image"
             priority
           />
         </div>
       </div>
-      {/* <div
-        className={classes.musetech}
-        onClick={() => window.open("https://musetechlab.com/")}
-      >
-        <Image
-          className={classes.image}
-          src={MuseTechLab}
-          alt="MuseTechLab"
-          width={120}
-          height={30}
-          loading="eager"
-          as="image"
-        />
-        <p className={classes.text}>{language ? "توسعه" : "Development"}</p>
-        <PrecisionManufacturingIcon sx={{ fontSize: 18 }} />
-      </div> */}
     </div>
   );
 }

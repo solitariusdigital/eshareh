@@ -101,7 +101,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "راهکار" : "Solutions"}
+        title={language ? "راهکار‌ها" : "Solutions"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
@@ -116,7 +116,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
       />
       <div className={classes.container}>
         <div
-          className={classes.category}
+          className={language ? classes.category : classes.categoryReverse}
           style={{
             fontFamily: language ? "FarsiLight" : "EnglishLight",
           }}
@@ -134,7 +134,24 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
               }}
             >
               {language ? item.labelFa : item.labelEn}
-              {index !== 2 && <span>/</span>}
+              {index !== 2 && !language && (
+                <span
+                  style={{
+                    fontFamily: language ? "EnglishLight" : "EnglishLight",
+                  }}
+                >
+                  /
+                </span>
+              )}
+              {index !== 0 && language && (
+                <span
+                  style={{
+                    fontFamily: language ? "EnglishLight" : "EnglishLight",
+                  }}
+                >
+                  /
+                </span>
+              )}
             </p>
           ))}
         </div>
@@ -209,6 +226,9 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
                       className={
                         language ? classes.title : classes.titleReverse
                       }
+                      style={{
+                        fontFamily: language ? "FarsiLight" : "EnglishLight",
+                      }}
                     >
                       <h3>{title}</h3>
                     </div>

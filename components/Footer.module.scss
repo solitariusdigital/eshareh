@@ -9,6 +9,10 @@
   margin-bottom: 20px;
   @include mixins.row-space-between-center();
 
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+
   @include mixins.mobile {
     width: calc(100% - 24px);
     display: flex;
@@ -37,7 +41,8 @@
   grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
   width: 180px;
   position: relative;
-  left: 20px;
+  left: -40px;
+  direction: rtl;
 
   @include mixins.mobile {
     display: flex;
@@ -77,6 +82,11 @@
 
 .navigationReverse {
   width: 220px;
+  direction: ltr;
+
+  @include mixins.desktop {
+    left: 20px;
+  }
 }
 
 .button {

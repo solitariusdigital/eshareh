@@ -1,4 +1,4 @@
-import { useContext, Fragment, useState } from "react";
+import { useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./contact.module.scss";
 import Image from "next/legacy/image";
@@ -8,7 +8,6 @@ import { NextSeo } from "next-seo";
 export default function Contact() {
   const { language, setLanguage } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
-  const [tag, setTag] = useState(false);
 
   const locationLink =
     "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7743132,51.3941519,17z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu";
@@ -16,7 +15,7 @@ export default function Contact() {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "تماس" : "Contact"}
+        title={language ? "تماس با ما" : "Contact"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
@@ -38,15 +37,7 @@ export default function Contact() {
         >
           {language ? <p>رزومه ارسال کنید</p> : <p>Send your resume</p>}
         </div>
-        <div
-          onClick={() => window.open(locationLink)}
-          onMouseEnter={() => {
-            setTag(true);
-          }}
-          onMouseLeave={() => {
-            setTag(false);
-          }}
-        >
+        <div onClick={() => window.open(locationLink)}>
           <Image
             src={map}
             blurDataURL={map}
@@ -58,7 +49,7 @@ export default function Contact() {
             priority
           />
         </div>
-        {tag && screenSize === "desktop" && (
+        {screenSize === "desktop" && (
           <h3
             className={classes.mapTag}
             style={{
@@ -68,13 +59,21 @@ export default function Contact() {
             {language ? "آژانس تبلیغاتی اشاره" : "Eshareh Advertising Agency"}
           </h3>
         )}
-        <div className={classes.location}>
+        <div
+          className={classes.location}
+          style={{
+            fontFamily: language ? "FarsiLight" : "EnglishLight",
+          }}
+        >
           {language ? <p>دفتر ما را پیدا کنید</p> : <p>Find our office</p>}
         </div>
         <div
           className={
             language ? classes.information : classes.informationReverse
           }
+          style={{
+            fontFamily: language ? "FarsiLight" : "EnglishLight",
+          }}
         >
           <div className={classes.details}>
             <div

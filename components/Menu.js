@@ -222,7 +222,7 @@ export default function Menu() {
                           <a
                             style={{
                               fontFamily: language
-                                ? "FarsiBold"
+                                ? "FarsiMedium"
                                 : "EnglishBold",
                             }}
                             className={
@@ -260,7 +260,7 @@ export default function Menu() {
                       )}
                       <a
                         style={{
-                          fontFamily: language ? "FarsiBold" : "EnglishBold",
+                          fontFamily: language ? "FarsiMedium" : "EnglishBold",
                         }}
                         className={
                           !nav.active ? classes.nav : classes.navActive
@@ -276,7 +276,7 @@ export default function Menu() {
                   <Fragment key={index}>
                     <a
                       style={{
-                        fontFamily: language ? "FarsiBold" : "EnglishBold",
+                        fontFamily: language ? "FarsiMedium" : "EnglishBold",
                       }}
                       className={!nav.active ? classes.nav : classes.navActive}
                       onClick={() => activateNav(nav.link, index)}
@@ -313,7 +313,9 @@ export default function Menu() {
                         </div>
                         <a
                           style={{
-                            fontFamily: language ? "FarsiBold" : "EnglishBold",
+                            fontFamily: language
+                              ? "FarsiMedium"
+                              : "EnglishBold",
                           }}
                           className={
                             !nav.active ? classes.nav : classes.navActive
@@ -433,7 +435,7 @@ export default function Menu() {
                     <a
                       key={index}
                       style={{
-                        fontFamily: language ? "FarsiBold" : "EnglishMedium",
+                        fontFamily: language ? "FarsiMedium" : "EnglishMedium",
                       }}
                       className={!nav.active ? classes.nav : classes.navActive}
                       onClick={() => activateNav(nav.link, index)}
