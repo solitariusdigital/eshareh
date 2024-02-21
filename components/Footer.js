@@ -92,7 +92,7 @@ export default function Footer() {
             priority
           />
         )}
-        <p className={classes.copyright}>© eshareh 2023 all rights reserved</p>
+        <p className={classes.copyright}>© eshareh 2024 all rights reserved</p>
       </div>
       <div className={classes.container}>
         <div
