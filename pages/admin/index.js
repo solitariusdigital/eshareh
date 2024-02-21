@@ -92,7 +92,7 @@ export default function Admin({ covers }) {
                 <h3
                   onClick={() => Router.push(project.link)}
                   style={{
-                    fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                    fontFamily: language ? "Farsi" : "English",
                   }}
                   className={classes.title}
                 >

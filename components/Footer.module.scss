@@ -87,6 +87,10 @@
   @include mixins.desktop {
     left: 20px;
   }
+
+  @include mixins.fourK {
+    left: 0px;
+  }
 }
 
 .button {
