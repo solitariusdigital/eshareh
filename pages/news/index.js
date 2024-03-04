@@ -2,6 +2,8 @@ import { useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./news.module.scss";
 import { NextSeo } from "next-seo";
+import Image from "next/legacy/image";
+import soon from "@/assets/soon.png";
 
 export default function News() {
   const { language, setLanguage } = useContext(StateContext);
@@ -28,7 +30,21 @@ export default function News() {
           fontFamily: language ? "English" : "English",
         }}
       >
-        <p>News ... coming soon</p>
+        <div className={classes.image}>
+          <div className={classes.image}>
+            <Image
+              src={soon}
+              blurDataURL={soon}
+              placeholder="blur"
+              alt="image"
+              layout="fill"
+              objectFit="cover"
+              as="image"
+              priority
+            />
+          </div>
+          <p>Coming soon</p>
+        </div>
       </div>
     </Fragment>
   );

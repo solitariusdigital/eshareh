@@ -2,6 +2,8 @@ import { useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./profession.module.scss";
 import { NextSeo } from "next-seo";
+import Image from "next/legacy/image";
+import soon from "@/assets/soon.png";
 
 export default function Profession() {
   const { language, setLanguage } = useContext(StateContext);
@@ -28,7 +30,21 @@ export default function Profession() {
           fontFamily: language ? "English" : "English",
         }}
       >
-        <p>What We Do ... coming soon</p>
+        <div className={classes.image}>
+          <div className={classes.image}>
+            <Image
+              src={soon}
+              blurDataURL={soon}
+              placeholder="blur"
+              alt="image"
+              layout="fill"
+              objectFit="cover"
+              as="image"
+              priority
+            />
+          </div>
+          <p>Coming soon</p>
+        </div>
       </div>
     </Fragment>
   );
