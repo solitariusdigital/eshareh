@@ -10,7 +10,6 @@ export default function CardGrid({ solutions, direction }) {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { heroHeight, setHeroHeight } = useContext(StateContext);
-  const [hoverItem, setHoverItem] = useState(null);
 
   useEffect(() => {
     let videos = document.querySelectorAll("video");
@@ -36,7 +35,7 @@ export default function CardGrid({ solutions, direction }) {
   return (
     <div
       style={{
-        fontFamily: language ? "FarsiLight" : "English",
+        fontFamily: language ? "Farsi" : "English",
       }}
     >
       {screenSize === "desktop" && (
@@ -55,12 +54,6 @@ export default function CardGrid({ solutions, direction }) {
                 )}`
               )
             }
-            onMouseEnter={() => {
-              setHoverItem(0);
-            }}
-            onMouseLeave={() => {
-              setHoverItem(null);
-            }}
           >
             <div className={classes.box}>
               {solutions[0].coverMedia.type === "image" ? (
@@ -88,16 +81,7 @@ export default function CardGrid({ solutions, direction }) {
             <div
               className={language ? classes.details : classes.detailsReverse}
             >
-              {hoverItem === 0 ? (
-                <h4>
-                  {sliceString(
-                    solutions[0][languageType].brief,
-                    language ? 150 : 120
-                  )}
-                </h4>
-              ) : (
-                <h4>{solutions[0][languageType].title}</h4>
-              )}
+              <h4>{solutions[0][languageType].title}</h4>
             </div>
           </div>
           <div className={classes.grid}>
@@ -112,12 +96,6 @@ export default function CardGrid({ solutions, direction }) {
                       )}`
                     )
                   }
-                  onMouseEnter={() => {
-                    setHoverItem(index);
-                  }}
-                  onMouseLeave={() => {
-                    setHoverItem(null);
-                  }}
                 >
                   <div className={classes.box}>
                     {project.coverMedia.type === "image" ? (
@@ -148,16 +126,7 @@ export default function CardGrid({ solutions, direction }) {
                     }
                     id="detailsInformation"
                   >
-                    {hoverItem === index ? (
-                      <h4>
-                        {sliceString(
-                          project[languageType].brief,
-                          language ? 80 : 60
-                        )}
-                      </h4>
-                    ) : (
-                      <h4>{project[languageType].title}</h4>
-                    )}
+                    <h4>{project[languageType].title}</h4>
                   </div>
                 </div>
               ))
@@ -177,12 +146,6 @@ export default function CardGrid({ solutions, direction }) {
                   )}`
                 )
               }
-              onMouseEnter={() => {
-                setHoverItem(index);
-              }}
-              onMouseLeave={() => {
-                setHoverItem(null);
-              }}
             >
               <div className={classes.box}>
                 {project.coverMedia.type === "image" ? (
@@ -210,16 +173,7 @@ export default function CardGrid({ solutions, direction }) {
               <div
                 className={language ? classes.details : classes.detailsReverse}
               >
-                {hoverItem === index ? (
-                  <h4>
-                    {sliceString(
-                      project[languageType].brief,
-                      language ? 120 : 90
-                    )}
-                  </h4>
-                ) : (
-                  <h4>{project[languageType].title}</h4>
-                )}
+                <h4>{project[languageType].title}</h4>
               </div>
             </div>
           ))}
