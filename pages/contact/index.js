@@ -2,7 +2,8 @@ import { useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./contact.module.scss";
 import Image from "next/legacy/image";
-import map from "@/assets/map.png";
+import mapEnglish from "@/assets/mapEnglish.png";
+import mapFarsi from "@/assets/mapFarsi.png";
 import { NextSeo } from "next-seo";
 
 export default function Contact() {
@@ -30,17 +31,17 @@ export default function Contact() {
       />
       <div className={classes.container}>
         <div
-          className={classes.resume}
+          className={language ? classes.resume : classes.resumeReverse}
           style={{
-            fontFamily: language ? "Farsi" : "English",
+            fontFamily: language ? "FarsiLight" : "English",
           }}
         >
-          {language ? <p>رزومه ارسال کنید</p> : <p>Send your resume</p>}
+          {language ? <p>ارسال رزومه</p> : <p>Send your resume</p>}
         </div>
         <div onClick={() => window.open(locationLink)}>
           <Image
-            src={map}
-            blurDataURL={map}
+            src={language ? mapFarsi : mapEnglish}
+            blurDataURL={language ? mapFarsi : mapEnglish}
             placeholder="blur"
             alt="map"
             layout="responsive"
@@ -51,28 +52,28 @@ export default function Contact() {
         </div>
         {screenSize === "desktop" && (
           <h3
-            className={classes.mapTag}
+            className={language ? classes.mapTag : classes.mapTagReverse}
             style={{
               fontFamily: language ? "FarsiBold" : "EnglishBold",
             }}
           >
-            {language ? "آژانس تبلیغاتی اشاره" : "Eshareh Advertising Agency"}
+            {language ? "شرکت تبلیغاتی اشاره" : "Eshareh Advertising Agency"}
           </h3>
         )}
         <div
-          className={classes.location}
+          className={language ? classes.location : classes.locationReverse}
           style={{
-            fontFamily: language ? "FarsiLight" : "EnglishLight",
+            fontFamily: language ? "FarsiLight" : "English",
           }}
         >
-          {language ? <p>دفتر ما را پیدا کنید</p> : <p>Find our office</p>}
+          {language ? <p>ما را پیدا کنید</p> : <p>Find our office</p>}
         </div>
         <div
           className={
             language ? classes.information : classes.informationReverse
           }
           style={{
-            fontFamily: language ? "FarsiLight" : "EnglishLight",
+            fontFamily: language ? "FarsiLight" : "English",
           }}
         >
           <div className={classes.details}>
@@ -81,7 +82,7 @@ export default function Contact() {
               onClick={() => window.open(locationLink)}
             >
               {language ? (
-                <p className={classes.click}>تهران، انتهای شیخ بهایی شمالی</p>
+                <p className={classes.click}>،تهران، انتهای شیخ بهایی شمالی</p>
               ) : (
                 <p className={classes.click}>No. 2, 21st Alley,</p>
               )}
@@ -91,7 +92,9 @@ export default function Contact() {
               onClick={() => window.open(locationLink)}
             >
               {language ? (
-                <p className={classes.click}>نبش بزرگراه نیایش</p>
+                <p className={classes.click}>
+                  نبش بزرگراه نیایش کوچه ۲۱، پلاک ۲
+                </p>
               ) : (
                 <p className={classes.click}>North Sheikh Bahaei St.</p>
               )}
@@ -101,7 +104,7 @@ export default function Contact() {
               onClick={() => window.open(locationLink)}
             >
               {language ? (
-                <p className={classes.click}>کوچه ۲۱ پلاک ۲، ۱۹۹۵۷۷۵۳۵۳</p>
+                <p className={classes.click}>کد پستی: ۱۹۹۵۷۷۵۳۵۳</p>
               ) : (
                 <p className={classes.click}>Tehran, 1995775353, Iran</p>
               )}
@@ -114,12 +117,12 @@ export default function Contact() {
             >
               <p className={classes.click}>{language ? ": تماس" : "Tel :"}</p>
               <p className={classes.click}>
-                {language ? "+۹۸ (۲۱) ۸۸۰ ۴۴ ۲۴۴" : "+98 (21) 880 44 244"}
+                {language ? "۰۲۱ ۸۸۰ ۴۴ ۲۴۴" : "+98 (21) 880 44 244"}
               </p>
             </div>
             <div className={language ? classes.row : classes.rowReverse}>
               <p>{language ? ": فکس" : "Fax :"}</p>
-              <p>{language ? "+۹۸ (۲۱) ۸۸۰ ۶۰ ۶۶۶" : "+98 (21) 880 60 666"}</p>
+              <p>{language ? "۰۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 (21) 880 60 666"}</p>
             </div>
             <div className={language ? classes.row : classes.rowReverse}>
               <p

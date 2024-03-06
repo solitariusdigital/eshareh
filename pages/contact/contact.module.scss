@@ -9,6 +9,14 @@
   margin: auto;
   cursor: pointer;
 
+  p {
+    font-size: 1.4rem;
+
+    @include mixins.mobile {
+      font-size: 1rem;
+    }
+  }
+
   @include mixins.mobile {
     margin: auto;
     height: 100%;
@@ -28,18 +36,56 @@
     bottom: 0px;
   }
 
-  .mapTag {
+  .mapTag,
+  .mapTagReverse {
     position: absolute;
-    right: -120px;
     top: 33%;
     width: 180px;
+    text-align: right;
+  }
+
+  .mapTag {
+    left: -60px;
+    font-size: 1.8rem;
+
+    @include mixins.fourK {
+      left: -100px;
+      font-size: 2.5rem;
+      width: 250px;
+    }
+  }
+
+  .mapTagReverse {
+    right: -120px;
+    width: 180px;
     text-align: left;
+
+    @include mixins.fourK {
+      right: -250px !important;
+      font-size: 2.2rem;
+      width: 330px;
+    }
+
+    @include mixins.fourK {
+      right: -90px;
+    }
   }
 }
 
-.resume {
+.resumeReverse {
+  left: 0px;
+
+  p {
+    font-size: 0.95rem !important;
+  }
+}
+
+.resume,
+.resumeReverse {
   position: absolute;
   top: 0px;
+  right: 0px;
+
   background: config.$yellow;
   font-size: config.$tiny-font;
   color: config.$black;
@@ -48,12 +94,15 @@
   z-index: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  width: 150px;
 
   p {
     position: relative;
     bottom: 2px;
+    font-size: 1rem;
   }
 
   &:hover {
@@ -69,26 +118,28 @@
   }
 }
 
-.location {
+.location,
+.locationReverse {
   position: absolute;
   top: 45%;
   color: config.$black;
+  right: 0px;
 
   @include mixins.mobile {
     top: 40%;
   }
-  @include mixins.fourK {
-    top: 50%;
-  }
+}
+
+.locationReverse {
+  left: 0px;
 }
 
 .information,
 .informationReverse {
   position: absolute;
-  bottom: 50px;
+  bottom: 40px;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
 
   @include mixins.mobile {
     bottom: -140px;
@@ -104,7 +155,6 @@
 
   .details {
     height: 80px;
-    margin-right: 10px;
 
     @include mixins.mobile {
       margin-bottom: 10px;
@@ -137,6 +187,15 @@
 
 .information {
   flex-direction: row-reverse;
+  right: 0px;
+
+  .row,
+  .rowReverse {
+    p {
+      margin-left: 12px;
+      margin-right: 0px;
+    }
+  }
 
   @include mixins.mobile {
     flex-direction: column;
