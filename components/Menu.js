@@ -224,6 +224,7 @@ export default function Menu() {
                               fontFamily: language
                                 ? "FarsiMedium"
                                 : "EnglishBold",
+                              fontSize: language ? "1.1rem" : "",
                             }}
                             className={
                               !nav.active ? classes.nav : classes.navActive
@@ -261,6 +262,7 @@ export default function Menu() {
                       <a
                         style={{
                           fontFamily: language ? "FarsiMedium" : "EnglishBold",
+                          fontSize: language ? "1.1rem" : "",
                         }}
                         className={
                           !nav.active ? classes.nav : classes.navActive
@@ -277,6 +279,7 @@ export default function Menu() {
                     <a
                       style={{
                         fontFamily: language ? "FarsiMedium" : "EnglishBold",
+                        fontSize: language ? "1.1rem" : "",
                       }}
                       className={!nav.active ? classes.nav : classes.navActive}
                       onClick={() => activateNav(nav.link, index)}
@@ -316,6 +319,7 @@ export default function Menu() {
                             fontFamily: language
                               ? "FarsiMedium"
                               : "EnglishBold",
+                            fontSize: language ? "1.1rem" : "",
                           }}
                           className={
                             !nav.active ? classes.nav : classes.navActive
@@ -436,6 +440,7 @@ export default function Menu() {
                       key={index}
                       style={{
                         fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                        fontSize: language ? "1.1rem" : "",
                       }}
                       className={!nav.active ? classes.nav : classes.navActive}
                       onClick={() => activateNav(nav.link, index)}

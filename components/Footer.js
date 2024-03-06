@@ -103,6 +103,7 @@ export default function Footer() {
               <a
                 style={{
                   fontFamily: language ? "FarsiMedium" : "EnglishBold",
+                  fontSize: language ? "1.1rem" : "",
                 }}
                 className={!nav.active ? classes.nav : classes.navActive}
                 onClick={() => activateNav(nav.link, index)}
