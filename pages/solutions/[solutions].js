@@ -353,6 +353,15 @@ export default function Solution({ solutions, projectTitle }) {
     window.location.reload();
   };
 
+  const getCharacterFontFamily = (char) => {
+    // Check if the character is in the Farsi range (based on Unicode ranges)
+    if (char >= "\u0600" && char <= "\u06FF") {
+      return "Farsi"; // Font type for Farsi characters
+    } else {
+      return "English"; // Font type for English characters
+    }
+  };
+
   return (
     <Fragment>
       {project && (
@@ -472,8 +481,26 @@ export default function Solution({ solutions, projectTitle }) {
                   >
                     {language ? "خلاصه" : "Brief"}
                   </p>
-                  <p className={classes.seperation}>|</p>
-                  <p className={classes.text}>{project[languageType].brief}</p>
+                  <p
+                    style={{
+                      fontFamily: language ? "EnglishLight" : "EnglishLight",
+                    }}
+                    className={classes.seperation}
+                  >
+                    |
+                  </p>
+                  <p className={classes.text}>
+                    {project[languageType].brief
+                      .split("")
+                      .map((char, index) => (
+                        <span
+                          key={index}
+                          style={{ fontFamily: getCharacterFontFamily(char) }}
+                        >
+                          {char}
+                        </span>
+                      ))}
+                  </p>
                 </div>
               </div>
             </div>
@@ -726,7 +753,16 @@ export default function Solution({ solutions, projectTitle }) {
                           >
                             {language ? "راهکار" : "Solution"}
                           </p>
-                          <p className={classes.seperation}>|</p>
+                          <p
+                            style={{
+                              fontFamily: language
+                                ? "EnglishLight"
+                                : "EnglishLight",
+                            }}
+                            className={classes.seperation}
+                          >
+                            |
+                          </p>
                           <p className={classes.text}>
                             {project[languageType].solution}
                           </p>
