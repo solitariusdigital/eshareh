@@ -1,7 +1,10 @@
 import { useState, useContext, Fragment, useEffect, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./solutions.module.scss";
-import { replaceSpacesAndHyphens } from "@/services/utility";
+import {
+  replaceSpacesAndHyphens,
+  getCharacterFontFamily,
+} from "@/services/utility";
 import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
@@ -351,15 +354,6 @@ export default function Solution({ solutions, projectTitle }) {
     };
     await updateSolutionApi(dataObject);
     window.location.reload();
-  };
-
-  const getCharacterFontFamily = (char) => {
-    // Check if the character is in the Farsi range (based on Unicode ranges)
-    if (char >= "\u0600" && char <= "\u06FF") {
-      return "Farsi"; // Font type for Farsi characters
-    } else {
-      return "English"; // Font type for English characters
-    }
   };
 
   return (

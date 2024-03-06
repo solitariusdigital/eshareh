@@ -2,21 +2,15 @@ import { useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./NextProject.module.scss";
 import Image from "next/legacy/image";
-import { replaceSpacesAndHyphens } from "@/services/utility";
+import {
+  replaceSpacesAndHyphens,
+  getCharacterFontFamily,
+} from "@/services/utility";
 import Router from "next/router";
 
 export default function NextProject({ project }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
-
-  const getCharacterFontFamily = (char) => {
-    // Check if the character is in the Farsi range (based on Unicode ranges)
-    if (char >= "\u0600" && char <= "\u06FF") {
-      return "Farsi"; // Font type for Farsi characters
-    } else {
-      return "English"; // Font type for English characters
-    }
-  };
 
   return (
     <div

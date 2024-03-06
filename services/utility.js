@@ -147,3 +147,12 @@ export function validateEmail(value) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(value);
 }
+
+export function getCharacterFontFamily(char) {
+  // Check if the character is in the Farsi range (based on Unicode ranges)
+  if (char >= "\u0600" && char <= "\u06FF") {
+    return "Farsi"; // Font type for Farsi characters
+  } else {
+    return "English"; // Font type for English characters
+  }
+}
