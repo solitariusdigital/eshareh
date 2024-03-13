@@ -11,7 +11,7 @@ export default function Profession() {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "چه میکنیم" : "What we do"}
+        title={language ? "چه می‌کنیم" : "What we do"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"

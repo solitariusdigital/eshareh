@@ -174,14 +174,27 @@
     .email {
       color: config.$yellow;
     }
+  }
 
-    p {
-      margin-right: 12px;
+  .rowReverse {
+    margin-right: 20px;
+    .clickFax {
+      margin-left: 10px;
+    }
+    .clickTel {
+      margin-left: 19px;
     }
   }
 
   .row {
     flex-direction: row-reverse;
+    margin-right: 0px;
+    .clickFax {
+      margin-right: 10px;
+    }
+    .clickTel {
+      margin-right: 10px;
+    }
   }
 }
 
@@ -189,12 +202,8 @@
   flex-direction: row-reverse;
   right: 0px;
 
-  .row,
-  .rowReverse {
-    p {
-      margin-left: 12px;
-      margin-right: 0px;
-    }
+  .row {
+    margin-left: 20px;
   }
 
   @include mixins.mobile {

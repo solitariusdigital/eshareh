@@ -54,7 +54,7 @@ export default function Home({ solutions, covers }) {
             fontFamily: language ? "FarsiBold" : "EnglishBold",
           }}
         >
-          {language ? "چه میکنیم" : "What We Do"}
+          {language ? "چه می‌کنیم" : "What We Do"}
         </h1>
         <div
           className={classes.gridLayout}
@@ -101,7 +101,7 @@ export default function Home({ solutions, covers }) {
         className={classes.message}
         onClick={() => Router.push("/solutions")}
       >
-        {language ? <h3>مشاهده راهکار‌ها</h3> : <h3>View solutions</h3>}
+        {language ? <h3>مشاهده راه‌کارها</h3> : <h3>View solutions</h3>}
       </div>
     </Fragment>
   );

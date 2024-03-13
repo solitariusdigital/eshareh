@@ -9,6 +9,12 @@
   margin-bottom: 20px;
   @include mixins.row-space-between-center();
 
+  @include mixins.desktop {
+    align-items: flex-end;
+  }
+  @include mixins.fourK {
+    align-items: flex-end;
+  }
   @include mixins.tablet {
     width: config.$content-widthTablet;
   }
@@ -38,11 +44,12 @@
 .navigation,
 .navigationReverse {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
   width: 180px;
   position: relative;
   left: -40px;
   direction: rtl;
+  gap: 0px 10px;
 
   @include mixins.mobile {
     display: flex;
@@ -81,21 +88,23 @@
 }
 
 .navigationReverse {
-  width: 220px;
+  width: 260px;
   direction: ltr;
+  gap: 0px;
 
   @include mixins.desktop {
-    left: 20px;
+    left: 40px;
   }
 
   @include mixins.fourK {
-    left: 0px;
+    left: 40px;
   }
 }
 
 .button {
   @include mixins.button(config.$yellow, config.$black);
   position: relative;
+  top: 10px;
   z-index: 2;
   width: 80px;
   height: 30px;
@@ -103,6 +112,7 @@
 
   @include mixins.mobile {
     margin: 30px 0px;
+    top: 0px;
   }
 }
 

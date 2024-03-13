@@ -36,6 +36,11 @@
     }
   }
 
+  h4 {
+    position: relative;
+    top: 5px;
+  }
+
   .box {
     display: flex;
     flex-direction: column;
@@ -140,6 +145,11 @@
     width: calc(100% - 24px);
     margin: 0px auto;
     gap: 0px;
+  }
+
+  h4 {
+    position: relative;
+    top: 5px;
   }
 
   div {

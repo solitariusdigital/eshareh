@@ -63,7 +63,7 @@ export default function Contact() {
         <div
           className={language ? classes.location : classes.locationReverse}
           style={{
-            fontFamily: language ? "FarsiLight" : "English",
+            fontFamily: language ? "Farsi" : "English",
           }}
         >
           {language ? <p>ما را پیدا کنید</p> : <p>Find our office</p>}
@@ -73,7 +73,7 @@ export default function Contact() {
             language ? classes.information : classes.informationReverse
           }
           style={{
-            fontFamily: language ? "FarsiLight" : "English",
+            fontFamily: language ? "Farsi" : "English",
           }}
         >
           <div className={classes.details}>
@@ -115,20 +115,23 @@ export default function Contact() {
               className={language ? classes.row : classes.rowReverse}
               onClick={() => window.open("tel:+982188044244", "_self")}
             >
-              <p className={classes.click}>{language ? ": تماس" : "Tel :"}</p>
-              <p className={classes.click}>
+              <p className={classes.click}>{language ? ": تلفن" : "Tel :"}</p>
+              <p className={classes.clickTel}>
                 {language ? "۰۲۱ ۸۸۰ ۴۴ ۲۴۴" : "+98 (21) 880 44 244"}
               </p>
             </div>
             <div className={language ? classes.row : classes.rowReverse}>
               <p>{language ? ": فکس" : "Fax :"}</p>
-              <p>{language ? "۰۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 (21) 880 60 666"}</p>
+              <p className={classes.clickFax}>
+                {language ? "۰۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 (21) 880 60 666"}
+              </p>
             </div>
             <div className={language ? classes.row : classes.rowReverse}>
               <p
                 className={classes.email}
                 style={{
                   fontFamily: language ? "English" : "English",
+                  fontSize: language ? "1.2rem" : "",
                 }}
               >
                 info@eshareh.com

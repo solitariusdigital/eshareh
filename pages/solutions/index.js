@@ -101,7 +101,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "راهکار‌ها" : "Solutions"}
+        title={language ? "راه‌کارها" : "Solutions"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
