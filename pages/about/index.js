@@ -132,9 +132,10 @@ export default function About() {
               slidesPerView={generateSwipeCount()}
               spaceBetween={0}
               centeredSlides={true}
-              navigation={true}
+              // navigation={true}
               mousewheel={true}
               loop={true}
+              allowTouchMove={false}
               modules={[Navigation, Mousewheel, Autoplay]}
               style={{ "--swiper-navigation-color": "#ffffff" }}
               onSlideChange={updateIndex}

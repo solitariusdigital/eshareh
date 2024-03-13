@@ -544,9 +544,7 @@ export default function Solution({ solutions, projectTitle }) {
                             placeholder="blur"
                             alt={image.link}
                             layout="fill"
-                            objectFit={
-                              screenSize === "desktop" ? "contain" : "cover"
-                            }
+                            objectFit="cover"
                             as="image"
                             priority
                           />
@@ -677,7 +675,7 @@ export default function Solution({ solutions, projectTitle }) {
                           placeholder="blur"
                           alt={project[languageType].title}
                           layout="fill"
-                          objectFit="contain"
+                          objectFit="cover"
                           as="image"
                           priority
                         />

@@ -276,7 +276,7 @@
     }
 
     @include mixins.mobile {
-      height: 200px;
+      height: 250px;
     }
     @include mixins.tablet {
       height: 650px;
@@ -289,7 +289,7 @@
     object-fit: cover;
 
     @include mixins.mobile {
-      height: 200px;
+      height: 250px;
     }
     @include mixins.tablet {
       height: 650px;
