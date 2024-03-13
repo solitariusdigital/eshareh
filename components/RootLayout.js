@@ -12,6 +12,7 @@ import { getUserApi, getControlsApi } from "@/services/api";
 
 export default function RootLayout({ children }) {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
   const { heroHeight, setHeroHeight } = useContext(StateContext);
   const [appLoader, setAppLoader] = useState(false);
   const [scrollArrow, setScrollArrow] = useState(false);
+  const [loadImage, setLoadImage] = useState(null);
 
   const router = useRouter();
   let pathname = router.pathname;
@@ -46,6 +48,18 @@ export default function RootLayout({ children }) {
     window.addEventListener("resize", handleResize);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (secureLocalStorage.getItem("languageBrowser")) {
+      setLanguageType("en");
+      setLanguage(false);
+      setLoadImage(logoLoadEnglish);
+    } else {
+      setLanguageType("fa");
+      setLanguage(true);
+      setLoadImage(logoLoadFarsi);
+    }
+  }, [setLanguage, setLanguageType]);
 
   // checks user login and set user data
   useEffect(() => {
@@ -154,14 +168,16 @@ export default function RootLayout({ children }) {
         </div>
       ) : (
         <div className="appload">
-          <Image
-            width={250}
-            height={145.29}
-            src={language ? logoLoadFarsi : logoLoadEnglish}
-            alt="logo"
-            as="image"
-            priority
-          />
+          {loadImage && (
+            <Image
+              width={250}
+              height={145.29}
+              src={loadImage}
+              alt="logo"
+              as="image"
+              priority
+            />
+          )}
         </div>
       )}
     </Fragment>

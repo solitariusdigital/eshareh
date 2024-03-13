@@ -87,6 +87,7 @@ export default function Menu() {
     setHoverLanguage(false);
     setLanguage(!language);
     setLanguageType(!language ? "fa" : "en");
+    secureLocalStorage.setItem("languageBrowser", language);
   };
 
   const signOut = () => {
