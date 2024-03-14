@@ -125,7 +125,7 @@
       height: 250px;
     }
     @include mixins.tablet {
-      height: 650px;
+      height: 750px;
     }
 
     .imageTest {
@@ -279,7 +279,7 @@
       height: 250px;
     }
     @include mixins.tablet {
-      height: 450px;
+      height: 650px;
     }
   }
 
