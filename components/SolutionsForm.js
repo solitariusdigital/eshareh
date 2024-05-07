@@ -61,6 +61,7 @@ export default function SolutionsForm() {
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const sourceLink = "https://eshareh.storage.iran.liara.space";
 
@@ -151,6 +152,10 @@ export default function SolutionsForm() {
     setDisableButton(true);
     setLoader(true);
 
+    const totalSteps =
+      imagesPreview.length + videosPreview.length + voicesPreview.length;
+    const progressIncrement = 100 / totalSteps;
+
     let mediaLinks = editSolution ? editSolution.media : [];
     let voice = editSolution ? editSolution.voice : [];
     const mediaFolder = "solutions";
@@ -169,6 +174,7 @@ export default function SolutionsForm() {
           type: "image",
           active: true,
         });
+        setProgress((prevProgress) => prevProgress + progressIncrement);
       }
     }
 
@@ -183,6 +189,7 @@ export default function SolutionsForm() {
           type: "video",
           active: true,
         });
+        setProgress((prevProgress) => prevProgress + progressIncrement);
       }
     }
 
@@ -197,6 +204,7 @@ export default function SolutionsForm() {
           type: "voice",
           active: true,
         });
+        setProgress((prevProgress) => prevProgress + progressIncrement);
       }
     }
 
@@ -243,6 +251,7 @@ export default function SolutionsForm() {
     } else {
       await createSolutionApi(solutionData);
     }
+    setProgress(100);
     let link = `/solutions/${replaceSpacesAndHyphens(solutionData.en.title)}`;
     window.location.assign(link);
   };
@@ -761,7 +770,12 @@ export default function SolutionsForm() {
         </div>
         <p className={classes.alert}>{alert}</p>
         {loader && (
-          <div>
+          <div
+            style={{
+              fontFamily: language ? "English" : "English",
+            }}
+          >
+            <p>Uploading ... {Math.round(progress)}%</p>
             <Image width={50} height={50} src={loaderImage} alt="isLoading" />
           </div>
         )}
