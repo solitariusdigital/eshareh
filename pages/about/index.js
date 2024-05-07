@@ -132,7 +132,6 @@ export default function About() {
               slidesPerView={generateSwipeCount()}
               spaceBetween={0}
               centeredSlides={true}
-              // navigation={true}
               mousewheel={true}
               loop={true}
               allowTouchMove={false}
@@ -144,10 +143,8 @@ export default function About() {
                 disableOnInteraction: true,
               }}
               speed={1000}
+              // navigation={true}
               // slideToClickedSlide={true}
-              // onSlideChangeEnd={(swiper) => {
-              //   swiper.fixLoop();
-              // }}
             >
               {users.map((user, index) => (
                 <SwiperSlide key={index} className={classes.swiperSlide}>

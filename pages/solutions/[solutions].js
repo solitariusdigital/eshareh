@@ -498,6 +498,16 @@ export default function Solution({ solutions, projectTitle }) {
                 </div>
               </div>
             </div>
+            {project.voice.map((voice, index) => (
+              <audio
+                className={classes.voice}
+                key={index}
+                preload="metadata"
+                controls
+              >
+                <source src={voice.link} />
+              </audio>
+            ))}
             {project.slideMedia && project.slideMedia.length > 0 && (
               <div className={classes.swiper}>
                 <Swiper

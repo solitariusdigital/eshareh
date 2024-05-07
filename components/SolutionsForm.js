@@ -48,11 +48,11 @@ export default function SolutionsForm() {
       : { en: "", fa: "" }
   );
 
+  const categories = ["Advertising", "Media", "Digital"];
+
   const [imagesPreview, setImagesPreview] = useState([]);
   const [videosPreview, setVideosPreview] = useState([]);
   const [voicesPreview, setVoicesPreview] = useState([]);
-
-  const categories = ["Advertising", "Media", "Digital"];
 
   const [uploadImages, setUploadImages] = useState([]);
   const [uploadVideos, setUploadVideos] = useState([]);
@@ -141,7 +141,8 @@ export default function SolutionsForm() {
     if (
       !editSolution &&
       imagesPreview.length === 0 &&
-      videosPreview.length === 0
+      videosPreview.length === 0 &&
+      voicesPreview.length === 0
     ) {
       showAlert("انتخاب عکس یا ویدئو");
       return;
@@ -151,6 +152,7 @@ export default function SolutionsForm() {
     setLoader(true);
 
     let mediaLinks = [];
+    let voice = [];
     const mediaFolder = "solutions";
     const subFolder = `sol${sixGenerator()}`;
 
@@ -177,6 +179,20 @@ export default function SolutionsForm() {
         mediaLinks.push({
           link: mediaLink,
           type: "video",
+          active: true,
+        });
+      }
+    }
+
+    if (voicesPreview.length > 0) {
+      const videoFormat = ".mp3";
+      for (const media of uploadVoices) {
+        const mediaId = `voc${fourGenerator()}`;
+        const mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${videoFormat}`;
+        await uploadMedia(media, mediaId, mediaFolder, subFolder, videoFormat);
+        voice.push({
+          link: mediaLink,
+          type: "voice",
           active: true,
         });
       }
@@ -209,6 +225,7 @@ export default function SolutionsForm() {
         category: category.en,
       },
       media: editSolution ? editSolution.media : mediaLinks,
+      voice: editSolution ? editSolution.voice : voice,
       mediaDouble: editSolution ? editSolution.mediaDouble : [],
       mediaQuadruple: editSolution ? editSolution.mediaQuadruple : [],
       slideMedia: editSolution ? editSolution.slideMedia : [],
@@ -345,7 +362,6 @@ export default function SolutionsForm() {
               autoComplete="off"
             ></textarea>
           </div>
-
           <div className={classes.inputTextArea}>
             <div className={classes.bar}>
               <p className={classes.label}>
@@ -706,7 +722,7 @@ export default function SolutionsForm() {
                 ))}
               </div>
             </div>
-            {/* <div className={classes.media}>
+            <div className={classes.media}>
               <label className="file">
                 <input
                   onChange={handleVoiceChange}
@@ -737,7 +753,7 @@ export default function SolutionsForm() {
                   </audio>
                 ))}
               </div>
-            </div> */}
+            </div>
           </div>
         )}
         <p className={classes.alert}>{alert}</p>

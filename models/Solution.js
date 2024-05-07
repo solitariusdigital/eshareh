@@ -19,6 +19,7 @@ const SolutionSchema = new Schema(
       category: String,
     },
     media: [],
+    voice: [],
     mediaDouble: [],
     mediaQuadruple: [],
     slideMedia: [],
