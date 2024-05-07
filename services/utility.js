@@ -148,11 +148,12 @@ export function validateEmail(value) {
   return emailRegex.test(value);
 }
 
-export function getCharacterFontFamily(char) {
-  // Check if the character is in the Farsi range (based on Unicode ranges)
-  if (char >= "\u0600" && char <= "\u06FF") {
-    return "Farsi"; // Font type for Farsi characters
-  } else {
-    return "English"; // Font type for English characters
-  }
+export function applyFontToEnglishWords(inputString, fontType) {
+  // Regular expression pattern to match English words
+  const pattern = /[a-zA-Z]+/g;
+  // Find and replace English words with span tags for specific font type
+  const outputString = inputString.replace(pattern, function (match) {
+    return `<span style="font-family: ${fontType};">${match}</span>`;
+  });
+  return outputString;
 }

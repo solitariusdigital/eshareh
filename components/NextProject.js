@@ -4,7 +4,7 @@ import classes from "./NextProject.module.scss";
 import Image from "next/legacy/image";
 import {
   replaceSpacesAndHyphens,
-  getCharacterFontFamily,
+  applyFontToEnglishWords,
 } from "@/services/utility";
 import Router from "next/router";
 
@@ -43,6 +43,7 @@ export default function NextProject({ project }) {
             className={classes.description}
           >
             <p
+              className={language ? classes.brief : ""}
               style={{
                 fontFamily: language ? "FarsiBold" : "EnglishBold",
               }}
@@ -57,16 +58,15 @@ export default function NextProject({ project }) {
             >
               |
             </p>
-            <p className={classes.text}>
-              {project[languageType].brief.split("").map((char, index) => (
-                <span
-                  key={index}
-                  style={{ fontFamily: getCharacterFontFamily(char) }}
-                >
-                  {char}
-                </span>
-              ))}
-            </p>
+            <p
+              className={classes.text}
+              dangerouslySetInnerHTML={{
+                __html: applyFontToEnglishWords(
+                  project[languageType].brief,
+                  "English"
+                ),
+              }}
+            ></p>
           </div>
         </div>
       </div>

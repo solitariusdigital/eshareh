@@ -3,7 +3,7 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./solutions.module.scss";
 import {
   replaceSpacesAndHyphens,
-  getCharacterFontFamily,
+  applyFontToEnglishWords,
 } from "@/services/utility";
 import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
@@ -484,18 +484,15 @@ export default function Solution({ solutions, projectTitle }) {
                   >
                     |
                   </p>
-                  <p className={classes.text}>
-                    {project[languageType].brief
-                      .split("")
-                      .map((char, index) => (
-                        <span
-                          key={index}
-                          style={{ fontFamily: getCharacterFontFamily(char) }}
-                        >
-                          {char}
-                        </span>
-                      ))}
-                  </p>
+                  <p
+                    className={classes.text}
+                    dangerouslySetInnerHTML={{
+                      __html: applyFontToEnglishWords(
+                        project[languageType].brief,
+                        "English"
+                      ),
+                    }}
+                  ></p>
                 </div>
               </div>
             </div>
