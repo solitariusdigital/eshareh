@@ -151,17 +151,19 @@ export default function SolutionsForm() {
     setDisableButton(true);
     setLoader(true);
 
-    let mediaLinks = [];
-    let voice = [];
+    let mediaLinks = editSolution ? editSolution.media : [];
+    let voice = editSolution ? editSolution.voice : [];
     const mediaFolder = "solutions";
-    const subFolder = `sol${sixGenerator()}`;
+    const solutionId = editSolution
+      ? editSolution.solutionId
+      : `sol${sixGenerator()}`;
 
     if (imagesPreview.length > 0) {
       const imageFormat = ".jpg";
       for (const media of uploadImages) {
         const mediaId = `img${fourGenerator()}`;
-        const mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${imageFormat}`;
-        await uploadMedia(media, mediaId, mediaFolder, subFolder, imageFormat);
+        const mediaLink = `${sourceLink}/${mediaFolder}/${solutionId}/${mediaId}${imageFormat}`;
+        await uploadMedia(media, mediaId, mediaFolder, solutionId, imageFormat);
         mediaLinks.push({
           link: mediaLink,
           type: "image",
@@ -174,8 +176,8 @@ export default function SolutionsForm() {
       const videoFormat = ".mp4";
       for (const media of uploadVideos) {
         const mediaId = `vid${fourGenerator()}`;
-        const mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${videoFormat}`;
-        await uploadMedia(media, mediaId, mediaFolder, subFolder, videoFormat);
+        const mediaLink = `${sourceLink}/${mediaFolder}/${solutionId}/${mediaId}${videoFormat}`;
+        await uploadMedia(media, mediaId, mediaFolder, solutionId, videoFormat);
         mediaLinks.push({
           link: mediaLink,
           type: "video",
@@ -188,8 +190,8 @@ export default function SolutionsForm() {
       const videoFormat = ".mp3";
       for (const media of uploadVoices) {
         const mediaId = `voc${fourGenerator()}`;
-        const mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${videoFormat}`;
-        await uploadMedia(media, mediaId, mediaFolder, subFolder, videoFormat);
+        const mediaLink = `${sourceLink}/${mediaFolder}/${solutionId}/${mediaId}${videoFormat}`;
+        await uploadMedia(media, mediaId, mediaFolder, solutionId, videoFormat);
         voice.push({
           link: mediaLink,
           type: "voice",
@@ -198,14 +200,16 @@ export default function SolutionsForm() {
       }
     }
 
-    mediaLinks.push({
-      link: {
-        fa: solution.fa,
-        en: solution.en,
-      },
-      type: "text",
-      active: true,
-    });
+    if (!editSolution) {
+      mediaLinks.push({
+        link: {
+          fa: solution.fa,
+          en: solution.en,
+        },
+        type: "text",
+        active: true,
+      });
+    }
 
     let solutionData = {
       fa: {
@@ -224,13 +228,14 @@ export default function SolutionsForm() {
         year: year.en,
         category: category.en,
       },
-      media: editSolution ? editSolution.media : mediaLinks,
-      voice: editSolution ? editSolution.voice : voice,
+      media: mediaLinks,
+      voice: voice,
       mediaDouble: editSolution ? editSolution.mediaDouble : [],
       mediaQuadruple: editSolution ? editSolution.mediaQuadruple : [],
       slideMedia: editSolution ? editSolution.slideMedia : [],
       coverMedia: editSolution ? editSolution.coverMedia : mediaLinks[0],
       active: false,
+      solutionId: solutionId,
     };
     if (editSolution) {
       solutionData.id = editSolution["_id"];
@@ -655,107 +660,105 @@ export default function SolutionsForm() {
           fontFamily: language ? "Farsi" : "Farsi",
         }}
       >
-        {!editSolution && (
-          <div className={classes.mediaContainer}>
-            <div className={classes.media}>
-              <label className="file">
-                <input
-                  onChange={handleImageChange}
-                  id="inputImage"
-                  type="file"
-                  accept="image/*"
-                  multiple
-                />
-                <p>عکس</p>
-              </label>
-              <CloseIcon
-                className={classes.clearMedia}
-                onClick={() => {
-                  setImagesPreview([]);
-                  removeImageInputFile();
-                }}
-                sx={{ fontSize: 16 }}
+        <div className={classes.mediaContainer}>
+          <div className={classes.media}>
+            <label className="file">
+              <input
+                onChange={handleImageChange}
+                id="inputImage"
+                type="file"
+                accept="image/*"
+                multiple
               />
-              <div className={classes.preview}>
-                {imagesPreview.map((image, index) => (
-                  <Image
-                    key={index}
-                    width={300}
-                    height={200}
-                    objectFit="contain"
-                    src={image.link}
-                    alt="image"
-                    priority
-                  />
-                ))}
-              </div>
-            </div>
-            <div className={classes.media}>
-              <label className="file">
-                <input
-                  onChange={handleVideoChange}
-                  id="inputVideo"
-                  type="file"
-                  accept="video/*"
-                  multiple
+              <p>عکس</p>
+            </label>
+            <CloseIcon
+              className={classes.clearMedia}
+              onClick={() => {
+                setImagesPreview([]);
+                removeImageInputFile();
+              }}
+              sx={{ fontSize: 16 }}
+            />
+            <div className={classes.preview}>
+              {imagesPreview.map((image, index) => (
+                <Image
+                  key={index}
+                  width={300}
+                  height={200}
+                  objectFit="contain"
+                  src={image.link}
+                  alt="image"
+                  priority
                 />
-                <p>ویدئو</p>
-              </label>
-              <CloseIcon
-                className={classes.clearMedia}
-                onClick={() => {
-                  setVideosPreview([]);
-                  removeVideoInputFile();
-                }}
-                sx={{ fontSize: 16 }}
-              />
-              <div className={classes.preview}>
-                {videosPreview.map((video, index) => (
-                  <video
-                    key={index}
-                    className={classes.video}
-                    src={video.link + "#t=0.1"}
-                    controls
-                    playsInline
-                    preload="metadata"
-                  />
-                ))}
-              </div>
-            </div>
-            <div className={classes.media}>
-              <label className="file">
-                <input
-                  onChange={handleVoiceChange}
-                  id="inputVoice"
-                  type="file"
-                  accept="audio/*"
-                  multiple
-                />
-                <p>صوتی</p>
-              </label>
-              <CloseIcon
-                className={classes.clearMedia}
-                onClick={() => {
-                  setVoicesPreview([]);
-                  removeVoiceInputFile();
-                }}
-                sx={{ fontSize: 16 }}
-              />
-              <div className={classes.preview}>
-                {voicesPreview.map((voice, index) => (
-                  <audio
-                    key={index}
-                    className={classes.voice}
-                    preload="metadata"
-                    controls
-                  >
-                    <source src={voice.link} />
-                  </audio>
-                ))}
-              </div>
+              ))}
             </div>
           </div>
-        )}
+          <div className={classes.media}>
+            <label className="file">
+              <input
+                onChange={handleVideoChange}
+                id="inputVideo"
+                type="file"
+                accept="video/*"
+                multiple
+              />
+              <p>ویدئو</p>
+            </label>
+            <CloseIcon
+              className={classes.clearMedia}
+              onClick={() => {
+                setVideosPreview([]);
+                removeVideoInputFile();
+              }}
+              sx={{ fontSize: 16 }}
+            />
+            <div className={classes.preview}>
+              {videosPreview.map((video, index) => (
+                <video
+                  key={index}
+                  className={classes.video}
+                  src={video.link + "#t=0.1"}
+                  controls
+                  playsInline
+                  preload="metadata"
+                />
+              ))}
+            </div>
+          </div>
+          <div className={classes.media}>
+            <label className="file">
+              <input
+                onChange={handleVoiceChange}
+                id="inputVoice"
+                type="file"
+                accept="audio/*"
+                multiple
+              />
+              <p>صوتی</p>
+            </label>
+            <CloseIcon
+              className={classes.clearMedia}
+              onClick={() => {
+                setVoicesPreview([]);
+                removeVoiceInputFile();
+              }}
+              sx={{ fontSize: 16 }}
+            />
+            <div className={classes.preview}>
+              {voicesPreview.map((voice, index) => (
+                <audio
+                  key={index}
+                  className={classes.voice}
+                  preload="metadata"
+                  controls
+                >
+                  <source src={voice.link} />
+                </audio>
+              ))}
+            </div>
+          </div>
+        </div>
         <p className={classes.alert}>{alert}</p>
         {loader && (
           <div>

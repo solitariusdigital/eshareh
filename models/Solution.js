@@ -25,6 +25,7 @@ const SolutionSchema = new Schema(
     slideMedia: [],
     coverMedia: {},
     active: Boolean,
+    solutionId: String,
   },
   { timestamps: true }
 );
