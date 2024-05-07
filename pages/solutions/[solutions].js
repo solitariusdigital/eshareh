@@ -469,6 +469,7 @@ export default function Solution({ solutions, projectTitle }) {
                   className={classes.description}
                 >
                   <p
+                    className={language ? classes.brief : ""}
                     style={{
                       fontFamily: language ? "FarsiBold" : "EnglishBold",
                     }}

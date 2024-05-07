@@ -42,12 +42,16 @@
     .description {
       display: flex;
       flex-direction: row-reverse;
-      align-items: center;
 
       .seperation {
         color: config.$grey;
         margin: 0px 10px;
       }
+    }
+
+    .brief {
+      position: relative;
+      top: 5px;
     }
 
     .text {
