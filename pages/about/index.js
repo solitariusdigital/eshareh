@@ -17,6 +17,7 @@ export default function About() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
 
   const [users, setUsers] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -167,14 +168,18 @@ export default function About() {
               >
                 {users[current]["name"][languageType]}
               </h2>
-              <p>{users[current]["title"][languageType]}</p>
-              <Tooltip title="Remove">
-                <CloseIcon
-                  className="icon"
-                  sx={{ color: "#d40d12" }}
-                  onClick={() => deactivateUser(current)}
-                />
-              </Tooltip>
+              <h3>{users[current]["title"][languageType]}</h3>
+              {permissionControl === "admin" && (
+                <Tooltip title="Remove">
+                  <CloseIcon
+                    style={{
+                      cursor: "pointer",
+                    }}
+                    sx={{ color: "#d40d12" }}
+                    onClick={() => deactivateUser(current)}
+                  />
+                </Tooltip>
+              )}
             </div>
           </div>
         )}
