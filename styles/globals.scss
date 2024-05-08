@@ -196,10 +196,11 @@ label.file input[type="file"] {
   position: relative !important;
   z-index: -1 !important;
 }
+
 .about_swiperSlide__KLdpq.swiper-slide-active {
-  // transform: scale(1.5, 1.5) !important;
-  clip-path: polygon(50% 100%, 0% 85%, 0% 0%, 100% 0%, 100% 85%) !important;
   height: 100% !important;
+  @include mixins.arrow-shape();
+  transition: all 0.3s ease;
 }
 
 .swiper-button-prev {

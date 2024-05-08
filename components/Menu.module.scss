@@ -71,11 +71,11 @@
   .profile {
     position: absolute;
     right: -100px;
-    bottom: -15px;
-    width: 50px;
-    height: 90px;
-    clip-path: polygon(50% 100%, 0% 85%, 0% 0%, 100% 0%, 100% 85%) !important;
+    bottom: 0px;
+    width: 45px;
+    height: 80px;
     cursor: pointer;
+    @include mixins.arrow-shape();
   }
 
   .dropDown {

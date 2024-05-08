@@ -775,7 +775,7 @@ export default function SolutionsForm() {
               fontFamily: language ? "English" : "English",
             }}
           >
-            <p>Uploading ... {Math.round(progress)}%</p>
+            <p>Uploading {Math.round(progress)} %</p>
             <Image width={50} height={50} src={loaderImage} alt="isLoading" />
           </div>
         )}

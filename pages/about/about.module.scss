@@ -77,14 +77,15 @@
   .swiper {
     height: 50%;
 
+    background: linear-gradient(
+      to bottom,
+      config.$black 70%,
+      config.$yellow 0%
+    );
+
     @include mixins.fourK {
       height: 60%;
     }
-  }
-
-  .imageSwiper {
-    object-fit: cover;
-    height: 500px;
   }
 
   .swiperSlide {
