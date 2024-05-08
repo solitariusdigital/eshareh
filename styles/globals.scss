@@ -198,9 +198,15 @@ label.file input[type="file"] {
 }
 
 .about_swiperSlide__KLdpq.swiper-slide-active {
-  height: 100% !important;
-  @include mixins.arrow-shape();
+  height: 80% !important;
+  scale: 1.5;
   transition: all 0.3s ease;
+  @include mixins.arrow-shape();
+
+  @include mixins.mobile {
+    height: 90% !important;
+    scale: 1.2;
+  }
 }
 
 .swiper-button-prev {
