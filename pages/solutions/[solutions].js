@@ -517,7 +517,6 @@ export default function Solution({ solutions, projectTitle }) {
                     disableOnInteraction: true,
                   }}
                   speed={1500}
-                  style={{ "--swiper-navigation-color": "#ffffff" }}
                 >
                   {project.slideMedia.map((image, index) => (
                     <SwiperSlide key={index}>

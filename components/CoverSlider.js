@@ -42,7 +42,6 @@ export default function CoverSlider({ covers }) {
           disableOnInteraction: false,
         }}
         modules={[Navigation, Autoplay]}
-        style={{ "--swiper-navigation-color": "#ffffff" }}
         onSlideChange={updateIndex}
       >
         {covers.map((project, index) => (

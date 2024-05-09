@@ -33,7 +33,6 @@ export default function GallerySlider({ media }) {
           mousewheel={true}
           loop={true}
           modules={[Navigation, Mousewheel]}
-          style={{ "--swiper-navigation-color": "#ffffff" }}
           onSlideChange={updateIndex}
         >
           {media

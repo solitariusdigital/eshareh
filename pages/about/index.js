@@ -4,7 +4,7 @@ import classes from "./about.module.scss";
 import Image from "next/legacy/image";
 import { enToFaDigits } from "@/services/utility";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Mousewheel, Autoplay } from "swiper/modules";
+import { Mousewheel, Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { NextSeo } from "next-seo";
@@ -134,15 +134,16 @@ export default function About() {
               centeredSlides={true}
               mousewheel={true}
               loop={true}
-              allowTouchMove={false}
-              modules={[Mousewheel, Autoplay]}
+              allowTouchMove={screenSize === "desktop" ? false : true}
+              navigation={false}
+              modules={[Navigation, Mousewheel, Autoplay]}
               onSlideChange={updateIndex}
               speed={1000}
-              // slideToClickedSlide={true}
               autoplay={{
                 delay: 500,
                 disableOnInteraction: true,
               }}
+              // slideToClickedSlide={true}
             >
               {users.map((user, index) => (
                 <SwiperSlide key={index} className={classes.swiperSlide}>
