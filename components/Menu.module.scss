@@ -71,9 +71,9 @@
   .profile {
     position: absolute;
     right: -100px;
-    bottom: 0px;
+    bottom: 15px;
     width: 45px;
-    height: 80px;
+    height: 60px;
     cursor: pointer;
     @include mixins.arrow-shape();
   }
@@ -88,7 +88,7 @@
     justify-content: space-around;
     height: 50px;
     background: config.$white;
-    border-radius: 4px;
+    border-radius: 50px;
     font-size: config.$tiny-font;
     box-shadow: config.$card-shadow;
     border: 1px solid config.$yellow;
