@@ -9,7 +9,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { NextSeo } from "next-seo";
 import { getUsersApi, updateUserApi } from "@/services/api";
-import balloon from "@/assets/balloon.png";
 import Tooltip from "@mui/material/Tooltip";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -148,8 +147,8 @@ export default function About() {
               {users.map((user, index) => (
                 <SwiperSlide key={index} className={classes.swiperSlide}>
                   <Image
-                    src={user.media ? user.media : balloon}
-                    blurDataURL={user.media ? user.media : balloon}
+                    src={user.media}
+                    blurDataURL={user.media}
                     placeholder="blur"
                     alt={user.name[languageType]}
                     layout="fill"

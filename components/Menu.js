@@ -13,7 +13,6 @@ import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import { getControlsApi, updateControlApi } from "@/services/api";
 import Tooltip from "@mui/material/Tooltip";
 import secureLocalStorage from "react-secure-storage";
-import balloon from "@/assets/balloon.png";
 import search from "@/assets/search.svg";
 import searchHover from "@/assets/searchHover.svg";
 import english from "@/assets/english.svg";
@@ -111,8 +110,8 @@ export default function Menu() {
               onClick={() => setDropDpwn(!dropDown)}
             >
               <Image
-                src={currentUser.media ? currentUser.media : balloon}
-                blurDataURL={currentUser.media ? currentUser.media : balloon}
+                src={currentUser.media}
+                blurDataURL={currentUser.media}
                 layout="fill"
                 objectFit="cover"
                 alt="image"
