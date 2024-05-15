@@ -5,7 +5,7 @@ import CardGrid from "@/components/CardGrid";
 import classes from "./home.module.scss";
 import Router from "next/router";
 import Image from "next/legacy/image";
-import profession from "@/assets/profession.png";
+import profession from "@/assets/profession.svg";
 import { enToFaDigits } from "@/services/utility";
 import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
