@@ -1,12 +1,26 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
+.container {
+  padding: 20px;
+
+  @include mixins.mobile {
+    padding: 12px;
+  }
+  @include mixins.desktop {
+    text-align: justify;
+  }
+}
+
 .information,
 .informationReverse {
-  margin: 50px auto;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
+  margin: auto;
   direction: rtl;
+
+  display: flex;
+  flex-direction: column;
 
   @include mixins.tablet {
     width: config.$content-widthTablet;
@@ -16,73 +30,93 @@
     width: calc(100% - 24px);
   }
 
-  .gridLayout {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
-    align-items: center;
-    margin-top: 20px;
-
-    @include mixins.mobile {
+  .box {
+    .methods {
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      @include mixins.mobile {
+        flex-direction: column;
+      }
+
+      h3 {
+        width: 50%;
+
+        @include mixins.mobile {
+          width: 100%;
+          margin-top: 20px;
+        }
+      }
     }
-    @include mixins.tablet {
+
+    .more,
+    .moreReverse {
       display: flex;
-      flex-direction: column-reverse;
-    }
-  }
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: space-between;
+      float: left;
 
-  .image {
-    position: relative;
-    right: 80px;
-    width: 70%;
-    margin: auto;
+      color: config.$yellow;
+      margin-top: 10px;
+      margin-bottom: 50px;
+      padding: 5px;
+      width: 140px;
 
-    @include mixins.tablet {
-      width: 50%;
-      right: 0px;
+      &:hover {
+        background: config.$yellow;
+        color: config.$black;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .icon {
+        display: flex;
+      }
     }
-    @include mixins.mobile {
-      width: 50%;
-      right: 0px;
+
+    .moreReverse {
+      flex-direction: row;
+      direction: rtl;
+      float: right;
+
+      .icon {
+        transform: rotateY(180deg);
+      }
     }
   }
 }
 
 .informationReverse {
   direction: ltr;
+}
 
-  .image {
-    left: 80px;
+.arrowContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 
-    @include mixins.tablet {
-      left: 0px;
-    }
+  h1 {
+    min-width: 300px;
+    text-align: center;
+
     @include mixins.mobile {
-      left: 0px;
+      min-width: 200px;
+    }
+    @include mixins.desktop {
+      font-size: 3.5rem;
+    }
+    @include mixins.tablet {
+      font-size: 2.5rem;
     }
   }
 }
 
 .gridWorks {
   margin: 50px 0px;
-}
-
-.message {
-  text-align: center;
-  color: config.$grey;
-  margin: auto;
-  margin-top: 100px;
-  width: config.$content-width;
-
-  @include mixins.tablet {
-    width: config.$content-widthTablet;
-  }
-
-  &:hover {
-    cursor: pointer;
-    color: config.$black;
-  }
 }
 
 .notFound {
