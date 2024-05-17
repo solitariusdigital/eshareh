@@ -67,15 +67,15 @@ export default function SolutionsForm() {
 
   const selectCategories = {
     Advertising: {
-      fa: "تبلیغات",
+      fa: "advertising",
       en: "advertising",
     },
     Media: {
-      fa: "رسانه",
+      fa: "media",
       en: "media",
     },
     Digital: {
-      fa: "دیجیتال",
+      fa: "digital",
       en: "digital",
     },
   };

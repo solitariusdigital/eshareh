@@ -352,7 +352,12 @@ export default function Home({ solutions, covers }) {
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() => setHoverOne(true)}
               onMouseLeave={() => setHoverOne(false)}
-              onClick={() => Router.push("/solutions")}
+              onClick={() =>
+                Router.push({
+                  pathname: "/solutions",
+                  query: { category: "advertising" },
+                })
+              }
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
@@ -393,7 +398,6 @@ export default function Home({ solutions, covers }) {
             ) : (
               <div className={classes.methods}>
                 <h1>Media methods</h1>
-
                 <h3>
                   It is a strategic unit in the field of marketing
                   communications and like a media agency that provides
@@ -410,7 +414,12 @@ export default function Home({ solutions, covers }) {
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() => setHoverTwo(true)}
               onMouseLeave={() => setHoverTwo(false)}
-              onClick={() => Router.push("/solutions")}
+              onClick={() =>
+                Router.push({
+                  pathname: "/solutions",
+                  query: { category: "media" },
+                })
+              }
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
@@ -467,7 +476,12 @@ export default function Home({ solutions, covers }) {
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() => setHoverThree(true)}
               onMouseLeave={() => setHoverThree(false)}
-              onClick={() => Router.push("/solutions")}
+              onClick={() =>
+                Router.push({
+                  pathname: "/solutions",
+                  query: { category: "digital" },
+                })
+              }
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
