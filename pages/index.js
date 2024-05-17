@@ -78,6 +78,7 @@ export default function Home({ solutions, covers }) {
             <h1
               style={{
                 fontFamily: "EnglishMedium",
+                marginBottom: "20px",
               }}
             >
               A new door to a world of creativity
@@ -351,6 +352,7 @@ export default function Home({ solutions, covers }) {
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() => setHoverOne(true)}
               onMouseLeave={() => setHoverOne(false)}
+              onClick={() => Router.push("/solutions")}
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
@@ -408,6 +410,7 @@ export default function Home({ solutions, covers }) {
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() => setHoverTwo(true)}
               onMouseLeave={() => setHoverTwo(false)}
+              onClick={() => Router.push("/solutions")}
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
@@ -464,6 +467,7 @@ export default function Home({ solutions, covers }) {
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() => setHoverThree(true)}
               onMouseLeave={() => setHoverThree(false)}
+              onClick={() => Router.push("/solutions")}
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
