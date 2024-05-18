@@ -10,6 +10,8 @@ import arrowone from "@/assets/arrowone.svg";
 import arrowtwo from "@/assets/arrowtwo.svg";
 import moreArrow from "@/assets/moreArrow.svg";
 import moreArrowHover from "@/assets/moreArrowHover.svg";
+import homeone from "@/assets/homeone.svg";
+import hometwo from "@/assets/hometwo.svg";
 import { enToFaDigits } from "@/services/utility";
 import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
@@ -55,7 +57,6 @@ export default function Home({ solutions, covers }) {
       <section>
         <CoverSlider covers={covers} />
       </section>
-
       <section
         className={classes.container}
         style={{ backgroundColor: "black", color: "white" }}
@@ -163,6 +164,20 @@ export default function Home({ solutions, covers }) {
             )}
           </div>
         </div>
+      </section>
+      <section className={classes.videoContainer}>
+        <video
+          className={classes.video}
+          controls
+          playsInline
+          preload="metadata"
+          poster="https://eshareh.storage.iran.liara.space/cover.jpg"
+        >
+          <source
+            src={"https://eshareh.storage.iran.liara.space/eshareh.mp4"}
+            type="video/mp4"
+          ></source>
+        </video>
       </section>
       <section className={classes.container}>
         <div
@@ -303,9 +318,25 @@ export default function Home({ solutions, covers }) {
           )}
         </div>
       </section>
+      <section className={classes.imageContainerOne}>
+        <Image
+          src={homeone}
+          blurDataURL={homeone}
+          placeholder="blur"
+          alt="image"
+          layout="fill"
+          objectFit="contain"
+          as="image"
+          priority
+        />
+      </section>
       <section
         className={classes.container}
-        style={{ backgroundColor: "black", color: "white" }}
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          paddingTop: "80px",
+        }}
       >
         <div
           className={
@@ -493,6 +524,29 @@ export default function Home({ solutions, covers }) {
           </div>
         </div>
       </section>
+      <section className={classes.imageContainerTwo}>
+        <Image
+          src={hometwo}
+          blurDataURL={hometwo}
+          placeholder="blur"
+          alt="image"
+          layout="fill"
+          objectFit="contain"
+          as="image"
+          priority
+        />
+      </section>
+      <div className={classes.arrowDown}>
+        <Image
+          src={arrowtwo}
+          blurDataURL={arrowtwo}
+          placeholder="blur"
+          alt="image"
+          width={40}
+          as="image"
+          priority
+        />
+      </div>
       {solutions.length >= 10 && (
         <section className={classes.gridWorks}>
           <CardGrid solutions={divideArray(solutions)[0]} direction={true} />
