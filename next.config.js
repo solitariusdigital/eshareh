@@ -5,7 +5,13 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ["eshareh.storage.iran.liara.space"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "eshareh.storage.iran.liara.space",
+        pathname: "**",
+      },
+    ],
   },
 };
 

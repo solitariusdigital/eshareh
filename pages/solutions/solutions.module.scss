@@ -73,10 +73,6 @@
   .categoryDescriptionReverse {
     margin-bottom: 50px;
     direction: rtl;
-
-    @include mixins.desktop {
-      text-align: justify;
-    }
   }
   .categoryDescriptionReverse {
     margin-bottom: 50px;

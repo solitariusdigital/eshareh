@@ -168,10 +168,10 @@ export default function Home({ solutions, covers }) {
       <section className={classes.videoContainer}>
         <video
           className={classes.video}
+          poster="https://eshareh.storage.iran.liara.space/cover.jpg"
           controls
           playsInline
           preload="metadata"
-          poster="https://eshareh.storage.iran.liara.space/cover.jpg"
         >
           <source
             src={"https://eshareh.storage.iran.liara.space/eshareh.mp4"}
