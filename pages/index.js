@@ -165,20 +165,16 @@ export default function Home({ solutions, covers }) {
           </div>
         </div>
       </section>
-      <section className={classes.videoContainer}>
+      <div className={classes.videoContainer}>
         <video
           className={classes.video}
+          src={"https://eshareh.storage.iran.liara.space/eshareh.mp4"}
           poster="https://eshareh.storage.iran.liara.space/cover.jpg"
           controls
           playsInline
           preload="metadata"
-        >
-          <source
-            src={"https://eshareh.storage.iran.liara.space/eshareh.mp4"}
-            type="video/mp4"
-          ></source>
-        </video>
-      </section>
+        />
+      </div>
       <section className={classes.container}>
         <div
           className={

@@ -111,11 +111,7 @@
 .imageContainerTwo {
   position: relative;
   background: linear-gradient(to bottom, config.$white 50%, config.$black 50%);
-  height: 500px;
-
-  @include mixins.mobile {
-    height: 300px;
-  }
+  height: 300px;
 }
 
 .arrowDown {
@@ -129,7 +125,12 @@
 }
 
 .imageContainerTwo {
+  height: 600px;
   background: linear-gradient(to bottom, config.$black 50%, config.$white 50%);
+
+  @include mixins.mobile {
+    height: 300px;
+  }
 }
 
 .informationReverse {
