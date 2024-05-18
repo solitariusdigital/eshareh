@@ -18,12 +18,11 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+  const { solutionsCategory, setSolutionsCategory } = useContext(StateContext);
   const [solutions, setSolutions] = useState([]);
-  const [category, setCategory] = useState("all");
 
   const router = useRouter();
   let pathname = router.pathname;
-  let categoryType = router.query.category;
 
   useEffect(() => {
     if (permissionControl === "admin") {
@@ -32,12 +31,6 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
       setSolutions(activeSolutions);
     }
   }, [activeSolutions, adminSolutions, permissionControl]);
-
-  useEffect(() => {
-    if (categoryType) {
-      setCategory(categoryType);
-    }
-  }, [categoryType]);
 
   const categories = [
     {
@@ -118,11 +111,13 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
             <p
               key={index}
               className={
-                category === item.type ? classes.navActive : classes.nav
+                solutionsCategory === item.type
+                  ? classes.navActive
+                  : classes.nav
               }
               onClick={() => {
                 {
-                  setCategory(item.type);
+                  setSolutionsCategory(item.type);
                 }
               }}
             >
@@ -148,7 +143,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
             </p>
           ))}
         </div>
-        {category !== "all" && (
+        {solutionsCategory !== "all" && (
           <h3
             style={{
               fontFamily: language ? "FarsiLight" : "EnglishLight",
@@ -159,15 +154,15 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
                 : classes.categoryDescriptionReverse
             }
           >
-            {information[category][languageType]}
+            {information[solutionsCategory][languageType]}
           </h3>
         )}
-        <section key={category} className={classes.gridList}>
+        <section key={solutionsCategory} className={classes.gridList}>
           {solutions
             .filter(
               (project) =>
-                project[languageType].category === category ||
-                category === "all"
+                project[languageType].category === solutionsCategory ||
+                solutionsCategory === "all"
             )
             .map((project, index) => {
               const { title } = project[languageType];

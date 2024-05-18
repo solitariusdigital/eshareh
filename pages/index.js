@@ -10,7 +10,6 @@ import arrowone from "@/assets/arrowone.svg";
 import arrowtwo from "@/assets/arrowtwo.svg";
 import moreArrow from "@/assets/moreArrow.svg";
 import moreArrowHover from "@/assets/moreArrowHover.svg";
-
 import { enToFaDigits } from "@/services/utility";
 import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
@@ -20,6 +19,7 @@ import coverModel from "@/models/Cover";
 export default function Home({ solutions, covers }) {
   const { language, setLanguage } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const { solutionsCategory, setSolutionsCategory } = useContext(StateContext);
 
   const [hoverOne, setHoverOne] = useState(false);
   const [hoverTwo, setHoverTwo] = useState(false);
@@ -352,12 +352,10 @@ export default function Home({ solutions, covers }) {
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() => setHoverOne(true)}
               onMouseLeave={() => setHoverOne(false)}
-              onClick={() =>
-                Router.push({
-                  pathname: "/solutions",
-                  query: { category: "advertising" },
-                })
-              }
+              onClick={() => {
+                Router.push("/solutions");
+                setSolutionsCategory("advertising");
+              }}
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
@@ -414,12 +412,10 @@ export default function Home({ solutions, covers }) {
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() => setHoverTwo(true)}
               onMouseLeave={() => setHoverTwo(false)}
-              onClick={() =>
-                Router.push({
-                  pathname: "/solutions",
-                  query: { category: "media" },
-                })
-              }
+              onClick={() => {
+                Router.push("/solutions");
+                setSolutionsCategory("media");
+              }}
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
@@ -476,12 +472,10 @@ export default function Home({ solutions, covers }) {
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() => setHoverThree(true)}
               onMouseLeave={() => setHoverThree(false)}
-              onClick={() =>
-                Router.push({
-                  pathname: "/solutions",
-                  query: { category: "digital" },
-                })
-              }
+              onClick={() => {
+                Router.push("/solutions");
+                setSolutionsCategory("digital");
+              }}
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
