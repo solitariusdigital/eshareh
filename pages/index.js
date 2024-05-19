@@ -59,7 +59,7 @@ export default function Home({ solutions, covers }) {
       </section>
       <section
         className={classes.container}
-        style={{ backgroundColor: "black", color: "white" }}
+        style={{ backgroundColor: "black", color: "white", paddingTop: "80px" }}
       >
         <div
           className={

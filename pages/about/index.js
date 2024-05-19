@@ -164,14 +164,14 @@ export default function About() {
               ))}
             </Swiper>
             <div className={classes.details}>
-              <h2
+              <h1
                 style={{
                   fontFamily: language ? "FarsiMedium" : "EnglishMedium",
                 }}
               >
                 {users[current]["name"][languageType]}
-              </h2>
-              <h3>{users[current]["title"][languageType]}</h3>
+              </h1>
+              <h2>{users[current]["title"][languageType]}</h2>
               {permissionControl === "admin" && (
                 <Tooltip title="Remove">
                   <CloseIcon

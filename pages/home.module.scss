@@ -39,11 +39,15 @@
       }
 
       h3 {
-        width: 50%;
+        width: 60%;
 
         @include mixins.mobile {
           width: 100%;
           margin-top: 20px;
+        }
+
+        @include mixins.fourK {
+          width: 75%;
         }
       }
     }
@@ -60,7 +64,7 @@
       margin-top: 10px;
       margin-bottom: 50px;
       padding: 5px;
-      width: 140px;
+      width: 125px;
 
       &:hover {
         background: config.$yellow;
@@ -78,6 +82,7 @@
       flex-direction: row;
       direction: rtl;
       float: right;
+      width: 140px;
 
       .icon {
         transform: rotateY(180deg);
@@ -90,7 +95,7 @@
   display: flex;
   justify-content: center;
   background: linear-gradient(to bottom, config.$black 50%, config.$white 50%);
-  padding: 20px 0px;
+  padding-top: 20px;
 
   .video {
     width: config.$content-width;

@@ -93,6 +93,11 @@
   }
 
   .details {
-    margin-top: 20px;
+    @include mixins.fourK {
+      margin-top: 80px;
+    }
+    @include mixins.mobile {
+      margin-top: 20px;
+    }
   }
 }
