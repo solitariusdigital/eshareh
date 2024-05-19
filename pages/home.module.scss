@@ -7,9 +7,6 @@
   @include mixins.mobile {
     padding: 12px;
   }
-  @include mixins.desktop {
-    text-align: justify;
-  }
 }
 
 .information,
