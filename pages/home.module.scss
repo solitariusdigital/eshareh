@@ -1,14 +1,6 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.container {
-  padding: 20px;
-
-  @include mixins.mobile {
-    padding: 12px;
-  }
-}
-
 .information,
 .informationReverse {
   width: config.$content-width;
@@ -31,9 +23,11 @@
     .methods {
       display: flex;
       flex-direction: row;
-      align-items: center;
       justify-content: space-between;
 
+      @include mixins.desktop {
+        align-items: center;
+      }
       @include mixins.mobile {
         flex-direction: column;
       }
