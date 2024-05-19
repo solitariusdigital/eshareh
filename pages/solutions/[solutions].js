@@ -282,8 +282,8 @@ export default function Solution({ solutions, projectTitle }) {
   const manageCoverSlide = async () => {
     const cover = {
       title: {
-        fa: project[languageType].title,
-        en: project[languageType].title,
+        fa: project.fa.title,
+        en: project.en.title,
       },
       coverMedia: project.coverMedia,
       link: `solutions/${replaceSpacesAndHyphens(project[languageType].title)}`,
@@ -292,7 +292,6 @@ export default function Solution({ solutions, projectTitle }) {
       text: false,
     };
     await createCoverApi(cover);
-
     window.location.assign("/admin");
   };
 
