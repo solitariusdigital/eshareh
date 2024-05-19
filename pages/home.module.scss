@@ -66,6 +66,10 @@
       padding: 5px;
       width: 125px;
 
+      @include mixins.mobile {
+        width: 115px;
+      }
+
       &:hover {
         background: config.$yellow;
         color: config.$black;
@@ -84,6 +88,10 @@
       float: right;
       width: 140px;
 
+      @include mixins.mobile {
+        width: 125px;
+      }
+
       .icon {
         transform: rotateY(180deg);
       }
@@ -95,7 +103,7 @@
   display: flex;
   justify-content: center;
   background: linear-gradient(to bottom, config.$black 50%, config.$white 50%);
-  padding-top: 20px;
+  padding: 20px 0px;
 
   .video {
     width: config.$content-width;
@@ -139,19 +147,13 @@
   direction: ltr;
 }
 
-.arrowContainer {
+.title {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
   h1 {
-    min-width: 300px;
-    text-align: center;
-
-    @include mixins.mobile {
-      min-width: 200px;
-    }
     @include mixins.desktop {
       font-size: 3.5rem;
     }

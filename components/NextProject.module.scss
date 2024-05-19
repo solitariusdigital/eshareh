@@ -13,7 +13,7 @@
     width: 100%;
     text-align: right;
 
-    h3 {
+    .subtitle {
       color: config.$grey;
       margin-bottom: 50px;
     }
@@ -21,16 +21,12 @@
     .description {
       display: flex;
       flex-direction: row-reverse;
+      align-items: center;
 
       .seperation {
         color: config.$grey;
         margin: 0px 10px;
       }
-    }
-
-    .brief {
-      position: relative;
-      top: 2px;
     }
 
     .text {

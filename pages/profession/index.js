@@ -214,7 +214,7 @@ export default function Profession() {
             placeholder="blur"
             alt="image"
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
             as="image"
             priority
           />

@@ -35,30 +35,29 @@ export default function NextProject({ project }) {
           >
             {project[languageType].title}
           </h2>
-          <h3>{project[languageType].subtitle}</h3>
+          <h3 className={classes.subtitle}>{project[languageType].subtitle}</h3>
           <div
             style={{
               fontFamily: language ? "FarsiLight" : "EnglishLight",
             }}
             className={classes.description}
           >
-            <p
-              className={language ? classes.brief : ""}
+            <h3
               style={{
                 fontFamily: language ? "FarsiBold" : "EnglishBold",
               }}
             >
               {language ? "خلاصه" : "Brief"}
-            </p>
-            <p
+            </h3>
+            <h3
               style={{
                 fontFamily: language ? "EnglishLight" : "EnglishLight",
               }}
               className={classes.seperation}
             >
               |
-            </p>
-            <p
+            </h3>
+            <h3
               className={classes.text}
               dangerouslySetInnerHTML={{
                 __html: applyFontToEnglishWords(
@@ -66,7 +65,7 @@ export default function NextProject({ project }) {
                   "English"
                 ),
               }}
-            ></p>
+            ></h3>
           </div>
         </div>
       </div>

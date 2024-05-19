@@ -33,18 +33,10 @@
   .image {
     position: relative;
     margin: auto;
-    height: 1500px;
+    height: 700px;
 
-    @include mixins.desktop {
-      height: 1200px;
-    }
     @include mixins.mobile {
-      width: calc(100% - 24px);
       height: 400px;
-    }
-    @include mixins.tablet {
-      width: calc(100% - 24px);
-      height: 900px;
     }
   }
 }

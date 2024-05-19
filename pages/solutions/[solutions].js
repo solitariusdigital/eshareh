@@ -467,23 +467,22 @@ export default function Solution({ solutions, projectTitle }) {
                   }}
                   className={classes.description}
                 >
-                  <p
-                    className={language ? classes.brief : ""}
+                  <h3
                     style={{
                       fontFamily: language ? "FarsiBold" : "EnglishBold",
                     }}
                   >
                     {language ? "خلاصه" : "Brief"}
-                  </p>
-                  <p
+                  </h3>
+                  <h3
                     style={{
                       fontFamily: language ? "EnglishLight" : "EnglishLight",
                     }}
                     className={classes.seperation}
                   >
                     |
-                  </p>
-                  <p
+                  </h3>
+                  <h3
                     className={classes.text}
                     dangerouslySetInnerHTML={{
                       __html: applyFontToEnglishWords(
@@ -491,7 +490,7 @@ export default function Solution({ solutions, projectTitle }) {
                         "English"
                       ),
                     }}
-                  ></p>
+                  ></h3>
                 </div>
               </div>
             </div>
@@ -739,7 +738,7 @@ export default function Solution({ solutions, projectTitle }) {
                           }}
                           className={classes.description}
                         >
-                          <p
+                          <h3
                             style={{
                               fontFamily: language
                                 ? "FarsiBold"
@@ -747,8 +746,8 @@ export default function Solution({ solutions, projectTitle }) {
                             }}
                           >
                             {language ? "راهکار" : "Solution"}
-                          </p>
-                          <p
+                          </h3>
+                          <h3
                             style={{
                               fontFamily: language
                                 ? "EnglishLight"
@@ -757,10 +756,10 @@ export default function Solution({ solutions, projectTitle }) {
                             className={classes.seperation}
                           >
                             |
-                          </p>
-                          <p className={classes.text}>
+                          </h3>
+                          <h3 className={classes.text}>
                             {project[languageType].solution}
-                          </p>
+                          </h3>
                         </div>
                       </div>
                     )}

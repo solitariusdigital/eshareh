@@ -171,17 +171,19 @@ export default function About() {
               >
                 {users[current]["name"][languageType]}
               </h1>
-              <h2>{users[current]["title"][languageType]}</h2>
+              <h3>{users[current]["title"][languageType]}</h3>
               {permissionControl === "admin" && (
-                <Tooltip title="Remove">
-                  <CloseIcon
-                    style={{
-                      cursor: "pointer",
-                    }}
-                    sx={{ color: "#d40d12" }}
-                    onClick={() => deactivateUser(current)}
-                  />
-                </Tooltip>
+                <div className={classes.remove}>
+                  <Tooltip title="Remove">
+                    <CloseIcon
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      sx={{ color: "#d40d12" }}
+                      onClick={() => deactivateUser(current)}
+                    />
+                  </Tooltip>
+                </div>
               )}
             </div>
           </div>

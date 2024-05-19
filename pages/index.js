@@ -6,8 +6,7 @@ import CardGrid from "@/components/CardGrid";
 import classes from "./home.module.scss";
 import Router from "next/router";
 import Image from "next/legacy/image";
-import arrowone from "@/assets/arrowone.svg";
-import arrowtwo from "@/assets/arrowtwo.svg";
+import arrow from "@/assets/arrow.svg";
 import moreArrow from "@/assets/moreArrow.svg";
 import moreArrowHover from "@/assets/moreArrowHover.svg";
 import homeone from "@/assets/homeone.png";
@@ -182,16 +181,7 @@ export default function Home({ solutions, covers }) {
           }
         >
           {language ? (
-            <div className={classes.arrowContainer}>
-              <Image
-                src={arrowtwo}
-                blurDataURL={arrowtwo}
-                placeholder="blur"
-                alt="image"
-                width={40}
-                as="image"
-                priority
-              />
+            <div className={classes.title}>
               <h1
                 style={{
                   fontFamily: "FarsiBold",
@@ -199,27 +189,9 @@ export default function Home({ solutions, covers }) {
               >
                 ما که هستیم؟
               </h1>
-              <Image
-                src={arrowone}
-                blurDataURL={arrowone}
-                placeholder="blur"
-                alt="image"
-                width={400}
-                as="image"
-                priority
-              />
             </div>
           ) : (
-            <div className={classes.arrowContainer}>
-              <Image
-                src={arrowtwo}
-                blurDataURL={arrowtwo}
-                placeholder="blur"
-                alt="image"
-                width={40}
-                as="image"
-                priority
-              />
+            <div className={classes.title}>
               <h1
                 style={{
                   fontFamily: "EnglishMedium",
@@ -227,15 +199,6 @@ export default function Home({ solutions, covers }) {
               >
                 Who are we?
               </h1>
-              <Image
-                src={arrowone}
-                blurDataURL={arrowone}
-                placeholder="blur"
-                alt="image"
-                width={400}
-                as="image"
-                priority
-              />
             </div>
           )}
           {language ? (
@@ -534,8 +497,8 @@ export default function Home({ solutions, covers }) {
       </section>
       <div className={classes.arrowDown}>
         <Image
-          src={arrowtwo}
-          blurDataURL={arrowtwo}
+          src={arrow}
+          blurDataURL={arrow}
           placeholder="blur"
           alt="image"
           width={40}
