@@ -101,9 +101,11 @@ export default function About() {
                 اشاره یک استودیوی طراحی چند رشته ای و مستقل است
               </h3>
               <p>
-                اشاره در سال {enToFaDigits(1376)} به عنوان یک آژانس تبلیغاتی
-                آغاز به کار کرد. در نتیجه‌ی فرآیندی اُرگانیک، به یک آژانس
-                ارتباطات بازاریابی فول سرویس با رویکردی راه‌حل‌گرا تبدیل شد
+                آژانس ارتباط تصویر اشاره، به عنوان یک آژانس تبلیغاتی از سال{" "}
+                <span>{enToFaDigits(1376)}</span> فعالیت خود را آغاز کرده است.
+                در طی این سال‌ها در نتیجه‌ی فرآیندی ارگانیک، به یک آژانس
+                ارتباطات بازاریابی تمام خدمت با رویکردی خلاق و راه‌حل‌ محور
+                تبدیل شده است.
               </p>
             </div>
           ) : (
@@ -117,10 +119,11 @@ export default function About() {
                 studio
               </h3>
               <p>
-                Eshareh, was established in 1996 as an advertising agency.
-                Through an organic growth the agency has transformed into a
-                full-service marketing communications agency with a solution
-                based approach
+                Eshareh image communication agency has started its activity as
+                an advertising agency since 1996. Over the years, as a result of
+                an organic process, it has evolved into a full-service marketing
+                communications agency with a creative and solution-oriented
+                approach.
               </p>
             </div>
           )}
