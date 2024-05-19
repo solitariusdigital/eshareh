@@ -4,7 +4,7 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./profession.module.scss";
 import { NextSeo } from "next-seo";
 import Image from "next/legacy/image";
-import profession from "@/assets/profession.svg";
+import profession from "@/assets/profession.png";
 
 export default function Profession() {
   const { language, setLanguage } = useContext(StateContext);
