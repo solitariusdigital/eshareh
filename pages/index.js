@@ -340,8 +340,12 @@ export default function Home({ solutions, covers }) {
             )}
             <div
               className={language ? classes.more : classes.moreReverse}
-              onMouseEnter={() => setHoverOne(true)}
-              onMouseLeave={() => setHoverOne(false)}
+              onMouseEnter={() =>
+                screenSize !== "mobile" ? setHoverOne(true) : null
+              }
+              onMouseLeave={() =>
+                screenSize !== "mobile" ? setHoverOne(false) : null
+              }
               onClick={() => {
                 Router.push("/solutions");
                 setSolutionsCategory("advertising");
@@ -400,8 +404,12 @@ export default function Home({ solutions, covers }) {
             )}
             <div
               className={language ? classes.more : classes.moreReverse}
-              onMouseEnter={() => setHoverTwo(true)}
-              onMouseLeave={() => setHoverTwo(false)}
+              onMouseEnter={() =>
+                screenSize !== "mobile" ? setHoverTwo(true) : null
+              }
+              onMouseLeave={() =>
+                screenSize !== "mobile" ? setHoverTwo(false) : null
+              }
               onClick={() => {
                 Router.push("/solutions");
                 setSolutionsCategory("media");
@@ -460,8 +468,12 @@ export default function Home({ solutions, covers }) {
             )}
             <div
               className={language ? classes.more : classes.moreReverse}
-              onMouseEnter={() => setHoverThree(true)}
-              onMouseLeave={() => setHoverThree(false)}
+              onMouseEnter={() =>
+                screenSize !== "mobile" ? setHoverThree(true) : null
+              }
+              onMouseLeave={() =>
+                screenSize !== "mobile" ? setHoverThree(false) : null
+              }
               onClick={() => {
                 Router.push("/solutions");
                 setSolutionsCategory("digital");

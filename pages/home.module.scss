@@ -53,6 +53,7 @@
       align-items: center;
       justify-content: space-between;
       float: left;
+      cursor: pointer;
 
       color: config.$yellow;
       margin-top: 10px;
@@ -64,11 +65,12 @@
         width: 115px;
       }
 
-      &:hover {
-        background: config.$yellow;
-        color: config.$black;
-        border-radius: 5px;
-        cursor: pointer;
+      @include mixins.desktop {
+        &:hover {
+          background: config.$yellow;
+          color: config.$black;
+          border-radius: 5px;
+        }
       }
 
       .icon {
@@ -97,7 +99,7 @@
   display: flex;
   justify-content: center;
   background: linear-gradient(to bottom, config.$black 50%, config.$white 50%);
-  padding: 20px 0px;
+  padding: 40px 0px;
 
   .video {
     width: config.$content-width;
