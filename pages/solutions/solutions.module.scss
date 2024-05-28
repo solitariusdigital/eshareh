@@ -74,6 +74,20 @@
     direction: ltr;
   }
 
+  .extraDetails {
+    margin: 20px 0px;
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 5px 0px;
+
+      h3 {
+        margin: 0px 10px;
+      }
+    }
+  }
   .projectController {
     position: fixed;
     bottom: 0px;

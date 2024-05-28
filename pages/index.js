@@ -81,7 +81,7 @@ export default function Home({ solutions, covers }) {
                 marginBottom: "20px",
               }}
             >
-              A new door to a world of creativity
+              A New Window to the World of Creativity
             </h1>
           )}
           {language ? (
@@ -99,9 +99,10 @@ export default function Home({ solutions, covers }) {
                 fontFamily: "EnglishLight",
               }}
             >
-              To solve any problem in the field of business, creativity is the
-              main keyword It is still the missing link in this field in our
-              land.
+              Creativity stands as the essential key to unlocking solutions in
+              the realm of business and yet, the missing link in our homeland.
+              However, for advertising agencies, creativity isn't just a
+              solution; it's the very essence of their existence.
             </h2>
           )}
           {language ? (
@@ -125,17 +126,15 @@ export default function Home({ solutions, covers }) {
                 fontFamily: "EnglishLight",
               }}
             >
-              The problem of creativity in advertising agencies is not only a
-              solution but the essence of their existence. We have established
-              the values ​​that we believe in and stick to in order to reach a
-              creative solution in the position of an advertising agency.
-              Teamwork, leadership and long-term relationship with our customers
-              on the one hand and with our colleagues on the other hand are our
-              most important values. Besides that, we consider relying on
-              experience to complete the puzzle of creative solutions. All of
-              what has been said shapes our nature in "pointing". The nature
-              that aims to look at the business world from a different
-              perspective to the world of creativity.
+              At Eshareh, as an advertising agency, we have established a set of
+              core values, we rigorously uphold to drive us towards creative
+              solutions. Teamwork, proactivity, and fostering long-lasting
+              relationships with both our clients and colleagues are our most
+              significant values. Additionally, we believe that relying on
+              experience is essential to completing the puzzle of creativity.
+              All that said, shapes our essence at "Eshareh", aimed at offering
+              a novel outlook on the business landscape through the unique lens
+              of creativity.
             </h2>
           )}
           <div
@@ -187,7 +186,7 @@ export default function Home({ solutions, covers }) {
                   fontFamily: "FarsiBold",
                 }}
               >
-                ما که هستیم؟
+                ما که هستیم
               </h1>
             </div>
           ) : (
@@ -197,7 +196,7 @@ export default function Home({ solutions, covers }) {
                   fontFamily: "EnglishMedium",
                 }}
               >
-                Who are we?
+                Who We Are
               </h1>
             </div>
           )}
@@ -225,11 +224,18 @@ export default function Home({ solutions, covers }) {
                 fontFamily: "EnglishLight",
               }}
             >
-              Eshareh image communication agency has started its activity as an
-              advertising agency since 1996. Over the years, as a result of an
-              organic process, it has evolved into a full-service marketing
-              communications agency with a creative and solution-oriented
-              approach.
+              Ertebat Tasvir Eshareh Agency began its journey as an advertising
+              agency in{" "}
+              <span
+                style={{
+                  fontFamily: "EnglishMedium",
+                }}
+              >
+                1997
+              </span>
+              . Through organic evolution over the years, it has transformed
+              into a full-service marketing communications agency with a
+              creative and solution-oriented approach.
             </h2>
           )}
           {language ? (
@@ -262,17 +268,24 @@ export default function Home({ solutions, covers }) {
                 fontFamily: "EnglishLight",
               }}
             >
-              As a member of the dnaunion family, Eshareh image communication
-              agency provides quality services to a wide range of domestic and
-              international clients. These services are based on creativity as
-              the main essence of our work, a proper understanding of marketing
-              strategies, based on current concepts, research-oriented and
-              localized. For this reason, we believe that we can define a wide
-              perspective in the field of effective and innovative marketing
-              communications for our customers. Also, since our growth directly
-              depends on the growth of our customers' brands, we believe in a
-              kind of cooperation that is a kind of long-term strategic
-              partnership and not just providing services.
+              Presently, as a member of the{" "}
+              <span
+                style={{
+                  fontFamily: "EnglishMedium",
+                }}
+              >
+                dnaunion
+              </span>{" "}
+              family, Eshareh delivers quality services to a wide range of local
+              and international clients. All these services, rooted in
+              creativity, as the essence of our work, are formed through a solid
+              understanding of the leading-edge, research-oriented and localized
+              marketing strategies. That’s why we believe we can open new
+              horizons for our clients in effective and innovative marketing
+              communications. Furthermore, as our growth is intricately bound to
+              the growth of our clients' brands, we embrace a collaborative
+              approach that transcends mere service provision, fostering
+              long-term strategic partnerships.
             </h2>
           )}
         </div>
@@ -325,16 +338,15 @@ export default function Home({ solutions, covers }) {
               </div>
             ) : (
               <div className={classes.methods}>
-                <h1>Advertising methods</h1>
+                <h1>Advertising Solutions</h1>
                 <h3>
-                  It is a strategic unit in the field of marketing communication
-                  and like a creative agency that provides specialized services
-                  in the field of creativity. In this unit, according to the
-                  wishes and needs of customers, with special emphasis on the
-                  use of the latest available research, the formulated
-                  advertising strategy is the basis of creative work in order to
-                  achieve the best solution and ultimately the result for
-                  customers.
+                  It is a marketing communication strategic unit, functioning as
+                  a creative agency that offers specialized creative services.
+                  In this unit, with respect to our clients’ needs and by
+                  leveraging the latest research available we develop
+                  advertising strategies that form the basis for our creative
+                  work which ensures we deliver optimal solutions and
+                  outstanding results to our clients.
                 </h3>
               </div>
             )}
@@ -389,16 +401,14 @@ export default function Home({ solutions, covers }) {
               </div>
             ) : (
               <div className={classes.methods}>
-                <h1>Media methods</h1>
+                <h1>Media Solutions</h1>
                 <h3>
-                  It is a strategic unit in the field of marketing
-                  communications and like a media agency that provides
-                  specialized services in the field of media. In this unit,
-                  according to the demands and needs of customers, with special
-                  emphasis on the use of the latest available research and
-                  software capable of measuring and optimizing the use of
-                  advertising budgets, efforts are made to use advertising
-                  budgets as effectively as possible.
+                  It is a marketing communication strategic unit, functioning as
+                  a media agency that offers specialized media services. In this
+                  unit, we focus on meeting clients’ needs and requests by
+                  utilizing the latest research available and advanced software
+                  to measure and optimize advertising budgets, ensuring the most
+                  effective use of media expenditures.
                 </h3>
               </div>
             )}
@@ -441,28 +451,23 @@ export default function Home({ solutions, covers }) {
                     راه کارهای دیجیتال
                   </h1>
                   <h3>
-                    واحد استراتژیکی در حوزه‌ی ارتباطات بازاریابی و همچون یک
-                    آژانس رسانه ای است که در حوزه‌ی رسانه خدمات تخصصی ارائه
-                    می‌دهد. در این واحد با توجه به خواسته‌ و نیاز مشتریان، با
-                    تاکید ویژه بر استفاده از آخرین تحقیقات دردسترس و
-                    نرم‌افزارهایی که قابلیت اندازه‌گیری و بهینه‌سازی استفاده از
-                    بودجه‌های تبلیغاتی را دارند، تلاش می‌شود تا حد امکان از
-                    بودجه‌های تبلیغاتی به شکلی موثرتر استفاده شود.
+                    واحدی استراتژیک در زمینه بازاریابی دیجیتال که با راهکارهای
+                    خلاق در تبلیغات آنلاین به دلیل جذب مخاطب بیشتر با هزینه‌های
+                    کمتر، می‌تواند این زمینه را فراهم کند تا کیفیت و حضور برند
+                    در بازار هدف پر رنگ و پایدار باشد.
                   </h3>
                 </div>
               </div>
             ) : (
               <div className={classes.methods}>
-                <h1>Digital methods</h1>
+                <h1>Digital Solutions</h1>
                 <h3>
-                  It is a strategic unit in the field of marketing
-                  communications and like a media agency that provides
-                  specialized services in the field of media. In this unit,
-                  according to the demands and needs of customers, with special
-                  emphasis on the use of the latest available research and
-                  software capable of measuring and optimizing the use of
-                  advertising budgets, efforts are made to use advertising
-                  budgets as effectively as possible.
+                  Our Digital Solutions unit is a strategic powerhouse in the
+                  field of digital marketing, delivering innovative online
+                  advertising strategies designed to attract a larger audience
+                  at lower costs which enables us to enhance the quality and
+                  presence of brands among their target markets, ensuring
+                  effective and enduring impact.
                 </h3>
               </div>
             )}

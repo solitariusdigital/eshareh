@@ -55,8 +55,8 @@ export default function About() {
     setCurrent(currentSlide);
   };
 
-  const deactivateUser = async (index) => {
-    let confirmationMessage = "آرشیو و پنهان، مطمئنی؟";
+  const deleteUser = async (index) => {
+    let confirmationMessage = "  حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
       await deletetUserApi(users[index]["_id"]);
@@ -169,14 +169,14 @@ export default function About() {
               </h1>
               <h3>{users[current]["title"][languageType]}</h3>
               {permissionControl === "admin" && (
-                <div className={classes.remove}>
-                  <Tooltip title="Remove">
+                <div className={classes.delete}>
+                  <Tooltip title="Delete">
                     <CloseIcon
                       style={{
                         cursor: "pointer",
                       }}
                       sx={{ color: "#d40d12" }}
-                      onClick={() => deactivateUser(current)}
+                      onClick={() => deleteUser(current)}
                     />
                   </Tooltip>
                 </div>

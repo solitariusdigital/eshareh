@@ -5,6 +5,7 @@ import classes from "./profession.module.scss";
 import { NextSeo } from "next-seo";
 import Image from "next/legacy/image";
 import profession from "@/assets/profession.png";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
 export default function Profession() {
   const { language, setLanguage } = useContext(StateContext);
@@ -28,7 +29,7 @@ export default function Profession() {
       <div
         className={classes.container}
         style={{
-          fontFamily: language ? "English" : "English",
+          fontFamily: language ? "EnglishLight" : "EnglishLight",
         }}
       >
         <div
@@ -52,10 +53,9 @@ export default function Profession() {
                 fontFamily: "EnglishMedium",
               }}
             >
-              As mentioned, we are a full-service company. But in the provision
-              of these services, what differentiates the reference and makes our
-              service more effective and efficient is based on several
-              principles;
+              As a full-service company, what differentiates and sets us apart
+              and enhances the effectiveness of our services is grounded in
+              couple of core principles:
             </h3>
           )}
         </div>
@@ -76,12 +76,11 @@ export default function Profession() {
           ) : (
             <h3
               style={{
-                fontFamily: "English",
+                fontFamily: "EnglishLight",
               }}
             >
-              We believe in a type of relationship with our customers that is a
-              strategic partnership based on a win-win, long-term and loyal
-              relationship.
+              We cultivate strategic partnerships with our clients, founded on a
+              win-win, long-term and loyal relationship.
             </h3>
           )}
         </div>
@@ -105,15 +104,15 @@ export default function Profession() {
           ) : (
             <h3
               style={{
-                fontFamily: "English",
+                fontFamily: "EnglishLight",
               }}
             >
-              In designing and managing advertising campaigns, creativity is the
-              main focus of all our work and the solutions we provide to our
-              partners. This creativity has always been kept up-to-date and in
-              line with global standards and connected to our experience and
-              strategic understanding of the Iranian business market. We have
-              defined.
+              When designing and managing advertising campaigns, creativity is
+              at the heart of everything we do, driving the innovative solutions
+              we deliver to our partners. However, we continuously refine our
+              distinct creative approach to align with global standards, drawing
+              on our extensive experience and strategic insights into the
+              Iranian business market.
             </h3>
           )}
         </div>
@@ -137,15 +136,15 @@ export default function Profession() {
           ) : (
             <h3
               style={{
-                fontFamily: "English",
+                fontFamily: "EnglishLight",
               }}
             >
-              We consider training as one of the pillars of our organization's
-              identity. In this way, we continuously organize training courses
-              and specialized workshops for our colleagues and business
-              partners. In this way, we rely on the world-class knowledge of the
-              advertising and marketing industry and distinguished professors in
-              these fields. They accompany us.
+              Education is a cornerstone of our organisation's spirit, which is
+              why we consistently organise training courses and specialised
+              workshops for our colleagues and business partners and for this,
+              we highly rely on up-to-date global advertising and marketing
+              knowledge and we are accompanied by best-in-class tutors and
+              mentors in these fields.
             </h3>
           )}
         </div>
@@ -162,41 +161,179 @@ export default function Profession() {
             >
               ما آژانسی تمام خدمت هستیم که به بسیاری از نیازهای مشتریانمان در
               ارتباط با فعالیت‌های بازاریابی پاسخ داده و به آنان خدمت ارائه
-              می‌دهیم. سرویس‌های ما شامل ارائه‌ی استراتژی ارتباطی، تدوین
-              کمپین‌های گسترده تبلیغاتی خلاق- تیزر تبلیغاتی، تیزر تلویزیونی،
-              تیزر رادیویی، تبلیغات محیطی و ...-، ارائه‌ی راه‌کارهای ارتباطی
-              دیجیتال و تدوین کمپین‌های این حوزه- تبلیغات آنلاین، تبلیغات
-              شبکه‎‌های اجتماعی، بازاریابی محتوا و شبکه های اجتماعی، تبلیغات
-              بنری و ...- ، ارائه ‌راه‌کارهای رسانه و خرید رسانه تبلیغاتی و
-              محیطی و همینطور طراحی و تولید راه‌کارهایی در زمینه تبلیغات{" "}
-              <span
-                style={{
-                  fontFamily: "English",
-                }}
-              >
-                BTL
-              </span>{" "}
-              - محل فروش، سمپلینگ، کمپین‌های نمایشگاهی، غرفه سازی، برگزاری
-              رویداد و ...- است.
+              می‌دهیم.
             </h3>
           ) : (
             <h3
               style={{
-                fontFamily: "English",
+                fontFamily: "EnglishLight",
               }}
             >
-              We are a full-service agency that responds to many of our client's
-              needs related to marketing activities and provides services to
-              them. Our services include providing a communication strategy,
-              developing extensive creative advertising campaigns - advertising
-              teasers, television teasers, radio teasers, environmental
-              advertisements, etc. Social networks, banner ads, etc., providing
-              media solutions and purchasing advertising and environmental
-              media, as well as designing and producing solutions in the field
-              of BTL advertising - point of sale, sampling, exhibition
-              campaigns, booth construction, event holding, etc.
+              We are a full-service agency dedicated to addressing the diverse
+              marketing needs of our clients with comprehensive and responsive
+              solutions.
             </h3>
           )}
+        </div>
+        <div
+          className={
+            language ? classes.information : classes.informationReverse
+          }
+        >
+          {language ? (
+            <h3
+              style={{
+                fontFamily: "FarsiLight",
+              }}
+            >
+              سرویس‌های ما شامل:
+            </h3>
+          ) : (
+            <h3
+              style={{
+                fontFamily: "EnglishLight",
+              }}
+            >
+              Our services include:
+            </h3>
+          )}
+        </div>
+        <div
+          className={
+            language ? classes.information : classes.informationReverse
+          }
+        >
+          <div className={classes.row}>
+            <RadioButtonUncheckedIcon sx={{ fontSize: 10 }} />
+            {language ? (
+              <h3
+                style={{
+                  fontFamily: "FarsiLight",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "FarsiMedium",
+                  }}
+                >
+                  ارائه‌ی استراتژی ارتباطی،
+                </span>{" "}
+                تدوین کمپین‌های گسترده تبلیغاتی خلاق- تیزر تبلیغاتی، تیزر
+                تلویزیونی، تیزر رادیویی و تبلیغات محیطی.
+              </h3>
+            ) : (
+              <h3
+                style={{
+                  fontFamily: "EnglishLight",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "EnglishMedium",
+                  }}
+                >
+                  Communication strategy development,
+                </span>{" "}
+                crafting extensive creative advertising campaigns, television
+                and radio commercials, and out-of-home advertising.
+              </h3>
+            )}
+          </div>
+        </div>
+        <div
+          className={
+            language ? classes.information : classes.informationReverse
+          }
+        >
+          <div className={classes.row}>
+            <RadioButtonUncheckedIcon sx={{ fontSize: 10 }} />
+            {language ? (
+              <h3
+                style={{
+                  fontFamily: "FarsiLight",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "FarsiMedium",
+                  }}
+                >
+                  ارائه‌ی راه‌کارهای ارتباطی دیجیتال
+                </span>{" "}
+                و تدوین کمپین‌های این حوزه- تبلیغات آنلاین، تبلیغات شبکه‎‌های
+                اجتماعی، بازاریابی محتوا و شبکه های اجتماعی و تبلیغات بنری.
+              </h3>
+            ) : (
+              <h3
+                style={{
+                  fontFamily: "EnglishLight",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "EnglishMedium",
+                  }}
+                >
+                  Digital communication solutions,
+                </span>{" "}
+                crafting campaigns including online advertising, social media
+                advertising, content and social media marketing, and banner ads.
+              </h3>
+            )}
+          </div>
+        </div>
+        <div
+          className={
+            language ? classes.information : classes.informationReverse
+          }
+        >
+          <div className={classes.row}>
+            <RadioButtonUncheckedIcon sx={{ fontSize: 10 }} />
+            {language ? (
+              <h3
+                style={{
+                  fontFamily: "FarsiLight",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "FarsiMedium",
+                  }}
+                >
+                  ارائه ‌راه‌کارهای رسانه
+                </span>{" "}
+                و خرید رسانه تبلیغاتی و محیطی و همینطور طراحی و تولید
+                راه‌کارهایی در زمینه تبلیغات{" "}
+                <span
+                  style={{
+                    fontFamily: "EnglishLight",
+                  }}
+                >
+                  BTL
+                </span>{" "}
+                - محل فروش، سمپلینگ، کمپین‌های نمایشگاهی، غرفه سازی و برگزاری
+                رویداد است.
+              </h3>
+            ) : (
+              <h3
+                style={{
+                  fontFamily: "EnglishLight",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "EnglishMedium",
+                  }}
+                >
+                  Media solutions,
+                </span>{" "}
+                advertising and outdoor media buying, designing and executing
+                Below the Line (BTL) campaigns including but not limited to
+                Point of Sale, sampling, holding exhibitions, booth
+                construction, and event organisation.
+              </h3>
+            )}
+          </div>
         </div>
         <div
           className={classes.image}

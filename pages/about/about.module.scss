@@ -97,9 +97,9 @@
     margin: auto;
     width: 50%;
 
-    .remove {
+    .delete {
       position: absolute;
-      top: 20px;
+      top: 0px;
     }
 
     @include mixins.fourK {
