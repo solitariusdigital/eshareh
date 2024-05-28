@@ -28,6 +28,15 @@ export const getUserApi = async (id) => {
   });
   return await response.json();
 };
+export const deletetUserApi = async (id) => {
+  const response = await fetch(`/api/user?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
 export const getUsersApi = async () => {
   const response = await fetch("/api/users", {
     method: "GET",

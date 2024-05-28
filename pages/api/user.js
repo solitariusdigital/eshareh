@@ -15,5 +15,17 @@ export default async function userHandler(req, res) {
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
+    case "DELETE":
+      try {
+        const deletedUser = await User.findByIdAndDelete(req.query.id);
+        if (!deletedUser) {
+          return res.status(404).json({ msg: "User not found" });
+        }
+        return res.status(200).json({ msg: "User deleted successfully" });
+      } catch (err) {
+        return res.status(400).json({ msg: err.message });
+      }
+    default:
+      return res.status(405).json({ msg: "Method Not Allowed" });
   }
 }

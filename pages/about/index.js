@@ -8,7 +8,7 @@ import { Mousewheel, Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { NextSeo } from "next-seo";
-import { getUsersApi, updateUserApi } from "@/services/api";
+import { getUsersApi, deletetUserApi } from "@/services/api";
 import Tooltip from "@mui/material/Tooltip";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -58,12 +58,8 @@ export default function About() {
   const deactivateUser = async (index) => {
     let confirmationMessage = "آرشیو و پنهان، مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
-    let user = {
-      ...users[index],
-      active: false,
-    };
     if (confirm) {
-      await updateUserApi(user);
+      await deletetUserApi(users[index]["_id"]);
       window.location.assign("/about");
     }
   };
@@ -138,7 +134,7 @@ export default function About() {
               mousewheel={true}
               loop={true}
               allowTouchMove={screenSize === "desktop" ? false : true}
-              navigation={false}
+              navigation={true}
               modules={[Navigation, Mousewheel, Autoplay]}
               onSlideChange={updateIndex}
               speed={1000}
