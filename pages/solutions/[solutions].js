@@ -757,9 +757,15 @@ export default function Solution({ solutions, projectTitle }) {
                           >
                             |
                           </h3>
-                          <h3 className={classes.text}>
-                            {project[languageType].solution}
-                          </h3>
+                          <h3
+                            className={classes.text}
+                            dangerouslySetInnerHTML={{
+                              __html: applyFontToEnglishWords(
+                                project[languageType].solution,
+                                "English"
+                              ),
+                            }}
+                          ></h3>
                         </div>
                       </div>
                     )}
