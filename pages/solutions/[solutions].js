@@ -465,14 +465,14 @@ export default function Solution({ solutions, projectTitle }) {
                   style={{
                     fontFamily: language ? "FarsiLight" : "EnglishLight",
                   }}
-                  className={classes.description}
+                  className={classes.descriptionSolution}
                 >
                   <h3
                     style={{
                       fontFamily: language ? "FarsiBold" : "EnglishBold",
                     }}
                   >
-                    {language ? "خلاصه" : "Brief"}
+                    {language ? "صورت مسئله" : "Brief"}
                   </h3>
                   <h3
                     style={{
@@ -736,7 +736,7 @@ export default function Solution({ solutions, projectTitle }) {
                               ? "FarsiLight"
                               : "EnglishLight",
                           }}
-                          className={classes.description}
+                          className={classes.descriptionSolution}
                         >
                           <h3
                             style={{
@@ -745,7 +745,7 @@ export default function Solution({ solutions, projectTitle }) {
                                 : "EnglishBold",
                             }}
                           >
-                            {language ? "راهکار" : "Solution"}
+                            {language ? "راه‌کار" : "Solution"}
                           </h3>
                           <h3
                             style={{

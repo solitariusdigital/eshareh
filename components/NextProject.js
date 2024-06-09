@@ -47,7 +47,7 @@ export default function NextProject({ project }) {
                 fontFamily: language ? "FarsiBold" : "EnglishBold",
               }}
             >
-              {language ? "خلاصه" : "Brief"}
+              {language ? "صورت مسئله" : "Brief"}
             </h3>
             <h3
               style={{

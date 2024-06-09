@@ -39,6 +39,7 @@
       margin-bottom: 50px;
     }
 
+    .descriptionSolution,
     .description {
       display: flex;
       flex-direction: row-reverse;
@@ -47,6 +48,10 @@
         color: config.$grey;
         margin: 0px 10px;
       }
+    }
+
+    .description {
+      align-items: center;
     }
 
     .text {

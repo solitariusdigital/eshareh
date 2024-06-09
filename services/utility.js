@@ -153,7 +153,7 @@ export function applyFontToEnglishWords(inputString, fontType) {
   const pattern = /[a-zA-Z]+/g;
   // Find and replace English words with span tags for specific font type
   const outputString = inputString.replace(pattern, function (match) {
-    return `<span style="font-family: ${fontType};">${match}</span>`;
+    return `<span style="font-family: ${fontType}; font-size: 15px;">${match}</span>`;
   });
   return outputString;
 }
