@@ -62,7 +62,8 @@ export default function NextProject({ project }) {
               dangerouslySetInnerHTML={{
                 __html: applyFontToEnglishWords(
                   project[languageType].brief,
-                  "English"
+                  "English",
+                  language
                 ),
               }}
             ></h3>
