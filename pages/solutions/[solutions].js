@@ -487,7 +487,8 @@ export default function Solution({ solutions, projectTitle }) {
                     dangerouslySetInnerHTML={{
                       __html: applyFontToEnglishWords(
                         project[languageType].brief,
-                        "English"
+                        "English",
+                        language
                       ),
                     }}
                   ></h3>
@@ -762,7 +763,8 @@ export default function Solution({ solutions, projectTitle }) {
                             dangerouslySetInnerHTML={{
                               __html: applyFontToEnglishWords(
                                 project[languageType].solution,
-                                "English"
+                                "English",
+                                language
                               ),
                             }}
                           ></h3>

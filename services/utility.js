@@ -148,12 +148,13 @@ export function validateEmail(value) {
   return emailRegex.test(value);
 }
 
-export function applyFontToEnglishWords(inputString, fontType) {
+export function applyFontToEnglishWords(inputString, fontType, language) {
+  let fontSize = language ? "16px" : null;
   // Regular expression pattern to match English words
   const pattern = /[a-zA-Z]+/g;
   // Find and replace English words with span tags for specific font type
   const outputString = inputString.replace(pattern, function (match) {
-    return `<span style="font-family: ${fontType}; font-size: 15px;">${match}</span>`;
+    return `<span style="font-family: ${fontType}; font-size: ${fontSize};">${match}</span>`;
   });
   return outputString;
 }
