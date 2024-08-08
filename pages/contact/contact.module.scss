@@ -2,172 +2,79 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  position: relative;
-  width: 100%;
+  background: config.$black;
+
+  .image {
+    position: relative;
+    margin: auto;
+    height: 70vh;
+    max-width: config.$max-widthHeigh;
+    width: config.$content-width;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+    @include mixins.mobile {
+      height: 300px;
+      width: 100%;
+    }
+    @include mixins.tablet {
+      width: 100%;
+    }
+    @include mixins.fourK {
+      max-height: 750px;
+    }
+  }
+}
+
+.information {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
   max-width: config.$max-widthHeigh;
   width: config.$content-width;
   margin: auto;
-  cursor: pointer;
-
-  p {
-    font-size: 1.4rem;
-
-    @include mixins.mobile {
-      font-size: 1rem;
-    }
-  }
+  padding: 20px 0px;
+  line-height: 20px;
+  height: 210px;
 
   @include mixins.mobile {
-    margin: auto;
-    height: 100%;
-    width: calc(100% - 24px);
-  }
-  @include mixins.desktop {
-    position: relative;
-    bottom: 100px;
-  }
-  @include mixins.tablet {
-    position: relative;
-    bottom: 0px;
-    width: config.$content-widthTablet;
-  }
-  @include mixins.tablet {
-    position: relative;
-    bottom: 0px;
-  }
-
-  .mapTag,
-  .mapTagReverse {
-    position: absolute;
-    top: 33%;
-    width: 180px;
-    text-align: right;
-  }
-
-  .mapTag {
-    left: -60px;
-    font-size: 1.8rem;
-
-    @include mixins.fourK {
-      left: -100px;
-      font-size: 2.5rem;
-      width: 250px;
-    }
-  }
-
-  .mapTagReverse {
-    right: -120px;
-    width: 180px;
-    text-align: left;
-
-    @include mixins.fourK {
-      right: -250px !important;
-      font-size: 2.2rem;
-      width: 330px;
-    }
-
-    @include mixins.fourK {
-      right: -90px;
-    }
-  }
-}
-
-.resumeReverse {
-  left: 0px;
-
-  p {
-    font-size: 0.95rem !important;
-  }
-}
-
-.resume,
-.resumeReverse {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-
-  background: config.$yellow;
-  font-size: config.$tiny-font;
-  color: config.$black;
-  padding: 0px 10px;
-  height: 40px;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  width: 150px;
-
-  p {
-    position: relative;
-    bottom: 2px;
-    font-size: 1rem;
-  }
-
-  &:hover {
-    background: config.$black;
-    color: config.$yellow;
-  }
-
-  @include mixins.desktop {
-    top: 100px;
-  }
-  @include mixins.tablet {
-    top: 0px;
-  }
-}
-
-.location,
-.locationReverse {
-  position: absolute;
-  top: 45%;
-  color: config.$black;
-  right: 0px;
-
-  @include mixins.mobile {
-    top: 40%;
-  }
-}
-
-.locationReverse {
-  left: 0px;
-}
-
-.information,
-.informationReverse {
-  position: absolute;
-  bottom: 40px;
-  display: flex;
-  flex-direction: row;
-
-  @include mixins.mobile {
-    bottom: -140px;
     flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  @include mixins.tablet {
+    width: 90%;
   }
 
-  @include mixins.tablet {
-    bottom: 0px;
-  }
-  @include mixins.fourK {
-    bottom: 100px;
+  .contactGraphic {
+    position: relative;
+    height: 400px;
+    width: 400px;
+
+    @include mixins.desktop {
+      bottom: 30px;
+    }
+    @include mixins.mobile {
+      margin: 20px;
+      height: 300px;
+      width: 100%;
+    }
   }
 
   .details {
-    height: 80px;
-
-    @include mixins.mobile {
-      margin-bottom: 10px;
-    }
+    margin: 10px 0px;
   }
 
   .row,
   .rowReverse {
     display: flex;
     align-items: center;
-    color: config.$black;
+    color: config.$white;
+    min-width: 220px;
 
-    .click {
+    .click,
+    .clickTel {
       cursor: pointer;
     }
 
@@ -176,37 +83,57 @@
     }
   }
 
+  .row {
+    flex-direction: row-reverse;
+    .clickFax {
+      margin-right: 10px;
+    }
+    .clickTel {
+      margin-right: 11px;
+    }
+  }
+
   .rowReverse {
-    margin-right: 20px;
     .clickFax {
       margin-left: 10px;
     }
     .clickTel {
-      margin-left: 19px;
-    }
-  }
-
-  .row {
-    flex-direction: row-reverse;
-    margin-right: 0px;
-    .clickFax {
-      margin-right: 10px;
-    }
-    .clickTel {
-      margin-right: 10px;
+      margin-left: 16px;
     }
   }
 }
 
-.information {
-  flex-direction: row-reverse;
-  right: 0px;
-
-  .row {
-    margin-left: 20px;
-  }
+.resume {
+  max-width: config.$max-widthHeigh;
+  width: config.$content-width;
+  margin: auto;
 
   @include mixins.mobile {
-    flex-direction: column;
+    display: flex;
+    justify-content: center;
+  }
+  @include mixins.tablet {
+    width: 90%;
+  }
+
+  p {
+    background: config.$yellow;
+    font-size: config.$tiny-font;
+    color: config.$black;
+    padding: 0px 10px;
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 150px;
+
+    &:hover {
+      background: config.$black;
+      color: config.$yellow;
+      cursor: pointer;
+    }
   }
 }

@@ -2,9 +2,9 @@ import { useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./contact.module.scss";
 import Image from "next/legacy/image";
-import mapEnglish from "@/assets/mapEnglish.png";
-import mapFarsi from "@/assets/mapFarsi.png";
+import contact from "@/assets/contact.jpg";
 import { NextSeo } from "next-seo";
+import contactGraphic from "@/assets/contactGraphic.png";
 
 export default function Contact() {
   const { language, setLanguage } = useContext(StateContext);
@@ -30,115 +30,178 @@ export default function Contact() {
         }}
       />
       <div className={classes.container}>
-        <div
-          className={language ? classes.resume : classes.resumeReverse}
-          style={{
-            fontFamily: language ? "FarsiLight" : "English",
-          }}
-        >
-          {language ? <p>ارسال رزومه</p> : <p>Send your resume</p>}
-        </div>
-        <div onClick={() => window.open(locationLink)}>
+        <div className={classes.image}>
           <Image
-            src={language ? mapFarsi : mapEnglish}
-            blurDataURL={language ? mapFarsi : mapEnglish}
+            className={classes.image}
+            src={contact}
+            blurDataURL={contact}
             placeholder="blur"
             alt="map"
-            layout="responsive"
-            objectFit="contain"
+            layout="fill"
+            objectFit="cover"
             as="image"
             priority
           />
         </div>
-        {screenSize === "desktop" && (
-          <h3
-            className={language ? classes.mapTag : classes.mapTagReverse}
-            style={{
-              fontFamily: language ? "FarsiBold" : "EnglishBold",
-            }}
-          >
-            {language ? "شرکت تبلیغاتی اشاره" : "Eshareh Advertising Agency"}
-          </h3>
-        )}
         <div
-          className={language ? classes.location : classes.locationReverse}
+          className={classes.information}
           style={{
             fontFamily: language ? "Farsi" : "English",
           }}
         >
-          {language ? <p>ما را پیدا کنید</p> : <p>Find our office</p>}
-        </div>
-        <div
-          className={
-            language ? classes.information : classes.informationReverse
-          }
-          style={{
-            fontFamily: language ? "Farsi" : "English",
-          }}
-        >
-          <div className={classes.details}>
+          <div>
             <div
               className={language ? classes.row : classes.rowReverse}
+              style={{
+                color: `#fdb714`,
+                fontFamily: language ? "FarsiBold" : "EnglishBold",
+              }}
               onClick={() => window.open(locationLink)}
             >
               {language ? (
-                <p className={classes.click}>،تهران، انتهای شیخ بهایی شمالی</p>
+                <h3 className={classes.click}>دفتر مرکزی</h3>
               ) : (
-                <p className={classes.click}>No. 2, 21st Alley,</p>
+                <h3 className={classes.click}>Head Office</h3>
               )}
             </div>
             <div
-              className={language ? classes.row : classes.rowReverse}
+              className={classes.details}
               onClick={() => window.open(locationLink)}
             >
-              {language ? (
-                <p className={classes.click}>
-                  نبش بزرگراه نیایش کوچه ۲۱، پلاک ۲
-                </p>
-              ) : (
-                <p className={classes.click}>North Sheikh Bahaei St.</p>
-              )}
+              <div className={language ? classes.row : classes.rowReverse}>
+                {language ? (
+                  <p className={classes.click}>
+                    ،تهران، انتهای شیخ بهایی شمالی
+                  </p>
+                ) : (
+                  <p className={classes.click}>No. 2, 21st Alley,</p>
+                )}
+              </div>
+              <div className={language ? classes.row : classes.rowReverse}>
+                {language ? (
+                  <p className={classes.click}>
+                    نبش بزرگراه نیایش کوچه ۲۱، پلاک ۲
+                  </p>
+                ) : (
+                  <p className={classes.click}>North Sheikh Bahaei St.</p>
+                )}
+              </div>
+              <div className={language ? classes.row : classes.rowReverse}>
+                {language ? (
+                  <p className={classes.click}>کد پستی: ۱۹۹۵۷۷۵۳۵۳</p>
+                ) : (
+                  <p className={classes.click}>Tehran, 1995775353, Iran</p>
+                )}
+              </div>
             </div>
-            <div
-              className={language ? classes.row : classes.rowReverse}
-              onClick={() => window.open(locationLink)}
-            >
-              {language ? (
-                <p className={classes.click}>کد پستی: ۱۹۹۵۷۷۵۳۵۳</p>
-              ) : (
-                <p className={classes.click}>Tehran, 1995775353, Iran</p>
-              )}
-            </div>
-          </div>
-          <div className={classes.details}>
-            <div
-              className={language ? classes.row : classes.rowReverse}
-              onClick={() => window.open("tel:+982188044244", "_self")}
-            >
-              <p className={classes.click}>{language ? ": تلفن" : "Tel :"}</p>
-              <p className={classes.clickTel}>
-                {language ? "۰۲۱ ۸۸۰ ۴۴ ۲۴۴" : "+98 (21) 880 44 244"}
-              </p>
-            </div>
-            <div className={language ? classes.row : classes.rowReverse}>
-              <p>{language ? ": فکس" : "Fax :"}</p>
-              <p className={classes.clickFax}>
-                {language ? "۰۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 (21) 880 60 666"}
-              </p>
-            </div>
-            <div className={language ? classes.row : classes.rowReverse}>
-              <p
-                className={classes.email}
-                style={{
-                  fontFamily: language ? "English" : "English",
-                  fontSize: language ? "1.2rem" : "",
-                }}
+            <div className={classes.details}>
+              <div
+                className={language ? classes.row : classes.rowReverse}
+                onClick={() => window.open("tel:+982188044244", "_self")}
               >
-                info@eshareh.com
-              </p>
+                <p className={classes.click}>{language ? ": تلفن" : "Tel :"}</p>
+                <p className={classes.clickTel}>
+                  {language ? "۰۲۱ ۸۸۰ ۴۴ ۲۴۴" : "+98 (21) 880 44 244"}
+                </p>
+              </div>
+              <div className={language ? classes.row : classes.rowReverse}>
+                <p>{language ? ": فکس" : "Fax :"}</p>
+                <p className={classes.clickFax}>
+                  {language ? "۰۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 (21) 880 60 666"}
+                </p>
+              </div>
+              <div className={language ? classes.row : classes.rowReverse}>
+                <p
+                  className={classes.email}
+                  style={{
+                    fontFamily: language ? "English" : "English",
+                  }}
+                >
+                  info@eshareh.com
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className={classes.contactGraphic}>
+            <Image
+              src={contactGraphic}
+              blurDataURL={contactGraphic}
+              placeholder="blur"
+              alt="image"
+              layout="fill"
+              objectFit="contain"
+              as="image"
+              priority
+            />
+          </div>
+          <div>
+            <div
+              className={language ? classes.row : classes.rowReverse}
+              style={{
+                color: `#fdb714`,
+                fontFamily: language ? "FarsiBold" : "EnglishBold",
+              }}
+              onClick={() => window.open(locationLink)}
+            >
+              {language ? (
+                <h3 className={classes.click}>استودیو فیلم سازی</h3>
+              ) : (
+                <h3 className={classes.click}>Production House</h3>
+              )}
+            </div>
+            <div
+              className={classes.details}
+              onClick={() => window.open(locationLink)}
+            >
+              <div className={language ? classes.row : classes.rowReverse}>
+                {language ? (
+                  <p className={classes.click}>
+                    تهران، خیابان چراغی، بوستان ولایت
+                  </p>
+                ) : (
+                  <p className={classes.click}>4th Industrial Shed,</p>
+                )}
+              </div>
+              <div className={language ? classes.row : classes.rowReverse}>
+                {language ? (
+                  <p className={classes.click}>بوستان شهربانو، سوله چهارم</p>
+                ) : (
+                  <p className={classes.click}>
+                    Shahrbanoo Park, Velayad Park,
+                  </p>
+                )}
+              </div>
+              <div className={language ? classes.row : classes.rowReverse}>
+                {language ? (
+                  <p className={classes.click}>سوله ارتباط تصویر اشاره</p>
+                ) : (
+                  <p className={classes.click}>Cheraghi St., Tehran - Iran</p>
+                )}
+              </div>
+            </div>
+            <div className={classes.details}>
+              <div
+                className={language ? classes.row : classes.rowReverse}
+                onClick={() => window.open("tel:+989384997808", "_self")}
+              >
+                <p className={classes.click}>
+                  {language ? ": موبایل" : "Mob :"}
+                </p>
+                <p className={classes.clickTel}>
+                  {language ? "۰۹۳۸ ۴۹۹۷۸۰۸" : "+98 (938) 499 78 08"}
+                </p>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      <div
+        className={classes.resume}
+        style={{
+          fontFamily: language ? "Farsi" : "English",
+        }}
+      >
+        {language ? <p>ارسال رزومه</p> : <p>Send your resume</p>}
       </div>
     </Fragment>
   );
