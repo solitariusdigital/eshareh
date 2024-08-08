@@ -115,6 +115,7 @@ export default function Contact() {
                   className={classes.email}
                   style={{
                     fontFamily: language ? "English" : "English",
+                    fontSize: language ? "0.95rem" : "1rem",
                   }}
                 >
                   info@eshareh.com
