@@ -71,7 +71,7 @@ export default function Home({ solutions, covers }) {
                 marginBottom: "20px",
               }}
             >
-              دریچه‌ای نو به دنیایی از خلاقـیت
+              دریچه‌ای نو به دنیایی از خلاقیت
             </h1>
           ) : (
             <h1
@@ -89,8 +89,9 @@ export default function Home({ solutions, covers }) {
                 fontFamily: "FarsiLight",
               }}
             >
-              برای حل هر مساله‌ای در زمینه کسب و کار، خلاقیت کلیدواژه اصلی و
-              کماکان حلقه‌ی مفقوده این حوزه در سرزمین ماست.
+              برای حل هر مساله‌ای در زمینه کسب و کار، خلاقیت کلیدواژه اصلی است و
+              در آژانس‌های تبلیغاتی، خلاقیت نه تنها راه‌حل بلکه جوهره وجودی
+              آن‌هاست.
             </h2>
           ) : (
             <h2
@@ -99,9 +100,9 @@ export default function Home({ solutions, covers }) {
               }}
             >
               Creativity stands as the essential key to unlocking solutions in
-              the realm of business and yet, the missing link in our homeland.
-              However, for advertising agencies, creativity isn't just a
-              solution; it's the very essence of their existence.
+              the realm of business, however, for advertising agencies,
+              creativity isn't just a solution; it's the very essence of their
+              existence.
             </h2>
           )}
           {language ? (
@@ -110,14 +111,14 @@ export default function Home({ solutions, covers }) {
                 fontFamily: "FarsiLight",
               }}
             >
-              مساله خلاقیت اما در آژانس‌های تبلیغاتی نه فقط راه حل که جوهره
-              وجودی آن‌هاست. ما در اشاره در جایگاه یک آژانس تبلیغاتی برای رسیدن
-              به راهکار خلاق، ارزش‌های را بنا کردیم که باورمند و پایبند به آن‌ها
-              هستیم. کار تیمی، پیشرو بودن و رابطه‌ی دیرپا با مشتریانمان از یک سو
-              و با همکارانمان از سوی دیگر مهم‌ترین ارزش‌های ما هستند. در کنار آن
-              اتکا به تجربه را کامل کننده پازل راهکار خلاق می‌دانیم. تمامی آنچه
-              گفته شد ماهیت ما را در "اشاره" شکل می‌دهد. ماهیتی که هدف آن نگاهی
-              نو به دنیای کسب و کار است از دریچه‌ای متفاوت به دنیای خلاقیت.
+              ما در اشاره در جایگاه یک آژانس تبلیغاتی برای رسیدن به راهکارهایی
+              خلاق، ارزش‌هایی را بنا کردیم که باورمند و پایبند به آن‌ها هستیم.
+              ارزش‌هایی که ما به آن معتقدیم شامل کار تیمی، پیشرو بودن و ساختن
+              رابطه‌ای بلندمدت و وفادارانه هم با مشتریانمان و هم با همکارانمان
+              می‌شود و در کنار آن، متکی به تجربه‌مان هستیم تا مسیر رسیدن به
+              خلاقیت را برای خود هموار کنیم. تمامی آنچه گفته شد ماهیت ما را در
+              "اشاره" شکل می‌دهد. ماهیتی که هدف آن نگاهی متفاوت به دنیای کسب و
+              کار است همراه با گشایش دریچه‌ای نو به دنیای خلاقیت. 
             </h2>
           ) : (
             <h2
@@ -126,14 +127,14 @@ export default function Home({ solutions, covers }) {
               }}
             >
               At Eshareh, as an advertising agency, we have established a set of
-              core values, we rigorously uphold to drive us towards creative
-              solutions. Teamwork, proactivity, and fostering long-lasting
-              relationships with both our clients and colleagues are our most
-              significant values. Additionally, we believe that relying on
-              experience is essential to completing the puzzle of creativity.
-              All that said, shapes our essence at "Eshareh", aimed at offering
-              a novel outlook on the business landscape through the unique lens
-              of creativity.
+              core values which we rigorously uphold to drive us towards
+              creative solutions. The values we highly believe in include
+              teamwork, proactivity, and fostering loyal, long-lasting
+              relationships with both our clients and colleagues and besides, we
+              rely on our experience to pave the way to creativity. All that
+              said, shapes our essence at "Eshareh", the essence that aims at
+              providing a novel outlook on the business landscape coupled with a
+              new window to the world of creativity.
             </h2>
           )}
           <div
@@ -185,7 +186,7 @@ export default function Home({ solutions, covers }) {
                   fontFamily: "FarsiBold",
                 }}
               >
-                ما که هستیم
+                ما که هستیم؟
               </h1>
             </div>
           ) : (
@@ -205,7 +206,7 @@ export default function Home({ solutions, covers }) {
                 fontFamily: "FarsiLight",
               }}
             >
-              آژانس ارتباط تصویر اشاره، به عنوان یک آژانس تبلیغاتی از سال{" "}
+              آژانس اشاره، به عنوان یک آژانس تبلیغاتی از سال{" "}
               <span
                 style={{
                   fontFamily: "FarsiBold",
@@ -213,8 +214,8 @@ export default function Home({ solutions, covers }) {
               >
                 {enToFaDigits(1376)}
               </span>{" "}
-              فعالیت خود را آغاز کرده است. در طی این سال‌ها در نتیجه‌ی فرآیندی
-              ارگانیک، به یک آژانس ارتباطات بازاریابی تمام خدمت با رویکردی خلاق
+              فعالیت خود را آغاز کرده است. در طی این سال‌ها در نتیجه فرآیندی
+              ارگانیک، به یک آژانس ارتباطات بازاریابی تمام‌خدمت با رویکردی خلاق
               و راه‌حل‌ محور تبدیل شده است.
             </h2>
           ) : (
@@ -243,7 +244,7 @@ export default function Home({ solutions, covers }) {
                 fontFamily: "FarsiLight",
               }}
             >
-              در حال حاضر آژانس ارتباط تصویر اشاره به عنوان عضوی از خانواده{" "}
+              در حال حاضر این آژانس، به عنوان عضوی از خانواده{" "}
               <span
                 style={{
                   fontFamily: "English",
@@ -251,15 +252,14 @@ export default function Home({ solutions, covers }) {
               >
                 dnaunion
               </span>{" "}
-              به طیف گسترده‌ای از مشتریان بومی و بین المللی خدمات کیفی ارائه
-              می‌کند. این خدمات با تکیه بر خلاقیت به عنوان جوهره اصلی کار ما،
-              فهم درست از استراتژی‌های بازاریابی، مبتنی بردانش روز، پژوهش‌مدار و
-              بومی شده‌ شکل گرفته است. به همین سبب بر این باوریم که می‌توانیم
-              چشم‌انداز گسترده‌ای در زمینه‌ی ارتباطات بازاریابی موثر و نوین برای
-              مشتریانمان تعریف کنیم. همچنین از آنجا که رشد ما، بطور مستقیم به
-              رشد برندهای مشتریان ما بستگی دارد، ما به نوعی از همکاری اعتقاد
-              داریم که گونه‌ای شراکت راهبردی بلند مدت است و نه صرفاً ارائه
-              خدمات.
+              به طیف گسترده‌ای از مشتریان بومی و بین‌المللی خدمات کیفی ارائه
+              می‌کند. این خدمات با تکیه بر خلاقیت به عنوان جوهره اصلی کار ما و
+              با فهم درستی از استراتژی‌های بازاریابی مبتنی بر دانش روز،
+              پژوهش‌مدار و بومی‌شده‌ شکل گرفته است. به همین سبب بر این باوریم که
+              می‌توانیم چشم‌انداز گسترده‌ای در زمینه ارتباطات بازاریابی موثر
+              برای مشتریانمان تعریف کنیم. همچنین از آنجا که رشد ما به رشد
+              مشتریان ما بستگی دارد، ما به نوعی از همکاری اعتقاد داریم که
+              گونه‌ای از شراکت راهبردی بلندمدت است و نه صرفاً ارائه خدمات.
             </h2>
           ) : (
             <h2
@@ -282,9 +282,8 @@ export default function Home({ solutions, covers }) {
               marketing strategies. That’s why we believe we can open new
               horizons for our clients in effective and innovative marketing
               communications. Furthermore, as our growth is intricately bound to
-              the growth of our clients' brands, we embrace a collaborative
-              approach that transcends mere service provision, fostering
-              long-term strategic partnerships.
+              the growth of our clients, we firmly believe in a collaborative
+              approach rather than mere service provision.
             </h2>
           )}
         </div>
@@ -322,15 +321,14 @@ export default function Home({ solutions, covers }) {
                       fontFamily: "FarsiBold",
                     }}
                   >
-                    راه کارهای تبلیـغات
+                    واحد راه‌کارهای تبلیغات
                   </h1>
                   <h3>
-                    واحد استراتژیکی در حوزه‌ی ارتباطات بازاریابی و همچون یک
-                    آژانس خلاقیت است که در حوزه‌ی خلاقیت خدمات تخصصی ارائه
-                    می‌دهد. در این واحد با توجه به خواسته‌ و نیاز مشتریان، با
-                    تاکید ویژه بر استفاده از آخرین تحقیقات در دسترس، استراتژی
-                    تبلیغاتی تدوین‌شده پایه و اساس کار خلاقیت قرار می‌گیرد تا
-                    بهترین راه‌حل و در نهایت نتیجه برای مشتریان حاصل شود.
+                    ما با توجه به خواسته‌ و نیاز مشتریان، آخرین تحقیقات در دسترس
+                    و استراتژی تبلیغاتی تدوین‌شده را پایه و اساس کار خلاقیت قرار
+                    می‌دهیم تا بهترین راه‌حل و نتیجه برای مشتریان حاصل شود.
+                    رسالت راهکارهای تبلیغاتی، رساندن پيام برند به مخاطب با روشی
+                    خلاقانه است.
                   </h3>
                 </div>
               </div>
@@ -338,13 +336,10 @@ export default function Home({ solutions, covers }) {
               <div className={classes.methods}>
                 <h1>Advertising Solutions</h1>
                 <h3>
-                  It is a marketing communication strategic unit, functioning as
-                  a creative agency that offers specialized creative services.
-                  In this unit, with respect to our clients’ needs and by
-                  leveraging the latest research available we develop
-                  advertising strategies that form the basis for our creative
-                  work which ensures we deliver optimal solutions and
-                  outstanding results to our clients.
+                  Based on our client’s needs, the most up-to-date research
+                  available and the developed communication strategy forms the
+                  basis for our creative work to ensure the best solution and
+                  result for the clients are obtained.
                 </h3>
               </div>
             )}
@@ -384,16 +379,17 @@ export default function Home({ solutions, covers }) {
                       fontFamily: "FarsiBold",
                     }}
                   >
-                    راه کارهای رســـــــانه
+                    واحد راه‌کارهای رســـــــانه
                   </h1>
                   <h3>
-                    واحد استراتژیکی در حوزه‌ی ارتباطات بازاریابی و همچون یک
-                    آژانس رسانه ای است که در حوزه‌ی رسانه خدمات تخصصی ارائه
-                    می‌دهد. در این واحد با توجه به خواسته‌ و نیاز مشتریان، با
-                    تاکید ویژه بر استفاده از آخرین تحقیقات دردسترس و
-                    نرم‌افزارهایی که قابلیت اندازه‌گیری و بهینه‌سازی استفاده از
-                    بودجه‌های تبلیغاتی را دارند، تلاش می‌شود تا حد امکان از
-                    بودجه‌های تبلیغاتی به شکلی موثرتر استفاده شود.
+                    ما در آژانس اشاره از آخرین تحقیقات در دسترس و نرم‌افزارهایی
+                    که قابلیت اندازه‌گیری و بهینه‌سازی دارند، استفاده می‌کنیم تا
+                    در حد امکان به شکلی موثرتر از بودجه‌های تبلیغاتی استفاده
+                    شود. خدماتی که در این بخش ارائه می‌گردد عبارت است از:
+                    استراتژی رسانه‌ای متناسب با مخاطب و اهداف کمپین، برنامه‌ریزی
+                    رسانه‌ای با استفاده از نرم‌افزارهای تخصصی و خرید بهینه رسانه
+                    که همگی در راستای اجرای هرچه دقیق‌تر هر کمپین برنامه‌ریزی
+                    می‌شوند.
                   </h3>
                 </div>
               </div>
@@ -401,12 +397,13 @@ export default function Home({ solutions, covers }) {
               <div className={classes.methods}>
                 <h1>Media Solutions</h1>
                 <h3>
-                  It is a marketing communication strategic unit, functioning as
-                  a media agency that offers specialized media services. In this
-                  unit, we focus on meeting clients’ needs and requests by
-                  utilizing the latest research available and advanced software
-                  to measure and optimize advertising budgets, ensuring the most
-                  effective use of media expenditures.
+                  We at Eshareh, benefit from the latest research available as
+                  well as measurement and optimization softwares to ensure
+                  effective allocation of advertising budgets. The services
+                  offered in this unit include developing media strategy
+                  tailored to the target audience and campaign objectives, media
+                  planning using specialized software, and optimal media buying,
+                  leading to the precise execution of each campaign.
                 </h3>
               </div>
             )}
@@ -446,13 +443,15 @@ export default function Home({ solutions, covers }) {
                       fontFamily: "FarsiBold",
                     }}
                   >
-                    راه کارهای دیجیتال
+                    واحد راه‌کارهای دیجیتال
                   </h1>
                   <h3>
-                    واحدی استراتژیک در زمینه بازاریابی دیجیتال که با راهکارهای
-                    خلاق در تبلیغات آنلاین به دلیل جذب مخاطب بیشتر با هزینه‌های
-                    کمتر، می‌تواند این زمینه را فراهم کند تا کیفیت و حضور برند
-                    در بازار هدف پر رنگ و پایدار باشد.
+                    در تبلیغات آنلاین به دلیل جذب مخاطب بیشتر همراه با هزینه‌های
+                    کمتر، می‌شود این زمینه را فراهم کرد تا کیفیت و حضور برند در
+                    بازار هدف پر رنگ و پایدار باشد. هدف نهایی استراتژی بازاریابی
+                    دیجیتال، ارائه کمپین‌های  تبلیغاتی با استفاده از تاکتیک‌ها و
+                    کانال‌های دیجیتالی متعدد است و همین امر می‌تواند نام تجاری
+                    شما را به سمت اهداف بزرگ‌تر هدایت کند.
                   </h3>
                 </div>
               </div>
@@ -460,12 +459,12 @@ export default function Home({ solutions, covers }) {
               <div className={classes.methods}>
                 <h1>Digital Solutions</h1>
                 <h3>
-                  Our Digital Solutions unit is a strategic powerhouse in the
-                  field of digital marketing, delivering innovative online
-                  advertising strategies designed to attract a larger audience
-                  at lower costs which enables us to enhance the quality and
-                  presence of brands among their target markets, ensuring
-                  effective and enduring impact.
+                  Due to the ability to attract much more audience with less
+                  costs, brands could enjoy consistent and effective presence in
+                  specific target markets. The ultimate goal of Digital
+                  Solutions Unit is to offer advertising campaigns that leverage
+                  various digital tactics and channels leading your brand
+                  towards much greater achievements.
                 </h3>
               </div>
             )}

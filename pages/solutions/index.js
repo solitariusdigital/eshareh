@@ -53,16 +53,16 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
 
   const information = {
     advertising: {
-      en: "It is a marketing communication strategic unit, functioning as a creative agency that offers specialized creative services. In this unit, with respect to our clients’ needs and by leveraging the latest research available we develop advertising strategies that form the basis for our creative work which ensures we deliver optimal solutions and outstanding results to our clients. The mission of the Advertising Solutions Unit is to convey the brand message to the target audience in a creative, knowledge-oriented, and up-to-date manner, respecting global standards. Within Eshareh’s Advertising Solutions Unit, we execute a diverse array of advertising campaigns, ranging from large-scale, 360 campaigns to ad hoc and small ones. Additionally, this department offers a comprehensive suite of services, including ideation and execution of diverse digital campaigns, printing services, TV ad production, graphic design, creative copywriting, consultation, planning, and POSM production.",
-      fa: "واحد استراتژیکی در حوزه‌ی ارتباطات بازاریابی و همچون یک آژانس رسانه ای است که در حوزه‌ی رسانه خدمات تخصصی ارائه می‌دهد. در این واحد با توجه به خواسته‌ و نیاز مشتریان، با تاکید ویژه بر استفاده از آخرین تحقیقات در دسترس، استراتژی تبلیغاتی تدوین‌ شده پایه و اساس کار خلاقیت قرار می‌گیرد تا بهترین راه‌حل و در نهایت نتیجه برای مشتریان حاصل شود. رسالت واحد راه‌کارهای تبلیغاتی رساندن پيام برند به مخاطب با روشی خلاقانه، دانش‌مدار و منطبق برشیوه‌های روز با رعايت استانداردهای جهانی است. در واحد راه‌حل‌های تبلیغاتی اشاره طیف وسیعی از انواع کمپین‌های بزرگ و کوچک تبلیغاتی از کمپین 360 درجه گرفته تا کمپین‌های کوچک انجام می‌پذیرد. همچنین در این بخش خدماتی از جمله ایده‌پردازی و اجرای انواع کمپین‌های دیجیتال، خدمات چاپ، ساخت آگهی‌های تلویزیونی، طراحی گرافیک، متون خلاقانه، مشاوره، برنامه‌ریزی و تولید اقلام فروشگاهی نیز انجام می‌شود.",
+      en: "Based on our client’s needs, the most up-to-date research available and the developed communication strategy forms the basis for our creative work to ensure the best solution and result for the clients are obtained. The mission of the Advertising Solutions Unit is to convey the brand message to the target audience in a creative way. Within Eshareh, we execute a diverse array of advertising campaigns, ranging from large-scale, 360 campaigns to ad hoc and small ones. Additionally, this department offers a comprehensive suite of services, including ideation and execution of all kinds of digital campaigns, printing services, TV ad production, graphic design, creative copywriting, consultation, planning, and POSM production.",
+      fa: "ما با توجه به خواسته‌ و نیاز مشتریان، آخرین تحقیقات در دسترس و استراتژی تبلیغاتی تدوین‌شده را پایه و اساس کار خلاقیت قرار می‌دهیم تا بهترین راه‌حل و نتیجه برای مشتریان حاصل شود. رسالت راهکارهای تبلیغاتی، رساندن پيام برند به مخاطب با روشی خلاقانه است. در آژانس اشاره طیف وسیعی از انواع کمپین‌های بزرگ و کوچک تبلیغاتی مثل کمپین ۳۶۰ درجه انجام می‌پذیرد. همچنین در این بخش خدماتی از جمله ایده‌پردازی و اجرای انواع کمپین‌های دیجیتال، خدمات چاپ، ساخت آگهی‌های تلویزیونی، طراحی گرافیک، متون خلاقانه، مشاوره، برنامه‌ریزی و تولید اقلام فروشگاهی نیز انجام می‌شود.",
     },
     media: {
-      en: "It is a marketing communication strategic unit, functioning as a media agency that offers specialized media services. In this unit, we focus on meeting clients’ needs and requests by utilizing the latest research available and advanced software to measure and optimize advertising budgets, ensuring the most effective use of media expenditures. The services offered in this unit include developing media strategy tailored to the target audience and campaign objectives, media planning using specialized software, and optimal media buying to ensure the precise execution of each campaign.",
-      fa: "واحد استراتژیکی در حوزه‌ی ارتباطات بازاریابی و همچون یک آژانس رسانه ای است که در حوزه‌ی رسانه خدمات تخصصی ارائه می‌دهد. در این واحد با توجه به خواسته‌ و نیاز مشتریان، با تاکید ویژه بر استفاده از آخرین تحقیقات دردسترس و نرم‌افزارهایی که قابلیت اندازه‌گیری و بهینه‌سازی استفاده از بودجه‌های تبلیغاتی را دارند، تلاش می‌شود تا حد امکان از بودجه‌های تبلیغاتی به شکلی موثرتر استفاده شود. خدماتی که در این واحد ارائه می‌گردد عبارت است از: استراتژی رسانه‌ای متناسب با مخاطب و اهداف کمپین، برنامه‌ریزی رسانه‌ای با استفاده از نرم‌افزارهای تخصصی و خرید بهینه‌ی رسانه که همگی در راستای اجرای هرچه دقیق‌تر هر کمپین برنامه‌ریزی می‌شوند.",
+      en: "We at Eshareh, benefit from the latest research available as well as measurement and optimization softwares to ensure effective allocation of advertising budgets. The services offered in this unit include developing media strategy tailored to the target audience and campaign objectives, media planning using specialized software, and optimal media buying, leading to the precise execution of each campaign.",
+      fa: "ما در آژانس اشاره از آخرین تحقیقات در دسترس و نرم‌افزارهایی که قابلیت اندازه‌گیری و بهینه‌سازی دارند، استفاده می‌کنیم تا در حد امکان به شکلی موثرتر از بودجه‌های تبلیغاتی استفاده شود. خدماتی که در این بخش ارائه می‌گردد عبارت است از: استراتژی رسانه‌ای متناسب با مخاطب و اهداف کمپین، برنامه‌ریزی رسانه‌ای با استفاده از نرم‌افزارهای تخصصی و خرید بهینه رسانه که همگی در راستای اجرای هرچه دقیق‌تر هر کمپین برنامه‌ریزی می‌شوند.",
     },
     digital: {
-      en: "Our Digital Solutions unit is a strategic powerhouse in the field of digital marketing, delivering innovative online advertising strategies designed to attract a larger audience at lower costs which enables us to enhance the quality and presence of brands among their target markets, ensuring effective and enduring impact. The goal of a digital marketing strategy is to leverage various digital tactics and channels to execute advertising campaigns that propel brands toward greater achievements.",
-      fa: "واحدی استراتژیک در زمینه بازاریابی دیجیتال که با راهکارهای خلاق در تبلیغات آنلاین به دلیل جذب مخاطب بیشتر با هزینه‌های کمتر، می‌تواند این زمینه را فراهم کند تا کیفیت و حضور برند در بازار هدف پر رنگ و پایدار باشد. هدف نهایی استراتژی بازاریابی دیجیتال، ارایه‌ی کمپین‌های  تبلیغاتی با استفاده از تاکتیک‌ها و کانال‌های دیجیتالی متعدد است و همین امر می‌تواند نام تجاری شما  را به سمت اهداف بزرگ‌تر هدایت کند.",
+      en: "Due to the ability to attract much more audience with less costs, brands could enjoy consistent and effective presence in specific target markets. The ultimate goal of Digital Solutions Unit is to offer advertising campaigns that leverage various digital tactics and channels leading your brand towards much greater achievements.",
+      fa: "در تبلیغات آنلاین به دلیل جذب مخاطب بیشتر همراه با هزینه‌های کمتر، می‌شود این زمینه را فراهم کرد تا کیفیت و حضور برند در بازار هدف پر رنگ و پایدار باشد. هدف نهایی استراتژی بازاریابی دیجیتال، ارائه کمپین‌های  تبلیغاتی با استفاده از تاکتیک‌ها و کانال‌های دیجیتالی متعدد است و همین امر می‌تواند نام تجاری شما را به سمت اهداف بزرگ‌تر هدایت کند.",
     },
   };
 
@@ -168,7 +168,7 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
               >
                 {language ? (
                   <h3>
-                    به عنوان مثال یک استراتژی دیجیتال مارکتینگ به شما امکان
+                    به عنوان مثال، یک استراتژی دیجیتال مارکتینگ به شما امکان
                     می‌دهد از کانال‌های دیجیتالی مختلف مانند:
                   </h3>
                 ) : (
@@ -217,14 +217,13 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
                   </h3>
                 ) : (
                   <h3>
-                    These channels help you connect with current customers and
-                    engage with potential customers interested in your products
-                    or services.
+                    to connect with current customers and engage with potential
+                    customers interested in your products or services.
                   </h3>
                 )}
                 {language ? (
                   <h3>
-                    ما در مجموعه‌ی تبلیغاتی اشاره با همراهی یک تیم جوان و پویا،
+                    ما در مجموعه تبلیغاتی اشاره با همراهی یک تیم جوان و پویا،
                     منتظرتان هستیم تا ارتباطی درست با شما و مخاطبین‌تان برقرار
                     کنیم.
                   </h3>
