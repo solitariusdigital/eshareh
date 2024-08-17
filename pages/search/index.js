@@ -107,49 +107,52 @@ export default function Search({ activeSolutions }) {
           </p>
         )}
         <div className={classes.gridList}>
-          {solutions.map((project, index) => {
-            const { title } = project[languageType];
-            const { coverMedia } = project;
-            return (
-              <Fragment key={index}>
-                <div
-                  className={classes.project}
-                  onClick={() => directSolution(project)}
-                >
-                  <div className={classes.box}>
-                    {coverMedia.type === "image" ? (
-                      <Image
-                        className={classes.image}
-                        src={coverMedia.link}
-                        placeholder="blur"
-                        blurDataURL={coverMedia.link}
-                        alt={title}
-                        layout="fill"
-                        objectFit="cover"
-                        as="image"
-                        priority
-                      />
-                    ) : (
-                      <video
-                        className={classes.video}
-                        src={coverMedia.link + "#t=0.1"}
-                        playsInline
-                        preload="metadata"
-                      />
-                    )}
-                  </div>
+          {search &&
+            solutions.map((project, index) => {
+              const { title } = project[languageType];
+              const { coverMedia } = project;
+              return (
+                <Fragment key={index}>
                   <div
-                    className={language ? classes.title : classes.titleReverse}
-                    style={{
-                      fontFamily: language ? "FarsiLight" : "EnglishLight",
-                    }}
+                    className={classes.project}
+                    onClick={() => directSolution(project)}
                   >
-                    <h3>{title}</h3>
+                    <div className={classes.box}>
+                      {coverMedia.type === "image" ? (
+                        <Image
+                          className={classes.image}
+                          src={coverMedia.link}
+                          placeholder="blur"
+                          blurDataURL={coverMedia.link}
+                          alt={title}
+                          layout="fill"
+                          objectFit="cover"
+                          as="image"
+                          priority
+                        />
+                      ) : (
+                        <video
+                          className={classes.video}
+                          src={coverMedia.link + "#t=0.1"}
+                          playsInline
+                          preload="metadata"
+                        />
+                      )}
+                    </div>
+                    <div
+                      className={
+                        language ? classes.title : classes.titleReverse
+                      }
+                      style={{
+                        fontFamily: language ? "FarsiLight" : "EnglishLight",
+                      }}
+                    >
+                      <h3>{title}</h3>
+                    </div>
                   </div>
-                </div>
-              </Fragment>
-            );
-          })}
+                </Fragment>
+              );
+            })}
         </div>
       </div>
     </Fragment>
