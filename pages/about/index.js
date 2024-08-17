@@ -1,8 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
 import Image from "next/legacy/image";
-import { enToFaDigits } from "@/services/utility";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -49,6 +49,22 @@ export default function About() {
     return count;
   };
 
+  const setInformationHeight = () => {
+    let height = "";
+    switch (screenSize) {
+      case "desktop":
+        height = language ? "25vh" : "40vh";
+        break;
+      case "tablet":
+        height = language ? "250px" : "300px";
+        break;
+      case "mobile":
+        height = language ? "250px" : "380px";
+        break;
+    }
+    return height;
+  };
+
   const updateIndex = (swiperInstance) => {
     if (swiperInstance === null) return;
     const currentSlide = swiperInstance?.realIndex;
@@ -85,6 +101,7 @@ export default function About() {
           className={
             language ? classes.information : classes.informationReverse
           }
+          style={{ height: setInformationHeight() }}
         >
           <h1>{language ? "تیم" : "Team"}</h1>
           {language ? (
@@ -97,11 +114,11 @@ export default function About() {
                 اشاره یک استودیوی طراحی چند رشته ای و مستقل است
               </h3>
               <p>
-                آژانس ارتباط تصویر اشاره، به عنوان یک آژانس تبلیغاتی از سال{" "}
-                <span>{enToFaDigits(1376)}</span> فعالیت خود را آغاز کرده است.
-                در طی این سال‌ها در نتیجه‌ی فرآیندی ارگانیک، به یک آژانس
-                ارتباطات بازاریابی تمام خدمت با رویکردی خلاق و راه‌حل‌ محور
-                تبدیل شده است.
+                شاکله آژانس اشاره از تیمی متخصص و منحصربه‌فرد تشکیل شده است که
+                در کنار یکدیگر و با همکاری هم راهکارهایی خلاقانه ارائه می‌دهند و
+                رویکردی راه‌حل‌محور دارند تا پاسخگوی نیاز مشتریانمان باشند. برای
+                همین، کار تیمی برای آژانس تمام‌ خدمت اشاره در اولویت بوده و
+                همیشه یکی از ارزش‌های اصلی این سازمان به حساب می‌آید.
               </p>
             </div>
           ) : (
@@ -115,11 +132,12 @@ export default function About() {
                 studio
               </h3>
               <p>
-                Eshareh image communication agency has started its activity as
-                an advertising agency since 1996. Over the years, as a result of
-                an organic process, it has evolved into a full-service marketing
-                communications agency with a creative and solution-oriented
-                approach.
+                Eshareh's structure is made up of a specialized and unique team
+                of experts who collaborate together to provide creative
+                solutions and through a solution-centric approach, meet the
+                needs of the clients. For this, teamwork is a top priority for
+                Eshareh full service agency and is always considered as one of
+                the fundamental values of the organization.
               </p>
             </div>
           )}

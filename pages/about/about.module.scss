@@ -4,17 +4,16 @@
 .container {
   margin: auto;
   color: config.$black;
-  background: linear-gradient(to bottom, config.$white 50%, config.$yellow 50%);
   margin-top: 150px;
   height: calc(100vh - 150px);
 
   @include mixins.mobile {
     width: 100%;
-    min-height: 770px;
+    min-height: 750px;
   }
   @include mixins.tablet {
     width: 100%;
-    min-height: 770px;
+    min-height: 750px;
   }
 }
 
@@ -27,19 +26,18 @@
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
   margin: auto;
-  height: 30vh;
 
   @include mixins.fourK {
-    height: 20vh;
+    height: 20vh !important;
   }
   @include mixins.mobile {
     width: calc(100% - 24px);
     flex-direction: column;
-    height: 350px;
+    justify-content: flex-start;
   }
   @include mixins.tablet {
     flex-direction: column;
-    height: 350px;
+    justify-content: flex-start;
     width: config.$content-widthTablet;
   }
 
@@ -71,21 +69,22 @@
 }
 
 .swiperContainer {
-  height: 70vh;
+  height: 55vh;
   text-align: center;
+  background: config.$yellow;
+
+  @include mixins.fourK {
+    height: 70vh;
+  }
 
   .swiper {
-    height: 50%;
+    height: 60%;
 
     background: linear-gradient(
       to bottom,
       config.$black 70%,
       config.$yellow 0%
     );
-
-    @include mixins.fourK {
-      height: 60%;
-    }
   }
 
   .swiperSlide {
