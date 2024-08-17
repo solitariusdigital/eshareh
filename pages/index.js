@@ -9,7 +9,6 @@ import Image from "next/legacy/image";
 import arrow from "@/assets/arrow.svg";
 import moreArrow from "@/assets/moreArrow.svg";
 import moreArrowHover from "@/assets/moreArrowHover.svg";
-import homeone from "@/assets/homeone.png";
 import hometwo from "@/assets/hometwo.png";
 import { enToFaDigits } from "@/services/utility";
 import { NextSeo } from "next-seo";
@@ -290,16 +289,15 @@ export default function Home({ solutions, covers }) {
           )}
         </div>
       </section>
-      <section className={classes.imageContainerOne}>
-        <Image
-          src={homeone}
-          blurDataURL={homeone}
-          placeholder="blur"
-          alt="image"
-          layout="fill"
-          objectFit="contain"
-          as="image"
-          priority
+      <section className={classes.animeContainer}>
+        <video
+          className={classes.anime}
+          src={"https://eshareh.storage.iran.liara.space/anime_home.mp4"}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
         />
       </section>
       <section
@@ -500,7 +498,7 @@ export default function Home({ solutions, covers }) {
           </div>
         </div>
       </section>
-      <section className={classes.imageContainerTwo}>
+      <section className={classes.imageContainer}>
         <Image
           src={hometwo}
           blurDataURL={hometwo}

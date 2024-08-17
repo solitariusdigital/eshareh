@@ -113,11 +113,17 @@
   }
 }
 
-.imageContainerOne,
-.imageContainerTwo {
-  position: relative;
-  background: linear-gradient(to bottom, config.$white 50%, config.$black 50%);
+.animeContainer {
+  display: flex;
+  justify-content: center;
   height: 300px;
+  margin-top: 50px;
+  background: linear-gradient(to bottom, config.$white 50%, config.$black 50%);
+
+  .anime {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .arrowDown {
@@ -130,7 +136,8 @@
   transform: rotate(90deg);
 }
 
-.imageContainerTwo {
+.imageContainer {
+  position: relative;
   height: 600px;
   background: linear-gradient(to bottom, config.$black 50%, config.$white 50%);
 
