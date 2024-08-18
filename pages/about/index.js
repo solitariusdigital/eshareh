@@ -53,13 +53,13 @@ export default function About() {
     let height = "";
     switch (screenSize) {
       case "desktop":
-        height = language ? "25vh" : "40vh";
+        height = language ? "180px" : "270px";
         break;
       case "tablet":
-        height = language ? "250px" : "300px";
+        height = language ? "200px" : "250px";
         break;
       case "mobile":
-        height = language ? "250px" : "380px";
+        height = language ? "300px" : "400px";
         break;
     }
     return height;

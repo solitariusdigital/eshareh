@@ -16,7 +16,7 @@ $screen-fourK: 6000px;
   }
 }
 @mixin desktop {
-  @media (min-width: #{$screen-mobile} ) and (max-width: #{$screen-large}) {
+  @media (min-width: #{$screen-tablet} ) and (max-width: #{$screen-large}) {
     @content;
   }
 }

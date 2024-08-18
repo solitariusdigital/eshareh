@@ -51,15 +51,10 @@
     }
 
     @include mixins.mobile {
-      margin-top: 40px;
       width: calc(100% - 24px);
-      height: 300px;
     }
-
     @include mixins.tablet {
-      margin-top: 40px;
       width: calc(100% - 24px);
-      height: 300px;
     }
   }
 }
@@ -69,7 +64,7 @@
 }
 
 .swiperContainer {
-  height: 55vh;
+  height: 60vh;
   text-align: center;
   background: config.$yellow;
 
@@ -101,12 +96,15 @@
       top: 0px;
     }
 
-    @include mixins.fourK {
-      margin-top: 80px;
-    }
     @include mixins.mobile {
       width: 100%;
       margin-top: 20px;
+    }
+    @include mixins.desktop {
+      margin-top: 30px;
+    }
+    @include mixins.fourK {
+      margin-top: 80px;
     }
   }
 }
