@@ -91,13 +91,10 @@
   width: 260px;
   direction: ltr;
   gap: 0px;
+  left: 40px;
 
-  @include mixins.desktop {
-    left: 40px;
-  }
-
-  @include mixins.fourK {
-    left: 40px;
+  @include mixins.mobile {
+    left: 0px;
   }
 }
 

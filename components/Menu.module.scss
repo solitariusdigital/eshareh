@@ -204,6 +204,8 @@
 
     @include mixins.tablet {
       width: config.$content-widthTablet;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
     }
 
     @include mixins.mobile {
