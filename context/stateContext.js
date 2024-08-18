@@ -11,7 +11,7 @@ export const StateProvider = (props) => {
   const [displayMenu, setDisplayMenu] = useState(true);
   const [displayFooter, setFooter] = useState(true);
   const [screenSize, setScreenSize] = useState(
-    "desktop" || "tablet" || "mobile"
+    "desktop" || "tablet-landscape" || "tablet-portrait" || "mobile"
   );
   const [solutionsCategory, setSolutionsCategory] = useState("all");
 

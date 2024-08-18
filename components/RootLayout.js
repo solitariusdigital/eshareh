@@ -34,13 +34,18 @@ export default function RootLayout({ children }) {
       let elemHeight = element.getBoundingClientRect().height;
       setHeroHeight(elemHeight);
     }
-    if (window.innerWidth < 700) {
-      setScreenSize("mobile");
-    } else if (window.innerWidth > 700 && window.innerWidth < 1400) {
-      setScreenSize("tablet");
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    let screenSize;
+    if (width < 700) {
+      screenSize = "mobile";
+    } else if (width >= 700 && width < 1400) {
+      screenSize = width > height ? "tablet-landscape" : "tablet-portrait";
     } else {
-      setScreenSize("desktop");
+      screenSize = "desktop";
     }
+    setScreenSize(screenSize);
   };
 
   useEffect(() => {

@@ -9,11 +9,25 @@
 
   @include mixins.mobile {
     width: 100%;
-    min-height: 750px;
+    min-height: 770px;
   }
   @include mixins.tablet {
     width: 100%;
-    min-height: 750px;
+    min-height: 770px;
+  }
+  @include mixins.desktop {
+    background: linear-gradient(
+      to bottom,
+      config.$white 50%,
+      config.$yellow 50%
+    );
+  }
+  @include mixins.fourK {
+    background: linear-gradient(
+      to bottom,
+      config.$white 50%,
+      config.$yellow 50%
+    );
   }
 }
 
@@ -28,7 +42,7 @@
   margin: auto;
 
   @include mixins.fourK {
-    height: 20vh !important;
+    height: 20vh;
   }
   @include mixins.mobile {
     width: calc(100% - 24px);
@@ -53,6 +67,7 @@
     @include mixins.mobile {
       width: calc(100% - 24px);
     }
+
     @include mixins.tablet {
       width: calc(100% - 24px);
     }
@@ -64,22 +79,22 @@
 }
 
 .swiperContainer {
-  height: 60vh;
+  height: 50vh;
   text-align: center;
   background: config.$yellow;
 
-  @include mixins.fourK {
-    height: 70vh;
-  }
-
   .swiper {
-    height: 60%;
+    height: 70%;
 
     background: linear-gradient(
       to bottom,
       config.$black 70%,
       config.$yellow 0%
     );
+
+    @include mixins.fourK {
+      height: 80%;
+    }
   }
 
   .swiperSlide {
@@ -93,18 +108,14 @@
 
     .delete {
       position: absolute;
-      top: 0px;
+      top: 20px;
     }
 
-    @include mixins.mobile {
-      width: 100%;
-      margin-top: 20px;
-    }
-    @include mixins.desktop {
-      margin-top: 30px;
-    }
     @include mixins.fourK {
       margin-top: 80px;
+    }
+    @include mixins.mobile {
+      width: 100%;
     }
   }
 }

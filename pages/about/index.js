@@ -39,8 +39,11 @@ export default function About() {
       case "desktop":
         count = 11;
         break;
-      case "tablet":
+      case "tablet-landscape":
         count = 7;
+        break;
+      case "tablet-portrait":
+        count = 5;
         break;
       case "mobile":
         count = 3;
@@ -55,11 +58,12 @@ export default function About() {
       case "desktop":
         height = language ? "180px" : "270px";
         break;
-      case "tablet":
-        height = language ? "200px" : "250px";
+      case "tablet-landscape":
+      case "tablet-portrait":
+        height = language ? "200px" : "270px";
         break;
       case "mobile":
-        height = language ? "300px" : "400px";
+        height = language ? "250px" : "380px";
         break;
     }
     return height;
