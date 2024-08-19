@@ -62,7 +62,6 @@ export default function Profession() {
             </h3>
           )}
         </div>
-
         <div
           className={
             language ? classes.information : classes.informationReverse

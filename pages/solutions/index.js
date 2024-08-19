@@ -11,7 +11,6 @@ import solutionModel from "@/models/Solution";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Tooltip from "@mui/material/Tooltip";
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
 export default function Solutions({ activeSolutions, adminSolutions }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -61,8 +60,8 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
       fa: "ما در آژانس اشاره از آخرین تحقیقات در دسترس و نرم‌افزارهایی که قابلیت اندازه‌گیری و بهینه‌سازی دارند، استفاده می‌کنیم تا در حد امکان به شکلی موثرتر از بودجه‌های تبلیغاتی استفاده شود. خدماتی که در این بخش ارائه می‌گردد عبارت است از: استراتژی رسانه‌ای متناسب با مخاطب و اهداف کمپین، برنامه‌ریزی رسانه‌ای با استفاده از نرم‌افزارهای تخصصی و خرید بهینه رسانه که همگی در راستای اجرای هرچه دقیق‌تر هر کمپین برنامه‌ریزی می‌شوند.",
     },
     digital: {
-      en: "Due to the ability to attract much more audience with less costs, brands could enjoy consistent and effective presence in specific target markets. The ultimate goal of Digital Solutions Unit is to offer advertising campaigns that leverage various digital tactics and channels leading your brand towards much greater achievements.",
-      fa: "در تبلیغات آنلاین به دلیل جذب مخاطب بیشتر همراه با هزینه‌های کمتر، می‌شود این زمینه را فراهم کرد تا کیفیت و حضور برند در بازار هدف پر رنگ و پایدار باشد. هدف نهایی استراتژی بازاریابی دیجیتال، ارائه کمپین‌های  تبلیغاتی با استفاده از تاکتیک‌ها و کانال‌های دیجیتالی متعدد است و همین امر می‌تواند نام تجاری شما را به سمت اهداف بزرگ‌تر هدایت کند.",
+      en: "The ultimate goal of Digital Solutions Unit is to design and develop advertising campaigns that leverage various digital tactics and channels leading your brand towards much greater achievements. As an instance, a digital marketing strategy enables you to use various digital channels such as social media, Pay-per-Click(PPC, Search Engine Optimization (SEO), Email Marketing ,… to connect with current customers and engage with potential customers interested in your products or services.",
+      fa: "هدف نهایی استراتژی بازاریابی دیجیتال،  تهیه و تنظیم کمپین‌های  تبلیغاتی با استفاده از تاکتیک‌ها و کانال‌های دیجیتالی متعدد است و همین امر می‌تواند نام تجاری شما را به سمت اهداف بزرگ‌تر هدایت کند. به عنوان مثال، یک استراتژی دیجیتال مارکتینگ به شما امکان می‌دهد از کانال‌های دیجیتالی مختلف مانند رسانه‌های اجتماعی، پرداخت به ازای کلیک، بهینه‌سازی موتور جستجو، بازاریابی ایمیلی و … استفاده کنید تا با مشتریان فعلی و افراد علاقه‌مند به محصولات یا خدمات‌تان در ارتباط باشید.",
     },
   };
 
@@ -166,61 +165,6 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
                 }}
                 className={classes.extraDetails}
               >
-                {language ? (
-                  <h3>
-                    به عنوان مثال، یک استراتژی دیجیتال مارکتینگ به شما امکان
-                    می‌دهد از کانال‌های دیجیتالی مختلف مانند:
-                  </h3>
-                ) : (
-                  <h3>
-                    As an instance, a digital marketing strategy enables you to
-                    use various digital channels, such as:
-                  </h3>
-                )}
-
-                <div className={classes.row}>
-                  <RadioButtonUncheckedIcon sx={{ fontSize: 10 }} />
-                  {language ? (
-                    <h3>رسانه‌های اجتماعی</h3>
-                  ) : (
-                    <h3>Social Media</h3>
-                  )}
-                </div>
-                <div className={classes.row}>
-                  <RadioButtonUncheckedIcon sx={{ fontSize: 10 }} />
-                  {language ? (
-                    <h3>پرداخت به ازای کلیک</h3>
-                  ) : (
-                    <h3>Pay-per-Click (PPC)</h3>
-                  )}
-                </div>
-                <div className={classes.row}>
-                  <RadioButtonUncheckedIcon sx={{ fontSize: 10 }} />
-                  {language ? (
-                    <h3>بهینه‌سازی موتور جستجو</h3>
-                  ) : (
-                    <h3>Search Engine Optimization (SEO)</h3>
-                  )}
-                </div>
-                <div className={classes.row}>
-                  <RadioButtonUncheckedIcon sx={{ fontSize: 10 }} />
-                  {language ? (
-                    <h3>بازاریابی ایمیلی و ...</h3>
-                  ) : (
-                    <h3>Email Marketing and …</h3>
-                  )}
-                </div>
-                {language ? (
-                  <h3>
-                    استفاده کنید تا با مشتریان فعلی و افراد علاقه‌مند به محصولات
-                    یا خدمات‌تان در ارتباط باشید.
-                  </h3>
-                ) : (
-                  <h3>
-                    to connect with current customers and engage with potential
-                    customers interested in your products or services.
-                  </h3>
-                )}
                 {language ? (
                   <h3>
                     ما در مجموعه تبلیغاتی اشاره با همراهی یک تیم جوان و پویا،

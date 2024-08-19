@@ -385,11 +385,7 @@ export default function Home({ solutions, covers }) {
                     ما در آژانس اشاره از آخرین تحقیقات در دسترس و نرم‌افزارهایی
                     که قابلیت اندازه‌گیری و بهینه‌سازی دارند، استفاده می‌کنیم تا
                     در حد امکان به شکلی موثرتر از بودجه‌های تبلیغاتی استفاده
-                    شود. خدماتی که در این بخش ارائه می‌گردد عبارت است از:
-                    استراتژی رسانه‌ای متناسب با مخاطب و اهداف کمپین، برنامه‌ریزی
-                    رسانه‌ای با استفاده از نرم‌افزارهای تخصصی و خرید بهینه رسانه
-                    که همگی در راستای اجرای هرچه دقیق‌تر هر کمپین برنامه‌ریزی
-                    می‌شوند.
+                    شود.
                   </h3>
                 </div>
               </div>
@@ -399,11 +395,7 @@ export default function Home({ solutions, covers }) {
                 <h3>
                   We at Eshareh, benefit from the latest research available as
                   well as measurement and optimization softwares to ensure
-                  effective allocation of advertising budgets. The services
-                  offered in this unit include developing media strategy
-                  tailored to the target audience and campaign objectives, media
-                  planning using specialized software, and optimal media buying,
-                  leading to the precise execution of each campaign.
+                  effective allocation of advertising budgets.
                 </h3>
               </div>
             )}
@@ -446,12 +438,10 @@ export default function Home({ solutions, covers }) {
                     واحد راه‌کارهای دیجیتال
                   </h1>
                   <h3>
-                    در تبلیغات آنلاین به دلیل جذب مخاطب بیشتر همراه با هزینه‌های
-                    کمتر، می‌شود این زمینه را فراهم کرد تا کیفیت و حضور برند در
-                    بازار هدف پر رنگ و پایدار باشد. هدف نهایی استراتژی بازاریابی
-                    دیجیتال، ارائه کمپین‌های  تبلیغاتی با استفاده از تاکتیک‌ها و
-                    کانال‌های دیجیتالی متعدد است و همین امر می‌تواند نام تجاری
-                    شما را به سمت اهداف بزرگ‌تر هدایت کند.
+                    هدف نهایی استراتژی بازاریابی دیجیتال، تهیه و تنظیم
+                    کمپین‌های  تبلیغاتی با استفاده از تاکتیک‌ها و کانال‌های
+                    دیجیتالی متعدد است و همین امر می‌تواند نام تجاری شما را به
+                    سمت اهداف بزرگ‌تر هدایت کند.
                   </h3>
                 </div>
               </div>
@@ -459,12 +449,10 @@ export default function Home({ solutions, covers }) {
               <div className={classes.methods}>
                 <h1>Digital Solutions</h1>
                 <h3>
-                  Due to the ability to attract much more audience with less
-                  costs, brands could enjoy consistent and effective presence in
-                  specific target markets. The ultimate goal of Digital
-                  Solutions Unit is to offer advertising campaigns that leverage
-                  various digital tactics and channels leading your brand
-                  towards much greater achievements.
+                  The ultimate goal of Digital Solutions Unit is to design and
+                  develop advertising campaigns that leverage various digital
+                  tactics and channels leading your brand towards much greater
+                  achievements.
                 </h3>
               </div>
             )}
