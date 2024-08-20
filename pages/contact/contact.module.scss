@@ -47,6 +47,14 @@
     width: 90%;
   }
 
+  h3 {
+    margin-bottom: 10px;
+
+    @include mixins.mobile {
+      font-size: 1.2rem;
+    }
+  }
+
   .contactGraphic {
     position: relative;
     height: 400px;
