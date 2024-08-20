@@ -594,7 +594,7 @@ export default function SolutionsForm() {
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
-                راه حل
+                راه‌کار
               </p>
               <CloseIcon
                 className="icon"
