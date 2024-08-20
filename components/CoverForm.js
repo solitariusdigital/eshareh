@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
@@ -148,11 +148,11 @@ export default function CoverForm() {
               />
             </div>
             <input
-              placeholder="fdb714"
               style={{
                 fontFamily: "English",
               }}
               type="text"
+              placeholder="fdb714"
               id="color"
               name="color"
               onChange={(e) => setColor(e.target.value)}

@@ -1,9 +1,9 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./CardGrid.module.scss";
 import Image from "next/legacy/image";
 import Router from "next/router";
-import { replaceSpacesAndHyphens, sliceString } from "@/services/utility";
+import { replaceSpacesAndHyphens } from "@/services/utility";
 
 export default function CardGrid({ solutions, direction }) {
   const { language, setLanguage } = useContext(StateContext);

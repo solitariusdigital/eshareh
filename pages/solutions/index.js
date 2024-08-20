@@ -15,7 +15,6 @@ import Tooltip from "@mui/material/Tooltip";
 export default function Solutions({ activeSolutions, adminSolutions }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
-  const { screenSize, setScreenSize } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { solutionsCategory, setSolutionsCategory } = useContext(StateContext);

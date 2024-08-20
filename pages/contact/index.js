@@ -8,7 +8,6 @@ import contactGraphic from "@/assets/contactGraphic.png";
 
 export default function Contact() {
   const { language, setLanguage } = useContext(StateContext);
-  const { screenSize, setScreenSize } = useContext(StateContext);
 
   const locationLink =
     "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7743132,51.3941519,17z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu";
@@ -36,7 +35,7 @@ export default function Contact() {
             src={contact}
             blurDataURL={contact}
             placeholder="blur"
-            alt="map"
+            alt="eshareh"
             layout="fill"
             objectFit="cover"
             as="image"

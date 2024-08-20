@@ -39,7 +39,6 @@ export default function Solution({ solutions, projectTitle }) {
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
-  const { screenSize, setScreenSize } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
 
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
