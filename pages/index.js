@@ -15,6 +15,7 @@ import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 import coverModel from "@/models/Cover";
+import AutoPlaySilentVideo from "@/components/AutoPlaySilentVideo";
 
 export default function Home({ solutions, covers }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -291,16 +292,7 @@ export default function Home({ solutions, covers }) {
         </div>
       </section>
       <section className={classes.animeContainer}>
-        <video
-          className={classes.anime}
-          src={animeSrc + "#t=0.001"}
-          autoPlay="autoplay"
-          playsInLine="playsinline"
-          loop="true"
-          muted="true"
-          playsInline
-          preload="metadata"
-        />
+        <AutoPlaySilentVideo animeSrc={animeSrc} />
       </section>
       <section
         className={classes.container}
