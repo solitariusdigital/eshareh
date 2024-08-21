@@ -5,12 +5,17 @@ import classes from "./profession.module.scss";
 import { NextSeo } from "next-seo";
 import Image from "next/legacy/image";
 import profession from "@/assets/profession.png";
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import CircleIcon from "@mui/icons-material/Circle";
 
 export default function Profession() {
   const { language, setLanguage } = useContext(StateContext);
 
-  const position = { position: "relative", top: language ? "8px" : "12px" };
+  const position = {
+    position: "relative",
+    top: language ? "13px" : "18px",
+    left: language ? "10px" : "-10px",
+  };
+
   return (
     <Fragment>
       <NextSeo
@@ -39,7 +44,7 @@ export default function Profession() {
           }
         >
           {language ? (
-            <h3
+            <h2
               style={{
                 fontFamily: "FarsiBold",
               }}
@@ -48,9 +53,9 @@ export default function Profession() {
               ارائه می‌دهد و به معنای واقعی کلمه، آژانسی تمام‌خدمت است.
               خدمت‌رسانی ما در اشاره هم متمایز است و هم کارآمد، چون کار ما مبتنی
               بر اصول زیر است:
-            </h3>
+            </h2>
           ) : (
-            <h3
+            <h2
               style={{
                 fontFamily: "EnglishMedium",
               }}
@@ -59,7 +64,7 @@ export default function Profession() {
               of services and in the true sense of the word is a "full-service"
               agency. Our service provision at Eshareh is both unique and
               effective since it is grounded in couple of core principles:
-            </h3>
+            </h2>
           )}
         </div>
         <div
@@ -68,25 +73,28 @@ export default function Profession() {
           }
         >
           <div className={classes.row}>
-            <RadioButtonUncheckedIcon style={position} sx={{ fontSize: 10 }} />
+            <CircleIcon
+              style={position}
+              sx={{ fontSize: 10, color: "#fdb714" }}
+            />
             {language ? (
-              <h3
+              <h2
                 style={{
                   fontFamily: "FarsiLight",
                 }}
               >
                 تلاش و باور ما این است که رابطه ما با مشتریانمان، رابطه‌ای
                 بلندمدت، برد-برد و وفادارانه باشد.
-              </h3>
+              </h2>
             ) : (
-              <h3
+              <h2
                 style={{
                   fontFamily: "EnglishLight",
                 }}
               >
                 We believe in and strive for a long-lasting, win-win
                 relationship with our clients.
-              </h3>
+              </h2>
             )}
           </div>
         </div>
@@ -96,9 +104,12 @@ export default function Profession() {
           }
         >
           <div className={classes.row}>
-            <RadioButtonUncheckedIcon style={position} sx={{ fontSize: 10 }} />
+            <CircleIcon
+              style={position}
+              sx={{ fontSize: 10, color: "#fdb714" }}
+            />
             {language ? (
-              <h3
+              <h2
                 style={{
                   fontFamily: "FarsiLight",
                 }}
@@ -108,9 +119,9 @@ export default function Profession() {
                 موقع کهنه نمی‌شود و آن را با استانداردهای جهانی، تجربه خود و
                 شناخت استراتژیکی که از بازار کسب و کار ایران داریم، همراه
                 می‌کنیم.
-              </h3>
+              </h2>
             ) : (
-              <h3
+              <h2
                 style={{
                   fontFamily: "EnglishLight",
                 }}
@@ -120,7 +131,7 @@ export default function Profession() {
                 us, creativity never loses novelty as we continuously align it
                 with global standards, our expertise and our strategic insights
                 into the Iranian business market.
-              </h3>
+              </h2>
             )}
           </div>
         </div>
@@ -130,9 +141,12 @@ export default function Profession() {
           }
         >
           <div className={classes.row}>
-            <RadioButtonUncheckedIcon style={position} sx={{ fontSize: 10 }} />
+            <CircleIcon
+              style={position}
+              sx={{ fontSize: 10, color: "#fdb714" }}
+            />
             {language ? (
-              <h3
+              <h2
                 style={{
                   fontFamily: "FarsiLight",
                 }}
@@ -142,9 +156,9 @@ export default function Profession() {
                 ورکشاپ‌های تخصصی برگزار می‌کنیم. ما متکی به دانش روز صنعت
                 بازاریابی و تبلیغات هستیم و  اساتید ممتاز این حوزه‌ها همراهی‌مان
                 می‌کنند.
-              </h3>
+              </h2>
             ) : (
-              <h3
+              <h2
                 style={{
                   fontFamily: "EnglishLight",
                 }}
@@ -155,7 +169,7 @@ export default function Profession() {
                 we highly rely on up-to-date global advertising and marketing
                 knowledge and we are accompanied by best-in-class tutors and
                 mentors in these fields.
-              </h3>
+              </h2>
             )}
           </div>
         </div>
@@ -165,9 +179,12 @@ export default function Profession() {
           }
         >
           <div className={classes.row}>
-            <RadioButtonUncheckedIcon style={position} sx={{ fontSize: 10 }} />
+            <CircleIcon
+              style={position}
+              sx={{ fontSize: 10, color: "#fdb714" }}
+            />
             {language ? (
-              <h3
+              <h2
                 style={{
                   fontFamily: "FarsiLight",
                 }}
@@ -190,9 +207,9 @@ export default function Profession() {
                 </span>{" "}
                 (محل فروش، سمپلینگ، کمپین‌های نمایشگاهی، غرفه‌سازی، برگزاری
                 رویداد و …) است.
-              </h3>
+              </h2>
             ) : (
-              <h3
+              <h2
                 style={{
                   fontFamily: "EnglishLight",
                 }}
@@ -209,7 +226,7 @@ export default function Profession() {
                 designing and executing Below the Line (BTL) campaigns including
                 but not limited to Point of Sale, sampling, holding exhibitions,
                 booth construction, and event organization.
-              </h3>
+              </h2>
             )}
           </div>
         </div>

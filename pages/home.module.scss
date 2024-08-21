@@ -123,6 +123,12 @@
   .anime {
     height: 100%;
     width: 100%;
+
+    @include mixins.mobile {
+      height: 300px;
+      width: 350px;
+      object-fit: cover;
+    }
   }
 }
 

@@ -107,7 +107,7 @@ export default function About() {
           }
           style={{ height: setInformationHeight() }}
         >
-          <h1>{language ? "تیم" : "Team"}</h1>
+          <h1>{language ? "تیم مدیران" : "Management Team"}</h1>
           {language ? (
             <div>
               <h3

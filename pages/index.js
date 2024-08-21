@@ -25,6 +25,8 @@ export default function Home({ solutions, covers }) {
   const [hoverTwo, setHoverTwo] = useState(false);
   const [hoverThree, setHoverThree] = useState(false);
 
+  const animeSrc = "https://eshareh.storage.iran.liara.space/anime_home.mp4";
+
   const divideArray = (solutions) => {
     const dividedArrays = [];
     let chunkLength = screenSize === "desktop" ? 5 : 10;
@@ -291,9 +293,7 @@ export default function Home({ solutions, covers }) {
       <section className={classes.animeContainer}>
         <video
           className={classes.anime}
-          src={
-            "https://eshareh.storage.iran.liara.space/anime_home.mp4#t=0.001"
-          }
+          src={animeSrc + "#t=0.001"}
           autoPlay
           loop
           muted

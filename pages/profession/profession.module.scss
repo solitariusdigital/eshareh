@@ -29,6 +29,10 @@
       display: flex;
       margin: 5px 0px;
 
+      @include mixins.mobile {
+        padding: 0px 10px;
+      }
+
       h3 {
         margin: 0px 10px;
       }

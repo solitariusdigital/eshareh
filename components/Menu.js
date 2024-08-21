@@ -224,7 +224,7 @@ export default function Menu() {
                               fontFamily: language
                                 ? "FarsiBold"
                                 : "EnglishBold",
-                              fontSize: language ? "1.1rem" : "",
+                              fontSize: language ? "1.2rem" : "",
                             }}
                             className={
                               !nav.active ? classes.nav : classes.navActive
@@ -262,7 +262,7 @@ export default function Menu() {
                       <a
                         style={{
                           fontFamily: language ? "FarsiBold" : "EnglishBold",
-                          fontSize: language ? "1.1rem" : "",
+                          fontSize: language ? "1.2rem" : "",
                         }}
                         className={
                           !nav.active ? classes.nav : classes.navActive
@@ -279,7 +279,7 @@ export default function Menu() {
                     <a
                       style={{
                         fontFamily: language ? "FarsiBold" : "EnglishBold",
-                        fontSize: language ? "1.1rem" : "",
+                        fontSize: language ? "1.2rem" : "",
                       }}
                       className={!nav.active ? classes.nav : classes.navActive}
                       onClick={() => activateNav(nav.link, index)}
@@ -317,7 +317,7 @@ export default function Menu() {
                         <a
                           style={{
                             fontFamily: language ? "FarsiBold" : "EnglishBold",
-                            fontSize: language ? "1.1rem" : "",
+                            fontSize: language ? "1.2rem" : "",
                           }}
                           className={
                             !nav.active ? classes.nav : classes.navActive
@@ -438,7 +438,7 @@ export default function Menu() {
                       key={index}
                       style={{
                         fontFamily: language ? "FarsiBold" : "EnglishMedium",
-                        fontSize: language ? "1.1rem" : "",
+                        fontSize: language ? "1.2rem" : "",
                       }}
                       className={!nav.active ? classes.nav : classes.navActive}
                       onClick={() => activateNav(nav.link, index)}
