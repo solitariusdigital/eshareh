@@ -294,9 +294,10 @@ export default function Home({ solutions, covers }) {
         <video
           className={classes.anime}
           src={animeSrc + "#t=0.001"}
-          autoPlay
-          loop
-          muted
+          autoPlay="autoplay"
+          playsInLine="playsinline"
+          loop="true"
+          muted="true"
           playsInline
           preload="metadata"
         />

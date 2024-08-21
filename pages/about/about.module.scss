@@ -59,11 +59,6 @@
     width: 50%;
     max-width: 700px;
 
-    h3 {
-      color: config.$yellow;
-      margin-bottom: 16px;
-    }
-
     @include mixins.mobile {
       width: calc(100% - 24px);
     }

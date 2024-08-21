@@ -56,14 +56,14 @@ export default function About() {
     let height = "";
     switch (screenSize) {
       case "desktop":
-        height = language ? "180px" : "270px";
+        height = language ? "130px" : "200px";
         break;
       case "tablet-landscape":
       case "tablet-portrait":
-        height = language ? "200px" : "270px";
+        height = language ? "170px" : "200px";
         break;
       case "mobile":
-        height = language ? "250px" : "380px";
+        height = language ? "220px" : "320px";
         break;
     }
     return height;
@@ -110,13 +110,6 @@ export default function About() {
           <h1>{language ? "تیم مدیران" : "Management Team"}</h1>
           {language ? (
             <div>
-              <h3
-                style={{
-                  fontFamily: "FarsiBold",
-                }}
-              >
-                اشاره یک استودیوی طراحی چند رشته ای و مستقل است
-              </h3>
               <p>
                 شاکله آژانس اشاره از تیمی متخصص و منحصربه‌فرد تشکیل شده است که
                 در کنار یکدیگر و با همکاری هم راه‌کارهایی خلاقانه ارائه می‌دهند
@@ -127,14 +120,6 @@ export default function About() {
             </div>
           ) : (
             <div>
-              <h3
-                style={{
-                  fontFamily: "EnglishMedium",
-                }}
-              >
-                Eshareh is a multidisciplinary, independently owned design
-                studio
-              </h3>
               <p>
                 Eshareh's structure is made up of a specialized and unique team
                 of experts who collaborate together to provide creative
