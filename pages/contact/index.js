@@ -98,13 +98,13 @@ export default function Contact() {
                 className={language ? classes.row : classes.rowReverse}
                 onClick={() => window.open("tel:+982188044244", "_self")}
               >
-                <p className={classes.click}>{language ? ": تلفن" : "Tel :"}</p>
+                <p className={classes.click}>{language ? ":تلفن" : "Tel:"}</p>
                 <p className={classes.clickTel}>
                   {language ? "۰۲۱ ۸۸۰ ۴۴ ۲۴۴" : "+98 (21) 880 44 244"}
                 </p>
               </div>
               <div className={language ? classes.row : classes.rowReverse}>
-                <p>{language ? ": فکس" : "Fax :"}</p>
+                <p>{language ? ":فکس" : "Fax:"}</p>
                 <p className={classes.clickFax}>
                   {language ? "۰۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 (21) 880 60 666"}
                 </p>
@@ -114,7 +114,7 @@ export default function Contact() {
                   className={classes.email}
                   style={{
                     fontFamily: language ? "English" : "English",
-                    fontSize: language ? "0.95rem" : "1rem",
+                    fontSize: language ? "0.85rem" : "1rem",
                   }}
                 >
                   info@eshareh.com
@@ -184,9 +184,7 @@ export default function Contact() {
                 className={language ? classes.row : classes.rowReverse}
                 onClick={() => window.open("tel:+989384997808", "_self")}
               >
-                <p className={classes.click}>
-                  {language ? ": موبایل" : "Mob :"}
-                </p>
+                <p className={classes.click}>{language ? ":موبایل" : "Mob:"}</p>
                 <p className={classes.clickTel}>
                   {language ? "۰۹۳۸ ۴۹۹۷۸۰۸" : "+98 (938) 499 78 08"}
                 </p>
