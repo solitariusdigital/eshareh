@@ -106,11 +106,6 @@
     margin: auto;
     width: 50%;
 
-    .delete {
-      position: absolute;
-      top: 20px;
-    }
-
     @include mixins.fourK {
       margin-top: 80px;
     }

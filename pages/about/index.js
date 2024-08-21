@@ -191,7 +191,7 @@ export default function About() {
               </h1>
               <h3>{users[current]["title"][languageType]}</h3>
               {permissionControl === "admin" && (
-                <div className={classes.delete}>
+                <div>
                   <Tooltip title="Delete">
                     <CloseIcon
                       style={{
