@@ -119,6 +119,12 @@
   height: 300px;
   margin-top: 50px;
   background: linear-gradient(to bottom, config.$white 50%, config.$black 50%);
+
+  .anime {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .arrowDown {

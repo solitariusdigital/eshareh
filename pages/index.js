@@ -15,7 +15,7 @@ import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 import coverModel from "@/models/Cover";
-import AutoPlaySilentVideo from "@/components/AutoPlaySilentVideo";
+import useDeviceAndBrowserDetection from "@/components/useDeviceAndBrowserDetection";
 
 export default function Home({ solutions, covers }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -26,7 +26,12 @@ export default function Home({ solutions, covers }) {
   const [hoverTwo, setHoverTwo] = useState(false);
   const [hoverThree, setHoverThree] = useState(false);
 
-  const animeSrc = "https://eshareh.storage.iran.liara.space/anime_home.mp4";
+  const { isDesktopSafari, isIphone } = useDeviceAndBrowserDetection();
+
+  const animeSrc = {
+    mp4: "https://eshareh.storage.iran.liara.space/animeHome.mp4",
+    webm: "https://eshareh.storage.iran.liara.space/animeHome.webm",
+  };
 
   const divideArray = (solutions) => {
     const dividedArrays = [];
@@ -292,7 +297,33 @@ export default function Home({ solutions, covers }) {
         </div>
       </section>
       <section className={classes.animeContainer}>
-        <AutoPlaySilentVideo animeSrc={animeSrc} />
+        {isDesktopSafari || isIphone ? (
+          <div className={classes.anime}>
+            <Image
+              src={"https://eshareh.storage.iran.liara.space/animeHome.png"}
+              blurDataURL={
+                "https://eshareh.storage.iran.liara.space/animeHome.png"
+              }
+              placeholder="blur"
+              alt="image"
+              layout="fill"
+              objectFit="contain"
+              priority
+            />
+          </div>
+        ) : (
+          <video
+            className={classes.anime}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+          >
+            <source src={animeSrc.mp4} type="video/mp4" />
+            <source src={animeSrc.webm} type="video/webm" />
+          </video>
+        )}
       </section>
       <section
         className={classes.container}
