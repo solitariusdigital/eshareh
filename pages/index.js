@@ -291,7 +291,9 @@ export default function Home({ solutions, covers }) {
       <section className={classes.animeContainer}>
         <video
           className={classes.anime}
-          src={"https://eshareh.storage.iran.liara.space/anime_home.mp4#t=0.1"}
+          src={
+            "https://eshareh.storage.iran.liara.space/anime_home.mp4#t=0.001"
+          }
           autoPlay
           loop
           muted
