@@ -39,6 +39,8 @@
 
   @include mixins.fourK {
     height: 300px;
+    line-height: 30px;
+    margin-top: 20px;
   }
 
   @include mixins.mobile {
@@ -57,6 +59,16 @@
     @include mixins.mobile {
       font-size: 1.2rem;
     }
+
+    @include mixins.fourK {
+      font-size: 2rem;
+    }
+  }
+
+  p {
+    @include mixins.fourK {
+      font-size: 1.5rem !important;
+    }
   }
 
   .contactGraphic {
@@ -73,8 +85,8 @@
       width: 100%;
     }
     @include mixins.fourK {
-      height: 600px;
-      width: 600px;
+      height: 550px;
+      width: 550px;
       bottom: 20px;
     }
   }
