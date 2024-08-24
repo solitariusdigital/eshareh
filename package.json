@@ -11,8 +11,8 @@
   "dependencies": {
     "@emotion/styled": "^11.13.0",
     "@emotion/react": "^11.13.0",
-    "@mui/material": "^5.16.5",
     "@mui/icons-material": "^5.16.6",
+    "@mui/material": "^5.16.6",
     "@mui/styled-engine-sc": "^5.14.10",
     "aws-sdk": "^2.1665.0",
     "crypto-js": "^4.2.0",
