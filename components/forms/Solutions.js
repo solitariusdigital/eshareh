@@ -1,6 +1,6 @@
 import { Fragment, useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./PagesForm.module.scss";
+import classes from "./Form.module.scss";
 import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";
@@ -13,7 +13,7 @@ import {
 } from "@/services/utility";
 import { createSolutionApi, updateSolutionApi } from "@/services/api";
 
-export default function SolutionsForm() {
+export default function Solutions() {
   const { language, setLanguage } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
 

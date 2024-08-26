@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
   gap: 12px;
+  margin-bottom: 50px;
 }
 
 .form {
@@ -67,10 +68,38 @@
   }
 }
 
+.navigation {
+  @include mixins.row-space-between-center();
+  justify-content: space-around;
+  height: 40px;
+  width: 200px;
+  margin: auto;
+  margin-bottom: 20px;
+  border: 1px solid config.$lightgrey;
+  border-radius: 50px;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+}
+
+.nav {
+  @include mixins.desktop {
+    &:hover {
+      cursor: pointer;
+      color: config.$yellow;
+    }
+  }
+}
+
+.navActive {
+  color: config.$yellow;
+  font-weight: bold !important;
+}
+
 .formAction {
   display: flex;
   flex-direction: column;
-  margin: 50px 0px;
   width: 100%;
   text-align: center;
 

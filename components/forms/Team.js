@@ -14,7 +14,7 @@ import {
 import loaderImage from "@/assets/loader.png";
 import AES from "crypto-js/aes";
 
-export default function TeamForm() {
+export default function Team() {
   const { language, setLanguage } = useContext(StateContext);
 
   const [name, setName] = useState({ en: "", fa: "" });
@@ -96,8 +96,8 @@ export default function TeamForm() {
   };
 
   return (
-    <div className={classes.form}>
-      <div className={classes.formSection}>
+    <div className={classes.container}>
+      <div className={classes.form}>
         <div
           style={{
             fontFamily: "English",
@@ -172,6 +172,8 @@ export default function TeamForm() {
             />
           </div>
         </div>
+      </div>
+      <div className={classes.form}>
         <div
           style={{
             fontFamily: "Farsi",
@@ -249,7 +251,7 @@ export default function TeamForm() {
           </div>
         </div>
       </div>
-      <div className={classes.formSection}>
+      <div className={classes.form}>
         <div
           className={classes.input}
           style={{
@@ -279,6 +281,8 @@ export default function TeamForm() {
             autoComplete="off"
           />
         </div>
+      </div>
+      <div className={classes.form}>
         <div
           className={classes.input}
           style={{
@@ -309,43 +313,42 @@ export default function TeamForm() {
           />
         </div>
       </div>
-
-      <div
-        className={classes.input}
-        style={{
-          fontFamily: "Farsi",
-        }}
-      >
-        <label className="file">
-          <input
-            onChange={(e) => {
-              setMedia(e.target.files[0]);
-            }}
-            type="file"
-            accept="image/*"
-          />
-          <p>عکس اختیاری</p>
-        </label>
-        {media !== "" && (
-          <div className={classes.preview}>
-            <CloseIcon
-              className="icon"
-              onClick={() => setMedia("")}
-              sx={{ fontSize: 16 }}
-            />
-            <Image
-              className={classes.image}
-              width={170}
-              height={200}
-              objectFit="contain"
-              src={URL.createObjectURL(media)}
-              alt="image"
-              priority
-            />
-          </div>
-        )}
-      </div>
       <div className={classes.formAction}>
+        <div
+          className={classes.input}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
+          <label className="file">
+            <input
+              onChange={(e) => {
+                setMedia(e.target.files[0]);
+              }}
+              type="file"
+              accept="image/*"
+            />
+            <p>عکس</p>
+          </label>
+          {media !== "" && (
+            <div className={classes.preview}>
+              <CloseIcon
+                className="icon"
+                onClick={() => setMedia("")}
+                sx={{ fontSize: 16 }}
+              />
+              <Image
+                className={classes.image}
+                width={170}
+                height={200}
+                objectFit="contain"
+                src={URL.createObjectURL(media)}
+                alt="image"
+                priority
+              />
+            </div>
+          )}
+        </div>
         <p className={classes.alert}>{alert}</p>
         {loader && (
           <div>

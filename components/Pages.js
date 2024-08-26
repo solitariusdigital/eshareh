@@ -1,7 +1,11 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Pages.module.scss";
-import ProfessionForm from "./ProfessionForm";
+import Profession from "./forms/Profession";
+import Home from "./forms/Home";
+import About from "./forms/About";
+import News from "./forms/News";
+import Contact from "./forms/Contact";
 
 export default function Pages() {
   const { languageType, setLanguageType } = useContext(StateContext);
@@ -30,7 +34,11 @@ export default function Pages() {
           </p>
         ))}
       </div>
-      {pageType === "what we do" && <ProfessionForm />}
+      {pageType === "home" && <Home />}
+      {pageType === "about us" && <About />}
+      {pageType === "what we do" && <Profession />}
+      {pageType === "news" && <News />}
+      {pageType === "contact us" && <Contact />}
     </div>
   );
 }

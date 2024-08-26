@@ -1,9 +1,9 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./admin.module.scss";
-import SolutionsForm from "@/components/SolutionsForm";
-import TeamForm from "@/components/TeamForm";
-import CoverForm from "@/components/CoverForm";
+import Solutions from "@/components/forms/Solutions";
+import Team from "@/components/forms/Team";
+import Cover from "@/components/forms/Cover";
 import Pages from "@/components/Pages";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
@@ -83,9 +83,9 @@ export default function Admin({ covers }) {
           </p>
         ))}
       </div>
-      {formType === "solutions" && <SolutionsForm />}
-      {formType === "team" && <TeamForm />}
-      {formType === "cover" && <CoverForm />}
+      {formType === "solutions" && <Solutions />}
+      {formType === "team" && <Team />}
+      {formType === "cover" && <Cover />}
       {formType === "pages" && <Pages />}
       {formType === "cover" && (
         <div className={classes.preview}>
