@@ -63,6 +63,7 @@ export default function NextProject({ project }) {
                 __html: applyFontToEnglishWords(
                   project[languageType].brief,
                   "English",
+                  "16px",
                   language
                 ),
               }}

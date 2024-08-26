@@ -490,6 +490,7 @@ export default function Solution({ solutions, projectTitle }) {
                       __html: applyFontToEnglishWords(
                         project[languageType].brief,
                         "English",
+                        "16px",
                         language
                       ),
                     }}
@@ -766,6 +767,7 @@ export default function Solution({ solutions, projectTitle }) {
                               __html: applyFontToEnglishWords(
                                 project[languageType].solution,
                                 "English",
+                                "16px",
                                 language
                               ),
                             }}

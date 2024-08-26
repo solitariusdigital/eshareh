@@ -8,6 +8,7 @@ import Pages from "@/components/Pages";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
 import coverModel from "@/models/Cover";
+import pageModel from "@/models/Page";
 import Image from "next/legacy/image";
 import Tooltip from "@mui/material/Tooltip";
 import CloseIcon from "@mui/icons-material/Close";
@@ -18,7 +19,7 @@ import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { updateCoverApi } from "@/services/api";
 
-export default function Admin({ covers }) {
+export default function Admin({ covers, pages }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
@@ -86,7 +87,7 @@ export default function Admin({ covers }) {
       {formType === "solutions" && <Solutions />}
       {formType === "team" && <Team />}
       {formType === "cover" && <Cover />}
-      {formType === "pages" && <Pages />}
+      {formType === "pages" && <Pages pages={pages} />}
       {formType === "cover" && (
         <div className={classes.preview}>
           {coversGrid.map((cover, index) => (
@@ -194,9 +195,12 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const covers = await coverModel.find();
+    const pages = await pageModel.find();
+
     return {
       props: {
         covers: JSON.parse(JSON.stringify(covers)),
+        pages: JSON.parse(JSON.stringify(pages)),
       },
     };
   } catch (error) {

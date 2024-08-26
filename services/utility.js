@@ -148,8 +148,8 @@ export function validateEmail(value) {
   return emailRegex.test(value);
 }
 
-export function applyFontToEnglishWords(inputString, fontType, language) {
-  let fontSize = language ? "16px" : null;
+export function applyFontToEnglishWords(inputString, fontType, size, language) {
+  let fontSize = language ? size : null;
   // Regular expression pattern to match English words
   const pattern = /[a-zA-Z]+/g;
   // Find and replace English words with span tags for specific font type
@@ -157,4 +157,10 @@ export function applyFontToEnglishWords(inputString, fontType, language) {
     return `<span style="font-family: ${fontType}; font-size: ${fontSize};">${match}</span>`;
   });
   return outputString;
+}
+
+export function extractParagraphs(text) {
+  return text
+    .split(/-{3,}|\n\n+/)
+    .filter((paragraph) => paragraph.trim() !== "");
 }

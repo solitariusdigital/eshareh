@@ -7,14 +7,14 @@ import About from "./forms/About";
 import News from "./forms/News";
 import Contact from "./forms/Contact";
 
-export default function Pages() {
+export default function Pages({ pages }) {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const [pageType, setPageType] = useState(
     "home" || "about us" || "what we do" || "news" || "contact us"
   );
 
-  const pages = ["home", "about us", "what we do", "news", "contact us"];
+  const pagesName = ["home", "about us", "what we do", "news", "contact us"];
 
   return (
     <div className={classes.container}>
@@ -24,7 +24,7 @@ export default function Pages() {
           fontFamily: language ? "English" : "English",
         }}
       >
-        {pages.map((page, index) => (
+        {pagesName.map((page, index) => (
           <p
             key={index}
             className={pageType === page ? classes.navActive : classes.nav}
@@ -36,7 +36,7 @@ export default function Pages() {
       </div>
       {pageType === "home" && <Home />}
       {pageType === "about us" && <About />}
-      {pageType === "what we do" && <Profession />}
+      {pageType === "what we do" && <Profession pages={pages} />}
       {pageType === "news" && <News />}
       {pageType === "contact us" && <Contact />}
     </div>

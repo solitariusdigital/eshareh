@@ -148,3 +148,34 @@ export const getCoversApi = async () => {
   });
   return await response.json();
 };
+
+// pages api
+export const updatePageApi = async (data) => {
+  const response = await fetch("/api/pages", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createPageApi = async (data) => {
+  const response = await fetch("/api/pages", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getPagessApi = async () => {
+  const response = await fetch("/api/pages", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
