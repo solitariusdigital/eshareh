@@ -1,6 +1,6 @@
 import { Fragment, useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./SolutionsForm.module.scss";
+import classes from "./PagesForm.module.scss";
 import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";

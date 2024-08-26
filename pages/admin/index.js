@@ -4,6 +4,7 @@ import classes from "./admin.module.scss";
 import SolutionsForm from "@/components/SolutionsForm";
 import TeamForm from "@/components/TeamForm";
 import CoverForm from "@/components/CoverForm";
+import Pages from "@/components/Pages";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
 import coverModel from "@/models/Cover";
@@ -24,14 +25,16 @@ export default function Admin({ covers }) {
   const [coversGrid, setCoversGrid] = useState(covers);
   const [text, setText] = useState(false);
 
-  const [formType, setFormType] = useState("solutions" || "team") || "cover";
-  const navigation = ["solutions", "team", "cover"];
+  const [formType, setFormType] = useState(
+    "Pages" || "solutions" || "team" || "cover"
+  );
+  const navigation = ["pages", "solutions", "team", "cover"];
 
   useEffect(() => {
     if (permissionControl !== "admin") {
       Router.push("/portal");
     } else {
-      setFormType("solutions");
+      setFormType("pages");
     }
   }, [permissionControl, setFormType]);
 
@@ -83,23 +86,24 @@ export default function Admin({ covers }) {
       {formType === "solutions" && <SolutionsForm />}
       {formType === "team" && <TeamForm />}
       {formType === "cover" && <CoverForm />}
+      {formType === "pages" && <Pages />}
       {formType === "cover" && (
         <div className={classes.preview}>
-          {coversGrid.map((project, index) => (
+          {coversGrid.map((cover, index) => (
             <div key={index} className={classes.mediaContainer}>
               <Fragment>
                 <h3
-                  onClick={() => Router.push(project.link)}
+                  onClick={() => Router.push(cover.link)}
                   style={{
                     fontFamily: language ? "Farsi" : "English",
                   }}
                   className={classes.title}
                 >
-                  {project.title[languageType]}
+                  {cover.title[languageType]}
                 </h3>
                 <div className={classes.action}>
                   <div>
-                    {project.active ? (
+                    {cover.active ? (
                       <Tooltip title="Visible">
                         <VerifiedUserIcon sx={{ color: "#57a361" }} />
                       </Tooltip>
@@ -118,24 +122,24 @@ export default function Admin({ covers }) {
                       id="color"
                       name="color"
                       onChange={(e) =>
-                        handleColorChange(e.target.value, project["_id"])
+                        handleColorChange(e.target.value, cover["_id"])
                       }
-                      value={project.color}
+                      value={cover.color}
                       autoComplete="off"
                       maxLength={6}
                     />
-                    {project.text ? (
+                    {cover.text ? (
                       <Tooltip title="Hide">
                         <RadioButtonCheckedIcon
                           className="icon"
-                          onClick={() => handleText(false, project["_id"])}
+                          onClick={() => handleText(false, cover["_id"])}
                         />
                       </Tooltip>
                     ) : (
                       <Tooltip title="Show">
                         <RadioButtonUncheckedIcon
                           className="icon"
-                          onClick={() => handleText(true, project["_id"])}
+                          onClick={() => handleText(true, cover["_id"])}
                         />
                       </Tooltip>
                     )}
@@ -156,12 +160,12 @@ export default function Admin({ covers }) {
                     </Tooltip>
                   </div>
                 </div>
-                {project.coverMedia.type === "image" ? (
+                {cover.coverMedia.type === "image" ? (
                   <Image
-                    src={project.coverMedia.link}
-                    blurDataURL={project.coverMedia.link}
+                    src={cover.coverMedia.link}
+                    blurDataURL={cover.coverMedia.link}
                     placeholder="blur"
-                    alt={project.title[languageType]}
+                    alt={cover.title[languageType]}
                     layout="fill"
                     objectFit="cover"
                     as="image"
@@ -170,7 +174,7 @@ export default function Admin({ covers }) {
                 ) : (
                   <video
                     className={classes.media}
-                    src={project.coverMedia.link + "#t=0.1"}
+                    src={cover.coverMedia.link + "#t=0.1"}
                     controls
                     playsInline
                     preload="metadata"
