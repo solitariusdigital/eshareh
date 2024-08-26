@@ -1,4 +1,5 @@
 import { useState, useContext, Fragment, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import { StateContext } from "@/context/stateContext";
 import classes from "./solutions.module.scss";
 import {
@@ -49,6 +50,8 @@ export default function Solution({ solutions, projectTitle }) {
   const [nextProject, setNextProject] = useState(null);
   const [dropDown, setDropDpwn] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -186,7 +189,7 @@ export default function Solution({ solutions, projectTitle }) {
         break;
     }
     await updateSolutionApi(data);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const moveItem = async (index, direction) => {
@@ -226,7 +229,7 @@ export default function Solution({ solutions, projectTitle }) {
       };
       await updateSolutionApi(dataObject);
     }
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const makeSlide = async (index) => {
@@ -239,7 +242,7 @@ export default function Solution({ solutions, projectTitle }) {
       slideMedia: slideMedia,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const removeSlide = async (index) => {
@@ -252,7 +255,7 @@ export default function Solution({ solutions, projectTitle }) {
       slideMedia: project.slideMedia,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const makeCover = async (index) => {
@@ -275,7 +278,7 @@ export default function Solution({ solutions, projectTitle }) {
       };
       await updateCoverApi(cover);
     }
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const manageCoverSlide = async () => {
@@ -302,7 +305,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaDouble: mediaDouble,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const makeQuadruple = async (index) => {
@@ -313,7 +316,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaQuadruple: mediaQuadruple,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const removeDouble = async (index) => {
@@ -326,7 +329,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaDouble: project.mediaDouble,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const removeQuadruple = async (index) => {
@@ -341,7 +344,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaQuadruple: project.mediaQuadruple,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const imageActivation = async (value, index) => {
@@ -351,7 +354,7 @@ export default function Solution({ solutions, projectTitle }) {
       media: project.media,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   return (

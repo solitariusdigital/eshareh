@@ -25,7 +25,7 @@ export default function Admin({ covers }) {
   const [text, setText] = useState(false);
 
   const [formType, setFormType] = useState("solutions" || "team") || "cover";
-  const types = ["solutions", "team", "cover"];
+  const navigation = ["solutions", "team", "cover"];
 
   useEffect(() => {
     if (permissionControl !== "admin") {
@@ -65,25 +65,24 @@ export default function Admin({ covers }) {
   return (
     <div className={classes.container}>
       <div
-        className={classes.types}
+        className={classes.navigation}
         style={{
           fontFamily: language ? "English" : "English",
         }}
       >
-        {types.map((type, index) => (
+        {navigation.map((nav, index) => (
           <p
             key={index}
-            className={formType === type ? classes.navActive : classes.nav}
-            onClick={() => setFormType(type)}
+            className={formType === nav ? classes.navActive : classes.nav}
+            onClick={() => setFormType(nav)}
           >
-            {type}
+            {nav}
           </p>
         ))}
       </div>
       {formType === "solutions" && <SolutionsForm />}
       {formType === "team" && <TeamForm />}
       {formType === "cover" && <CoverForm />}
-
       {formType === "cover" && (
         <div className={classes.preview}>
           {coversGrid.map((project, index) => (
@@ -191,7 +190,6 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const covers = await coverModel.find();
-
     return {
       props: {
         covers: JSON.parse(JSON.stringify(covers)),
