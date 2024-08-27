@@ -269,10 +269,9 @@ export default function Solutions() {
         <div
           className={classes.form}
           style={{
-            fontFamily: language ? "English" : "English",
+            fontFamily: "English",
           }}
         >
-          <p className={classes.title}>English</p>
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
@@ -480,10 +479,9 @@ export default function Solutions() {
         <div
           className={classes.form}
           style={{
-            fontFamily: language ? "Farsi" : "Farsi",
+            fontFamily: "Farsi",
           }}
         >
-          <p className={classes.title}>فارسی</p>
           <div className={classes.input}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
@@ -666,7 +664,7 @@ export default function Solutions() {
       <div
         className={classes.formAction}
         style={{
-          fontFamily: language ? "Farsi" : "Farsi",
+          fontFamily: "Farsi",
         }}
       >
         <div className={classes.mediaContainer}>
@@ -772,7 +770,7 @@ export default function Solutions() {
         {loader && (
           <div
             style={{
-              fontFamily: language ? "English" : "English",
+              fontFamily: "English",
             }}
           >
             <p>Uploading {Math.round(progress)} %</p>
@@ -783,7 +781,7 @@ export default function Solutions() {
           disabled={disableButton}
           onClick={() => handleSubmit()}
           style={{
-            fontFamily: language ? "FarsiMedium" : "FarsiMedium",
+            fontFamily: "FarsiMedium",
           }}
         >
           ذخیره

@@ -86,13 +86,6 @@ export default function Profession({ pageData }) {
                 style={position}
                 sx={{ fontSize: 10, color: "#fdb714" }}
               />
-              {/* <h2
-                style={{
-                  fontFamily: language ? "FarsiLight" : "EnglishLight",
-                }}
-              >
-                {para}
-              </h2> */}
               <h2
                 dangerouslySetInnerHTML={{
                   __html: applyFontToEnglishWords(

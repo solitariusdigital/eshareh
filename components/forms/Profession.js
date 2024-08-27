@@ -8,24 +8,22 @@ import { areAllStatesValid, extractParagraphs } from "@/services/utility";
 import { updatePageApi } from "@/services/api";
 
 export default function Profession({ pages }) {
-  const { language, setLanguage } = useContext(StateContext);
   const [main, setMain] = useState({ en: "", fa: "" });
   const [paragraph, setParagraphs] = useState({ en: "", fa: "" });
   const [alert, setAlert] = useState("");
   const [professionData, setProfessionData] = useState(false);
 
   useEffect(() => {
-    let professionData = pages.filter(
-      (page, i) => page.slug === "profession"
-    )[0];
+    let professionData = pages.find((page) => page.slug === "profession");
+    const { content } = professionData;
     setProfessionData(professionData);
     setMain({
-      en: professionData.content[0].data.en,
-      fa: professionData.content[0].data.fa,
+      en: content[0].data.en,
+      fa: content[0].data.fa,
     });
     setParagraphs({
-      en: professionData.content[1].data.en,
-      fa: professionData.content[1].data.fa,
+      en: content[1].data.en,
+      fa: content[1].data.fa,
     });
   }, [pages]);
 
@@ -60,7 +58,6 @@ export default function Profession({ pages }) {
     };
     await updatePageApi(dataObject);
     showAlert("داده ذخیره شد");
-    // const paragraphs = retrievedText.split('\n\n');
   };
 
   const showAlert = (message) => {
@@ -76,10 +73,9 @@ export default function Profession({ pages }) {
         <div
           className={classes.form}
           style={{
-            fontFamily: language ? "English" : "English",
+            fontFamily: "English",
           }}
         >
-          <p className={classes.title}>English</p>
           <div className={classes.inputTextArea}>
             <div className={classes.bar}>
               <p className={classes.label}>
@@ -154,10 +150,9 @@ export default function Profession({ pages }) {
         <div
           className={classes.form}
           style={{
-            fontFamily: language ? "Farsi" : "Farsi",
+            fontFamily: "Farsi",
           }}
         >
-          <p className={classes.title}>فارسی</p>
           <div className={classes.inputTextArea}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
@@ -177,7 +172,7 @@ export default function Profession({ pages }) {
             </div>
             <textarea
               style={{
-                fontFamily: "English",
+                fontFamily: "Farsi",
               }}
               placeholder="..."
               type="main"
@@ -235,14 +230,14 @@ export default function Profession({ pages }) {
       <div
         className={classes.formAction}
         style={{
-          fontFamily: language ? "Farsi" : "Farsi",
+          fontFamily: "Farsi",
         }}
       >
         <p className={classes.alert}>{alert}</p>
         <button
           onClick={() => handleSubmit()}
           style={{
-            fontFamily: language ? "FarsiMedium" : "FarsiMedium",
+            fontFamily: "FarsiMedium",
           }}
         >
           ذخیره

@@ -313,7 +313,7 @@ export default function Cover() {
         <button
           disabled={disableButton}
           style={{
-            fontFamily: language ? "FarsiMedium" : "FarsiMedium",
+            fontFamily: "FarsiMedium",
           }}
           onClick={() => handleSubmit()}
         >
