@@ -16,6 +16,8 @@ import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 import coverModel from "@/models/Cover";
 import useDeviceAndBrowserDetection from "@/components/useDeviceAndBrowserDetection";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 
 export default function Home({ solutions, covers }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -53,11 +55,33 @@ export default function Home({ solutions, covers }) {
             ? "آژانس تبلیغاتی اشاره - خدمات تبلیغات، برند، رسانه و ارتباطات بازاریابی فول سرویس"
             : "Eshareh Advertising Agency - Advertising, Branding, Media & Full Service Marketing Communication in Iran"
         }
+        canonical="https://eshareh.com"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com",
+          title: language
+            ? "آژانس تبلیغاتی اشاره"
+            : "Eshareh Advertising Agency",
+          description: language
+            ? "آژانس تبلیغاتی اشاره - خدمات تبلیغات، برند، رسانه و ارتباطات بازاریابی فول سرویس"
+            : "Eshareh Advertising Agency - Advertising, Branding, Media & Full Service Marketing Communication in Iran",
           siteName: "Eshareh Advertising Agency",
+          images: [
+            {
+              url: language ? logoFarsi : logoEnglish,
+              width: 1200,
+              height: 630,
+              alt: language
+                ? "آژانس تبلیغاتی اشاره"
+                : "Eshareh Advertising Agency",
+            },
+          ],
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
         }}
       />
       <section>

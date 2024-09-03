@@ -22,6 +22,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import StarIcon from "@mui/icons-material/Star";
 import Tooltip from "@mui/material/Tooltip";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 import {
   getSolutionApi,
   updateSolutionApi,
@@ -363,18 +365,36 @@ export default function Solution({ solutions, projectTitle }) {
         <Fragment>
           <NextSeo
             title={project[languageType].title}
-            description={
-              language
-                ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
-                : "Eshareh is a multidisciplinary, independently owned design studio"
-            }
+            description={project[languageType].subtitle}
+            canonical={`https://eshareh.com/solutions/${replaceSpacesAndHyphens(
+              project[languageType].title
+            )}`}
             openGraph={{
               type: "website",
               locale: "fa_IR",
               url: `https://eshareh.com/solutions/${replaceSpacesAndHyphens(
                 project[languageType].title
               )}`,
-              siteName: "Eshareh Advertising Agency",
+              title: `${project[languageType].title}`,
+              description: `${project[languageType].subtitle}`,
+              siteName: language
+                ? "آژانس تبلیغاتی اشاره"
+                : "Eshareh Advertising Agency",
+              images: [
+                {
+                  url: language ? logoFarsi : logoEnglish,
+                  width: 1200,
+                  height: 630,
+                  alt: language
+                    ? "آژانس تبلیغاتی اشاره"
+                    : "Eshareh Advertising Agency",
+                },
+              ],
+            }}
+            robotsProps={{
+              maxSnippet: -1,
+              maxImagePreview: "large",
+              maxVideoPreview: -1,
             }}
           />
           {permissionControl === "admin" && !displayGallerySlider && (

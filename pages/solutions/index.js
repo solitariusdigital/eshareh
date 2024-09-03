@@ -11,6 +11,8 @@ import solutionModel from "@/models/Solution";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Tooltip from "@mui/material/Tooltip";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 
 export default function Solutions({ activeSolutions, adminSolutions }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -92,11 +94,33 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
+        canonical="https://eshareh.com/solutions"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/solutions",
-          siteName: "Eshareh Advertising Agency",
+          title: language ? "راه‌کارها" : "Solutions",
+          description: language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio",
+          siteName: language
+            ? "آژانس تبلیغاتی اشاره"
+            : "Eshareh Advertising Agency",
+          images: [
+            {
+              url: language ? logoFarsi : logoEnglish,
+              width: 1200,
+              height: 630,
+              alt: language
+                ? "آژانس تبلیغاتی اشاره"
+                : "Eshareh Advertising Agency",
+            },
+          ],
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
         }}
       />
       <div className={classes.container}>
