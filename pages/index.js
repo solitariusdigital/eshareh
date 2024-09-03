@@ -29,8 +29,8 @@ export default function Home({ solutions, covers }) {
   const { isDesktopSafari, isIphone } = useDeviceAndBrowserDetection();
 
   const animeSrc = {
-    mp4: "https://eshareh.storage.iran.liara.space/animeHome.mp4",
-    webm: "https://eshareh.storage.iran.liara.space/animeHome.webm",
+    mp4: "https://eshareh.storage.iran.liara.space/motion/smokingFish.mp4",
+    webm: "https://eshareh.storage.iran.liara.space/motion/smokingFish.webm",
   };
 
   const divideArray = (solutions) => {
@@ -300,9 +300,11 @@ export default function Home({ solutions, covers }) {
         {isDesktopSafari || isIphone ? (
           <div className={classes.anime}>
             <Image
-              src={"https://eshareh.storage.iran.liara.space/animeHome.png"}
+              src={
+                "https://eshareh.storage.iran.liara.space/motion/smokingFish.png"
+              }
               blurDataURL={
-                "https://eshareh.storage.iran.liara.space/animeHome.png"
+                "https://eshareh.storage.iran.liara.space/motion/smokingFish.png"
               }
               placeholder="blur"
               alt="image"

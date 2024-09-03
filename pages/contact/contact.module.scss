@@ -76,18 +76,21 @@
     height: 400px;
     width: 400px;
 
-    @include mixins.desktop {
-      bottom: 30px;
-    }
     @include mixins.mobile {
       margin: 20px;
       height: 300px;
       width: 100%;
     }
+    @include mixins.tablet {
+      bottom: 70px;
+    }
+    @include mixins.desktop {
+      bottom: 70px;
+    }
     @include mixins.fourK {
-      height: 550px;
-      width: 550px;
-      bottom: 20px;
+      height: 600px;
+      width: 600px;
+      bottom: 100px;
     }
   }
 

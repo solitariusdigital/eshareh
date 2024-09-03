@@ -25,7 +25,7 @@ export default function About() {
     const fetchData = async () => {
       try {
         const users = await getUsersApi();
-        setUsers(users.filter((user) => user.active));
+        setUsers(shuffleUsers(users.filter((user) => user.active)));
       } catch (error) {
         console.error(error);
       }
@@ -82,6 +82,16 @@ export default function About() {
       await deletetUserApi(users[index]["_id"]);
       window.location.assign("/about");
     }
+  };
+
+  const shuffleUsers = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      // Generate a random index from 0 to i
+      const j = Math.floor(Math.random() * (i + 1));
+      // Swap elements at indices i and j
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   };
 
   return (
