@@ -1,0 +1,18 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  color: config.$black;
+  margin-top: 150px;
+  height: calc(100vh - 150px);
+
+  button {
+    @include mixins.button(config.$yellow, config.$black);
+    margin: auto;
+  }
+}

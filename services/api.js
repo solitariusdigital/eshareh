@@ -118,6 +118,37 @@ export const getControlsApi = async () => {
   return await response.json();
 };
 
+// charity api
+export const updateCharityApi = async (data) => {
+  const response = await fetch("/api/charity", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createCharityApi = async (data) => {
+  const response = await fetch("/api/charity", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getCharityApi = async () => {
+  const response = await fetch("/api/charity", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
 // covers api
 export const updateCoverApi = async (data) => {
   const response = await fetch("/api/covers", {
