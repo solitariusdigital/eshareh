@@ -13,6 +13,21 @@
 
   button {
     @include mixins.button(config.$yellow, config.$black);
-    margin: auto;
+    // margin: auto;
+  }
+
+  .shareContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+    }
+  }
+  .share {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
   }
 }
