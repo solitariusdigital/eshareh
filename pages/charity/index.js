@@ -52,7 +52,12 @@ export default function Charity() {
           siteName: "Eshareh Advertising Agency",
         }}
       />
-      <div className={classes.container}>
+      <div
+        className={classes.container}
+        style={{
+          fontFamily: language ? "FarsiBold" : "FarsiBold",
+        }}
+      >
         <h2>{charity.count}</h2>
         <button
           style={{
