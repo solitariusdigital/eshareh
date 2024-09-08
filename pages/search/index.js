@@ -8,6 +8,8 @@ import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 import { replaceSpacesAndHyphens } from "@/services/utility";
 import Router from "next/router";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 
 export default function Search({ activeSolutions }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -50,14 +52,36 @@ export default function Search({ activeSolutions }) {
         title={language ? "جستجو" : "Search"}
         description={
           language
-            ? "جستجو ... پروژه، نوع کار، سال"
-            : "Search ... project, work type, year"
+            ? "جستجو پروژه، نوع کار، سال"
+            : "Search project, work type, year"
         }
+        canonical="https://eshareh.com/search"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/search",
-          siteName: "Eshareh Advertising Agency",
+          title: language ? "جستجو" : "Search",
+          description: language
+            ? "جستجو پروژه، نوع کار، سال"
+            : "Search project, work type, year",
+          siteName: language
+            ? "آژانس تبلیغاتی اشاره"
+            : "Eshareh Advertising Agency",
+          images: [
+            {
+              url: language ? logoFarsi : logoEnglish,
+              width: 1200,
+              height: 630,
+              alt: language
+                ? "آژانس تبلیغاتی اشاره"
+                : "Eshareh Advertising Agency",
+            },
+          ],
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
         }}
       />
       <div

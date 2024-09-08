@@ -5,6 +5,8 @@ import Image from "next/legacy/image";
 import contact from "@/assets/contact.jpg";
 import { NextSeo } from "next-seo";
 import useDeviceAndBrowserDetection from "@/components/useDeviceAndBrowserDetection";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 
 export default function Contact() {
   const { language, setLanguage } = useContext(StateContext);
@@ -21,17 +23,39 @@ export default function Contact() {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "تماس با ما" : "Contact"}
+        title={language ? "تماس با ما" : "Contact Us"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
+        canonical="https://eshareh.com/contact"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/contact",
-          siteName: "Eshareh Advertising Agency",
+          title: language ? "تماس با ما" : "Contact Us",
+          description: language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio",
+          siteName: language
+            ? "آژانس تبلیغاتی اشاره"
+            : "Eshareh Advertising Agency",
+          images: [
+            {
+              url: language ? logoFarsi : logoEnglish,
+              width: 1200,
+              height: 630,
+              alt: language
+                ? "آژانس تبلیغاتی اشاره"
+                : "Eshareh Advertising Agency",
+            },
+          ],
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
         }}
       />
       <div className={classes.container}>

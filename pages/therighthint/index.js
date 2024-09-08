@@ -17,6 +17,8 @@ import {
   WhatsappShareButton,
   TelegramShareButton,
 } from "react-share";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 
 export default function Therighthint() {
   const { language, setLanguage } = useContext(StateContext);
@@ -90,11 +92,33 @@ export default function Therighthint() {
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
+        canonical="https://eshareh.com/therighthint"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/therighthint",
-          siteName: "Eshareh Advertising Agency",
+          title: language ? "اشاره‌ای درست!" : "The Right Hint",
+          description: language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio",
+          siteName: language
+            ? "آژانس تبلیغاتی اشاره"
+            : "Eshareh Advertising Agency",
+          images: [
+            {
+              url: language ? logoFarsi : logoEnglish,
+              width: 1200,
+              height: 630,
+              alt: language
+                ? "آژانس تبلیغاتی اشاره"
+                : "Eshareh Advertising Agency",
+            },
+          ],
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
         }}
       />
       <div
