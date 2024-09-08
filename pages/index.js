@@ -322,10 +322,27 @@ export default function Home({ solutions, covers }) {
             playsInline
             preload="metadata"
           >
-            <source src={animeSrc.mov} type='video/mp4; codecs="hvc1"' />
+            <source src={animeSrc.mov} type="video/quicktime" />
             <source src={animeSrc.webm} type="video/webm" />
           </video>
         )}
+        {/* <video
+          className={classes.anime}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+        >
+          <source
+            src="https://transparent-videos-for-all.vercel.app/sample.mov"
+            type="video/quicktime"
+          />
+          <source
+            src="https://transparent-videos-for-all.vercel.app/sample.webm"
+            type="video/webm"
+          />
+        </video> */}
       </section>
       <section
         className={classes.container}

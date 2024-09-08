@@ -154,7 +154,7 @@ export default function Contact() {
                 playsInline
                 preload="metadata"
               >
-                <source src={animeSrc.mov} type='video/mp4; codecs="hvc1"' />
+                <source src={animeSrc.mov} type="video/quicktime" />
                 <source src={animeSrc.webm} type="video/webm" />
               </video>
             )}
