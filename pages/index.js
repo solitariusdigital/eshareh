@@ -29,7 +29,7 @@ export default function Home({ solutions, covers }) {
   const { isDesktopSafari, isIphone } = useDeviceAndBrowserDetection();
 
   const animeSrc = {
-    mp4: "https://eshareh.storage.iran.liara.space/motion/smokingFish.mp4",
+    mov: "https://eshareh.storage.iran.liara.space/motion/smokingFish.mov",
     webm: "https://eshareh.storage.iran.liara.space/motion/smokingFish.webm",
   };
 
@@ -322,7 +322,7 @@ export default function Home({ solutions, covers }) {
             playsInline
             preload="metadata"
           >
-            <source src={animeSrc.mp4} type="video/mp4" />
+            <source src={animeSrc.mov} type='video/mp4; codecs="hvc1"' />
             <source src={animeSrc.webm} type="video/webm" />
           </video>
         )}
