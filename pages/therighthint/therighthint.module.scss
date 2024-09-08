@@ -4,10 +4,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: auto;
-  color: config.$black;
   margin-top: 150px;
   height: calc(100vh - 150px);
 
@@ -20,15 +17,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 250px;
-
-    @include mixins.mobile {
-      width: calc(100% - 24px);
-    }
   }
+
   .share {
     width: 24px;
     height: 24px;
+    margin-right: 20px;
     cursor: pointer;
   }
 
