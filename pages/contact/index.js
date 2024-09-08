@@ -5,12 +5,19 @@ import Image from "next/legacy/image";
 import contact from "@/assets/contact.jpg";
 import { NextSeo } from "next-seo";
 import contactGraphic from "@/assets/contactGraphic.png";
+import useDeviceAndBrowserDetection from "@/components/useDeviceAndBrowserDetection";
 
 export default function Contact() {
   const { language, setLanguage } = useContext(StateContext);
+  const { isDesktopSafari, isIphone } = useDeviceAndBrowserDetection();
 
   const locationLink =
     "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7743132,51.3941519,17z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu";
+
+  const animeSrc = {
+    mov: "https://eshareh.storage.iran.liara.space/motion/ghostBike.mov",
+    webm: "https://eshareh.storage.iran.liara.space/motion/ghostBike.webm",
+  };
 
   return (
     <Fragment>
@@ -122,17 +129,36 @@ export default function Contact() {
               </div>
             </div>
           </div>
-          <div className={classes.contactGraphic}>
-            <Image
-              src={contactGraphic}
-              blurDataURL={contactGraphic}
-              placeholder="blur"
-              alt="image"
-              layout="fill"
-              objectFit="contain"
-              as="image"
-              priority
-            />
+          <div className={classes.animeContainer}>
+            {isDesktopSafari || isIphone ? (
+              <div className={classes.graphic}>
+                <Image
+                  src={
+                    "https://eshareh.storage.iran.liara.space/motion/ghostBike.png"
+                  }
+                  blurDataURL={
+                    "https://eshareh.storage.iran.liara.space/motion/ghostBike.png"
+                  }
+                  placeholder="blur"
+                  alt="image"
+                  layout="fill"
+                  objectFit="contain"
+                  priority
+                />
+              </div>
+            ) : (
+              <video
+                className={classes.anime}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              >
+                <source src={animeSrc.mov} type='video/mp4; codecs="hvc1"' />
+                <source src={animeSrc.webm} type="video/webm" />
+              </video>
+            )}
           </div>
           <div>
             <div

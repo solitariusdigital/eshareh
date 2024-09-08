@@ -71,10 +71,21 @@
     }
   }
 
-  .contactGraphic {
+  .animeContainer {
     position: relative;
     height: 400px;
     width: 400px;
+
+    .anime,
+    .graphic {
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+
+    .graphic {
+      bottom: 30px;
+    }
 
     @include mixins.mobile {
       margin: 20px;
@@ -82,15 +93,16 @@
       width: 100%;
     }
     @include mixins.tablet {
-      bottom: 70px;
+      bottom: 50px;
     }
     @include mixins.desktop {
-      bottom: 70px;
+      bottom: 50px;
     }
     @include mixins.fourK {
-      height: 600px;
-      width: 600px;
+      height: 500px;
+      width: 500px;
       bottom: 100px;
+      bottom: 60px;
     }
   }
 
