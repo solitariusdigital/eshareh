@@ -1,6 +1,6 @@
-import { useContext, Fragment, useEffect, useState } from "react";
+import { useContext, Fragment, useEffect, useState, useMemo } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./charity.module.scss";
+import classes from "./therighthint.module.scss";
 import { NextSeo } from "next-seo";
 import { getCharityApi, updateCharityApi } from "@/services/api";
 import secureLocalStorage from "react-secure-storage";
@@ -18,13 +18,18 @@ import {
   TelegramShareButton,
 } from "react-share";
 
-export default function Charity() {
+export default function Therighthint() {
   const { language, setLanguage } = useContext(StateContext);
   const [charity, setCharity] = useState({});
-  const [buttonMessage, setButtonMessage] = useState("خیریه");
-
-  const shareUrl = "https://eshareh.com/charity";
-  const title = "کمپین خیریه اشاره";
+  const textsArray = useMemo(
+    () => ["متخصص", "اولویت", "منحصربه‌فرد", "مشارکت", "خیریه"],
+    []
+  );
+  const [dynamicText, setDynamicText] = useState(textsArray[0]);
+  const [animate, setAnimate] = useState(false);
+  const [buttonMessage, setButtonMessage] = useState("اشاره‌ای درست");
+  const shareUrl = "https://eshareh.com/therighthint";
+  const titleCampaign = "اشاره‌ای درست!";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +42,25 @@ export default function Charity() {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimate(false);
+      setDynamicText((prevFruit) => {
+        const currentIndex = textsArray.indexOf(prevFruit);
+        const nextIndex = (currentIndex + 1) % textsArray.length;
+        return textsArray[nextIndex];
+      });
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [textsArray]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAnimate(true);
+    }, 10);
+  }, [dynamicText]);
 
   const updateCharityCount = async () => {
     let checkCharityUser = secureLocalStorage.getItem("charityUser");
@@ -51,14 +75,14 @@ export default function Charity() {
       setCharity(dataObject);
       secureLocalStorage.setItem("charityUser", true);
     } else {
-      setButtonMessage("مشارکت شما ثبت شد");
+      setButtonMessage("اشاره شما ثبت شد");
     }
   };
 
   return (
     <Fragment>
       <NextSeo
-        title={language ? "خیریه" : "Charity"}
+        title={language ? "اشاره‌ای درست!" : "The Right Hint"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
@@ -67,7 +91,7 @@ export default function Charity() {
         openGraph={{
           type: "website",
           locale: "fa_IR",
-          url: "https://eshareh.com/charity",
+          url: "https://eshareh.com/therighthint",
           siteName: "Eshareh Advertising Agency",
         }}
       />
@@ -77,6 +101,18 @@ export default function Charity() {
           fontFamily: language ? "FarsiBold" : "FarsiBold",
         }}
       >
+        <h2>
+          <span>!</span>
+          اشاره‌ای درست
+        </h2>
+        <h2
+          className={`${classes.dynamicText} animate__animated ${
+            animate ? "animate__rubberBand" : ""
+          }`}
+        >
+          {dynamicText}
+        </h2>
+        <h2>چند رشته ای و مستقل است</h2>
         <h2>{charity.count}</h2>
         <button
           style={{
@@ -93,40 +129,36 @@ export default function Charity() {
           <LinkedinShareButton
             className={classes.share}
             url={shareUrl}
-            title={title}
+            title={titleCampaign}
           >
             <LinkedInIcon />
           </LinkedinShareButton>
           <TwitterShareButton
             className={classes.share}
             url={shareUrl}
-            title={title}
+            title={titleCampaign}
           >
             <XIcon />
           </TwitterShareButton>
           <WhatsappShareButton
             className={classes.share}
             url={shareUrl}
-            title={title}
+            title={titleCampaign}
           >
             <WhatsAppIcon />
           </WhatsappShareButton>
           <TelegramShareButton
             className={classes.share}
             url={shareUrl}
-            title={title}
+            title={titleCampaign}
           >
-            <TelegramIcon
-              className={classes.share}
-              onClick={() =>
-                window.open("https://www.instagram.com/", "_ self")
-              }
-            />
+            <TelegramIcon />
           </TelegramShareButton>
           <FacebookShareButton
             className={classes.share}
             url={shareUrl}
-            quote={title}
+            quote={titleCampaign}
+            title={titleCampaign}
           >
             <FacebookIcon />
           </FacebookShareButton>
