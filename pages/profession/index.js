@@ -21,7 +21,7 @@ export default function Profession() {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "چه می‌کنیم" : "What we do"}
+        title={language ? "چه می‌کنیم" : "What We Do"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
@@ -32,7 +32,7 @@ export default function Profession() {
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/profession",
-          title: language ? "چه می‌کنیم" : "What we do",
+          title: language ? "چه می‌کنیم" : "What We Do",
           description: language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
