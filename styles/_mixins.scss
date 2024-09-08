@@ -35,11 +35,13 @@ $screen-fourK: 6000px;
   color: $subColor;
   border: none;
 
-  &:hover {
-    cursor: pointer;
-    color: $subColor;
-    border: 1px solid $color;
-    background: config.$background;
+  @include desktop {
+    &:hover {
+      cursor: pointer;
+      color: $subColor;
+      border: 1px solid $color;
+      background: config.$background;
+    }
   }
 }
 
