@@ -4,7 +4,6 @@ import classes from "./contact.module.scss";
 import Image from "next/legacy/image";
 import contact from "@/assets/contact.jpg";
 import { NextSeo } from "next-seo";
-import contactGraphic from "@/assets/contactGraphic.png";
 import useDeviceAndBrowserDetection from "@/components/useDeviceAndBrowserDetection";
 
 export default function Contact() {
