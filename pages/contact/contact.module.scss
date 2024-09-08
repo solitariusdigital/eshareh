@@ -84,7 +84,11 @@
     }
 
     .graphic {
-      bottom: 30px;
+      bottom: 20px;
+
+      @include mixins.mobile {
+        bottom: 0px;
+      }
     }
 
     @include mixins.mobile {
