@@ -30,6 +30,8 @@ export default function Therighthint() {
   const [buttonMessage, setButtonMessage] = useState("اشاره‌ای درست");
   const shareUrl = "https://eshareh.com/therighthint";
   const titleCampaign = "اشاره‌ای درست!";
+  const summaryCampaign = "اشاره‌ای درست!";
+  const hashtagCampaign = "#therighthint";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -128,15 +130,17 @@ export default function Therighthint() {
         >
           <LinkedinShareButton
             className={classes.share}
-            url={shareUrl}
             title={titleCampaign}
+            summary={summaryCampaign}
+            source={shareUrl}
           >
             <LinkedInIcon />
           </LinkedinShareButton>
           <TwitterShareButton
             className={classes.share}
-            url={shareUrl}
             title={titleCampaign}
+            url={shareUrl}
+            hashtags={[hashtagCampaign]}
           >
             <XIcon />
           </TwitterShareButton>
@@ -156,9 +160,7 @@ export default function Therighthint() {
           </TelegramShareButton>
           <FacebookShareButton
             className={classes.share}
-            url={shareUrl}
-            quote={titleCampaign}
-            title={titleCampaign}
+            hashtag={hashtagCampaign}
           >
             <FacebookIcon />
           </FacebookShareButton>
