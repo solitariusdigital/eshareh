@@ -48,7 +48,6 @@ export default function News() {
           maxVideoPreview: -1,
         }}
       />
-
       <div
         className={classes.container}
         style={{

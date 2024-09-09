@@ -136,7 +136,6 @@ export default function About() {
           maxVideoPreview: -1,
         }}
       />
-
       <div className={classes.container}>
         <div
           className={
