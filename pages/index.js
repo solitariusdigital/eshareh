@@ -430,11 +430,8 @@ export default function Home({ solutions, covers }) {
                 <Image
                   src={!hoverOne ? moreArrow : moreArrowHover}
                   blurDataURL={!hoverOne ? moreArrow : moreArrowHover}
-                  placeholder="blur"
                   alt="image"
                   width={20}
-                  as="image"
-                  priority
                 />
               </div>
             </div>
@@ -486,11 +483,8 @@ export default function Home({ solutions, covers }) {
                 <Image
                   src={!hoverTwo ? moreArrow : moreArrowHover}
                   blurDataURL={!hoverTwo ? moreArrow : moreArrowHover}
-                  placeholder="blur"
                   alt="image"
                   width={20}
-                  as="image"
-                  priority
                 />
               </div>
             </div>
@@ -543,11 +537,8 @@ export default function Home({ solutions, covers }) {
                 <Image
                   src={!hoverThree ? moreArrow : moreArrowHover}
                   blurDataURL={!hoverThree ? moreArrow : moreArrowHover}
-                  placeholder="blur"
                   alt="image"
                   width={20}
-                  as="image"
-                  priority
                 />
               </div>
             </div>
@@ -573,8 +564,6 @@ export default function Home({ solutions, covers }) {
           placeholder="blur"
           alt="image"
           width={40}
-          as="image"
-          priority
         />
       </div>
       {solutions.length >= 10 && (

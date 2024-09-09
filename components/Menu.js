@@ -115,8 +115,6 @@ export default function Menu() {
                 layout="fill"
                 objectFit="cover"
                 alt="image"
-                as="image"
-                priority
               />
             </div>
           )}
@@ -147,8 +145,6 @@ export default function Menu() {
                 src={language ? logoFarsi : logoEnglish}
                 alt="logo"
                 onClick={() => window.location.assign("/")}
-                as="image"
-                priority
               />
             </div>
             {permissionControl === "admin" && (
@@ -203,8 +199,6 @@ export default function Menu() {
                                 height={20}
                                 src={english}
                                 alt="logo"
-                                as="image"
-                                priority
                                 onMouseEnter={() => setHoverLanguage(true)}
                               />
                             ) : (
@@ -213,8 +207,6 @@ export default function Menu() {
                                 height={20}
                                 src={englishHover}
                                 alt="logo"
-                                as="image"
-                                priority
                                 onMouseLeave={() => setHoverLanguage(false)}
                               />
                             )}
@@ -239,8 +231,6 @@ export default function Menu() {
                                     height={20}
                                     src={search}
                                     alt="logo"
-                                    as="image"
-                                    priority
                                     onMouseEnter={() => setHover(true)}
                                   />
                                 ) : (
@@ -249,8 +239,6 @@ export default function Menu() {
                                     height={20}
                                     src={searchHover}
                                     alt="logo"
-                                    as="image"
-                                    priority
                                     onMouseLeave={() => setHover(false)}
                                   />
                                 )}
@@ -298,8 +286,6 @@ export default function Menu() {
                               height={20}
                               src={farsi}
                               alt="logo"
-                              as="image"
-                              priority
                               onMouseEnter={() => setHoverLanguage(true)}
                             />
                           ) : (
@@ -308,8 +294,6 @@ export default function Menu() {
                               height={20}
                               src={farsiHover}
                               alt="logo"
-                              as="image"
-                              priority
                               onMouseLeave={() => setHoverLanguage(false)}
                             />
                           )}
@@ -332,8 +316,6 @@ export default function Menu() {
                                   height={20}
                                   src={search}
                                   alt="logo"
-                                  as="image"
-                                  priority
                                   onMouseEnter={() => setHover(true)}
                                 />
                               ) : (
@@ -342,8 +324,6 @@ export default function Menu() {
                                   height={20}
                                   src={searchHover}
                                   alt="logo"
-                                  as="image"
-                                  priority
                                   onMouseLeave={() => setHover(false)}
                                 />
                               )}
@@ -373,7 +353,6 @@ export default function Menu() {
                   src={!language ? logoEnglish : logoFarsi}
                   alt="logo"
                   onClick={() => window.location.assign("/")}
-                  priority
                 />
               </div>
             </div>
@@ -392,8 +371,6 @@ export default function Menu() {
                     height={20}
                     src={language ? english : farsi}
                     alt="logo"
-                    as="image"
-                    priority
                     onMouseEnter={() => setHoverLanguage(true)}
                   />
                 ) : (
@@ -402,8 +379,6 @@ export default function Menu() {
                     height={20}
                     src={language ? englishHover : farsiHover}
                     alt="logo"
-                    as="image"
-                    priority
                     onMouseLeave={() => setHoverLanguage(false)}
                   />
                 )}
@@ -445,14 +420,7 @@ export default function Menu() {
                     >
                       {nav.title[languageType]}
                       {nav.title[languageType] === "" && (
-                        <Image
-                          width={20}
-                          height={20}
-                          src={search}
-                          alt="logo"
-                          as="image"
-                          priority
-                        />
+                        <Image width={20} height={20} src={search} alt="logo" />
                       )}
                     </a>
                   ))}

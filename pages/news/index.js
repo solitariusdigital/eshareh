@@ -68,13 +68,13 @@ export default function News() {
               priority
             />
           </div>
-          <p>
+          <div>
             {language ? (
               <p className={classes.click}>به زودی</p>
             ) : (
               <p className={classes.click}>Coming soon</p>
             )}
-          </p>
+          </div>
         </div>
       </div>
     </Fragment>

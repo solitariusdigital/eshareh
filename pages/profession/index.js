@@ -271,8 +271,6 @@ export default function Profession() {
             alt="image"
             layout="fill"
             objectFit="contain"
-            as="image"
-            priority
           />
         </div>
       </div>

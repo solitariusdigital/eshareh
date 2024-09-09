@@ -166,7 +166,6 @@ export default function Contact() {
                   alt="image"
                   layout="fill"
                   objectFit="contain"
-                  priority
                 />
               </div>
             ) : (
