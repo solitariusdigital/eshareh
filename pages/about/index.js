@@ -27,7 +27,9 @@ export default function About() {
     const fetchData = async () => {
       try {
         const users = await getUsersApi();
-        setUsers(shuffleUsers(users.filter((user) => user.active)));
+        let setOne = shuffleUsers(users.filter((user) => user.active));
+        let setTwo = [...setOne];
+        setUsers(setOne.concat(setTwo));
       } catch (error) {
         console.error(error);
       }
