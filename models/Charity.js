@@ -3,6 +3,7 @@ import { Schema, model, models } from "mongoose";
 const CharitySchema = new Schema(
   {
     count: Number,
+    maxCount: Number,
   },
   { timestamps: true }
 );

@@ -5,28 +5,328 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 150px;
-  height: calc(100vh - 150px);
+  background: config.$ocean;
+  color: config.$white;
 
   button {
     @include mixins.button(config.$yellow, config.$black);
+    border-radius: 50px;
     margin: 20px auto;
   }
 
-  .shareContainer {
+  .content {
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    max-width: config.$max-widthHeigh;
+    width: config.$content-width;
+    direction: rtl;
+    bottom: 200px;
+
+    @include mixins.fourK {
+      bottom: 450px;
+    }
+    @include mixins.tablet {
+      width: config.$content-widthTablet;
+      bottom: 150px;
+    }
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+      bottom: 40px;
+    }
+
+    h2 {
+      margin: 5px 0px;
+    }
   }
 
-  .share {
-    width: 24px;
-    height: 24px;
-    margin-right: 20px;
-    cursor: pointer;
+  .cover {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    margin-top: 50px;
+
+    .star {
+      left: 10%;
+      top: 20%;
+    }
+
+    .starRight {
+      right: 20%;
+      top: 0%;
+
+      @include mixins.mobile {
+        top: -10%;
+      }
+    }
+  }
+
+  .actionContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 100px 0px;
+
+    @include mixins.mobile {
+      margin: 50px 0px;
+    }
+
+    @include mixins.fourK {
+      width: 75%;
+    }
+
+    .star {
+      left: 50%;
+      bottom: 130%;
+
+      @include mixins.mobile {
+        bottom: 150%;
+      }
+    }
+
+    @include mixins.mobile {
+      justify-content: space-between;
+    }
+
+    .click {
+      position: relative;
+
+      .button {
+        position: relative;
+        width: 500px;
+        border-radius: 70px;
+        box-shadow: config.$button-shadow;
+
+        @include mixins.mobile {
+          width: 180px;
+        }
+        @include mixins.tablet {
+          width: 350px;
+        }
+        @include mixins.desktop {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .bigTitle {
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: config.$ocean;
+
+        @include mixins.mobile {
+          top: 45%;
+        }
+        @include mixins.desktop {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .yellowTitle {
+    color: config.$yellow;
+    margin: 20px 0px !important;
+  }
+
+  .bigTitle {
+    position: relative;
+    font-size: 90px;
+    @include mixins.mobile {
+      font-size: 24px;
+    }
+    @include mixins.tablet {
+      font-size: 50px;
+    }
+
+    .star {
+      left: 20%;
+      bottom: 60%;
+
+      @include mixins.mobile {
+        right: 40px;
+        bottom: 70px;
+      }
+    }
+  }
+
+  .star {
+    left: 20%;
+    bottom: 0px;
+  }
+
+  .hekmat {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 150px;
+    height: 30px;
+    width: fit-content;
+
+    @include mixins.mobile {
+      margin-top: 100px;
+    }
+
+    h3 {
+      border-bottom: 1px solid config.$white;
+      margin-left: 5px;
+
+      @include mixins.desktop {
+        &:hover {
+          border-bottom: 1px solid config.$yellow;
+        }
+      }
+    }
+
+    @include mixins.desktop {
+      &:hover {
+        color: config.$yellow;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .progress {
+    width: 100%;
+    border-radius: 50px;
+    padding: 5px;
+    background: config.$white;
+    border: 10px solid #98bcce;
+    box-shadow: config.$button-shadow;
+    direction: ltr;
   }
 
   .dynamicText {
     color: config.$yellow;
+  }
+}
+
+.star,
+.starRight {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  @include mixins.blink();
+
+  @include mixins.mobile {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  width: 100%;
+  height: calc(100vh - 100px);
+  margin-top: 100px;
+  background: config.$grey;
+
+  .graphic {
+    position: relative;
+    z-index: 2;
+    width: 500px;
+    height: 320px;
+    border-radius: 20px;
+    border: 3px solid config.$white;
+    box-shadow: config.$button-shadow;
+    background: config.$ocean;
+    direction: rtl;
+
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+      height: 250px;
+    }
+
+    .text {
+      position: absolute;
+      left: 20%;
+      top: 20%;
+
+      h2 {
+        color: config.$yellow;
+      }
+      h3 {
+        color: config.$white;
+      }
+    }
+
+    .star {
+      left: 35%;
+      top: 25%;
+
+      @include mixins.mobile {
+        left: 40%;
+        top: 30%;
+      }
+    }
+  }
+
+  .share {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+    color: config.$white;
+    width: 500px;
+
+    @include mixins.desktop {
+      &:hover {
+        color: config.$yellow;
+        cursor: pointer;
+      }
+    }
+
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+    }
+
+    h4 {
+      position: relative;
+      top: 3px;
+      margin-left: 10px;
+    }
+  }
+
+  .social {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 500px;
+    margin-top: 20px;
+    color: config.$white;
+
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+    }
+
+    .icon {
+      margin-right: 24px;
+      cursor: pointer;
+
+      @include mixins.desktop {
+        &:hover {
+          color: config.$yellow;
+          cursor: pointer;
+        }
+      }
+    }
   }
 }
