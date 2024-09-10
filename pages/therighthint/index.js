@@ -32,6 +32,7 @@ export default function Therighthint() {
   const [charity, setCharity] = useState({});
   const [displayPopup, setDisplayPopup] = useState(false);
   const [displaySocial, setDisplaySocial] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
   const [currentString, setCurrentString] = useState("");
   const [stingsArray, setStringsArray] = useState([
     "خلاقیــت",
@@ -87,7 +88,10 @@ export default function Therighthint() {
   };
 
   const updateCharityCount = () => {
-    performStringReplacement();
+    if (!disableButton) {
+      performStringReplacement();
+    }
+    setDisableButton(true);
     setTimeout(() => {
       saveCount();
     }, 2000);
@@ -98,17 +102,17 @@ export default function Therighthint() {
     setDisplayPopup(true);
     document.body.style.overflow = "hidden";
     let checkCharityUser = secureLocalStorage.getItem("charityUser");
-    // if (!checkCharityUser) {
-    let count = charity.count;
-    count += 1;
-    let dataObject = {
-      id: charity["_id"],
-      count: count,
-    };
-    await updateCharityApi(dataObject);
-    setCharity(dataObject);
-    secureLocalStorage.setItem("charityUser", true);
-    // }
+    if (!checkCharityUser) {
+      let count = charity.count;
+      count += 1;
+      let dataObject = {
+        id: charity["_id"],
+        count: count,
+      };
+      await updateCharityApi(dataObject);
+      setCharity(dataObject);
+      secureLocalStorage.setItem("charityUser", true);
+    }
   };
 
   return (
