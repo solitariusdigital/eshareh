@@ -26,6 +26,11 @@ import {
   WhatsappShareButton,
   TelegramShareButton,
 } from "react-share";
+import starOne from "@/assets/therighthint/starOne.gif";
+import starTwo from "@/assets/therighthint/starTwo.gif";
+import starThree from "@/assets/therighthint/starThree.gif";
+import starFour from "@/assets/therighthint/starFour.gif";
+import starFive from "@/assets/therighthint/starFive.gif";
 
 export default function Therighthint() {
   const { language, setLanguage } = useContext(StateContext);
@@ -161,8 +166,55 @@ export default function Therighthint() {
         }}
       >
         <div className={classes.cover}>
+          <div className={classes.starOne}>
+            <Image
+              src={starOne}
+              blurDataURL={starOne}
+              placeholder="blur"
+              alt="star"
+              layout="responsive"
+              objectFit="contain"
+              as="image"
+              priority
+            />
+          </div>
+          <div className={classes.starTwo}>
+            <Image
+              src={starTwo}
+              blurDataURL={starTwo}
+              placeholder="blur"
+              alt="star"
+              layout="responsive"
+              objectFit="contain"
+              as="image"
+              priority
+            />
+          </div>
+          <div className={classes.starThree}>
+            <Image
+              src={starThree}
+              blurDataURL={starThree}
+              placeholder="blur"
+              alt="star"
+              layout="responsive"
+              objectFit="contain"
+              as="image"
+              priority
+            />
+          </div>
+          <div className={classes.starFour}>
+            <Image
+              src={starFour}
+              blurDataURL={starFour}
+              placeholder="blur"
+              alt="star"
+              layout="responsive"
+              objectFit="contain"
+              as="image"
+              priority
+            />
+          </div>
           <Image
-            className={classes.cover}
             src={cover}
             blurDataURL={cover}
             placeholder="blur"
@@ -284,6 +336,18 @@ export default function Therighthint() {
               height={10}
               border={true}
             />
+            <div className={classes.starFive}>
+              <Image
+                src={starFive}
+                blurDataURL={starFive}
+                placeholder="blur"
+                alt="star"
+                layout="responsive"
+                objectFit="contain"
+                as="image"
+                priority
+              />
+            </div>
           </div>
           <div
             className={classes.hekmat}
@@ -325,6 +389,18 @@ export default function Therighthint() {
               as="image"
               priority
             />
+            <div className={classes.starFive}>
+              <Image
+                src={starFive}
+                blurDataURL={starFive}
+                placeholder="blur"
+                alt="star"
+                layout="responsive"
+                objectFit="contain"
+                as="image"
+                priority
+              />
+            </div>
           </div>
           <div
             className={classes.share}

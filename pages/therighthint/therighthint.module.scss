@@ -36,6 +36,7 @@
   }
 
   .cover {
+    position: relative;
     width: 100%;
     margin-top: 20px;
     max-width: config.$max-widthHeigh;
@@ -49,6 +50,23 @@
     }
     @include mixins.mobile {
       width: calc(100% - 24px);
+    }
+
+    .starOne {
+      left: 0%;
+      top: 10%;
+    }
+    .starTwo {
+      left: 30%;
+      bottom: 0%;
+    }
+    .starThree {
+      right: 0%;
+      bottom: 20%;
+    }
+    .starFour {
+      right: 10%;
+      top: 0%;
     }
   }
 
@@ -141,9 +159,6 @@
       margin-left: 5px;
     }
 
-    @include mixins.mobile {
-      margin-top: 100px;
-    }
     @include mixins.allDesktop {
       &:hover {
         color: config.$yellow;
@@ -164,6 +179,19 @@
 
   .dynamicText {
     color: config.$yellow;
+  }
+}
+
+.starOne,
+.starTwo,
+.starThree,
+.starFour,
+.starFive {
+  position: absolute;
+  width: 200px;
+
+  @include mixins.mobile {
+    width: 80px;
   }
 }
 
@@ -204,6 +232,20 @@
     @include mixins.mobile {
       width: calc(100% - 24px);
       height: 250px;
+    }
+
+    .starFive {
+      left: 20%;
+      top: 10%;
+
+      @include mixins.fourK {
+        left: 25%;
+        top: 15%;
+      }
+      @include mixins.mobile {
+        left: 35%;
+        top: 25%;
+      }
     }
 
     .text {
