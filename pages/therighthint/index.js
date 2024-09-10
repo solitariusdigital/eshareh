@@ -410,7 +410,7 @@ export default function Therighthint() {
             }}
           >
             <h4>یاری بیشتر با به اشتراک گذاشتن صفحه‌ی اشاره</h4>
-            <IosShareIcon sx={{ fontSize: 16 }} />
+            <IosShareIcon />
             {displaySocial && (
               <div
                 className={`${classes.social} animate__animated animate__slideInDown`}
