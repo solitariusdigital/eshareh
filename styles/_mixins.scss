@@ -165,7 +165,7 @@ $screen-fourK: 6000px;
   }
 }
 
-@mixin blink() {
+@mixin pulse() {
   -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
   animation: heartbeat 1.5s ease-in-out infinite both;
 
@@ -235,6 +235,34 @@ $screen-fourK: 6000px;
       transform: scale(1);
       -webkit-animation-timing-function: ease-out;
       animation-timing-function: ease-out;
+    }
+  }
+}
+
+@mixin blink() {
+  -webkit-animation: blink-1 3s infinite both;
+  animation: blink-1 3s infinite both;
+
+  @-webkit-keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+      opacity: 1;
+    }
+    25%,
+    75% {
+      opacity: 0;
+    }
+  }
+  @keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+      opacity: 1;
+    }
+    25%,
+    75% {
+      opacity: 0;
     }
   }
 }

@@ -41,7 +41,7 @@ export default function About() {
     let count = 0;
     switch (screenSize) {
       case "desktop":
-        count = 11;
+        count = 9;
         break;
       case "tablet-landscape":
         count = 7;
@@ -172,7 +172,7 @@ export default function About() {
             <Swiper
               className={classes.swiper}
               slidesPerView={generateSwipeCount()}
-              spaceBetween={0}
+              spaceBetween={screenSize === "desktop" ? 25 : 0}
               centeredSlides={true}
               mousewheel={true}
               loop={true}
