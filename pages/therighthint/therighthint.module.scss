@@ -41,6 +41,9 @@
     max-width: config.$max-widthHeigh;
     width: config.$content-width;
 
+    @include mixins.fourK {
+      max-width: 2000px;
+    }
     @include mixins.tablet {
       width: config.$content-widthTablet;
     }
@@ -55,19 +58,16 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
     margin: 100px 0px;
-
-    @include mixins.mobile {
-      margin: 50px 0px;
-    }
-
-    @include mixins.fourK {
-      width: 75%;
-    }
+    width: 100%;
+    max-width: 1080px;
 
     @include mixins.mobile {
       justify-content: space-between;
+      margin: 50px 0px;
+    }
+    @include mixins.tablet {
+      max-width: 700px;
     }
 
     .click {
@@ -212,14 +212,21 @@
       top: 20%;
 
       @include mixins.fourK {
-        left: 30%;
+        left: 12%;
+        top: 15%;
       }
 
       h2 {
         color: config.$yellow;
+        @include mixins.fourK {
+          font-size: 3rem;
+        }
       }
       h3 {
         color: config.$white;
+        @include mixins.fourK {
+          font-size: 2rem;
+        }
       }
     }
   }
