@@ -146,7 +146,7 @@
     position: relative;
     font-size: 90px;
     @include mixins.mobile {
-      font-size: 24px;
+      font-size: 30px;
     }
     @include mixins.tablet {
       font-size: 50px;
