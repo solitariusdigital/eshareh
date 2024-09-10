@@ -15,7 +15,6 @@ import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 import coverModel from "@/models/Cover";
-import useDeviceAndBrowserDetection from "@/components/useDeviceAndBrowserDetection";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 
@@ -28,12 +27,8 @@ export default function Home({ solutions, covers }) {
   const [hoverTwo, setHoverTwo] = useState(false);
   const [hoverThree, setHoverThree] = useState(false);
 
-  const { isDesktopSafari, isIphone } = useDeviceAndBrowserDetection();
-
-  const animeSrc = {
-    mov: "https://eshareh.storage.iran.liara.space/motion/smokingFish.mov",
-    webm: "https://eshareh.storage.iran.liara.space/motion/smokingFish.webm",
-  };
+  const smokingFish =
+    "https://eshareh.storage.iran.liara.space/motion/smokingFish.gif";
 
   const divideArray = (solutions) => {
     const dividedArrays = [];
@@ -321,52 +316,17 @@ export default function Home({ solutions, covers }) {
         </div>
       </section>
       <section className={classes.animeContainer}>
-        {isDesktopSafari || isIphone ? (
-          <div className={classes.anime}>
-            <Image
-              src={
-                "https://eshareh.storage.iran.liara.space/motion/smokingFish.png"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/motion/smokingFish.png"
-              }
-              placeholder="blur"
-              alt="image"
-              layout="fill"
-              objectFit="contain"
-              priority
-            />
-          </div>
-        ) : (
-          <video
-            className={classes.anime}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-          >
-            <source src={animeSrc.mov} type="video/quicktime" />
-            <source src={animeSrc.webm} type="video/webm" />
-          </video>
-        )}
-        {/* <video
-          className={classes.anime}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-        >
-          <source
-            src="https://transparent-videos-for-all.vercel.app/sample.mov"
-            type="video/quicktime"
+        <div className={classes.anime}>
+          <Image
+            src={smokingFish}
+            blurDataURL={smokingFish}
+            placeholder="blur"
+            alt="image"
+            layout="fill"
+            objectFit="contain"
+            priority
           />
-          <source
-            src="https://transparent-videos-for-all.vercel.app/sample.webm"
-            type="video/webm"
-          />
-        </video> */}
+        </div>
       </section>
       <section
         className={classes.container}
