@@ -134,23 +134,15 @@
     align-items: center;
     margin-top: 100px;
     margin-bottom: 50px;
-
     height: 30px;
     width: fit-content;
 
-    @include mixins.mobile {
-      margin-top: 100px;
+    h3 {
+      margin-left: 5px;
     }
 
-    h3 {
-      border-bottom: 1px solid config.$white;
-      margin-left: 5px;
-
-      @include mixins.allDesktop {
-        &:hover {
-          border-bottom: 1px solid config.$yellow;
-        }
-      }
+    @include mixins.mobile {
+      margin-top: 100px;
     }
     @include mixins.allDesktop {
       &:hover {
