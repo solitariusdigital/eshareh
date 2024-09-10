@@ -29,8 +29,10 @@
     .item {
       cursor: pointer;
 
-      &:hover {
-        color: config.$yellow;
+      @include mixins.allDesktop {
+        &:hover {
+          color: config.$yellow;
+        }
       }
     }
 
@@ -113,8 +115,10 @@
         color: config.$grey;
         cursor: pointer;
 
-        &:hover {
-          color: config.$black;
+        @include mixins.allDesktop {
+          &:hover {
+            color: config.$black;
+          }
         }
       }
     }
@@ -155,8 +159,10 @@
       color: config.$white;
       @include mixins.transparentBackground(0.5, config.$lightgrey);
 
-      &:hover {
-        color: config.$yellow;
+      @include mixins.allDesktop {
+        &:hover {
+          color: config.$yellow;
+        }
       }
 
       @include mixins.mobile {
@@ -265,8 +271,10 @@
   }
 
   p {
-    &:hover {
-      color: config.$yellow;
+    @include mixins.allDesktop {
+      &:hover {
+        color: config.$yellow;
+      }
     }
   }
 }
@@ -376,8 +384,10 @@
     color: config.$grey;
     position: relative;
 
-    &:hover {
-      color: config.$black;
+    @include mixins.allDesktop {
+      &:hover {
+        color: config.$black;
+      }
     }
 
     .title,
@@ -462,9 +472,11 @@
     display: flex;
     align-items: center;
 
-    &:hover {
-      cursor: pointer;
-      color: config.$yellow;
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$yellow;
+      }
     }
   }
 

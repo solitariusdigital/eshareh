@@ -121,13 +121,7 @@ p {
 }
 
 .icon {
-  @include mixins.desktop {
-    &:hover {
-      color: config.$yellow;
-      cursor: pointer;
-    }
-  }
-  @include mixins.fourK {
+  @include mixins.allDesktop {
     &:hover {
       color: config.$yellow;
       cursor: pointer;

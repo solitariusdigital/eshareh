@@ -34,9 +34,11 @@
   .nav {
     font-weight: bold !important;
 
-    &:hover {
-      cursor: pointer;
-      color: config.$yellow;
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$yellow;
+      }
     }
   }
 
@@ -73,8 +75,10 @@
 
     h3 {
       cursor: pointer;
-      &:hover {
-        color: config.$yellow;
+      @include mixins.allDesktop {
+        &:hover {
+          color: config.$yellow;
+        }
       }
     }
   }

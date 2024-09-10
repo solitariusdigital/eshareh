@@ -35,9 +35,11 @@
     font-size: config.$big-font;
     color: config.$grey;
 
-    &:hover {
-      cursor: pointer;
-      color: config.$black;
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$black;
+      }
     }
   }
 }
@@ -66,8 +68,10 @@
     color: config.$grey;
     position: relative;
 
-    &:hover {
-      color: config.$black;
+    @include mixins.allDesktop {
+      &:hover {
+        color: config.$black;
+      }
     }
 
     .title,

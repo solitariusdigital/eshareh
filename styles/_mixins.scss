@@ -25,6 +25,11 @@ $screen-fourK: 6000px;
     @content;
   }
 }
+@mixin allDesktop {
+  @media (min-width: #{$screen-tablet} ) {
+    @content;
+  }
+}
 
 @mixin button($color, $subColor) {
   width: 150px;
@@ -35,7 +40,7 @@ $screen-fourK: 6000px;
   color: $subColor;
   border: none;
 
-  @include desktop {
+  @include allDesktop() {
     &:hover {
       cursor: pointer;
       color: $subColor;

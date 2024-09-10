@@ -22,18 +22,12 @@
     max-width: config.$max-widthHeigh;
     width: config.$content-width;
     direction: rtl;
-    bottom: 200px;
 
-    @include mixins.fourK {
-      bottom: 450px;
-    }
     @include mixins.tablet {
       width: config.$content-widthTablet;
-      bottom: 150px;
     }
     @include mixins.mobile {
       width: calc(100% - 24px);
-      bottom: 40px;
     }
 
     h2 {
@@ -42,25 +36,16 @@
   }
 
   .cover {
-    position: relative;
-    margin: auto;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
+    max-width: config.$max-widthHeigh;
+    width: config.$content-width;
 
-    .star {
-      left: 10%;
-      top: 20%;
-      @include mixins.blink();
+    @include mixins.tablet {
+      width: config.$content-widthTablet;
     }
-
-    .starRight {
-      right: 20%;
-      top: 0%;
-      @include mixins.pulse();
-
-      @include mixins.mobile {
-        top: -10%;
-      }
+    @include mixins.mobile {
+      width: calc(100% - 24px);
     }
   }
 
@@ -79,16 +64,6 @@
 
     @include mixins.fourK {
       width: 75%;
-    }
-
-    .star {
-      left: 50%;
-      bottom: 130%;
-      @include mixins.pulse();
-
-      @include mixins.mobile {
-        bottom: 150%;
-      }
     }
 
     @include mixins.mobile {
@@ -110,7 +85,7 @@
         @include mixins.tablet {
           width: 350px;
         }
-        @include mixins.desktop {
+        @include mixins.allDesktop {
           &:hover {
             cursor: pointer;
           }
@@ -128,7 +103,7 @@
         @include mixins.mobile {
           top: 45%;
         }
-        @include mixins.desktop {
+        @include mixins.allDesktop {
           &:hover {
             cursor: pointer;
           }
@@ -151,36 +126,15 @@
     @include mixins.tablet {
       font-size: 50px;
     }
-
-    .star {
-      left: 20%;
-      bottom: 60%;
-      @include mixins.pulse();
-    }
-
-    .starRight {
-      right: 0%;
-      bottom: 180%;
-      @include mixins.blink();
-
-      @include mixins.mobile {
-        right: 10%;
-        bottom: 200%;
-      }
-    }
-  }
-
-  .star {
-    left: 20%;
-    bottom: 0px;
-    @include mixins.blink();
   }
 
   .hekmat {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: 150px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+
     height: 30px;
     width: fit-content;
 
@@ -192,14 +146,13 @@
       border-bottom: 1px solid config.$white;
       margin-left: 5px;
 
-      @include mixins.desktop {
+      @include mixins.allDesktop {
         &:hover {
           border-bottom: 1px solid config.$yellow;
         }
       }
     }
-
-    @include mixins.desktop {
+    @include mixins.allDesktop {
       &:hover {
         color: config.$yellow;
         cursor: pointer;
@@ -219,18 +172,6 @@
 
   .dynamicText {
     color: config.$yellow;
-  }
-}
-
-.star,
-.starRight {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-
-  @include mixins.mobile {
-    width: 35px;
-    height: 35px;
   }
 }
 
@@ -263,6 +204,11 @@
     background: config.$ocean;
     direction: rtl;
 
+    @include mixins.fourK {
+      width: 700px;
+      height: 450px;
+    }
+
     @include mixins.mobile {
       width: calc(100% - 24px);
       height: 250px;
@@ -273,26 +219,15 @@
       left: 20%;
       top: 20%;
 
+      @include mixins.fourK {
+        left: 30%;
+      }
+
       h2 {
         color: config.$yellow;
       }
       h3 {
         color: config.$white;
-      }
-    }
-
-    .star {
-      left: 35%;
-      top: 30%;
-      width: 60px;
-      height: 60px;
-      @include mixins.blink();
-
-      @include mixins.mobile {
-        left: 40%;
-        top: 30%;
-        width: 35px;
-        height: 35px;
       }
     }
   }
@@ -307,11 +242,15 @@
     width: 500px;
     position: relative;
 
-    @include mixins.desktop {
+    @include mixins.allDesktop {
       &:hover {
         color: config.$yellow;
         cursor: pointer;
       }
+    }
+
+    @include mixins.fourK {
+      width: 700px;
     }
 
     @include mixins.mobile {
@@ -345,7 +284,7 @@
       margin-right: 24px;
       cursor: pointer;
 
-      @include mixins.desktop {
+      @include mixins.allDesktop {
         &:hover {
           color: config.$yellow;
           cursor: pointer;

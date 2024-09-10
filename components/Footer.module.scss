@@ -68,9 +68,11 @@
       margin: 4px 0px;
     }
 
-    &:hover {
-      color: config.$yellow;
-      font-weight: bold;
+    @include mixins.allDesktop {
+      &:hover {
+        color: config.$yellow;
+        font-weight: bold;
+      }
     }
   }
 
@@ -117,9 +119,11 @@
 .youtube {
   margin-right: 20px;
 
-  &:hover {
-    color: config.$yellow;
-    cursor: pointer;
+  @include mixins.allDesktop {
+    &:hover {
+      color: config.$yellow;
+      cursor: pointer;
+    }
   }
 }
 

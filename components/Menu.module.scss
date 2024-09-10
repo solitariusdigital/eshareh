@@ -98,8 +98,10 @@
       margin: 5px 10px;
       cursor: pointer;
 
-      &:hover {
-        color: config.$yellow;
+      @include mixins.allDesktop {
+        &:hover {
+          color: config.$yellow;
+        }
       }
     }
   }
@@ -142,8 +144,10 @@
     font-size: config.$small-font;
   }
 
-  &:hover {
-    color: config.$yellow;
+  @include mixins.allDesktop {
+    &:hover {
+      color: config.$yellow;
+    }
   }
 }
 

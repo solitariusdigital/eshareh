@@ -178,10 +178,12 @@
     border-bottom-right-radius: 10px;
     width: 150px;
 
-    &:hover {
-      background: config.$black;
-      color: config.$yellow;
-      cursor: pointer;
+    @include mixins.allDesktop {
+      &:hover {
+        background: config.$black;
+        color: config.$yellow;
+        cursor: pointer;
+      }
     }
   }
 }

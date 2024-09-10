@@ -79,7 +79,7 @@
 }
 
 .nav {
-  @include mixins.desktop {
+  @include mixins.allDesktop {
     &:hover {
       cursor: pointer;
       color: config.$yellow;

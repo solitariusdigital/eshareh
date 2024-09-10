@@ -65,7 +65,7 @@
         width: 115px;
       }
 
-      @include mixins.desktop {
+      @include mixins.allDesktop {
         &:hover {
           background: config.$yellow;
           color: config.$black;

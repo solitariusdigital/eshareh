@@ -8,8 +8,6 @@ import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import Progress from "@/components/Progress";
 import cover from "@/assets/therighthint/cover.png";
-import star from "@/assets/therighthint/star.png";
-import starFlip from "@/assets/therighthint/starFlip.png";
 import popup from "@/assets/therighthint/popup.png";
 import button from "@/assets/therighthint/button.png";
 import Image from "next/legacy/image";
@@ -32,22 +30,17 @@ import {
 export default function Therighthint() {
   const { language, setLanguage } = useContext(StateContext);
   const [charity, setCharity] = useState({});
-  const textsArray = useMemo(
-    () => [
-      "خلاقیــت",
-      "پیشــرفت",
-      "یادگیـــری",
-      "آمــــوزش",
-      "درســـــتی",
-      "نیکــــــــی",
-    ],
-    []
-  );
-  const [dynamicText, setDynamicText] = useState(textsArray[0]);
-  const [animate, setAnimate] = useState(false);
   const [displayPopup, setDisplayPopup] = useState(false);
   const [displaySocial, setDisplaySocial] = useState(false);
-
+  const [currentString, setCurrentString] = useState("");
+  const [stingsArray, setStringsArray] = useState([
+    "خلاقیــت",
+    "پیشــرفت",
+    "یادگیـــری",
+    "آمــــوزش",
+    "درســـــتی",
+    "نیکــــــــی",
+  ]);
   const shareUrl = "https://eshareh.com/therighthint";
   const titleCampaign = "اشاره‌ای درست!";
   const summaryCampaign = "اشاره‌ای درست!";
@@ -65,28 +58,11 @@ export default function Therighthint() {
     fetchData();
   }, []);
 
-  const calculatePercentage = (count) => {
-    return ((count + 1) / charity.maxCount) * 100;
-  };
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      setAnimate(false);
-      setDynamicText((prevFruit) => {
-        const currentIndex = textsArray.indexOf(prevFruit);
-        const nextIndex = (currentIndex + 1) % textsArray.length;
-        return textsArray[nextIndex];
-      });
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, [textsArray]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setAnimate(true);
-    }, 10);
-  }, [dynamicText]);
+    setCurrentString(
+      stingsArray[Math.floor(Math.random() * stingsArray.length)]
+    );
+  }, [stingsArray]);
 
   useEffect(() => {
     // Enable scrolling when the component unmounts
@@ -95,10 +71,32 @@ export default function Therighthint() {
     };
   }, []);
 
-  const updateCharityCount = async () => {
+  const calculatePercentage = (count) => {
+    return ((count + 1) / charity.maxCount) * 100;
+  };
+
+  const getRandomString = () => {
+    const availableStrings = stingsArray.filter((str) => str !== currentString);
+    const randomIndex = Math.floor(Math.random() * availableStrings.length);
+    return availableStrings[randomIndex];
+  };
+
+  const performStringReplacement = () => {
+    const newString = getRandomString();
+    setCurrentString(newString);
+  };
+
+  const updateCharityCount = () => {
+    performStringReplacement();
+    setTimeout(() => {
+      saveCount();
+    }, 2000);
+  };
+
+  const saveCount = async () => {
     window.scrollTo(0, 0);
-    document.body.style.overflow = "hidden";
     setDisplayPopup(true);
+    document.body.style.overflow = "hidden";
     let checkCharityUser = secureLocalStorage.getItem("charityUser");
     // if (!checkCharityUser) {
     let count = charity.count;
@@ -159,18 +157,6 @@ export default function Therighthint() {
         }}
       >
         <div className={classes.cover}>
-          <div className={classes.starRight}>
-            <Image
-              src={starFlip}
-              blurDataURL={starFlip}
-              placeholder="blur"
-              alt="star"
-              layout="responsive"
-              objectFit="contain"
-              as="image"
-              priority
-            />
-          </div>
           <Image
             className={classes.cover}
             src={cover}
@@ -182,18 +168,6 @@ export default function Therighthint() {
             as="image"
             priority
           />
-          <div className={classes.star}>
-            <Image
-              src={star}
-              blurDataURL={star}
-              placeholder="blur"
-              alt="star"
-              layout="responsive"
-              objectFit="contain"
-              as="image"
-              priority
-            />
-          </div>
         </div>
         <div
           className={classes.content}
@@ -209,30 +183,6 @@ export default function Therighthint() {
           >
             اشــــــــاره‌ای درست
             <span>!</span>
-            <div className={classes.starRight}>
-              <Image
-                src={star}
-                blurDataURL={star}
-                placeholder="blur"
-                alt="star"
-                layout="responsive"
-                objectFit="contain"
-                as="image"
-                priority
-              />
-            </div>
-            <div className={classes.star}>
-              <Image
-                src={starFlip}
-                blurDataURL={starFlip}
-                placeholder="blur"
-                alt="star"
-                layout="responsive"
-                objectFit="contain"
-                as="image"
-                priority
-              />
-            </div>
           </div>
           <h2>
             ما معتقدیم یادگیری مستمر می‌تواند در کیفیت هر لحظه‌ تاثیر‌گذار باشد
@@ -290,18 +240,6 @@ export default function Therighthint() {
             >
               به
             </h2>
-            <div className={classes.star}>
-              <Image
-                src={starFlip}
-                blurDataURL={starFlip}
-                placeholder="blur"
-                alt="star"
-                layout="responsive"
-                objectFit="contain"
-                as="image"
-                priority
-              />
-            </div>
             <div className={classes.click} onClick={() => updateCharityCount()}>
               <h2
                 className={classes.bigTitle}
@@ -309,7 +247,7 @@ export default function Therighthint() {
                   fontFamily: language ? "FarsiFat" : "FarsiFat",
                 }}
               >
-                {dynamicText}
+                {currentString}
               </h2>
               <div className={classes.button}>
                 <Image
@@ -343,18 +281,6 @@ export default function Therighthint() {
               border={true}
             />
           </div>
-          <div className={classes.star}>
-            <Image
-              src={star}
-              blurDataURL={star}
-              placeholder="blur"
-              alt="star"
-              layout="responsive"
-              objectFit="contain"
-              as="image"
-              priority
-            />
-          </div>
           <div
             className={classes.hekmat}
             onClick={() =>
@@ -366,7 +292,6 @@ export default function Therighthint() {
           </div>
         </div>
       </div>
-
       {displayPopup && (
         <div className={classes.popup}>
           <div className={classes.graphic}>
@@ -396,18 +321,6 @@ export default function Therighthint() {
               as="image"
               priority
             />
-            <div className={classes.star}>
-              <Image
-                src={starFlip}
-                blurDataURL={starFlip}
-                placeholder="blur"
-                alt="star"
-                layout="responsive"
-                objectFit="contain"
-                as="image"
-                priority
-              />
-            </div>
           </div>
           <div
             className={classes.share}
