@@ -191,7 +191,7 @@ export default function Solution({ solutions, projectTitle }) {
         break;
     }
     await updateSolutionApi(data);
-    router.replace(router.asPath);
+    window.location.reload();
   };
 
   const moveItem = async (index, direction) => {
@@ -231,7 +231,7 @@ export default function Solution({ solutions, projectTitle }) {
       };
       await updateSolutionApi(dataObject);
     }
-    router.replace(router.asPath);
+    window.location.reload();
   };
 
   const makeSlide = async (index) => {
@@ -244,7 +244,7 @@ export default function Solution({ solutions, projectTitle }) {
       slideMedia: slideMedia,
     };
     await updateSolutionApi(dataObject);
-    router.replace(router.asPath);
+    window.location.reload();
   };
 
   const removeSlide = async (index) => {
@@ -257,7 +257,7 @@ export default function Solution({ solutions, projectTitle }) {
       slideMedia: project.slideMedia,
     };
     await updateSolutionApi(dataObject);
-    router.replace(router.asPath);
+    window.location.reload();
   };
 
   const makeCover = async (index) => {
@@ -280,7 +280,7 @@ export default function Solution({ solutions, projectTitle }) {
       };
       await updateCoverApi(cover);
     }
-    router.replace(router.asPath);
+    window.location.reload();
   };
 
   const manageCoverSlide = async () => {
@@ -307,7 +307,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaDouble: mediaDouble,
     };
     await updateSolutionApi(dataObject);
-    router.replace(router.asPath);
+    window.location.reload();
   };
 
   const makeQuadruple = async (index) => {
@@ -318,7 +318,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaQuadruple: mediaQuadruple,
     };
     await updateSolutionApi(dataObject);
-    router.replace(router.asPath);
+    window.location.reload();
   };
 
   const removeDouble = async (index) => {
@@ -331,7 +331,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaDouble: project.mediaDouble,
     };
     await updateSolutionApi(dataObject);
-    router.replace(router.asPath);
+    window.location.reload();
   };
 
   const removeQuadruple = async (index) => {
@@ -346,7 +346,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaQuadruple: project.mediaQuadruple,
     };
     await updateSolutionApi(dataObject);
-    router.replace(router.asPath);
+    window.location.reload();
   };
 
   const imageActivation = async (value, index) => {
@@ -356,7 +356,7 @@ export default function Solution({ solutions, projectTitle }) {
       media: project.media,
     };
     await updateSolutionApi(dataObject);
-    router.replace(router.asPath);
+    window.location.reload();
   };
 
   return (
