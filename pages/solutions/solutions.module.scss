@@ -62,6 +62,9 @@
       width: 90%;
       direction: rtl;
 
+      @include mixins.mobile {
+        width: 75%;
+      }
       @include mixins.tablet {
         width: 85%;
       }
