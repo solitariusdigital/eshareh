@@ -292,6 +292,7 @@
     color: config.$white;
     width: 500px;
     position: relative;
+    z-index: 2;
 
     @include mixins.allDesktop {
       &:hover {
