@@ -235,16 +235,15 @@
     }
 
     .starFive {
-      left: 20%;
-      top: 10%;
+      left: 0%;
+      bottom: -15%;
 
       @include mixins.fourK {
-        left: 25%;
-        top: 15%;
+        bottom: -5%;
       }
       @include mixins.mobile {
-        left: 35%;
-        top: 25%;
+        left: 5%;
+        bottom: 0%;
       }
     }
 

@@ -2,28 +2,11 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: auto;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
-  color: config.$black;
   margin-top: 150px;
-
-  @include mixins.mobile {
-    width: 100%;
-  }
-
-  @include mixins.tablet {
-    width: 100%;
-    width: config.$content-widthTablet;
-  }
-
-  .image {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 300px;
-    height: 300px;
-    margin: auto;
-  }
 }

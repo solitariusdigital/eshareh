@@ -48,33 +48,8 @@ export default function News() {
           maxVideoPreview: -1,
         }}
       />
-      <div
-        className={classes.container}
-        style={{
-          fontFamily: language ? "English" : "English",
-        }}
-      >
-        <div className={classes.image}>
-          <div className={classes.image}>
-            <Image
-              src={soon}
-              blurDataURL={soon}
-              placeholder="blur"
-              alt="image"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
-          <div>
-            {language ? (
-              <p className={classes.click}>به زودی</p>
-            ) : (
-              <p className={classes.click}>Coming soon</p>
-            )}
-          </div>
-        </div>
+      <div className={classes.container}>
+        {language ? <h3>به زودی</h3> : <h3>Coming soon</h3>}
       </div>
     </Fragment>
   );
