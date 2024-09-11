@@ -17,9 +17,7 @@
     width: config.$content-widthTablet;
   }
   .information,
-  .informationReverse,
-  .details,
-  .detailsReverse {
+  .informationReverse {
     width: 100%;
     text-align: right;
     margin: 50px 0px;
@@ -58,6 +56,10 @@
       align-items: center;
     }
 
+    .text {
+      direction: rtl;
+    }
+
     .textBrief {
       width: 90%;
       direction: rtl;
@@ -74,8 +76,7 @@
     }
   }
 
-  .informationReverse,
-  .detailsReverse {
+  .informationReverse {
     direction: rtl;
     text-align: left;
 
