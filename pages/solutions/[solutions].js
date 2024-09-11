@@ -1,5 +1,6 @@
 import { useState, useContext, Fragment, useEffect, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
+import { useRouter } from "next/router";
 import classes from "./solutions.module.scss";
 import {
   replaceSpacesAndHyphens,
@@ -51,6 +52,8 @@ export default function Solution({ solutions, projectTitle }) {
   const [nextProject, setNextProject] = useState(null);
   const [dropDown, setDropDpwn] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -188,7 +191,7 @@ export default function Solution({ solutions, projectTitle }) {
         break;
     }
     await updateSolutionApi(data);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const moveItem = async (index, direction) => {
@@ -228,7 +231,7 @@ export default function Solution({ solutions, projectTitle }) {
       };
       await updateSolutionApi(dataObject);
     }
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const makeSlide = async (index) => {
@@ -241,7 +244,7 @@ export default function Solution({ solutions, projectTitle }) {
       slideMedia: slideMedia,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const removeSlide = async (index) => {
@@ -254,30 +257,44 @@ export default function Solution({ solutions, projectTitle }) {
       slideMedia: project.slideMedia,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const makeCover = async (index) => {
+    // Validate index
+    if (index < 0 || index >= project.media.length) {
+      console.error("Invalid index for cover media.");
+      return;
+    }
+    // Push current cover media to the media array
     project.media.push(project.coverMedia);
+    // Create the updated data object
     let dataObject = {
       ...project,
       media: project.media.filter((item, i) => i !== index),
       coverMedia: project.media[index],
     };
-    await updateSolutionApi(dataObject);
-
-    let getCovers = await getCoversApi();
-    const foundCover = getCovers.find(
-      (cover) => cover.title.en === project.en.title
-    );
-    if (foundCover) {
-      const cover = {
-        ...foundCover,
-        coverMedia: project.media[index],
-      };
-      await updateCoverApi(cover);
+    try {
+      // Update the solution
+      await updateSolutionApi(dataObject);
+      // Retrieve existing covers
+      let getCovers = await getCoversApi();
+      const foundCover = getCovers.find(
+        (cover) => cover.title.en === project.en.title
+      );
+      // Update cover if found
+      if (foundCover) {
+        const cover = {
+          ...foundCover,
+          coverMedia: project.media[index],
+        };
+        await updateCoverApi(cover);
+      }
+    } catch (error) {
+      console.error("Error updating project or cover:", error);
+      // Handle error appropriately (e.g., show a message to the user)
     }
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const manageCoverSlide = async () => {
@@ -304,7 +321,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaDouble: mediaDouble,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const makeQuadruple = async (index) => {
@@ -315,7 +332,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaQuadruple: mediaQuadruple,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const removeDouble = async (index) => {
@@ -328,7 +345,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaDouble: project.mediaDouble,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const removeQuadruple = async (index) => {
@@ -343,7 +360,7 @@ export default function Solution({ solutions, projectTitle }) {
       mediaQuadruple: project.mediaQuadruple,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   const imageActivation = async (value, index) => {
@@ -353,7 +370,7 @@ export default function Solution({ solutions, projectTitle }) {
       media: project.media,
     };
     await updateSolutionApi(dataObject);
-    window.location.reload();
+    router.replace(router.asPath);
   };
 
   return (
