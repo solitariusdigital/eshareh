@@ -7,6 +7,7 @@ import Image from "next/legacy/image";
 import CircleIcon from "@mui/icons-material/Circle";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
+import profession from "@/assets/profession.png";
 
 export default function Profession() {
   const { language, setLanguage } = useContext(StateContext);
@@ -267,12 +268,12 @@ export default function Profession() {
           }
         >
           <Image
-            src={flyingFish}
-            blurDataURL={flyingFish}
+            src={profession}
+            blurDataURL={profession}
             placeholder="blur"
             alt="image"
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
           />
         </div>
       </div>

@@ -325,6 +325,7 @@ export default function Home({ solutions, covers }) {
             layout="fill"
             objectFit="contain"
             priority
+            unoptimized
           />
         </div>
       </section>
