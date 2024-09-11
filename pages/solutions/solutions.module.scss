@@ -154,7 +154,7 @@
       height: 250px;
     }
     @include mixins.tablet {
-      height: 750px;
+      height: 650px;
     }
     @include mixins.tabletPortrait {
       height: 450px;
@@ -323,7 +323,7 @@
       height: 650px;
     }
     @include mixins.tabletPortrait {
-      height: 400px;
+      height: 450px;
     }
   }
 
