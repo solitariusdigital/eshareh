@@ -13,7 +13,9 @@
   @include mixins.tablet {
     width: config.$content-widthTablet;
   }
-
+  @include mixins.tabletPortrait {
+    width: config.$content-widthTablet;
+  }
   .information,
   .informationReverse,
   .details,
@@ -139,6 +141,9 @@
     }
     @include mixins.tablet {
       height: 750px;
+    }
+    @include mixins.tabletPortrait {
+      height: 450px;
     }
 
     .imageTest {
@@ -298,10 +303,13 @@
     }
 
     @include mixins.mobile {
-      height: 250px;
+      height: 200px;
     }
     @include mixins.tablet {
       height: 650px;
+    }
+    @include mixins.tabletPortrait {
+      height: 400px;
     }
   }
 
@@ -374,9 +382,11 @@
   @include mixins.mobile {
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   }
-
   @include mixins.tablet {
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  }
+  @include mixins.tabletPortrait {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   }
 
   .project {
@@ -420,7 +430,12 @@
       min-height: 250px;
     }
     @include mixins.tablet {
-      min-height: 250px;
+      height: 40vh;
+      max-height: 350px;
+    }
+    @include mixins.tabletPortrait {
+      height: 40vh;
+      max-height: 500px;
     }
     .video {
       width: 100%;
@@ -463,8 +478,11 @@
     @include mixins.tablet {
       font-size: 2rem;
     }
+    @include mixins.tabletPortrait {
+      font-size: 2rem;
+    }
     @include mixins.mobile {
-      font-size: 1.5rem;
+      font-size: 1.7rem;
     }
   }
 
