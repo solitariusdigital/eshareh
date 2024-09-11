@@ -505,7 +505,7 @@ export default function Solution({ solutions, projectTitle }) {
                     |
                   </h3>
                   <h3
-                    className={classes.text}
+                    className={classes.textBrief}
                     dangerouslySetInnerHTML={{
                       __html: applyFontToEnglishWords(
                         project[languageType].brief,

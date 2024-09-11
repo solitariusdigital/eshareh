@@ -58,8 +58,16 @@
       align-items: center;
     }
 
-    .text {
+    .textBrief {
+      width: 90%;
       direction: rtl;
+
+      @include mixins.tablet {
+        width: 85%;
+      }
+      @include mixins.tabletPortrait {
+        width: 85%;
+      }
     }
   }
 
@@ -68,6 +76,12 @@
     direction: rtl;
     text-align: left;
 
+    h1 {
+      direction: ltr;
+    }
+    .textBrief {
+      direction: ltr;
+    }
     .text {
       direction: ltr;
     }
