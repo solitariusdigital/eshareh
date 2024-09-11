@@ -178,18 +178,6 @@ export default function Therighthint() {
               priority
             />
           </div>
-          <div className={classes.starTwo}>
-            <Image
-              src={starTwo}
-              blurDataURL={starTwo}
-              placeholder="blur"
-              alt="star"
-              layout="responsive"
-              objectFit="contain"
-              as="image"
-              priority
-            />
-          </div>
           <div className={classes.starThree}>
             <Image
               src={starThree}
@@ -206,6 +194,42 @@ export default function Therighthint() {
             <Image
               src={starFour}
               blurDataURL={starFour}
+              placeholder="blur"
+              alt="star"
+              layout="responsive"
+              objectFit="contain"
+              as="image"
+              priority
+            />
+          </div>
+          <div className={classes.starFive}>
+            <Image
+              src={starFive}
+              blurDataURL={starFive}
+              placeholder="blur"
+              alt="star"
+              layout="responsive"
+              objectFit="contain"
+              as="image"
+              priority
+            />
+          </div>
+          <div className={classes.starSix}>
+            <Image
+              src={starOne}
+              blurDataURL={starOne}
+              placeholder="blur"
+              alt="star"
+              layout="responsive"
+              objectFit="contain"
+              as="image"
+              priority
+            />
+          </div>
+          <div className={classes.starSeven}>
+            <Image
+              src={starTwo}
+              blurDataURL={starTwo}
               placeholder="blur"
               alt="star"
               layout="responsive"
@@ -336,10 +360,10 @@ export default function Therighthint() {
               height={10}
               border={true}
             />
-            <div className={classes.starFive}>
+            <div className={classes.starTwo}>
               <Image
-                src={starFive}
-                blurDataURL={starFive}
+                src={starTwo}
+                blurDataURL={starTwo}
                 placeholder="blur"
                 alt="star"
                 layout="responsive"

@@ -1,5 +1,4 @@
 import { useState, useContext, Fragment, useEffect, useRef } from "react";
-import { useRouter } from "next/router";
 import { StateContext } from "@/context/stateContext";
 import classes from "./solutions.module.scss";
 import {
@@ -52,8 +51,6 @@ export default function Solution({ solutions, projectTitle }) {
   const [nextProject, setNextProject] = useState(null);
   const [dropDown, setDropDpwn] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
-
-  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -593,7 +590,9 @@ export default function Solution({ solutions, projectTitle }) {
               .map((image, index) => (
                 <Fragment key={index}>
                   <div
-                    className={classes.imageBox}
+                    className={`${
+                      image.type === "text" ? "" : classes.imageBox
+                    }`}
                     style={{
                       height: image.type === "text" ? "100%" : "none",
                     }}
@@ -685,10 +684,7 @@ export default function Solution({ solutions, projectTitle }) {
                         </div>
                       )}
                     {image.type === "image" && (
-                      <div
-                        onClick={() => gallerySlider()}
-                        className={classes.imageContainer}
-                      >
+                      <div onClick={() => gallerySlider()}>
                         <Image
                           className={
                             index === 0 && project.slideMedia.length === 0

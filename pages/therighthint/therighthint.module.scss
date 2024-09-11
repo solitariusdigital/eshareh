@@ -56,17 +56,25 @@
       left: 0%;
       top: 10%;
     }
-    .starTwo {
-      left: 30%;
-      bottom: 0%;
+    .starFive {
+      left: 10%;
+      bottom: -10%;
     }
     .starThree {
       right: 0%;
-      bottom: 20%;
+      bottom: 0%;
     }
     .starFour {
       right: 10%;
       top: 0%;
+    }
+    .starSix {
+      right: 0%;
+      bottom: 35%;
+    }
+    .starSeven {
+      left: 0%;
+      bottom: 10%;
     }
   }
 
@@ -186,12 +194,14 @@
 .starTwo,
 .starThree,
 .starFour,
-.starFive {
+.starFive,
+.starSix,
+.starSeven {
   position: absolute;
-  width: 200px;
+  width: 300px;
 
   @include mixins.mobile {
-    width: 80px;
+    width: 100px;
   }
 }
 
@@ -235,11 +245,12 @@
     }
 
     .starFive {
-      left: 0%;
-      bottom: -15%;
+      left: -10%;
+      bottom: -30%;
 
       @include mixins.fourK {
-        bottom: -5%;
+        left: 0%;
+        bottom: -15%;
       }
       @include mixins.mobile {
         left: 5%;
