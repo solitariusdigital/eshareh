@@ -2,8 +2,6 @@ import { useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./news.module.scss";
 import { NextSeo } from "next-seo";
-import Image from "next/legacy/image";
-import soon from "@/assets/soon.png";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 

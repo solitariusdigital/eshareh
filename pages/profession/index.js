@@ -4,13 +4,15 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./profession.module.scss";
 import { NextSeo } from "next-seo";
 import Image from "next/legacy/image";
-import profession from "@/assets/profession.png";
 import CircleIcon from "@mui/icons-material/Circle";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 
 export default function Profession() {
   const { language, setLanguage } = useContext(StateContext);
+
+  const flyingFish =
+    "https://eshareh.storage.iran.liara.space/motion/flyingFish.gif";
 
   const position = {
     position: "relative",
@@ -265,12 +267,12 @@ export default function Profession() {
           }
         >
           <Image
-            src={profession}
-            blurDataURL={profession}
+            src={flyingFish}
+            blurDataURL={flyingFish}
             placeholder="blur"
             alt="image"
             layout="fill"
-            objectFit="contain"
+            objectFit="cover"
           />
         </div>
       </div>

@@ -143,9 +143,7 @@
     }
   }
 
-  .imageBox,
-  .imageBoxDouble,
-  .imageBoxQuadruple {
+  .singleImageBox {
     position: relative;
     width: 100%;
     height: 80vh !important;
@@ -154,13 +152,51 @@
     cursor: pointer;
 
     @include mixins.mobile {
-      height: 200px;
+      height: 200px !important;
     }
     @include mixins.tablet {
-      height: 650px;
+      height: 650px !important;
     }
     @include mixins.tabletPortrait {
-      height: 500px;
+      height: 500px !important;
+    }
+
+    .video,
+    .videoRadius {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .videoRadius {
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+  }
+
+  .imageBoxDouble,
+  .imageBoxQuadruple {
+    width: 100%;
+    height: 90vh !important;
+    max-height: 950px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    @include mixins.mobile {
+      height: 100% !important;
+    }
+    @include mixins.tablet {
+      height: 700px !important;
+    }
+    @include mixins.tabletPortrait {
+      height: 600px !important;
+    }
+
+    .imageBox {
+      position: relative;
+      @include mixins.mobile {
+        margin-bottom: 20px;
+      }
     }
 
     .imageTest {
@@ -190,18 +226,6 @@
       @include mixins.mobile {
         scale: 0.8;
       }
-    }
-
-    .video,
-    .videoRadius {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .videoRadius {
-      border-top-right-radius: 20px;
-      border-top-left-radius: 20px;
     }
   }
 

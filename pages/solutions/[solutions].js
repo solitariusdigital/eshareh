@@ -591,7 +591,7 @@ export default function Solution({ solutions, projectTitle }) {
                 <Fragment key={index}>
                   <div
                     className={`${
-                      image.type === "text" ? "" : classes.imageBox
+                      image.type === "text" ? "" : classes.singleImageBox
                     }`}
                     style={{
                       height: image.type === "text" ? "100%" : "none",
