@@ -1,4 +1,4 @@
-import { useContext, Fragment, useEffect, useState, useMemo } from "react";
+import { useContext, Fragment, useEffect, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./therighthint.module.scss";
 import { NextSeo } from "next-seo";
@@ -13,19 +13,6 @@ import button from "@/assets/therighthint/button.png";
 import Image from "next/legacy/image";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import IosShareIcon from "@mui/icons-material/IosShare";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import TelegramIcon from "@mui/icons-material/Telegram";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import XIcon from "@mui/icons-material/X";
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  LinkedinShareButton,
-  WhatsappShareButton,
-  TelegramShareButton,
-} from "react-share";
 import starOne from "@/assets/therighthint/starOne.gif";
 import starTwo from "@/assets/therighthint/starTwo.gif";
 import starThree from "@/assets/therighthint/starThree.gif";
@@ -36,7 +23,6 @@ export default function Therighthint() {
   const { language, setLanguage } = useContext(StateContext);
   const [charity, setCharity] = useState({});
   const [displayPopup, setDisplayPopup] = useState(false);
-  const [displaySocial, setDisplaySocial] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const [currentString, setCurrentString] = useState("");
   const [stingsArray, setStringsArray] = useState([
@@ -48,9 +34,8 @@ export default function Therighthint() {
     "نیکــــــــی",
   ]);
   const shareUrl = "https://eshareh.com/therighthint";
-  const titleCampaign = "اشاره‌ای درست!";
-  const summaryCampaign = "اشاره‌ای درست!";
-  const hashtagCampaign = ["therighthint", "اشاره‌ای_درست"];
+  const titleCampaign = "اشاره‌ای درست";
+  const summaryCampaign = "یادمان باشد که همیشه در حال یادگیری باشیم";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -249,140 +234,145 @@ export default function Therighthint() {
             priority
           />
         </div>
-        <div
-          className={classes.content}
-          style={{
-            fontFamily: language ? "FarsiLight" : "FarsiLight",
-          }}
-        >
+        {!displayPopup && (
           <div
-            className={classes.bigTitle}
+            className={classes.content}
             style={{
-              fontFamily: language ? "FarsiFat" : "FarsiFat",
+              fontFamily: language ? "FarsiLight" : "FarsiLight",
             }}
           >
-            اشــــــــاره‌ای درست
-            <span>!</span>
-          </div>
-          <h2>
-            ما معتقدیم یادگیری مستمر می‌تواند در کیفیت هر لحظه‌ تاثیر‌گذار باشد
-            و خاستگاه فردی را ارتقا دهد.
-          </h2>
-          <h2>
-            با دنبال کردن این تفکر بدین نتیجه رسیدیم که یادگیری و آموزش در بالا
-            بردن سطح اجتماعی همانند بالا رفتن خاستگاه فردی، موثر بوده و روند رو
-            به رشدتری را در بر خواهد داشت.
-          </h2>
-          <h2>
-            با اشاره‌ای درست به اهداف درست‌تر و کمک به نوجوانان؛ نسلی که به این
-            حد از تفکرات و فعالیت‌ ها نزدیک‌تر هستند، می‌توان پایه‌های محکم‌تری
-            را در این مسیر برداشت و آن را هدایت کرد.
-          </h2>
-          <h2>
-            اینکه همه‌ی نوجوانان و افراد جامعه در جایگاه درست خود قرار گیرند و
-            بتوانند استعدادها و افکار خود را پرورش دهند، مهم‌ترین اصل در این هدف
-            است.
-          </h2>
-          <h2>
-            برای اینکه بتوانیم به این روند کمک کوچکی کرده باشیم؛ با تیم اشاره در
-            کمپین اشاره‌ای درست! شرکت کنید و نوجوانان را برای یادگیری در جای
-            درست خود قرار دهید.
-          </h2>
-          <h2
-            className={classes.yellowTitle}
-            style={{
-              fontFamily: language ? "FarsiBold" : "FarsiBold",
-            }}
-          >
-            یادمان باشد که همیشه در حال یادگیری باشیم!
-          </h2>
-          <h2>
-            بر روی دکمه‌ی نشانه‌دار بزنید و با هر کلیک، نمودار مربوط را برای کمک
-            به سقف نهایی برسانید.
-          </h2>
-          <h2>
-            تنها با یک کلیک ساده، مبلغی از سمت تیم اشاره به{" "}
-            <span
-              style={{
-                fontFamily: language ? "FarsiBold" : "FarsiBold",
-              }}
-            >
-              *بنیاد نیکوکاری حکمت
-            </span>{" "}
-            برای کمک به یادگیری نوجونان در زمینه‌های مختلف کمک خواهد شد.
-          </h2>
-          <div className={classes.actionContainer}>
-            <h2
+            <div
               className={classes.bigTitle}
               style={{
+                fontFamily: language ? "FarsiFat" : "FarsiFat",
+              }}
+            >
+              اشــــــــاره‌ای درست
+              <span>!</span>
+            </div>
+            <h2>
+              ما معتقدیم یادگیری مستمر می‌تواند در کیفیت هر لحظه‌ تاثیر‌گذار
+              باشد و خاستگاه فردی را ارتقا دهد.
+            </h2>
+            <h2>
+              با دنبال کردن این تفکر بدین نتیجه رسیدیم که یادگیری و آموزش در
+              بالا بردن سطح اجتماعی همانند بالا رفتن خاستگاه فردی، موثر بوده و
+              روند رو به رشدتری را در بر خواهد داشت.
+            </h2>
+            <h2>
+              با اشاره‌ای درست به اهداف درست‌تر و کمک به نوجوانان؛ نسلی که به
+              این حد از تفکرات و فعالیت‌ ها نزدیک‌تر هستند، می‌توان پایه‌های
+              محکم‌تری را در این مسیر برداشت و آن را هدایت کرد.
+            </h2>
+            <h2>
+              اینکه همه‌ی نوجوانان و افراد جامعه در جایگاه درست خود قرار گیرند و
+              بتوانند استعدادها و افکار خود را پرورش دهند، مهم‌ترین اصل در این
+              هدف است.
+            </h2>
+            <h2>
+              برای اینکه بتوانیم به این روند کمک کوچکی کرده باشیم؛ با تیم اشاره
+              در کمپین اشاره‌ای درست! شرکت کنید و نوجوانان را برای یادگیری در
+              جای درست خود قرار دهید.
+            </h2>
+            <h2
+              className={classes.yellowTitle}
+              style={{
                 fontFamily: language ? "FarsiBold" : "FarsiBold",
               }}
             >
-              به
+              یادمان باشد که همیشه در حال یادگیری باشیم!
             </h2>
-            <div className={classes.click} onClick={() => updateCharityCount()}>
+            <h2>
+              بر روی دکمه‌ی نشانه‌دار بزنید و با هر کلیک، نمودار مربوط را برای
+              کمک به سقف نهایی برسانید.
+            </h2>
+            <h2>
+              تنها با یک کلیک ساده، مبلغی از سمت تیم اشاره به{" "}
+              <span
+                style={{
+                  fontFamily: language ? "FarsiBold" : "FarsiBold",
+                }}
+              >
+                *بنیاد نیکوکاری حکمت
+              </span>{" "}
+              برای کمک به یادگیری نوجونان در زمینه‌های مختلف کمک خواهد شد.
+            </h2>
+            <div className={classes.actionContainer}>
               <h2
                 className={classes.bigTitle}
                 style={{
-                  fontFamily: language ? "FarsiFat" : "FarsiFat",
+                  fontFamily: language ? "FarsiBold" : "FarsiBold",
                 }}
               >
-                {currentString}
+                به
               </h2>
-              <div className={classes.button}>
+              <div
+                className={classes.click}
+                onClick={() => updateCharityCount()}
+              >
+                <h2
+                  className={classes.bigTitle}
+                  style={{
+                    fontFamily: language ? "FarsiFat" : "FarsiFat",
+                  }}
+                >
+                  {currentString}
+                </h2>
+                <div className={classes.button}>
+                  <Image
+                    className={classes.buttonShadow}
+                    src={button}
+                    blurDataURL={button}
+                    placeholder="blur"
+                    alt="button"
+                    layout="responsive"
+                    objectFit="cover"
+                    as="image"
+                    priority
+                  />
+                </div>
+              </div>
+              <h2
+                className={classes.bigTitle}
+                style={{
+                  fontFamily: language ? "FarsiBold" : "FarsiBold",
+                }}
+              >
+                اشــــــــاره کنید
+                <span>!</span>
+              </h2>
+            </div>
+            <div className={classes.progress}>
+              <Progress
+                color={"#fdb714"}
+                completed={calculatePercentage(charity.count)}
+                height={10}
+                border={true}
+              />
+              <div className={classes.starTwo}>
                 <Image
-                  className={classes.buttonShadow}
-                  src={button}
-                  blurDataURL={button}
+                  src={starTwo}
+                  blurDataURL={starTwo}
                   placeholder="blur"
-                  alt="button"
+                  alt="star"
                   layout="responsive"
-                  objectFit="cover"
+                  objectFit="contain"
                   as="image"
                   priority
                 />
               </div>
             </div>
-            <h2
-              className={classes.bigTitle}
-              style={{
-                fontFamily: language ? "FarsiBold" : "FarsiBold",
-              }}
+            <div
+              className={classes.hekmat}
+              onClick={() =>
+                window.open("https://www.instagram.com/hekmattoos_", "_ self")
+              }
             >
-              اشــــــــاره کنید
-              <span>!</span>
-            </h2>
-          </div>
-          <div className={classes.progress}>
-            <Progress
-              color={"#fdb714"}
-              completed={calculatePercentage(charity.count)}
-              height={10}
-              border={true}
-            />
-            <div className={classes.starTwo}>
-              <Image
-                src={starTwo}
-                blurDataURL={starTwo}
-                placeholder="blur"
-                alt="star"
-                layout="responsive"
-                objectFit="contain"
-                as="image"
-                priority
-              />
+              <h3>آشنایی بیشتر با بنیاد حکمت</h3>
+              <ArrowBackIosNewIcon />
             </div>
           </div>
-          <div
-            className={classes.hekmat}
-            onClick={() =>
-              window.open("https://www.instagram.com/hekmattoos_", "_ self")
-            }
-          >
-            <h3>آشنایی بیشتر با بنیاد حکمت</h3>
-            <ArrowBackIosNewIcon />
-          </div>
-        </div>
+        )}
       </div>
       {displayPopup && (
         <div className={classes.popup}>
@@ -429,55 +419,16 @@ export default function Therighthint() {
           <div
             className={classes.share}
             onClick={() => {
-              setDisplaySocial(!displaySocial);
               navigator.clipboard.writeText(shareUrl);
+              navigator.share({
+                url: shareUrl,
+                title: titleCampaign,
+                text: summaryCampaign,
+              });
             }}
           >
             <h4>یاری بیشتر با به اشتراک گذاشتن صفحه‌ی اشاره</h4>
             <IosShareIcon />
-            {displaySocial && (
-              <div
-                className={`${classes.social} animate__animated animate__slideInDown`}
-              >
-                <LinkedinShareButton
-                  title={titleCampaign}
-                  url={shareUrl}
-                  summary={summaryCampaign}
-                  source={shareUrl}
-                >
-                  <LinkedInIcon className={classes.icon} />
-                </LinkedinShareButton>
-                <TwitterShareButton
-                  title={titleCampaign}
-                  url={shareUrl}
-                  hashtags={hashtagCampaign}
-                >
-                  <XIcon className={classes.icon} />
-                </TwitterShareButton>
-                <WhatsappShareButton url={shareUrl} title={titleCampaign}>
-                  <WhatsAppIcon className={classes.icon} />
-                </WhatsappShareButton>
-                <TelegramShareButton url={shareUrl} title={titleCampaign}>
-                  <TelegramIcon className={classes.icon} />
-                </TelegramShareButton>
-                <FacebookShareButton
-                  url={shareUrl}
-                  quote={titleCampaign}
-                  title={titleCampaign}
-                  hashtag={hashtagCampaign[0]}
-                >
-                  <FacebookIcon className={classes.icon} />
-                </FacebookShareButton>
-                <div className={classes.icon}>
-                  <InstagramIcon
-                    className={classes.icon}
-                    onClick={() =>
-                      window.open("https://www.instagram.com/", "_ self")
-                    }
-                  />
-                </div>
-              </div>
-            )}
           </div>
         </div>
       )}
