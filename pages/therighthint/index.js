@@ -234,145 +234,140 @@ export default function Therighthint() {
             priority
           />
         </div>
-        {!displayPopup && (
+        <div
+          className={classes.content}
+          style={{
+            fontFamily: language ? "FarsiLight" : "FarsiLight",
+          }}
+        >
           <div
-            className={classes.content}
+            className={classes.bigTitle}
             style={{
-              fontFamily: language ? "FarsiLight" : "FarsiLight",
+              fontFamily: language ? "FarsiFat" : "FarsiFat",
             }}
           >
-            <div
-              className={classes.bigTitle}
-              style={{
-                fontFamily: language ? "FarsiFat" : "FarsiFat",
-              }}
-            >
-              اشــــــــاره‌ای درست
-              <span>!</span>
-            </div>
-            <h2>
-              ما معتقدیم یادگیری مستمر می‌تواند در کیفیت هر لحظه‌ تاثیر‌گذار
-              باشد و خاستگاه فردی را ارتقا دهد.
-            </h2>
-            <h2>
-              با دنبال کردن این تفکر بدین نتیجه رسیدیم که یادگیری و آموزش در
-              بالا بردن سطح اجتماعی همانند بالا رفتن خاستگاه فردی، موثر بوده و
-              روند رو به رشدتری را در بر خواهد داشت.
-            </h2>
-            <h2>
-              با اشاره‌ای درست به اهداف درست‌تر و کمک به نوجوانان؛ نسلی که به
-              این حد از تفکرات و فعالیت‌ ها نزدیک‌تر هستند، می‌توان پایه‌های
-              محکم‌تری را در این مسیر برداشت و آن را هدایت کرد.
-            </h2>
-            <h2>
-              اینکه همه‌ی نوجوانان و افراد جامعه در جایگاه درست خود قرار گیرند و
-              بتوانند استعدادها و افکار خود را پرورش دهند، مهم‌ترین اصل در این
-              هدف است.
-            </h2>
-            <h2>
-              برای اینکه بتوانیم به این روند کمک کوچکی کرده باشیم؛ با تیم اشاره
-              در کمپین اشاره‌ای درست! شرکت کنید و نوجوانان را برای یادگیری در
-              جای درست خود قرار دهید.
-            </h2>
-            <h2
-              className={classes.yellowTitle}
+            اشــــــــاره‌ای درست
+            <span>!</span>
+          </div>
+          <h2>
+            ما معتقدیم یادگیری مستمر می‌تواند در کیفیت هر لحظه‌ تاثیر‌گذار باشد
+            و خاستگاه فردی را ارتقا دهد.
+          </h2>
+          <h2>
+            با دنبال کردن این تفکر بدین نتیجه رسیدیم که یادگیری و آموزش در بالا
+            بردن سطح اجتماعی همانند بالا رفتن خاستگاه فردی، موثر بوده و روند رو
+            به رشدتری را در بر خواهد داشت.
+          </h2>
+          <h2>
+            با اشاره‌ای درست به اهداف درست‌تر و کمک به نوجوانان؛ نسلی که به این
+            حد از تفکرات و فعالیت‌ ها نزدیک‌تر هستند، می‌توان پایه‌های محکم‌تری
+            را در این مسیر برداشت و آن را هدایت کرد.
+          </h2>
+          <h2>
+            اینکه همه‌ی نوجوانان و افراد جامعه در جایگاه درست خود قرار گیرند و
+            بتوانند استعدادها و افکار خود را پرورش دهند، مهم‌ترین اصل در این هدف
+            است.
+          </h2>
+          <h2>
+            برای اینکه بتوانیم به این روند کمک کوچکی کرده باشیم؛ با تیم اشاره در
+            کمپین اشاره‌ای درست! شرکت کنید و نوجوانان را برای یادگیری در جای
+            درست خود قرار دهید.
+          </h2>
+          <h2
+            className={classes.yellowTitle}
+            style={{
+              fontFamily: language ? "FarsiBold" : "FarsiBold",
+            }}
+          >
+            یادمان باشد که همیشه در حال یادگیری باشیم!
+          </h2>
+          <h2>
+            بر روی دکمه‌ی نشانه‌دار بزنید و با هر کلیک، نمودار مربوط را برای کمک
+            به سقف نهایی برسانید.
+          </h2>
+          <h2>
+            تنها با یک کلیک ساده، مبلغی از سمت تیم اشاره به{" "}
+            <span
               style={{
                 fontFamily: language ? "FarsiBold" : "FarsiBold",
               }}
             >
-              یادمان باشد که همیشه در حال یادگیری باشیم!
+              *بنیاد نیکوکاری حکمت
+            </span>{" "}
+            برای کمک به یادگیری نوجونان در زمینه‌های مختلف کمک خواهد شد.
+          </h2>
+          <div className={classes.actionContainer}>
+            <h2
+              className={classes.bigTitle}
+              style={{
+                fontFamily: language ? "FarsiBold" : "FarsiBold",
+              }}
+            >
+              به
             </h2>
-            <h2>
-              بر روی دکمه‌ی نشانه‌دار بزنید و با هر کلیک، نمودار مربوط را برای
-              کمک به سقف نهایی برسانید.
-            </h2>
-            <h2>
-              تنها با یک کلیک ساده، مبلغی از سمت تیم اشاره به{" "}
-              <span
-                style={{
-                  fontFamily: language ? "FarsiBold" : "FarsiBold",
-                }}
-              >
-                *بنیاد نیکوکاری حکمت
-              </span>{" "}
-              برای کمک به یادگیری نوجونان در زمینه‌های مختلف کمک خواهد شد.
-            </h2>
-            <div className={classes.actionContainer}>
+            <div className={classes.click} onClick={() => updateCharityCount()}>
               <h2
                 className={classes.bigTitle}
                 style={{
-                  fontFamily: language ? "FarsiBold" : "FarsiBold",
+                  fontFamily: language ? "FarsiFat" : "FarsiFat",
                 }}
               >
-                به
+                {currentString}
               </h2>
-              <div
-                className={classes.click}
-                onClick={() => updateCharityCount()}
-              >
-                <h2
-                  className={classes.bigTitle}
-                  style={{
-                    fontFamily: language ? "FarsiFat" : "FarsiFat",
-                  }}
-                >
-                  {currentString}
-                </h2>
-                <div className={classes.button}>
-                  <Image
-                    className={classes.buttonShadow}
-                    src={button}
-                    blurDataURL={button}
-                    placeholder="blur"
-                    alt="button"
-                    layout="responsive"
-                    objectFit="cover"
-                    as="image"
-                    priority
-                  />
-                </div>
-              </div>
-              <h2
-                className={classes.bigTitle}
-                style={{
-                  fontFamily: language ? "FarsiBold" : "FarsiBold",
-                }}
-              >
-                اشــــــــاره کنید
-                <span>!</span>
-              </h2>
-            </div>
-            <div className={classes.progress}>
-              <Progress
-                color={"#fdb714"}
-                completed={calculatePercentage(charity.count)}
-                height={10}
-                border={true}
-              />
-              <div className={classes.starTwo}>
+              <div className={classes.button}>
                 <Image
-                  src={starTwo}
-                  blurDataURL={starTwo}
+                  className={classes.buttonShadow}
+                  src={button}
+                  blurDataURL={button}
                   placeholder="blur"
-                  alt="star"
+                  alt="button"
                   layout="responsive"
-                  objectFit="contain"
+                  objectFit="cover"
                   as="image"
                   priority
                 />
               </div>
             </div>
-            <div
-              className={classes.hekmat}
-              onClick={() =>
-                window.open("https://www.instagram.com/hekmattoos_", "_ self")
-              }
+            <h2
+              className={classes.bigTitle}
+              style={{
+                fontFamily: language ? "FarsiBold" : "FarsiBold",
+              }}
             >
-              <h3>آشنایی بیشتر با بنیاد حکمت</h3>
-              <ArrowBackIosNewIcon />
+              اشــــــــاره کنید
+              <span>!</span>
+            </h2>
+          </div>
+          <div className={classes.progress}>
+            <Progress
+              color={"#fdb714"}
+              completed={calculatePercentage(charity.count)}
+              height={10}
+              border={true}
+            />
+            <div className={classes.starTwo}>
+              <Image
+                src={starTwo}
+                blurDataURL={starTwo}
+                placeholder="blur"
+                alt="star"
+                layout="responsive"
+                objectFit="contain"
+                as="image"
+                priority
+              />
             </div>
           </div>
-        )}
+          <div
+            className={classes.hekmat}
+            onClick={() =>
+              window.open("https://www.instagram.com/hekmattoos_", "_ self")
+            }
+          >
+            <h3>آشنایی بیشتر با بنیاد حکمت</h3>
+            <ArrowBackIosNewIcon />
+          </div>
+        </div>
       </div>
       {displayPopup && (
         <div className={classes.popup}>
