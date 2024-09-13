@@ -53,24 +53,24 @@
     }
 
     .starOne {
-      left: 0%;
+      left: -5%;
       top: 10%;
     }
     .starFive {
       left: 10%;
-      bottom: -10%;
+      bottom: -20%;
     }
     .starThree {
       right: 0%;
-      bottom: 0%;
+      bottom: -10%;
     }
     .starFour {
-      right: 10%;
-      top: 0%;
+      right: 0%;
+      top: -10%;
     }
     .starSix {
       right: 0%;
-      bottom: 35%;
+      bottom: 15%;
     }
     .starSeven {
       left: 0%;
@@ -201,7 +201,7 @@
   width: 300px;
 
   @include mixins.mobile {
-    width: 100px;
+    width: 150px;
   }
 }
 
@@ -253,8 +253,8 @@
         bottom: -15%;
       }
       @include mixins.mobile {
-        left: 5%;
-        bottom: 0%;
+        left: 0%;
+        bottom: -15%;
       }
     }
 
