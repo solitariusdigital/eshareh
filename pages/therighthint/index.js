@@ -35,7 +35,7 @@ export default function Therighthint() {
   ]);
   const shareUrl = "https://eshareh.com/therighthint";
   const titleCampaign = "اشاره‌ای درست";
-  const summaryCampaign = "یادمان باشد که همیشه در حال یادگیری باشیم";
+  const summaryCampaign = "اشاره‌ای درست";
 
   useEffect(() => {
     const fetchData = async () => {
