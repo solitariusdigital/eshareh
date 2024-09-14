@@ -59,14 +59,27 @@
     .starFive {
       left: 10%;
       bottom: -20%;
+      @include mixins.fourK {
+        left: 20%;
+        bottom: -10%;
+      }
     }
     .starThree {
       right: 0%;
       bottom: -10%;
+
+      @include mixins.fourK {
+        right: 20%;
+        bottom: 0%;
+      }
     }
     .starFour {
       right: 0%;
       top: -10%;
+      @include mixins.fourK {
+        right: 10%;
+        top: 0%;
+      }
     }
     .starSix {
       right: 0%;
@@ -313,35 +326,6 @@
       position: relative;
       top: 3px;
       margin-left: 10px;
-    }
-  }
-
-  .social {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    width: 500px;
-    margin-top: 20px;
-    color: config.$white;
-    position: absolute;
-    top: 25px;
-    left: 0px;
-
-    @include mixins.mobile {
-      width: calc(100% - 24px);
-    }
-
-    .icon {
-      margin-right: 24px;
-      cursor: pointer;
-
-      @include mixins.allDesktop {
-        &:hover {
-          color: config.$yellow;
-          cursor: pointer;
-        }
-      }
     }
   }
 }
