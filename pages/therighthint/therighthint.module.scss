@@ -53,29 +53,28 @@
     }
 
     .starOne {
-      left: -5%;
+      left: 0%;
       top: 10%;
     }
     .starFive {
-      left: 10%;
-      bottom: -20%;
+      left: 15%;
+      bottom: -10%;
       @include mixins.fourK {
         left: 20%;
-        bottom: -10%;
+        bottom: -5%;
       }
     }
     .starThree {
-      right: 0%;
-      bottom: -10%;
-
+      right: 10%;
+      bottom: -5%;
       @include mixins.fourK {
         right: 20%;
         bottom: 0%;
       }
     }
     .starFour {
-      right: 0%;
-      top: -10%;
+      right: 5%;
+      top: -5%;
       @include mixins.fourK {
         right: 10%;
         top: 0%;
@@ -211,10 +210,10 @@
 .starSix,
 .starSeven {
   position: absolute;
-  width: 300px;
+  width: 200px;
 
   @include mixins.mobile {
-    width: 150px;
+    width: 100px;
   }
 }
 
@@ -257,17 +256,17 @@
       height: 250px;
     }
 
-    .starFive {
-      left: -10%;
-      bottom: -30%;
+    .starTwo {
+      left: 0%;
+      bottom: -15%;
 
       @include mixins.fourK {
         left: 0%;
-        bottom: -15%;
+        bottom: -5%;
       }
       @include mixins.mobile {
-        left: 0%;
-        bottom: -15%;
+        left: 5%;
+        bottom: -5%;
       }
     }
 
@@ -280,7 +279,9 @@
         left: 12%;
         top: 15%;
       }
-
+      @include mixins.mobile {
+        left: 18%;
+      }
       h2 {
         color: config.$yellow;
         @include mixins.fourK {

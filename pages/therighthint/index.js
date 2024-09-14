@@ -396,10 +396,10 @@ export default function Therighthint() {
               as="image"
               priority
             />
-            <div className={classes.starFive}>
+            <div className={classes.starTwo}>
               <Image
-                src={starFive}
-                blurDataURL={starFive}
+                src={starTwo}
+                blurDataURL={starTwo}
                 placeholder="blur"
                 alt="star"
                 layout="responsive"
