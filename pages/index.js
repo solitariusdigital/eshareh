@@ -62,16 +62,14 @@ export default function Home({ solutions, covers }) {
             ? "آژانس تبلیغاتی اشاره - خدمات تبلیغات، برند، رسانه و ارتباطات بازاریابی فول سرویس"
             : "Eshareh Advertising Agency - Advertising, Branding, Media & Full Service Marketing Communication in Iran",
           siteName: "Eshareh Advertising Agency",
-          images: [
-            {
-              url: language ? logoFarsi : logoEnglish,
-              width: 1200,
-              height: 630,
-              alt: language
-                ? "آژانس تبلیغاتی اشاره"
-                : "Eshareh Advertising Agency",
-            },
-          ],
+          images: {
+            url: language ? logoFarsi : logoEnglish,
+            width: 1200,
+            height: 630,
+            alt: language
+              ? "آژانس تبلیغاتی اشاره"
+              : "Eshareh Advertising Agency",
+          },
         }}
         robotsProps={{
           maxSnippet: -1,

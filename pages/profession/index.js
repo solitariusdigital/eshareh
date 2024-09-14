@@ -42,16 +42,14 @@ export default function Profession() {
           siteName: language
             ? "آژانس تبلیغاتی اشاره"
             : "Eshareh Advertising Agency",
-          images: [
-            {
-              url: language ? logoFarsi : logoEnglish,
-              width: 1200,
-              height: 630,
-              alt: language
-                ? "آژانس تبلیغاتی اشاره"
-                : "Eshareh Advertising Agency",
-            },
-          ],
+          images: {
+            url: language ? logoFarsi : logoEnglish,
+            width: 1200,
+            height: 630,
+            alt: language
+              ? "آژانس تبلیغاتی اشاره"
+              : "Eshareh Advertising Agency",
+          },
         }}
         robotsProps={{
           maxSnippet: -1,

@@ -384,7 +384,7 @@ export default function Solution({ solutions, projectTitle }) {
               project[languageType].title
             )}`}
             openGraph={{
-              type: "website",
+              type: "article",
               locale: "fa_IR",
               url: `https://eshareh.com/solutions/${replaceSpacesAndHyphens(
                 project[languageType].title
@@ -394,16 +394,20 @@ export default function Solution({ solutions, projectTitle }) {
               siteName: language
                 ? "آژانس تبلیغاتی اشاره"
                 : "Eshareh Advertising Agency",
-              images: [
-                {
-                  url: language ? logoFarsi : logoEnglish,
-                  width: 1200,
-                  height: 630,
-                  alt: language
-                    ? "آژانس تبلیغاتی اشاره"
-                    : "Eshareh Advertising Agency",
-                },
-              ],
+              article: {
+                publishedTime: project.createdAt,
+                modifiedTime: project.updatedAt,
+                authors: ["https://www.eshareh.com"],
+                tags: [project[languageType].category],
+              },
+              images: {
+                url: language ? logoFarsi : logoEnglish,
+                width: 1200,
+                height: 630,
+                alt: language
+                  ? "آژانس تبلیغاتی اشاره"
+                  : "Eshareh Advertising Agency",
+              },
             }}
             robotsProps={{
               maxSnippet: -1,
