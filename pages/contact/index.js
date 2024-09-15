@@ -4,7 +4,8 @@ import classes from "./contact.module.scss";
 import Image from "next/legacy/image";
 import contact from "@/assets/contact.jpg";
 import { NextSeo } from "next-seo";
-import contactGraphic from "@/assets/contactGraphic.png";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 
 export default function Contact() {
   const { language, setLanguage } = useContext(StateContext);
@@ -12,20 +13,43 @@ export default function Contact() {
   const locationLink =
     "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7743132,51.3941519,17z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu";
 
+  const ghostBike =
+    "https://eshareh.storage.iran.liara.space/motion/ghostBike.gif";
+
   return (
     <Fragment>
       <NextSeo
-        title={language ? "تماس با ما" : "Contact"}
+        title={language ? "تماس با ما" : "Contact Us"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
+        canonical="https://eshareh.com/contact"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/contact",
-          siteName: "Eshareh Advertising Agency",
+          title: language ? "تماس با ما" : "Contact Us",
+          description: language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio",
+          siteName: language
+            ? "آژانس تبلیغاتی اشاره"
+            : "Eshareh Advertising Agency",
+          images: {
+            url: language ? logoFarsi : logoEnglish,
+            width: 1200,
+            height: 630,
+            alt: language
+              ? "آژانس تبلیغاتی اشاره"
+              : "Eshareh Advertising Agency",
+          },
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
         }}
       />
       <div className={classes.container}>
@@ -122,16 +146,15 @@ export default function Contact() {
               </div>
             </div>
           </div>
-          <div className={classes.contactGraphic}>
+          <div className={classes.animeContainer}>
             <Image
-              src={contactGraphic}
-              blurDataURL={contactGraphic}
+              src={ghostBike}
+              blurDataURL={ghostBike}
               placeholder="blur"
               alt="image"
               layout="fill"
               objectFit="contain"
-              as="image"
-              priority
+              unoptimized
             />
           </div>
           <div>

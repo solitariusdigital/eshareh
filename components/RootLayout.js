@@ -21,9 +21,10 @@ export default function RootLayout({ children }) {
   const { displayFooter, setFooter } = useContext(StateContext);
   const { menuColor, setMenuColor } = useContext(StateContext);
   const { heroHeight, setHeroHeight } = useContext(StateContext);
-  const [appLoader, setAppLoader] = useState(false);
   const [scrollArrow, setScrollArrow] = useState(false);
   const [loadImage, setLoadImage] = useState(null);
+  const [appLoader, setAppLoader] = useState(false);
+  const [appLive, setAppLive] = useState(false);
 
   const router = useRouter();
   let pathname = router.pathname;
@@ -65,6 +66,18 @@ export default function RootLayout({ children }) {
       setLoadImage(logoLoadFarsi);
     }
   }, [setLanguage, setLanguageType]);
+
+  // check app live
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getControlsApi();
+      setAppLive(data[0].live);
+    };
+    fetchData().catch(console.error);
+    setTimeout(() => {
+      setAppLoader(true);
+    }, 1000);
+  }, []);
 
   // checks user login and set user data
   useEffect(() => {
@@ -130,7 +143,8 @@ export default function RootLayout({ children }) {
 
   return (
     <Fragment>
-      {appLoader ? (
+      {(currentUser && currentUser["permission"] === "admin") ||
+      (appLoader && appLive) ? (
         <div
           style={{
             fontFamily: language ? "Farsi" : "English",

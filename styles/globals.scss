@@ -14,6 +14,18 @@
 }
 
 @font-face {
+  font-family: "FarsiHeavy";
+  src: url("../assets/fonts/Fa/YekanBakh-Heavy.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "FarsiFat";
+  src: url("../assets/fonts/Fa/YekanBakh-Fat.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
   font-family: "EnglishMedium";
   src: url("../assets/fonts/En/Kalameh-Medium.ttf") format("truetype");
 }
@@ -109,13 +121,7 @@ p {
 }
 
 .icon {
-  @include mixins.desktop {
-    &:hover {
-      color: config.$yellow;
-      cursor: pointer;
-    }
-  }
-  @include mixins.fourK {
+  @include mixins.allDesktop {
     &:hover {
       color: config.$yellow;
       cursor: pointer;

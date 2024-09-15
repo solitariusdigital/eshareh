@@ -15,7 +15,6 @@ import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 import coverModel from "@/models/Cover";
-import useDeviceAndBrowserDetection from "@/components/useDeviceAndBrowserDetection";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 
@@ -28,12 +27,8 @@ export default function Home({ solutions, covers }) {
   const [hoverTwo, setHoverTwo] = useState(false);
   const [hoverThree, setHoverThree] = useState(false);
 
-  const { isDesktopSafari, isIphone } = useDeviceAndBrowserDetection();
-
-  const animeSrc = {
-    mp4: "https://eshareh.storage.iran.liara.space/animeHome.mp4",
-    webm: "https://eshareh.storage.iran.liara.space/animeHome.webm",
-  };
+  const smokingFish =
+    "https://eshareh.storage.iran.liara.space/motion/smokingFish.gif";
 
   const divideArray = (solutions) => {
     const dividedArrays = [];
@@ -67,16 +62,14 @@ export default function Home({ solutions, covers }) {
             ? "آژانس تبلیغاتی اشاره - خدمات تبلیغات، برند، رسانه و ارتباطات بازاریابی فول سرویس"
             : "Eshareh Advertising Agency - Advertising, Branding, Media & Full Service Marketing Communication in Iran",
           siteName: "Eshareh Advertising Agency",
-          images: [
-            {
-              url: language ? logoFarsi : logoEnglish,
-              width: 1200,
-              height: 630,
-              alt: language
-                ? "آژانس تبلیغاتی اشاره"
-                : "Eshareh Advertising Agency",
-            },
-          ],
+          images: {
+            url: language ? logoFarsi : logoEnglish,
+            width: 1200,
+            height: 630,
+            alt: language
+              ? "آژانس تبلیغاتی اشاره"
+              : "Eshareh Advertising Agency",
+          },
         }}
         robotsProps={{
           maxSnippet: -1,
@@ -321,33 +314,18 @@ export default function Home({ solutions, covers }) {
         </div>
       </section>
       <section className={classes.animeContainer}>
-        {isDesktopSafari || isIphone ? (
-          <div className={classes.anime}>
-            <Image
-              src={"https://eshareh.storage.iran.liara.space/animeHome.png"}
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/animeHome.png"
-              }
-              placeholder="blur"
-              alt="image"
-              layout="fill"
-              objectFit="contain"
-              priority
-            />
-          </div>
-        ) : (
-          <video
-            className={classes.anime}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-          >
-            <source src={animeSrc.mp4} type="video/mp4" />
-            <source src={animeSrc.webm} type="video/webm" />
-          </video>
-        )}
+        <div className={classes.anime}>
+          <Image
+            src={smokingFish}
+            blurDataURL={smokingFish}
+            placeholder="blur"
+            alt="image"
+            layout="fill"
+            objectFit="contain"
+            priority
+            unoptimized
+          />
+        </div>
       </section>
       <section
         className={classes.container}
@@ -411,11 +389,8 @@ export default function Home({ solutions, covers }) {
                 <Image
                   src={!hoverOne ? moreArrow : moreArrowHover}
                   blurDataURL={!hoverOne ? moreArrow : moreArrowHover}
-                  placeholder="blur"
                   alt="image"
                   width={20}
-                  as="image"
-                  priority
                 />
               </div>
             </div>
@@ -467,11 +442,8 @@ export default function Home({ solutions, covers }) {
                 <Image
                   src={!hoverTwo ? moreArrow : moreArrowHover}
                   blurDataURL={!hoverTwo ? moreArrow : moreArrowHover}
-                  placeholder="blur"
                   alt="image"
                   width={20}
-                  as="image"
-                  priority
                 />
               </div>
             </div>
@@ -524,11 +496,8 @@ export default function Home({ solutions, covers }) {
                 <Image
                   src={!hoverThree ? moreArrow : moreArrowHover}
                   blurDataURL={!hoverThree ? moreArrow : moreArrowHover}
-                  placeholder="blur"
                   alt="image"
                   width={20}
-                  as="image"
-                  priority
                 />
               </div>
             </div>
@@ -554,8 +523,6 @@ export default function Home({ solutions, covers }) {
           placeholder="blur"
           alt="image"
           width={40}
-          as="image"
-          priority
         />
       </div>
       {solutions.length >= 10 && (

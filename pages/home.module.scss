@@ -65,7 +65,7 @@
         width: 115px;
       }
 
-      @include mixins.desktop {
+      @include mixins.allDesktop {
         &:hover {
           background: config.$yellow;
           color: config.$black;
@@ -109,6 +109,9 @@
 
     @include mixins.mobile {
       width: calc(100% - 24px);
+    }
+    @include mixins.tablet {
+      width: config.$content-widthTablet;
     }
   }
 }

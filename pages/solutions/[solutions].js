@@ -1,6 +1,6 @@
 import { useState, useContext, Fragment, useEffect, useRef } from "react";
-import { useRouter } from "next/router";
 import { StateContext } from "@/context/stateContext";
+import { useRouter } from "next/router";
 import classes from "./solutions.module.scss";
 import {
   replaceSpacesAndHyphens,
@@ -35,6 +35,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 
 export default function Solution({ solutions, projectTitle }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -261,24 +263,38 @@ export default function Solution({ solutions, projectTitle }) {
   };
 
   const makeCover = async (index) => {
+    // Validate index
+    if (index < 0 || index >= project.media.length) {
+      console.error("Invalid index for cover media.");
+      return;
+    }
+    // Push current cover media to the media array
     project.media.push(project.coverMedia);
+    // Create the updated data object
     let dataObject = {
       ...project,
       media: project.media.filter((item, i) => i !== index),
       coverMedia: project.media[index],
     };
-    await updateSolutionApi(dataObject);
-
-    let getCovers = await getCoversApi();
-    const foundCover = getCovers.find(
-      (cover) => cover.title.en === project.en.title
-    );
-    if (foundCover) {
-      const cover = {
-        ...foundCover,
-        coverMedia: project.media[index],
-      };
-      await updateCoverApi(cover);
+    try {
+      // Update the solution
+      await updateSolutionApi(dataObject);
+      // Retrieve existing covers
+      let getCovers = await getCoversApi();
+      const foundCover = getCovers.find(
+        (cover) => cover.title.en === project.en.title
+      );
+      // Update cover if found
+      if (foundCover) {
+        const cover = {
+          ...foundCover,
+          coverMedia: project.media[index],
+        };
+        await updateCoverApi(cover);
+      }
+    } catch (error) {
+      console.error("Error updating project or cover:", error);
+      // Handle error appropriately (e.g., show a message to the user)
     }
     router.replace(router.asPath);
   };
@@ -370,7 +386,7 @@ export default function Solution({ solutions, projectTitle }) {
               project[languageType].title
             )}`}
             openGraph={{
-              type: "website",
+              type: "article",
               locale: "fa_IR",
               url: `https://eshareh.com/solutions/${replaceSpacesAndHyphens(
                 project[languageType].title
@@ -380,16 +396,20 @@ export default function Solution({ solutions, projectTitle }) {
               siteName: language
                 ? "آژانس تبلیغاتی اشاره"
                 : "Eshareh Advertising Agency",
-              images: [
-                {
-                  url: language ? logoFarsi : logoEnglish,
-                  width: 1200,
-                  height: 630,
-                  alt: language
-                    ? "آژانس تبلیغاتی اشاره"
-                    : "Eshareh Advertising Agency",
-                },
-              ],
+              article: {
+                publishedTime: project.createdAt,
+                modifiedTime: project.updatedAt,
+                authors: ["https://www.eshareh.com"],
+                tags: [project[languageType].category],
+              },
+              images: {
+                url: language ? logoFarsi : logoEnglish,
+                width: 1200,
+                height: 630,
+                alt: language
+                  ? "آژانس تبلیغاتی اشاره"
+                  : "Eshareh Advertising Agency",
+              },
             }}
             robotsProps={{
               maxSnippet: -1,
@@ -505,7 +525,7 @@ export default function Solution({ solutions, projectTitle }) {
                     |
                   </h3>
                   <h3
-                    className={classes.text}
+                    className={classes.textBrief}
                     dangerouslySetInnerHTML={{
                       __html: applyFontToEnglishWords(
                         project[languageType].brief,
@@ -594,7 +614,9 @@ export default function Solution({ solutions, projectTitle }) {
               .map((image, index) => (
                 <Fragment key={index}>
                   <div
-                    className={classes.imageBox}
+                    className={`${
+                      image.type === "text" ? "" : classes.singleImageBox
+                    }`}
                     style={{
                       height: image.type === "text" ? "100%" : "none",
                     }}
@@ -686,10 +708,7 @@ export default function Solution({ solutions, projectTitle }) {
                         </div>
                       )}
                     {image.type === "image" && (
-                      <div
-                        onClick={() => gallerySlider()}
-                        className={classes.imageContainer}
-                      >
+                      <div onClick={() => gallerySlider()}>
                         <Image
                           className={
                             index === 0 && project.slideMedia.length === 0

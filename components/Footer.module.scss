@@ -18,7 +18,9 @@
   @include mixins.tablet {
     width: config.$content-widthTablet;
   }
-
+  @include mixins.tabletPortrait {
+    width: config.$content-widthTablet;
+  }
   @include mixins.mobile {
     width: calc(100% - 24px);
     display: flex;
@@ -68,9 +70,11 @@
       margin: 4px 0px;
     }
 
-    &:hover {
-      color: config.$yellow;
-      font-weight: bold;
+    @include mixins.allDesktop {
+      &:hover {
+        color: config.$yellow;
+        font-weight: bold;
+      }
     }
   }
 
@@ -117,9 +121,11 @@
 .youtube {
   margin-right: 20px;
 
-  &:hover {
-    color: config.$yellow;
-    cursor: pointer;
+  @include mixins.allDesktop {
+    &:hover {
+      color: config.$yellow;
+      cursor: pointer;
+    }
   }
 }
 

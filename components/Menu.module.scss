@@ -98,8 +98,10 @@
       margin: 5px 10px;
       cursor: pointer;
 
-      &:hover {
-        color: config.$yellow;
+      @include mixins.allDesktop {
+        &:hover {
+          color: config.$yellow;
+        }
       }
     }
   }
@@ -142,8 +144,10 @@
     font-size: config.$small-font;
   }
 
-  &:hover {
-    color: config.$yellow;
+  @include mixins.allDesktop {
+    &:hover {
+      color: config.$yellow;
+    }
   }
 }
 
@@ -164,6 +168,9 @@
   width: config.$content-width;
 
   @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+  @include mixins.tabletPortrait {
     width: config.$content-widthTablet;
   }
   @include mixins.mobile {
@@ -208,6 +215,11 @@
       border-bottom-right-radius: 20px;
       border-bottom-left-radius: 20px;
     }
+    @include mixins.tabletPortrait {
+      width: config.$content-widthTablet;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
 
     @include mixins.mobile {
       width: 100%;
@@ -215,6 +227,11 @@
 
     .menuItems {
       @include mixins.tablet {
+        @include mixins.row-space-between-center();
+        justify-content: space-around;
+        flex-direction: row-reverse;
+      }
+      @include mixins.tabletPortrait {
         @include mixins.row-space-between-center();
         justify-content: space-around;
         flex-direction: row-reverse;
@@ -227,6 +244,10 @@
     }
     .menuItemsReverse {
       @include mixins.tablet {
+        @include mixins.row-space-between-center();
+        justify-content: space-around;
+      }
+      @include mixins.tabletPortrait {
         @include mixins.row-space-between-center();
         justify-content: space-around;
       }

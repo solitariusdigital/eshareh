@@ -21,7 +21,6 @@
     .description {
       display: flex;
       flex-direction: row-reverse;
-      align-items: center;
 
       .seperation {
         color: config.$grey;
@@ -31,6 +30,17 @@
 
     .text {
       direction: rtl;
+      width: 90%;
+
+      @include mixins.mobile {
+        width: 75%;
+      }
+      @include mixins.tablet {
+        width: 80%;
+      }
+      @include mixins.tabletPortrait {
+        width: 80%;
+      }
     }
   }
 

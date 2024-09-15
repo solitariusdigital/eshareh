@@ -20,6 +20,10 @@
     @include mixins.tablet {
       width: 100%;
     }
+    @include mixins.tabletPortrait {
+      width: 100%;
+      height: 500px;
+    }
     @include mixins.fourK {
       max-height: 750px;
     }
@@ -49,6 +53,12 @@
     height: 100%;
     width: 100%;
   }
+  @include mixins.tabletPortrait {
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
   @include mixins.tablet {
     width: 90%;
   }
@@ -71,23 +81,26 @@
     }
   }
 
-  .contactGraphic {
+  .animeContainer {
     position: relative;
     height: 400px;
     width: 400px;
 
-    @include mixins.desktop {
-      bottom: 30px;
-    }
     @include mixins.mobile {
-      margin: 20px;
-      height: 300px;
+      margin: 50px 0px;
       width: 100%;
+      height: 250px;
+    }
+    @include mixins.tablet {
+      bottom: 50px;
+    }
+    @include mixins.desktop {
+      bottom: 50px;
     }
     @include mixins.fourK {
-      height: 550px;
-      width: 550px;
-      bottom: 20px;
+      height: 500px;
+      width: 500px;
+      bottom: 60px;
     }
   }
 
@@ -144,7 +157,10 @@
   @include mixins.tablet {
     width: 90%;
   }
-
+  @include mixins.tabletPortrait {
+    display: flex;
+    justify-content: center;
+  }
   p {
     background: config.$yellow;
     font-size: config.$tiny-font;
@@ -159,10 +175,12 @@
     border-bottom-right-radius: 10px;
     width: 150px;
 
-    &:hover {
-      background: config.$black;
-      color: config.$yellow;
-      cursor: pointer;
+    @include mixins.allDesktop {
+      &:hover {
+        background: config.$black;
+        color: config.$yellow;
+        cursor: pointer;
+      }
     }
   }
 }

@@ -3,6 +3,7 @@ import { Schema, model, models } from "mongoose";
 const ControlSchema = new Schema(
   {
     menu: {},
+    live: Boolean,
   },
   { timestamps: true }
 );

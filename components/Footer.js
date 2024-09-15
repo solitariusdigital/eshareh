@@ -74,8 +74,6 @@ export default function Footer() {
             height={25}
             src={aparat}
             alt="aparat"
-            as="image"
-            priority
           />
         ) : (
           <Image
@@ -88,8 +86,6 @@ export default function Footer() {
             height={25}
             src={aparatHover}
             alt="aparat"
-            as="image"
-            priority
           />
         )}
         <p className={classes.copyright}>© eshareh 2024 all rights reserved</p>
@@ -132,8 +128,6 @@ export default function Footer() {
             height={82.5}
             src={language ? logoLoadFarsi : logoLoadEnglish}
             alt="logo"
-            as="image"
-            priority
           />
         </div>
       </div>

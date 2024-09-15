@@ -17,7 +17,6 @@ export default function Portal() {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");

@@ -1,9 +1,10 @@
 export default function Progress(props) {
-  const { color, completed } = props;
+  const { color, completed, height, border } = props;
 
   const progress = {
-    height: 5,
     width: "100%",
+    height: height ? height : 5,
+    borderRadius: border ? "50px" : "0px",
   };
 
   const filler = {

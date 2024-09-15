@@ -12,11 +12,10 @@
     width: 100%;
     padding: 0px 12px;
   }
-
+  @include mixins.tabletPortrait {
+    width: config.$content-widthTablet;
+  }
   @include mixins.tablet {
-    width: 100%;
-    padding: 0px 12px;
-
     width: config.$content-widthTablet;
   }
 

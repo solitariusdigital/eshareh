@@ -4,11 +4,10 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./profession.module.scss";
 import { NextSeo } from "next-seo";
 import Image from "next/legacy/image";
-import profession from "@/assets/profession.png";
 import CircleIcon from "@mui/icons-material/Circle";
-import pageModel from "@/models/Page";
-import dbConnect from "@/services/dbConnect";
-import { applyFontToEnglishWords } from "@/services/utility";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
+import profession from "@/assets/profession.png";
 
 export default function Profession({ pageData }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -17,6 +16,9 @@ export default function Profession({ pageData }) {
     en: [pageData.content[1].data.en.split("\n\n")][0],
     fa: [pageData.content[1].data.fa.split("\n\n")][0],
   });
+
+  const flyingFish =
+    "https://eshareh.storage.iran.liara.space/motion/flyingFish.gif";
 
   const position = {
     position: "relative",
@@ -27,17 +29,37 @@ export default function Profession({ pageData }) {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "چه می‌کنیم" : "What we do"}
+        title={language ? "چه می‌کنیم" : "What We Do"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
+        canonical="https://eshareh.com/profession"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/profession",
-          siteName: "Eshareh Advertising Agency",
+          title: language ? "چه می‌کنیم" : "What We Do",
+          description: language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio",
+          siteName: language
+            ? "آژانس تبلیغاتی اشاره"
+            : "Eshareh Advertising Agency",
+          images: {
+            url: language ? logoFarsi : logoEnglish,
+            width: 1200,
+            height: 630,
+            alt: language
+              ? "آژانس تبلیغاتی اشاره"
+              : "Eshareh Advertising Agency",
+          },
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
         }}
       />
       <div
@@ -116,8 +138,6 @@ export default function Profession({ pageData }) {
             alt="image"
             layout="fill"
             objectFit="contain"
-            as="image"
-            priority
           />
         </div>
       </div>

@@ -11,6 +11,8 @@ import { NextSeo } from "next-seo";
 import { getUsersApi, deletetUserApi } from "@/services/api";
 import Tooltip from "@mui/material/Tooltip";
 import CloseIcon from "@mui/icons-material/Close";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 
 export default function About() {
   const { language, setLanguage } = useContext(StateContext);
@@ -25,7 +27,9 @@ export default function About() {
     const fetchData = async () => {
       try {
         const users = await getUsersApi();
-        setUsers(users.filter((user) => user.active));
+        let setOne = shuffleUsers(users.filter((user) => user.active));
+        let setTwo = [...setOne];
+        setUsers(setOne.concat(setTwo));
       } catch (error) {
         console.error(error);
       }
@@ -37,7 +41,7 @@ export default function About() {
     let count = 0;
     switch (screenSize) {
       case "desktop":
-        count = 11;
+        count = 9;
         break;
       case "tablet-landscape":
         count = 7;
@@ -84,20 +88,50 @@ export default function About() {
     }
   };
 
+  const shuffleUsers = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      // Generate a random index from 0 to i
+      const j = Math.floor(Math.random() * (i + 1));
+      // Swap elements at indices i and j
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   return (
     <Fragment>
       <NextSeo
-        title={language ? "درباره" : "About"}
+        title={language ? "درباره ما" : "About Us"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
+        canonical="https://eshareh.com/about"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/about",
-          siteName: "Eshareh Advertising Agency",
+          title: language ? "درباره ما" : "About Us",
+          description: language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio",
+          siteName: language
+            ? "آژانس تبلیغاتی اشاره"
+            : "Eshareh Advertising Agency",
+          images: {
+            url: language ? logoFarsi : logoEnglish,
+            width: 1200,
+            height: 630,
+            alt: language
+              ? "آژانس تبلیغاتی اشاره"
+              : "Eshareh Advertising Agency",
+          },
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
         }}
       />
       <div className={classes.container}>
@@ -136,7 +170,7 @@ export default function About() {
             <Swiper
               className={classes.swiper}
               slidesPerView={generateSwipeCount()}
-              spaceBetween={0}
+              spaceBetween={screenSize === "desktop" ? 25 : 0}
               centeredSlides={true}
               mousewheel={true}
               loop={true}
