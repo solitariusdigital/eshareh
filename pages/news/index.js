@@ -51,7 +51,7 @@ export default function News() {
           width={50}
           height={50}
           src={building}
-          alt="logo"
+          alt="building"
           as="image"
           unoptimized
         />
