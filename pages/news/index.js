@@ -53,7 +53,7 @@ export default function News() {
           src={building}
           alt="logo"
           as="image"
-          priority
+          unoptimized
         />
         {language ? <h3>به زودی</h3> : <h3>Coming soon</h3>}
       </div>
