@@ -1,11 +1,19 @@
 import React from "react";
-import ConstructionIcon from "@mui/icons-material/Construction";
 import classes from "./Form.module.scss";
+import building from "@/assets/building.png";
+import Image from "next/legacy/image";
 
 export default function Contact() {
   return (
     <div className={classes.build}>
-      <ConstructionIcon sx={{ fontSize: 50 }} />
+      <Image
+        width={50}
+        height={50}
+        src={building}
+        alt="building"
+        as="image"
+        unoptimized
+      />
     </div>
   );
 }

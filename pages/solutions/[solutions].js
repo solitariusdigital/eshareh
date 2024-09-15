@@ -35,8 +35,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import logoEnglish from "@/assets/logoEnglish.svg";
-import logoFarsi from "@/assets/logoFarsi.svg";
 
 export default function Solution({ solutions, projectTitle }) {
   const { language, setLanguage } = useContext(StateContext);
