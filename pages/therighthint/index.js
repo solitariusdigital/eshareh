@@ -108,7 +108,7 @@ export default function Therighthint() {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "اشاره‌ای درست!" : "The Right Hint"}
+        title={language ? "اشاره‌ای درست" : "The Right Hint"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
@@ -119,7 +119,7 @@ export default function Therighthint() {
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/therighthint",
-          title: language ? "اشاره‌ای درست!" : "The Right Hint",
+          title: language ? "اشاره‌ای درست" : "The Right Hint",
           description: language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
