@@ -5,7 +5,7 @@ import { NextSeo } from "next-seo";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import Image from "next/legacy/image";
-import building from "@/assets/building.svg";
+import building from "@/assets/building.png";
 
 export default function News() {
   const { language, setLanguage } = useContext(StateContext);
@@ -48,8 +48,8 @@ export default function News() {
       />
       <div className={classes.container}>
         <Image
-          width={100}
-          height={100}
+          width={50}
+          height={50}
           src={building}
           alt="logo"
           as="image"
