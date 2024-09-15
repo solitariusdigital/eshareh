@@ -4,6 +4,8 @@ import classes from "./news.module.scss";
 import { NextSeo } from "next-seo";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
+import Image from "next/legacy/image";
+import building from "@/assets/building.svg";
 
 export default function News() {
   const { language, setLanguage } = useContext(StateContext);
@@ -45,6 +47,14 @@ export default function News() {
         }}
       />
       <div className={classes.container}>
+        <Image
+          width={100}
+          height={100}
+          src={building}
+          alt="logo"
+          as="image"
+          priority
+        />
         {language ? <h3>به زودی</h3> : <h3>Coming soon</h3>}
       </div>
     </Fragment>
