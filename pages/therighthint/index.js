@@ -79,12 +79,12 @@ export default function Therighthint() {
 
   const updateCharityCount = () => {
     if (!disableButton) {
+      setDisableButton(true);
       performStringReplacement();
+      setTimeout(() => {
+        saveCount();
+      }, 2000);
     }
-    setDisableButton(true);
-    setTimeout(() => {
-      saveCount();
-    }, 2000);
   };
 
   const saveCount = async () => {
@@ -141,7 +141,6 @@ export default function Therighthint() {
           maxVideoPreview: -1,
         }}
       />
-
       <div
         className={classes.container}
         style={{
@@ -158,7 +157,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <div className={classes.starThree}>
@@ -170,7 +169,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <div className={classes.starFour}>
@@ -182,7 +181,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <div className={classes.starFive}>
@@ -194,7 +193,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <div className={classes.starSix}>
@@ -206,7 +205,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <div className={classes.starSeven}>
@@ -218,7 +217,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <Image
@@ -351,7 +350,7 @@ export default function Therighthint() {
                 layout="responsive"
                 objectFit="contain"
                 as="image"
-                priority
+                unoptimized
               />
             </div>
           </div>
@@ -404,7 +403,7 @@ export default function Therighthint() {
                 layout="responsive"
                 objectFit="contain"
                 as="image"
-                priority
+                unoptimized
               />
             </div>
           </div>
