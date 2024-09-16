@@ -7,7 +7,6 @@ import Image from "next/legacy/image";
 import CircleIcon from "@mui/icons-material/Circle";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
-import profession from "@/assets/profession.png";
 import dbConnect from "@/services/dbConnect";
 import pageModel from "@/models/Page";
 import mediaModel from "@/models/Media";

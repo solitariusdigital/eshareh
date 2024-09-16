@@ -3,7 +3,7 @@
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   gap: 12px;
   margin-bottom: 50px;
 }
@@ -66,6 +66,19 @@
 
   @include mixins.mobile {
     width: 100%;
+  }
+}
+
+.delete {
+  display: flex;
+  justify-content: center;
+
+  button {
+    @include mixins.button(config.$red, config.$white);
+    margin: auto;
+    &:hover {
+      color: config.$red;
+    }
   }
 }
 

@@ -33,7 +33,7 @@ export default function Admin({ covers, pages, mediaData }) {
     if (permissionControl !== "admin") {
       Router.push("/portal");
     } else {
-      setFormType("cover");
+      setFormType("solutions");
     }
   }, [permissionControl, setFormType]);
 

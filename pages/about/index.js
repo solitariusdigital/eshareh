@@ -3,23 +3,21 @@ import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
 import Image from "next/legacy/image";
+import { NextSeo } from "next-seo";
+import { getUsersApi, deletetUserApi } from "@/services/api";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
+import dbConnect from "@/services/dbConnect";
+import pageModel from "@/models/Page";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { NextSeo } from "next-seo";
-import { getUsersApi, deletetUserApi } from "@/services/api";
-import Tooltip from "@mui/material/Tooltip";
-import CloseIcon from "@mui/icons-material/Close";
-import logoEnglish from "@/assets/logoEnglish.svg";
-import logoFarsi from "@/assets/logoFarsi.svg";
 
-export default function About() {
+export default function About({ pageData }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
-  const { permissionControl, setPermissionControl } = useContext(StateContext);
-
   const [users, setUsers] = useState([]);
   const [current, setCurrent] = useState(0);
 
@@ -27,7 +25,9 @@ export default function About() {
     const fetchData = async () => {
       try {
         const users = await getUsersApi();
-        let setOne = shuffleUsers(users.filter((user) => user.active));
+        let setOne = shuffleUsers(
+          users.filter((user) => user.permission === "user")
+        );
         let setTwo = [...setOne];
         setUsers(setOne.concat(setTwo));
       } catch (error) {
@@ -77,15 +77,6 @@ export default function About() {
     if (swiperInstance === null) return;
     const currentSlide = swiperInstance?.realIndex;
     setCurrent(currentSlide);
-  };
-
-  const deleteUser = async (index) => {
-    let confirmationMessage = "  حذف مطمئنی؟";
-    let confirm = window.confirm(confirmationMessage);
-    if (confirm) {
-      await deletetUserApi(users[index]["_id"]);
-      window.location.assign("/about");
-    }
   };
 
   const shuffleUsers = (array) => {
@@ -141,27 +132,18 @@ export default function About() {
           }
           style={{ height: setInformationHeight() }}
         >
-          <h1>{language ? "تیم مدیران" : "Management Team"}</h1>
+          <h1>
+            {language
+              ? pageData.content[0].data.fa
+              : pageData.content[0].data.en}
+          </h1>
           {language ? (
             <div>
-              <p>
-                شاکله آژانس اشاره از تیمی متخصص و منحصربه‌فرد تشکیل شده است که
-                در کنار یکدیگر و با همکاری هم راه‌کارهایی خلاقانه ارائه می‌دهند
-                و رویکردی راه‌حل‌محور دارند تا پاسخگوی نیاز مشتریانمان باشند.
-                برای همین، کار تیمی برای آژانس تمام‌ خدمت اشاره در اولویت بوده و
-                همیشه یکی از ارزش‌های اصلی این سازمان به حساب می‌آید.
-              </p>
+              <p>{pageData.content[1].data.fa}</p>
             </div>
           ) : (
             <div>
-              <p>
-                Eshareh's structure is made up of a specialized and unique team
-                of experts who collaborate together to provide creative
-                solutions and through a solution-centric approach, meet the
-                needs of the clients. For this, teamwork is a top priority for
-                Eshareh full service agency and is always considered as one of
-                the fundamental values of the organization.
-              </p>
+              <p>{pageData.content[1].data.en}</p>
             </div>
           )}
         </div>
@@ -209,23 +191,29 @@ export default function About() {
                 {users[current]["name"][languageType]}
               </h1>
               <h3>{users[current]["title"][languageType]}</h3>
-              {permissionControl === "admin" && (
-                <div>
-                  <Tooltip title="Delete">
-                    <CloseIcon
-                      style={{
-                        cursor: "pointer",
-                      }}
-                      sx={{ color: "#d40d12" }}
-                      onClick={() => deleteUser(current)}
-                    />
-                  </Tooltip>
-                </div>
-              )}
             </div>
           </div>
         )}
       </div>
     </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const pageData = await pageModel.findOne({ slug: "about" });
+
+    return {
+      props: {
+        pageData: JSON.parse(JSON.stringify(pageData)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }
