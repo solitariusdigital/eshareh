@@ -79,12 +79,12 @@ export default function Therighthint() {
 
   const updateCharityCount = () => {
     if (!disableButton) {
+      setDisableButton(true);
       performStringReplacement();
+      setTimeout(() => {
+        saveCount();
+      }, 2000);
     }
-    setDisableButton(true);
-    setTimeout(() => {
-      saveCount();
-    }, 2000);
   };
 
   const saveCount = async () => {
@@ -108,7 +108,7 @@ export default function Therighthint() {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "اشاره‌ای درست!" : "The Right Hint"}
+        title={language ? "اشاره‌ای درست" : "The Right Hint"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
@@ -119,7 +119,7 @@ export default function Therighthint() {
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/therighthint",
-          title: language ? "اشاره‌ای درست!" : "The Right Hint",
+          title: language ? "اشاره‌ای درست" : "The Right Hint",
           description: language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
@@ -141,7 +141,6 @@ export default function Therighthint() {
           maxVideoPreview: -1,
         }}
       />
-
       <div
         className={classes.container}
         style={{
@@ -158,7 +157,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <div className={classes.starThree}>
@@ -170,7 +169,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <div className={classes.starFour}>
@@ -182,7 +181,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <div className={classes.starFive}>
@@ -194,7 +193,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <div className={classes.starSix}>
@@ -206,7 +205,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <div className={classes.starSeven}>
@@ -218,7 +217,7 @@ export default function Therighthint() {
               layout="responsive"
               objectFit="contain"
               as="image"
-              priority
+              unoptimized
             />
           </div>
           <Image
@@ -249,25 +248,24 @@ export default function Therighthint() {
           </div>
           <h2>
             ما معتقدیم یادگیری مستمر می‌تواند در کیفیت هر لحظه‌ تاثیر‌گذار باشد
-            و خاستگاه فردی را ارتقا دهد.
+            و خواستگاه فردی را ارتقا دهد.
           </h2>
           <h2>
-            با دنبال کردن این تفکر بدین نتیجه رسیدیم که یادگیری و آموزش در بالا
-            بردن سطح اجتماعی همانند بالا رفتن خاستگاه فردی، موثر بوده و روند رو
-            به رشدتری را در بر خواهد داشت.
+            یادگیری و آموزش در بالا بردن سطح اجتماعی همانند بالا رفتن خواستگاه
+            فردی، موثر بوده و روند رو به رشدتری را در برخواهد داشت.
           </h2>
           <h2>
             با اشاره‌ای درست به اهداف درست‌تر و کمک به نوجوانان؛ نسلی که به این
-            حد از تفکرات و فعالیت‌ ها نزدیک‌تر هستند، می‌توان پایه‌های محکم‌تری
-            را در این مسیر برداشت و آن را هدایت کرد.
+            حد از تفکرات و فعالیت‌ها نزدیک‌تر هستند، می‌توان پایه‌های محکم‌تری
+            را برای جامعه در این مسیر ساخت و آن را هدایت کرد.
           </h2>
           <h2>
             اینکه همه‌ی نوجوانان و افراد جامعه در جایگاه درست خود قرار گیرند و
-            بتوانند استعدادها و افکار خود را پرورش دهند، مهم‌ترین اصل در این هدف
+            بتوانند استعدادها و افکار خود را پروش دهند، مهم‌ترین اصل در این هدف
             است.
           </h2>
           <h2>
-            برای اینکه بتوانیم به این روند کمک کوچکی کرده باشیم؛ با تیم اشاره در
+            برای اینکه بتوانید به این روند کمک کوچکی کرده باشید؛ با تیم اشاره در
             کمپین اشاره‌ای درست! شرکت کنید و نوجوانان را برای یادگیری در جای
             درست خود قرار دهید.
           </h2>
@@ -290,7 +288,7 @@ export default function Therighthint() {
                 fontFamily: language ? "FarsiBold" : "FarsiBold",
               }}
             >
-              *بنیاد نیکوکاری حکمت
+              بنیاد نیکوکاری حکمت*
             </span>{" "}
             برای کمک به یادگیری نوجونان در زمینه‌های مختلف کمک خواهد شد.
           </h2>
@@ -352,7 +350,7 @@ export default function Therighthint() {
                 layout="responsive"
                 objectFit="contain"
                 as="image"
-                priority
+                unoptimized
               />
             </div>
           </div>
@@ -405,7 +403,7 @@ export default function Therighthint() {
                 layout="responsive"
                 objectFit="contain"
                 as="image"
-                priority
+                unoptimized
               />
             </div>
           </div>
