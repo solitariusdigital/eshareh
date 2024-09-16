@@ -22,6 +22,5 @@ const PageSchema = new Schema(
   { timestamps: true }
 );
 
-// Create the model
 const Page = models.Page || model("Page", PageSchema);
 export default Page;

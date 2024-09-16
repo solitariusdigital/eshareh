@@ -210,3 +210,34 @@ export const getPagessApi = async () => {
   });
   return await response.json();
 };
+
+// Media api
+export const updateMediaApi = async (data) => {
+  const response = await fetch("/api/media", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createMediaApi = async (data) => {
+  const response = await fetch("/api/media", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getMediaApi = async () => {
+  const response = await fetch("/api/media", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

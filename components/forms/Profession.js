@@ -1,19 +1,38 @@
 import { Fragment, useContext, useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
-import { areAllStatesValid, extractParagraphs } from "@/services/utility";
-import { updatePageApi } from "@/services/api";
+import {
+  areAllStatesValid,
+  extractParagraphs,
+  fourGenerator,
+  sixGenerator,
+  uploadMedia,
+} from "@/services/utility";
+import { updatePageApi, updateMediaApi } from "@/services/api";
+import Image from "next/legacy/image";
+import loaderImage from "@/assets/loader.png";
 
-export default function Profession({ pages }) {
+export default function Profession({ pages, mediaData }) {
   const [main, setMain] = useState({ en: "", fa: "" });
   const [paragraph, setParagraphs] = useState({ en: "", fa: "" });
   const [alert, setAlert] = useState("");
-  const [professionData, setProfessionData] = useState(false);
+  const [professionContent, setProfessionContent] = useState({});
+  const [mediaContent, setMediaContent] = useState({});
+  const [mediaType, setMediaType] = useState("image" || "gif");
+  const [media, setMedia] = useState("");
+  const [loader, setLoader] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
+  const sourceLink = "https://eshareh.storage.iran.liara.space";
+
+  const router = useRouter();
 
   useEffect(() => {
-    let professionData = pages.find((page) => page.slug === "profession");
-    const { content } = professionData;
-    setProfessionData(professionData);
+    let professionContent = pages.find((page) => page.slug === "profession");
+    const { content } = professionContent;
+    setProfessionContent(professionContent);
+    let mediaContent = mediaData.find((media) => media.slug === "profession");
+    setMediaContent(mediaContent);
     setMain({
       en: content[0].data.en,
       fa: content[0].data.fa,
@@ -22,7 +41,7 @@ export default function Profession({ pages }) {
       en: content[1].data.en,
       fa: content[1].data.fa,
     });
-  }, [pages]);
+  }, [mediaData, pages]);
 
   const handleSubmit = async () => {
     const isValid = areAllStatesValid([main, paragraph]);
@@ -32,10 +51,33 @@ export default function Profession({ pages }) {
       return;
     }
 
-    const dataObject = {
-      _id: professionData["_id"],
+    setLoader(true);
+    setDisableButton(true);
+
+    // upload media
+    if (media) {
+      let mediaLink = "";
+      let mediaFormat = mediaType === "image" ? ".jpg" : ".gif";
+      let mediaFolder = "page";
+      const subFolder = `pag${sixGenerator()}`;
+      let mediaId = `img${fourGenerator()}`;
+      mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
+      await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
+
+      const mediaObject = {
+        _id: mediaContent["_id"],
+        slug: "profession",
+        title: "What We Do",
+        type: mediaType,
+        link: mediaLink,
+      };
+      await updateMediaApi(mediaObject);
+    }
+
+    const contentObject = {
+      _id: professionContent["_id"],
       slug: "profession",
-      title: "What we do",
+      title: "What We Do",
       content: [
         {
           type: "text",
@@ -53,8 +95,9 @@ export default function Profession({ pages }) {
         },
       ],
     };
-    await updatePageApi(dataObject);
-    showAlert("داده ذخیره شد");
+    await updatePageApi(contentObject);
+    showAlert("ذخیره شد");
+    router.reload(router.asPath);
   };
 
   const showAlert = (message) => {
@@ -223,22 +266,85 @@ export default function Profession({ pages }) {
             ></textarea>
           </div>
         </div>
-      </div>
-      <div
-        className={classes.formAction}
-        style={{
-          fontFamily: "Farsi",
-        }}
-      >
-        <p className={classes.alert}>{alert}</p>
-        <button
-          onClick={() => handleSubmit()}
+        <div
+          className={classes.formAction}
           style={{
-            fontFamily: "FarsiMedium",
+            fontFamily: "English",
           }}
         >
-          ذخیره
-        </button>
+          <div className={classes.navigation}>
+            <p
+              className={mediaType === "gif" ? classes.navActive : classes.nav}
+              onClick={() => {
+                setMediaType("gif");
+                setMedia("");
+              }}
+            >
+              gif
+            </p>
+            <p
+              className={
+                mediaType === "image" ? classes.navActive : classes.nav
+              }
+              onClick={() => {
+                setMediaType("image");
+                setMedia("");
+              }}
+            >
+              عکس
+            </p>
+          </div>
+          <div
+            className={classes.input}
+            style={{
+              fontFamily: `${mediaType === "image" ? "Farsi" : "English"}`,
+            }}
+          >
+            <label className="file">
+              <input
+                onChange={(e) => {
+                  setMedia(e.target.files[0]);
+                }}
+                type="file"
+                accept="image/*"
+              />
+              <p>{mediaType === "image" ? "عکس" : "gif"}</p>
+            </label>
+            {media !== "" && (
+              <div className={classes.preview}>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setMedia("")}
+                  sx={{ fontSize: 16 }}
+                />
+                <Image
+                  className={classes.media}
+                  width={170}
+                  height={200}
+                  objectFit="contain"
+                  src={URL.createObjectURL(media)}
+                  alt="image"
+                  priority
+                />
+              </div>
+            )}
+          </div>
+          <p className={classes.alert}>{alert}</p>
+          {loader && (
+            <div>
+              <Image width={50} height={50} src={loaderImage} alt="isLoading" />
+            </div>
+          )}
+          <button
+            disabled={disableButton}
+            style={{
+              fontFamily: "FarsiMedium",
+            }}
+            onClick={() => handleSubmit()}
+          >
+            ذخیره
+          </button>
+        </div>
       </div>
     </Fragment>
   );

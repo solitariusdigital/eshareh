@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import { useState, useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Pages.module.scss";
 import Profession from "./forms/Profession";
@@ -7,8 +7,7 @@ import About from "./forms/About";
 import News from "./forms/News";
 import Contact from "./forms/Contact";
 
-export default function Pages({ pages }) {
-  const { languageType, setLanguageType } = useContext(StateContext);
+export default function Pages({ pages, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
   const [pageType, setPageType] = useState(
     "home" || "about us" || "what we do" || "news" || "contact us"
@@ -36,7 +35,9 @@ export default function Pages({ pages }) {
       </div>
       {pageType === "home" && <Home />}
       {pageType === "about us" && <About />}
-      {pageType === "what we do" && <Profession pages={pages} />}
+      {pageType === "what we do" && (
+        <Profession pages={pages} mediaData={mediaData} />
+      )}
       {pageType === "news" && <News />}
       {pageType === "contact us" && <Contact />}
     </div>

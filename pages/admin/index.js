@@ -9,6 +9,7 @@ import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
 import coverModel from "@/models/Cover";
 import pageModel from "@/models/Page";
+import mediaModel from "@/models/Media";
 import Image from "next/legacy/image";
 import Tooltip from "@mui/material/Tooltip";
 import CloseIcon from "@mui/icons-material/Close";
@@ -19,7 +20,7 @@ import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { updateCoverApi } from "@/services/api";
 
-export default function Admin({ covers, pages }) {
+export default function Admin({ covers, pages, mediaData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
@@ -87,7 +88,7 @@ export default function Admin({ covers, pages }) {
       {formType === "solutions" && <Solutions />}
       {formType === "team" && <Team />}
       {formType === "cover" && <Cover />}
-      {formType === "pages" && <Pages pages={pages} />}
+      {formType === "pages" && <Pages pages={pages} mediaData={mediaData} />}
       {formType === "cover" && (
         <div className={classes.preview}>
           {coversGrid.map((cover, index) => (
@@ -196,11 +197,13 @@ export async function getServerSideProps(context) {
     await dbConnect();
     const covers = await coverModel.find();
     const pages = await pageModel.find();
+    const mediaData = await mediaModel.find();
 
     return {
       props: {
         covers: JSON.parse(JSON.stringify(covers)),
         pages: JSON.parse(JSON.stringify(pages)),
+        mediaData: JSON.parse(JSON.stringify(mediaData)),
       },
     };
   } catch (error) {

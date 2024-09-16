@@ -10,9 +10,10 @@ import logoFarsi from "@/assets/logoFarsi.svg";
 import profession from "@/assets/profession.png";
 import dbConnect from "@/services/dbConnect";
 import pageModel from "@/models/Page";
+import mediaModel from "@/models/Media";
 import { applyFontToEnglishWords } from "@/services/utility";
 
-export default function Profession({ pageData }) {
+export default function Profession({ pageData, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const [paragraph, setParagraphs] = useState({
@@ -135,12 +136,13 @@ export default function Profession({ pageData }) {
           }
         >
           <Image
-            src={profession}
-            blurDataURL={profession}
+            src={mediaData.link}
+            blurDataURL={mediaData.link}
             placeholder="blur"
-            alt="image"
+            alt={mediaData.type}
             layout="fill"
             objectFit="contain"
+            unoptimized={mediaData.type === "gif"}
           />
         </div>
       </div>
@@ -153,10 +155,12 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const pageData = await pageModel.findOne({ slug: "profession" });
+    const mediaData = await mediaModel.findOne({ slug: "profession" });
 
     return {
       props: {
         pageData: JSON.parse(JSON.stringify(pageData)),
+        mediaData: JSON.parse(JSON.stringify(mediaData)),
       },
     };
   } catch (error) {
