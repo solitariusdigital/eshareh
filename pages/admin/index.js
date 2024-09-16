@@ -2,7 +2,6 @@ import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./admin.module.scss";
 import Solutions from "@/components/forms/Solutions";
-import Team from "@/components/forms/Team";
 import Cover from "@/components/forms/Cover";
 import Pages from "@/components/Pages";
 import Router from "next/router";
@@ -27,16 +26,14 @@ export default function Admin({ covers, pages, mediaData }) {
   const [coversGrid, setCoversGrid] = useState(covers);
   const [text, setText] = useState(false);
 
-  const [formType, setFormType] = useState(
-    "Pages" || "solutions" || "team" || "cover"
-  );
-  const navigation = ["pages", "solutions", "team", "cover"];
+  const [formType, setFormType] = useState("solutions" || "pages" || "cover");
+  const navigation = ["solutions", "pages", "cover"];
 
   useEffect(() => {
     if (permissionControl !== "admin") {
       Router.push("/portal");
     } else {
-      setFormType("pages");
+      setFormType("cover");
     }
   }, [permissionControl, setFormType]);
 
@@ -86,82 +83,81 @@ export default function Admin({ covers, pages, mediaData }) {
         ))}
       </div>
       {formType === "solutions" && <Solutions />}
-      {formType === "team" && <Team />}
       {formType === "cover" && <Cover />}
       {formType === "pages" && <Pages pages={pages} mediaData={mediaData} />}
       {formType === "cover" && (
-        <div className={classes.preview}>
+        <div className={classes.coverContainer}>
           {coversGrid.map((cover, index) => (
-            <div key={index} className={classes.mediaContainer}>
-              <Fragment>
-                <h3
-                  onClick={() => Router.push(cover.link)}
-                  style={{
-                    fontFamily: language ? "Farsi" : "English",
-                  }}
-                  className={classes.title}
-                >
-                  {cover.title[languageType]}
-                </h3>
-                <div className={classes.action}>
-                  <div>
-                    {cover.active ? (
-                      <Tooltip title="Visible">
-                        <VerifiedUserIcon sx={{ color: "#57a361" }} />
-                      </Tooltip>
-                    ) : (
-                      <Tooltip title="Hidden">
-                        <VisibilityOffIcon sx={{ color: "#d40d12" }} />
-                      </Tooltip>
-                    )}
-                  </div>
-                  <div className={classes.input}>
-                    <input
-                      style={{
-                        fontFamily: "English",
-                      }}
-                      type="text"
-                      id="color"
-                      name="color"
-                      onChange={(e) =>
-                        handleColorChange(e.target.value, cover["_id"])
-                      }
-                      value={cover.color}
-                      autoComplete="off"
-                      maxLength={6}
-                    />
-                    {cover.text ? (
-                      <Tooltip title="Hide">
-                        <RadioButtonCheckedIcon
-                          className="icon"
-                          onClick={() => handleText(false, cover["_id"])}
-                        />
-                      </Tooltip>
-                    ) : (
-                      <Tooltip title="Show">
-                        <RadioButtonUncheckedIcon
-                          className="icon"
-                          onClick={() => handleText(true, cover["_id"])}
-                        />
-                      </Tooltip>
-                    )}
-                  </div>
-                  <div>
-                    <Tooltip title="Hide">
-                      <CloseIcon
-                        className="icon"
-                        onClick={() => manageCover("hide", index)}
-                      />
+            <div key={index} className={classes.cover}>
+              <p
+                className={language ? classes.titleReverse : classes.title}
+                style={{
+                  fontFamily: language ? "Farsi" : "English",
+                }}
+                onClick={() => Router.push(cover.link)}
+              >
+                {cover.title[languageType]}
+              </p>
+              <div className={classes.action}>
+                <div>
+                  {cover.active ? (
+                    <Tooltip title="Visible">
+                      <VerifiedUserIcon sx={{ color: "#57a361" }} />
                     </Tooltip>
-
-                    <Tooltip title="Show">
-                      <TaskAltIcon
-                        className="icon"
-                        onClick={() => manageCover("show", index)}
-                      />
+                  ) : (
+                    <Tooltip title="Hidden">
+                      <VisibilityOffIcon sx={{ color: "#d40d12" }} />
                     </Tooltip>
-                  </div>
+                  )}
                 </div>
+                <div className={classes.input}>
+                  <input
+                    style={{
+                      fontFamily: "English",
+                    }}
+                    type="text"
+                    id="color"
+                    name="color"
+                    onChange={(e) =>
+                      handleColorChange(e.target.value, cover["_id"])
+                    }
+                    value={cover.color}
+                    autoComplete="off"
+                    maxLength={6}
+                  />
+                  {cover.text ? (
+                    <Tooltip title="Hide">
+                      <RadioButtonCheckedIcon
+                        className="icon"
+                        onClick={() => handleText(false, cover["_id"])}
+                      />
+                    </Tooltip>
+                  ) : (
+                    <Tooltip title="Show">
+                      <RadioButtonUncheckedIcon
+                        className="icon"
+                        onClick={() => handleText(true, cover["_id"])}
+                      />
+                    </Tooltip>
+                  )}
+                </div>
+                <div>
+                  <Tooltip title="Hide">
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => manageCover("hide", index)}
+                    />
+                  </Tooltip>
+
+                  <Tooltip title="Show">
+                    <TaskAltIcon
+                      className="icon"
+                      onClick={() => manageCover("show", index)}
+                    />
+                  </Tooltip>
+                </div>
+              </div>
+              <div className={classes.media}>
                 {cover.coverMedia.type === "image" ? (
                   <Image
                     src={cover.coverMedia.link}
@@ -182,7 +178,7 @@ export default function Admin({ covers, pages, mediaData }) {
                     preload="metadata"
                   />
                 )}
-              </Fragment>
+              </div>
             </div>
           ))}
         </div>

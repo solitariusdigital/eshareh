@@ -34,7 +34,7 @@ export default function Pages({ pages, mediaData }) {
         ))}
       </div>
       {pageType === "home" && <Home />}
-      {pageType === "about us" && <About />}
+      {pageType === "about us" && <About pages={pages} mediaData={mediaData} />}
       {pageType === "what we do" && (
         <Profession pages={pages} mediaData={mediaData} />
       )}
