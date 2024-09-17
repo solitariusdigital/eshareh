@@ -179,6 +179,15 @@ export const getCoversApi = async () => {
   });
   return await response.json();
 };
+export const deletetCoverApi = async (id) => {
+  const response = await fetch(`/api/cover?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
 
 // pages api
 export const updatePageApi = async (data) => {
