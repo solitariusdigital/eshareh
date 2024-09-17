@@ -426,6 +426,9 @@ export default function Team({ pages, mediaData }) {
               />
             </div>
             <select
+              style={{
+                fontFamily: language ? "Farsi" : "English",
+              }}
               value={selectedUserIndex}
               onChange={(e) => {
                 setSelectedUser(users[e.target.value]);
@@ -441,7 +444,7 @@ export default function Team({ pages, mediaData }) {
               }}
             >
               <option value="default" disabled>
-                Select to update
+                {language ? "انتخاب برای ویرایش" : "Select to update"}
               </option>
               {users.map((user, index) => {
                 return (
