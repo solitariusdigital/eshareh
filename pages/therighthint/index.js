@@ -93,7 +93,8 @@ export default function Therighthint() {
     document.body.style.overflow = "hidden";
     let checkCharityUser = secureLocalStorage.getItem("charityUser");
     if (!checkCharityUser) {
-      let count = charity.count;
+      const dataCharity = await getCharityApi();
+      let count = dataCharity[0].count;
       count += 1;
       let dataObject = {
         id: charity["_id"],
