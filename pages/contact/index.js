@@ -151,9 +151,10 @@ export default function Contact() {
               src={ghostBike}
               blurDataURL={ghostBike}
               placeholder="blur"
-              alt="image"
+              alt="gif"
               layout="fill"
               objectFit="contain"
+              as="image"
               unoptimized
             />
           </div>

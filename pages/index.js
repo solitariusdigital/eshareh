@@ -319,10 +319,10 @@ export default function Home({ solutions, covers }) {
             src={smokingFish}
             blurDataURL={smokingFish}
             placeholder="blur"
-            alt="image"
+            alt="gif"
             layout="fill"
             objectFit="contain"
-            priority
+            as="image"
             unoptimized
           />
         </div>
