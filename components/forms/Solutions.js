@@ -4,6 +4,7 @@ import classes from "./Form.module.scss";
 import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";
+import { createSolutionApi, updateSolutionApi } from "@/services/api";
 import {
   fourGenerator,
   sixGenerator,
@@ -11,12 +12,9 @@ import {
   replaceSpacesAndHyphens,
   areAllStatesValid,
 } from "@/services/utility";
-import { createSolutionApi, updateSolutionApi } from "@/services/api";
 
 export default function Solutions() {
-  const { language, setLanguage } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
-
   const [title, setTitle] = useState(
     editSolution
       ? { en: editSolution.en.title, fa: editSolution.fa.title }
@@ -48,8 +46,6 @@ export default function Solutions() {
       : { en: "", fa: "" }
   );
 
-  const categories = ["Advertising", "Media", "Digital"];
-
   const [imagesPreview, setImagesPreview] = useState([]);
   const [videosPreview, setVideosPreview] = useState([]);
   const [voicesPreview, setVoicesPreview] = useState([]);
@@ -64,6 +60,7 @@ export default function Solutions() {
   const [progress, setProgress] = useState(0);
 
   const sourceLink = "https://eshareh.storage.iran.liara.space";
+  const categories = ["Advertising", "Media", "Digital"];
 
   const selectCategories = {
     Advertising: {

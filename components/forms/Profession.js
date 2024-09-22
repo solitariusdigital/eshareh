@@ -1,7 +1,10 @@
-import { Fragment, useContext, useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
+import { updatePageApi, updateMediaApi } from "@/services/api";
+import Image from "next/legacy/image";
+import loaderImage from "@/assets/loader.png";
 import {
   areAllStatesValid,
   extractParagraphs,
@@ -9,9 +12,6 @@ import {
   sixGenerator,
   uploadMedia,
 } from "@/services/utility";
-import { updatePageApi, updateMediaApi } from "@/services/api";
-import Image from "next/legacy/image";
-import loaderImage from "@/assets/loader.png";
 
 export default function Profession({ pages, mediaData }) {
   const [main, setMain] = useState({ en: "", fa: "" });
@@ -24,7 +24,6 @@ export default function Profession({ pages, mediaData }) {
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const sourceLink = "https://eshareh.storage.iran.liara.space";
-
   const router = useRouter();
 
   useEffect(() => {
@@ -139,7 +138,7 @@ export default function Profession({ pages, mediaData }) {
               }}
               placeholder="..."
               type="main"
-              id="main"
+              id="mainEn"
               name="main"
               onChange={(e) =>
                 setMain((prevData) => ({
@@ -174,7 +173,7 @@ export default function Profession({ pages, mediaData }) {
               }}
               placeholder="..."
               type="paragraph"
-              id="paragraph"
+              id="paragraphEn"
               name="paragraph"
               onChange={(e) =>
                 setParagraphs((prevData) => ({
@@ -216,7 +215,7 @@ export default function Profession({ pages, mediaData }) {
               }}
               placeholder="..."
               type="main"
-              id="main"
+              id="mainFa"
               name="main"
               onChange={(e) =>
                 setMain((prevData) => ({
@@ -252,7 +251,7 @@ export default function Profession({ pages, mediaData }) {
               }}
               placeholder="..."
               type="paragraph"
-              id="paragraph"
+              id="paragraphFa"
               name="paragraph"
               onChange={(e) =>
                 setParagraphs((prevData) => ({

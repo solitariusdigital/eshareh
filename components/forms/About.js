@@ -3,6 +3,8 @@ import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
+import loaderImage from "@/assets/loader.png";
+import AES from "crypto-js/aes";
 import {
   createUserApi,
   updatePageApi,
@@ -18,8 +20,6 @@ import {
   areAllStatesValid,
   validateEmail,
 } from "@/services/utility";
-import loaderImage from "@/assets/loader.png";
-import AES from "crypto-js/aes";
 
 export default function Team({ pages, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -238,7 +238,7 @@ export default function Team({ pages, mediaData }) {
               }}
               placeholder="..."
               type="main"
-              id="main"
+              id="mainEn"
               name="main"
               onChange={(e) =>
                 setMain((prevData) => ({
@@ -273,7 +273,7 @@ export default function Team({ pages, mediaData }) {
               }}
               placeholder="..."
               type="paragraph"
-              id="paragraph"
+              id="paragraphEn"
               name="paragraph"
               onChange={(e) =>
                 setParagraphs((prevData) => ({
@@ -315,7 +315,7 @@ export default function Team({ pages, mediaData }) {
               }}
               placeholder="..."
               type="main"
-              id="main"
+              id="mainFa"
               name="main"
               onChange={(e) =>
                 setMain((prevData) => ({
@@ -351,7 +351,7 @@ export default function Team({ pages, mediaData }) {
               }}
               placeholder="..."
               type="paragraph"
-              id="paragraph"
+              id="paragraphFa"
               name="paragraph"
               onChange={(e) =>
                 setParagraphs((prevData) => ({

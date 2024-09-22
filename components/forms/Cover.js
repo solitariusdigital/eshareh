@@ -1,20 +1,17 @@
-import { useContext, useState } from "react";
-import { StateContext } from "@/context/stateContext";
+import { useState } from "react";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { createCoverApi } from "@/services/api";
 import Image from "next/legacy/image";
+import loaderImage from "@/assets/loader.png";
 import {
   fourGenerator,
   sixGenerator,
   uploadMedia,
   areAllStatesValid,
 } from "@/services/utility";
-import loaderImage from "@/assets/loader.png";
 
 export default function Cover() {
-  const { language, setLanguage } = useContext(StateContext);
-
   const [title, setTitle] = useState({ en: "", fa: "" });
   const [media, setMedia] = useState("");
   const [link, setLink] = useState("");

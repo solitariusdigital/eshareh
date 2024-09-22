@@ -1,4 +1,4 @@
-import { useContext, Fragment } from "react";
+import { useContext, Fragment, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./contact.module.scss";
 import Image from "next/legacy/image";
@@ -6,13 +6,32 @@ import contact from "@/assets/contact.jpg";
 import { NextSeo } from "next-seo";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
+import dbConnect from "@/services/dbConnect";
+import pageModel from "@/models/Page";
+import mediaModel from "@/models/Media";
 
-export default function Contact() {
+export default function Contact({ pageData, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
+  const [headAddress, setHeadAddress] = useState({
+    en: [pageData.content[1].data.en.split("\n\n")][0],
+    fa: [pageData.content[1].data.fa.split("\n\n")][0],
+  });
+  const [headContact, setHeadContact] = useState({
+    en: [pageData.content[2].data.en.split("\n\n")][0],
+    fa: [pageData.content[2].data.fa.split("\n\n")][0],
+  });
+  const [secAddress, setSecAddress] = useState({
+    en: [pageData.content[4].data.en.split("\n\n")][0],
+    fa: [pageData.content[4].data.fa.split("\n\n")][0],
+  });
+  const [secContact, setSecContact] = useState({
+    en: [pageData.content[5].data.en.split("\n\n")][0],
+    fa: [pageData.content[5].data.fa.split("\n\n")][0],
+  });
 
   const locationLink =
     "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7743132,51.3941519,17z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu";
-
   const ghostBike =
     "https://eshareh.storage.iran.liara.space/motion/ghostBike.gif";
 
@@ -82,68 +101,46 @@ export default function Contact() {
               onClick={() => window.open(locationLink)}
             >
               {language ? (
-                <h3 className={classes.click}>دفتر مرکزی</h3>
+                <h3 className={classes.click}>{pageData.content[0].data.fa}</h3>
               ) : (
-                <h3 className={classes.click}>Head Office</h3>
+                <h3 className={classes.click}>{pageData.content[0].data.en}</h3>
               )}
             </div>
-            <div
-              className={classes.details}
-              onClick={() => window.open(locationLink)}
-            >
-              <div className={language ? classes.row : classes.rowReverse}>
-                {language ? (
-                  <p className={classes.click}>
-                    ،تهران، انتهای شیخ بهایی شمالی
-                  </p>
-                ) : (
-                  <p className={classes.click}>No. 2, 21st Alley,</p>
-                )}
-              </div>
-              <div className={language ? classes.row : classes.rowReverse}>
-                {language ? (
-                  <p className={classes.click}>
-                    نبش بزرگراه نیایش کوچه ۲۱، پلاک ۲
-                  </p>
-                ) : (
-                  <p className={classes.click}>North Sheikh Bahaei St.</p>
-                )}
-              </div>
-              <div className={language ? classes.row : classes.rowReverse}>
-                {language ? (
-                  <p className={classes.click}>کد پستی: ۱۹۹۵۷۷۵۳۵۳</p>
-                ) : (
-                  <p className={classes.click}>Tehran, 1995775353, Iran</p>
-                )}
-              </div>
+            <div className={classes.details}>
+              {headAddress[languageType].map((address, index) => (
+                <Fragment key={index}>
+                  <div
+                    onClick={() => window.open(locationLink)}
+                    className={language ? classes.row : classes.rowReverse}
+                  >
+                    <p className={classes.click}>{address}</p>
+                  </div>
+                </Fragment>
+              ))}
             </div>
             <div className={classes.details}>
-              <div
-                className={language ? classes.row : classes.rowReverse}
-                onClick={() => window.open("tel:+982188044244", "_self")}
-              >
-                <p className={classes.click}>{language ? ":تلفن" : "Tel:"}</p>
-                <p className={classes.clickTel}>
-                  {language ? "۰۲۱ ۸۸۰ ۴۴ ۲۴۴" : "+98 (21) 880 44 244"}
-                </p>
-              </div>
-              <div className={language ? classes.row : classes.rowReverse}>
-                <p>{language ? ":فکس" : "Fax:"}</p>
-                <p className={classes.clickFax}>
-                  {language ? "۰۲۱ ۸۸۰ ۶۰ ۶۶۶" : "+98 (21) 880 60 666"}
-                </p>
-              </div>
-              <div className={language ? classes.row : classes.rowReverse}>
-                <p
-                  className={classes.email}
-                  style={{
-                    fontFamily: language ? "English" : "English",
-                    fontSize: language ? "0.85rem" : "1rem",
-                  }}
-                >
-                  info@eshareh.com
-                </p>
-              </div>
+              {headContact[languageType].map((contact, index) => (
+                <Fragment key={index}>
+                  <div
+                    onClick={() => window.open("tel:+982188044244", "_self")}
+                    className={language ? classes.row : classes.rowReverse}
+                  >
+                    {index === 2 ? (
+                      <p
+                        className={classes.email}
+                        style={{
+                          fontFamily: language ? "English" : "English",
+                          fontSize: language ? "0.9rem" : "1rem",
+                        }}
+                      >
+                        {contact}
+                      </p>
+                    ) : (
+                      <p className={classes.click}>{contact}</p>
+                    )}
+                  </div>
+                </Fragment>
+              ))}
             </div>
           </div>
           <div className={classes.animeContainer}>
@@ -168,51 +165,34 @@ export default function Contact() {
               onClick={() => window.open(locationLink)}
             >
               {language ? (
-                <h3 className={classes.click}>استودیو فیلم سازی</h3>
+                <h3 className={classes.click}>{pageData.content[3].data.fa}</h3>
               ) : (
-                <h3 className={classes.click}>Production House</h3>
+                <h3 className={classes.click}>{pageData.content[3].data.en}</h3>
               )}
             </div>
-            <div
-              className={classes.details}
-              onClick={() => window.open(locationLink)}
-            >
-              <div className={language ? classes.row : classes.rowReverse}>
-                {language ? (
-                  <p className={classes.click}>
-                    تهران، خیابان چراغی، بوستان ولایت
-                  </p>
-                ) : (
-                  <p className={classes.click}>4th Industrial Shed,</p>
-                )}
-              </div>
-              <div className={language ? classes.row : classes.rowReverse}>
-                {language ? (
-                  <p className={classes.click}>بوستان شهربانو، سوله چهارم</p>
-                ) : (
-                  <p className={classes.click}>
-                    Shahrbanoo Park, Velayad Park,
-                  </p>
-                )}
-              </div>
-              <div className={language ? classes.row : classes.rowReverse}>
-                {language ? (
-                  <p className={classes.click}>سوله ارتباط تصویر اشاره</p>
-                ) : (
-                  <p className={classes.click}>Cheraghi St., Tehran - Iran</p>
-                )}
-              </div>
+            <div className={classes.details}>
+              {secAddress[languageType].map((address, index) => (
+                <Fragment key={index}>
+                  <div
+                    onClick={() => window.open(locationLink)}
+                    className={language ? classes.row : classes.rowReverse}
+                  >
+                    <p className={classes.click}>{address}</p>
+                  </div>
+                </Fragment>
+              ))}
             </div>
             <div className={classes.details}>
-              <div
-                className={language ? classes.row : classes.rowReverse}
-                onClick={() => window.open("tel:+989384997808", "_self")}
-              >
-                <p className={classes.click}>{language ? ":موبایل" : "Mob:"}</p>
-                <p className={classes.clickTel}>
-                  {language ? "۰۹۳۸ ۴۹۹۷۸۰۸" : "+98 (938) 499 78 08"}
-                </p>
-              </div>
+              {secContact[languageType].map((contact, index) => (
+                <Fragment key={index}>
+                  <div
+                    onClick={() => window.open("tel:+982188044244", "_self")}
+                    className={language ? classes.row : classes.rowReverse}
+                  >
+                    <p className={classes.click}>{contact}</p>
+                  </div>
+                </Fragment>
+              ))}
             </div>
           </div>
         </div>
@@ -227,4 +207,25 @@ export default function Contact() {
       </div>
     </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const pageData = await pageModel.findOne({ slug: "contact" });
+    const mediaData = await mediaModel.findOne({ slug: "contact" });
+
+    return {
+      props: {
+        pageData: JSON.parse(JSON.stringify(pageData)),
+        mediaData: JSON.parse(JSON.stringify(mediaData)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }

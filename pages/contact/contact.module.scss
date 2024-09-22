@@ -115,8 +115,7 @@
     color: config.$white;
     min-width: 220px;
 
-    .click,
-    .clickTel {
+    .click {
       cursor: pointer;
     }
 
@@ -126,22 +125,7 @@
   }
 
   .row {
-    flex-direction: row-reverse;
-    .clickFax {
-      margin-right: 10px;
-    }
-    .clickTel {
-      margin-right: 12px;
-    }
-  }
-
-  .rowReverse {
-    .clickFax {
-      margin-left: 4px;
-    }
-    .clickTel {
-      margin-left: 10px;
-    }
+    direction: rtl;
   }
 }
 

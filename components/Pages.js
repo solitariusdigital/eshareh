@@ -39,7 +39,9 @@ export default function Pages({ pages, mediaData }) {
         <Profession pages={pages} mediaData={mediaData} />
       )}
       {pageType === "news" && <News />}
-      {pageType === "contact us" && <Contact />}
+      {pageType === "contact us" && (
+        <Contact pages={pages} mediaData={mediaData} />
+      )}
     </div>
   );
 }
