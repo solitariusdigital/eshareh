@@ -393,8 +393,7 @@ export default function Team({ pages, mediaData }) {
         className={classes.container}
         style={{
           borderTop: "1px solid #d6d6d6",
-          borderBottom: "1px solid #d6d6d6",
-          padding: "50px 0px",
+          paddingTop: "50px",
         }}
       >
         <div className={classes.form}>
