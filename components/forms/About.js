@@ -35,6 +35,7 @@ export default function Team({ pages, mediaData }) {
   const [loader, setLoader] = useState(false);
   const [main, setMain] = useState({ en: "", fa: "" });
   const [paragraph, setParagraphs] = useState({ en: "", fa: "" });
+  const [description, setDescription] = useState({ en: "", fa: "" });
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedUserIndex, setSelectedUserIndex] = useState("default");
@@ -45,13 +46,17 @@ export default function Team({ pages, mediaData }) {
     let aboutContent = pages.find((page) => page.slug === "about");
     const { content } = aboutContent;
     setAboutContent(aboutContent);
-    setMain({
+    setDescription({
       en: content[0].data.en,
       fa: content[0].data.fa,
     });
-    setParagraphs({
+    setMain({
       en: content[1].data.en,
       fa: content[1].data.fa,
+    });
+    setParagraphs({
+      en: content[2].data.en,
+      fa: content[2].data.fa,
     });
   }, [mediaData, pages]);
 
@@ -135,7 +140,7 @@ export default function Team({ pages, mediaData }) {
   };
 
   const updateAboutContent = async () => {
-    const isValid = areAllStatesValid([main, paragraph]);
+    const isValid = areAllStatesValid([description, main, paragraph]);
 
     if (!isValid) {
       showAlert("همه موارد الزامیست");
@@ -150,6 +155,13 @@ export default function Team({ pages, mediaData }) {
       slug: "about",
       title: "About Us",
       content: [
+        {
+          type: "text",
+          data: {
+            fa: description.fa,
+            en: description.en,
+          },
+        },
         {
           type: "text",
           data: {
@@ -215,10 +227,45 @@ export default function Team({ pages, mediaData }) {
             fontFamily: "English",
           }}
         >
+          <div className={classes.inputTextArea}>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                Description
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() =>
+                  setDescription((prevData) => ({
+                    ...prevData,
+                    en: "",
+                  }))
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <textarea
+              style={{
+                fontFamily: "English",
+              }}
+              placeholder="..."
+              type="description"
+              id="descriptionEn"
+              name="description"
+              onChange={(e) =>
+                setDescription((prevData) => ({
+                  ...prevData,
+                  en: e.target.value,
+                }))
+              }
+              value={description.en}
+              autoComplete="off"
+            ></textarea>
+          </div>
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
-                Main
+                Title
                 <span>*</span>
               </p>
               <CloseIcon
@@ -292,11 +339,47 @@ export default function Team({ pages, mediaData }) {
             fontFamily: "Farsi",
           }}
         >
+          <div className={classes.inputTextArea}>
+            <div className={classes.barReverse}>
+              <p className={classes.label}>
+                <span>*</span>
+                توضیحات
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() =>
+                  setDescription((prevData) => ({
+                    ...prevData,
+                    fa: "",
+                  }))
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <textarea
+              style={{
+                fontFamily: "Farsi",
+              }}
+              placeholder="..."
+              type="description"
+              id="descriptionFa"
+              name="description"
+              onChange={(e) =>
+                setDescription((prevData) => ({
+                  ...prevData,
+                  fa: e.target.value,
+                }))
+              }
+              value={description.fa}
+              autoComplete="off"
+              dir="rtl"
+            ></textarea>
+          </div>
           <div className={classes.input}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
-                اصلی
+                عنوان
               </p>
               <CloseIcon
                 className="icon"
