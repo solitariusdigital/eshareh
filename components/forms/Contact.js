@@ -670,7 +670,7 @@ export default function Contact({ pages, mediaData }) {
                 type="file"
                 accept="image/*"
               />
-              <p>عکس</p>
+              <p>عکس کاور اصلی</p>
             </label>
             {mainMedia !== "" && (
               <div className={classes.preview}>
