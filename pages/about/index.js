@@ -65,7 +65,7 @@ export default function About() {
         break;
       case "tablet-landscape":
       case "tablet-portrait":
-        height = language ? "150px" : "200px";
+        height = language ? "160px" : "200px";
         break;
       case "mobile":
         height = language ? "170px" : "260px";
