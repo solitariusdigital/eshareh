@@ -21,22 +21,18 @@ export default function Search({ activeSolutions }) {
   const searchSolutions = (event) => {
     setSearch(event);
     setSearchEmpty(false);
-    let searchSolutions = [];
-    if (search) {
-      searchSolutions = activeSolutions.filter((item) => {
-        let matches = [];
-        matches.push(
-          Object.values(item[languageType]).some((val) =>
-            String(val).toLowerCase().includes(search.trim().slice(0, 20))
-          )
-        );
-        return matches.every((match) => match);
-      });
-      setSolutions(searchSolutions);
+    if (!event) {
+      setSolutions([]);
+      return;
     }
-    if (searchSolutions.length === 0) {
-      setSearchEmpty(true);
-    }
+    const trimmedSearch = event.trim().slice(0, 20).toLowerCase();
+    const searchSolutions = activeSolutions.filter((item) =>
+      Object.values(item[languageType]).some((val) =>
+        String(val).toLowerCase().includes(trimmedSearch)
+      )
+    );
+    setSolutions(searchSolutions);
+    setSearchEmpty(searchSolutions.length === 0);
   };
 
   const directSolution = (project) => {
