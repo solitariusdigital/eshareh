@@ -120,7 +120,7 @@ export default function Contact({ pageData, mediaData }) {
               {headContact[languageType].map((contact, index) => (
                 <Fragment key={index}>
                   <div
-                    onClick={() => window.open("tel:+982188044244", "_self")}
+                    onClick={() => window.open("tel:+982124444880", "_self")}
                     className={language ? classes.row : classes.rowReverse}
                   >
                     {index === 2 ? (
@@ -183,7 +183,7 @@ export default function Contact({ pageData, mediaData }) {
               {secContact[languageType].map((contact, index) => (
                 <Fragment key={index}>
                   <div
-                    onClick={() => window.open("tel:+982188044244", "_self")}
+                    onClick={() => window.open("tel:+989384997808", "_self")}
                     className={language ? classes.row : classes.rowReverse}
                   >
                     <p className={classes.click}>{contact}</p>

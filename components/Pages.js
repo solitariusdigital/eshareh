@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./Pages.module.scss";
+import classes from "@/components/forms/Form.module.scss";
 import Profession from "./forms/Profession";
 import Home from "./forms/Home";
 import About from "./forms/About";
@@ -16,9 +16,9 @@ export default function Pages({ pages, mediaData }) {
   const pagesName = ["home", "about us", "what we do", "news", "contact us"];
 
   return (
-    <div className={classes.container}>
+    <>
       <div
-        className={classes.navigation}
+        className={classes.pageNavigation}
         style={{
           fontFamily: language ? "English" : "English",
         }}
@@ -42,6 +42,6 @@ export default function Pages({ pages, mediaData }) {
       {pageType === "contact us" && (
         <Contact pages={pages} mediaData={mediaData} />
       )}
-    </div>
+    </>
   );
 }

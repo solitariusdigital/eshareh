@@ -8,6 +8,34 @@
   margin-bottom: 50px;
 }
 
+.pageNavigation {
+  width: 65%;
+  margin: auto;
+  margin-bottom: 50px;
+  height: 40px;
+  border-bottom: 1px solid config.$lightgrey;
+  text-transform: capitalize;
+  @include mixins.row-space-between-center();
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+
+  .nav {
+    font-weight: bold !important;
+
+    &:hover {
+      cursor: pointer;
+      color: config.$yellow;
+    }
+  }
+
+  .navActive {
+    color: config.$yellow;
+    font-weight: bold !important;
+  }
+}
+
 .build {
   display: flex;
   flex-direction: column;

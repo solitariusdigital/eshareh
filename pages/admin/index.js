@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./admin.module.scss";
@@ -27,7 +27,6 @@ export default function Admin({ covers, pages, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
   const [coversGrid, setCoversGrid] = useState(covers);
   const [text, setText] = useState(false);
-
   const [formType, setFormType] = useState("solutions" || "pages" || "cover");
   const navigation = ["solutions", "pages", "cover"];
   const router = useRouter();
