@@ -16,9 +16,11 @@ export default function Contact({ pages, mediaData }) {
   const [headOffice, setHeadOffice] = useState({ en: "", fa: "" });
   const [headAddress, setHeadAddress] = useState({ en: "", fa: "" });
   const [headContact, setHeadContact] = useState({ en: "", fa: "" });
+  const [headLocationLink, setHeadLocationLink] = useState({ en: "", fa: "" });
   const [secOffice, setSecOffice] = useState({ en: "", fa: "" });
   const [secAddress, setSecAddress] = useState({ en: "", fa: "" });
   const [secContact, setSecContact] = useState({ en: "", fa: "" });
+  const [secLocationLink, setSecLocationLink] = useState({ en: "", fa: "" });
   const [contactContent, setContactContent] = useState({});
   const [mediaContent, setMediaContent] = useState({});
   const [graphicType, setGraphicType] = useState("image" || "gif");
@@ -48,17 +50,25 @@ export default function Contact({ pages, mediaData }) {
       en: content[2].data.en,
       fa: content[2].data.fa,
     });
-    setSecOffice({
+    setHeadLocationLink({
       en: content[3].data.en,
       fa: content[3].data.fa,
     });
-    setSecAddress({
+    setSecOffice({
       en: content[4].data.en,
       fa: content[4].data.fa,
     });
-    setSecContact({
+    setSecAddress({
       en: content[5].data.en,
       fa: content[5].data.fa,
+    });
+    setSecContact({
+      en: content[6].data.en,
+      fa: content[6].data.fa,
+    });
+    setSecLocationLink({
+      en: content[7].data.en,
+      fa: content[7].data.fa,
     });
   }, [mediaData, pages]);
 
@@ -67,9 +77,11 @@ export default function Contact({ pages, mediaData }) {
       headOffice,
       headAddress,
       headContact,
+      headLocationLink,
       secOffice,
       secAddress,
       secContact,
+      secLocationLink,
     ]);
 
     if (!isValid) {
@@ -161,6 +173,13 @@ export default function Contact({ pages, mediaData }) {
         {
           type: "text",
           data: {
+            fa: headLocationLink.fa,
+            en: headLocationLink.en,
+          },
+        },
+        {
+          type: "text",
+          data: {
             fa: secOffice.fa,
             en: secOffice.en,
           },
@@ -177,6 +196,13 @@ export default function Contact({ pages, mediaData }) {
           data: {
             fa: extractParagraphs(secContact.fa).join("\n\n"),
             en: extractParagraphs(secContact.en).join("\n\n"),
+          },
+        },
+        {
+          type: "text",
+          data: {
+            fa: secLocationLink.fa,
+            en: secLocationLink.en,
           },
         },
       ],
@@ -305,6 +331,41 @@ export default function Contact({ pages, mediaData }) {
             value={headContact.en}
             autoComplete="off"
           ></textarea>
+        </div>
+        <div className={classes.input}>
+          <div className={classes.bar}>
+            <p className={classes.label}>
+              Head Location Link
+              <span>*</span>
+            </p>
+            <CloseIcon
+              className="icon"
+              onClick={() =>
+                setHeadLocationLink({
+                  fa: "",
+                  en: "",
+                })
+              }
+              sx={{ fontSize: 16 }}
+            />
+          </div>
+          <input
+            style={{
+              fontFamily: "English",
+            }}
+            placeholder="..."
+            type="headLocationLink"
+            id="headLocationLink"
+            name="headLocationLink"
+            onChange={(e) =>
+              setHeadLocationLink({
+                fa: e.target.value,
+                en: e.target.value,
+              })
+            }
+            value={headLocationLink.en}
+            autoComplete="off"
+          ></input>
         </div>
       </div>
       <div
@@ -533,6 +594,41 @@ export default function Contact({ pages, mediaData }) {
             autoComplete="off"
           ></textarea>
         </div>
+        <div className={classes.input}>
+          <div className={classes.bar}>
+            <p className={classes.label}>
+              Studio Location Link
+              <span>*</span>
+            </p>
+            <CloseIcon
+              className="icon"
+              onClick={() =>
+                setSecLocationLink({
+                  fa: "",
+                  en: "",
+                })
+              }
+              sx={{ fontSize: 16 }}
+            />
+          </div>
+          <input
+            style={{
+              fontFamily: "English",
+            }}
+            placeholder="..."
+            type="secLocationLink"
+            id="secLocationLink"
+            name="secLocationLink"
+            onChange={(e) =>
+              setSecLocationLink({
+                fa: e.target.value,
+                en: e.target.value,
+              })
+            }
+            value={secLocationLink.en}
+            autoComplete="off"
+          ></input>
+        </div>
       </div>
       <div
         className={classes.form}
@@ -657,8 +753,10 @@ export default function Contact({ pages, mediaData }) {
       >
         <div
           style={{
-            paddingBottom: "30px",
+            paddingBottom: "20px",
+            paddingTop: "20px",
             borderBottom: "1px solid #d6d6d6",
+            borderTop: "1px solid #d6d6d6",
           }}
         >
           <div
@@ -699,7 +797,7 @@ export default function Contact({ pages, mediaData }) {
         </div>
         <div
           style={{
-            marginTop: "30px",
+            marginTop: "20px",
           }}
         >
           <div className={classes.navigation}>
