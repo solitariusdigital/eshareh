@@ -65,10 +65,10 @@ export default function About() {
         break;
       case "tablet-landscape":
       case "tablet-portrait":
-        height = language ? "160px" : "200px";
+        height = language ? "160px" : "220px";
         break;
       case "mobile":
-        height = language ? "170px" : "260px";
+        height = language ? "190px" : "280px";
         break;
     }
     return height;
