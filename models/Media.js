@@ -4,8 +4,12 @@ const MediaSchema = new Schema(
   {
     slug: { type: String, required: true, unique: true },
     title: { type: String, required: true },
-    type: { type: String, required: true },
-    link: { type: String, required: true },
+    content: [
+      {
+        type: { type: String, required: true },
+        link: { type: String, required: true },
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -32,8 +32,6 @@ export default function Contact({ pageData, mediaData }) {
 
   const locationLink =
     "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7743132,51.3941519,17z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu";
-  const ghostBike =
-    "https://eshareh.storage.iran.liara.space/motion/ghostBike.gif";
 
   return (
     <Fragment>
@@ -75,10 +73,10 @@ export default function Contact({ pageData, mediaData }) {
         <div className={classes.image}>
           <Image
             className={classes.image}
-            src={contact}
-            blurDataURL={contact}
+            src={mediaData.content[0].link}
+            blurDataURL={mediaData.content[0].link}
             placeholder="blur"
-            alt="eshareh"
+            alt={mediaData.content[0].type}
             layout="fill"
             objectFit="cover"
             as="image"
@@ -145,14 +143,13 @@ export default function Contact({ pageData, mediaData }) {
           </div>
           <div className={classes.animeContainer}>
             <Image
-              src={ghostBike}
-              blurDataURL={ghostBike}
+              src={mediaData.content[1].link}
+              blurDataURL={mediaData.content[1].link}
               placeholder="blur"
-              alt="gif"
+              alt={mediaData.content[1].type}
               layout="fill"
               objectFit="contain"
-              as="image"
-              unoptimized
+              unoptimized={mediaData.content[1].type === "gif"}
             />
           </div>
           <div>

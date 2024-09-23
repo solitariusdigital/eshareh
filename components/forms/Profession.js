@@ -9,7 +9,6 @@ import {
   areAllStatesValid,
   extractParagraphs,
   fourGenerator,
-  sixGenerator,
   uploadMedia,
 } from "@/services/utility";
 
@@ -58,7 +57,7 @@ export default function Profession({ pages, mediaData }) {
       let mediaLink = "";
       let mediaFormat = mediaType === "image" ? ".jpg" : ".gif";
       let mediaFolder = "page";
-      const subFolder = `pag${sixGenerator()}`;
+      const subFolder = "profession";
       let mediaId = `img${fourGenerator()}`;
       mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
       await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
@@ -67,8 +66,12 @@ export default function Profession({ pages, mediaData }) {
         _id: mediaContent["_id"],
         slug: "profession",
         title: "What We Do",
-        type: mediaType,
-        link: mediaLink,
+        content: [
+          {
+            type: mediaType,
+            link: mediaLink,
+          },
+        ],
       };
       await updateMediaApi(mediaObject);
     }

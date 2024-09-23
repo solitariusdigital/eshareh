@@ -1,22 +1,18 @@
-import { Fragment, useContext, useState, useEffect } from "react";
-import { StateContext } from "@/context/stateContext";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";
-import { updatePageApi } from "@/services/api";
+import { updatePageApi, updateMediaApi } from "@/services/api";
 import {
   fourGenerator,
-  sixGenerator,
   uploadMedia,
   areAllStatesValid,
   extractParagraphs,
 } from "@/services/utility";
 
 export default function Contact({ pages, mediaData }) {
-  const { language, setLanguage } = useContext(StateContext);
-  const { languageType, setLanguageType } = useContext(StateContext);
   const [headOffice, setHeadOffice] = useState({ en: "", fa: "" });
   const [headAddress, setHeadAddress] = useState({ en: "", fa: "" });
   const [headContact, setHeadContact] = useState({ en: "", fa: "" });
@@ -24,6 +20,10 @@ export default function Contact({ pages, mediaData }) {
   const [secAddress, setSecAddress] = useState({ en: "", fa: "" });
   const [secContact, setSecContact] = useState({ en: "", fa: "" });
   const [contactContent, setContactContent] = useState({});
+  const [mediaContent, setMediaContent] = useState({});
+  const [graphicType, setGraphicType] = useState("image" || "gif");
+  const [mainMedia, setMainMedia] = useState("");
+  const [graphicMedia, setGraphicMedia] = useState("");
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
@@ -34,6 +34,8 @@ export default function Contact({ pages, mediaData }) {
     let contactContent = pages.find((page) => page.slug === "contact");
     const { content } = contactContent;
     setContactContent(contactContent);
+    let mediaContent = mediaData.find((media) => media.slug === "contact");
+    setMediaContent(mediaContent);
     setHeadOffice({
       en: content[0].data.en,
       fa: content[0].data.fa,
@@ -58,7 +60,7 @@ export default function Contact({ pages, mediaData }) {
       en: content[5].data.en,
       fa: content[5].data.fa,
     });
-  }, [pages]);
+  }, [mediaData, pages]);
 
   const updateContactContent = async () => {
     const isValid = areAllStatesValid([
@@ -77,6 +79,58 @@ export default function Contact({ pages, mediaData }) {
 
     setLoader(true);
     setDisableButton(true);
+
+    if (mainMedia || graphicMedia) {
+      const currentMediaLink = mediaContent.content[0].link;
+      const currentGraphicLink = mediaContent.content[1].link;
+      const mediaFormat = ".jpg";
+      const graphicFormat = graphicType === "image" ? ".jpg" : ".gif";
+      const mediaFolder = "page";
+      const subFolder = "contact";
+      const mediaId = `img${fourGenerator()}`;
+      const graphicId = `img${fourGenerator()}`;
+
+      // Create new media links if mainMedia or graphicMedia is provided
+      const mediaLink = mainMedia
+        ? `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`
+        : currentMediaLink;
+      const graphicLink = graphicMedia
+        ? `${sourceLink}/${mediaFolder}/${subFolder}/${graphicId}${graphicFormat}`
+        : currentGraphicLink;
+
+      // Upload media if it's provided
+      const uploadPromises = [];
+      if (mainMedia) {
+        uploadPromises.push(
+          uploadMedia(mainMedia, mediaId, mediaFolder, subFolder, mediaFormat)
+        );
+      }
+      if (graphicMedia) {
+        uploadPromises.push(
+          uploadMedia(
+            graphicMedia,
+            graphicId,
+            mediaFolder,
+            subFolder,
+            graphicFormat
+          )
+        );
+      }
+
+      await Promise.all(uploadPromises);
+
+      const mediaObject = {
+        _id: mediaContent["_id"],
+        slug: "contact",
+        title: "Contact Us",
+        content: [
+          { type: "image", link: mediaLink },
+          { type: graphicType, link: graphicLink },
+        ],
+      };
+
+      await updateMediaApi(mediaObject);
+    }
 
     const contentObject = {
       _id: contactContent["_id"],
@@ -601,6 +655,108 @@ export default function Contact({ pages, mediaData }) {
           fontFamily: "English",
         }}
       >
+        <div>
+          <div
+            className={classes.input}
+            style={{
+              fontFamily: "Farsi",
+            }}
+          >
+            <label className="file">
+              <input
+                onChange={(e) => {
+                  setMainMedia(e.target.files[0]);
+                }}
+                type="file"
+                accept="image/*"
+              />
+              <p>عکس</p>
+            </label>
+            {mainMedia !== "" && (
+              <div className={classes.preview}>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setMainMedia("")}
+                  sx={{ fontSize: 16 }}
+                />
+                <Image
+                  className={classes.media}
+                  width={170}
+                  height={200}
+                  objectFit="contain"
+                  src={URL.createObjectURL(mainMedia)}
+                  alt="image"
+                  priority
+                />
+              </div>
+            )}
+          </div>
+        </div>
+        <div
+          style={{
+            marginTop: "30px",
+          }}
+        >
+          <div className={classes.navigation}>
+            <p
+              className={
+                graphicType === "gif" ? classes.navActive : classes.nav
+              }
+              onClick={() => {
+                setGraphicType("gif");
+                setGraphicMedia("");
+              }}
+            >
+              gif
+            </p>
+            <p
+              className={
+                graphicType === "image" ? classes.navActive : classes.nav
+              }
+              onClick={() => {
+                setGraphicType("image");
+                setGraphicMedia("");
+              }}
+            >
+              عکس
+            </p>
+          </div>
+          <div
+            className={classes.input}
+            style={{
+              fontFamily: `${graphicType === "image" ? "Farsi" : "English"}`,
+            }}
+          >
+            <label className="file">
+              <input
+                onChange={(e) => {
+                  setGraphicMedia(e.target.files[0]);
+                }}
+                type="file"
+                accept="image/*"
+              />
+              <p>{graphicType === "image" ? "عکس" : "gif"}</p>
+            </label>
+            {graphicMedia !== "" && (
+              <div className={classes.preview}>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setGraphicMedia("")}
+                  sx={{ fontSize: 16 }}
+                />
+                <Image
+                  className={classes.media}
+                  width={170}
+                  height={200}
+                  objectFit="contain"
+                  src={URL.createObjectURL(graphicMedia)}
+                  alt="image"
+                  priority
+                />
+              </div>
+            )}
+          </div>
+        </div>
         <p className={classes.alert}>{alert}</p>
         {loader && (
           <div>
