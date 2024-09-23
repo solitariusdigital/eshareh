@@ -68,7 +68,7 @@ export default function About() {
         height = language ? "160px" : "220px";
         break;
       case "mobile":
-        height = language ? "190px" : "280px";
+        height = language ? "220px" : "320px";
         break;
     }
     return height;
