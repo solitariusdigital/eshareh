@@ -27,8 +27,8 @@ export default function Admin({ covers, pages, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
   const [coversGrid, setCoversGrid] = useState(covers);
   const [text, setText] = useState(false);
-  const [formType, setFormType] = useState("solutions" || "pages" || "cover");
-  const navigation = ["solutions", "pages", "cover"];
+  const [formType, setFormType] = useState("solutions" || "pages" || "covers");
+  const navigation = ["solutions", "pages", "covers"];
   const router = useRouter();
 
   useEffect(() => {
@@ -94,9 +94,9 @@ export default function Admin({ covers, pages, mediaData }) {
         ))}
       </div>
       {formType === "solutions" && <Solutions />}
-      {formType === "cover" && <Cover />}
+      {formType === "covers" && <Cover />}
       {formType === "pages" && <Pages pages={pages} mediaData={mediaData} />}
-      {formType === "cover" && (
+      {formType === "covers" && (
         <div className={classes.coverContainer}>
           {coversGrid
             .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
