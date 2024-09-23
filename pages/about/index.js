@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import CloseIcon from "@mui/icons-material/Close";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
+import { enToFaDigits } from "@/services/utility";
 
 export default function About() {
   const { language, setLanguage } = useContext(StateContext);
@@ -135,6 +136,46 @@ export default function About() {
         }}
       />
       <div className={classes.container}>
+        <div className={language ? classes.title : classes.titleReverse}>
+          {language ? (
+            <p
+              style={{
+                fontFamily: "Farsi",
+              }}
+            >
+              آژانس اشاره، به عنوان یک آژانس تبلیغاتی از سال{" "}
+              <span
+                style={{
+                  fontFamily: "FarsiBold",
+                }}
+              >
+                {enToFaDigits(1376)}
+              </span>{" "}
+              فعالیت خود را آغاز کرده است. در طی این سال‌ها در نتیجه فرآیندی
+              ارگانیک، به یک آژانس ارتباطات بازاریابی تمام‌خدمت با رویکردی خلاق
+              و راه‌حل‌ محور تبدیل شده است.
+            </p>
+          ) : (
+            <p
+              style={{
+                fontFamily: "English",
+              }}
+            >
+              Ertebat Tasvir Eshareh Agency began its journey as an advertising
+              agency in{" "}
+              <span
+                style={{
+                  fontFamily: "EnglishMedium",
+                }}
+              >
+                1997
+              </span>
+              . Through organic evolution over the years, it has transformed
+              into a full-service marketing communications agency with a
+              creative and solution-oriented approach.
+            </p>
+          )}
+        </div>
         <div
           className={
             language ? classes.information : classes.informationReverse

@@ -31,6 +31,32 @@
   }
 }
 
+.title,
+.titleReverse {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  direction: rtl;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  margin: auto;
+  margin-bottom: 20px;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+  @include mixins.tabletPortrait {
+    width: config.$content-widthTablet;
+  }
+}
+
+.titleReverse {
+  direction: ltr;
+}
+
 .information,
 .informationReverse {
   display: flex;

@@ -17,8 +17,8 @@ export default function Profession() {
 
   const position = {
     position: "relative",
-    top: language ? "13px" : "18px",
-    left: language ? "10px" : "-10px",
+    top: language ? "6px" : "10px",
+    left: language ? "6px" : "-6px",
   };
 
   return (
@@ -60,7 +60,7 @@ export default function Profession() {
       <div
         className={classes.container}
         style={{
-          fontFamily: language ? "EnglishLight" : "EnglishLight",
+          fontFamily: language ? "English" : "English",
         }}
       >
         <div
@@ -69,7 +69,7 @@ export default function Profession() {
           }
         >
           {language ? (
-            <h2
+            <p
               style={{
                 fontFamily: "FarsiBold",
               }}
@@ -78,9 +78,9 @@ export default function Profession() {
               ارائه می‌دهد و به معنای واقعی کلمه، آژانسی تمام‌خدمت است.
               خدمت‌رسانی ما در اشاره هم متمایز است و هم کارآمد، چون کار ما مبتنی
               بر اصول زیر است:
-            </h2>
+            </p>
           ) : (
-            <h2
+            <p
               style={{
                 fontFamily: "EnglishMedium",
               }}
@@ -89,7 +89,7 @@ export default function Profession() {
               of services and in the true sense of the word is a "full-service"
               agency. Our service provision at Eshareh is both unique and
               effective since it is grounded in couple of core principles:
-            </h2>
+            </p>
           )}
         </div>
         <div
@@ -103,23 +103,23 @@ export default function Profession() {
               sx={{ fontSize: 10, color: "#fdb714" }}
             />
             {language ? (
-              <h2
+              <p
                 style={{
-                  fontFamily: "FarsiLight",
+                  fontFamily: "Farsi",
                 }}
               >
                 تلاش و باور ما این است که رابطه ما با مشتریانمان، رابطه‌ای
                 بلندمدت، برد-برد و وفادارانه باشد.
-              </h2>
+              </p>
             ) : (
-              <h2
+              <p
                 style={{
-                  fontFamily: "EnglishLight",
+                  fontFamily: "English",
                 }}
               >
                 We believe in and strive for a long-lasting, win-win
                 relationship with our clients.
-              </h2>
+              </p>
             )}
           </div>
         </div>
@@ -134,9 +134,9 @@ export default function Profession() {
               sx={{ fontSize: 10, color: "#fdb714" }}
             />
             {language ? (
-              <h2
+              <p
                 style={{
-                  fontFamily: "FarsiLight",
+                  fontFamily: "Farsi",
                 }}
               >
                 در تدوین و مدیریت کمپین‌های تبلیغاتی، خلاقیت محور اصلی
@@ -144,11 +144,11 @@ export default function Profession() {
                 موقع کهنه نمی‌شود و آن را با استانداردهای جهانی، تجربه خود و
                 شناخت استراتژیکی که از بازار کسب و کار ایران داریم، همراه
                 می‌کنیم.
-              </h2>
+              </p>
             ) : (
-              <h2
+              <p
                 style={{
-                  fontFamily: "EnglishLight",
+                  fontFamily: "English",
                 }}
               >
                 When designing and managing advertising campaigns, creativity is
@@ -156,7 +156,7 @@ export default function Profession() {
                 us, creativity never loses novelty as we continuously align it
                 with global standards, our expertise and our strategic insights
                 into the Iranian business market.
-              </h2>
+              </p>
             )}
           </div>
         </div>
@@ -171,9 +171,9 @@ export default function Profession() {
               sx={{ fontSize: 10, color: "#fdb714" }}
             />
             {language ? (
-              <h2
+              <p
                 style={{
-                  fontFamily: "FarsiLight",
+                  fontFamily: "Farsi",
                 }}
               >
                 آموزش را یکی از ارکان هویتی سازمانی‌مان می‌دانیم و در این مسیر
@@ -181,11 +181,11 @@ export default function Profession() {
                 ورکشاپ‌های تخصصی برگزار می‌کنیم. ما متکی به دانش روز صنعت
                 بازاریابی و تبلیغات هستیم و  اساتید ممتاز این حوزه‌ها همراهی‌مان
                 می‌کنند.
-              </h2>
+              </p>
             ) : (
-              <h2
+              <p
                 style={{
-                  fontFamily: "EnglishLight",
+                  fontFamily: "English",
                 }}
               >
                 Education is a cornerstone of our organization's spirit, which
@@ -194,7 +194,7 @@ export default function Profession() {
                 we highly rely on up-to-date global advertising and marketing
                 knowledge and we are accompanied by best-in-class tutors and
                 mentors in these fields.
-              </h2>
+              </p>
             )}
           </div>
         </div>
@@ -209,9 +209,9 @@ export default function Profession() {
               sx={{ fontSize: 10, color: "#fdb714" }}
             />
             {language ? (
-              <h2
+              <p
                 style={{
-                  fontFamily: "FarsiLight",
+                  fontFamily: "Farsi",
                 }}
               >
                 ما آژانسی تمام‌خدمت هستیم که به بسیاری از نیازهای مشتریانمان در
@@ -232,11 +232,11 @@ export default function Profession() {
                 </span>{" "}
                 (محل فروش، سمپلینگ، کمپین‌های نمایشگاهی، غرفه‌سازی، برگزاری
                 رویداد و …) است.
-              </h2>
+              </p>
             ) : (
-              <h2
+              <p
                 style={{
-                  fontFamily: "EnglishLight",
+                  fontFamily: "English",
                 }}
               >
                 We are a full-service agency dedicated to addressing the diverse
@@ -251,7 +251,7 @@ export default function Profession() {
                 designing and executing Below the Line (BTL) campaigns including
                 but not limited to Point of Sale, sampling, holding exhibitions,
                 booth construction, and event organization.
-              </h2>
+              </p>
             )}
           </div>
         </div>

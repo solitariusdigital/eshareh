@@ -154,22 +154,6 @@
   direction: ltr;
 }
 
-.title {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-
-  h1 {
-    @include mixins.desktop {
-      font-size: 3.5rem;
-    }
-    @include mixins.tablet {
-      font-size: 2.5rem;
-    }
-  }
-}
-
 .gridWorks {
   margin: 50px 0px;
 }
