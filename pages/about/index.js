@@ -61,14 +61,14 @@ export default function About() {
     let height = "";
     switch (screenSize) {
       case "desktop":
-        height = language ? "130px" : "200px";
+        height = language ? "120px" : "180px";
         break;
       case "tablet-landscape":
       case "tablet-portrait":
-        height = language ? "170px" : "200px";
+        height = language ? "150px" : "200px";
         break;
       case "mobile":
-        height = language ? "220px" : "320px";
+        height = language ? "170px" : "260px";
         break;
     }
     return height;
