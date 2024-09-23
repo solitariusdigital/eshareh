@@ -655,7 +655,12 @@ export default function Contact({ pages, mediaData }) {
           fontFamily: "English",
         }}
       >
-        <div>
+        <div
+          style={{
+            paddingBottom: "30px",
+            borderBottom: "1px solid #d6d6d6",
+          }}
+        >
           <div
             className={classes.input}
             style={{
