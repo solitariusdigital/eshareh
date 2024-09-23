@@ -13,6 +13,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { enToFaDigits } from "@/services/utility";
 
 export default function About({ pageData }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -60,14 +61,14 @@ export default function About({ pageData }) {
     let height = "";
     switch (screenSize) {
       case "desktop":
-        height = language ? "130px" : "200px";
+        height = language ? "120px" : "180px";
         break;
       case "tablet-landscape":
       case "tablet-portrait":
-        height = language ? "170px" : "200px";
+        height = language ? "160px" : "200px";
         break;
       case "mobile":
-        height = language ? "220px" : "320px";
+        height = language ? "170px" : "260px";
         break;
     }
     return height;
@@ -126,6 +127,46 @@ export default function About({ pageData }) {
         }}
       />
       <div className={classes.container}>
+        <div className={language ? classes.title : classes.titleReverse}>
+          {language ? (
+            <p
+              style={{
+                fontFamily: "Farsi",
+              }}
+            >
+              آژانس اشاره، به عنوان یک آژانس تبلیغاتی از سال{" "}
+              <span
+                style={{
+                  fontFamily: "FarsiBold",
+                }}
+              >
+                {enToFaDigits(1376)}
+              </span>{" "}
+              فعالیت خود را آغاز کرده است. در طی این سال‌ها در نتیجه فرآیندی
+              ارگانیک، به یک آژانس ارتباطات بازاریابی تمام‌خدمت با رویکردی خلاق
+              و راه‌حل‌ محور تبدیل شده است.
+            </p>
+          ) : (
+            <p
+              style={{
+                fontFamily: "English",
+              }}
+            >
+              Ertebat Tasvir Eshareh Agency began its journey as an advertising
+              agency in{" "}
+              <span
+                style={{
+                  fontFamily: "EnglishMedium",
+                }}
+              >
+                1997
+              </span>
+              . Through organic evolution over the years, it has transformed
+              into a full-service marketing communications agency with a
+              creative and solution-oriented approach.
+            </p>
+          )}
+        </div>
         <div
           className={
             language ? classes.information : classes.informationReverse

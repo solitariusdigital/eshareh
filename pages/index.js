@@ -204,23 +204,13 @@ export default function Home({ solutions, covers }) {
             language ? classes.information : classes.informationReverse
           }
         >
-          {language ? (
-            <h1
-              style={{
-                fontFamily: "FarsiBold",
-              }}
-            >
-              درباره ما
-            </h1>
-          ) : (
-            <h1
-              style={{
-                fontFamily: "EnglishMedium",
-              }}
-            >
-              About Us
-            </h1>
-          )}
+          <h1
+            style={{
+              fontFamily: language ? "FarsiBold" : "EnglishMedium",
+            }}
+          >
+            {language ? "درباره ما" : "About Us"}
+          </h1>
           {language ? (
             <h2
               style={{
