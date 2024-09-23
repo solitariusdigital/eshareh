@@ -205,25 +205,21 @@ export default function Home({ solutions, covers }) {
           }
         >
           {language ? (
-            <div className={classes.title}>
-              <h1
-                style={{
-                  fontFamily: "FarsiBold",
-                }}
-              >
-                ما که هستیم؟
-              </h1>
-            </div>
+            <h1
+              style={{
+                fontFamily: "FarsiBold",
+              }}
+            >
+              درباره ما
+            </h1>
           ) : (
-            <div className={classes.title}>
-              <h1
-                style={{
-                  fontFamily: "EnglishMedium",
-                }}
-              >
-                Who We Are
-              </h1>
-            </div>
+            <h1
+              style={{
+                fontFamily: "EnglishMedium",
+              }}
+            >
+              About Us
+            </h1>
           )}
           {language ? (
             <h2
@@ -349,7 +345,7 @@ export default function Home({ solutions, covers }) {
                       fontFamily: "FarsiBold",
                     }}
                   >
-                    واحد راه‌کارهای تبلیغات
+                    راه‌کارهای تبلیغات
                   </h1>
                   <h3>
                     ما با توجه به خواسته‌ و نیاز مشتریان، آخرین تحقیقات در دسترس
@@ -404,7 +400,7 @@ export default function Home({ solutions, covers }) {
                       fontFamily: "FarsiBold",
                     }}
                   >
-                    واحد راه‌کارهای رســـــــانه
+                    راه‌کارهای رســـــــانه
                   </h1>
                   <h3>
                     ما در آژانس اشاره از آخرین تحقیقات در دسترس و نرم‌افزارهایی
@@ -457,7 +453,7 @@ export default function Home({ solutions, covers }) {
                       fontFamily: "FarsiBold",
                     }}
                   >
-                    واحد راه‌کارهای دیجیتال
+                    راه‌کارهای دیجیتال
                   </h1>
                   <h3>
                     هدف نهایی استراتژی بازاریابی دیجیتال، تهیه و تنظیم

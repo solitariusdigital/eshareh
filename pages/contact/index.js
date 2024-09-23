@@ -29,8 +29,11 @@ export default function Contact({ pageData, mediaData }) {
     fa: [pageData.content[5].data.fa.split("\n\n")][0],
   });
 
-  const locationLink =
+  const headLocationLink =
     "https://www.google.com/maps/place/Eshareh+Advertising+Agency/@35.7743132,51.3941519,17z/data=!4m6!3m5!1s0x3f8e0651f88334cf:0xbf2b6076f1e9fc52!8m2!3d35.7746884!4d51.3941131!16s%2Fg%2F1tg6j0hh?entry=ttu";
+
+  const secLocationLink =
+    "https://www.google.com/maps/place/35%C2%B039'09.8%22N+51%C2%B022'48.2%22E/@35.6527222,51.3800556,17z/data=!3m1!4b1!4m4!3m3!8m2!3d35.6527222!4d51.3800556?entry=ttu&g_ep=EgoyMDI0MDkxOC4xIKXMDSoASAFQAw%3D%3D";
 
   return (
     <Fragment>
@@ -95,7 +98,7 @@ export default function Contact({ pageData, mediaData }) {
                 color: `#fdb714`,
                 fontFamily: language ? "FarsiBold" : "EnglishBold",
               }}
-              onClick={() => window.open(locationLink)}
+              onClick={() => window.open(headLocationLink)}
             >
               {language ? (
                 <h3 className={classes.click}>{pageData.content[0].data.fa}</h3>
@@ -107,7 +110,7 @@ export default function Contact({ pageData, mediaData }) {
               {headAddress[languageType].map((address, index) => (
                 <Fragment key={index}>
                   <div
-                    onClick={() => window.open(locationLink)}
+                    onClick={() => window.open(headLocationLink)}
                     className={language ? classes.row : classes.rowReverse}
                   >
                     <p className={classes.click}>{address}</p>
@@ -158,7 +161,7 @@ export default function Contact({ pageData, mediaData }) {
                 color: `#fdb714`,
                 fontFamily: language ? "FarsiBold" : "EnglishBold",
               }}
-              onClick={() => window.open(locationLink)}
+              onClick={() => window.open(secLocationLink)}
             >
               {language ? (
                 <h3 className={classes.click}>{pageData.content[3].data.fa}</h3>
@@ -170,7 +173,7 @@ export default function Contact({ pageData, mediaData }) {
               {secAddress[languageType].map((address, index) => (
                 <Fragment key={index}>
                   <div
-                    onClick={() => window.open(locationLink)}
+                    onClick={() => window.open(secLocationLink)}
                     className={language ? classes.row : classes.rowReverse}
                   >
                     <p className={classes.click}>{address}</p>

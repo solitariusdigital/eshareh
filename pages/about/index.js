@@ -4,7 +4,7 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
 import Image from "next/legacy/image";
 import { NextSeo } from "next-seo";
-import { getUsersApi, deletetUserApi } from "@/services/api";
+import { getUsersApi } from "@/services/api";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import dbConnect from "@/services/dbConnect";

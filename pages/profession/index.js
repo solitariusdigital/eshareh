@@ -25,8 +25,8 @@ export default function Profession({ pageData, mediaData }) {
 
   const position = {
     position: "relative",
-    top: language ? "13px" : "18px",
-    left: language ? "10px" : "-10px",
+    top: language ? "6px" : "10px",
+    left: language ? "6px" : "-6px",
   };
 
   return (
@@ -77,21 +77,21 @@ export default function Profession({ pageData, mediaData }) {
           }
         >
           {language ? (
-            <h2
+            <p
               style={{
                 fontFamily: "FarsiBold",
               }}
             >
               {pageData.content[0].data.fa}
-            </h2>
+            </p>
           ) : (
-            <h2
+            <p
               style={{
                 fontFamily: "EnglishMedium",
               }}
             >
               {pageData.content[0].data.en}
-            </h2>
+            </p>
           )}
         </div>
         {paragraph[languageType].map((para, index) => (
@@ -104,23 +104,23 @@ export default function Profession({ pageData, mediaData }) {
             <div
               className={classes.row}
               style={{
-                fontFamily: language ? "FarsiLight" : "EnglishLight",
+                fontFamily: language ? "Farsi" : "English",
               }}
             >
               <CircleIcon
                 style={position}
                 sx={{ fontSize: 10, color: "#fdb714" }}
               />
-              <h2
+              <p
                 dangerouslySetInnerHTML={{
                   __html: applyFontToEnglishWords(
                     para,
-                    "EnglishLight",
-                    "24px",
+                    "English",
+                    "16px",
                     language
                   ),
                 }}
-              ></h2>
+              ></p>
             </div>
           </div>
         ))}
