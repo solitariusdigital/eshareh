@@ -21,6 +21,7 @@ import starFive from "@/assets/therighthint/starFive.gif";
 
 export default function Therighthint() {
   const { language, setLanguage } = useContext(StateContext);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [charity, setCharity] = useState({});
   const [displayPopup, setDisplayPopup] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
@@ -335,6 +336,11 @@ export default function Therighthint() {
               <span>!</span>
             </h2>
           </div>
+          {permissionControl === "admin" && (
+            <p>
+              {charity.maxCount} / {charity.count}
+            </p>
+          )}
           <div className={classes.progress}>
             <Progress
               color={"#fdb714"}

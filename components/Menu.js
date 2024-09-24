@@ -125,7 +125,7 @@ export default function Menu() {
                 fontFamily: language ? "English" : "English",
               }}
             >
-              {currentUser.permission === "admin" && (
+              {permissionControl === "admin" && (
                 <p onClick={() => Router.push("/admin")}>Admin</p>
               )}
               <p onClick={() => Router.push("/password")}>Password</p>
