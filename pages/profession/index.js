@@ -100,7 +100,7 @@ export default function Profession() {
           <div className={classes.row}>
             <CircleIcon
               style={position}
-              sx={{ fontSize: 10, color: "#fdb714" }}
+              sx={{ fontSize: 8, color: "#fdb714" }}
             />
             {language ? (
               <p
@@ -131,7 +131,7 @@ export default function Profession() {
           <div className={classes.row}>
             <CircleIcon
               style={position}
-              sx={{ fontSize: 10, color: "#fdb714" }}
+              sx={{ fontSize: 8, color: "#fdb714" }}
             />
             {language ? (
               <p
@@ -168,7 +168,7 @@ export default function Profession() {
           <div className={classes.row}>
             <CircleIcon
               style={position}
-              sx={{ fontSize: 10, color: "#fdb714" }}
+              sx={{ fontSize: 8, color: "#fdb714" }}
             />
             {language ? (
               <p
@@ -206,7 +206,7 @@ export default function Profession() {
           <div className={classes.row}>
             <CircleIcon
               style={position}
-              sx={{ fontSize: 10, color: "#fdb714" }}
+              sx={{ fontSize: 8, color: "#fdb714" }}
             />
             {language ? (
               <p
