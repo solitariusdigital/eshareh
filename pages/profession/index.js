@@ -65,7 +65,7 @@ export default function Profession({ pageData, mediaData }) {
       <div
         className={classes.container}
         style={{
-          fontFamily: language ? "EnglishLight" : "EnglishLight",
+          fontFamily: language ? "English" : "English",
         }}
       >
         <div
