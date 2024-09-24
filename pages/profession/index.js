@@ -20,9 +20,6 @@ export default function Profession({ pageData, mediaData }) {
     fa: [pageData.content[1].data.fa.split("\n\n")][0],
   });
 
-  const flyingFish =
-    "https://eshareh.storage.iran.liara.space/motion/flyingFish.gif";
-
   const position = {
     position: "relative",
     top: language ? "6px" : "10px",
@@ -109,7 +106,7 @@ export default function Profession({ pageData, mediaData }) {
             >
               <CircleIcon
                 style={position}
-                sx={{ fontSize: 10, color: "#fdb714" }}
+                sx={{ fontSize: 8, color: "#fdb714" }}
               />
               <p
                 dangerouslySetInnerHTML={{

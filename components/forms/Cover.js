@@ -210,7 +210,12 @@ export default function Cover() {
         </div>
       </div>
       <div className={classes.formAction}>
-        <div className={classes.navigation}>
+        <div
+          className={classes.navigation}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
           <p
             className={mediaType === "video" ? classes.navActive : classes.nav}
             onClick={() => {
