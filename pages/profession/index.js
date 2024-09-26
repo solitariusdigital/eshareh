@@ -15,7 +15,7 @@ import { applyFontToEnglishWords } from "@/services/utility";
 export default function Profession({ pageData, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
-  const [paragraph, setParagraphs] = useState({
+  const [paragraph, setParagraph] = useState({
     en: [pageData.content[1].data.en.split("\n\n")][0],
     fa: [pageData.content[1].data.fa.split("\n\n")][0],
   });

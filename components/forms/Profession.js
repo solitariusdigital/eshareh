@@ -15,7 +15,7 @@ import building from "@/assets/building.png";
 
 export default function Profession({ pages, mediaData }) {
   const [main, setMain] = useState({ en: "", fa: "" });
-  const [paragraph, setParagraphs] = useState({ en: "", fa: "" });
+  const [paragraph, setParagraph] = useState({ en: "", fa: "" });
   const [alert, setAlert] = useState("");
   const [professionContent, setProfessionContent] = useState({});
   const [mediaContent, setMediaContent] = useState({});
@@ -37,7 +37,7 @@ export default function Profession({ pages, mediaData }) {
       en: content[0].data.en,
       fa: content[0].data.fa,
     });
-    setParagraphs({
+    setParagraph({
       en: content[1].data.en,
       fa: content[1].data.fa,
     });
@@ -165,7 +165,7 @@ export default function Profession({ pages, mediaData }) {
                 <CloseIcon
                   className="icon"
                   onClick={() =>
-                    setParagraphs((prevData) => ({
+                    setParagraph((prevData) => ({
                       ...prevData,
                       en: "",
                     }))
@@ -182,7 +182,7 @@ export default function Profession({ pages, mediaData }) {
                 id="paragraphEn"
                 name="paragraph"
                 onChange={(e) =>
-                  setParagraphs((prevData) => ({
+                  setParagraph((prevData) => ({
                     ...prevData,
                     en: e.target.value,
                   }))
@@ -243,7 +243,7 @@ export default function Profession({ pages, mediaData }) {
                 <CloseIcon
                   className="icon"
                   onClick={() =>
-                    setParagraphs((prevData) => ({
+                    setParagraph((prevData) => ({
                       ...prevData,
                       fa: "",
                     }))
@@ -260,7 +260,7 @@ export default function Profession({ pages, mediaData }) {
                 id="paragraphFa"
                 name="paragraph"
                 onChange={(e) =>
-                  setParagraphs((prevData) => ({
+                  setParagraph((prevData) => ({
                     ...prevData,
                     fa: e.target.value,
                   }))

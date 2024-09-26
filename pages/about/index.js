@@ -11,6 +11,7 @@ import dbConnect from "@/services/dbConnect";
 import pageModel from "@/models/Page";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Autoplay, Navigation } from "swiper/modules";
+import { applyFontToEnglishWords } from "@/services/utility";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -127,11 +128,16 @@ export default function About({ pageData }) {
       />
       <div className={classes.container}>
         <div className={language ? classes.title : classes.titleReverse}>
-          {language ? (
-            <p>{pageData.content[0].data.fa}</p>
-          ) : (
-            <p>{pageData.content[0].data.en}</p>
-          )}
+          <p
+            dangerouslySetInnerHTML={{
+              __html: applyFontToEnglishWords(
+                pageData.content[0].data[languageType],
+                language ? "FarsiBold" : "EnglishMedium",
+                "16px",
+                language
+              ),
+            }}
+          ></p>
         </div>
         <div
           className={
@@ -139,20 +145,10 @@ export default function About({ pageData }) {
           }
           style={{ height: setInformationHeight() }}
         >
-          <h1>
-            {language
-              ? pageData.content[1].data.fa
-              : pageData.content[1].data.en}
-          </h1>
-          {language ? (
-            <div>
-              <p>{pageData.content[2].data.fa}</p>
-            </div>
-          ) : (
-            <div>
-              <p>{pageData.content[2].data.en}</p>
-            </div>
-          )}
+          <h1>{pageData.content[1].data[languageType]}</h1>
+          <div>
+            <p>{pageData.content[2].data[languageType]}</p>
+          </div>
         </div>
         {users.length > 0 && (
           <div className={classes.swiperContainer}>

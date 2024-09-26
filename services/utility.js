@@ -150,8 +150,7 @@ export function validateEmail(value) {
 
 export function applyFontToEnglishWords(inputString, fontType, size, language) {
   let fontSize = language ? size : null;
-  // Regular expression pattern to match English words
-  const pattern = /[a-zA-Z]+/g;
+  const pattern = language ? /[a-zA-Z0-9۰-۹]+/g : /[0-9]+/g;
   // Find and replace English words with span tags for specific font type
   const outputString = inputString.replace(pattern, function (match) {
     return `<span style="font-family: ${fontType}; font-size: ${fontSize};">${match}</span>`;

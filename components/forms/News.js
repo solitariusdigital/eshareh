@@ -5,7 +5,7 @@ import Image from "next/legacy/image";
 
 export default function News() {
   return (
-    <div className={classes.build}>
+    <div className={classes.building}>
       <Image
         width={50}
         height={50}
