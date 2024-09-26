@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import Image from "next/legacy/image";
@@ -11,6 +11,7 @@ import {
   areAllStatesValid,
   extractParagraphs,
 } from "@/services/utility";
+import building from "@/assets/building.png";
 
 export default function Contact({ pages, mediaData }) {
   const [headOffice, setHeadOffice] = useState({ en: "", fa: "" });
@@ -31,6 +32,7 @@ export default function Contact({ pages, mediaData }) {
   const [alert, setAlert] = useState("");
   const sourceLink = "https://eshareh.storage.iran.liara.space";
   const router = useRouter();
+  const [development, setDevelopment] = useState(false);
 
   useEffect(() => {
     let contactContent = pages.find((page) => page.slug === "contact");
@@ -220,662 +222,684 @@ export default function Contact({ pages, mediaData }) {
   };
 
   return (
-    <div className={classes.container}>
-      <div
-        className={classes.form}
-        style={{
-          fontFamily: "English",
-        }}
-      >
-        <div className={classes.input}>
-          <div className={classes.bar}>
-            <p className={classes.label}>
-              Head Office
-              <span>*</span>
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setHeadOffice((prevData) => ({
-                  ...prevData,
-                  en: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <input
-            style={{
-              fontFamily: "English",
-            }}
-            placeholder="..."
-            type="headOffice"
-            id="headOfficeEn"
-            name="headOffice"
-            onChange={(e) =>
-              setHeadOffice((prevData) => ({
-                ...prevData,
-                en: e.target.value,
-              }))
-            }
-            value={headOffice.en}
-            autoComplete="off"
-          ></input>
-        </div>
-        <div className={classes.inputTextArea}>
-          <div className={classes.bar}>
-            <p className={classes.label}>
-              Head Address
-              <span>*</span>
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setHeadAddress((prevData) => ({
-                  ...prevData,
-                  en: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <textarea
-            style={{
-              fontFamily: "English",
-            }}
-            placeholder="..."
-            type="headAddress"
-            id="headAddressEn"
-            name="headAddress"
-            onChange={(e) =>
-              setHeadAddress((prevData) => ({
-                ...prevData,
-                en: e.target.value,
-              }))
-            }
-            value={headAddress.en}
-            autoComplete="off"
-          ></textarea>
-        </div>
-        <div className={classes.inputTextArea}>
-          <div className={classes.bar}>
-            <p className={classes.label}>
-              Head Contact
-              <span>*</span>
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setHeadContact((prevData) => ({
-                  ...prevData,
-                  en: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <textarea
-            style={{
-              fontFamily: "English",
-            }}
-            placeholder="..."
-            type="headContact"
-            id="headContactEn"
-            name="headContact"
-            onChange={(e) =>
-              setHeadContact((prevData) => ({
-                ...prevData,
-                en: e.target.value,
-              }))
-            }
-            value={headContact.en}
-            autoComplete="off"
-          ></textarea>
-        </div>
-        <div className={classes.input}>
-          <div className={classes.bar}>
-            <p className={classes.label}>
-              Head Location Link
-              <span>*</span>
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setHeadLocationLink({
-                  fa: "",
-                  en: "",
-                })
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <input
-            style={{
-              fontFamily: "English",
-            }}
-            placeholder="..."
-            type="headLocationLink"
-            id="headLocationLink"
-            name="headLocationLink"
-            onChange={(e) =>
-              setHeadLocationLink({
-                fa: e.target.value,
-                en: e.target.value,
-              })
-            }
-            value={headLocationLink.en}
-            autoComplete="off"
-          ></input>
-        </div>
-      </div>
-      <div
-        className={classes.form}
-        style={{
-          fontFamily: "Farsi",
-        }}
-      >
-        <div className={classes.input}>
-          <div className={classes.barReverse}>
-            <p className={classes.label}>
-              <span>*</span>
-              دفتر مرکزی
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setHeadOffice((prevData) => ({
-                  ...prevData,
-                  fa: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <input
-            style={{
-              fontFamily: "Farsi",
-            }}
-            placeholder="..."
-            type="headOffice"
-            id="headOfficeFa"
-            name="headOffice"
-            onChange={(e) =>
-              setHeadOffice((prevData) => ({
-                ...prevData,
-                fa: e.target.value,
-              }))
-            }
-            value={headOffice.fa}
-            autoComplete="off"
-            dir="rtl"
-          ></input>
-        </div>
-        <div className={classes.inputTextArea}>
-          <div className={classes.barReverse}>
-            <p className={classes.label}>
-              <span>*</span>
-              آدرس مرکزی
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setHeadAddress((prevData) => ({
-                  ...prevData,
-                  fa: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <textarea
-            style={{
-              fontFamily: "Farsi",
-            }}
-            placeholder="..."
-            type="headAddress"
-            id="headAddressFa"
-            name="headAddress"
-            onChange={(e) =>
-              setHeadAddress((prevData) => ({
-                ...prevData,
-                fa: e.target.value,
-              }))
-            }
-            value={headAddress.fa}
-            autoComplete="off"
-            dir="rtl"
-          ></textarea>
-        </div>
-        <div className={classes.inputTextArea}>
-          <div className={classes.barReverse}>
-            <p className={classes.label}>
-              <span>*</span>
-              تماس مرکزی
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setHeadContact((prevData) => ({
-                  ...prevData,
-                  fa: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <textarea
-            style={{
-              fontFamily: "Farsi",
-            }}
-            placeholder="..."
-            type="headContact"
-            id="headContactFa"
-            name="headContact"
-            onChange={(e) =>
-              setHeadContact((prevData) => ({
-                ...prevData,
-                fa: e.target.value,
-              }))
-            }
-            value={headContact.fa}
-            autoComplete="off"
-            dir="rtl"
-          ></textarea>
-        </div>
-      </div>
-      <div
-        className={classes.form}
-        style={{
-          fontFamily: "English",
-        }}
-      >
-        <div className={classes.input}>
-          <div className={classes.bar}>
-            <p className={classes.label}>
-              Studio Office
-              <span>*</span>
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setSecOffice((prevData) => ({
-                  ...prevData,
-                  en: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <input
-            style={{
-              fontFamily: "English",
-            }}
-            placeholder="..."
-            type="secOffice"
-            id="secOfficeEn"
-            name="secOffice"
-            onChange={(e) =>
-              setSecOffice((prevData) => ({
-                ...prevData,
-                en: e.target.value,
-              }))
-            }
-            value={secOffice.en}
-            autoComplete="off"
-          ></input>
-        </div>
-        <div className={classes.inputTextArea}>
-          <div className={classes.bar}>
-            <p className={classes.label}>
-              Studio Address
-              <span>*</span>
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setSecAddress((prevData) => ({
-                  ...prevData,
-                  en: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <textarea
-            style={{
-              fontFamily: "English",
-            }}
-            placeholder="..."
-            type="secAddress"
-            id="secAddressEn"
-            name="secAddress"
-            onChange={(e) =>
-              setSecAddress((prevData) => ({
-                ...prevData,
-                en: e.target.value,
-              }))
-            }
-            value={secAddress.en}
-            autoComplete="off"
-          ></textarea>
-        </div>
-        <div className={classes.inputTextArea}>
-          <div className={classes.bar}>
-            <p className={classes.label}>
-              Studio Contact
-              <span>*</span>
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setSecContact((prevData) => ({
-                  ...prevData,
-                  en: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <textarea
-            style={{
-              fontFamily: "English",
-            }}
-            placeholder="..."
-            type="secContact"
-            id="secContactEn"
-            name="secContact"
-            onChange={(e) =>
-              setSecContact((prevData) => ({
-                ...prevData,
-                en: e.target.value,
-              }))
-            }
-            value={secContact.en}
-            autoComplete="off"
-          ></textarea>
-        </div>
-        <div className={classes.input}>
-          <div className={classes.bar}>
-            <p className={classes.label}>
-              Studio Location Link
-              <span>*</span>
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setSecLocationLink({
-                  fa: "",
-                  en: "",
-                })
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <input
-            style={{
-              fontFamily: "English",
-            }}
-            placeholder="..."
-            type="secLocationLink"
-            id="secLocationLink"
-            name="secLocationLink"
-            onChange={(e) =>
-              setSecLocationLink({
-                fa: e.target.value,
-                en: e.target.value,
-              })
-            }
-            value={secLocationLink.en}
-            autoComplete="off"
-          ></input>
-        </div>
-      </div>
-      <div
-        className={classes.form}
-        style={{
-          fontFamily: "Farsi",
-        }}
-      >
-        <div className={classes.input}>
-          <div className={classes.barReverse}>
-            <p className={classes.label}>
-              <span>*</span>
-              دفتر استودیو
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setSecOffice((prevData) => ({
-                  ...prevData,
-                  fa: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <input
-            style={{
-              fontFamily: "Farsi",
-            }}
-            placeholder="..."
-            type="secOffice"
-            id="secOfficeFa"
-            name="secOffice"
-            onChange={(e) =>
-              setSecOffice((prevData) => ({
-                ...prevData,
-                fa: e.target.value,
-              }))
-            }
-            value={secOffice.fa}
-            autoComplete="off"
-            dir="rtl"
-          ></input>
-        </div>
-        <div className={classes.inputTextArea}>
-          <div className={classes.barReverse}>
-            <p className={classes.label}>
-              <span>*</span>
-              آدرس استودیو
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setSecAddress((prevData) => ({
-                  ...prevData,
-                  fa: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <textarea
-            style={{
-              fontFamily: "Farsi",
-            }}
-            placeholder="..."
-            type="secAddress"
-            id="secAddressFa"
-            name="secAddress"
-            onChange={(e) =>
-              setSecAddress((prevData) => ({
-                ...prevData,
-                fa: e.target.value,
-              }))
-            }
-            value={secAddress.fa}
-            autoComplete="off"
-            dir="rtl"
-          ></textarea>
-        </div>
-        <div className={classes.inputTextArea}>
-          <div className={classes.barReverse}>
-            <p className={classes.label}>
-              <span>*</span>
-              تماس استودیو
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() =>
-                setSecContact((prevData) => ({
-                  ...prevData,
-                  fa: "",
-                }))
-              }
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <textarea
-            style={{
-              fontFamily: "Farsi",
-            }}
-            placeholder="..."
-            type="secContact"
-            id="secContactFa"
-            name="secContact"
-            onChange={(e) =>
-              setSecContact((prevData) => ({
-                ...prevData,
-                fa: e.target.value,
-              }))
-            }
-            value={secContact.fa}
-            autoComplete="off"
-            dir="rtl"
-          ></textarea>
-        </div>
-      </div>
-      <div
-        className={classes.formAction}
-        style={{
-          fontFamily: "English",
-        }}
-      >
-        <div
-          style={{
-            paddingBottom: "20px",
-            paddingTop: "20px",
-            borderBottom: "1px solid #d6d6d6",
-            borderTop: "1px solid #d6d6d6",
-          }}
-        >
+    <Fragment>
+      {!development ? (
+        <div className={classes.container}>
           <div
-            className={classes.input}
+            className={classes.form}
+            style={{
+              fontFamily: "English",
+            }}
+          >
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  Head Office
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setHeadOffice((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="..."
+                type="headOffice"
+                id="headOfficeEn"
+                name="headOffice"
+                onChange={(e) =>
+                  setHeadOffice((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={headOffice.en}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.inputTextArea}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  Head Address
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setHeadAddress((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="..."
+                type="headAddress"
+                id="headAddressEn"
+                name="headAddress"
+                onChange={(e) =>
+                  setHeadAddress((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={headAddress.en}
+                autoComplete="off"
+              ></textarea>
+            </div>
+            <div className={classes.inputTextArea}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  Head Contact
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setHeadContact((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="..."
+                type="headContact"
+                id="headContactEn"
+                name="headContact"
+                onChange={(e) =>
+                  setHeadContact((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={headContact.en}
+                autoComplete="off"
+              ></textarea>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  Head Location Link
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setHeadLocationLink({
+                      fa: "",
+                      en: "",
+                    })
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="..."
+                type="headLocationLink"
+                id="headLocationLink"
+                name="headLocationLink"
+                onChange={(e) =>
+                  setHeadLocationLink({
+                    fa: e.target.value,
+                    en: e.target.value,
+                  })
+                }
+                value={headLocationLink.en}
+                autoComplete="off"
+              ></input>
+            </div>
+          </div>
+          <div
+            className={classes.form}
             style={{
               fontFamily: "Farsi",
             }}
           >
-            <label className="file">
-              <input
-                onChange={(e) => {
-                  setMainMedia(e.target.files[0]);
-                }}
-                type="file"
-                accept="image/*"
-              />
-              <p>عکس کاور اصلی</p>
-            </label>
-            {mainMedia !== "" && (
-              <div className={classes.preview}>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  <span>*</span>
+                  دفتر مرکزی
+                </p>
                 <CloseIcon
                   className="icon"
-                  onClick={() => setMainMedia("")}
+                  onClick={() =>
+                    setHeadOffice((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
                   sx={{ fontSize: 16 }}
                 />
-                <Image
-                  className={classes.media}
-                  width={170}
-                  height={200}
-                  objectFit="contain"
-                  src={URL.createObjectURL(mainMedia)}
-                  alt="image"
-                  priority
+              </div>
+              <input
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                placeholder="..."
+                type="headOffice"
+                id="headOfficeFa"
+                name="headOffice"
+                onChange={(e) =>
+                  setHeadOffice((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={headOffice.fa}
+                autoComplete="off"
+                dir="rtl"
+              ></input>
+            </div>
+            <div className={classes.inputTextArea}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  <span>*</span>
+                  آدرس مرکزی
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setHeadAddress((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
                 />
               </div>
-            )}
-          </div>
-        </div>
-        <div
-          style={{
-            marginTop: "20px",
-          }}
-        >
-          <div className={classes.navigation}>
-            <p
-              className={
-                graphicType === "gif" ? classes.navActive : classes.nav
-              }
-              onClick={() => {
-                setGraphicType("gif");
-                setGraphicMedia("");
-              }}
-            >
-              gif
-            </p>
-            <p
-              className={
-                graphicType === "image" ? classes.navActive : classes.nav
-              }
-              onClick={() => {
-                setGraphicType("image");
-                setGraphicMedia("");
-              }}
-            >
-              عکس
-            </p>
+              <textarea
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                placeholder="..."
+                type="headAddress"
+                id="headAddressFa"
+                name="headAddress"
+                onChange={(e) =>
+                  setHeadAddress((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={headAddress.fa}
+                autoComplete="off"
+                dir="rtl"
+              ></textarea>
+            </div>
+            <div className={classes.inputTextArea}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  <span>*</span>
+                  تماس مرکزی
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setHeadContact((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                placeholder="..."
+                type="headContact"
+                id="headContactFa"
+                name="headContact"
+                onChange={(e) =>
+                  setHeadContact((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={headContact.fa}
+                autoComplete="off"
+                dir="rtl"
+              ></textarea>
+            </div>
           </div>
           <div
-            className={classes.input}
+            className={classes.form}
             style={{
-              fontFamily: `${graphicType === "image" ? "Farsi" : "English"}`,
+              fontFamily: "English",
             }}
           >
-            <label className="file">
-              <input
-                onChange={(e) => {
-                  setGraphicMedia(e.target.files[0]);
-                }}
-                type="file"
-                accept="image/*"
-              />
-              <p>{graphicType === "image" ? "عکس" : "gif"}</p>
-            </label>
-            {graphicMedia !== "" && (
-              <div className={classes.preview}>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  Studio Office
+                  <span>*</span>
+                </p>
                 <CloseIcon
                   className="icon"
-                  onClick={() => setGraphicMedia("")}
+                  onClick={() =>
+                    setSecOffice((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
                   sx={{ fontSize: 16 }}
                 />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="..."
+                type="secOffice"
+                id="secOfficeEn"
+                name="secOffice"
+                onChange={(e) =>
+                  setSecOffice((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={secOffice.en}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.inputTextArea}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  Studio Address
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setSecAddress((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="..."
+                type="secAddress"
+                id="secAddressEn"
+                name="secAddress"
+                onChange={(e) =>
+                  setSecAddress((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={secAddress.en}
+                autoComplete="off"
+              ></textarea>
+            </div>
+            <div className={classes.inputTextArea}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  Studio Contact
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setSecContact((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="..."
+                type="secContact"
+                id="secContactEn"
+                name="secContact"
+                onChange={(e) =>
+                  setSecContact((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={secContact.en}
+                autoComplete="off"
+              ></textarea>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  Studio Location Link
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setSecLocationLink({
+                      fa: "",
+                      en: "",
+                    })
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="..."
+                type="secLocationLink"
+                id="secLocationLink"
+                name="secLocationLink"
+                onChange={(e) =>
+                  setSecLocationLink({
+                    fa: e.target.value,
+                    en: e.target.value,
+                  })
+                }
+                value={secLocationLink.en}
+                autoComplete="off"
+              ></input>
+            </div>
+          </div>
+          <div
+            className={classes.form}
+            style={{
+              fontFamily: "Farsi",
+            }}
+          >
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  <span>*</span>
+                  دفتر استودیو
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setSecOffice((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                placeholder="..."
+                type="secOffice"
+                id="secOfficeFa"
+                name="secOffice"
+                onChange={(e) =>
+                  setSecOffice((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={secOffice.fa}
+                autoComplete="off"
+                dir="rtl"
+              ></input>
+            </div>
+            <div className={classes.inputTextArea}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  <span>*</span>
+                  آدرس استودیو
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setSecAddress((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                placeholder="..."
+                type="secAddress"
+                id="secAddressFa"
+                name="secAddress"
+                onChange={(e) =>
+                  setSecAddress((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={secAddress.fa}
+                autoComplete="off"
+                dir="rtl"
+              ></textarea>
+            </div>
+            <div className={classes.inputTextArea}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  <span>*</span>
+                  تماس استودیو
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setSecContact((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                placeholder="..."
+                type="secContact"
+                id="secContactFa"
+                name="secContact"
+                onChange={(e) =>
+                  setSecContact((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={secContact.fa}
+                autoComplete="off"
+                dir="rtl"
+              ></textarea>
+            </div>
+          </div>
+          <div
+            className={classes.formAction}
+            style={{
+              fontFamily: "English",
+            }}
+          >
+            <div
+              style={{
+                paddingBottom: "20px",
+                paddingTop: "20px",
+                borderBottom: "1px solid #d6d6d6",
+                borderTop: "1px solid #d6d6d6",
+              }}
+            >
+              <div
+                className={classes.input}
+                style={{
+                  fontFamily: "Farsi",
+                }}
+              >
+                <label className="file">
+                  <input
+                    onChange={(e) => {
+                      setMainMedia(e.target.files[0]);
+                    }}
+                    type="file"
+                    accept="image/*"
+                  />
+                  <p>عکس کاور اصلی</p>
+                </label>
+                {mainMedia !== "" && (
+                  <div className={classes.preview}>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setMainMedia("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                    <Image
+                      className={classes.media}
+                      width={170}
+                      height={200}
+                      objectFit="contain"
+                      src={URL.createObjectURL(mainMedia)}
+                      alt="image"
+                      priority
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+            <div
+              style={{
+                marginTop: "20px",
+              }}
+            >
+              <div className={classes.navigation}>
+                <p
+                  className={
+                    graphicType === "gif" ? classes.navActive : classes.nav
+                  }
+                  onClick={() => {
+                    setGraphicType("gif");
+                    setGraphicMedia("");
+                  }}
+                >
+                  gif
+                </p>
+                <p
+                  className={
+                    graphicType === "image" ? classes.navActive : classes.nav
+                  }
+                  onClick={() => {
+                    setGraphicType("image");
+                    setGraphicMedia("");
+                  }}
+                >
+                  عکس
+                </p>
+              </div>
+              <div
+                className={classes.input}
+                style={{
+                  fontFamily: `${
+                    graphicType === "image" ? "Farsi" : "English"
+                  }`,
+                }}
+              >
+                <label className="file">
+                  <input
+                    onChange={(e) => {
+                      setGraphicMedia(e.target.files[0]);
+                    }}
+                    type="file"
+                    accept="image/*"
+                  />
+                  <p>{graphicType === "image" ? "عکس" : "gif"}</p>
+                </label>
+                {graphicMedia !== "" && (
+                  <div className={classes.preview}>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setGraphicMedia("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                    <Image
+                      className={classes.media}
+                      width={170}
+                      height={200}
+                      objectFit="contain"
+                      src={URL.createObjectURL(graphicMedia)}
+                      alt="image"
+                      priority
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+            <p className={classes.alert}>{alert}</p>
+            {loader && (
+              <div>
                 <Image
-                  className={classes.media}
-                  width={170}
-                  height={200}
-                  objectFit="contain"
-                  src={URL.createObjectURL(graphicMedia)}
-                  alt="image"
-                  priority
+                  width={50}
+                  height={50}
+                  src={loaderImage}
+                  alt="isLoading"
                 />
               </div>
             )}
+            <button
+              disabled={disableButton}
+              style={{
+                fontFamily: "FarsiMedium",
+              }}
+              onClick={() => updateContactContent()}
+            >
+              ذخیره
+            </button>
           </div>
         </div>
-        <p className={classes.alert}>{alert}</p>
-        {loader && (
-          <div>
-            <Image width={50} height={50} src={loaderImage} alt="isLoading" />
-          </div>
-        )}
-        <button
-          disabled={disableButton}
-          style={{
-            fontFamily: "FarsiMedium",
-          }}
-          onClick={() => updateContactContent()}
-        >
-          ذخیره
-        </button>
-      </div>
-    </div>
+      ) : (
+        <div className={classes.building}>
+          <Image
+            width={50}
+            height={50}
+            src={building}
+            alt="building"
+            as="image"
+            unoptimized
+          />
+        </div>
+      )}
+    </Fragment>
   );
 }

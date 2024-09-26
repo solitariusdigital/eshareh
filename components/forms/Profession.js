@@ -11,6 +11,7 @@ import {
   fourGenerator,
   uploadMedia,
 } from "@/services/utility";
+import building from "@/assets/building.png";
 
 export default function Profession({ pages, mediaData }) {
   const [main, setMain] = useState({ en: "", fa: "" });
@@ -24,6 +25,7 @@ export default function Profession({ pages, mediaData }) {
   const [disableButton, setDisableButton] = useState(false);
   const sourceLink = "https://eshareh.storage.iran.liara.space";
   const router = useRouter();
+  const [development, setDevelopment] = useState(false);
 
   useEffect(() => {
     let professionContent = pages.find((page) => page.slug === "profession");
@@ -111,243 +113,263 @@ export default function Profession({ pages, mediaData }) {
 
   return (
     <Fragment>
-      <div className={classes.container}>
-        <div
-          className={classes.form}
-          style={{
-            fontFamily: "English",
-          }}
-        >
-          <div className={classes.inputTextArea}>
-            <div className={classes.bar}>
-              <p className={classes.label}>
-                Main
-                <span>*</span>
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() =>
-                  setMain((prevData) => ({
-                    ...prevData,
-                    en: "",
-                  }))
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <textarea
-              style={{
-                fontFamily: "English",
-              }}
-              placeholder="..."
-              type="main"
-              id="mainEn"
-              name="main"
-              onChange={(e) =>
-                setMain((prevData) => ({
-                  ...prevData,
-                  en: e.target.value,
-                }))
-              }
-              value={main.en}
-              autoComplete="off"
-            ></textarea>
-          </div>
-          <div className={classes.inputTextArea}>
-            <div className={classes.bar}>
-              <p className={classes.label}>
-                Paragraphs
-                <span>*</span>
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() =>
-                  setParagraphs((prevData) => ({
-                    ...prevData,
-                    en: "",
-                  }))
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <textarea
-              style={{
-                fontFamily: "English",
-              }}
-              placeholder="..."
-              type="paragraph"
-              id="paragraphEn"
-              name="paragraph"
-              onChange={(e) =>
-                setParagraphs((prevData) => ({
-                  ...prevData,
-                  en: e.target.value,
-                }))
-              }
-              value={paragraph.en}
-              autoComplete="off"
-            ></textarea>
-          </div>
-        </div>
-        <div
-          className={classes.form}
-          style={{
-            fontFamily: "Farsi",
-          }}
-        >
-          <div className={classes.inputTextArea}>
-            <div className={classes.barReverse}>
-              <p className={classes.label}>
-                <span>*</span>
-                اصلی
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() =>
-                  setMain((prevData) => ({
-                    ...prevData,
-                    fa: "",
-                  }))
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <textarea
-              style={{
-                fontFamily: "Farsi",
-              }}
-              placeholder="..."
-              type="main"
-              id="mainFa"
-              name="main"
-              onChange={(e) =>
-                setMain((prevData) => ({
-                  ...prevData,
-                  fa: e.target.value,
-                }))
-              }
-              value={main.fa}
-              autoComplete="off"
-              dir="rtl"
-            ></textarea>
-          </div>
-          <div className={classes.inputTextArea}>
-            <div className={classes.barReverse}>
-              <p className={classes.label}>
-                <span>*</span>
-                پاراگراف
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() =>
-                  setParagraphs((prevData) => ({
-                    ...prevData,
-                    fa: "",
-                  }))
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <textarea
-              style={{
-                fontFamily: "Farsi",
-              }}
-              placeholder="..."
-              type="paragraph"
-              id="paragraphFa"
-              name="paragraph"
-              onChange={(e) =>
-                setParagraphs((prevData) => ({
-                  ...prevData,
-                  fa: e.target.value,
-                }))
-              }
-              value={paragraph.fa}
-              autoComplete="off"
-              dir="rtl"
-            ></textarea>
-          </div>
-        </div>
-        <div
-          className={classes.formAction}
-          style={{
-            fontFamily: "English",
-          }}
-        >
-          <div className={classes.navigation}>
-            <p
-              className={mediaType === "gif" ? classes.navActive : classes.nav}
-              onClick={() => {
-                setMediaType("gif");
-                setMedia("");
-              }}
-            >
-              gif
-            </p>
-            <p
-              className={
-                mediaType === "image" ? classes.navActive : classes.nav
-              }
-              onClick={() => {
-                setMediaType("image");
-                setMedia("");
-              }}
-            >
-              عکس
-            </p>
-          </div>
+      {!development ? (
+        <div className={classes.container}>
           <div
-            className={classes.input}
+            className={classes.form}
             style={{
-              fontFamily: `${mediaType === "image" ? "Farsi" : "English"}`,
+              fontFamily: "English",
             }}
           >
-            <label className="file">
-              <input
-                onChange={(e) => {
-                  setMedia(e.target.files[0]);
-                }}
-                type="file"
-                accept="image/*"
-              />
-              <p>{mediaType === "image" ? "عکس" : "gif"}</p>
-            </label>
-            {media !== "" && (
-              <div className={classes.preview}>
+            <div className={classes.inputTextArea}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  Main
+                  <span>*</span>
+                </p>
                 <CloseIcon
                   className="icon"
-                  onClick={() => setMedia("")}
+                  onClick={() =>
+                    setMain((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
                   sx={{ fontSize: 16 }}
                 />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="..."
+                type="main"
+                id="mainEn"
+                name="main"
+                onChange={(e) =>
+                  setMain((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={main.en}
+                autoComplete="off"
+              ></textarea>
+            </div>
+            <div className={classes.inputTextArea}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  Paragraphs
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setParagraphs((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="..."
+                type="paragraph"
+                id="paragraphEn"
+                name="paragraph"
+                onChange={(e) =>
+                  setParagraphs((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={paragraph.en}
+                autoComplete="off"
+              ></textarea>
+            </div>
+          </div>
+          <div
+            className={classes.form}
+            style={{
+              fontFamily: "Farsi",
+            }}
+          >
+            <div className={classes.inputTextArea}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  <span>*</span>
+                  اصلی
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setMain((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                placeholder="..."
+                type="main"
+                id="mainFa"
+                name="main"
+                onChange={(e) =>
+                  setMain((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={main.fa}
+                autoComplete="off"
+                dir="rtl"
+              ></textarea>
+            </div>
+            <div className={classes.inputTextArea}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  <span>*</span>
+                  پاراگراف
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setParagraphs((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                placeholder="..."
+                type="paragraph"
+                id="paragraphFa"
+                name="paragraph"
+                onChange={(e) =>
+                  setParagraphs((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={paragraph.fa}
+                autoComplete="off"
+                dir="rtl"
+              ></textarea>
+            </div>
+          </div>
+          <div
+            className={classes.formAction}
+            style={{
+              fontFamily: "English",
+            }}
+          >
+            <div className={classes.navigation}>
+              <p
+                className={
+                  mediaType === "gif" ? classes.navActive : classes.nav
+                }
+                onClick={() => {
+                  setMediaType("gif");
+                  setMedia("");
+                }}
+              >
+                gif
+              </p>
+              <p
+                className={
+                  mediaType === "image" ? classes.navActive : classes.nav
+                }
+                onClick={() => {
+                  setMediaType("image");
+                  setMedia("");
+                }}
+              >
+                عکس
+              </p>
+            </div>
+            <div
+              className={classes.input}
+              style={{
+                fontFamily: `${mediaType === "image" ? "Farsi" : "English"}`,
+              }}
+            >
+              <label className="file">
+                <input
+                  onChange={(e) => {
+                    setMedia(e.target.files[0]);
+                  }}
+                  type="file"
+                  accept="image/*"
+                />
+                <p>{mediaType === "image" ? "عکس" : "gif"}</p>
+              </label>
+              {media !== "" && (
+                <div className={classes.preview}>
+                  <CloseIcon
+                    className="icon"
+                    onClick={() => setMedia("")}
+                    sx={{ fontSize: 16 }}
+                  />
+                  <Image
+                    className={classes.media}
+                    width={170}
+                    height={200}
+                    objectFit="contain"
+                    src={URL.createObjectURL(media)}
+                    alt="image"
+                    priority
+                  />
+                </div>
+              )}
+            </div>
+            <p className={classes.alert}>{alert}</p>
+            {loader && (
+              <div>
                 <Image
-                  className={classes.media}
-                  width={170}
-                  height={200}
-                  objectFit="contain"
-                  src={URL.createObjectURL(media)}
-                  alt="image"
-                  priority
+                  width={50}
+                  height={50}
+                  src={loaderImage}
+                  alt="isLoading"
                 />
               </div>
             )}
+            <button
+              disabled={disableButton}
+              style={{
+                fontFamily: "FarsiMedium",
+              }}
+              onClick={() => handleSubmit()}
+            >
+              ذخیره
+            </button>
           </div>
-          <p className={classes.alert}>{alert}</p>
-          {loader && (
-            <div>
-              <Image width={50} height={50} src={loaderImage} alt="isLoading" />
-            </div>
-          )}
-          <button
-            disabled={disableButton}
-            style={{
-              fontFamily: "FarsiMedium",
-            }}
-            onClick={() => handleSubmit()}
-          >
-            ذخیره
-          </button>
         </div>
-      </div>
+      ) : (
+        <div className={classes.building}>
+          <Image
+            width={50}
+            height={50}
+            src={building}
+            alt="building"
+            as="image"
+            unoptimized
+          />
+        </div>
+      )}
     </Fragment>
   );
 }
