@@ -23,8 +23,11 @@ export default function Home({ pages, mediaData }) {
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
+  const [graphicType, setGraphicType] = useState("image" || "gif");
+  const [mediaOne, setMediaOne] = useState("");
+  const [mediaTwo, setMediaTwo] = useState("");
+  const [mediaThree, setMediaThree] = useState("");
   const [development, setDevelopment] = useState(false);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -53,7 +56,7 @@ export default function Home({ pages, mediaData }) {
     });
   }, [mediaData, pages]);
 
-  const handleSubmit = async () => {
+  const updateHomeContent = async () => {
     const isValid = areAllStatesValid([
       titleOne,
       paragraphOne,
@@ -116,6 +119,8 @@ export default function Home({ pages, mediaData }) {
     showAlert("ذخیره شد");
     router.reload(router.asPath);
   };
+
+  const updateHomeMedia = async () => {};
 
   const showAlert = (message) => {
     setAlert(message);
@@ -511,7 +516,6 @@ export default function Home({ pages, mediaData }) {
               ></textarea>
             </div>
           </div>
-
           <div
             className={classes.formAction}
             style={{
@@ -519,6 +523,218 @@ export default function Home({ pages, mediaData }) {
             }}
           >
             <p className={classes.alert}>{alert}</p>
+            <button
+              disabled={disableButton}
+              style={{
+                fontFamily: "FarsiMedium",
+                marginBottom: "20px",
+              }}
+              onClick={() => updateHomeContent()}
+            >
+              ذخیره داده
+            </button>
+            <div
+              style={{
+                paddingBottom: "20px",
+                paddingTop: "20px",
+                borderBottom: "1px solid #d6d6d6",
+                borderTop: "1px solid #d6d6d6",
+              }}
+            >
+              <div className={classes.navigation}>
+                <p
+                  className={
+                    graphicType === "gif" ? classes.navActive : classes.nav
+                  }
+                  onClick={() => {
+                    setGraphicType("gif");
+                    setMediaTwo("");
+                  }}
+                >
+                  gif
+                </p>
+                <p
+                  className={
+                    graphicType === "image" ? classes.navActive : classes.nav
+                  }
+                  onClick={() => {
+                    setGraphicType("image");
+                    setMediaTwo("");
+                  }}
+                >
+                  عکس
+                </p>
+              </div>
+              <div
+                className={classes.input}
+                style={{
+                  fontFamily: "Farsi",
+                }}
+              >
+                <label className="file">
+                  <input
+                    onChange={(e) => {
+                      setMediaOne(e.target.files[0]);
+                    }}
+                    type="file"
+                    accept="image/*"
+                  />
+                  <p>عکس کاور اصلی</p>
+                </label>
+                {mediaOne !== "" && (
+                  <div className={classes.preview}>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setMediaOne("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                    <Image
+                      className={classes.media}
+                      width={170}
+                      height={200}
+                      objectFit="contain"
+                      src={URL.createObjectURL(mediaOne)}
+                      alt="image"
+                      priority
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+            <div
+              style={{
+                paddingBottom: "20px",
+                paddingTop: "20px",
+                borderBottom: "1px solid #d6d6d6",
+              }}
+            >
+              <div className={classes.navigation}>
+                <p
+                  className={
+                    graphicType === "gif" ? classes.navActive : classes.nav
+                  }
+                  onClick={() => {
+                    setGraphicType("gif");
+                    setMediaTwo("");
+                  }}
+                >
+                  gif
+                </p>
+                <p
+                  className={
+                    graphicType === "image" ? classes.navActive : classes.nav
+                  }
+                  onClick={() => {
+                    setGraphicType("image");
+                    setMediaTwo("");
+                  }}
+                >
+                  عکس
+                </p>
+              </div>
+              <div
+                className={classes.input}
+                style={{
+                  fontFamily: "Farsi",
+                }}
+              >
+                <label className="file">
+                  <input
+                    onChange={(e) => {
+                      setMediaOne(e.target.files[0]);
+                    }}
+                    type="file"
+                    accept="image/*"
+                  />
+                  <p>عکس کاور اصلی</p>
+                </label>
+                {mediaOne !== "" && (
+                  <div className={classes.preview}>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setMediaOne("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                    <Image
+                      className={classes.media}
+                      width={170}
+                      height={200}
+                      objectFit="contain"
+                      src={URL.createObjectURL(mediaOne)}
+                      alt="image"
+                      priority
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+            <div
+              style={{
+                marginTop: "20px",
+              }}
+            >
+              <div className={classes.navigation}>
+                <p
+                  className={
+                    graphicType === "gif" ? classes.navActive : classes.nav
+                  }
+                  onClick={() => {
+                    setGraphicType("gif");
+                    setMediaTwo("");
+                  }}
+                >
+                  gif
+                </p>
+                <p
+                  className={
+                    graphicType === "image" ? classes.navActive : classes.nav
+                  }
+                  onClick={() => {
+                    setGraphicType("image");
+                    setMediaTwo("");
+                  }}
+                >
+                  عکس
+                </p>
+              </div>
+              <div
+                className={classes.input}
+                style={{
+                  fontFamily: `${
+                    graphicType === "image" ? "Farsi" : "English"
+                  }`,
+                }}
+              >
+                <label className="file">
+                  <input
+                    onChange={(e) => {
+                      setMediaTwo(e.target.files[0]);
+                    }}
+                    type="file"
+                    accept="image/*"
+                  />
+                  <p>{graphicType === "image" ? "عکس" : "gif"}</p>
+                </label>
+                {mediaTwo !== "" && (
+                  <div className={classes.preview}>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() => setMediaTwo("")}
+                      sx={{ fontSize: 16 }}
+                    />
+                    <Image
+                      className={classes.media}
+                      width={170}
+                      height={200}
+                      objectFit="contain"
+                      src={URL.createObjectURL(mediaTwo)}
+                      alt="image"
+                      priority
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
             {loader && (
               <div>
                 <Image
@@ -533,10 +749,11 @@ export default function Home({ pages, mediaData }) {
               disabled={disableButton}
               style={{
                 fontFamily: "FarsiMedium",
+                marginTop: "20px",
               }}
-              onClick={() => handleSubmit()}
+              onClick={() => updateHomeMedia()}
             >
-              ذخیره
+              ذخیره مدیا
             </button>
           </div>
         </div>
