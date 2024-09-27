@@ -94,58 +94,6 @@ export default function Contact({ pages, mediaData }) {
     setLoader(true);
     setDisableButton(true);
 
-    if (mainMedia || graphicMedia) {
-      const currentMediaLink = mediaContent.content[0].link;
-      const currentGraphicLink = mediaContent.content[1].link;
-      const mediaFormat = ".jpg";
-      const graphicFormat = graphicType === "image" ? ".jpg" : ".gif";
-      const mediaFolder = "page";
-      const subFolder = "contact";
-      const mediaId = `img${fourGenerator()}`;
-      const graphicId = `img${fourGenerator()}`;
-
-      // Create new media links if mainMedia or graphicMedia is provided
-      const mediaLink = mainMedia
-        ? `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`
-        : currentMediaLink;
-      const graphicLink = graphicMedia
-        ? `${sourceLink}/${mediaFolder}/${subFolder}/${graphicId}${graphicFormat}`
-        : currentGraphicLink;
-
-      // Upload media if it's provided
-      const uploadPromises = [];
-      if (mainMedia) {
-        uploadPromises.push(
-          uploadMedia(mainMedia, mediaId, mediaFolder, subFolder, mediaFormat)
-        );
-      }
-      if (graphicMedia) {
-        uploadPromises.push(
-          uploadMedia(
-            graphicMedia,
-            graphicId,
-            mediaFolder,
-            subFolder,
-            graphicFormat
-          )
-        );
-      }
-
-      await Promise.all(uploadPromises);
-
-      const mediaObject = {
-        _id: mediaContent["_id"],
-        slug: "contact",
-        title: "Contact Us",
-        content: [
-          { type: "image", link: mediaLink },
-          { type: graphicType, link: graphicLink },
-        ],
-      };
-
-      await updateMediaApi(mediaObject);
-    }
-
     const contentObject = {
       _id: contactContent["_id"],
       slug: "contact",
@@ -212,6 +160,63 @@ export default function Contact({ pages, mediaData }) {
     await updatePageApi(contentObject);
     showAlert("ذخیره شد");
     router.reload(router.asPath);
+  };
+
+  const updateContactMedia = async () => {
+    setLoader(true);
+    setDisableButton(true);
+    if (mainMedia || graphicMedia) {
+      const currentMediaLink = mediaContent.content[0].link;
+      const currentGraphicLink = mediaContent.content[1].link;
+      const mediaFormat = ".jpg";
+      const graphicFormat = graphicType === "image" ? ".jpg" : ".gif";
+      const mediaFolder = "page";
+      const subFolder = "contact";
+      const mediaId = `img${fourGenerator()}`;
+      const graphicId = `img${fourGenerator()}`;
+
+      // Create new media links if mainMedia or graphicMedia is provided
+      const mediaLink = mainMedia
+        ? `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`
+        : currentMediaLink;
+      const graphicLink = graphicMedia
+        ? `${sourceLink}/${mediaFolder}/${subFolder}/${graphicId}${graphicFormat}`
+        : currentGraphicLink;
+
+      // Upload media if it's provided
+      const uploadPromises = [];
+      if (mainMedia) {
+        uploadPromises.push(
+          uploadMedia(mainMedia, mediaId, mediaFolder, subFolder, mediaFormat)
+        );
+      }
+      if (graphicMedia) {
+        uploadPromises.push(
+          uploadMedia(
+            graphicMedia,
+            graphicId,
+            mediaFolder,
+            subFolder,
+            graphicFormat
+          )
+        );
+      }
+      await Promise.all(uploadPromises);
+      const mediaObject = {
+        _id: mediaContent["_id"],
+        slug: "contact",
+        title: "Contact Us",
+        content: [
+          { type: "image", link: mediaLink },
+          { type: graphicType, link: graphicLink },
+        ],
+      };
+      await updateMediaApi(mediaObject);
+      showAlert("ذخیره شد");
+      router.reload(router.asPath);
+    }
+    setLoader(false);
+    setDisableButton(false);
   };
 
   const showAlert = (message) => {
@@ -755,6 +760,17 @@ export default function Contact({ pages, mediaData }) {
               fontFamily: "English",
             }}
           >
+            <p className={classes.alert}>{alert}</p>
+            <button
+              disabled={disableButton}
+              style={{
+                fontFamily: "FarsiMedium",
+                marginBottom: "20px",
+              }}
+              onClick={() => updateContactContent()}
+            >
+              ذخیره داده
+            </button>
             <div
               style={{
                 paddingBottom: "20px",
@@ -866,7 +882,6 @@ export default function Contact({ pages, mediaData }) {
                 )}
               </div>
             </div>
-            <p className={classes.alert}>{alert}</p>
             {loader && (
               <div>
                 <Image
@@ -881,10 +896,11 @@ export default function Contact({ pages, mediaData }) {
               disabled={disableButton}
               style={{
                 fontFamily: "FarsiMedium",
+                marginTop: "20px",
               }}
-              onClick={() => updateContactContent()}
+              onClick={() => updateContactMedia()}
             >
-              ذخیره
+              ذخیره مدیا
             </button>
           </div>
         </div>
