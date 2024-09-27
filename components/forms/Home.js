@@ -23,10 +23,10 @@ export default function Home({ pages, mediaData }) {
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
-  const [graphicType, setGraphicType] = useState("image" || "gif");
   const [mediaOne, setMediaOne] = useState("");
   const [mediaTwo, setMediaTwo] = useState("");
-  const [mediaThree, setMediaThree] = useState("");
+  const [mediaOneType, setMediaOneType] = useState("image" || "gif");
+  const [mediaTwoType, setMediaTwoType] = useState("image" || "gif");
   const [development, setDevelopment] = useState(false);
   const router = useRouter();
 
@@ -544,22 +544,22 @@ export default function Home({ pages, mediaData }) {
               <div className={classes.navigation}>
                 <p
                   className={
-                    graphicType === "gif" ? classes.navActive : classes.nav
+                    mediaOneType === "gif" ? classes.navActive : classes.nav
                   }
                   onClick={() => {
-                    setGraphicType("gif");
-                    setMediaTwo("");
+                    setMediaOneType("gif");
+                    setMediaOne("");
                   }}
                 >
                   gif
                 </p>
                 <p
                   className={
-                    graphicType === "image" ? classes.navActive : classes.nav
+                    mediaOneType === "image" ? classes.navActive : classes.nav
                   }
                   onClick={() => {
-                    setGraphicType("image");
-                    setMediaTwo("");
+                    setMediaOneType("image");
+                    setMediaOne("");
                   }}
                 >
                   عکس
@@ -568,7 +568,9 @@ export default function Home({ pages, mediaData }) {
               <div
                 className={classes.input}
                 style={{
-                  fontFamily: "Farsi",
+                  fontFamily: `${
+                    mediaOneType === "image" ? "Farsi" : "English"
+                  }`,
                 }}
               >
                 <label className="file">
@@ -579,7 +581,7 @@ export default function Home({ pages, mediaData }) {
                     type="file"
                     accept="image/*"
                   />
-                  <p>عکس کاور اصلی</p>
+                  <p>{mediaOneType === "image" ? "عکس" : "gif"}</p>
                 </label>
                 {mediaOne !== "" && (
                   <div className={classes.preview}>
@@ -603,18 +605,16 @@ export default function Home({ pages, mediaData }) {
             </div>
             <div
               style={{
-                paddingBottom: "20px",
                 paddingTop: "20px",
-                borderBottom: "1px solid #d6d6d6",
               }}
             >
               <div className={classes.navigation}>
                 <p
                   className={
-                    graphicType === "gif" ? classes.navActive : classes.nav
+                    mediaTwoType === "gif" ? classes.navActive : classes.nav
                   }
                   onClick={() => {
-                    setGraphicType("gif");
+                    setMediaTwoType("gif");
                     setMediaTwo("");
                   }}
                 >
@@ -622,75 +622,10 @@ export default function Home({ pages, mediaData }) {
                 </p>
                 <p
                   className={
-                    graphicType === "image" ? classes.navActive : classes.nav
+                    mediaTwoType === "image" ? classes.navActive : classes.nav
                   }
                   onClick={() => {
-                    setGraphicType("image");
-                    setMediaTwo("");
-                  }}
-                >
-                  عکس
-                </p>
-              </div>
-              <div
-                className={classes.input}
-                style={{
-                  fontFamily: "Farsi",
-                }}
-              >
-                <label className="file">
-                  <input
-                    onChange={(e) => {
-                      setMediaOne(e.target.files[0]);
-                    }}
-                    type="file"
-                    accept="image/*"
-                  />
-                  <p>عکس کاور اصلی</p>
-                </label>
-                {mediaOne !== "" && (
-                  <div className={classes.preview}>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => setMediaOne("")}
-                      sx={{ fontSize: 16 }}
-                    />
-                    <Image
-                      className={classes.media}
-                      width={170}
-                      height={200}
-                      objectFit="contain"
-                      src={URL.createObjectURL(mediaOne)}
-                      alt="image"
-                      priority
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-            <div
-              style={{
-                marginTop: "20px",
-              }}
-            >
-              <div className={classes.navigation}>
-                <p
-                  className={
-                    graphicType === "gif" ? classes.navActive : classes.nav
-                  }
-                  onClick={() => {
-                    setGraphicType("gif");
-                    setMediaTwo("");
-                  }}
-                >
-                  gif
-                </p>
-                <p
-                  className={
-                    graphicType === "image" ? classes.navActive : classes.nav
-                  }
-                  onClick={() => {
-                    setGraphicType("image");
+                    setMediaTwoType("image");
                     setMediaTwo("");
                   }}
                 >
@@ -701,7 +636,7 @@ export default function Home({ pages, mediaData }) {
                 className={classes.input}
                 style={{
                   fontFamily: `${
-                    graphicType === "image" ? "Farsi" : "English"
+                    mediaTwoType === "image" ? "Farsi" : "English"
                   }`,
                 }}
               >
@@ -713,7 +648,7 @@ export default function Home({ pages, mediaData }) {
                     type="file"
                     accept="image/*"
                   />
-                  <p>{graphicType === "image" ? "عکس" : "gif"}</p>
+                  <p>{mediaTwoType === "image" ? "عکس" : "gif"}</p>
                 </label>
                 {mediaTwo !== "" && (
                   <div className={classes.preview}>
@@ -735,6 +670,7 @@ export default function Home({ pages, mediaData }) {
                 )}
               </div>
             </div>
+
             {loader && (
               <div>
                 <Image
