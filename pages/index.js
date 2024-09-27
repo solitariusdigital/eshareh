@@ -143,8 +143,8 @@ export default function Home({ solutions, covers, pageData }) {
       <div className={classes.videoContainer}>
         <video
           className={classes.video}
-          src={"https://eshareh.storage.iran.liara.space/eshareh.mp4"}
-          poster="https://eshareh.storage.iran.liara.space/cover.jpg"
+          src={"https://eshareh.storage.iran.liara.space/page/home/eshareh.mp4"}
+          poster="https://eshareh.storage.iran.liara.space/page/home/cover.jpg"
           controls
           playsInline
           preload="metadata"
