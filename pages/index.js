@@ -48,9 +48,6 @@ export default function Home({ solutions, covers, pageData, mediaData }) {
   const [hoverTwo, setHoverTwo] = useState(false);
   const [hoverThree, setHoverThree] = useState(false);
 
-  const smokingFish =
-    "https://eshareh.storage.iran.liara.space/motion/smokingFish.gif";
-
   const divideArray = (solutions) => {
     const dividedArrays = [];
     let chunkLength = screenSize === "desktop" ? 5 : 10;
