@@ -9,8 +9,6 @@ import Image from "next/legacy/image";
 import arrow from "@/assets/arrow.svg";
 import moreArrow from "@/assets/moreArrow.svg";
 import moreArrowHover from "@/assets/moreArrowHover.svg";
-import hometwo from "@/assets/hometwo.png";
-import { enToFaDigits } from "@/services/utility";
 import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
