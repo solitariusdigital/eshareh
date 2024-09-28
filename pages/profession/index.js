@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useContext, Fragment } from "react";
+import { useContext, Fragment, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./profession.module.scss";
 import { NextSeo } from "next-seo";
@@ -7,13 +7,18 @@ import Image from "next/legacy/image";
 import CircleIcon from "@mui/icons-material/Circle";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
-import profession from "@/assets/profession.png";
+import dbConnect from "@/services/dbConnect";
+import pageModel from "@/models/Page";
+import mediaModel from "@/models/Media";
+import { applyFontToEnglishWords } from "@/services/utility";
 
-export default function Profession() {
+export default function Profession({ pageData, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
-
-  const flyingFish =
-    "https://eshareh.storage.iran.liara.space/motion/flyingFish.gif";
+  const { languageType, setLanguageType } = useContext(StateContext);
+  const [paragraph, setParagraph] = useState({
+    en: [pageData.content[1].data.en.split("\n\n")][0],
+    fa: [pageData.content[1].data.fa.split("\n\n")][0],
+  });
 
   const position = {
     position: "relative",
@@ -74,10 +79,7 @@ export default function Profession() {
                 fontFamily: "FarsiBold",
               }}
             >
-              آژانس تبلیغاتی اشاره، آژانسی است که خدمات متنوع و گسترده‌ای را
-              ارائه می‌دهد و به معنای واقعی کلمه، آژانسی تمام‌خدمت است.
-              خدمت‌رسانی ما در اشاره هم متمایز است و هم کارآمد، چون کار ما مبتنی
-              بر اصول زیر است:
+              {pageData.content[0].data.fa}
             </p>
           ) : (
             <p
@@ -85,176 +87,40 @@ export default function Profession() {
                 fontFamily: "EnglishMedium",
               }}
             >
-              Eshareh Advertising Agency is an agency which offers a whole array
-              of services and in the true sense of the word is a "full-service"
-              agency. Our service provision at Eshareh is both unique and
-              effective since it is grounded in couple of core principles:
+              {pageData.content[0].data.en}
             </p>
           )}
         </div>
-        <div
-          className={
-            language ? classes.information : classes.informationReverse
-          }
-        >
-          <div className={classes.row}>
-            <CircleIcon
-              style={position}
-              sx={{ fontSize: 8, color: "#fdb714" }}
-            />
-            {language ? (
+        {paragraph[languageType].map((para, index) => (
+          <div
+            key={index}
+            className={
+              language ? classes.information : classes.informationReverse
+            }
+          >
+            <div
+              className={classes.row}
+              style={{
+                fontFamily: language ? "Farsi" : "English",
+              }}
+            >
+              <CircleIcon
+                style={position}
+                sx={{ fontSize: 8, color: "#fdb714" }}
+              />
               <p
-                style={{
-                  fontFamily: "Farsi",
+                dangerouslySetInnerHTML={{
+                  __html: applyFontToEnglishWords(
+                    para,
+                    "English",
+                    "16px",
+                    language
+                  ),
                 }}
-              >
-                تلاش و باور ما این است که رابطه ما با مشتریانمان، رابطه‌ای
-                بلندمدت، برد-برد و وفادارانه باشد.
-              </p>
-            ) : (
-              <p
-                style={{
-                  fontFamily: "English",
-                }}
-              >
-                We believe in and strive for a long-lasting, win-win
-                relationship with our clients.
-              </p>
-            )}
+              ></p>
+            </div>
           </div>
-        </div>
-        <div
-          className={
-            language ? classes.information : classes.informationReverse
-          }
-        >
-          <div className={classes.row}>
-            <CircleIcon
-              style={position}
-              sx={{ fontSize: 8, color: "#fdb714" }}
-            />
-            {language ? (
-              <p
-                style={{
-                  fontFamily: "Farsi",
-                }}
-              >
-                در تدوین و مدیریت کمپین‌های تبلیغاتی، خلاقیت محور اصلی
-                راه‌کارهایی است که به شرکایمان ارائه می‌دهیم. برای ما خلاقیت هیچ
-                موقع کهنه نمی‌شود و آن را با استانداردهای جهانی، تجربه خود و
-                شناخت استراتژیکی که از بازار کسب و کار ایران داریم، همراه
-                می‌کنیم.
-              </p>
-            ) : (
-              <p
-                style={{
-                  fontFamily: "English",
-                }}
-              >
-                When designing and managing advertising campaigns, creativity is
-                at the heart of the solutions we deliver to our partners. For
-                us, creativity never loses novelty as we continuously align it
-                with global standards, our expertise and our strategic insights
-                into the Iranian business market.
-              </p>
-            )}
-          </div>
-        </div>
-        <div
-          className={
-            language ? classes.information : classes.informationReverse
-          }
-        >
-          <div className={classes.row}>
-            <CircleIcon
-              style={position}
-              sx={{ fontSize: 8, color: "#fdb714" }}
-            />
-            {language ? (
-              <p
-                style={{
-                  fontFamily: "Farsi",
-                }}
-              >
-                آموزش را یکی از ارکان هویتی سازمانی‌مان می‌دانیم و در این مسیر
-                برای همکاران و شرکای تجاری‌مان به طور مستمر دوره‌های آموزشی و
-                ورکشاپ‌های تخصصی برگزار می‌کنیم. ما متکی به دانش روز صنعت
-                بازاریابی و تبلیغات هستیم و  اساتید ممتاز این حوزه‌ها همراهی‌مان
-                می‌کنند.
-              </p>
-            ) : (
-              <p
-                style={{
-                  fontFamily: "English",
-                }}
-              >
-                Education is a cornerstone of our organization's spirit, which
-                is why we consistently organize training courses and specialized
-                workshops for our colleagues and business partners and for this,
-                we highly rely on up-to-date global advertising and marketing
-                knowledge and we are accompanied by best-in-class tutors and
-                mentors in these fields.
-              </p>
-            )}
-          </div>
-        </div>
-        <div
-          className={
-            language ? classes.information : classes.informationReverse
-          }
-        >
-          <div className={classes.row}>
-            <CircleIcon
-              style={position}
-              sx={{ fontSize: 8, color: "#fdb714" }}
-            />
-            {language ? (
-              <p
-                style={{
-                  fontFamily: "Farsi",
-                }}
-              >
-                ما آژانسی تمام‌خدمت هستیم که به بسیاری از نیازهای مشتریانمان در
-                ارتباط با فعالیت‌های بازاریابی پاسخ داده و به آنان خدمت ارائه
-                می‌دهیم. سرویس‌های ما شامل ارائه استراتژی ارتباطی، تدوین
-                کمپین‌های گسترده تبلیغاتی خلاق (تیزر تبلیغاتی، تیزر تلویزیونی،
-                تیزر رادیویی، تبلیغات محیطی و …)، ارائه راهکارهای ارتباطی
-                دیجیتال و تدوین کمپین‌های این حوزه (تبلیغات آنلاین، تبلیغات
-                شبکه‎‌های اجتماعی، بازاریابی محتوا و شبکه های اجتماعی، تبلیغات
-                بنری و …)، ارائه ‌راهکارهای رسانه و خرید رسانه تبلیغاتی و محیطی
-                و همین‌طور طراحی و تولید راه‌کارهایی در زمینه تبلیغات{" "}
-                <span
-                  style={{
-                    fontFamily: "English",
-                  }}
-                >
-                  BTL
-                </span>{" "}
-                (محل فروش، سمپلینگ، کمپین‌های نمایشگاهی، غرفه‌سازی، برگزاری
-                رویداد و …) است.
-              </p>
-            ) : (
-              <p
-                style={{
-                  fontFamily: "English",
-                }}
-              >
-                We are a full-service agency dedicated to addressing the diverse
-                marketing needs of our clients with comprehensive and responsive
-                solutions. Our services include communication strategy
-                development, developing extensive creative advertising
-                campaigns(television and radio commercials, and out-of-home
-                advertising, …), offering digital communication solutions and
-                developing digital campaigns(online advertising, social media
-                advertising, content and social media marketing, banner ads, …),
-                offering media solutions, advertising and outdoor media buying,
-                designing and executing Below the Line (BTL) campaigns including
-                but not limited to Point of Sale, sampling, holding exhibitions,
-                booth construction, and event organization.
-              </p>
-            )}
-          </div>
-        </div>
+        ))}
         <div
           className={classes.image}
           onClick={() =>
@@ -266,15 +132,37 @@ export default function Profession() {
           }
         >
           <Image
-            src={profession}
-            blurDataURL={profession}
+            src={mediaData.content[0].link}
+            blurDataURL={mediaData.content[0].link}
             placeholder="blur"
-            alt="image"
+            alt={mediaData.content[0].type}
             layout="fill"
             objectFit="contain"
+            unoptimized={mediaData.content[0].type === "gif"}
           />
         </div>
       </div>
     </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const pageData = await pageModel.findOne({ slug: "profession" });
+    const mediaData = await mediaModel.findOne({ slug: "profession" });
+
+    return {
+      props: {
+        pageData: JSON.parse(JSON.stringify(pageData)),
+        mediaData: JSON.parse(JSON.stringify(mediaData)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }

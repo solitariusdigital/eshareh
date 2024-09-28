@@ -1,12 +1,15 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
+import { useRouter } from "next/router";
 import classes from "./admin.module.scss";
-import SolutionsForm from "@/components/SolutionsForm";
-import TeamForm from "@/components/TeamForm";
-import CoverForm from "@/components/CoverForm";
+import Solutions from "@/components/forms/Solutions";
+import Cover from "@/components/forms/Cover";
+import Pages from "@/components/Pages";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
 import coverModel from "@/models/Cover";
+import pageModel from "@/models/Page";
+import mediaModel from "@/models/Media";
 import Image from "next/legacy/image";
 import Tooltip from "@mui/material/Tooltip";
 import CloseIcon from "@mui/icons-material/Close";
@@ -15,17 +18,18 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import { updateCoverApi } from "@/services/api";
+import { updateCoverApi, deletetCoverApi } from "@/services/api";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
-export default function Admin({ covers }) {
+export default function Admin({ covers, pages, mediaData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const [coversGrid, setCoversGrid] = useState(covers);
   const [text, setText] = useState(false);
-
-  const [formType, setFormType] = useState("solutions" || "team") || "cover";
-  const navigation = ["solutions", "team", "cover"];
+  const [formType, setFormType] = useState("solutions" || "pages" || "covers");
+  const navigation = ["solutions", "pages", "covers"];
+  const router = useRouter();
 
   useEffect(() => {
     if (permissionControl !== "admin") {
@@ -43,7 +47,7 @@ export default function Admin({ covers }) {
       text: text,
     };
     await updateCoverApi(cover);
-    window.location.assign("/admin");
+    router.reload(router.asPath);
   };
 
   const handleColorChange = (value, id) => {
@@ -60,6 +64,15 @@ export default function Admin({ covers }) {
     newCovers[coverIndex].text = value;
     setCoversGrid(newCovers);
     setText(value);
+  };
+
+  const deleteCover = async (index) => {
+    let confirmationMessage = "حذف مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      await deletetCoverApi(coversGrid[index]["_id"]);
+      router.reload(router.asPath);
+    }
   };
 
   return (
@@ -80,26 +93,27 @@ export default function Admin({ covers }) {
           </p>
         ))}
       </div>
-      {formType === "solutions" && <SolutionsForm />}
-      {formType === "team" && <TeamForm />}
-      {formType === "cover" && <CoverForm />}
-      {formType === "cover" && (
-        <div className={classes.preview}>
-          {coversGrid.map((project, index) => (
-            <div key={index} className={classes.mediaContainer}>
-              <Fragment>
-                <h3
-                  onClick={() => Router.push(project.link)}
+      {formType === "solutions" && <Solutions />}
+      {formType === "covers" && <Cover />}
+      {formType === "pages" && <Pages pages={pages} mediaData={mediaData} />}
+      {formType === "covers" && (
+        <div className={classes.coverContainer}>
+          {coversGrid
+            .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+            .map((cover, index) => (
+              <div key={index} className={classes.cover}>
+                <p
+                  className={language ? classes.titleReverse : classes.title}
                   style={{
                     fontFamily: language ? "Farsi" : "English",
                   }}
-                  className={classes.title}
+                  onClick={() => Router.push(cover.link)}
                 >
-                  {project.title[languageType]}
-                </h3>
+                  {cover.title[languageType]}
+                </p>
                 <div className={classes.action}>
                   <div>
-                    {project.active ? (
+                    {cover.active ? (
                       <Tooltip title="Visible">
                         <VerifiedUserIcon sx={{ color: "#57a361" }} />
                       </Tooltip>
@@ -108,6 +122,13 @@ export default function Admin({ covers }) {
                         <VisibilityOffIcon sx={{ color: "#d40d12" }} />
                       </Tooltip>
                     )}
+                    <Tooltip title="Delete">
+                      <DeleteOutlineIcon
+                        className="icon"
+                        sx={{ color: "#d40d12" }}
+                        onClick={() => deleteCover(index)}
+                      />
+                    </Tooltip>
                   </div>
                   <div className={classes.input}>
                     <input
@@ -118,24 +139,24 @@ export default function Admin({ covers }) {
                       id="color"
                       name="color"
                       onChange={(e) =>
-                        handleColorChange(e.target.value, project["_id"])
+                        handleColorChange(e.target.value, cover["_id"])
                       }
-                      value={project.color}
+                      value={cover.color}
                       autoComplete="off"
                       maxLength={6}
                     />
-                    {project.text ? (
+                    {cover.text ? (
                       <Tooltip title="Hide">
                         <RadioButtonCheckedIcon
                           className="icon"
-                          onClick={() => handleText(false, project["_id"])}
+                          onClick={() => handleText(false, cover["_id"])}
                         />
                       </Tooltip>
                     ) : (
                       <Tooltip title="Show">
                         <RadioButtonUncheckedIcon
                           className="icon"
-                          onClick={() => handleText(true, project["_id"])}
+                          onClick={() => handleText(true, cover["_id"])}
                         />
                       </Tooltip>
                     )}
@@ -147,7 +168,6 @@ export default function Admin({ covers }) {
                         onClick={() => manageCover("hide", index)}
                       />
                     </Tooltip>
-
                     <Tooltip title="Show">
                       <TaskAltIcon
                         className="icon"
@@ -156,29 +176,30 @@ export default function Admin({ covers }) {
                     </Tooltip>
                   </div>
                 </div>
-                {project.coverMedia.type === "image" ? (
-                  <Image
-                    src={project.coverMedia.link}
-                    blurDataURL={project.coverMedia.link}
-                    placeholder="blur"
-                    alt={project.title[languageType]}
-                    layout="fill"
-                    objectFit="cover"
-                    as="image"
-                    priority
-                  />
-                ) : (
-                  <video
-                    className={classes.media}
-                    src={project.coverMedia.link + "#t=0.1"}
-                    controls
-                    playsInline
-                    preload="metadata"
-                  />
-                )}
-              </Fragment>
-            </div>
-          ))}
+                <div className={classes.media}>
+                  {cover.coverMedia.type === "image" ? (
+                    <Image
+                      src={cover.coverMedia.link}
+                      blurDataURL={cover.coverMedia.link}
+                      placeholder="blur"
+                      alt={cover.title[languageType]}
+                      layout="fill"
+                      objectFit="cover"
+                      as="image"
+                      priority
+                    />
+                  ) : (
+                    <video
+                      className={classes.media}
+                      src={cover.coverMedia.link + "#t=0.1"}
+                      controls
+                      playsInline
+                      preload="metadata"
+                    />
+                  )}
+                </div>
+              </div>
+            ))}
         </div>
       )}
     </div>
@@ -190,9 +211,14 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const covers = await coverModel.find();
+    const pages = await pageModel.find();
+    const mediaData = await mediaModel.find();
+
     return {
       props: {
         covers: JSON.parse(JSON.stringify(covers)),
+        pages: JSON.parse(JSON.stringify(pages)),
+        mediaData: JSON.parse(JSON.stringify(mediaData)),
       },
     };
   } catch (error) {

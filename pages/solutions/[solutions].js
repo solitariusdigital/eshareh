@@ -22,6 +22,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import StarIcon from "@mui/icons-material/Star";
 import Tooltip from "@mui/material/Tooltip";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 import {
   getSolutionApi,
   updateSolutionApi,
@@ -33,8 +35,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import logoEnglish from "@/assets/logoEnglish.svg";
-import logoFarsi from "@/assets/logoFarsi.svg";
 
 export default function Solution({ solutions, projectTitle }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -528,6 +528,7 @@ export default function Solution({ solutions, projectTitle }) {
                       __html: applyFontToEnglishWords(
                         project[languageType].brief,
                         "English",
+                        "16px",
                         language
                       ),
                     }}
@@ -803,6 +804,7 @@ export default function Solution({ solutions, projectTitle }) {
                               __html: applyFontToEnglishWords(
                                 project[languageType].solution,
                                 "English",
+                                "16px",
                                 language
                               ),
                             }}

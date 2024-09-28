@@ -1,20 +1,17 @@
-import { useContext, useState } from "react";
-import { StateContext } from "@/context/stateContext";
+import { useState } from "react";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { createCoverApi } from "@/services/api";
 import Image from "next/legacy/image";
+import loaderImage from "@/assets/loader.png";
 import {
   fourGenerator,
   sixGenerator,
   uploadMedia,
   areAllStatesValid,
 } from "@/services/utility";
-import loaderImage from "@/assets/loader.png";
 
-export default function CoverForm() {
-  const { language, setLanguage } = useContext(StateContext);
-
+export default function Cover() {
   const [title, setTitle] = useState({ en: "", fa: "" });
   const [media, setMedia] = useState("");
   const [link, setLink] = useState("");
@@ -73,8 +70,8 @@ export default function CoverForm() {
   };
 
   return (
-    <div className={classes.form}>
-      <div className={classes.formSection}>
+    <div className={classes.container}>
+      <div className={classes.form}>
         <div
           style={{
             fontFamily: "English",
@@ -135,39 +132,16 @@ export default function CoverForm() {
               autoComplete="off"
             />
           </div>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p className={classes.label}>
-                Hex color code
-                <span>*</span>
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() => setColor("")}
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              style={{
-                fontFamily: "English",
-              }}
-              type="text"
-              placeholder="fdb714"
-              id="color"
-              name="color"
-              onChange={(e) => setColor(e.target.value)}
-              value={color}
-              autoComplete="off"
-              maxLength={6}
-            />
-          </div>
         </div>
-        <div
-          style={{
-            fontFamily: "Farsi",
-          }}
-        >
-          <div className={classes.input}>
+      </div>
+      <div className={classes.form}>
+        <div>
+          <div
+            className={classes.input}
+            style={{
+              fontFamily: "Farsi",
+            }}
+          >
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
@@ -202,100 +176,136 @@ export default function CoverForm() {
               dir="rtl"
             />
           </div>
-        </div>
-      </div>
-      <div className={classes.navigation}>
-        <p
-          className={mediaType === "video" ? classes.navActive : classes.nav}
-          onClick={() => {
-            setMediaType("video");
-            setMedia("");
-          }}
-        >
-          ویدئو
-        </p>
-        <p
-          className={mediaType === "image" ? classes.navActive : classes.nav}
-          onClick={() => {
-            setMediaType("image");
-            setMedia("");
-          }}
-        >
-          عکس
-        </p>
-      </div>
-      {mediaType === "image" && (
-        <div
-          className={classes.input}
-          style={{
-            fontFamily: "Farsi",
-          }}
-        >
-          <label className="file">
-            <input
-              onChange={(e) => {
-                setMedia(e.target.files[0]);
-              }}
-              type="file"
-              accept="image/*"
-            />
-            <p>عکس</p>
-          </label>
-          {media !== "" && (
-            <div className={classes.preview}>
+          <div
+            className={classes.input}
+            style={{
+              fontFamily: "English",
+            }}
+          >
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                Hex color code
+                <span>*</span>
+              </p>
               <CloseIcon
                 className="icon"
-                onClick={() => setMedia("")}
+                onClick={() => setColor("")}
                 sx={{ fontSize: 16 }}
               />
-              <Image
-                className={classes.media}
-                width={170}
-                height={200}
-                objectFit="contain"
-                src={URL.createObjectURL(media)}
-                alt="image"
-                priority
-              />
             </div>
-          )}
-        </div>
-      )}
-      {mediaType === "video" && (
-        <div
-          className={classes.input}
-          style={{
-            fontFamily: "Farsi",
-          }}
-        >
-          <label className="file">
             <input
-              onChange={(e) => {
-                setMedia(e.target.files[0]);
+              style={{
+                fontFamily: "English",
               }}
-              type="file"
-              accept="video/*"
+              type="text"
+              placeholder="fdb714"
+              id="color"
+              name="color"
+              onChange={(e) => setColor(e.target.value)}
+              value={color}
+              autoComplete="off"
+              maxLength={6}
             />
-            <p>ویدئو</p>
-          </label>
-          {media !== "" && (
-            <div className={classes.preview}>
-              <CloseIcon
-                className="icon"
-                onClick={() => setMedia("")}
-                sx={{ fontSize: 16 }}
-              />
-              <video
-                className={classes.media}
-                preload="metadata"
-                src={URL.createObjectURL(media)}
-                controls
-              />
-            </div>
-          )}
+          </div>
         </div>
-      )}
+      </div>
       <div className={classes.formAction}>
+        <div
+          className={classes.navigation}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
+          <p
+            className={mediaType === "video" ? classes.navActive : classes.nav}
+            onClick={() => {
+              setMediaType("video");
+              setMedia("");
+            }}
+          >
+            ویدئو
+          </p>
+          <p
+            className={mediaType === "image" ? classes.navActive : classes.nav}
+            onClick={() => {
+              setMediaType("image");
+              setMedia("");
+            }}
+          >
+            عکس
+          </p>
+        </div>
+        {mediaType === "image" && (
+          <div
+            className={classes.input}
+            style={{
+              fontFamily: "Farsi",
+            }}
+          >
+            <label className="file">
+              <input
+                onChange={(e) => {
+                  setMedia(e.target.files[0]);
+                }}
+                type="file"
+                accept="image/*"
+              />
+              <p>عکس</p>
+            </label>
+            {media !== "" && (
+              <div className={classes.preview}>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setMedia("")}
+                  sx={{ fontSize: 16 }}
+                />
+                <Image
+                  className={classes.media}
+                  width={170}
+                  height={200}
+                  objectFit="contain"
+                  src={URL.createObjectURL(media)}
+                  alt="image"
+                  priority
+                />
+              </div>
+            )}
+          </div>
+        )}
+        {mediaType === "video" && (
+          <div
+            className={classes.input}
+            style={{
+              fontFamily: "Farsi",
+            }}
+          >
+            <label className="file">
+              <input
+                onChange={(e) => {
+                  setMedia(e.target.files[0]);
+                }}
+                type="file"
+                accept="video/*"
+              />
+              <p>ویدئو</p>
+            </label>
+            {media !== "" && (
+              <div className={classes.preview}>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setMedia("")}
+                  sx={{ fontSize: 16 }}
+                />
+                <video
+                  className={classes.media}
+                  preload="metadata"
+                  src={URL.createObjectURL(media)}
+                  controls
+                />
+              </div>
+            )}
+          </div>
+        )}
         <p className={classes.alert}>{alert}</p>
         {loader && (
           <div>
@@ -305,7 +315,7 @@ export default function CoverForm() {
         <button
           disabled={disableButton}
           style={{
-            fontFamily: language ? "FarsiMedium" : "FarsiMedium",
+            fontFamily: "FarsiMedium",
           }}
           onClick={() => handleSubmit()}
         >

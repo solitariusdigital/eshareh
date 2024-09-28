@@ -44,37 +44,39 @@ export default function CoverSlider({ covers }) {
         modules={[Navigation, Autoplay]}
         onSlideChange={updateIndex}
       >
-        {covers.map((project, index) => (
-          <SwiperSlide key={index}>
-            <div
-              className={classes.media}
-              onClick={() => Router.push(project.link)}
-            >
-              {project.coverMedia.type === "image" ? (
-                <Image
-                  src={project.coverMedia.link}
-                  blurDataURL={project.coverMedia.link}
-                  placeholder="blur"
-                  alt={project.title[languageType]}
-                  layout="fill"
-                  objectFit="cover"
-                  as="image"
-                  priority
-                />
-              ) : (
-                <video
-                  className={classes.video}
-                  src={project.coverMedia.link + "#t=0.1"}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                />
-              )}
-            </div>
-          </SwiperSlide>
-        ))}
+        {covers
+          .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+          .map((project, index) => (
+            <SwiperSlide key={index}>
+              <div
+                className={classes.media}
+                onClick={() => Router.push(project.link)}
+              >
+                {project.coverMedia.type === "image" ? (
+                  <Image
+                    src={project.coverMedia.link}
+                    blurDataURL={project.coverMedia.link}
+                    placeholder="blur"
+                    alt={project.title[languageType]}
+                    layout="fill"
+                    objectFit="cover"
+                    as="image"
+                    priority
+                  />
+                ) : (
+                  <video
+                    className={classes.video}
+                    src={project.coverMedia.link + "#t=0.1"}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                  />
+                )}
+              </div>
+            </SwiperSlide>
+          ))}
       </Swiper>
       <div
         style={{ color: `#${covers[current].color}` }}

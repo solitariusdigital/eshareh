@@ -3,24 +3,22 @@ import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
 import Image from "next/legacy/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Mousewheel, Autoplay, Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
 import { NextSeo } from "next-seo";
-import { getUsersApi, deletetUserApi } from "@/services/api";
-import Tooltip from "@mui/material/Tooltip";
-import CloseIcon from "@mui/icons-material/Close";
+import { getUsersApi } from "@/services/api";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
-import { enToFaDigits } from "@/services/utility";
+import dbConnect from "@/services/dbConnect";
+import pageModel from "@/models/Page";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Mousewheel, Autoplay, Navigation } from "swiper/modules";
+import { applyFontToEnglishWords } from "@/services/utility";
+import "swiper/css";
+import "swiper/css/navigation";
 
-export default function About() {
+export default function About({ pageData }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
-  const { permissionControl, setPermissionControl } = useContext(StateContext);
-
   const [users, setUsers] = useState([]);
   const [current, setCurrent] = useState(0);
 
@@ -28,7 +26,9 @@ export default function About() {
     const fetchData = async () => {
       try {
         const users = await getUsersApi();
-        let setOne = shuffleUsers(users.filter((user) => user.active));
+        let setOne = shuffleUsers(
+          users.filter((user) => user.permission === "user")
+        );
         let setTwo = [...setOne];
         setUsers(setOne.concat(setTwo));
       } catch (error) {
@@ -80,15 +80,6 @@ export default function About() {
     setCurrent(currentSlide);
   };
 
-  const deleteUser = async (index) => {
-    let confirmationMessage = "  حذف مطمئنی؟";
-    let confirm = window.confirm(confirmationMessage);
-    if (confirm) {
-      await deletetUserApi(users[index]["_id"]);
-      window.location.assign("/about");
-    }
-  };
-
   const shuffleUsers = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       // Generate a random index from 0 to i
@@ -137,44 +128,16 @@ export default function About() {
       />
       <div className={classes.container}>
         <div className={language ? classes.title : classes.titleReverse}>
-          {language ? (
-            <p
-              style={{
-                fontFamily: "Farsi",
-              }}
-            >
-              آژانس اشاره، به عنوان یک آژانس تبلیغاتی از سال{" "}
-              <span
-                style={{
-                  fontFamily: "FarsiBold",
-                }}
-              >
-                {enToFaDigits(1376)}
-              </span>{" "}
-              فعالیت خود را آغاز کرده است. در طی این سال‌ها در نتیجه فرآیندی
-              ارگانیک، به یک آژانس ارتباطات بازاریابی تمام‌خدمت با رویکردی خلاق
-              و راه‌حل‌ محور تبدیل شده است.
-            </p>
-          ) : (
-            <p
-              style={{
-                fontFamily: "English",
-              }}
-            >
-              Ertebat Tasvir Eshareh Agency began its journey as an advertising
-              agency in{" "}
-              <span
-                style={{
-                  fontFamily: "EnglishMedium",
-                }}
-              >
-                1997
-              </span>
-              . Through organic evolution over the years, it has transformed
-              into a full-service marketing communications agency with a
-              creative and solution-oriented approach.
-            </p>
-          )}
+          <p
+            dangerouslySetInnerHTML={{
+              __html: applyFontToEnglishWords(
+                pageData.content[0].data[languageType],
+                language ? "FarsiBold" : "EnglishMedium",
+                "16px",
+                language
+              ),
+            }}
+          ></p>
         </div>
         <div
           className={
@@ -182,29 +145,10 @@ export default function About() {
           }
           style={{ height: setInformationHeight() }}
         >
-          <h1>{language ? "تیم مدیران" : "Management Team"}</h1>
-          {language ? (
-            <div>
-              <p>
-                شاکله آژانس اشاره از تیمی متخصص و منحصربه‌فرد تشکیل شده است که
-                در کنار یکدیگر و با همکاری هم راه‌کارهایی خلاقانه ارائه می‌دهند
-                و رویکردی راه‌حل‌محور دارند تا پاسخگوی نیاز مشتریانمان باشند.
-                برای همین، کار تیمی برای آژانس تمام‌ خدمت اشاره در اولویت بوده و
-                همیشه یکی از ارزش‌های اصلی این سازمان به حساب می‌آید.
-              </p>
-            </div>
-          ) : (
-            <div>
-              <p>
-                Eshareh's structure is made up of a specialized and unique team
-                of experts who collaborate together to provide creative
-                solutions and through a solution-centric approach, meet the
-                needs of the clients. For this, teamwork is a top priority for
-                Eshareh full service agency and is always considered as one of
-                the fundamental values of the organization.
-              </p>
-            </div>
-          )}
+          <h1>{pageData.content[1].data[languageType]}</h1>
+          <div>
+            <p>{pageData.content[2].data[languageType]}</p>
+          </div>
         </div>
         {users.length > 0 && (
           <div className={classes.swiperContainer}>
@@ -250,23 +194,29 @@ export default function About() {
                 {users[current]["name"][languageType]}
               </h1>
               <h3>{users[current]["title"][languageType]}</h3>
-              {permissionControl === "admin" && (
-                <div>
-                  <Tooltip title="Delete">
-                    <CloseIcon
-                      style={{
-                        cursor: "pointer",
-                      }}
-                      sx={{ color: "#d40d12" }}
-                      onClick={() => deleteUser(current)}
-                    />
-                  </Tooltip>
-                </div>
-              )}
             </div>
           </div>
         )}
       </div>
     </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const pageData = await pageModel.findOne({ slug: "about" });
+
+    return {
+      props: {
+        pageData: JSON.parse(JSON.stringify(pageData)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }

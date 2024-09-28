@@ -15,14 +15,37 @@ import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 import coverModel from "@/models/Cover";
+import pageModel from "@/models/Page";
+import mediaModel from "@/models/Media";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
+import { applyFontToEnglishWords } from "@/services/utility";
 
-export default function Home({ solutions, covers }) {
+export default function Home({ solutions, covers, pageData, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { solutionsCategory, setSolutionsCategory } = useContext(StateContext);
-
+  const [titleOne, setTitleOne] = useState({
+    en: pageData.content[0].data.en,
+    fa: pageData.content[0].data.fa,
+  });
+  const [paragraphOne, setParagraphOne] = useState({
+    en: [pageData.content[1].data.en.split("\n\n")][0],
+    fa: [pageData.content[1].data.fa.split("\n\n")][0],
+  });
+  const [titleTwo, setTitleTwo] = useState({
+    en: pageData.content[2].data.en,
+    fa: pageData.content[2].data.fa,
+  });
+  const [titleThree, setTitleThree] = useState({
+    en: pageData.content[3].data.en,
+    fa: pageData.content[3].data.fa,
+  });
+  const [paragraphTwo, setParagraphTwo] = useState({
+    en: [pageData.content[4].data.en.split("\n\n")][0],
+    fa: [pageData.content[4].data.fa.split("\n\n")][0],
+  });
   const [hoverOne, setHoverOne] = useState(false);
   const [hoverTwo, setHoverTwo] = useState(false);
   const [hoverThree, setHoverThree] = useState(false);
@@ -89,103 +112,33 @@ export default function Home({ solutions, covers }) {
             language ? classes.information : classes.informationReverse
           }
         >
-          {language ? (
-            <h1
-              style={{
-                fontFamily: "FarsiMedium",
-                marginBottom: "20px",
-              }}
-            >
-              دریچه‌ای نو به دنیایی از خلاقیت
-            </h1>
-          ) : (
-            <h1
-              style={{
-                fontFamily: "EnglishMedium",
-                marginBottom: "20px",
-              }}
-            >
-              A New Window to the World of Creativity
-            </h1>
-          )}
-          {language ? (
-            <h2
-              style={{
-                fontFamily: "FarsiLight",
-              }}
-            >
-              برای حل هر مساله‌ای در زمینه کسب و کار، خلاقیت کلیدواژه اصلی است و
-              در آژانس‌های تبلیغاتی، خلاقیت نه تنها راه‌حل بلکه جوهره وجودی
-              آن‌هاست.
-            </h2>
-          ) : (
-            <h2
-              style={{
-                fontFamily: "EnglishLight",
-              }}
-            >
-              Creativity stands as the essential key to unlocking solutions in
-              the realm of business, however, for advertising agencies,
-              creativity isn't just a solution; it's the very essence of their
-              existence.
-            </h2>
-          )}
-          {language ? (
-            <h2
-              style={{
-                fontFamily: "FarsiLight",
-              }}
-            >
-              ما در اشاره در جایگاه یک آژانس تبلیغاتی برای رسیدن به راه‌کارهایی
-              خلاق، ارزش‌هایی را بنا کردیم که باورمند و پایبند به آن‌ها هستیم.
-              ارزش‌هایی که ما به آن معتقدیم شامل کار تیمی، پیشرو بودن و ساختن
-              رابطه‌ای بلندمدت و وفادارانه هم با مشتریانمان و هم با همکارانمان
-              می‌شود و در کنار آن، متکی به تجربه‌مان هستیم تا مسیر رسیدن به
-              خلاقیت را برای خود هموار کنیم. تمامی آنچه گفته شد ماهیت ما را در
-              "اشاره" شکل می‌دهد. ماهیتی که هدف آن نگاهی متفاوت به دنیای کسب و
-              کار است همراه با گشایش دریچه‌ای نو به دنیای خلاقیت. 
-            </h2>
-          ) : (
-            <h2
-              style={{
-                fontFamily: "EnglishLight",
-              }}
-            >
-              At Eshareh, as an advertising agency, we have established a set of
-              core values which we rigorously uphold to drive us towards
-              creative solutions. The values we highly believe in include
-              teamwork, proactivity, and fostering loyal, long-lasting
-              relationships with both our clients and colleagues and besides, we
-              rely on our experience to pave the way to creativity. All that
-              said, shapes our essence at "Eshareh", the essence that aims at
-              providing a novel outlook on the business landscape coupled with a
-              new window to the world of creativity.
-            </h2>
-          )}
-          <div
+          <h1
             style={{
-              marginTop: "20px",
+              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              marginBottom: "12px",
+            }}
+          >
+            {titleOne[languageType]}
+          </h1>
+          {paragraphOne[languageType].map((para, index) => (
+            <h2
+              key={index}
+              style={{
+                fontFamily: language ? "FarsiLight" : "EnglishLight",
+                marginBottom: "12px",
+              }}
+            >
+              {para}
+            </h2>
+          ))}
+          <h1
+            style={{
+              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
               color: "#fdb714",
             }}
           >
-            {language ? (
-              <h1
-                style={{
-                  fontFamily: "FarsiMedium",
-                }}
-              >
-                "اشــــــــاره" دریچه‌ای نو می‌گشاید به دنیایی از خلاقیت.
-              </h1>
-            ) : (
-              <h1
-                style={{
-                  fontFamily: "EnglishMedium",
-                }}
-              >
-                "Eshareh" opens a new window to the world of creativity.
-              </h1>
-            )}
-          </div>
+            {titleTwo[languageType]}
+          </h1>
         </div>
       </section>
       <div className={classes.videoContainer}>
@@ -206,110 +159,40 @@ export default function Home({ solutions, covers }) {
         >
           <h1
             style={{
-              fontFamily: language ? "FarsiBold" : "EnglishMedium",
+              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
             }}
           >
-            {language ? "درباره ما" : "About Us"}
+            {titleThree[languageType]}
           </h1>
-          {language ? (
+          {paragraphTwo[languageType].map((para, index) => (
             <h2
+              key={index}
               style={{
-                fontFamily: "FarsiLight",
+                fontFamily: language ? "FarsiLight" : "EnglishLight",
+                marginBottom: "12px",
               }}
-            >
-              آژانس اشاره، به عنوان یک آژانس تبلیغاتی از سال{" "}
-              <span
-                style={{
-                  fontFamily: "FarsiBold",
-                }}
-              >
-                {enToFaDigits(1376)}
-              </span>{" "}
-              فعالیت خود را آغاز کرده است. در طی این سال‌ها در نتیجه فرآیندی
-              ارگانیک، به یک آژانس ارتباطات بازاریابی تمام‌خدمت با رویکردی خلاق
-              و راه‌حل‌ محور تبدیل شده است.
-            </h2>
-          ) : (
-            <h2
-              style={{
-                fontFamily: "EnglishLight",
+              dangerouslySetInnerHTML={{
+                __html: applyFontToEnglishWords(
+                  para,
+                  "English",
+                  "24px",
+                  language
+                ),
               }}
-            >
-              Ertebat Tasvir Eshareh Agency began its journey as an advertising
-              agency in{" "}
-              <span
-                style={{
-                  fontFamily: "EnglishMedium",
-                }}
-              >
-                1997
-              </span>
-              . Through organic evolution over the years, it has transformed
-              into a full-service marketing communications agency with a
-              creative and solution-oriented approach.
-            </h2>
-          )}
-          {language ? (
-            <h2
-              style={{
-                fontFamily: "FarsiLight",
-              }}
-            >
-              در حال حاضر این آژانس، به عنوان عضوی از خانواده{" "}
-              <span
-                style={{
-                  fontFamily: "English",
-                }}
-              >
-                dnaunion
-              </span>{" "}
-              به طیف گسترده‌ای از مشتریان بومی و بین‌المللی خدمات کیفی ارائه
-              می‌کند. این خدمات با تکیه بر خلاقیت به عنوان جوهره اصلی کار ما و
-              با فهم درستی از استراتژی‌های بازاریابی مبتنی بر دانش روز،
-              پژوهش‌مدار و بومی‌شده‌ شکل گرفته است. به همین سبب بر این باوریم که
-              می‌توانیم چشم‌انداز گسترده‌ای در زمینه ارتباطات بازاریابی موثر
-              برای مشتریانمان تعریف کنیم. همچنین از آنجا که رشد ما به رشد
-              مشتریان ما بستگی دارد، ما به نوعی از همکاری اعتقاد داریم که
-              گونه‌ای از شراکت راهبردی بلندمدت است و نه صرفاً ارائه خدمات.
-            </h2>
-          ) : (
-            <h2
-              style={{
-                fontFamily: "EnglishLight",
-              }}
-            >
-              Presently, as a member of the{" "}
-              <span
-                style={{
-                  fontFamily: "EnglishMedium",
-                }}
-              >
-                dnaunion
-              </span>{" "}
-              family, Eshareh delivers quality services to a wide range of local
-              and international clients. All these services, rooted in
-              creativity, as the essence of our work, are formed through a solid
-              understanding of the leading-edge, research-oriented and localized
-              marketing strategies. That’s why we believe we can open new
-              horizons for our clients in effective and innovative marketing
-              communications. Furthermore, as our growth is intricately bound to
-              the growth of our clients, we firmly believe in a collaborative
-              approach rather than mere service provision.
-            </h2>
-          )}
+            ></h2>
+          ))}
         </div>
       </section>
       <section className={classes.animeContainer}>
         <div className={classes.anime}>
           <Image
-            src={smokingFish}
-            blurDataURL={smokingFish}
+            src={mediaData.content[0].link}
+            blurDataURL={mediaData.content[0].link}
             placeholder="blur"
-            alt="gif"
+            alt={mediaData.content[0].type}
             layout="fill"
             objectFit="contain"
-            as="image"
-            unoptimized
+            unoptimized={mediaData.content[1].type === "gif"}
           />
         </div>
       </section>
@@ -492,14 +375,13 @@ export default function Home({ solutions, covers }) {
       </section>
       <section className={classes.imageContainer}>
         <Image
-          src={hometwo}
-          blurDataURL={hometwo}
+          src={mediaData.content[1].link}
+          blurDataURL={mediaData.content[1].link}
           placeholder="blur"
-          alt="image"
+          alt={mediaData.content[1].type}
           layout="fill"
           objectFit="contain"
-          as="image"
-          priority
+          unoptimized={mediaData.content[1].type === "gif"}
         />
       </section>
       <div className={classes.arrowDown}>
@@ -529,6 +411,8 @@ export async function getServerSideProps(context) {
     await dbConnect();
     const solutions = await solutionModel.find();
     const covers = await coverModel.find();
+    const pageData = await pageModel.findOne({ slug: "home" });
+    const mediaData = await mediaModel.findOne({ slug: "home" });
 
     let activeSolutions = solutions
       .filter((project) => project.active)
@@ -540,6 +424,8 @@ export async function getServerSideProps(context) {
       props: {
         solutions: JSON.parse(JSON.stringify(activeSolutions)),
         covers: JSON.parse(JSON.stringify(activeCovers)),
+        pageData: JSON.parse(JSON.stringify(pageData)),
+        mediaData: JSON.parse(JSON.stringify(mediaData)),
       },
     };
   } catch (error) {

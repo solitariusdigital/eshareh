@@ -1,9 +1,10 @@
 import { Fragment, useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./SolutionsForm.module.scss";
+import classes from "./Form.module.scss";
 import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";
+import { createSolutionApi, updateSolutionApi } from "@/services/api";
 import {
   fourGenerator,
   sixGenerator,
@@ -11,12 +12,9 @@ import {
   replaceSpacesAndHyphens,
   areAllStatesValid,
 } from "@/services/utility";
-import { createSolutionApi, updateSolutionApi } from "@/services/api";
 
-export default function SolutionsForm() {
-  const { language, setLanguage } = useContext(StateContext);
+export default function Solutions() {
   const { editSolution, setEditSolution } = useContext(StateContext);
-
   const [title, setTitle] = useState(
     editSolution
       ? { en: editSolution.en.title, fa: editSolution.fa.title }
@@ -48,8 +46,6 @@ export default function SolutionsForm() {
       : { en: "", fa: "" }
   );
 
-  const categories = ["Advertising", "Media", "Digital"];
-
   const [imagesPreview, setImagesPreview] = useState([]);
   const [videosPreview, setVideosPreview] = useState([]);
   const [voicesPreview, setVoicesPreview] = useState([]);
@@ -64,6 +60,7 @@ export default function SolutionsForm() {
   const [progress, setProgress] = useState(0);
 
   const sourceLink = "https://eshareh.storage.iran.liara.space";
+  const categories = ["Advertising", "Media", "Digital"];
 
   const selectCategories = {
     Advertising: {
@@ -269,10 +266,9 @@ export default function SolutionsForm() {
         <div
           className={classes.form}
           style={{
-            fontFamily: language ? "English" : "English",
+            fontFamily: "English",
           }}
         >
-          <p className={classes.title}>English</p>
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
@@ -480,10 +476,9 @@ export default function SolutionsForm() {
         <div
           className={classes.form}
           style={{
-            fontFamily: language ? "Farsi" : "Farsi",
+            fontFamily: "Farsi",
           }}
         >
-          <p className={classes.title}>فارسی</p>
           <div className={classes.input}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
@@ -666,7 +661,7 @@ export default function SolutionsForm() {
       <div
         className={classes.formAction}
         style={{
-          fontFamily: language ? "Farsi" : "Farsi",
+          fontFamily: "Farsi",
         }}
       >
         <div className={classes.mediaContainer}>
@@ -772,7 +767,7 @@ export default function SolutionsForm() {
         {loader && (
           <div
             style={{
-              fontFamily: language ? "English" : "English",
+              fontFamily: "English",
             }}
           >
             <p>Uploading {Math.round(progress)} %</p>
@@ -783,7 +778,7 @@ export default function SolutionsForm() {
           disabled={disableButton}
           onClick={() => handleSubmit()}
           style={{
-            fontFamily: language ? "FarsiMedium" : "FarsiMedium",
+            fontFamily: "FarsiMedium",
           }}
         >
           ذخیره
