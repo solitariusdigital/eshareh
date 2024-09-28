@@ -188,7 +188,7 @@ export default function Home({ solutions, covers, pageData, mediaData }) {
             as={mediaData.content[0].type}
             layout="fill"
             objectFit="contain"
-            unoptimized={mediaData.content[1].type === "gif"}
+            unoptimized={mediaData.content[0].type === "gif"}
             priority
           />
         </div>
