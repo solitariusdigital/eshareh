@@ -24,9 +24,9 @@ export default function Contact({ pages, mediaData }) {
   const [secLocationLink, setSecLocationLink] = useState({ en: "", fa: "" });
   const [contactContent, setContactContent] = useState({});
   const [mediaContent, setMediaContent] = useState({});
-  const [graphicType, setGraphicType] = useState("image" || "gif");
-  const [mainMedia, setMainMedia] = useState("");
-  const [graphicMedia, setGraphicMedia] = useState("");
+  const [mediaTwoType, setMediaTwoType] = useState("image" || "gif");
+  const [mediaOne, setMediaOne] = useState("");
+  const [mediaTwo, setMediaTwo] = useState("");
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
@@ -165,39 +165,45 @@ export default function Contact({ pages, mediaData }) {
   const updateContactMedia = async () => {
     setLoader(true);
     setDisableButton(true);
-    if (mainMedia || graphicMedia) {
-      const currentMediaLink = mediaContent.content[0].link;
-      const currentGraphicLink = mediaContent.content[1].link;
-      const mediaFormat = ".jpg";
-      const graphicFormat = graphicType === "image" ? ".jpg" : ".gif";
+    if (mediaOne || mediaTwo) {
+      const currentMediaOneLink = mediaContent.content[0].link;
+      const currentMediaTwiLink = mediaContent.content[1].link;
       const mediaFolder = "page";
       const subFolder = "contact";
-      const mediaId = `img${fourGenerator()}`;
-      const graphicId = `img${fourGenerator()}`;
+      const mediaOneFormat = ".jpg";
+      const mediaTwoFormat = mediaTwoType === "image" ? ".jpg" : ".gif";
+      const mediaOneId = `img${fourGenerator()}`;
+      const mediaTwoId = `img${fourGenerator()}`;
 
-      // Create new media links if mainMedia or graphicMedia is provided
-      const mediaLink = mainMedia
-        ? `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`
-        : currentMediaLink;
-      const graphicLink = graphicMedia
-        ? `${sourceLink}/${mediaFolder}/${subFolder}/${graphicId}${graphicFormat}`
-        : currentGraphicLink;
+      // Create new media links if mediaOne or mediaTwo is provided
+      const mediaOneLink = mediaOne
+        ? `${sourceLink}/${mediaFolder}/${subFolder}/${mediaOneId}${mediaOneFormat}`
+        : currentMediaOneLink;
+      const mediaTwoLink = mediaTwo
+        ? `${sourceLink}/${mediaFolder}/${subFolder}/${mediaTwoId}${mediaTwoFormat}`
+        : currentMediaTwiLink;
 
       // Upload media if it's provided
       const uploadPromises = [];
-      if (mainMedia) {
-        uploadPromises.push(
-          uploadMedia(mainMedia, mediaId, mediaFolder, subFolder, mediaFormat)
-        );
-      }
-      if (graphicMedia) {
+      if (mediaOne) {
         uploadPromises.push(
           uploadMedia(
-            graphicMedia,
-            graphicId,
+            mediaOne,
+            mediaOneId,
             mediaFolder,
             subFolder,
-            graphicFormat
+            mediaOneFormat
+          )
+        );
+      }
+      if (mediaTwo) {
+        uploadPromises.push(
+          uploadMedia(
+            mediaTwo,
+            mediaTwoId,
+            mediaFolder,
+            subFolder,
+            mediaTwoFormat
           )
         );
       }
@@ -207,8 +213,8 @@ export default function Contact({ pages, mediaData }) {
         slug: "contact",
         title: "Contact Us",
         content: [
-          { type: "image", link: mediaLink },
-          { type: graphicType, link: graphicLink },
+          { type: "image", link: mediaOneLink },
+          { type: mediaTwoType, link: mediaTwoLink },
         ],
       };
       await updateMediaApi(mediaObject);
@@ -788,18 +794,18 @@ export default function Contact({ pages, mediaData }) {
                 <label className="file">
                   <input
                     onChange={(e) => {
-                      setMainMedia(e.target.files[0]);
+                      setMediaOne(e.target.files[0]);
                     }}
                     type="file"
                     accept="image/*"
                   />
                   <p>عکس کاور اصلی</p>
                 </label>
-                {mainMedia !== "" && (
+                {mediaOne !== "" && (
                   <div className={classes.preview}>
                     <CloseIcon
                       className="icon"
-                      onClick={() => setMainMedia("")}
+                      onClick={() => setMediaOne("")}
                       sx={{ fontSize: 16 }}
                     />
                     <Image
@@ -807,7 +813,7 @@ export default function Contact({ pages, mediaData }) {
                       width={170}
                       height={200}
                       objectFit="contain"
-                      src={URL.createObjectURL(mainMedia)}
+                      src={URL.createObjectURL(mediaOne)}
                       alt="image"
                       priority
                     />
@@ -823,22 +829,22 @@ export default function Contact({ pages, mediaData }) {
               <div className={classes.navigation}>
                 <p
                   className={
-                    graphicType === "gif" ? classes.navActive : classes.nav
+                    mediaTwoType === "gif" ? classes.navActive : classes.nav
                   }
                   onClick={() => {
-                    setGraphicType("gif");
-                    setGraphicMedia("");
+                    setMediaTwoType("gif");
+                    setMediaTwo("");
                   }}
                 >
                   gif
                 </p>
                 <p
                   className={
-                    graphicType === "image" ? classes.navActive : classes.nav
+                    mediaTwoType === "image" ? classes.navActive : classes.nav
                   }
                   onClick={() => {
-                    setGraphicType("image");
-                    setGraphicMedia("");
+                    setMediaTwoType("image");
+                    setMediaTwo("");
                   }}
                 >
                   عکس
@@ -848,25 +854,25 @@ export default function Contact({ pages, mediaData }) {
                 className={classes.input}
                 style={{
                   fontFamily: `${
-                    graphicType === "image" ? "Farsi" : "English"
+                    mediaTwoType === "image" ? "Farsi" : "English"
                   }`,
                 }}
               >
                 <label className="file">
                   <input
                     onChange={(e) => {
-                      setGraphicMedia(e.target.files[0]);
+                      setMediaTwo(e.target.files[0]);
                     }}
                     type="file"
                     accept="image/*"
                   />
-                  <p>{graphicType === "image" ? "عکس" : "gif"}</p>
+                  <p>{mediaTwoType === "image" ? "عکس" : "gif"}</p>
                 </label>
-                {graphicMedia !== "" && (
+                {mediaTwo !== "" && (
                   <div className={classes.preview}>
                     <CloseIcon
                       className="icon"
-                      onClick={() => setGraphicMedia("")}
+                      onClick={() => setMediaTwo("")}
                       sx={{ fontSize: 16 }}
                     />
                     <Image
@@ -874,7 +880,7 @@ export default function Contact({ pages, mediaData }) {
                       width={170}
                       height={200}
                       objectFit="contain"
-                      src={URL.createObjectURL(graphicMedia)}
+                      src={URL.createObjectURL(mediaTwo)}
                       alt="image"
                       priority
                     />
