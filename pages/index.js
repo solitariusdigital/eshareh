@@ -185,6 +185,7 @@ export default function Home({ solutions, covers, pageData, mediaData }) {
             blurDataURL={mediaData.content[0].link}
             placeholder="blur"
             alt={mediaData.content[0].type}
+            as={mediaData.content[0].type}
             layout="fill"
             objectFit="contain"
             unoptimized={mediaData.content[1].type === "gif"}
@@ -375,6 +376,7 @@ export default function Home({ solutions, covers, pageData, mediaData }) {
           blurDataURL={mediaData.content[1].link}
           placeholder="blur"
           alt={mediaData.content[1].type}
+          as={mediaData.content[1].type}
           layout="fill"
           objectFit="contain"
           unoptimized={mediaData.content[1].type === "gif"}

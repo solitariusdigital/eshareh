@@ -136,6 +136,7 @@ export default function Profession({ pageData, mediaData }) {
             blurDataURL={mediaData.content[0].link}
             placeholder="blur"
             alt={mediaData.content[0].type}
+            as={mediaData.content[0].type}
             layout="fill"
             objectFit="contain"
             unoptimized={mediaData.content[0].type === "gif"}
