@@ -4,7 +4,7 @@ import classes from "./Form.module.scss";
 import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";
-import { updatePageApi } from "@/services/api";
+import { updatePageApi, updateMediaApi } from "@/services/api";
 import {
   areAllStatesValid,
   extractParagraphs,
@@ -20,6 +20,7 @@ export default function Home({ pages, mediaData }) {
   const [titleThree, setTitleThree] = useState({ en: "", fa: "" });
   const [paragraphTwo, setParagraphTwo] = useState({ en: "", fa: "" });
   const [homeContent, setHomeContent] = useState({});
+  const [mediaContent, setMediaContent] = useState({});
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
@@ -27,13 +28,16 @@ export default function Home({ pages, mediaData }) {
   const [mediaTwo, setMediaTwo] = useState("");
   const [mediaOneType, setMediaOneType] = useState("image" || "gif");
   const [mediaTwoType, setMediaTwoType] = useState("image" || "gif");
-  const [development, setDevelopment] = useState(false);
+  const sourceLink = "https://eshareh.storage.iran.liara.space";
   const router = useRouter();
+  const [development, setDevelopment] = useState(false);
 
   useEffect(() => {
     let homeContent = pages.find((page) => page.slug === "home");
     const { content } = homeContent;
     setHomeContent(homeContent);
+    let mediaContent = mediaData.find((media) => media.slug === "home");
+    setMediaContent(mediaContent);
     setTitleOne({
       en: content[0].data.en,
       fa: content[0].data.fa,
@@ -57,6 +61,8 @@ export default function Home({ pages, mediaData }) {
   }, [mediaData, pages]);
 
   const updateHomeContent = async () => {
+    setLoader(false);
+    setDisableButton(false);
     const isValid = areAllStatesValid([
       titleOne,
       paragraphOne,
@@ -120,7 +126,68 @@ export default function Home({ pages, mediaData }) {
     router.reload(router.asPath);
   };
 
-  const updateHomeMedia = async () => {};
+  const updateHomeMedia = async () => {
+    setLoader(true);
+    setDisableButton(true);
+    if (mediaOne || mediaTwo) {
+      const currentMediaOneLink = mediaContent.content[0].link;
+      const currentMediaTwiLink = mediaContent.content[1].link;
+      const mediaFolder = "page";
+      const subFolder = "home";
+      const mediaOneFormat = mediaOneType === "image" ? ".jpg" : ".gif";
+      const mediaTwoFormat = mediaTwoType === "image" ? ".jpg" : ".gif";
+      const mediaOneId = `img${fourGenerator()}`;
+      const mediaTwoId = `img${fourGenerator()}`;
+
+      // Create new media links if mediaOne or mediaTwo is provided
+      const mediaOneLink = mediaOne
+        ? `${sourceLink}/${mediaFolder}/${subFolder}/${mediaOneId}${mediaOneFormat}`
+        : currentMediaOneLink;
+      const mediaTwoLink = mediaTwo
+        ? `${sourceLink}/${mediaFolder}/${subFolder}/${mediaTwoId}${mediaTwoFormat}`
+        : currentMediaTwiLink;
+
+      // Upload media if it's provided
+      const uploadPromises = [];
+      if (mediaOne) {
+        uploadPromises.push(
+          uploadMedia(
+            mediaOne,
+            mediaOneId,
+            mediaFolder,
+            subFolder,
+            mediaOneFormat
+          )
+        );
+      }
+      if (mediaTwo) {
+        uploadPromises.push(
+          uploadMedia(
+            mediaTwo,
+            mediaTwoId,
+            mediaFolder,
+            subFolder,
+            mediaTwoFormat
+          )
+        );
+      }
+      await Promise.all(uploadPromises);
+      const mediaObject = {
+        _id: mediaContent["_id"],
+        slug: "home",
+        title: "Home",
+        content: [
+          { type: mediaOneType, link: mediaOneLink },
+          { type: mediaTwoType, link: mediaTwoLink },
+        ],
+      };
+      await updateMediaApi(mediaObject);
+      showAlert("ذخیره شد");
+      router.reload(router.asPath);
+    }
+    setLoader(false);
+    setDisableButton(false);
+  };
 
   const showAlert = (message) => {
     setAlert(message);

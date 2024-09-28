@@ -16,11 +16,12 @@ import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 import coverModel from "@/models/Cover";
 import pageModel from "@/models/Page";
+import mediaModel from "@/models/Media";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import { applyFontToEnglishWords } from "@/services/utility";
 
-export default function Home({ solutions, covers, pageData }) {
+export default function Home({ solutions, covers, pageData, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -185,14 +186,13 @@ export default function Home({ solutions, covers, pageData }) {
       <section className={classes.animeContainer}>
         <div className={classes.anime}>
           <Image
-            src={smokingFish}
-            blurDataURL={smokingFish}
+            src={mediaData.content[0].link}
+            blurDataURL={mediaData.content[0].link}
             placeholder="blur"
-            alt="gif"
+            alt={mediaData.content[0].type}
             layout="fill"
             objectFit="contain"
-            as="image"
-            unoptimized
+            unoptimized={mediaData.content[1].type === "gif"}
           />
         </div>
       </section>
@@ -375,14 +375,13 @@ export default function Home({ solutions, covers, pageData }) {
       </section>
       <section className={classes.imageContainer}>
         <Image
-          src={hometwo}
-          blurDataURL={hometwo}
+          src={mediaData.content[1].link}
+          blurDataURL={mediaData.content[1].link}
           placeholder="blur"
-          alt="image"
+          alt={mediaData.content[1].type}
           layout="fill"
           objectFit="contain"
-          as="image"
-          priority
+          unoptimized={mediaData.content[1].type === "gif"}
         />
       </section>
       <div className={classes.arrowDown}>
@@ -413,6 +412,7 @@ export async function getServerSideProps(context) {
     const solutions = await solutionModel.find();
     const covers = await coverModel.find();
     const pageData = await pageModel.findOne({ slug: "home" });
+    const mediaData = await mediaModel.findOne({ slug: "home" });
 
     let activeSolutions = solutions
       .filter((project) => project.active)
@@ -425,6 +425,7 @@ export async function getServerSideProps(context) {
         solutions: JSON.parse(JSON.stringify(activeSolutions)),
         covers: JSON.parse(JSON.stringify(activeCovers)),
         pageData: JSON.parse(JSON.stringify(pageData)),
+        mediaData: JSON.parse(JSON.stringify(mediaData)),
       },
     };
   } catch (error) {
