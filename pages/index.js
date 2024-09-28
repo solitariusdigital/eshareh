@@ -188,6 +188,7 @@ export default function Home({ solutions, covers, pageData, mediaData }) {
             layout="fill"
             objectFit="contain"
             unoptimized={mediaData.content[1].type === "gif"}
+            priority
           />
         </div>
       </section>
@@ -377,6 +378,7 @@ export default function Home({ solutions, covers, pageData, mediaData }) {
           layout="fill"
           objectFit="contain"
           unoptimized={mediaData.content[1].type === "gif"}
+          priority
         />
       </section>
       <div className={classes.arrowDown}>

@@ -139,6 +139,7 @@ export default function Profession({ pageData, mediaData }) {
             layout="fill"
             objectFit="contain"
             unoptimized={mediaData.content[0].type === "gif"}
+            priority
           />
         </div>
       </div>

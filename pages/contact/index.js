@@ -158,6 +158,7 @@ export default function Contact({ pageData, mediaData }) {
               layout="fill"
               objectFit="contain"
               unoptimized={mediaData.content[1].type === "gif"}
+              priority
             />
           </div>
           <div>

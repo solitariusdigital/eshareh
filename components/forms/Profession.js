@@ -25,7 +25,7 @@ export default function Profession({ pages, mediaData }) {
   const [disableButton, setDisableButton] = useState(false);
   const sourceLink = "https://eshareh.storage.iran.liara.space";
   const router = useRouter();
-  const [development, setDevelopment] = useState(false);
+  const [development, setDevelopment] = useState(true);
 
   useEffect(() => {
     let professionContent = pages.find((page) => page.slug === "profession");
