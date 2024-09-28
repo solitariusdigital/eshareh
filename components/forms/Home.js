@@ -61,8 +61,6 @@ export default function Home({ pages, mediaData }) {
   }, [mediaData, pages]);
 
   const updateHomeContent = async () => {
-    setLoader(false);
-    setDisableButton(false);
     const isValid = areAllStatesValid([
       titleOne,
       paragraphOne,
@@ -589,7 +587,14 @@ export default function Home({ pages, mediaData }) {
               fontFamily: "English",
             }}
           >
-            <p className={classes.alert}>{alert}</p>
+            <p
+              className={classes.alert}
+              style={{
+                fontFamily: "Farsi",
+              }}
+            >
+              {alert}
+            </p>
             <button
               disabled={disableButton}
               style={{

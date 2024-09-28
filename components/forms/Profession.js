@@ -336,7 +336,14 @@ export default function Profession({ pages, mediaData }) {
                 </div>
               )}
             </div>
-            <p className={classes.alert}>{alert}</p>
+            <p
+              className={classes.alert}
+              style={{
+                fontFamily: "Farsi",
+              }}
+            >
+              {alert}
+            </p>
             {loader && (
               <div>
                 <Image

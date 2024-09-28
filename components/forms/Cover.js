@@ -306,7 +306,14 @@ export default function Cover() {
             )}
           </div>
         )}
-        <p className={classes.alert}>{alert}</p>
+        <p
+          className={classes.alert}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
+          {alert}
+        </p>
         {loader && (
           <div>
             <Image width={50} height={50} src={loaderImage} alt="isLoading" />

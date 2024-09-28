@@ -766,7 +766,14 @@ export default function Contact({ pages, mediaData }) {
               fontFamily: "English",
             }}
           >
-            <p className={classes.alert}>{alert}</p>
+            <p
+              className={classes.alert}
+              style={{
+                fontFamily: "Farsi",
+              }}
+            >
+              {alert}
+            </p>
             <button
               disabled={disableButton}
               style={{
