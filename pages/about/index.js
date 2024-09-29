@@ -13,6 +13,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { applyFontToEnglishWords } from "@/services/utility";
 
 export default function About({ pageData }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -133,9 +134,15 @@ export default function About({ pageData }) {
               color: `#${pageContent[0].setting.split(" ")[0]}`,
               fontSize: `${pageContent[0].setting.split(" ")[1]}px`,
             }}
-          >
-            {pageContent[0].data[languageType]}
-          </p>
+            dangerouslySetInnerHTML={{
+              __html: applyFontToEnglishWords(
+                pageContent[0].data[languageType],
+                language ? "FarsiBold" : "EnglishMedium",
+                `${pageContent[0].setting.split(" ")[1]}px`,
+                language
+              ),
+            }}
+          ></p>
         </div>
         <div
           className={
