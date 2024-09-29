@@ -24,16 +24,20 @@
     direction: rtl;
     margin-bottom: 20px;
 
-    .row {
+    .row,
+    .rowReverse {
       display: flex;
-      margin: 5px 0px;
 
-      @include mixins.mobile {
-        padding: 0px 10px;
+      .icon {
+        margin-top: 5px;
+        margin-left: 5px;
       }
+    }
 
-      h3 {
-        margin: 0px 10px;
+    .rowReverse {
+      .icon {
+        margin-top: 10px;
+        margin-right: 5px;
       }
     }
   }

@@ -16,6 +16,8 @@ import building from "@/assets/building.png";
 export default function Profession({ pages, mediaData }) {
   const [main, setMain] = useState({ en: "", fa: "" });
   const [paragraph, setParagraph] = useState({ en: "", fa: "" });
+  const [mainSetting, setMainSetting] = useState("");
+  const [paragraphSetting, setParagraphSetting] = useState("");
   const [alert, setAlert] = useState("");
   const [professionContent, setProfessionContent] = useState({});
   const [mediaContent, setMediaContent] = useState({});
@@ -41,6 +43,8 @@ export default function Profession({ pages, mediaData }) {
       en: content[1].data.en,
       fa: content[1].data.fa,
     });
+    setMainSetting(content[0].setting);
+    setParagraphSetting(content[1].setting);
   }, [mediaData, pages]);
 
   const handleSubmit = async () => {
@@ -85,6 +89,7 @@ export default function Profession({ pages, mediaData }) {
       content: [
         {
           type: "text",
+          setting: mainSetting,
           data: {
             fa: main.fa,
             en: main.en,
@@ -92,6 +97,7 @@ export default function Profession({ pages, mediaData }) {
         },
         {
           type: "text",
+          setting: paragraphSetting,
           data: {
             fa: extractParagraphs(paragraph.fa).join("\n\n"),
             en: extractParagraphs(paragraph.en).join("\n\n"),
@@ -124,7 +130,7 @@ export default function Profession({ pages, mediaData }) {
             <div className={classes.inputTextArea}>
               <div className={classes.bar}>
                 <p className={classes.label}>
-                  Main
+                  Title
                   <span>*</span>
                 </p>
                 <CloseIcon
@@ -159,7 +165,7 @@ export default function Profession({ pages, mediaData }) {
             <div className={classes.inputTextArea}>
               <div className={classes.bar}>
                 <p className={classes.label}>
-                  Paragraphs
+                  Paragraph
                   <span>*</span>
                 </p>
                 <CloseIcon
@@ -202,7 +208,7 @@ export default function Profession({ pages, mediaData }) {
               <div className={classes.barReverse}>
                 <p className={classes.label}>
                   <span>*</span>
-                  اصلی
+                  عنوان
                 </p>
                 <CloseIcon
                   className="icon"
@@ -269,6 +275,60 @@ export default function Profession({ pages, mediaData }) {
                 autoComplete="off"
                 dir="rtl"
               ></textarea>
+            </div>
+          </div>
+          <div
+            className={classes.form}
+            style={{
+              fontFamily: "Farsi",
+            }}
+          >
+            <p className={classes.barReverse}>
+              در صورت خالی بودن رنگ و سایز، پیش فرض سیستم اعمال میشود
+            </p>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>رنگ و سایز عنوان</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setMainSetting("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="000000 16"
+                type="mainSetting"
+                id="mainSetting"
+                name="mainSetting"
+                onChange={(e) => setMainSetting(e.target.value)}
+                value={mainSetting}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>رنگ و سایز پاراگراف</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setParagraphSetting("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="000000 16"
+                type="paragraphSetting"
+                id="paragraphSetting"
+                name="paragraphSetting"
+                onChange={(e) => setParagraphSetting(e.target.value)}
+                value={paragraphSetting}
+                autoComplete="off"
+              ></input>
             </div>
           </div>
           <div

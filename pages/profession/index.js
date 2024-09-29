@@ -20,12 +20,6 @@ export default function Profession({ pageData, mediaData }) {
     fa: [pageData.content[1].data.fa.split("\n\n")][0],
   });
 
-  const position = {
-    position: "relative",
-    top: language ? "6px" : "10px",
-    left: language ? "6px" : "-6px",
-  };
-
   return (
     <Fragment>
       <NextSeo
@@ -73,23 +67,15 @@ export default function Profession({ pageData, mediaData }) {
             language ? classes.information : classes.informationReverse
           }
         >
-          {language ? (
-            <p
-              style={{
-                fontFamily: "FarsiBold",
-              }}
-            >
-              {pageData.content[0].data.fa}
-            </p>
-          ) : (
-            <p
-              style={{
-                fontFamily: "EnglishMedium",
-              }}
-            >
-              {pageData.content[0].data.en}
-            </p>
-          )}
+          <p
+            style={{
+              fontFamily: language ? "FarsiBold" : "EnglishMedium",
+              color: `#${pageData.content[0].setting.split(" ")[0]}`,
+              fontSize: `${pageData.content[0].setting.split(" ")[1]}px`,
+            }}
+          >
+            {pageData.content[0].data[languageType]}
+          </p>
         </div>
         {paragraph[languageType].map((para, index) => (
           <div
@@ -99,21 +85,25 @@ export default function Profession({ pageData, mediaData }) {
             }
           >
             <div
-              className={classes.row}
+              className={language ? classes.row : classes.rowReverse}
               style={{
                 fontFamily: language ? "Farsi" : "English",
               }}
             >
               <CircleIcon
-                style={position}
+                className={classes.icon}
                 sx={{ fontSize: 8, color: "#fdb714" }}
               />
               <p
+                style={{
+                  color: `#${pageData.content[1].setting.split(" ")[0]}`,
+                  fontSize: `${pageData.content[1].setting.split(" ")[1]}px`,
+                }}
                 dangerouslySetInnerHTML={{
                   __html: applyFontToEnglishWords(
                     para,
                     "English",
-                    "16px",
+                    `${pageData.content[1].setting.split(" ")[1]}px`,
                     language
                   ),
                 }}

@@ -43,7 +43,6 @@ export default function Solution({ solutions, projectTitle }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
-
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayNextController, setDisplayNextController] = useState(false);
   const [project, setProject] = useState(null);
@@ -52,7 +51,6 @@ export default function Solution({ solutions, projectTitle }) {
   const [nextProject, setNextProject] = useState(null);
   const [dropDown, setDropDpwn] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
-
   const router = useRouter();
 
   useEffect(() => {
