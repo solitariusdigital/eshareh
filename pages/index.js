@@ -19,7 +19,13 @@ import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import { applyFontToEnglishWords } from "@/services/utility";
 
-export default function Home({ solutions, covers, pageData, mediaData }) {
+export default function Home({
+  solutions,
+  covers,
+  pageData,
+  solutionsData,
+  mediaData,
+}) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -47,6 +53,9 @@ export default function Home({ solutions, covers, pageData, mediaData }) {
   const [hoverOne, setHoverOne] = useState(false);
   const [hoverTwo, setHoverTwo] = useState(false);
   const [hoverThree, setHoverThree] = useState(false);
+  const [solutionsContent, setSolutionsContent] = useState(
+    solutionsData.content
+  );
 
   const divideArray = (solutions) => {
     const dividedArrays = [];
@@ -170,7 +179,7 @@ export default function Home({ solutions, covers, pageData, mediaData }) {
                 __html: applyFontToEnglishWords(
                   para,
                   "English",
-                  "24px",
+                  "22px",
                   language
                 ),
               }}
@@ -207,36 +216,16 @@ export default function Home({ solutions, covers, pageData, mediaData }) {
           }
         >
           <div className={classes.box}>
-            {language ? (
-              <div>
-                <div className={classes.methods}>
-                  <h1
-                    style={{
-                      fontFamily: "FarsiBold",
-                    }}
-                  >
-                    راه‌کارهای تبلیغات
-                  </h1>
-                  <h3>
-                    ما با توجه به خواسته‌ و نیاز مشتریان، آخرین تحقیقات در دسترس
-                    و استراتژی تبلیغاتی تدوین‌شده را پایه و اساس کار خلاقیت قرار
-                    می‌دهیم تا بهترین راه‌حل و نتیجه برای مشتریان حاصل شود.
-                    رسالت راهکارهای تبلیغاتی، رساندن پيام برند به مخاطب با روشی
-                    خلاقانه است.
-                  </h3>
-                </div>
-              </div>
-            ) : (
-              <div className={classes.methods}>
-                <h1>Advertising Solutions</h1>
-                <h3>
-                  Based on our client’s needs, the most up-to-date research
-                  available and the developed communication strategy forms the
-                  basis for our creative work to ensure the best solution and
-                  result for the clients are obtained.
-                </h3>
-              </div>
-            )}
+            <div className={classes.methods}>
+              <h1
+                style={{
+                  fontFamily: language ? "FarsiBold" : "English",
+                }}
+              >
+                {solutionsContent[0].data[languageType]}
+              </h1>
+              <h3>{solutionsContent[1].data[languageType].split("\n\n")[0]}</h3>
+            </div>
             <div
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() =>
@@ -262,34 +251,16 @@ export default function Home({ solutions, covers, pageData, mediaData }) {
             </div>
           </div>
           <div className={classes.box}>
-            {language ? (
-              <div>
-                <div className={classes.methods}>
-                  <h1
-                    style={{
-                      fontFamily: "FarsiBold",
-                    }}
-                  >
-                    راه‌کارهای رســـــــانه
-                  </h1>
-                  <h3>
-                    ما در آژانس اشاره از آخرین تحقیقات در دسترس و نرم‌افزارهایی
-                    که قابلیت اندازه‌گیری و بهینه‌سازی دارند، استفاده می‌کنیم تا
-                    در حد امکان به شکلی موثرتر از بودجه‌های تبلیغاتی استفاده
-                    شود.
-                  </h3>
-                </div>
-              </div>
-            ) : (
-              <div className={classes.methods}>
-                <h1>Media Solutions</h1>
-                <h3>
-                  We at Eshareh, benefit from the latest research available as
-                  well as measurement and optimization softwares to ensure
-                  effective allocation of advertising budgets.
-                </h3>
-              </div>
-            )}
+            <div className={classes.methods}>
+              <h1
+                style={{
+                  fontFamily: language ? "FarsiBold" : "English",
+                }}
+              >
+                {solutionsContent[2].data[languageType]}
+              </h1>
+              <h3>{solutionsContent[3].data[languageType].split("\n\n")[0]}</h3>
+            </div>
             <div
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() =>
@@ -315,35 +286,16 @@ export default function Home({ solutions, covers, pageData, mediaData }) {
             </div>
           </div>
           <div className={classes.box}>
-            {language ? (
-              <div>
-                <div className={classes.methods}>
-                  <h1
-                    style={{
-                      fontFamily: "FarsiBold",
-                    }}
-                  >
-                    راه‌کارهای دیجیتال
-                  </h1>
-                  <h3>
-                    هدف نهایی استراتژی بازاریابی دیجیتال، تهیه و تنظیم
-                    کمپین‌های  تبلیغاتی با استفاده از تاکتیک‌ها و کانال‌های
-                    دیجیتالی متعدد است و همین امر می‌تواند نام تجاری شما را به
-                    سمت اهداف بزرگ‌تر هدایت کند.
-                  </h3>
-                </div>
-              </div>
-            ) : (
-              <div className={classes.methods}>
-                <h1>Digital Solutions</h1>
-                <h3>
-                  The ultimate goal of Digital Solutions Unit is to design and
-                  develop advertising campaigns that leverage various digital
-                  tactics and channels leading your brand towards much greater
-                  achievements.
-                </h3>
-              </div>
-            )}
+            <div className={classes.methods}>
+              <h1
+                style={{
+                  fontFamily: language ? "FarsiBold" : "English",
+                }}
+              >
+                {solutionsContent[4].data[languageType]}
+              </h1>
+              <h3>{solutionsContent[5].data[languageType].split("\n\n")[0]}</h3>
+            </div>
             <div
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() =>
@@ -410,7 +362,10 @@ export async function getServerSideProps(context) {
     await dbConnect();
     const solutions = await solutionModel.find();
     const covers = await coverModel.find();
-    const pageData = await pageModel.findOne({ slug: "home" });
+    const [pageData, solutionsData] = await Promise.all([
+      pageModel.findOne({ slug: "home" }),
+      pageModel.findOne({ slug: "solutions" }),
+    ]);
     const mediaData = await mediaModel.findOne({ slug: "home" });
 
     let activeSolutions = solutions
@@ -424,6 +379,7 @@ export async function getServerSideProps(context) {
         solutions: JSON.parse(JSON.stringify(activeSolutions)),
         covers: JSON.parse(JSON.stringify(activeCovers)),
         pageData: JSON.parse(JSON.stringify(pageData)),
+        solutionsData: JSON.parse(JSON.stringify(solutionsData)),
         mediaData: JSON.parse(JSON.stringify(mediaData)),
       },
     };

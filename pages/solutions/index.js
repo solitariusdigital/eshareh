@@ -8,13 +8,18 @@ import { replaceSpacesAndHyphens } from "@/services/utility";
 import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
+import pageModel from "@/models/Page";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Tooltip from "@mui/material/Tooltip";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 
-export default function Solutions({ activeSolutions, adminSolutions }) {
+export default function Solutions({
+  activeSolutions,
+  adminSolutions,
+  pageData,
+}) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
@@ -52,18 +57,9 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
   ];
 
   const information = {
-    advertising: {
-      en: "Based on our client’s needs, the most up-to-date research available and the developed communication strategy forms the basis for our creative work to ensure the best solution and result for the clients are obtained. The mission of the Advertising Solutions Unit is to convey the brand message to the target audience in a creative way. Within Eshareh, we execute a diverse array of advertising campaigns, ranging from large-scale, 360 campaigns to ad hoc and small ones. Additionally, this department offers a comprehensive suite of services, including ideation and execution of all kinds of digital campaigns, printing services, TV ad production, graphic design, creative copywriting, consultation, planning, and POSM production.",
-      fa: "ما با توجه به خواسته‌ و نیاز مشتریان، آخرین تحقیقات در دسترس و استراتژی تبلیغاتی تدوین‌شده را پایه و اساس کار خلاقیت قرار می‌دهیم تا بهترین راه‌حل و نتیجه برای مشتریان حاصل شود. رسالت راهکارهای تبلیغاتی، رساندن پيام برند به مخاطب با روشی خلاقانه است. در آژانس اشاره طیف وسیعی از انواع کمپین‌های بزرگ و کوچک تبلیغاتی مثل کمپین ۳۶۰ درجه انجام می‌پذیرد. همچنین در این بخش خدماتی از جمله ایده‌پردازی و اجرای انواع کمپین‌های دیجیتال، خدمات چاپ، ساخت آگهی‌های تلویزیونی، طراحی گرافیک، متون خلاقانه، مشاوره، برنامه‌ریزی و تولید اقلام فروشگاهی نیز انجام می‌شود.",
-    },
-    media: {
-      en: "We at Eshareh, benefit from the latest research available as well as measurement and optimization softwares to ensure effective allocation of advertising budgets. The services offered in this unit include developing media strategy tailored to the target audience and campaign objectives, media planning using specialized software, and optimal media buying, leading to the precise execution of each campaign.",
-      fa: "ما در آژانس اشاره از آخرین تحقیقات در دسترس و نرم‌افزارهایی که قابلیت اندازه‌گیری و بهینه‌سازی دارند، استفاده می‌کنیم تا در حد امکان به شکلی موثرتر از بودجه‌های تبلیغاتی استفاده شود. خدماتی که در این بخش ارائه می‌گردد عبارت است از: استراتژی رسانه‌ای متناسب با مخاطب و اهداف کمپین، برنامه‌ریزی رسانه‌ای با استفاده از نرم‌افزارهای تخصصی و خرید بهینه رسانه که همگی در راستای اجرای هرچه دقیق‌تر هر کمپین برنامه‌ریزی می‌شوند.",
-    },
-    digital: {
-      en: "The ultimate goal of Digital Solutions Unit is to design and develop advertising campaigns that leverage various digital tactics and channels leading your brand towards much greater achievements. As an instance, a digital marketing strategy enables you to use various digital channels such as social media, Pay-per-Click(PPC, Search Engine Optimization (SEO), Email Marketing ,… to connect with current customers and engage with potential customers interested in your products or services.",
-      fa: "هدف نهایی استراتژی بازاریابی دیجیتال،  تهیه و تنظیم کمپین‌های  تبلیغاتی با استفاده از تاکتیک‌ها و کانال‌های دیجیتالی متعدد است و همین امر می‌تواند نام تجاری شما را به سمت اهداف بزرگ‌تر هدایت کند. به عنوان مثال، یک استراتژی دیجیتال مارکتینگ به شما امکان می‌دهد از کانال‌های دیجیتالی مختلف مانند رسانه‌های اجتماعی، پرداخت به ازای کلیک، بهینه‌سازی موتور جستجو، بازاریابی ایمیلی و … استفاده کنید تا با مشتریان فعلی و افراد علاقه‌مند به محصولات یا خدمات‌تان در ارتباط باشید.",
-    },
+    advertising: pageData.content[1].data[languageType].split("\n\n"),
+    media: pageData.content[3].data[languageType].split("\n\n"),
+    digital: pageData.content[5].data[languageType].split("\n\n"),
   };
 
   useEffect(() => {
@@ -177,30 +173,8 @@ export default function Solutions({ activeSolutions, adminSolutions }) {
                 fontFamily: language ? "FarsiLight" : "EnglishLight",
               }}
             >
-              {information[solutionsCategory][languageType]}
+              {information[solutionsCategory]}
             </h3>
-            {solutionsCategory === "digital" && (
-              <div
-                style={{
-                  fontFamily: language ? "FarsiLight" : "EnglishLight",
-                }}
-                className={classes.extraDetails}
-              >
-                {language ? (
-                  <h3>
-                    ما در مجموعه تبلیغاتی اشاره با همراهی یک تیم جوان و پویا،
-                    منتظرتان هستیم تا ارتباطی درست با شما و مخاطبین‌تان برقرار
-                    کنیم.
-                  </h3>
-                ) : (
-                  <h3>
-                    At Eshareh, our young, dynamic, and experienced team is
-                    eager to establish a strong connection between you and your
-                    audience.
-                  </h3>
-                )}
-              </div>
-            )}
           </div>
         )}
         <section key={solutionsCategory} className={classes.gridList}>
@@ -287,10 +261,14 @@ export async function getServerSideProps(context) {
     let activeSolutions = solutions
       .filter((project) => project.active)
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    const pageData = await pageModel.findOne({ slug: "solutions" });
+
     return {
       props: {
         activeSolutions: JSON.parse(JSON.stringify(activeSolutions)),
         adminSolutions: JSON.parse(JSON.stringify(adminSolutions)),
+        pageData: JSON.parse(JSON.stringify(pageData)),
       },
     };
   } catch (error) {

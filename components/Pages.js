@@ -6,14 +6,27 @@ import Home from "./forms/Home";
 import About from "./forms/About";
 import News from "./forms/News";
 import Contact from "./forms/Contact";
+import SolutionsContent from "./forms/SolutionsContent";
 
 export default function Pages({ pages, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
   const [pageType, setPageType] = useState(
-    "home" || "about us" || "what we do" || "news" || "contact us"
+    "home" ||
+      "about us" ||
+      "what we do" ||
+      "news" ||
+      "contact us" ||
+      "solutions"
   );
 
-  const pagesName = ["home", "about us", "what we do", "news", "contact us"];
+  const pagesName = [
+    "home",
+    "about us",
+    "what we do",
+    "news",
+    "contact us",
+    "solutions",
+  ];
 
   return (
     <>
@@ -41,6 +54,9 @@ export default function Pages({ pages, mediaData }) {
       {pageType === "news" && <News pages={pages} mediaData={mediaData} />}
       {pageType === "contact us" && (
         <Contact pages={pages} mediaData={mediaData} />
+      )}
+      {pageType === "solutions" && (
+        <SolutionsContent pages={pages} mediaData={mediaData} />
       )}
     </>
   );
