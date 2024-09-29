@@ -3,6 +3,7 @@ import { Schema, model, models } from "mongoose";
 // Define the schema for text content
 const ContentSchema = new Schema({
   type: { type: String, required: true },
+  setting: String,
   data: {
     fa: { type: String, required: true },
     en: { type: String, required: true },

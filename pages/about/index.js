@@ -11,7 +11,6 @@ import dbConnect from "@/services/dbConnect";
 import pageModel from "@/models/Page";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Autoplay, Navigation } from "swiper/modules";
-import { applyFontToEnglishWords } from "@/services/utility";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -21,6 +20,7 @@ export default function About({ pageData }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [users, setUsers] = useState([]);
   const [current, setCurrent] = useState(0);
+  const [pageContent, setPageContent] = useState(pageData.content);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -129,15 +129,13 @@ export default function About({ pageData }) {
       <div className={classes.container}>
         <div className={language ? classes.title : classes.titleReverse}>
           <p
-            dangerouslySetInnerHTML={{
-              __html: applyFontToEnglishWords(
-                pageData.content[0].data[languageType],
-                language ? "FarsiBold" : "EnglishMedium",
-                "16px",
-                language
-              ),
+            style={{
+              color: `#${pageContent[0].setting.split(" ")[0]}`,
+              fontSize: `${pageContent[0].setting.split(" ")[1]}px`,
             }}
-          ></p>
+          >
+            {pageContent[0].data[languageType]}
+          </p>
         </div>
         <div
           className={
@@ -145,9 +143,23 @@ export default function About({ pageData }) {
           }
           style={{ height: setInformationHeight() }}
         >
-          <h1>{pageData.content[1].data[languageType]}</h1>
+          <h1
+            style={{
+              color: `#${pageContent[1].setting.split(" ")[0]}`,
+              fontSize: `${pageContent[1].setting.split(" ")[1]}px`,
+            }}
+          >
+            {pageContent[1].data[languageType]}
+          </h1>
           <div>
-            <p>{pageData.content[2].data[languageType]}</p>
+            <p
+              style={{
+                color: `#${pageContent[2].setting.split(" ")[0]}`,
+                fontSize: `${pageContent[2].setting.split(" ")[1]}px`,
+              }}
+            >
+              {pageContent[2].data[languageType]}
+            </p>
           </div>
         </div>
         {users.length > 0 && (

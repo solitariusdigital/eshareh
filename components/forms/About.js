@@ -36,6 +36,9 @@ export default function Team({ pages, mediaData }) {
   const [main, setMain] = useState({ en: "", fa: "" });
   const [paragraph, setParagraph] = useState({ en: "", fa: "" });
   const [description, setDescription] = useState({ en: "", fa: "" });
+  const [mainSetting, setMainSetting] = useState("");
+  const [paragraphSetting, setParagraphSetting] = useState("");
+  const [descriptionSetting, setDescriptionSetting] = useState("");
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedUserIndex, setSelectedUserIndex] = useState("default");
@@ -58,6 +61,9 @@ export default function Team({ pages, mediaData }) {
       en: content[2].data.en,
       fa: content[2].data.fa,
     });
+    setDescriptionSetting(content[0].setting);
+    setMainSetting(content[1].setting);
+    setParagraphSetting(content[2].setting);
   }, [mediaData, pages]);
 
   useEffect(() => {
@@ -157,6 +163,7 @@ export default function Team({ pages, mediaData }) {
       content: [
         {
           type: "text",
+          setting: descriptionSetting,
           data: {
             fa: description.fa,
             en: description.en,
@@ -164,6 +171,7 @@ export default function Team({ pages, mediaData }) {
         },
         {
           type: "text",
+          setting: mainSetting,
           data: {
             fa: main.fa,
             en: main.en,
@@ -171,6 +179,7 @@ export default function Team({ pages, mediaData }) {
         },
         {
           type: "text",
+          setting: paragraphSetting,
           data: {
             fa: paragraph.fa,
             en: paragraph.en,
@@ -449,6 +458,82 @@ export default function Team({ pages, mediaData }) {
           </div>
         </div>
         <div
+          className={classes.form}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
+          <p className={classes.barReverse}>
+            در صورت خالی بودن رنگ و سایز، پیش فرض سیستم اعمال میشود
+          </p>
+          <div className={classes.input}>
+            <div className={classes.barReverse}>
+              <p className={classes.label}>رنگ و سایز توضیحات</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setDescriptionSetting("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "English",
+              }}
+              placeholder="000000 16"
+              type="descriptionSetting"
+              id="descriptionSetting"
+              name="descriptionSetting"
+              onChange={(e) => setDescriptionSetting(e.target.value)}
+              value={descriptionSetting}
+              autoComplete="off"
+            ></input>
+          </div>
+          <div className={classes.input}>
+            <div className={classes.barReverse}>
+              <p className={classes.label}>رنگ و سایز عنوان</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setMainSetting("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "English",
+              }}
+              placeholder="000000 16"
+              type="mainSetting"
+              id="mainSetting"
+              name="mainSetting"
+              onChange={(e) => setMainSetting(e.target.value)}
+              value={mainSetting}
+              autoComplete="off"
+            ></input>
+          </div>
+          <div className={classes.input}>
+            <div className={classes.barReverse}>
+              <p className={classes.label}>رنگ و سایز پاراگراف</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setParagraphSetting("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "English",
+              }}
+              placeholder="000000 16"
+              type="paragraphSetting"
+              id="paragraphSetting"
+              name="paragraphSetting"
+              onChange={(e) => setParagraphSetting(e.target.value)}
+              value={paragraphSetting}
+              autoComplete="off"
+            ></input>
+          </div>
+        </div>
+        <div
           className={classes.formAction}
           style={{
             fontFamily: "English",
@@ -478,7 +563,6 @@ export default function Team({ pages, mediaData }) {
           </button>
         </div>
       </div>
-      {/*  */}
       <div
         className={classes.container}
         style={{
@@ -558,7 +642,6 @@ export default function Team({ pages, mediaData }) {
           )}
         </div>
       </div>
-      {/*  */}
       <div className={classes.container}>
         <div className={classes.form}>
           <div
