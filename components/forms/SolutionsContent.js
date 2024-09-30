@@ -160,7 +160,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="titleOne"
+                type="text"
                 id="titleOneEn"
                 name="titleOne"
                 onChange={(e) =>
@@ -195,7 +195,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="paragraphOne"
+                type="text"
                 id="paragraphOneEn"
                 name="paragraphOne"
                 onChange={(e) =>
@@ -237,7 +237,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="titleOne"
+                type="text"
                 id="titleOneFa"
                 name="titleOne"
                 onChange={(e) =>
@@ -273,7 +273,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="paragraphOne"
+                type="text"
                 id="paragraphOneFa"
                 name="paragraphOne"
                 onChange={(e) =>
@@ -316,7 +316,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="titleTwo"
+                type="text"
                 id="titleTwoEn"
                 name="titleTwo"
                 onChange={(e) =>
@@ -351,7 +351,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="paragraphTwo"
+                type="text"
                 id="paragraphTwoEn"
                 name="paragraphTwo"
                 onChange={(e) =>
@@ -393,7 +393,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="titleTwo"
+                type="text"
                 id="titleTwoFa"
                 name="titleTwo"
                 onChange={(e) =>
@@ -429,7 +429,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="paragraphTwo"
+                type="text"
                 id="paragraphTwoFa"
                 name="paragraphTwo"
                 onChange={(e) =>
@@ -472,7 +472,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="titleThree"
+                type="text"
                 id="titleThreeEn"
                 name="titleThree"
                 onChange={(e) =>
@@ -507,7 +507,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="paragraphThree"
+                type="text"
                 id="paragraphThreeEn"
                 name="paragraphThree"
                 onChange={(e) =>
@@ -549,7 +549,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="titleThree"
+                type="text"
                 id="titleThreeFa"
                 name="titleThree"
                 onChange={(e) =>
@@ -585,7 +585,7 @@ export default function SolutionsContent({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="paragraphThree"
+                type="text"
                 id="paragraphThreeFa"
                 name="paragraphThree"
                 onChange={(e) =>

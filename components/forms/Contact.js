@@ -264,7 +264,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="headOffice"
+                type="text"
                 id="headOfficeEn"
                 name="headOffice"
                 onChange={(e) =>
@@ -299,7 +299,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="headAddress"
+                type="text"
                 id="headAddressEn"
                 name="headAddress"
                 onChange={(e) =>
@@ -334,7 +334,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="headContact"
+                type="text"
                 id="headContactEn"
                 name="headContact"
                 onChange={(e) =>
@@ -369,7 +369,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="headLocationLink"
+                type="text"
                 id="headLocationLink"
                 name="headLocationLink"
                 onChange={(e) =>
@@ -411,7 +411,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="headOffice"
+                type="text"
                 id="headOfficeFa"
                 name="headOffice"
                 onChange={(e) =>
@@ -447,7 +447,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="headAddress"
+                type="text"
                 id="headAddressFa"
                 name="headAddress"
                 onChange={(e) =>
@@ -483,7 +483,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="headContact"
+                type="text"
                 id="headContactFa"
                 name="headContact"
                 onChange={(e) =>
@@ -526,7 +526,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="secOffice"
+                type="text"
                 id="secOfficeEn"
                 name="secOffice"
                 onChange={(e) =>
@@ -561,7 +561,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="secAddress"
+                type="text"
                 id="secAddressEn"
                 name="secAddress"
                 onChange={(e) =>
@@ -596,7 +596,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="secContact"
+                type="text"
                 id="secContactEn"
                 name="secContact"
                 onChange={(e) =>
@@ -631,7 +631,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="secLocationLink"
+                type="text"
                 id="secLocationLink"
                 name="secLocationLink"
                 onChange={(e) =>
@@ -673,7 +673,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="secOffice"
+                type="text"
                 id="secOfficeFa"
                 name="secOffice"
                 onChange={(e) =>
@@ -709,7 +709,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="secAddress"
+                type="text"
                 id="secAddressFa"
                 name="secAddress"
                 onChange={(e) =>
@@ -745,7 +745,7 @@ export default function Contact({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="secContact"
+                type="text"
                 id="secContactFa"
                 name="secContact"
                 onChange={(e) =>

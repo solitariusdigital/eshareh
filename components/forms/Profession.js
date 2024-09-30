@@ -149,7 +149,7 @@ export default function Profession({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="main"
+                type="text"
                 id="mainEn"
                 name="main"
                 onChange={(e) =>
@@ -184,7 +184,7 @@ export default function Profession({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="..."
-                type="paragraph"
+                type="text"
                 id="paragraphEn"
                 name="paragraph"
                 onChange={(e) =>
@@ -226,7 +226,7 @@ export default function Profession({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="main"
+                type="text"
                 id="mainFa"
                 name="main"
                 onChange={(e) =>
@@ -262,7 +262,7 @@ export default function Profession({ pages, mediaData }) {
                   fontFamily: "Farsi",
                 }}
                 placeholder="..."
-                type="paragraph"
+                type="text"
                 id="paragraphFa"
                 name="paragraph"
                 onChange={(e) =>
@@ -300,7 +300,7 @@ export default function Profession({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="000000 16"
-                type="mainSetting"
+                type="text"
                 id="mainSetting"
                 name="mainSetting"
                 onChange={(e) => setMainSetting(e.target.value)}
@@ -322,7 +322,7 @@ export default function Profession({ pages, mediaData }) {
                   fontFamily: "English",
                 }}
                 placeholder="000000 16"
-                type="paragraphSetting"
+                type="text"
                 id="paragraphSetting"
                 name="paragraphSetting"
                 onChange={(e) => setParagraphSetting(e.target.value)}
