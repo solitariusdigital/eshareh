@@ -92,19 +92,15 @@ export default function Therighthint() {
     window.scrollTo(0, 0);
     setDisplayPopup(true);
     document.body.style.overflow = "hidden";
-    let checkCharityUser = secureLocalStorage.getItem("charityUser");
-    if (!checkCharityUser) {
-      const dataCharity = await getCharityApi();
-      let count = dataCharity[0].count;
-      count += 1;
-      let dataObject = {
-        id: charity["_id"],
-        count: count,
-      };
-      await updateCharityApi(dataObject);
-      setCharity(dataObject);
-      secureLocalStorage.setItem("charityUser", true);
-    }
+    const dataCharity = await getCharityApi();
+    let count = dataCharity[0].count;
+    count += 1;
+    let dataObject = {
+      id: charity["_id"],
+      count: count,
+    };
+    await updateCharityApi(dataObject);
+    setCharity(dataObject);
   };
 
   return (
