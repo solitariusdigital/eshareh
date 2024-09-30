@@ -17,7 +17,6 @@ export default function Cover() {
   const [link, setLink] = useState("");
   const [color, setColor] = useState("");
   const [mediaType, setMediaType] = useState("image" || "video");
-
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -111,9 +110,17 @@ export default function Cover() {
               autoComplete="off"
             />
           </div>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p className={classes.label}>Link</p>
+          <div
+            className={classes.input}
+            style={{
+              fontFamily: "Farsi",
+            }}
+          >
+            <div className={classes.barReverse}>
+              <p className={classes.label}>
+                <span>*</span>
+                لینک
+              </p>
               <CloseIcon
                 className="icon"
                 onClick={() => setLink("")}
@@ -179,13 +186,13 @@ export default function Cover() {
           <div
             className={classes.input}
             style={{
-              fontFamily: "English",
+              fontFamily: "Farsi",
             }}
           >
-            <div className={classes.bar}>
+            <div className={classes.barReverse}>
               <p className={classes.label}>
-                Hex color code
                 <span>*</span>
+                رنگ
               </p>
               <CloseIcon
                 className="icon"
@@ -198,7 +205,7 @@ export default function Cover() {
                 fontFamily: "English",
               }}
               type="text"
-              placeholder="fdb714"
+              placeholder="000000"
               id="color"
               name="color"
               onChange={(e) => setColor(e.target.value)}
@@ -250,7 +257,7 @@ export default function Cover() {
                 type="file"
                 accept="image/*"
               />
-              <p>عکس</p>
+              <p>عکس اجباری</p>
             </label>
             {media !== "" && (
               <div className={classes.preview}>
@@ -287,7 +294,7 @@ export default function Cover() {
                 type="file"
                 accept="video/*"
               />
-              <p>ویدئو</p>
+              <p>ویدئو اجباری</p>
             </label>
             {media !== "" && (
               <div className={classes.preview}>
@@ -326,7 +333,7 @@ export default function Cover() {
           }}
           onClick={() => handleSubmit()}
         >
-          ذخیره
+          ذخیره داده
         </button>
       </div>
     </div>

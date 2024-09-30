@@ -45,20 +45,16 @@ export default function Solutions() {
       ? { en: editSolution.en.category, fa: editSolution.fa.category }
       : { en: "", fa: "" }
   );
-
   const [imagesPreview, setImagesPreview] = useState([]);
   const [videosPreview, setVideosPreview] = useState([]);
   const [voicesPreview, setVoicesPreview] = useState([]);
-
   const [uploadImages, setUploadImages] = useState([]);
   const [uploadVideos, setUploadVideos] = useState([]);
   const [uploadVoices, setUploadVoices] = useState([]);
-
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
   const [progress, setProgress] = useState(0);
-
   const sourceLink = "https://eshareh.storage.iran.liara.space";
   const categories = ["Advertising", "Media", "Digital"];
 

@@ -11,9 +11,9 @@ import dbConnect from "@/services/dbConnect";
 import pageModel from "@/models/Page";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Autoplay, Navigation } from "swiper/modules";
+import { applyFontToEnglishWords } from "@/services/utility";
 import "swiper/css";
 import "swiper/css/navigation";
-import { applyFontToEnglishWords } from "@/services/utility";
 
 export default function About({ pageData }) {
   const { language, setLanguage } = useContext(StateContext);
