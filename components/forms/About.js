@@ -3,7 +3,10 @@ import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
+import Tooltip from "@mui/material/Tooltip";
 import loaderImage from "@/assets/loader.png";
+import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import AES from "crypto-js/aes";
 import Image from "next/legacy/image";
 import {
@@ -40,6 +43,7 @@ export default function Team({ pages, mediaData }) {
   const [paragraphSetting, setParagraphSetting] = useState("");
   const [descriptionSetting, setDescriptionSetting] = useState("");
   const [users, setUsers] = useState([]);
+  const [userActivation, setUserActivation] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedUserIndex, setSelectedUserIndex] = useState("default");
   const sourceLink = "https://eshareh.storage.iran.liara.space";
@@ -131,7 +135,7 @@ export default function Team({ pages, mediaData }) {
       password: cryptPassword(),
       media: mediaLink,
       permission: "user",
-      active: true,
+      display: userActivation,
     };
     await createUserApi(user);
     router.reload(router.asPath);
@@ -147,7 +151,6 @@ export default function Team({ pages, mediaData }) {
 
   const updateAboutContent = async () => {
     const isValid = areAllStatesValid([description, main, paragraph]);
-
     if (!isValid) {
       showAlert("همه موارد الزامیست");
       return;
@@ -212,6 +215,7 @@ export default function Team({ pages, mediaData }) {
         fa: title.fa,
         en: title.en,
       },
+      display: userActivation,
     };
     await updateUserApi(userObject);
     showAlert("ویرایش شد");
@@ -258,7 +262,7 @@ export default function Team({ pages, mediaData }) {
                 fontFamily: "English",
               }}
               placeholder="..."
-              type="description"
+              type="text"
               id="descriptionEn"
               name="description"
               onChange={(e) =>
@@ -293,7 +297,7 @@ export default function Team({ pages, mediaData }) {
                 fontFamily: "English",
               }}
               placeholder="..."
-              type="main"
+              type="text"
               id="mainEn"
               name="main"
               onChange={(e) =>
@@ -328,7 +332,7 @@ export default function Team({ pages, mediaData }) {
                 fontFamily: "English",
               }}
               placeholder="..."
-              type="paragraph"
+              type="text"
               id="paragraphEn"
               name="paragraph"
               onChange={(e) =>
@@ -370,7 +374,7 @@ export default function Team({ pages, mediaData }) {
                 fontFamily: "Farsi",
               }}
               placeholder="..."
-              type="description"
+              type="text"
               id="descriptionFa"
               name="description"
               onChange={(e) =>
@@ -406,7 +410,7 @@ export default function Team({ pages, mediaData }) {
                 fontFamily: "Farsi",
               }}
               placeholder="..."
-              type="main"
+              type="text"
               id="mainFa"
               name="main"
               onChange={(e) =>
@@ -442,7 +446,7 @@ export default function Team({ pages, mediaData }) {
                 fontFamily: "Farsi",
               }}
               placeholder="..."
-              type="paragraph"
+              type="text"
               id="paragraphFa"
               name="paragraph"
               onChange={(e) =>
@@ -480,7 +484,7 @@ export default function Team({ pages, mediaData }) {
                 fontFamily: "English",
               }}
               placeholder="000000 16"
-              type="descriptionSetting"
+              type="text"
               id="descriptionSetting"
               name="descriptionSetting"
               onChange={(e) => setDescriptionSetting(e.target.value)}
@@ -502,7 +506,7 @@ export default function Team({ pages, mediaData }) {
                 fontFamily: "English",
               }}
               placeholder="000000 16"
-              type="mainSetting"
+              type="text"
               id="mainSetting"
               name="mainSetting"
               onChange={(e) => setMainSetting(e.target.value)}
@@ -524,7 +528,7 @@ export default function Team({ pages, mediaData }) {
                 fontFamily: "English",
               }}
               placeholder="000000 16"
-              type="paragraphSetting"
+              type="text"
               id="paragraphSetting"
               name="paragraphSetting"
               onChange={(e) => setParagraphSetting(e.target.value)}
@@ -609,6 +613,7 @@ export default function Team({ pages, mediaData }) {
                   fa: users[e.target.value].title.fa,
                   en: users[e.target.value].title.en,
                 });
+                setUserActivation(users[e.target.value].display);
               }}
             >
               <option value="default" disabled>
@@ -789,6 +794,28 @@ export default function Team({ pages, mediaData }) {
                 autoComplete="off"
                 dir="rtl"
               />
+            </div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  کاربر در اسلایدشو نمایش داده شود؟
+                </p>
+                {userActivation ? (
+                  <Tooltip title="Hide">
+                    <RadioButtonCheckedIcon
+                      className="icon"
+                      onClick={() => setUserActivation(false)}
+                    />
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Show">
+                    <RadioButtonUncheckedIcon
+                      className="icon"
+                      onClick={() => setUserActivation(true)}
+                    />
+                  </Tooltip>
+                )}
+              </div>
             </div>
           </div>
         </div>

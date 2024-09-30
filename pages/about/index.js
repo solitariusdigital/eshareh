@@ -27,9 +27,7 @@ export default function About({ pageData }) {
     const fetchData = async () => {
       try {
         const users = await getUsersApi();
-        let setOne = shuffleUsers(
-          users.filter((user) => user.permission === "user")
-        );
+        let setOne = shuffleUsers(users.filter((user) => user.display));
         let setTwo = [...setOne];
         setUsers(setOne.concat(setTwo));
       } catch (error) {

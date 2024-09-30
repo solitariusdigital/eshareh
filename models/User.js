@@ -21,7 +21,7 @@ const UserSchema = new Schema(
     },
     media: String,
     permission: String,
-    active: Boolean,
+    display: Boolean,
   },
   { timestamps: true }
 );
