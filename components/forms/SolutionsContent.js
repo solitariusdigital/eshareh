@@ -3,13 +3,8 @@ import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
-import { updatePageApi, createPageApi } from "@/services/api";
-import {
-  fourGenerator,
-  uploadMedia,
-  areAllStatesValid,
-  extractParagraphs,
-} from "@/services/utility";
+import { updatePageApi } from "@/services/api";
+import { areAllStatesValid, extractParagraphs } from "@/services/utility";
 import building from "@/assets/building.png";
 
 export default function SolutionsContent({ pages, mediaData }) {
@@ -73,7 +68,7 @@ export default function SolutionsContent({ pages, mediaData }) {
     setDisableButton(true);
 
     const contentObject = {
-      // _id: homeContent["_id"],
+      _id: solutionsContent["_id"],
       slug: "solutions",
       title: "Solutions",
       content: [
@@ -121,7 +116,7 @@ export default function SolutionsContent({ pages, mediaData }) {
         },
       ],
     };
-    await createPageApi(contentObject);
+    await updatePageApi(contentObject);
     showAlert("ذخیره شد");
     router.reload(router.asPath);
   };

@@ -116,7 +116,7 @@
   justify-content: space-around;
   height: 40px;
   width: 200px;
-  margin: 12px auto;
+  margin: auto;
   margin-bottom: 20px;
   border: 1px solid config.$lightgrey;
   border-radius: 50px;
@@ -138,6 +138,12 @@
 .navActive {
   color: config.$yellow;
   font-weight: bold !important;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  color: config.$grey;
 }
 
 .formAction {

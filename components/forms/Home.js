@@ -613,6 +613,15 @@ export default function Home({ pages, mediaData }) {
                 borderTop: "1px solid #d6d6d6",
               }}
             >
+              <p
+                className={classes.message}
+                style={{
+                  fontFamily: "Farsi",
+                  marginBottom: "12px",
+                }}
+              >
+                در صورت تغییر در مدیا انتخاب کنید
+              </p>
               <div className={classes.navigation}>
                 <p
                   className={

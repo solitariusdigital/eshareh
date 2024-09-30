@@ -5,6 +5,7 @@ import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";
 import AES from "crypto-js/aes";
+import Image from "next/legacy/image";
 import {
   createUserApi,
   updatePageApi,
@@ -12,7 +13,6 @@ import {
   updateUserApi,
   deletetUserApi,
 } from "@/services/api";
-import Image from "next/legacy/image";
 import {
   fourGenerator,
   sixGenerator,
@@ -87,7 +87,7 @@ export default function Team({ pages, mediaData }) {
 
   const createUser = async () => {
     const isValid = areAllStatesValid([name, title]);
-    if (!isValid || !email || !password) {
+    if (!isValid || !email || !password || !media) {
       showAlert("همه موارد الزامیست");
       return;
     }
@@ -463,7 +463,7 @@ export default function Team({ pages, mediaData }) {
             fontFamily: "Farsi",
           }}
         >
-          <p className={classes.barReverse}>
+          <p className={classes.message}>
             در صورت خالی بودن رنگ و سایز، پیش فرض سیستم اعمال میشود
           </p>
           <div className={classes.input}>
@@ -547,11 +547,6 @@ export default function Team({ pages, mediaData }) {
           >
             {alert}
           </p>
-          {loader && (
-            <div>
-              <Image width={50} height={50} src={loaderImage} alt="isLoading" />
-            </div>
-          )}
           <button
             disabled={disableButton}
             style={{
@@ -559,7 +554,7 @@ export default function Team({ pages, mediaData }) {
             }}
             onClick={() => updateAboutContent()}
           >
-            ذخیره
+            ذخیره داده
           </button>
         </div>
       </div>
@@ -879,7 +874,7 @@ export default function Team({ pages, mediaData }) {
                   type="file"
                   accept="image/*"
                 />
-                <p>عکس</p>
+                <p>عکس اجباری</p>
               </label>
               {media !== "" && (
                 <div className={classes.preview}>
@@ -921,7 +916,7 @@ export default function Team({ pages, mediaData }) {
             }}
             onClick={() => (selectedUser ? updateUser() : createUser())}
           >
-            {selectedUser ? "ویرایش" : "ذخیره"}
+            {selectedUser ? "ویرایش داده" : "ذخیره داده"}
           </button>
         </div>
       </div>

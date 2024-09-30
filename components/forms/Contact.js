@@ -786,12 +786,19 @@ export default function Contact({ pages, mediaData }) {
             </button>
             <div
               style={{
-                paddingBottom: "20px",
                 paddingTop: "20px",
-                borderBottom: "1px solid #d6d6d6",
                 borderTop: "1px solid #d6d6d6",
               }}
             >
+              <p
+                className={classes.message}
+                style={{
+                  fontFamily: "Farsi",
+                  marginBottom: "12px",
+                }}
+              >
+                در صورت تغییر در مدیا انتخاب کنید
+              </p>
               <div
                 className={classes.input}
                 style={{

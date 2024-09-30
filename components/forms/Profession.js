@@ -47,7 +47,7 @@ export default function Profession({ pages, mediaData }) {
     setParagraphSetting(content[1].setting);
   }, [mediaData, pages]);
 
-  const handleSubmit = async () => {
+  const updateProfessionContent = async () => {
     const isValid = areAllStatesValid([main, paragraph]);
 
     if (!isValid) {
@@ -283,7 +283,7 @@ export default function Profession({ pages, mediaData }) {
               fontFamily: "Farsi",
             }}
           >
-            <p className={classes.barReverse}>
+            <p className={classes.message}>
               در صورت خالی بودن رنگ و سایز، پیش فرض سیستم اعمال میشود
             </p>
             <div className={classes.input}>
@@ -337,6 +337,14 @@ export default function Profession({ pages, mediaData }) {
               fontFamily: "English",
             }}
           >
+            <p
+              className={classes.message}
+              style={{
+                fontFamily: "Farsi",
+              }}
+            >
+              در صورت تغییر در مدیا انتخاب کنید
+            </p>
             <div className={classes.navigation}>
               <p
                 className={
@@ -419,9 +427,9 @@ export default function Profession({ pages, mediaData }) {
               style={{
                 fontFamily: "FarsiMedium",
               }}
-              onClick={() => handleSubmit()}
+              onClick={() => updateProfessionContent()}
             >
-              ذخیره
+              ذخیره داده
             </button>
           </div>
         </div>
