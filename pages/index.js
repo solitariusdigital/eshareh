@@ -56,6 +56,21 @@ export default function Home({
   const [solutionsContent, setSolutionsContent] = useState(
     solutionsData.content
   );
+  const [titleOneSetting, setTitleOneSetting] = useState(
+    pageData.content[0].setting
+  );
+  const [paragraphOneSetting, setParagraphOneSetting] = useState(
+    pageData.content[1].setting
+  );
+  const [titleTwoSetting, setTitleTwoSetting] = useState(
+    pageData.content[2].setting
+  );
+  const [titleThreeSetting, setTitleThreeSetting] = useState(
+    pageData.content[3].setting
+  );
+  const [paragraphTwoSetting, setParagraphTwoSetting] = useState(
+    pageData.content[4].setting
+  );
 
   const divideArray = (solutions) => {
     const dividedArrays = [];
@@ -120,6 +135,8 @@ export default function Home({
             style={{
               fontFamily: language ? "FarsiMedium" : "EnglishMedium",
               marginBottom: "12px",
+              color: `#${titleOneSetting.split(" ")[0]}`,
+              fontSize: `${titleOneSetting.split(" ")[1]}px`,
             }}
           >
             {titleOne[languageType]}
@@ -130,6 +147,8 @@ export default function Home({
               style={{
                 fontFamily: language ? "FarsiLight" : "EnglishLight",
                 marginBottom: "12px",
+                color: `#${paragraphOneSetting.split(" ")[0]}`,
+                fontSize: `${paragraphOneSetting.split(" ")[1]}px`,
               }}
             >
               {para}
@@ -138,7 +157,10 @@ export default function Home({
           <h1
             style={{
               fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-              color: "#fdb714",
+              color: titleTwoSetting
+                ? `#${titleTwoSetting.split(" ")[0]}`
+                : "#fdb714",
+              fontSize: `${titleTwoSetting.split(" ")[1]}px`,
             }}
           >
             {titleTwo[languageType]}
@@ -164,6 +186,8 @@ export default function Home({
           <h1
             style={{
               fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              color: `#${titleThreeSetting.split(" ")[0]}`,
+              fontSize: `${titleThreeSetting.split(" ")[1]}px`,
             }}
           >
             {titleThree[languageType]}
@@ -174,12 +198,16 @@ export default function Home({
               style={{
                 fontFamily: language ? "FarsiLight" : "EnglishLight",
                 marginBottom: "12px",
+                color: `#${paragraphTwoSetting.split(" ")[0]}`,
+                fontSize: `${paragraphTwoSetting.split(" ")[1]}px`,
               }}
               dangerouslySetInnerHTML={{
                 __html: applyFontToEnglishWords(
                   para,
                   "English",
-                  "22px",
+                  paragraphTwoSetting
+                    ? `${paragraphTwoSetting.split(" ")[1]}px`
+                    : "22px",
                   language
                 ),
               }}
