@@ -27,7 +27,7 @@ export default function Profession({ pages, mediaData }) {
   const [disableButton, setDisableButton] = useState(false);
   const sourceLink = "https://eshareh.storage.iran.liara.space";
   const router = useRouter();
-  const [development, setDevelopment] = useState(true);
+  const [development, setDevelopment] = useState(false);
 
   useEffect(() => {
     let professionContent = pages.find((page) => page.slug === "profession");
@@ -108,6 +108,36 @@ export default function Profession({ pages, mediaData }) {
     await updatePageApi(contentObject);
     showAlert("ذخیره شد");
     router.reload(router.asPath);
+  };
+
+  const updateProfessionMedia = async () => {
+    setLoader(true);
+    setDisableButton(true);
+    if (media) {
+      let mediaLink = "";
+      let mediaFormat = mediaType === "image" ? ".jpg" : ".gif";
+      let mediaFolder = "page";
+      const subFolder = "profession";
+      let mediaId = `img${fourGenerator()}`;
+      mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
+      await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
+
+      const mediaObject = {
+        _id: mediaContent["_id"],
+        slug: "profession",
+        title: "What We Do",
+        content: [
+          {
+            type: mediaType,
+            link: mediaLink,
+          },
+        ],
+      };
+      await updateMediaApi(mediaObject);
+      router.reload(router.asPath);
+    }
+    setLoader(false);
+    setDisableButton(false);
   };
 
   const showAlert = (message) => {
@@ -330,6 +360,30 @@ export default function Profession({ pages, mediaData }) {
                 autoComplete="off"
               ></input>
             </div>
+            <div
+              className={classes.formAction}
+              style={{
+                fontFamily: "English",
+              }}
+            >
+              <p
+                className={classes.alert}
+                style={{
+                  fontFamily: "Farsi",
+                }}
+              >
+                {alert}
+              </p>
+              <button
+                disabled={disableButton}
+                style={{
+                  fontFamily: "FarsiMedium",
+                }}
+                onClick={() => updateProfessionContent()}
+              >
+                ذخیره داده
+              </button>
+            </div>
           </div>
           <div
             className={classes.formAction}
@@ -404,14 +458,6 @@ export default function Profession({ pages, mediaData }) {
                 </div>
               )}
             </div>
-            <p
-              className={classes.alert}
-              style={{
-                fontFamily: "Farsi",
-              }}
-            >
-              {alert}
-            </p>
             {loader && (
               <div>
                 <Image
@@ -427,9 +473,9 @@ export default function Profession({ pages, mediaData }) {
               style={{
                 fontFamily: "FarsiMedium",
               }}
-              onClick={() => updateProfessionContent()}
+              onClick={() => updateProfessionMedia()}
             >
-              ذخیره داده
+              ذخیره مدیا
             </button>
           </div>
         </div>

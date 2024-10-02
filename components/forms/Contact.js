@@ -22,6 +22,12 @@ export default function Contact({ pages, mediaData }) {
   const [secAddress, setSecAddress] = useState({ en: "", fa: "" });
   const [secContact, setSecContact] = useState({ en: "", fa: "" });
   const [secLocationLink, setSecLocationLink] = useState({ en: "", fa: "" });
+  const [headOfficeSetting, setHeadOfficeSetting] = useState("");
+  const [headAddressSetting, setHeadAddressSetting] = useState("");
+  const [headContactSetting, setHeadContactSetting] = useState("");
+  const [secOfficeSetting, setSecOfficeSetting] = useState("");
+  const [secAddressSetting, setSecAddressSetting] = useState("");
+  const [secContactSetting, setSecContactSetting] = useState("");
   const [contactContent, setContactContent] = useState({});
   const [mediaContent, setMediaContent] = useState({});
   const [mediaTwoType, setMediaTwoType] = useState("image" || "gif");
@@ -32,7 +38,7 @@ export default function Contact({ pages, mediaData }) {
   const [alert, setAlert] = useState("");
   const sourceLink = "https://eshareh.storage.iran.liara.space";
   const router = useRouter();
-  const [development, setDevelopment] = useState(true);
+  const [development, setDevelopment] = useState(false);
 
   useEffect(() => {
     let contactContent = pages.find((page) => page.slug === "contact");
@@ -72,6 +78,12 @@ export default function Contact({ pages, mediaData }) {
       en: content[7].data.en,
       fa: content[7].data.fa,
     });
+    setHeadOfficeSetting(content[0].setting);
+    setHeadAddressSetting(content[1].setting);
+    setHeadContactSetting(content[2].setting);
+    setSecOfficeSetting(content[4].setting);
+    setSecAddressSetting(content[5].setting);
+    setSecContactSetting(content[6].setting);
   }, [mediaData, pages]);
 
   const updateContactContent = async () => {
@@ -101,6 +113,7 @@ export default function Contact({ pages, mediaData }) {
       content: [
         {
           type: "text",
+          setting: headOfficeSetting,
           data: {
             fa: headOffice.fa,
             en: headOffice.en,
@@ -108,6 +121,7 @@ export default function Contact({ pages, mediaData }) {
         },
         {
           type: "text",
+          setting: headAddressSetting,
           data: {
             fa: extractParagraphs(headAddress.fa).join("\n\n"),
             en: extractParagraphs(headAddress.en).join("\n\n"),
@@ -115,6 +129,7 @@ export default function Contact({ pages, mediaData }) {
         },
         {
           type: "text",
+          setting: headContactSetting,
           data: {
             fa: extractParagraphs(headContact.fa).join("\n\n"),
             en: extractParagraphs(headContact.en).join("\n\n"),
@@ -122,6 +137,7 @@ export default function Contact({ pages, mediaData }) {
         },
         {
           type: "text",
+          setting: "",
           data: {
             fa: headLocationLink.fa,
             en: headLocationLink.en,
@@ -129,6 +145,7 @@ export default function Contact({ pages, mediaData }) {
         },
         {
           type: "text",
+          setting: secOfficeSetting,
           data: {
             fa: secOffice.fa,
             en: secOffice.en,
@@ -136,6 +153,7 @@ export default function Contact({ pages, mediaData }) {
         },
         {
           type: "text",
+          setting: secAddressSetting,
           data: {
             fa: extractParagraphs(secAddress.fa).join("\n\n"),
             en: extractParagraphs(secAddress.en).join("\n\n"),
@@ -143,6 +161,7 @@ export default function Contact({ pages, mediaData }) {
         },
         {
           type: "text",
+          setting: secContactSetting,
           data: {
             fa: extractParagraphs(secContact.fa).join("\n\n"),
             en: extractParagraphs(secContact.en).join("\n\n"),
@@ -150,6 +169,7 @@ export default function Contact({ pages, mediaData }) {
         },
         {
           type: "text",
+          setting: "",
           data: {
             fa: secLocationLink.fa,
             en: secLocationLink.en,
@@ -218,7 +238,6 @@ export default function Contact({ pages, mediaData }) {
         ],
       };
       await updateMediaApi(mediaObject);
-      showAlert("ذخیره شد");
       router.reload(router.asPath);
     }
     setLoader(false);
@@ -761,35 +780,179 @@ export default function Contact({ pages, mediaData }) {
             </div>
           </div>
           <div
+            className={classes.form}
+            style={{
+              fontFamily: "Farsi",
+            }}
+          >
+            <p className={classes.message}>
+              در صورت خالی بودن رنگ و سایز، پیش فرض سیستم اعمال میشود
+            </p>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>رنگ و سایز دفتر مرکزی</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setHeadOfficeSetting("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="000000 16"
+                type="text"
+                id="headOfficeSetting"
+                name="headOfficeSetting"
+                onChange={(e) => setHeadOfficeSetting(e.target.value)}
+                value={headOfficeSetting}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>رنگ و سایز آدرس مرکزی</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setHeadAddressSetting("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="000000 16"
+                type="text"
+                id="headAddressSetting"
+                name="headAddressSetting"
+                onChange={(e) => setHeadAddressSetting(e.target.value)}
+                value={headAddressSetting}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>رنگ و سایز تماس مرکزی</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setHeadContactSetting("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="000000 16"
+                type="text"
+                id="headContactSetting"
+                name="headContactSetting"
+                onChange={(e) => setHeadContactSetting(e.target.value)}
+                value={headContactSetting}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>رنگ و سایز دفتر استودیو</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setSecOfficeSetting("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="000000 16"
+                type="text"
+                id="secOfficeSetting"
+                name="secOfficeSetting"
+                onChange={(e) => setSecOfficeSetting(e.target.value)}
+                value={secOfficeSetting}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>رنگ و سایز آدرس استودیو</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setSecAddressSetting("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="000000 16"
+                type="text"
+                id="secAddressSetting"
+                name="secAddressSetting"
+                onChange={(e) => setSecAddressSetting(e.target.value)}
+                value={secAddressSetting}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>رنگ و سایز تماس استودیو</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setSecContactSetting("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="000000 16"
+                type="text"
+                id="secContactSetting"
+                name="secContactSetting"
+                onChange={(e) => setSecContactSetting(e.target.value)}
+                value={secContactSetting}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div
+              className={classes.formAction}
+              style={{
+                fontFamily: "English",
+              }}
+            >
+              <p
+                className={classes.alert}
+                style={{
+                  fontFamily: "Farsi",
+                }}
+              >
+                {alert}
+              </p>
+              <button
+                disabled={disableButton}
+                style={{
+                  fontFamily: "FarsiMedium",
+                  marginBottom: "20px",
+                }}
+                onClick={() => updateContactContent()}
+              >
+                ذخیره داده
+              </button>
+            </div>
+          </div>
+          <div
             className={classes.formAction}
             style={{
               fontFamily: "English",
             }}
           >
-            <p
-              className={classes.alert}
-              style={{
-                fontFamily: "Farsi",
-              }}
-            >
-              {alert}
-            </p>
-            <button
-              disabled={disableButton}
-              style={{
-                fontFamily: "FarsiMedium",
-                marginBottom: "20px",
-              }}
-              onClick={() => updateContactContent()}
-            >
-              ذخیره داده
-            </button>
-            <div
-              style={{
-                paddingTop: "20px",
-                borderTop: "1px solid #d6d6d6",
-              }}
-            >
+            <div>
               <p
                 className={classes.message}
                 style={{

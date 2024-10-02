@@ -536,30 +536,30 @@ export default function Team({ pages, mediaData }) {
               autoComplete="off"
             ></input>
           </div>
-        </div>
-        <div
-          className={classes.formAction}
-          style={{
-            fontFamily: "English",
-          }}
-        >
-          <p
-            className={classes.alert}
+          <div
+            className={classes.formAction}
             style={{
-              fontFamily: "Farsi",
+              fontFamily: "English",
             }}
           >
-            {alert}
-          </p>
-          <button
-            disabled={disableButton}
-            style={{
-              fontFamily: "FarsiMedium",
-            }}
-            onClick={() => updateAboutContent()}
-          >
-            ذخیره داده
-          </button>
+            <p
+              className={classes.alert}
+              style={{
+                fontFamily: "Farsi",
+              }}
+            >
+              {alert}
+            </p>
+            <button
+              disabled={disableButton}
+              style={{
+                fontFamily: "FarsiMedium",
+              }}
+              onClick={() => updateAboutContent()}
+            >
+              ذخیره داده
+            </button>
+          </div>
         </div>
       </div>
       <div

@@ -28,6 +28,24 @@ export default function Contact({ pageData, mediaData }) {
     en: [pageData.content[6].data.en.split("\n\n")][0],
     fa: [pageData.content[6].data.fa.split("\n\n")][0],
   });
+  const [headOfficeSetting, setHeadOfficeSetting] = useState(
+    pageData.content[0].setting
+  );
+  const [headAddressSetting, setHeadAddressSetting] = useState(
+    pageData.content[1].setting
+  );
+  const [headContactSetting, setHeadContactSetting] = useState(
+    pageData.content[2].setting
+  );
+  const [secOfficeSetting, setSecOfficeSetting] = useState(
+    pageData.content[4].setting
+  );
+  const [secAddressSetting, setSecAddressSetting] = useState(
+    pageData.content[5].setting
+  );
+  const [secContactSetting, setSecContactSetting] = useState(
+    pageData.content[6].setting
+  );
   const headLocationLink = pageData.content[3].data.en;
   const secLocationLink = pageData.content[7].data.en;
 
@@ -96,16 +114,17 @@ export default function Contact({ pageData, mediaData }) {
             <div
               className={language ? classes.row : classes.rowReverse}
               style={{
-                color: `#fdb714`,
+                color: headOfficeSetting
+                  ? `#${headOfficeSetting.split(" ")[0]}`
+                  : "#fdb714",
+                fontSize: `${headOfficeSetting.split(" ")[1]}px`,
                 fontFamily: language ? "FarsiBold" : "EnglishBold",
               }}
               onClick={() => window.open(headLocationLink)}
             >
-              {language ? (
-                <h3 className={classes.click}>{pageData.content[0].data.fa}</h3>
-              ) : (
-                <h3 className={classes.click}>{pageData.content[0].data.en}</h3>
-              )}
+              <h3 className={classes.click}>
+                {pageData.content[0].data[languageType]}
+              </h3>
             </div>
             <div className={classes.details}>
               {headAddress[languageType].map((address, index) => (
@@ -114,7 +133,15 @@ export default function Contact({ pageData, mediaData }) {
                     onClick={() => window.open(headLocationLink)}
                     className={language ? classes.row : classes.rowReverse}
                   >
-                    <p className={classes.click}>{address}</p>
+                    <p
+                      className={classes.click}
+                      style={{
+                        color: `#${headAddressSetting.split(" ")[0]}`,
+                        fontSize: `${headAddressSetting.split(" ")[1]}px`,
+                      }}
+                    >
+                      {address}
+                    </p>
                   </div>
                 </Fragment>
               ))}
@@ -136,13 +163,22 @@ export default function Contact({ pageData, mediaData }) {
                         className={classes.email}
                         style={{
                           fontFamily: language ? "English" : "English",
-                          fontSize: language ? "0.9rem" : "1rem",
+                          color: `#${headContactSetting.split(" ")[0]}`,
+                          fontSize: `${headContactSetting.split(" ")[1]}px`,
                         }}
                       >
                         {contact}
                       </p>
                     ) : (
-                      <p className={classes.click}>{contact}</p>
+                      <p
+                        className={classes.click}
+                        style={{
+                          color: `#${headContactSetting.split(" ")[0]}`,
+                          fontSize: `${headContactSetting.split(" ")[1]}px`,
+                        }}
+                      >
+                        {contact}
+                      </p>
                     )}
                   </div>
                 </Fragment>
@@ -166,16 +202,17 @@ export default function Contact({ pageData, mediaData }) {
             <div
               className={language ? classes.row : classes.rowReverse}
               style={{
-                color: `#fdb714`,
+                color: secOfficeSetting
+                  ? `#${secOfficeSetting.split(" ")[0]}`
+                  : "#fdb714",
+                fontSize: `${secOfficeSetting.split(" ")[1]}px`,
                 fontFamily: language ? "FarsiBold" : "EnglishBold",
               }}
               onClick={() => window.open(secLocationLink)}
             >
-              {language ? (
-                <h3 className={classes.click}>{pageData.content[4].data.fa}</h3>
-              ) : (
-                <h3 className={classes.click}>{pageData.content[4].data.en}</h3>
-              )}
+              <h3 className={classes.click}>
+                {pageData.content[4].data[languageType]}
+              </h3>
             </div>
             <div className={classes.details}>
               {secAddress[languageType].map((address, index) => (
@@ -184,7 +221,15 @@ export default function Contact({ pageData, mediaData }) {
                     onClick={() => window.open(secLocationLink)}
                     className={language ? classes.row : classes.rowReverse}
                   >
-                    <p className={classes.click}>{address}</p>
+                    <p
+                      className={classes.click}
+                      style={{
+                        color: `#${secAddressSetting.split(" ")[0]}`,
+                        fontSize: `${secAddressSetting.split(" ")[1]}px`,
+                      }}
+                    >
+                      {address}
+                    </p>
                   </div>
                 </Fragment>
               ))}
@@ -201,7 +246,15 @@ export default function Contact({ pageData, mediaData }) {
                     }
                     className={language ? classes.row : classes.rowReverse}
                   >
-                    <p className={classes.click}>{contact}</p>
+                    <p
+                      className={classes.click}
+                      style={{
+                        color: `#${secContactSetting.split(" ")[0]}`,
+                        fontSize: `${secContactSetting.split(" ")[1]}px`,
+                      }}
+                    >
+                      {contact}
+                    </p>
                   </div>
                 </Fragment>
               ))}
