@@ -57,9 +57,21 @@ export default function Solutions({
   ];
 
   const information = {
-    advertising: pageData.content[1].data[languageType].split("\n\n"),
-    media: pageData.content[3].data[languageType].split("\n\n"),
-    digital: pageData.content[5].data[languageType].split("\n\n"),
+    advertising: {
+      content: pageData.content[1].data[languageType].split("\n\n"),
+      color: `#${pageData.content[1].setting.split(" ")[0]}`,
+      size: `${pageData.content[1].setting.split(" ")[1]}px`,
+    },
+    media: {
+      content: pageData.content[3].data[languageType].split("\n\n"),
+      color: `#${pageData.content[3].setting.split(" ")[0]}`,
+      size: `${pageData.content[3].setting.split(" ")[1]}px`,
+    },
+    digital: {
+      content: pageData.content[5].data[languageType].split("\n\n"),
+      color: `#${pageData.content[5].setting.split(" ")[0]}`,
+      size: `${pageData.content[5].setting.split(" ")[1]}px`,
+    },
   };
 
   useEffect(() => {
@@ -171,9 +183,11 @@ export default function Solutions({
             <h3
               style={{
                 fontFamily: language ? "FarsiLight" : "EnglishLight",
+                color: information[solutionsCategory].color,
+                fontSize: information[solutionsCategory].size,
               }}
             >
-              {information[solutionsCategory]}
+              {information[solutionsCategory].content}
             </h3>
           </div>
         )}

@@ -24,7 +24,6 @@ export default function Home({ pages, mediaData }) {
   const [titleTwoSetting, setTitleTwoSetting] = useState("");
   const [titleThreeSetting, setTitleThreeSetting] = useState("");
   const [paragraphTwoSetting, setParagraphTwoSetting] = useState("");
-
   const [homeContent, setHomeContent] = useState({});
   const [mediaContent, setMediaContent] = useState({});
   const [loader, setLoader] = useState(false);

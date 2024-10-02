@@ -248,11 +248,20 @@ export default function Home({
               <h1
                 style={{
                   fontFamily: language ? "FarsiBold" : "English",
+                  color: `#${solutionsContent[0].setting.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[0].setting.split(" ")[1]}px`,
                 }}
               >
                 {solutionsContent[0].data[languageType]}
               </h1>
-              <h3>{solutionsContent[1].data[languageType].split("\n\n")[0]}</h3>
+              <h3
+                style={{
+                  color: `#${solutionsContent[1].setting.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[1].setting.split(" ")[1]}px`,
+                }}
+              >
+                {solutionsContent[1].data[languageType].split("\n\n")[0]}
+              </h3>
             </div>
             <div
               className={language ? classes.more : classes.moreReverse}
@@ -283,11 +292,20 @@ export default function Home({
               <h1
                 style={{
                   fontFamily: language ? "FarsiBold" : "English",
+                  color: `#${solutionsContent[2].setting.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[2].setting.split(" ")[1]}px`,
                 }}
               >
                 {solutionsContent[2].data[languageType]}
               </h1>
-              <h3>{solutionsContent[3].data[languageType].split("\n\n")[0]}</h3>
+              <h3
+                style={{
+                  color: `#${solutionsContent[3].setting.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[3].setting.split(" ")[1]}px`,
+                }}
+              >
+                {solutionsContent[3].data[languageType].split("\n\n")[0]}
+              </h3>
             </div>
             <div
               className={language ? classes.more : classes.moreReverse}
@@ -318,11 +336,20 @@ export default function Home({
               <h1
                 style={{
                   fontFamily: language ? "FarsiBold" : "English",
+                  color: `#${solutionsContent[4].setting.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[4].setting.split(" ")[1]}px`,
                 }}
               >
                 {solutionsContent[4].data[languageType]}
               </h1>
-              <h3>{solutionsContent[5].data[languageType].split("\n\n")[0]}</h3>
+              <h3
+                style={{
+                  color: `#${solutionsContent[5].setting.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[5].setting.split(" ")[1]}px`,
+                }}
+              >
+                {solutionsContent[5].data[languageType].split("\n\n")[0]}
+              </h3>
             </div>
             <div
               className={language ? classes.more : classes.moreReverse}
