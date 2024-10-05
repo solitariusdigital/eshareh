@@ -18,7 +18,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import { updateCoverApi, deletetCoverApi } from "@/services/api";
+import { updateCoverApi, deletetCoverApi, getCoversApi } from "@/services/api";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 export default function Admin({ covers, pages, mediaData }) {
@@ -47,7 +47,8 @@ export default function Admin({ covers, pages, mediaData }) {
       text: text,
     };
     await updateCoverApi(cover);
-    router.reload(router.asPath);
+    let updatedCovers = await getCoversApi(cover);
+    setCoversGrid(updatedCovers);
   };
 
   const handleColorChange = (value, id) => {
