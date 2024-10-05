@@ -619,7 +619,7 @@ export default function Team({ pages, mediaData }) {
               <option value="default" disabled>
                 {language ? "انتخاب برای ویرایش" : "Select to update"}
               </option>
-              {users.map((user, index) => {
+              {users?.map((user, index) => {
                 return (
                   <option key={index} value={index}>
                     {user.name[languageType]}
