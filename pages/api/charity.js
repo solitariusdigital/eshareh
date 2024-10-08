@@ -38,5 +38,7 @@ export default async function charityHandler(req, res) {
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
+    default:
+      return res.status(405).json({ msg: "Method Not Allowed" });
   }
 }

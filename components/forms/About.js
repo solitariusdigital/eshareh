@@ -14,7 +14,7 @@ import {
   updatePageApi,
   getUsersApi,
   updateUserApi,
-  deletetUserApi,
+  deleteUserApi,
 } from "@/services/api";
 import {
   fourGenerator,
@@ -111,7 +111,6 @@ export default function Team({ pages, mediaData }) {
     setLoader(true);
     setDisableButton(true);
 
-    // upload media
     let mediaLink = "";
     if (media) {
       let mediaFormat = ".jpg";
@@ -226,7 +225,7 @@ export default function Team({ pages, mediaData }) {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      await deletetUserApi(users[index]["_id"]);
+      await deleteUserApi(users[index]["_id"]);
       router.reload(router.asPath);
     }
   };

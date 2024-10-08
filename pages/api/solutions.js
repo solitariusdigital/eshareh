@@ -16,7 +16,12 @@ export default async function solutionsHandler(req, res) {
       }
     case "GET":
       try {
-        const solutions = await Solution.find();
+        let solutions = null;
+        if (req.query.id) {
+          solutions = await Solution.findById(req.query.id);
+        } else {
+          solutions = await Solution.find();
+        }
         return res.status(200).json(solutions);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
@@ -38,5 +43,7 @@ export default async function solutionsHandler(req, res) {
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
+    default:
+      return res.status(405).json({ msg: "Method Not Allowed" });
   }
 }

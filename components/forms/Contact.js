@@ -103,7 +103,6 @@ export default function Contact({ pages, mediaData }) {
       return;
     }
 
-    setLoader(true);
     setDisableButton(true);
 
     const contentObject = {

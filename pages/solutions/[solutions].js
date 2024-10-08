@@ -189,6 +189,7 @@ export default function Solution({ solutions, projectTitle }) {
         break;
     }
     await updateSolutionApi(data);
+    setDropDpwn(false);
     router.replace(router.asPath);
   };
 

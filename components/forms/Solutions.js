@@ -142,8 +142,8 @@ export default function Solutions() {
       return;
     }
 
-    setDisableButton(true);
     setLoader(true);
+    setDisableButton(true);
 
     const totalSteps =
       imagesPreview.length + videosPreview.length + voicesPreview.length;
@@ -784,7 +784,7 @@ export default function Solutions() {
             fontFamily: "FarsiMedium",
           }}
         >
-          ذخیره
+          ذخیره داده
         </button>
       </div>
     </Fragment>

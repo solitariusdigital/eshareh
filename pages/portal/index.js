@@ -23,19 +23,19 @@ export default function Portal() {
   const [formType, setFormType] = useState(true);
 
   useEffect(() => {
+    if (permissionControl === "admin") {
+      Router.push("/admin");
+      setEditSolution(null);
+    }
+  }, [permissionControl, setEditSolution]);
+
+  useEffect(() => {
     navigationTopBar.map((nav, i) => {
       nav.active = false;
     });
     setNavigationTopBar([...navigationTopBar]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (permissionControl === "admin") {
-      Router.push("/admin");
-      setEditSolution(null);
-    }
-  }, [permissionControl, setEditSolution]);
 
   const showAlert = (message) => {
     setAlert(message);

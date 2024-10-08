@@ -4,26 +4,19 @@ import classes from "@/components/forms/Form.module.scss";
 import Profession from "./forms/Profession";
 import Home from "./forms/Home";
 import About from "./forms/About";
-import News from "./forms/News";
 import Contact from "./forms/Contact";
 import SolutionsContent from "./forms/SolutionsContent";
 
 export default function Pages({ pages, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
   const [pageType, setPageType] = useState(
-    "home" ||
-      "about us" ||
-      "what we do" ||
-      "news" ||
-      "contact us" ||
-      "solutions"
+    "home" || "about us" || "what we do" || "contact us" || "solutions"
   );
 
   const pagesName = [
     "home",
     "about us",
     "what we do",
-    "news",
     "contact us",
     "solutions",
   ];
@@ -51,7 +44,6 @@ export default function Pages({ pages, mediaData }) {
       {pageType === "what we do" && (
         <Profession pages={pages} mediaData={mediaData} />
       )}
-      {pageType === "news" && <News pages={pages} mediaData={mediaData} />}
       {pageType === "contact us" && (
         <Contact pages={pages} mediaData={mediaData} />
       )}

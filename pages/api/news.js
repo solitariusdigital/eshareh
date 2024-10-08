@@ -1,7 +1,7 @@
-import Cover from "@/models/Cover";
+import News from "@/models/News";
 import dbConnect from "@/services/dbConnect";
 
-export default async function coversHandler(req, res) {
+export default async function newsHandler(req, res) {
   res.setHeader("Cache-Control", "s-maxage=10");
   const { method, body } = req;
   await dbConnect();
@@ -9,21 +9,26 @@ export default async function coversHandler(req, res) {
   switch (method) {
     case "POST":
       try {
-        const newCover = await Cover.create(body);
-        return res.status(200).json(newCover);
+        const newNews = await News.create(body);
+        return res.status(200).json(newNews);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
     case "GET":
       try {
-        const covers = await Cover.find();
-        return res.status(200).json(covers);
+        let news = null;
+        if (req.query.id) {
+          news = await News.findById(req.query.id);
+        } else {
+          news = await News.find();
+        }
+        return res.status(200).json(news);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
     case "PUT":
       try {
-        const updateCover = await Cover.findByIdAndUpdate(
+        const updateNews = await News.findByIdAndUpdate(
           body.id || body["_id"],
           body,
           {
@@ -31,20 +36,20 @@ export default async function coversHandler(req, res) {
             runValidators: true,
           }
         );
-        if (!updateCover) {
+        if (!updateNews) {
           return res.status(400).json({ msg: err.message });
         }
-        return res.status(200).json(updateCover);
+        return res.status(200).json(updateNews);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
     case "DELETE":
       try {
-        const deleteCover = await Cover.findByIdAndDelete(req.query.id);
-        if (!deleteCover) {
-          return res.status(404).json({ msg: "Cover not found" });
+        const deleteNews = await News.findByIdAndDelete(req.query.id);
+        if (!deleteNews) {
+          return res.status(404).json({ msg: "News not found" });
         }
-        return res.status(200).json({ msg: "Cover deleted successfully" });
+        return res.status(200).json({ msg: "News deleted successfully" });
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }

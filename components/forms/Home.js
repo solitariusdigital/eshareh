@@ -84,7 +84,6 @@ export default function Home({ pages, mediaData }) {
       return;
     }
 
-    setLoader(true);
     setDisableButton(true);
 
     const contentObject = {

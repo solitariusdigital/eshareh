@@ -20,17 +20,8 @@ export const createUserApi = async (data) => {
   return await response.json();
 };
 export const getUserApi = async (id) => {
-  const response = await fetch(`/api/user?id=${id}`, {
+  const response = await fetch(`/api/users?id=${id}`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  return await response.json();
-};
-export const deletetUserApi = async (id) => {
-  const response = await fetch(`/api/user?id=${id}`, {
-    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
@@ -40,6 +31,15 @@ export const deletetUserApi = async (id) => {
 export const getUsersApi = async () => {
   const response = await fetch("/api/users", {
     method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteUserApi = async (id) => {
+  const response = await fetch(`/api/user?id=${id}`, {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
@@ -69,7 +69,7 @@ export const createSolutionApi = async (data) => {
   return await response.json();
 };
 export const getSolutionApi = async (id) => {
-  const response = await fetch(`/api/solution?id=${id}`, {
+  const response = await fetch(`/api/solutions?id=${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -179,8 +179,57 @@ export const getCoversApi = async () => {
   });
   return await response.json();
 };
-export const deletetCoverApi = async (id) => {
-  const response = await fetch(`/api/cover?id=${id}`, {
+export const deleteCoverApi = async (id) => {
+  const response = await fetch(`/api/covers?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
+// news api
+export const updateNewsApi = async (data) => {
+  const response = await fetch("/api/news", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createNewsApi = async (data) => {
+  const response = await fetch("/api/news", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleNewsApi = async (id) => {
+  const response = await fetch(`/api/news?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getNewsApi = async () => {
+  const response = await fetch("/api/news", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteNewsApi = async (id) => {
+  const response = await fetch(`/api/news?id=${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -210,7 +259,7 @@ export const createPageApi = async (data) => {
   });
   return await response.json();
 };
-export const getPagessApi = async () => {
+export const getPagesApi = async () => {
   const response = await fetch("/api/pages", {
     method: "GET",
     headers: {

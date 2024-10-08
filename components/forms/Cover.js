@@ -39,7 +39,6 @@ export default function Cover() {
     setLoader(true);
     setDisableButton(true);
 
-    // upload media
     let mediaLink = "";
     if (media) {
       let mediaFormat = mediaType === "image" ? ".jpg" : ".mp4";

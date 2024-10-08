@@ -55,32 +55,7 @@ export default function Profession({ pages, mediaData }) {
       return;
     }
 
-    setLoader(true);
     setDisableButton(true);
-
-    // upload media
-    if (media) {
-      let mediaLink = "";
-      let mediaFormat = mediaType === "image" ? ".jpg" : ".gif";
-      let mediaFolder = "page";
-      const subFolder = "profession";
-      let mediaId = `img${fourGenerator()}`;
-      mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
-      await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
-
-      const mediaObject = {
-        _id: mediaContent["_id"],
-        slug: "profession",
-        title: "What We Do",
-        content: [
-          {
-            type: mediaType,
-            link: mediaLink,
-          },
-        ],
-      };
-      await updateMediaApi(mediaObject);
-    }
 
     const contentObject = {
       _id: professionContent["_id"],

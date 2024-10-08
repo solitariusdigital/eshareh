@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import classes from "./admin.module.scss";
 import Solutions from "@/components/forms/Solutions";
 import Cover from "@/components/forms/Cover";
+import News from "@/components/forms/News";
 import Pages from "@/components/Pages";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
@@ -18,7 +19,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import { updateCoverApi, deletetCoverApi, getCoversApi } from "@/services/api";
+import { updateCoverApi, deleteCoverApi, getCoversApi } from "@/services/api";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 export default function Admin({ covers, pages, mediaData }) {
@@ -27,8 +28,10 @@ export default function Admin({ covers, pages, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
   const [coversGrid, setCoversGrid] = useState(covers);
   const [text, setText] = useState(false);
-  const [formType, setFormType] = useState("solutions" || "pages" || "covers");
-  const navigation = ["solutions", "pages", "covers"];
+  const [formType, setFormType] = useState(
+    "solutions" || "pages" || "news" || "covers"
+  );
+  const navigation = ["solutions", "covers", "news", "pages"];
   const router = useRouter();
 
   useEffect(() => {
@@ -71,7 +74,7 @@ export default function Admin({ covers, pages, mediaData }) {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      await deletetCoverApi(coversGrid[index]["_id"]);
+      await deleteCoverApi(coversGrid[index]["_id"]);
       router.reload(router.asPath);
     }
   };
@@ -96,6 +99,7 @@ export default function Admin({ covers, pages, mediaData }) {
       </div>
       {formType === "solutions" && <Solutions />}
       {formType === "covers" && <Cover />}
+      {formType === "news" && <News />}
       {formType === "pages" && <Pages pages={pages} mediaData={mediaData} />}
       {formType === "covers" && (
         <div className={classes.coverContainer}>
