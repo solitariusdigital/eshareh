@@ -20,6 +20,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { updateCoverApi, deleteCoverApi, getCoversApi } from "@/services/api";
+import UpdateIcon from "@mui/icons-material/Update";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 export default function Admin({ covers, pages, mediaData }) {
@@ -27,7 +28,7 @@ export default function Admin({ covers, pages, mediaData }) {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const [coversGrid, setCoversGrid] = useState(covers);
-  const [text, setText] = useState(false);
+  const [text, setText] = useState({});
   const [formType, setFormType] = useState(
     "solutions" || "pages" || "news" || "covers"
   );
@@ -42,15 +43,32 @@ export default function Admin({ covers, pages, mediaData }) {
     }
   }, [permissionControl, setFormType]);
 
-  const manageCover = async (type, index) => {
-    const cover = {
+  useEffect(() => {
+    const textObject = covers.reduce((acc, entry) => {
+      acc[entry["_id"]] = entry.text;
+      return acc;
+    }, {});
+    setText(textObject);
+  }, [covers]);
+
+  const updateCover = async (index) => {
+    const coverObject = {
       ...coversGrid[index],
       color: coversGrid[index].color,
-      active: type === "show" ? true : false,
-      text: text,
+      text: text[coversGrid[index]["_id"]],
     };
-    await updateCoverApi(cover);
-    let updatedCovers = await getCoversApi(cover);
+    await updateCoverApi(coverObject);
+    let updatedCovers = await getCoversApi(coverObject);
+    setCoversGrid(updatedCovers);
+  };
+
+  const manageVisibility = async (type, index) => {
+    const coverObject = {
+      ...coversGrid[index],
+      active: type === "show" ? true : false,
+    };
+    await updateCoverApi(coverObject);
+    let updatedCovers = await getCoversApi(coverObject);
     setCoversGrid(updatedCovers);
   };
 
@@ -59,15 +77,14 @@ export default function Admin({ covers, pages, mediaData }) {
     const coverIndex = newCovers.findIndex((object) => object["_id"] === id);
     newCovers[coverIndex].color = value;
     setCoversGrid(newCovers);
-    setText(true);
+    setText(false);
   };
 
-  const handleText = (value, id) => {
-    const newCovers = [...coversGrid];
-    const coverIndex = newCovers.findIndex((object) => object["_id"] === id);
-    newCovers[coverIndex].text = value;
-    setCoversGrid(newCovers);
-    setText(value);
+  const handleText = (id, newValue) => {
+    setText((prevText) => ({
+      ...prevText,
+      [id]: newValue,
+    }));
   };
 
   const deleteCover = async (index) => {
@@ -118,15 +135,6 @@ export default function Admin({ covers, pages, mediaData }) {
                 </p>
                 <div className={classes.action}>
                   <div>
-                    {cover.active ? (
-                      <Tooltip title="Visible">
-                        <VerifiedUserIcon sx={{ color: "#57a361" }} />
-                      </Tooltip>
-                    ) : (
-                      <Tooltip title="Hidden">
-                        <VisibilityOffIcon sx={{ color: "#d40d12" }} />
-                      </Tooltip>
-                    )}
                     <Tooltip title="Delete">
                       <DeleteOutlineIcon
                         className="icon"
@@ -134,6 +142,23 @@ export default function Admin({ covers, pages, mediaData }) {
                         onClick={() => deleteCover(index)}
                       />
                     </Tooltip>
+                    {cover.active ? (
+                      <Tooltip title="Hide">
+                        <VerifiedUserIcon
+                          className="icon"
+                          sx={{ color: "#57a361" }}
+                          onClick={() => manageVisibility("hide", index)}
+                        />
+                      </Tooltip>
+                    ) : (
+                      <Tooltip title="Show">
+                        <VisibilityOffIcon
+                          className="icon"
+                          sx={{ color: "#d40d12" }}
+                          onClick={() => manageVisibility("show", index)}
+                        />
+                      </Tooltip>
+                    )}
                   </div>
                   <div className={classes.input}>
                     <input
@@ -150,33 +175,29 @@ export default function Admin({ covers, pages, mediaData }) {
                       autoComplete="off"
                       maxLength={6}
                     />
-                    {cover.text ? (
-                      <Tooltip title="Hide">
+                    {text[cover["_id"]] ? (
+                      <Tooltip title="Hide Text">
                         <RadioButtonCheckedIcon
                           className="icon"
-                          onClick={() => handleText(false, cover["_id"])}
+                          onClick={() =>
+                            handleText(cover["_id"], !text[cover["_id"]])
+                          }
                         />
                       </Tooltip>
                     ) : (
-                      <Tooltip title="Show">
+                      <Tooltip title="Show Text">
                         <RadioButtonUncheckedIcon
                           className="icon"
-                          onClick={() => handleText(true, cover["_id"])}
+                          onClick={() =>
+                            handleText(cover["_id"], !text[cover["_id"]])
+                          }
                         />
                       </Tooltip>
                     )}
-                  </div>
-                  <div>
-                    <Tooltip title="Hide">
-                      <CloseIcon
+                    <Tooltip title="Update">
+                      <UpdateIcon
                         className="icon"
-                        onClick={() => manageCover("hide", index)}
-                      />
-                    </Tooltip>
-                    <Tooltip title="Show">
-                      <TaskAltIcon
-                        className="icon"
-                        onClick={() => manageCover("show", index)}
+                        onClick={() => updateCover(index)}
                       />
                     </Tooltip>
                   </div>
