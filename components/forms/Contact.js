@@ -38,7 +38,7 @@ export default function Contact({ pages, mediaData }) {
   const [alert, setAlert] = useState("");
   const sourceLink = "https://eshareh.storage.iran.liara.space";
   const router = useRouter();
-  const [development, setDevelopment] = useState(false);
+  const [development, setDevelopment] = useState(true);
 
   useEffect(() => {
     let contactContent = pages.find((page) => page.slug === "contact");

@@ -26,7 +26,7 @@ export default function SolutionsContent({ pages, mediaData }) {
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
   const router = useRouter();
-  const [development, setDevelopment] = useState(false);
+  const [development, setDevelopment] = useState(true);
 
   useEffect(() => {
     let solutionsContent = pages.find((page) => page.slug === "solutions");

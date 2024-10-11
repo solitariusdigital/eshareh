@@ -35,7 +35,7 @@ export default function Home({ pages, mediaData }) {
   const [mediaTwoType, setMediaTwoType] = useState("image" || "gif");
   const sourceLink = "https://eshareh.storage.iran.liara.space";
   const router = useRouter();
-  const [development, setDevelopment] = useState(false);
+  const [development, setDevelopment] = useState(true);
 
   useEffect(() => {
     let homeContent = pages.find((page) => page.slug === "home");
