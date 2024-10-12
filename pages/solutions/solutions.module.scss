@@ -148,6 +148,11 @@
     margin-bottom: 20px;
     cursor: pointer;
 
+    .imageContainer {
+      position: relative;
+      height: 100%;
+    }
+
     @include mixins.mobile {
       height: 200px !important;
     }
@@ -179,6 +184,11 @@
     margin-bottom: 20px;
     cursor: pointer;
 
+    .imageContainer {
+      position: relative;
+      height: 100%;
+    }
+
     @include mixins.mobile {
       height: 100% !important;
     }
@@ -204,25 +214,24 @@
       border-top-right-radius: 20px;
       border-top-left-radius: 20px;
     }
+  }
 
-    .enlarge {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      border-radius: 50px;
-      padding: 8px 20px;
-      color: config.$white;
-      @include mixins.transparentBackground(0.5, config.$lightgrey);
-
-      @include mixins.allDesktop {
-        &:hover {
-          color: config.$yellow;
-        }
+  .enlarge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 50px;
+    padding: 8px 20px;
+    color: config.$white;
+    @include mixins.transparentBackground(0.5, config.$lightgrey);
+    @include mixins.allDesktop {
+      &:hover {
+        color: config.$yellow;
       }
+    }
 
-      @include mixins.mobile {
-        scale: 0.8;
-      }
+    @include mixins.mobile {
+      scale: 0.8;
     }
   }
 

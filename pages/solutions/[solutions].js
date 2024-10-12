@@ -705,7 +705,10 @@ export default function Solution({ solutions, projectTitle }) {
                         </div>
                       )}
                     {image.type === "image" && (
-                      <div onClick={() => gallerySlider()}>
+                      <div
+                        className={classes.imageContainer}
+                        onClick={() => gallerySlider()}
+                      >
                         <Image
                           className={
                             index === 0 && project.slideMedia.length === 0
@@ -833,7 +836,10 @@ export default function Solution({ solutions, projectTitle }) {
                               </div>
                             )}
                           {image.type === "image" ? (
-                            <div onClick={() => gallerySlider()}>
+                            <div
+                              className={classes.imageContainer}
+                              onClick={() => gallerySlider()}
+                            >
                               <Image
                                 className={
                                   index === 0 && project.slideMedia.length === 0

@@ -188,7 +188,7 @@ export default function Menu() {
                   .map((nav, index) => (
                     <Fragment key={index}>
                       {index === navigationTopBar.length - 1 && (
-                        <div className={classes.menuWrapper}>
+                        <nav className={classes.menuWrapper}>
                           <div
                             className={classes.languageControl}
                             onClick={() => toggleLanguage()}
@@ -245,7 +245,7 @@ export default function Menu() {
                               </Fragment>
                             )}
                           </a>
-                        </div>
+                        </nav>
                       )}
                       <a
                         style={{
@@ -275,7 +275,7 @@ export default function Menu() {
                       {nav.title[languageType]}
                     </a>
                     {index === navigationTopBar.length - 1 && (
-                      <div className={classes.menuWrapperReverse}>
+                      <nav className={classes.menuWrapperReverse}>
                         <div
                           className={classes.languageControl}
                           onClick={() => toggleLanguage()}
@@ -330,7 +330,7 @@ export default function Menu() {
                             </Fragment>
                           )}
                         </a>
-                      </div>
+                      </nav>
                     )}
                   </Fragment>
                 ))}
@@ -399,34 +399,32 @@ export default function Menu() {
             </div>
           </div>
           {menuMobile && (
-            <Fragment>
-              <div
-                className={`${classes.menuMobile} animate__animated animate__slideInDown`}
+            <div
+              className={`${classes.menuMobile} animate__animated animate__slideInDown`}
+            >
+              <nav
+                className={
+                  language ? classes.menuItems : classes.menuItemsReverse
+                }
               >
-                <div
-                  className={
-                    language ? classes.menuItems : classes.menuItemsReverse
-                  }
-                >
-                  {navigationTopBar.map((nav, index) => (
-                    <a
-                      key={index}
-                      style={{
-                        fontFamily: language ? "FarsiBold" : "EnglishMedium",
-                        fontSize: language ? "1.2rem" : "",
-                      }}
-                      className={!nav.active ? classes.nav : classes.navActive}
-                      onClick={() => activateNav(nav.link, index)}
-                    >
-                      {nav.title[languageType]}
-                      {nav.title[languageType] === "" && (
-                        <Image width={20} height={20} src={search} alt="logo" />
-                      )}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </Fragment>
+                {navigationTopBar.map((nav, index) => (
+                  <a
+                    key={index}
+                    style={{
+                      fontFamily: language ? "FarsiBold" : "EnglishMedium",
+                      fontSize: language ? "1.2rem" : "",
+                    }}
+                    className={!nav.active ? classes.nav : classes.navActive}
+                    onClick={() => activateNav(nav.link, index)}
+                  >
+                    {nav.title[languageType]}
+                    {nav.title[languageType] === "" && (
+                      <Image width={20} height={20} src={search} alt="logo" />
+                    )}
+                  </a>
+                ))}
+              </nav>
+            </div>
           )}
         </div>
       )}

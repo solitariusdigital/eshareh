@@ -31,7 +31,7 @@ export default function Footer() {
   };
 
   return (
-    <div
+    <footer
       className={classes.footer}
       style={{
         fontFamily: language ? "EnglishLight" : "EnglishLight",
@@ -131,6 +131,6 @@ export default function Footer() {
           />
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
