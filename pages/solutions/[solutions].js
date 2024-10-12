@@ -2,10 +2,6 @@ import { useState, useContext, Fragment, useEffect, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./solutions.module.scss";
-import {
-  replaceSpacesAndHyphens,
-  applyFontToEnglishWords,
-} from "@/services/utility";
 import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
@@ -19,7 +15,6 @@ import solutionModel from "@/models/Solution";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import StarIcon from "@mui/icons-material/Star";
 import Tooltip from "@mui/material/Tooltip";
 import logoEnglish from "@/assets/logoEnglish.svg";
@@ -31,6 +26,10 @@ import {
   getCoversApi,
   updateCoverApi,
 } from "@/services/api";
+import {
+  replaceSpacesAndHyphens,
+  applyFontToEnglishWords,
+} from "@/services/utility";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -418,12 +417,20 @@ export default function Solution({ solutions, projectTitle }) {
             <Fragment>
               <div className={classes.controlPanel}>
                 {project.active ? (
-                  <Tooltip title="Visible">
-                    <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                  <Tooltip title="Hide">
+                    <VerifiedUserIcon
+                      className="icon"
+                      sx={{ color: "#57a361" }}
+                      onClick={() => manageSolution("hide")}
+                    />
                   </Tooltip>
                 ) : (
-                  <Tooltip title="Hidden">
-                    <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                  <Tooltip title="Publish">
+                    <VisibilityOffIcon
+                      className="icon"
+                      sx={{ color: "#d40d12" }}
+                      onClick={() => manageSolution("show")}
+                    />
                   </Tooltip>
                 )}
                 {!coverSlide && (
@@ -431,21 +438,6 @@ export default function Solution({ solutions, projectTitle }) {
                     <StarIcon
                       className="icon"
                       onClick={() => manageCoverSlide()}
-                    />
-                  </Tooltip>
-                )}
-                {!project.active ? (
-                  <Tooltip title="Publish">
-                    <TaskAltIcon
-                      className="icon"
-                      onClick={() => manageSolution("show")}
-                    />
-                  </Tooltip>
-                ) : (
-                  <Tooltip title="Hide">
-                    <CloseIcon
-                      className="icon"
-                      onClick={() => manageSolution("hide")}
                     />
                   </Tooltip>
                 )}
@@ -629,33 +621,21 @@ export default function Solution({ solutions, projectTitle }) {
                         >
                           <div className={classes.item}>
                             {image.active ? (
-                              <Fragment>
-                                <Tooltip title="Visible">
-                                  <VerifiedUserIcon sx={{ color: "#57a361" }} />
-                                </Tooltip>
-                                <Tooltip title="Hide">
-                                  <CloseIcon
-                                    className="icon"
-                                    onClick={() =>
-                                      imageActivation(false, index)
-                                    }
-                                  />
-                                </Tooltip>
-                              </Fragment>
+                              <Tooltip title="Hide">
+                                <VerifiedUserIcon
+                                  sx={{ color: "#57a361" }}
+                                  className="icon"
+                                  onClick={() => imageActivation(false, index)}
+                                />
+                              </Tooltip>
                             ) : (
-                              <Fragment>
-                                <Tooltip title="Hidden">
-                                  <VisibilityOffIcon
-                                    sx={{ color: "#d40d12" }}
-                                  />
-                                </Tooltip>
-                                <Tooltip title="Show">
-                                  <TaskAltIcon
-                                    className="icon"
-                                    onClick={() => imageActivation(true, index)}
-                                  />
-                                </Tooltip>
-                              </Fragment>
+                              <Tooltip title="Show">
+                                <VisibilityOffIcon
+                                  sx={{ color: "#d40d12" }}
+                                  className="icon"
+                                  onClick={() => imageActivation(true, index)}
+                                />
+                              </Tooltip>
                             )}
                           </div>
                           {image.active && (

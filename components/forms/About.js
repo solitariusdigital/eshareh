@@ -112,14 +112,12 @@ export default function Team({ pages, mediaData }) {
     setDisableButton(true);
 
     let mediaLink = "";
-    if (media) {
-      let mediaFormat = ".jpg";
-      let mediaFolder = "team";
-      const subFolder = `usr${sixGenerator()}`;
-      let mediaId = `img${fourGenerator()}`;
-      mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
-      await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
-    }
+    let mediaFormat = ".jpg";
+    let mediaFolder = "team";
+    const subFolder = `usr${sixGenerator()}`;
+    let mediaId = `img${fourGenerator()}`;
+    mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
+    await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
 
     const user = {
       name: {
