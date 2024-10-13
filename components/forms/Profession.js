@@ -360,12 +360,7 @@ export default function Profession({ pages, mediaData }) {
               </button>
             </div>
           </div>
-          <div
-            className={classes.formAction}
-            style={{
-              fontFamily: "English",
-            }}
-          >
+          <div className={classes.formAction}>
             <p
               className={classes.message}
               style={{
@@ -379,6 +374,9 @@ export default function Profession({ pages, mediaData }) {
                 className={
                   mediaType === "gif" ? classes.navActive : classes.nav
                 }
+                style={{
+                  fontFamily: "English",
+                }}
                 onClick={() => {
                   setMediaType("gif");
                   setMedia("");
@@ -390,6 +388,9 @@ export default function Profession({ pages, mediaData }) {
                 className={
                   mediaType === "image" ? classes.navActive : classes.nav
                 }
+                style={{
+                  fontFamily: "Farsi",
+                }}
                 onClick={() => {
                   setMediaType("image");
                   setMedia("");

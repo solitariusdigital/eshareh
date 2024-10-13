@@ -919,12 +919,7 @@ export default function Contact({ pages, mediaData }) {
                 autoComplete="off"
               ></input>
             </div>
-            <div
-              className={classes.formAction}
-              style={{
-                fontFamily: "English",
-              }}
-            >
+            <div className={classes.formAction}>
               <p
                 className={classes.alert}
                 style={{
@@ -945,12 +940,7 @@ export default function Contact({ pages, mediaData }) {
               </button>
             </div>
           </div>
-          <div
-            className={classes.formAction}
-            style={{
-              fontFamily: "English",
-            }}
-          >
+          <div className={classes.formAction}>
             <div>
               <p
                 className={classes.message}
@@ -1007,6 +997,9 @@ export default function Contact({ pages, mediaData }) {
                   className={
                     mediaTwoType === "gif" ? classes.navActive : classes.nav
                   }
+                  style={{
+                    fontFamily: "English",
+                  }}
                   onClick={() => {
                     setMediaTwoType("gif");
                     setMediaTwo("");
@@ -1018,6 +1011,9 @@ export default function Contact({ pages, mediaData }) {
                   className={
                     mediaTwoType === "image" ? classes.navActive : classes.nav
                   }
+                  style={{
+                    fontFamily: "Farsi",
+                  }}
                   onClick={() => {
                     setMediaTwoType("image");
                     setMediaTwo("");

@@ -898,7 +898,7 @@ export default function Team({ pages, mediaData }) {
                   type="file"
                   accept="image/*"
                 />
-                <p>عکس اجباری</p>
+                <p>عکس الزامی</p>
               </label>
               {media !== "" && (
                 <div className={classes.preview}>

@@ -332,7 +332,7 @@ export default function Cover({ covers }) {
                   type="file"
                   accept="image/*"
                 />
-                <p>عکس اجباری</p>
+                <p>عکس الزامی</p>
               </label>
               {media !== "" && (
                 <div className={classes.preview}>
@@ -369,7 +369,7 @@ export default function Cover({ covers }) {
                   type="file"
                   accept="video/*"
                 />
-                <p>ویدئو اجباری</p>
+                <p>ویدئو الزامی</p>
               </label>
               {media !== "" && (
                 <div className={classes.preview}>

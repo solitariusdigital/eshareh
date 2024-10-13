@@ -23,7 +23,7 @@ export default function News({ pages, mediaData }) {
   const [disableButton, setDisableButton] = useState(false);
   const sourceLink = "https://eshareh.storage.iran.liara.space";
   const router = useRouter();
-  const [development, setDevelopment] = useState(false);
+  const [development, setDevelopment] = useState(true);
 
   const handleSubmit = async () => {
     const isValid = areAllStatesValid([title, paragraph]);
@@ -228,17 +228,15 @@ export default function News({ pages, mediaData }) {
               ></textarea>
             </div>
           </div>
-          <div
-            className={classes.formAction}
-            style={{
-              fontFamily: "English",
-            }}
-          >
+          <div className={classes.formAction}>
             <div className={classes.navigation}>
               <p
                 className={
                   mediaType === "gif" ? classes.navActive : classes.nav
                 }
+                style={{
+                  fontFamily: "English",
+                }}
                 onClick={() => {
                   setMediaType("gif");
                   setMedia("");
@@ -250,6 +248,9 @@ export default function News({ pages, mediaData }) {
                 className={
                   mediaType === "image" ? classes.navActive : classes.nav
                 }
+                style={{
+                  fontFamily: "Farsi",
+                }}
                 onClick={() => {
                   setMediaType("image");
                   setMedia("");
@@ -261,7 +262,7 @@ export default function News({ pages, mediaData }) {
             <div
               className={classes.input}
               style={{
-                fontFamily: `${mediaType === "image" ? "Farsi" : "English"}`,
+                fontFamily: "Farsi",
               }}
             >
               <label className="file">
@@ -272,7 +273,7 @@ export default function News({ pages, mediaData }) {
                   type="file"
                   accept="image/*"
                 />
-                <p>{mediaType === "image" ? "عکس" : "gif"}</p>
+                <p>{mediaType === "image" ? "عکس الزامی" : "گیف الزامی"}</p>
               </label>
               {media !== "" && (
                 <div className={classes.preview}>
