@@ -148,11 +148,6 @@
     margin-bottom: 20px;
     cursor: pointer;
 
-    .imageContainer {
-      position: relative;
-      height: 100%;
-    }
-
     @include mixins.mobile {
       height: 200px !important;
     }
@@ -183,11 +178,6 @@
     max-height: 950px;
     margin-bottom: 20px;
     cursor: pointer;
-
-    .imageContainer {
-      position: relative;
-      height: 100%;
-    }
 
     @include mixins.mobile {
       height: 100% !important;
