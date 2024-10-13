@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState } from "react";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
@@ -9,11 +9,12 @@ import {
   areAllStatesValid,
   extractParagraphs,
   fourGenerator,
+  sixGenerator,
   uploadMedia,
 } from "@/services/utility";
 import building from "@/assets/building.png";
 
-export default function News({ pages, mediaData }) {
+export default function News() {
   const [title, setTitle] = useState({ en: "", fa: "" });
   const [paragraph, setParagraph] = useState({ en: "", fa: "" });
   const [alert, setAlert] = useState("");
@@ -47,11 +48,11 @@ export default function News({ pages, mediaData }) {
     const newsObject = {
       fa: {
         title: title.fa,
-        paragraph: paragraph.fa,
+        paragraph: extractParagraphs(paragraph.fa).join("\n\n"),
       },
       en: {
         title: title.en,
-        paragraph: paragraph.en,
+        paragraph: extractParagraphs(paragraph.en).join("\n\n"),
       },
       media: mediaLink,
       active: false,
