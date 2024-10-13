@@ -5,7 +5,7 @@ import Router from "next/router";
 import CloseIcon from "@mui/icons-material/Close";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { getUserApi, updateUserApi } from "@/services/api";
+import { getSingleUserApi, updateUserApi } from "@/services/api";
 import secureLocalStorage from "react-secure-storage";
 import AES from "crypto-js/aes";
 import { enc } from "crypto-js";
@@ -50,7 +50,7 @@ export default function Password() {
       );
       return;
     }
-    const userData = await getUserApi(currentUser["_id"]);
+    const userData = await getSingleUserApi(currentUser["_id"]);
     if (decryptPassword(userData.password) === oldPassword) {
       const user = {
         ...currentUser,

@@ -23,12 +23,12 @@ export default function News({ pages, mediaData }) {
   const [disableButton, setDisableButton] = useState(false);
   const sourceLink = "https://eshareh.storage.iran.liara.space";
   const router = useRouter();
-  const [development, setDevelopment] = useState(true);
+  const [development, setDevelopment] = useState(false);
 
   const handleSubmit = async () => {
     const isValid = areAllStatesValid([title, paragraph]);
 
-    if (!isValid || media) {
+    if (!isValid || !media) {
       showAlert("همه موارد الزامیست");
       return;
     }

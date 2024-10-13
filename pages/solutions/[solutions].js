@@ -20,7 +20,7 @@ import Tooltip from "@mui/material/Tooltip";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import {
-  getSolutionApi,
+  getSingleSolutionApi,
   updateSolutionApi,
   createCoverApi,
   getCoversApi,
@@ -178,7 +178,7 @@ export default function Solution({ solutions, projectTitle }) {
   };
 
   const updateSolution = async (id) => {
-    let data = await getSolutionApi(id);
+    let data = await getSingleSolutionApi(id);
     switch (confirmMessage) {
       case "Publish":
         data.active = true;

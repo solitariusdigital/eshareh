@@ -19,7 +19,7 @@ export const createUserApi = async (data) => {
   });
   return await response.json();
 };
-export const getUserApi = async (id) => {
+export const getSingleUserApi = async (id) => {
   const response = await fetch(`/api/users?id=${id}`, {
     method: "GET",
     headers: {
@@ -38,7 +38,7 @@ export const getUsersApi = async () => {
   return await response.json();
 };
 export const deleteUserApi = async (id) => {
-  const response = await fetch(`/api/user?id=${id}`, {
+  const response = await fetch(`/api/users?id=${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export const createSolutionApi = async (data) => {
   });
   return await response.json();
 };
-export const getSolutionApi = async (id) => {
+export const getSingleSolutionApi = async (id) => {
   const response = await fetch(`/api/solutions?id=${id}`, {
     method: "GET",
     headers: {

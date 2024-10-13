@@ -8,7 +8,7 @@ import logoLoadEnglish from "@/assets/logoLoadEnglish.svg";
 import logoLoadFarsi from "@/assets/logoLoadFarsi.svg";
 import arrowUp from "@/assets/arrowUp.svg";
 import secureLocalStorage from "react-secure-storage";
-import { getUserApi, getControlsApi } from "@/services/api";
+import { getSingleUserApi, getControlsApi } from "@/services/api";
 
 export default function RootLayout({ children }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -87,7 +87,7 @@ export default function RootLayout({ children }) {
           secureLocalStorage.getItem("currentUser")
         );
         if (currentUser) {
-          const userData = await getUserApi(currentUser["_id"]);
+          const userData = await getSingleUserApi(currentUser["_id"]);
           setCurrentUser(userData);
           secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
           if (userData.permission === "admin") {
