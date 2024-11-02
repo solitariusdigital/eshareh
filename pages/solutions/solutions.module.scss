@@ -411,10 +411,13 @@
 }
 
 .gridList {
+  direction: rtl;
+}
+.gridList,
+.gridListReverse {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   gap: 20px;
-  direction: rtl;
 
   @include mixins.mobile {
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));

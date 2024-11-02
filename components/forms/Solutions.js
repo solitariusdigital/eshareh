@@ -56,7 +56,14 @@ export default function Solutions() {
   const [loader, setLoader] = useState(false);
   const [progress, setProgress] = useState(0);
   const sourceLink = "https://eshareh.storage.iran.liara.space";
-  const categories = ["Advertising", "Media", "Digital"];
+  const categories = [
+    "Advertising",
+    "Media",
+    "Digital",
+    "Advertising-Media",
+    "Advertising-Digital",
+    "Media-Digital",
+  ];
 
   const selectCategories = {
     Advertising: {
@@ -70,6 +77,18 @@ export default function Solutions() {
     Digital: {
       fa: "digital",
       en: "digital",
+    },
+    "Advertising-Media": {
+      fa: "advertising-media",
+      en: "advertising-media",
+    },
+    "Advertising-Digital": {
+      fa: "advertising-digital",
+      en: "advertising-digital",
+    },
+    "Media-Digital": {
+      fa: "media-digital",
+      en: "media-digital",
     },
   };
 

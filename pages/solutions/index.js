@@ -32,11 +32,19 @@ export default function Solutions({
 
   useEffect(() => {
     if (permissionControl === "admin") {
-      setSolutions(adminSolutions);
+      setSolutions(
+        adminSolutions.sort(
+          (a, b) => b[languageType].year - a[languageType].year
+        )
+      );
     } else {
-      setSolutions(activeSolutions);
+      setSolutions(
+        activeSolutions.sort(
+          (a, b) => b[languageType].year - a[languageType].year
+        )
+      );
     }
-  }, [activeSolutions, adminSolutions, permissionControl]);
+  }, [activeSolutions, adminSolutions, languageType, permissionControl]);
 
   const categories = [
     {
@@ -191,11 +199,14 @@ export default function Solutions({
             </h3>
           </div>
         )}
-        <section key={solutionsCategory} className={classes.gridList}>
+        <section
+          key={solutionsCategory}
+          className={language ? classes.gridList : classes.gridListReverse}
+        >
           {solutions
             .filter(
               (project) =>
-                project[languageType].category === solutionsCategory ||
+                project[languageType].category.includes(solutionsCategory) ||
                 solutionsCategory === "all"
             )
             .map((project, index) => {
@@ -269,19 +280,13 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const solutions = await solutionModel.find();
-    let adminSolutions = solutions.sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    );
-    let activeSolutions = solutions
-      .filter((project) => project.active)
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
+    let activeSolutions = solutions.filter((project) => project.active);
     const pageData = await pageModel.findOne({ slug: "solutions" });
 
     return {
       props: {
         activeSolutions: JSON.parse(JSON.stringify(activeSolutions)),
-        adminSolutions: JSON.parse(JSON.stringify(adminSolutions)),
+        adminSolutions: JSON.parse(JSON.stringify(solutions)),
         pageData: JSON.parse(JSON.stringify(pageData)),
       },
     };
