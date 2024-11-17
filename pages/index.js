@@ -283,6 +283,7 @@ export default function Home({
                   blurDataURL={!hoverOne ? moreArrow : moreArrowHover}
                   alt="image"
                   width={20}
+                  priority
                 />
               </div>
             </div>
@@ -327,6 +328,7 @@ export default function Home({
                   blurDataURL={!hoverTwo ? moreArrow : moreArrowHover}
                   alt="image"
                   width={20}
+                  priority
                 />
               </div>
             </div>
@@ -371,6 +373,7 @@ export default function Home({
                   blurDataURL={!hoverThree ? moreArrow : moreArrowHover}
                   alt="image"
                   width={20}
+                  priority
                 />
               </div>
             </div>

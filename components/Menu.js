@@ -200,6 +200,7 @@ export default function Menu() {
                                 src={english}
                                 alt="logo"
                                 onMouseEnter={() => setHoverLanguage(true)}
+                                priority
                               />
                             ) : (
                               <Image
@@ -208,6 +209,7 @@ export default function Menu() {
                                 src={englishHover}
                                 alt="logo"
                                 onMouseLeave={() => setHoverLanguage(false)}
+                                priority
                               />
                             )}
                           </div>
@@ -232,6 +234,7 @@ export default function Menu() {
                                     src={search}
                                     alt="logo"
                                     onMouseEnter={() => setHover(true)}
+                                    priority
                                   />
                                 ) : (
                                   <Image
@@ -240,6 +243,7 @@ export default function Menu() {
                                     src={searchHover}
                                     alt="logo"
                                     onMouseLeave={() => setHover(false)}
+                                    priority
                                   />
                                 )}
                               </Fragment>
@@ -287,6 +291,7 @@ export default function Menu() {
                               src={farsi}
                               alt="logo"
                               onMouseEnter={() => setHoverLanguage(true)}
+                              priority
                             />
                           ) : (
                             <Image
@@ -295,6 +300,7 @@ export default function Menu() {
                               src={farsiHover}
                               alt="logo"
                               onMouseLeave={() => setHoverLanguage(false)}
+                              priority
                             />
                           )}
                         </div>
@@ -317,6 +323,7 @@ export default function Menu() {
                                   src={search}
                                   alt="logo"
                                   onMouseEnter={() => setHover(true)}
+                                  priority
                                 />
                               ) : (
                                 <Image
@@ -325,6 +332,7 @@ export default function Menu() {
                                   src={searchHover}
                                   alt="logo"
                                   onMouseLeave={() => setHover(false)}
+                                  priority
                                 />
                               )}
                             </Fragment>
@@ -372,6 +380,7 @@ export default function Menu() {
                     src={language ? english : farsi}
                     alt="logo"
                     onMouseEnter={() => setHoverLanguage(true)}
+                    priority
                   />
                 ) : (
                   <Image
@@ -380,6 +389,7 @@ export default function Menu() {
                     src={language ? englishHover : farsiHover}
                     alt="logo"
                     onMouseLeave={() => setHoverLanguage(false)}
+                    priority
                   />
                 )}
               </div>
