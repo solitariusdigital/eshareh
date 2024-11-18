@@ -2,11 +2,103 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: auto;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
   margin-top: 150px;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+  @include mixins.tabletPortrait {
+    width: config.$content-widthTablet;
+  }
+}
+
+.newsCover {
+  direction: rtl;
+}
+.newsCover,
+.newsCoverReverse {
+  width: 100%;
+  margin-bottom: 50px;
+
+  @include mixins.mobile {
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    margin-bottom: 12px;
+  }
+  h3 {
+    color: config.$grey;
+  }
+
+  .cover {
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      padding-top: 50%;
+
+      @include mixins.mobile {
+        padding-top: 60%;
+      }
+    }
+  }
+}
+
+.gridList {
+  direction: rtl;
+}
+.gridList,
+.gridListReverse {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  gap: 20px;
+  width: 100%;
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+  @include mixins.tabletPortrait {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  }
+
+  .item {
+    cursor: pointer;
+    color: config.$grey;
+    position: relative;
+
+    @include mixins.allDesktop {
+      &:hover {
+        color: config.$black;
+      }
+    }
+
+    .titleReverse {
+      direction: ltr;
+    }
+
+    .visibility {
+      position: absolute;
+      top: 20px;
+      right: 10px;
+      z-index: 2;
+    }
+  }
+
+  .box {
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      padding-top: 60%;
+    }
+  }
 }

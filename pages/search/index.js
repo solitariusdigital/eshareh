@@ -138,7 +138,6 @@ export default function Search({ activeSolutions }) {
                     <div className={classes.box}>
                       {coverMedia.type === "image" ? (
                         <Image
-                          className={classes.image}
                           src={coverMedia.link}
                           placeholder="blur"
                           blurDataURL={coverMedia.link}
@@ -150,7 +149,6 @@ export default function Search({ activeSolutions }) {
                         />
                       ) : (
                         <video
-                          className={classes.video}
                           src={coverMedia.link + "#t=0.1"}
                           playsInline
                           preload="metadata"

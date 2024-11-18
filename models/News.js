@@ -4,13 +4,17 @@ const NewsSchema = new Schema(
   {
     fa: {
       title: String,
+      subtitle: String,
       paragraph: String,
+      date: String,
     },
     en: {
       title: String,
+      subtitle: String,
       paragraph: String,
+      date: String,
     },
-    media: String,
+    media: [],
     active: Boolean,
   },
   { timestamps: true }

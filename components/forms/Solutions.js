@@ -306,7 +306,7 @@ export default function Solutions() {
                 fontFamily: "English",
               }}
               type="text"
-              id="title"
+              id="titleEn"
               name="title"
               onChange={(e) =>
                 setTitle((prevData) => ({
@@ -340,7 +340,7 @@ export default function Solutions() {
                 fontFamily: "English",
               }}
               type="text"
-              id="subtitle"
+              id="subtitleEn"
               name="subtitle"
               onChange={(e) =>
                 setSubtitle((prevData) => ({
@@ -375,7 +375,7 @@ export default function Solutions() {
               }}
               placeholder="..."
               type="text"
-              id="brief"
+              id="briefEn"
               name="brief"
               onChange={(e) =>
                 setBrief((prevData) => ({
@@ -410,7 +410,7 @@ export default function Solutions() {
               }}
               placeholder="..."
               type="text"
-              id="solution"
+              id="solutionEn"
               name="solution"
               onChange={(e) =>
                 setSolution((prevData) => ({
@@ -444,7 +444,7 @@ export default function Solutions() {
                 fontFamily: "English",
               }}
               type="tel"
-              id="year"
+              id="yearEn"
               name="year"
               onChange={(e) =>
                 setYear((prevData) => ({
@@ -516,7 +516,7 @@ export default function Solutions() {
                 fontFamily: "Farsi",
               }}
               type="text"
-              id="title"
+              id="titleFa"
               name="title"
               onChange={(e) =>
                 setTitle((prevData) => ({
@@ -551,7 +551,7 @@ export default function Solutions() {
                 fontFamily: "Farsi",
               }}
               type="text"
-              id="subtitle"
+              id="subtitleFa"
               name="subtitle"
               onChange={(e) =>
                 setSubtitle((prevData) => ({
@@ -587,7 +587,7 @@ export default function Solutions() {
               }}
               placeholder="..."
               type="text"
-              id="brief"
+              id="briefFa"
               name="brief"
               onChange={(e) =>
                 setBrief((prevData) => ({
@@ -623,7 +623,7 @@ export default function Solutions() {
               }}
               placeholder="..."
               type="text"
-              id="solution"
+              id="solutionFa"
               name="solution"
               onChange={(e) =>
                 setSolution((prevData) => ({
@@ -658,7 +658,7 @@ export default function Solutions() {
                 fontFamily: "English",
               }}
               type="tel"
-              id="year"
+              id="yearFa"
               name="year"
               onChange={(e) =>
                 setYear((prevData) => ({

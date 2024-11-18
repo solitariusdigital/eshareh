@@ -16,6 +16,7 @@
   @include mixins.tabletPortrait {
     width: config.$content-widthTablet;
   }
+
   .information,
   .informationReverse {
     width: 100%;
@@ -422,11 +423,8 @@
   @include mixins.mobile {
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   }
-  @include mixins.tablet {
-    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-  }
   @include mixins.tabletPortrait {
-    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   }
 
   .project {
@@ -454,41 +452,11 @@
 
   .box {
     position: relative;
-    width: 100%;
-    height: 30vh;
-    min-height: 200px;
-    max-height: 300px;
-    margin: 12px 0px;
 
-    @include mixins.mobile {
-      min-height: 250px;
-    }
-    @include mixins.tablet {
-      height: 40vh;
-      max-height: 350px;
-    }
-    @include mixins.tabletPortrait {
-      height: 40vh;
-      max-height: 500px;
-    }
-    .video {
-      width: 100%;
-      height: 30vh;
-      min-height: 200px;
-      max-height: 300px;
-      object-fit: cover;
-
-      @include mixins.mobile {
-        min-height: 250px;
-      }
-      @include mixins.tablet {
-        height: 40vh;
-        max-height: 350px;
-      }
-      @include mixins.tabletPortrait {
-        height: 40vh;
-        max-height: 500px;
-      }
+    &::before {
+      content: "";
+      display: block;
+      padding-top: 60%;
     }
   }
 }
