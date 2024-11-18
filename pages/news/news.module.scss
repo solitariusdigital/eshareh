@@ -31,10 +31,21 @@
   }
 
   h1 {
-    margin-bottom: 12px;
+    margin-bottom: 36px;
   }
+
   h3 {
+    margin-top: 16px;
     color: config.$grey;
+  }
+
+  @include mixins.allDesktop {
+    cursor: pointer;
+    &:hover {
+      h3 {
+        color: config.$black;
+      }
+    }
   }
 
   .cover {
@@ -52,6 +63,97 @@
   }
 }
 
+.singleNews {
+  direction: rtl;
+}
+.singleNews,
+.singleNewsReverse {
+  width: 100%;
+  margin-bottom: 50px;
+
+  @include mixins.mobile {
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    color: config.$yellow;
+  }
+
+  .date {
+    display: flex;
+    justify-content: flex-end;
+    direction: ltr;
+    color: config.$grey;
+    margin-bottom: 36px;
+  }
+
+  .cover {
+    position: relative;
+    margin-bottom: 36px;
+
+    .image {
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      padding-top: 50%;
+
+      @include mixins.mobile {
+        padding-top: 60%;
+      }
+    }
+  }
+}
+
+.controlPanel,
+.dropDown {
+  position: absolute;
+  left: 50%;
+  top: 120px;
+  transform: translate(-50%, -50%);
+  width: 15%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 40px;
+  border-radius: 50px;
+  box-shadow: config.$image-shadow;
+  background: config.$white;
+
+  @include mixins.mobile {
+    width: 40%;
+  }
+  @include mixins.tablet {
+    width: 25%;
+  }
+}
+
+.dropDown {
+  top: 190px;
+  flex-direction: column;
+  height: 80px;
+  border-radius: 4px;
+
+  .confirm {
+    color: config.$green;
+    cursor: pointer;
+  }
+  .cancel {
+    color: config.$red;
+    cursor: pointer;
+  }
+
+  .action {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+}
+
 .gridList {
   direction: rtl;
 }
@@ -59,7 +161,7 @@
 .gridListReverse {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  gap: 20px;
+  gap: 16px;
   width: 100%;
 
   @include mixins.mobile {
@@ -80,6 +182,10 @@
       }
     }
 
+    .title,
+    .titleReverse {
+      margin-top: 16px;
+    }
     .titleReverse {
       direction: ltr;
     }

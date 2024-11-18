@@ -10,6 +10,8 @@ import newsModel from "@/models/News";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Tooltip from "@mui/material/Tooltip";
+import { replaceSpacesAndHyphens } from "@/services/utility";
+import Router from "next/router";
 
 export default function News({ adminNews, activeNews }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -28,6 +30,11 @@ export default function News({ adminNews, activeNews }) {
       );
     }
   }, [activeNews, adminNews, languageType, permissionControl]);
+
+  const directNews = (item) => {
+    let link = `/news/${replaceSpacesAndHyphens(item[languageType].title)}`;
+    Router.push(link);
+  };
 
   return (
     <Fragment>
@@ -71,7 +78,7 @@ export default function News({ adminNews, activeNews }) {
         >
           <h1>{language ? "اخبار" : "News"}</h1>
           {news[0] && (
-            <Fragment>
+            <div onClick={() => directNews(news[0])}>
               <div className={classes.cover}>
                 <Image
                   src={news[0].media[0].link}
@@ -85,7 +92,7 @@ export default function News({ adminNews, activeNews }) {
                 />
               </div>
               <h3>{news[0][languageType].title}</h3>
-            </Fragment>
+            </div>
           )}
         </div>
         <section
@@ -99,7 +106,7 @@ export default function News({ adminNews, activeNews }) {
                 <Fragment key={index}>
                   <div
                     className={classes.item}
-                    onClick={() => directSolution(item)}
+                    onClick={() => directNews(item)}
                   >
                     {permissionControl === "admin" && (
                       <div className={classes.visibility}>
