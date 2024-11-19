@@ -151,7 +151,7 @@ export default function News() {
     let mediaLinks = editNews ? editNews.media : [];
     let voice = editNews ? editNews.voice : [];
     const mediaFolder = "news";
-    const newsId = editNews ? editNews.newsId : `sol${sixGenerator()}`;
+    const newsId = editNews ? editNews.newsId : `news${sixGenerator()}`;
 
     if (imagesPreview.length > 0) {
       const imageFormat = ".jpg";
