@@ -4,7 +4,11 @@ import { useRouter } from "next/router";
 import classes from "./news.module.scss";
 import dbConnect from "@/services/dbConnect";
 import newsModel from "@/models/News";
-import { replaceSpacesAndHyphens, enToFaDigits } from "@/services/utility";
+import {
+  replaceSpacesAndHyphens,
+  enToFaDigits,
+  applyFontToEnglishWords,
+} from "@/services/utility";
 import Image from "next/legacy/image";
 import Router from "next/router";
 import { NextSeo } from "next-seo";
@@ -21,6 +25,7 @@ export default function News({ news, newsTitle }) {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
+  const { editNews, setEditNews } = useContext(StateContext);
   const [displayNews, setDisplayNews] = useState(null);
   const [dropDown, setDropDpwn] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
@@ -28,7 +33,6 @@ export default function News({ news, newsTitle }) {
 
   useEffect(() => {
     let displayNews = null;
-
     if (permissionControl === "admin") {
       displayNews = news.find(
         (p) => p.en.title === newsTitle || p.fa.title === newsTitle
@@ -43,7 +47,6 @@ export default function News({ news, newsTitle }) {
       Router.push("/404");
       return;
     }
-
     setDisplayNews(displayNews);
   }, [permissionControl, displayNews, news, newsTitle]);
 
@@ -145,7 +148,7 @@ export default function News({ news, newsTitle }) {
                     className="icon"
                     onClick={() => {
                       Router.push("/admin");
-                      setEditSolution(project);
+                      setEditNews(displayNews);
                     }}
                   />
                 </Tooltip>
@@ -201,7 +204,7 @@ export default function News({ news, newsTitle }) {
                   }
                 </p>
               </div>
-              {displayNews.voice && displayNews.voice.length > 0 && (
+              {displayNews.voice?.length > 0 && (
                 <div>
                   <audio className={classes.voice} preload="metadata" controls>
                     <source
@@ -211,12 +214,15 @@ export default function News({ news, newsTitle }) {
                 </div>
               )}
               <div className={classes.cover}>
-                {displayNews.media[0].type === "image" ? (
+                {displayNews.media[displayNews.media.length - 1].type ===
+                "image" ? (
                   <Image
                     className={classes.image}
-                    src={displayNews.media[0].link}
+                    src={displayNews.media[displayNews.media.length - 1].link}
                     placeholder="blur"
-                    blurDataURL={displayNews.media[0].link}
+                    blurDataURL={
+                      displayNews.media[displayNews.media.length - 1].link
+                    }
                     alt={displayNews[languageType].subtitle}
                     layout="fill"
                     objectFit="cover"
@@ -242,9 +248,15 @@ export default function News({ news, newsTitle }) {
                       fontFamily: language ? "FarsiLight" : "EnglishLight",
                     }}
                     className={classes.paragraph}
-                  >
-                    {desc}
-                  </h3>
+                    dangerouslySetInnerHTML={{
+                      __html: applyFontToEnglishWords(
+                        desc,
+                        "English",
+                        "16px",
+                        language
+                      ),
+                    }}
+                  ></h3>
                 ))}
             </div>
           </div>

@@ -14,6 +14,7 @@ import mediaModel from "@/models/Media";
 export default function Admin({ covers, pages, mediaData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
+  const { editNews, setEditNews } = useContext(StateContext);
   const [formType, setFormType] = useState(
     "solutions" || "pages" || "news" || "covers"
   );
@@ -23,9 +24,13 @@ export default function Admin({ covers, pages, mediaData }) {
     if (permissionControl !== "admin") {
       Router.push("/portal");
     } else {
-      setFormType("solutions");
+      if (editNews) {
+        setFormType("news");
+      } else {
+        setFormType("solutions");
+      }
     }
-  }, [permissionControl, setFormType]);
+  }, [editNews, permissionControl, setFormType]);
 
   return (
     <div className={classes.container}>
@@ -60,7 +65,6 @@ export async function getServerSideProps(context) {
     const covers = await coverModel.find();
     const pages = await pageModel.find();
     const mediaData = await mediaModel.find();
-
     return {
       props: {
         covers: JSON.parse(JSON.stringify(covers)),

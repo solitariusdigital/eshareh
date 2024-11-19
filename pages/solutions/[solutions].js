@@ -41,6 +41,7 @@ export default function Solution({ solutions, projectTitle }) {
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
+  const { editNews, setEditNews } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayNextController, setDisplayNextController] = useState(false);
@@ -447,6 +448,7 @@ export default function Solution({ solutions, projectTitle }) {
                     onClick={() => {
                       Router.push("/admin");
                       setEditSolution(project);
+                      setEditNews(null);
                     }}
                   />
                 </Tooltip>

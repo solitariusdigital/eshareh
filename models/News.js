@@ -14,9 +14,11 @@ const NewsSchema = new Schema(
       paragraph: String,
       date: String,
     },
+    dateString: String,
     media: [],
     voice: [],
     active: Boolean,
+    newsId: String,
   },
   { timestamps: true }
 );

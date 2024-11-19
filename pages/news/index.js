@@ -77,36 +77,58 @@ export default function News({ adminNews, activeNews }) {
           className={language ? classes.newsCover : classes.newsCoverReverse}
         >
           <h1>{language ? "اخبار" : "News"}</h1>
-          {news[0] && (
-            <div onClick={() => directNews(news[0])}>
-              <div className={classes.cover}>
-                <Image
-                  src={news[0].media[0].link}
-                  placeholder="blur"
-                  blurDataURL={news[0].media[0].link}
-                  alt={news[0][languageType].subtitle}
-                  layout="fill"
-                  objectFit="cover"
-                  as="image"
-                  priority
-                />
-                {permissionControl === "admin" && (
-                  <div className={classes.visibility}>
-                    {news[0].active ? (
-                      <Tooltip title="Visible">
-                        <VerifiedUserIcon sx={{ color: "#57a361" }} />
-                      </Tooltip>
+          {news[0] &&
+            (() => {
+              const {
+                media,
+                [languageType]: { title },
+                active,
+              } = news[0];
+              const lastMedia = media[media.length - 1];
+              return (
+                <div
+                  className={classes.coverBox}
+                  onClick={() => directNews(news[0])}
+                >
+                  <div className={classes.cover}>
+                    {lastMedia.type === "image" ? (
+                      <Image
+                        src={lastMedia.link}
+                        placeholder="blur"
+                        blurDataURL={lastMedia.link}
+                        alt={title}
+                        layout="fill"
+                        objectFit="cover"
+                        as="image"
+                        priority
+                      />
                     ) : (
-                      <Tooltip title="Hidden">
-                        <VisibilityOffIcon sx={{ color: "#d40d12" }} />
-                      </Tooltip>
+                      <video
+                        className={classes.video}
+                        src={`${lastMedia.link}#t=0.1`}
+                        controls
+                        playsInline
+                        preload="metadata"
+                      />
+                    )}
+                    {permissionControl === "admin" && (
+                      <div className={classes.visibility}>
+                        {active ? (
+                          <Tooltip title="Visible">
+                            <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                          </Tooltip>
+                        ) : (
+                          <Tooltip title="Hidden">
+                            <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                          </Tooltip>
+                        )}
+                      </div>
                     )}
                   </div>
-                )}
-              </div>
-              <h3>{news[0][languageType].title}</h3>
-            </div>
-          )}
+                  <h3>{title}</h3>
+                </div>
+              );
+            })()}
         </div>
         <section
           className={language ? classes.gridList : classes.gridListReverse}
@@ -115,6 +137,7 @@ export default function News({ adminNews, activeNews }) {
             .map((item, index) => {
               const { title } = item[languageType];
               const { media } = item;
+              const lastMedia = media[media.length - 1];
               return (
                 <Fragment key={index}>
                   <div
@@ -135,16 +158,26 @@ export default function News({ adminNews, activeNews }) {
                       </div>
                     )}
                     <div className={classes.box}>
-                      <Image
-                        src={media[0].link}
-                        placeholder="blur"
-                        blurDataURL={media[0].link}
-                        alt={title}
-                        layout="fill"
-                        objectFit="cover"
-                        as="image"
-                        priority
-                      />
+                      {lastMedia.type === "image" ? (
+                        <Image
+                          src={lastMedia.link}
+                          placeholder="blur"
+                          blurDataURL={lastMedia.link}
+                          alt={title}
+                          layout="fill"
+                          objectFit="cover"
+                          as="image"
+                          priority
+                        />
+                      ) : (
+                        <video
+                          className={classes.video}
+                          src={lastMedia.link + "#t=0.1"}
+                          controls
+                          playsInline
+                          preload="metadata"
+                        />
+                      )}
                     </div>
                     <div
                       className={

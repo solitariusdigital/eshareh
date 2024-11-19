@@ -39,16 +39,23 @@
     color: config.$grey;
   }
 
-  @include mixins.allDesktop {
-    cursor: pointer;
-    &:hover {
-      h3 {
-        color: config.$black;
+  .video {
+    width: 100%;
+  }
+
+  .coverBox {
+    @include mixins.allDesktop {
+      cursor: pointer;
+      &:hover {
+        h3 {
+          color: config.$black;
+        }
       }
     }
   }
 
   .cover {
+    display: flex;
     position: relative;
 
     &::before {
@@ -228,7 +235,12 @@
   }
 
   .box {
+    display: flex;
     position: relative;
+
+    .video {
+      width: 100%;
+    }
 
     &::before {
       content: "";

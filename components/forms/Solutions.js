@@ -440,6 +440,7 @@ export default function Solutions() {
               />
             </div>
             <input
+              placeholder="2023"
               style={{
                 fontFamily: "English",
               }}
@@ -654,6 +655,7 @@ export default function Solutions() {
               />
             </div>
             <input
+              placeholder="1403"
               style={{
                 fontFamily: "English",
               }}
@@ -668,7 +670,6 @@ export default function Solutions() {
               }
               value={year.fa}
               autoComplete="off"
-              dir="rtl"
             />
           </div>
         </div>

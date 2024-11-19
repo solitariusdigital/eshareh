@@ -6,6 +6,7 @@ export const StateProvider = (props) => {
   const [languageType, setLanguageType] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [editSolution, setEditSolution] = useState(null);
+  const [editNews, setEditNews] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuColor, setMenuColor] = useState({});
   const [displayMenu, setDisplayMenu] = useState(true);
@@ -91,6 +92,8 @@ export const StateProvider = (props) => {
     setPermissionControl,
     editSolution,
     setEditSolution,
+    editNews,
+    setEditNews,
     heroHeight,
     setHeroHeight,
     solutionsCategory,

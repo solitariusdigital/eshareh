@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { Fragment, useContext, useState } from "react";
+import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
-import { createNewsApi } from "@/services/api";
+import { createNewsApi, updateNewsApi } from "@/services/api";
 import Image from "next/legacy/image";
 import loaderImage from "@/assets/loader.png";
 import {
@@ -13,14 +14,28 @@ import {
   uploadMedia,
   enToFaDigits,
 } from "@/services/utility";
-import { Fragment } from "react";
 const jalaali = require("jalali-date");
 
 export default function News() {
-  const [title, setTitle] = useState({ en: "", fa: "" });
-  const [subtitle, setSubtitle] = useState({ en: "", fa: "" });
-  const [paragraph, setParagraph] = useState({ en: "", fa: "" });
-  const [dateString, setDateString] = useState("");
+  const { editNews, setEditNews } = useContext(StateContext);
+  const [title, setTitle] = useState(
+    editNews
+      ? { en: editNews.en.title, fa: editNews.fa.title }
+      : { en: "", fa: "" }
+  );
+  const [subtitle, setSubtitle] = useState(
+    editNews
+      ? { en: editNews.en.subtitle, fa: editNews.fa.subtitle }
+      : { en: "", fa: "" }
+  );
+  const [paragraph, setParagraph] = useState(
+    editNews
+      ? { en: editNews.en.paragraph, fa: editNews.fa.paragraph }
+      : { en: "", fa: "" }
+  );
+  const [dateString, setDateString] = useState(
+    editNews ? editNews.dateString : ""
+  );
   const [alert, setAlert] = useState("");
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
@@ -121,6 +136,7 @@ export default function News() {
     }
 
     if (
+      !editNews &&
       imagesPreview.length === 0 &&
       videosPreview.length === 0 &&
       voicesPreview.length === 0
@@ -132,17 +148,17 @@ export default function News() {
     setLoader(true);
     setDisableButton(true);
 
-    let mediaLinks = [];
-    let voice = [];
+    let mediaLinks = editNews ? editNews.media : [];
+    let voice = editNews ? editNews.voice : [];
     const mediaFolder = "news";
-    const solutionId = `news${sixGenerator()}`;
+    const newsId = editNews ? editNews.newsId : `sol${sixGenerator()}`;
 
     if (imagesPreview.length > 0) {
       const imageFormat = ".jpg";
       for (const media of uploadImages) {
         const mediaId = `img${fourGenerator()}`;
-        const mediaLink = `${sourceLink}/${mediaFolder}/${solutionId}/${mediaId}${imageFormat}`;
-        await uploadMedia(media, mediaId, mediaFolder, solutionId, imageFormat);
+        const mediaLink = `${sourceLink}/${mediaFolder}/${newsId}/${mediaId}${imageFormat}`;
+        await uploadMedia(media, mediaId, mediaFolder, newsId, imageFormat);
         mediaLinks.push({
           link: mediaLink,
           type: "image",
@@ -155,8 +171,8 @@ export default function News() {
       const videoFormat = ".mp4";
       for (const media of uploadVideos) {
         const mediaId = `vid${fourGenerator()}`;
-        const mediaLink = `${sourceLink}/${mediaFolder}/${solutionId}/${mediaId}${videoFormat}`;
-        await uploadMedia(media, mediaId, mediaFolder, solutionId, videoFormat);
+        const mediaLink = `${sourceLink}/${mediaFolder}/${newsId}/${mediaId}${videoFormat}`;
+        await uploadMedia(media, mediaId, mediaFolder, newsId, videoFormat);
         mediaLinks.push({
           link: mediaLink,
           type: "video",
@@ -169,8 +185,8 @@ export default function News() {
       const videoFormat = ".mp3";
       for (const media of uploadVoices) {
         const mediaId = `voc${fourGenerator()}`;
-        const mediaLink = `${sourceLink}/${mediaFolder}/${solutionId}/${mediaId}${videoFormat}`;
-        await uploadMedia(media, mediaId, mediaFolder, solutionId, videoFormat);
+        const mediaLink = `${sourceLink}/${mediaFolder}/${newsId}/${mediaId}${videoFormat}`;
+        await uploadMedia(media, mediaId, mediaFolder, newsId, videoFormat);
         voice.push({
           link: mediaLink,
           type: "voice",
@@ -192,11 +208,18 @@ export default function News() {
         paragraph: extractParagraphs(paragraph.en).join("\n\n"),
         date: date.en,
       },
+      dateString: dateString,
       media: mediaLinks,
       voice: voice,
       active: false,
+      newsId: newsId,
     };
-    await createNewsApi(newsObject);
+    if (editNews) {
+      newsObject.id = editNews["_id"];
+      await updateNewsApi(newsObject);
+    } else {
+      await createNewsApi(newsObject);
+    }
     showAlert("ذخیره شد");
     router.reload(router.asPath);
   };
@@ -451,7 +474,7 @@ export default function News() {
             </div>
             <input
               style={{
-                fontFamily: "Farsi",
+                fontFamily: "English",
               }}
               placeholder="1403-7-21"
               type="text"
