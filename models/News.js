@@ -15,6 +15,7 @@ const NewsSchema = new Schema(
       date: String,
     },
     media: [],
+    voice: [],
     active: Boolean,
   },
   { timestamps: true }

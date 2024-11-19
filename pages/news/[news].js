@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import classes from "./news.module.scss";
 import dbConnect from "@/services/dbConnect";
 import newsModel from "@/models/News";
-import { replaceSpacesAndHyphens } from "@/services/utility";
+import { replaceSpacesAndHyphens, enToFaDigits } from "@/services/utility";
 import Image from "next/legacy/image";
 import Router from "next/router";
 import { NextSeo } from "next-seo";
@@ -12,6 +12,7 @@ import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import EditIcon from "@mui/icons-material/Edit";
 import Tooltip from "@mui/material/Tooltip";
 import { getSingleNewsApi, updateNewsApi } from "@/services/api";
 
@@ -47,13 +48,14 @@ export default function News({ news, newsTitle }) {
   }, [permissionControl, displayNews, news, newsTitle]);
 
   const calculateReadingTime = (text) => {
-    const wordsPerMinute = 150;
+    const wordsPerMinute = 200;
     const words = text.trim().split(/\s+/);
     const wordCount = words.length;
     const readingTime = Math.ceil(wordCount / wordsPerMinute);
     return {
-      minutes: readingTime,
-      totalTime: `${readingTime} minute(s)`,
+      time: language
+        ? `${enToFaDigits(readingTime)} دقیقه مطالعه`
+        : `${readingTime} min read`,
     };
   };
 
@@ -138,6 +140,15 @@ export default function News({ news, newsTitle }) {
                     />
                   </Tooltip>
                 )}
+                <Tooltip title="Edit">
+                  <EditIcon
+                    className="icon"
+                    onClick={() => {
+                      Router.push("/admin");
+                      setEditSolution(project);
+                    }}
+                  />
+                </Tooltip>
               </div>
               {dropDown && (
                 <div
@@ -179,35 +190,62 @@ export default function News({ news, newsTitle }) {
                 {displayNews[languageType].title}
               </h1>
               <h2>{displayNews[languageType].subtitle}</h2>
-              <h3 className={language ? classes.date : null}>
-                {displayNews[languageType].date}
-              </h3>
-              {/* <p>
-                {
-                  calculateReadingTime(displayNews[languageType].paragraph)
-                    .totalTime
-                }
-              </p> */}
-              <div className={classes.cover}>
-                <Image
-                  className={classes.image}
-                  src={displayNews.media[0].link}
-                  placeholder="blur"
-                  blurDataURL={displayNews.media[0].link}
-                  alt={displayNews[languageType].subtitle}
-                  layout="fill"
-                  objectFit="cover"
-                  as="image"
-                  priority
-                />
+              <div className={classes.info}>
+                <h3 className={language ? classes.date : classes.dateReverse}>
+                  {displayNews[languageType].date}
+                </h3>
+                <p>
+                  {
+                    calculateReadingTime(displayNews[languageType].paragraph)
+                      .time
+                  }
+                </p>
               </div>
-              <h3
-                style={{
-                  fontFamily: language ? "FarsiLight" : "EnglishLight",
-                }}
-              >
-                {displayNews[languageType].paragraph}
-              </h3>
+              {displayNews.voice && displayNews.voice.length > 0 && (
+                <div>
+                  <audio className={classes.voice} preload="metadata" controls>
+                    <source
+                      src={displayNews.voice[displayNews.voice.length - 1].link}
+                    />
+                  </audio>
+                </div>
+              )}
+              <div className={classes.cover}>
+                {displayNews.media[0].type === "image" ? (
+                  <Image
+                    className={classes.image}
+                    src={displayNews.media[0].link}
+                    placeholder="blur"
+                    blurDataURL={displayNews.media[0].link}
+                    alt={displayNews[languageType].subtitle}
+                    layout="fill"
+                    objectFit="cover"
+                    as="image"
+                    priority
+                  />
+                ) : (
+                  <video
+                    className={classes.video}
+                    src={displayNews.media[0].link + "#t=0.1"}
+                    controls
+                    playsInline
+                    preload="metadata"
+                  />
+                )}
+              </div>
+              {displayNews[languageType].paragraph
+                .split("\n\n")
+                .map((desc, index) => (
+                  <h3
+                    key={index}
+                    style={{
+                      fontFamily: language ? "FarsiLight" : "EnglishLight",
+                    }}
+                    className={classes.paragraph}
+                  >
+                    {desc}
+                  </h3>
+                ))}
             </div>
           </div>
         </Fragment>

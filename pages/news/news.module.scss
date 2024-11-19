@@ -60,6 +60,13 @@
         padding-top: 60%;
       }
     }
+
+    .visibility {
+      position: absolute;
+      top: 20px;
+      right: 10px;
+      z-index: 2;
+    }
   }
 }
 
@@ -79,19 +86,37 @@
     color: config.$yellow;
   }
 
-  .date {
+  .info {
     display: flex;
     justify-content: flex-end;
-    direction: ltr;
+    flex-direction: column;
     color: config.$grey;
     margin-bottom: 36px;
   }
 
+  .date {
+    display: flex;
+    justify-content: flex-end;
+    direction: ltr;
+  }
+
+  .voice {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
   .cover {
+    display: flex;
     position: relative;
     margin-bottom: 36px;
 
     .image {
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+
+    .video {
+      width: 100%;
       border-top-right-radius: 20px;
       border-top-left-radius: 20px;
     }
@@ -105,6 +130,10 @@
         padding-top: 60%;
       }
     }
+  }
+
+  .paragraph {
+    margin-bottom: 8px;
   }
 }
 

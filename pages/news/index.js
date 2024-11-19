@@ -90,6 +90,19 @@ export default function News({ adminNews, activeNews }) {
                   as="image"
                   priority
                 />
+                {permissionControl === "admin" && (
+                  <div className={classes.visibility}>
+                    {news[0].active ? (
+                      <Tooltip title="Visible">
+                        <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                      </Tooltip>
+                    ) : (
+                      <Tooltip title="Hidden">
+                        <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                      </Tooltip>
+                    )}
+                  </div>
+                )}
               </div>
               <h3>{news[0][languageType].title}</h3>
             </div>

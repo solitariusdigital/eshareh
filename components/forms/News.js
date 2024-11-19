@@ -108,7 +108,10 @@ export default function News() {
 
   const handleSubmit = async () => {
     let date;
-    if (dateString) {
+    if (!dateString) {
+      showAlert("تاریخ الزامیست");
+      return;
+    } else {
       date = await transformDate(dateString);
     }
     const isValid = areAllStatesValid([title, subtitle, date, paragraph]);
@@ -190,6 +193,7 @@ export default function News() {
         date: date.en,
       },
       media: mediaLinks,
+      voice: voice,
       active: false,
     };
     await createNewsApi(newsObject);
