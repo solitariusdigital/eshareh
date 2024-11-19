@@ -15,6 +15,7 @@ export default function Admin({ covers, pages, mediaData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { editNews, setEditNews } = useContext(StateContext);
+  const { editSolution, setEditSolution } = useContext(StateContext);
   const [formType, setFormType] = useState(
     "solutions" || "pages" || "news" || "covers"
   );
@@ -44,7 +45,11 @@ export default function Admin({ covers, pages, mediaData }) {
           <p
             key={index}
             className={formType === nav ? classes.navActive : classes.nav}
-            onClick={() => setFormType(nav)}
+            onClick={() => {
+              setFormType(nav);
+              setEditNews(null);
+              setEditSolution(null);
+            }}
           >
             {nav}
           </p>
