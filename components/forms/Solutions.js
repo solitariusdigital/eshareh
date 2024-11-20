@@ -804,7 +804,7 @@ export default function Solutions() {
             fontFamily: "FarsiMedium",
           }}
         >
-          ذخیره داده
+          {editSolution ? "ویرایش داده" : "ذخیره داده"}
         </button>
       </div>
     </Fragment>

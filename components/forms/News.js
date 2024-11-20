@@ -607,7 +607,7 @@ export default function News() {
           }}
           onClick={() => handleSubmit()}
         >
-          ذخیره داده
+          {editNews ? "ویرایش داده" : "ذخیره داده"}
         </button>
       </div>
     </Fragment>
