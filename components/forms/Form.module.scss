@@ -25,6 +25,10 @@
 
   @include mixins.mobile {
     width: 100%;
+    justify-content: space-around;
+    p {
+      font-size: small;
+    }
   }
 
   .nav {
