@@ -37,7 +37,7 @@ export default function Password() {
     if (!password || !oldPassword) {
       showAlert(
         language
-          ? "پسورد قدیم و جدید الزامیست"
+          ? "رمز عبور قدیم و جدید الزامیست"
           : "Old & new passwords are required"
       );
       return;
@@ -45,7 +45,7 @@ export default function Password() {
     if (password.length < 8) {
       showAlert(
         language
-          ? "پسورد جدید باید حداقل 8 کاراکتر باشد"
+          ? "رمز عبور جدید باید حداقل 8 کاراکتر باشد"
           : "New password must be minimum 8 characters"
       );
       return;
@@ -61,7 +61,7 @@ export default function Password() {
       secureLocalStorage.removeItem("currentUser");
       setCurrentUser(null);
     } else {
-      showAlert(language ? "پسورد قدیم اشتباه" : "Old password is wrong");
+      showAlert(language ? "رمز عبور قدیم اشتباه" : "Old password is wrong");
     }
   };
 
@@ -97,10 +97,10 @@ export default function Password() {
           <p
             className={classes.label}
             style={{
-              fontFamily: language ? "English" : "English",
+              fontFamily: language ? "Farsi" : "English",
             }}
           >
-            {language ? "پسورد قدیم" : "Old Password"}
+            {language ? "رمز عبور قدیم" : "Old Password"}
           </p>
           <CloseIcon
             className="icon"
@@ -109,6 +109,9 @@ export default function Password() {
           />
         </div>
         <input
+          style={{
+            fontFamily: language ? "English" : "English",
+          }}
           type={visibility ? "text" : "password"}
           id="oldPassword"
           name="oldPassword"
@@ -122,10 +125,10 @@ export default function Password() {
           <p
             className={classes.label}
             style={{
-              fontFamily: language ? "English" : "English",
+              fontFamily: language ? "Farsi" : "English",
             }}
           >
-            {language ? "پسورد جدید" : "New Password"}
+            {language ? "رمز عبور جدید" : "New Password"}
           </p>
           <CloseIcon
             className="icon"
@@ -134,6 +137,9 @@ export default function Password() {
           />
         </div>
         <input
+          style={{
+            fontFamily: language ? "English" : "English",
+          }}
           type={visibility ? "text" : "password"}
           id="password"
           name="password"

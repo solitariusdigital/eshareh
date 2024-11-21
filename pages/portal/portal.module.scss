@@ -17,8 +17,12 @@
   @include mixins.mobile {
     height: 100%;
   }
+  @include mixins.tabletPortrait {
+    height: 100%;
+  }
 
-  .gridLayout {
+  .gridLayout,
+  .gridLayoutReverse {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -28,6 +32,7 @@
     max-width: config.$max-widthHeigh;
     margin-top: 40px;
     position: relative;
+    direction: rtl;
 
     h1 {
       position: absolute;
@@ -41,6 +46,9 @@
         top: 0px;
       }
       @include mixins.tablet {
+        top: 0px;
+      }
+      @include mixins.tabletPortrait {
         top: 0px;
       }
     }
@@ -60,20 +68,40 @@
       flex-direction: column;
       width: config.$content-widthTablet;
     }
+    @include mixins.tabletPortrait {
+      display: flex;
+      flex-direction: column;
+      width: config.$content-widthTablet;
+    }
+
+    .image {
+      position: relative;
+      width: 50%;
+
+      @include mixins.fourK {
+        top: 100px;
+        scale: 1.2;
+      }
+      @include mixins.mobile {
+        width: 100%;
+      }
+      @include mixins.tablet {
+        width: 100%;
+      }
+      @include mixins.tabletPortrait {
+        width: 100%;
+      }
+    }
   }
 
-  .image {
-    position: relative;
-    width: 50%;
-    @include mixins.fourK {
-      top: 100px;
-      scale: 1.2;
-    }
-    @include mixins.mobile {
-      width: 100%;
-    }
-    @include mixins.tablet {
-      width: 100%;
+  .gridLayoutReverse {
+    direction: ltr;
+  }
+
+  .gridLayout {
+    .image {
+      display: inline-block;
+      transform: scaleX(-1);
     }
   }
 }
@@ -89,6 +117,10 @@
     top: 0px;
   }
   @include mixins.tablet {
+    width: 500px;
+    margin: 100px 0px;
+  }
+  @include mixins.tabletPortrait {
     width: 500px;
     margin: 100px 0px;
   }
@@ -127,22 +159,12 @@
     @include mixins.tablet {
       align-items: center;
     }
+    @include mixins.tabletPortrait {
+      align-items: center;
+    }
     button {
       @include mixins.button(config.$yellow, config.$black);
     }
-  }
-
-  .create {
-    cursor: pointer;
-    color: config.$white;
-
-    @include mixins.tablet {
-      color: config.$black;
-    }
-    @include mixins.mobile {
-      color: config.$black;
-    }
-    margin-top: 20px;
   }
 
   .alert {
@@ -151,6 +173,9 @@
     color: config.$red;
 
     @include mixins.tablet {
+      color: config.$red;
+    }
+    @include mixins.tabletPortrait {
       color: config.$red;
     }
     @include mixins.mobile {

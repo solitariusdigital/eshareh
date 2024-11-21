@@ -47,7 +47,7 @@ export default function Portal() {
   const handleLogin = () => {
     if (!email || !password) {
       showAlert(
-        language ? "ایمیل و پسورد الزامیست" : "Email & Password are required"
+        language ? "ایمیل و رمز عبور الزامیست" : "Email & Password are required"
       );
       return;
     }
@@ -58,7 +58,7 @@ export default function Portal() {
     if (password.length < 8) {
       showAlert(
         language
-          ? "پسورد باید حداقل 8 کاراکتر باشد"
+          ? "رمز عبور باید حداقل 8 کاراکتر باشد"
           : "Password must be minimum 8 characters"
       );
       return;
@@ -85,7 +85,7 @@ export default function Portal() {
           window.location.assign("/");
         }
       } else {
-        showAlert(language ? "پسورد اشتباه" : "Wrong password");
+        showAlert(language ? "رمز عبور اشتباه" : "Wrong password");
       }
     } else {
       showAlert(language ? "ایمیل وجود ندارد" : "Email does not exist");
@@ -133,7 +133,9 @@ export default function Portal() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.gridLayout}>
+      <div
+        className={language ? classes.gridLayout : classes.gridLayoutReverse}
+      >
         <h1>{language ? "پورتال" : "Portal"}</h1>
         <div className={classes.form}>
           <div className={classes.input}>
@@ -141,7 +143,7 @@ export default function Portal() {
               <p
                 className={classes.label}
                 style={{
-                  fontFamily: language ? "English" : "English",
+                  fontFamily: language ? "Farsi" : "English",
                 }}
               >
                 {language ? "ایمیل" : "Email"}
@@ -153,12 +155,16 @@ export default function Portal() {
               />
             </div>
             <input
+              style={{
+                fontFamily: language ? "English" : "English",
+              }}
               type="email"
               id="email"
               name="email"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               autoComplete="off"
+              dir="ltr"
             />
           </div>
           <div className={classes.input}>
@@ -166,10 +172,10 @@ export default function Portal() {
               <p
                 className={classes.label}
                 style={{
-                  fontFamily: language ? "English" : "English",
+                  fontFamily: language ? "Farsi" : "English",
                 }}
               >
-                {language ? "پسورد" : "Password"}
+                {language ? "رمز عبور" : "Password"}
               </p>
               <CloseIcon
                 className="icon"
@@ -178,12 +184,16 @@ export default function Portal() {
               />
             </div>
             <input
+              style={{
+                fontFamily: language ? "English" : "English",
+              }}
               type="password"
               id="password"
               name="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               autoComplete="off"
+              dir="ltr"
             />
           </div>
           <div className={classes.formAction}>
@@ -207,16 +217,6 @@ export default function Portal() {
                 <>{language ? "ثبت نام" : "Sign up"}</>
               )}
             </button>
-            {/* <div
-              className={classes.create}
-              onClick={() => setFormType(!formType)}
-            >
-              {formType ? (
-                <>{language ? "ایجاد حساب کاربری" : "Create an account"}</>
-              ) : (
-                <>{language ? "حساب کاربری دارم" : "Have an account"}</>
-              )}
-            </div> */}
           </div>
         </div>
         <div className={classes.image}>
