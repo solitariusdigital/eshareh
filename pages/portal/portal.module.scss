@@ -2,15 +2,11 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  margin: auto;
-  background: linear-gradient(to bottom, config.$white 50%, config.$black 50%);
   display: flex;
+  background: linear-gradient(to bottom, config.$white 50%, config.$black 50%);
   margin-top: 120px;
   height: calc(100vh - 120px);
 
-  @include mixins.desktop {
-    height: calc(100vh - 100px);
-  }
   @include mixins.tablet {
     height: 100%;
   }
@@ -36,21 +32,7 @@
 
     h1 {
       position: absolute;
-      @include mixins.fourK {
-        top: -40px;
-      }
-      @include mixins.desktop {
-        top: 0px;
-      }
-      @include mixins.mobile {
-        top: 0px;
-      }
-      @include mixins.tablet {
-        top: 0px;
-      }
-      @include mixins.tabletPortrait {
-        top: 0px;
-      }
+      top: 0px;
     }
 
     @include mixins.desktop {
@@ -74,22 +56,18 @@
       width: config.$content-widthTablet;
     }
 
-    .image {
+    .imageBox {
       position: relative;
       width: 50%;
 
-      @include mixins.fourK {
-        top: 100px;
-        scale: 1.2;
-      }
       @include mixins.mobile {
         width: 100%;
       }
       @include mixins.tablet {
-        width: 100%;
+        width: 70%;
       }
       @include mixins.tabletPortrait {
-        width: 100%;
+        width: 80%;
       }
     }
   }
@@ -99,7 +77,7 @@
   }
 
   .gridLayout {
-    .image {
+    .imageBox {
       display: inline-block;
       transform: scaleX(-1);
     }

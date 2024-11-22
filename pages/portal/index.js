@@ -219,7 +219,7 @@ export default function Portal() {
             </button>
           </div>
         </div>
-        <div className={classes.image}>
+        <div className={classes.imageBox}>
           <Image
             src={portal}
             blurDataURL={portal}
