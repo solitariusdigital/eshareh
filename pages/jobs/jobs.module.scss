@@ -1,0 +1,168 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  display: flex;
+  background: linear-gradient(to bottom, config.$white 50%, config.$yellow 50%);
+  margin-top: 120px;
+  height: 100vh;
+  height: calc(100vh - 120px);
+
+  @include mixins.tablet {
+    height: 100%;
+  }
+  @include mixins.mobile {
+    height: 100%;
+  }
+  @include mixins.tabletPortrait {
+    height: 100%;
+  }
+
+  .gridLayout,
+  .gridLayoutReverse {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    width: config.$content-width;
+    max-width: config.$max-widthHeigh;
+    margin-top: 40px;
+    position: relative;
+    direction: rtl;
+
+    h1 {
+      @include mixins.allDesktop {
+        position: absolute;
+        top: 0px;
+      }
+    }
+
+    @include mixins.desktop {
+      position: relative;
+      bottom: 40px;
+    }
+    @include mixins.mobile {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 0px;
+    }
+    @include mixins.tablet {
+      display: flex;
+      flex-direction: column;
+      width: config.$content-widthTablet;
+    }
+    @include mixins.tabletPortrait {
+      display: flex;
+      flex-direction: column;
+      width: config.$content-widthTablet;
+    }
+
+    .infoBox {
+      width: 50%;
+      border: 1px solid green;
+
+      @include mixins.allDesktop {
+        max-width: 700px;
+      }
+      @include mixins.mobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: calc(100% - 24px);
+      }
+      @include mixins.tabletPortrait {
+        width: 100%;
+      }
+      @include mixins.tablet {
+        width: 100%;
+      }
+    }
+
+    .imageBox {
+      position: relative;
+      width: 50%;
+      max-width: 700px;
+      //   border: 1px solid red;
+
+      @include mixins.mobile {
+        width: 100%;
+      }
+      @include mixins.tablet {
+        width: 70%;
+      }
+      @include mixins.tabletPortrait {
+        width: 80%;
+      }
+
+      p {
+        margin-bottom: 36px;
+      }
+    }
+
+    .jobsList {
+      position: relative;
+      border: 1px solid red;
+
+      @include mixins.allDesktop {
+        top: 36px;
+      }
+      @include mixins.fourK {
+        top: 100px;
+      }
+      h3 {
+        color: config.$white;
+        margin-bottom: 16px;
+      }
+
+      .job {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        p {
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+
+  .gridLayoutReverse {
+    direction: ltr;
+  }
+
+  .gridLayout {
+    .image {
+      display: inline-block;
+      transform: scaleX(-1);
+    }
+  }
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  span {
+    margin: 0px 8px;
+    color: config.$black;
+  }
+
+  .nav,
+  .navActive {
+    color: config.$black;
+
+    @include mixins.allDesktop {
+      &:hover {
+        color: config.$yellow;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .navActive {
+    color: config.$yellow;
+  }
+}

@@ -8,6 +8,7 @@ import logoFarsi from "@/assets/logoFarsi.svg";
 import dbConnect from "@/services/dbConnect";
 import pageModel from "@/models/Page";
 import mediaModel from "@/models/Media";
+import Router from "next/router";
 
 export default function Contact({ pageData, mediaData }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -267,6 +268,7 @@ export default function Contact({ pageData, mediaData }) {
         style={{
           fontFamily: language ? "Farsi" : "English",
         }}
+        onClick={() => Router.push("/jobs")}
       >
         {language ? <p>ارسال رزومه</p> : <p>Send your resume</p>}
       </div>
