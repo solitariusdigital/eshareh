@@ -88,11 +88,8 @@
   position: relative;
   width: 40%;
 
-  @include mixins.fourK {
-    top: 180px;
-  }
   @include mixins.desktop {
-    top: 0px;
+    bottom: 20px;
   }
   @include mixins.tablet {
     width: 500px;
