@@ -215,6 +215,8 @@
     padding: 8px 20px;
     color: config.$white;
     @include mixins.transparentBackground(0.5, config.$lightgrey);
+    user-select: none;
+
     @include mixins.allDesktop {
       &:hover {
         color: config.$yellow;
@@ -280,6 +282,7 @@
   display: flex;
   flex-direction: row-reverse;
   margin-bottom: 10px;
+  user-select: none;
 
   p {
     margin-right: 10px;
@@ -294,6 +297,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  user-select: none;
 
   .item {
     display: flex;
@@ -379,6 +383,7 @@
   border-radius: 50px;
   box-shadow: config.$image-shadow;
   background: config.$white;
+  user-select: none;
 
   @include mixins.mobile {
     width: 40%;
@@ -419,6 +424,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   gap: 16px;
+  user-select: none;
 
   @include mixins.mobile {
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
@@ -469,6 +475,7 @@
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 40px;
+  user-select: none;
 
   span {
     color: config.$black;

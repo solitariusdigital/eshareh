@@ -4,6 +4,7 @@ import classes from "./Menu.module.scss";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Router from "next/router";
+import Link from "next/link";
 import Image from "next/legacy/image";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
@@ -137,15 +138,19 @@ export default function Menu() {
               language ? classes.logoContainer : classes.logoContainerReverse
             }
           >
-            <div className={classes.logo}>
-              <Image
-                className={classes.image}
-                layout="fill"
-                objectFit="cover"
-                src={language ? logoFarsi : logoEnglish}
-                alt="logo"
-                onClick={() => window.location.assign("/")}
-              />
+            <div
+              className={classes.logo}
+              onClick={() => window.location.assign("/")}
+            >
+              <Link href="/" passHref>
+                <Image
+                  className={classes.image}
+                  layout="fill"
+                  objectFit="cover"
+                  src={language ? logoFarsi : logoEnglish}
+                  alt="logo"
+                />
+              </Link>
             </div>
             {permissionControl === "admin" && (
               <div>
@@ -182,13 +187,13 @@ export default function Menu() {
               </div>
             )}
           </div>
-          <div className={classes.largeNavigation}>
+          <nav className={classes.largeNavigation}>
             {language
               ? navigationTopBar
                   .map((nav, index) => (
                     <Fragment key={index}>
                       {index === navigationTopBar.length - 1 && (
-                        <nav className={classes.menuWrapper}>
+                        <div className={classes.menuWrapper}>
                           <div
                             className={classes.languageControl}
                             onClick={() => toggleLanguage()}
@@ -213,7 +218,7 @@ export default function Menu() {
                               />
                             )}
                           </div>
-                          <a
+                          <Link
                             style={{
                               fontFamily: language
                                 ? "FarsiBold"
@@ -224,6 +229,8 @@ export default function Menu() {
                               !nav.active ? classes.nav : classes.navActive
                             }
                             onClick={() => activateNav(nav.link, index)}
+                            href={nav.link}
+                            passHref
                           >
                             {nav.title[languageType] === "" && (
                               <Fragment>
@@ -248,10 +255,10 @@ export default function Menu() {
                                 )}
                               </Fragment>
                             )}
-                          </a>
-                        </nav>
+                          </Link>
+                        </div>
                       )}
-                      <a
+                      <Link
                         style={{
                           fontFamily: language ? "FarsiBold" : "EnglishBold",
                           fontSize: language ? "1.2rem" : "",
@@ -260,24 +267,28 @@ export default function Menu() {
                           !nav.active ? classes.nav : classes.navActive
                         }
                         onClick={() => activateNav(nav.link, index)}
+                        href={nav.link}
+                        passHref
                       >
                         {nav.title[languageType]}
-                      </a>
+                      </Link>
                     </Fragment>
                   ))
                   .reverse()
               : navigationTopBar.map((nav, index) => (
                   <Fragment key={index}>
-                    <a
+                    <Link
                       style={{
                         fontFamily: language ? "FarsiBold" : "EnglishBold",
                         fontSize: language ? "1.2rem" : "",
                       }}
                       className={!nav.active ? classes.nav : classes.navActive}
                       onClick={() => activateNav(nav.link, index)}
+                      href={nav.link}
+                      passHref
                     >
                       {nav.title[languageType]}
-                    </a>
+                    </Link>
                     {index === navigationTopBar.length - 1 && (
                       <nav className={classes.menuWrapperReverse}>
                         <div
@@ -304,7 +315,7 @@ export default function Menu() {
                             />
                           )}
                         </div>
-                        <a
+                        <Link
                           style={{
                             fontFamily: language ? "FarsiBold" : "EnglishBold",
                             fontSize: language ? "1.2rem" : "",
@@ -313,6 +324,8 @@ export default function Menu() {
                             !nav.active ? classes.nav : classes.navActive
                           }
                           onClick={() => activateNav(nav.link, index)}
+                          href={nav.link}
+                          passHref
                         >
                           {nav.title[languageType] === "" && (
                             <Fragment>
@@ -337,12 +350,12 @@ export default function Menu() {
                               )}
                             </Fragment>
                           )}
-                        </a>
+                        </Link>
                       </nav>
                     )}
                   </Fragment>
                 ))}
-          </div>
+          </nav>
         </div>
       )}
       {screenSize !== "desktop" && (
@@ -353,15 +366,19 @@ export default function Menu() {
                 language ? classes.logoContainer : classes.logoContainerReverse
               }
             >
-              <div className={classes.logo}>
-                <Image
-                  className={classes.image}
-                  layout="fill"
-                  objectFit="cover"
-                  src={!language ? logoEnglish : logoFarsi}
-                  alt="logo"
-                  onClick={() => window.location.assign("/")}
-                />
+              <div
+                className={classes.logo}
+                onClick={() => window.location.assign("/")}
+              >
+                <Link href="/" passHref>
+                  <Image
+                    className={classes.image}
+                    layout="fill"
+                    objectFit="cover"
+                    src={!language ? logoEnglish : logoFarsi}
+                    alt="logo"
+                  />
+                </Link>
               </div>
             </div>
             <div
