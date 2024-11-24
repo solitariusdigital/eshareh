@@ -10,6 +10,7 @@ import logoLoadFarsi from "@/assets/logoLoadFarsi.svg";
 import aparat from "@/assets/aparat.svg";
 import aparatHover from "@/assets/aparatHover.svg";
 import Router from "next/router";
+import Link from "next/link";
 
 export default function Footer() {
   const { language, setLanguage } = useContext(StateContext);
@@ -38,79 +39,94 @@ export default function Footer() {
       }}
     >
       <div>
-        <LinkedInIcon
-          className={classes.icon}
-          onClick={() =>
-            window.open(
-              "https://www.linkedin.com/company/esharehmarcom",
-              "_ self"
-            )
-          }
-        />
-        <InstagramIcon
-          className={classes.icon}
-          onClick={() =>
-            window.open("https://www.instagram.com/esharehmarcom/", "_ self")
-          }
-        />
-        <YouTubeIcon
-          sx={{ fontSize: 30 }}
-          className={classes.youtube}
-          onClick={() =>
-            window.open(
-              "https://www.youtube.com/channel/UCO5L7FnGyEvme6Ckr9kBaOw",
-              "_ self"
-            )
-          }
-        />
+        <Link href="https://www.linkedin.com/company/esharehmarcom" passHref>
+          <LinkedInIcon
+            className={classes.icon}
+            onClick={() =>
+              window.open(
+                "https://www.linkedin.com/company/esharehmarcom",
+                "_ self"
+              )
+            }
+          />
+        </Link>
+        <Link href="https://www.instagram.com/esharehmarcom" passHref>
+          <InstagramIcon
+            className={classes.icon}
+            onClick={() =>
+              window.open("https://www.instagram.com/esharehmarcom", "_ self")
+            }
+          />
+        </Link>
+        <Link
+          href="https://www.youtube.com/channel/UCO5L7FnGyEvme6Ckr9kBaOw"
+          passHref
+        >
+          <YouTubeIcon
+            sx={{ fontSize: 30 }}
+            className={classes.youtube}
+            onClick={() =>
+              window.open(
+                "https://www.youtube.com/channel/UCO5L7FnGyEvme6Ckr9kBaOw",
+                "_ self"
+              )
+            }
+          />
+        </Link>
         {!hover ? (
-          <Image
-            className={classes.icon}
-            onClick={() =>
-              window.open("https://www.aparat.com/esharehmarcom", "_ self")
-            }
-            onMouseEnter={() => setHover(true)}
-            width={25}
-            height={25}
-            src={aparat}
-            alt="aparat"
-            priority
-          />
+          <Link href="https://www.aparat.com/esharehmarcom" passHref>
+            <Image
+              className={classes.icon}
+              onClick={() =>
+                window.open("https://www.aparat.com/esharehmarcom", "_ self")
+              }
+              onMouseEnter={() => setHover(true)}
+              width={25}
+              height={25}
+              src={aparat}
+              alt="aparat"
+              priority
+            />
+          </Link>
         ) : (
-          <Image
-            className={classes.icon}
-            onClick={() =>
-              window.open("https://www.aparat.com/esharehmarcom", "_ self")
-            }
-            onMouseLeave={() => setHover(false)}
-            width={25}
-            height={25}
-            src={aparatHover}
-            alt="aparat"
-            priority
-          />
+          <Link href="https://www.aparat.com/esharehmarcom" passHref>
+            <Image
+              className={classes.icon}
+              onClick={() =>
+                window.open("https://www.aparat.com/esharehmarcom", "_ self")
+              }
+              onMouseLeave={() => setHover(false)}
+              width={25}
+              height={25}
+              src={aparatHover}
+              alt="aparat"
+              priority
+            />
+          </Link>
         )}
         <p className={classes.copyright}>© eshareh 2024 all rights reserved</p>
       </div>
       <div className={classes.container}>
-        <div
+        <nav
           className={language ? classes.navigation : classes.navigationReverse}
         >
           {navigationTopBar.map((nav, index) => (
             <Fragment key={index}>
-              <a
+              <Link
                 style={{
                   fontFamily: language ? "FarsiBold" : "EnglishBold",
                   fontSize: language ? "1.2rem" : "",
                 }}
                 className={!nav.active ? classes.nav : classes.navActive}
                 onClick={() => activateNav(nav.link, index)}
+                href={nav.link}
+                passHref
               >
                 {nav.title[languageType]}
-              </a>
+              </Link>
             </Fragment>
           ))}
-        </div>
+        </nav>
         <button
           style={{
             fontFamily: language ? "FarsiBold" : "EnglishBold",
@@ -125,12 +141,14 @@ export default function Footer() {
           className={classes.logo}
           onClick={() => window.location.assign("/")}
         >
-          <Image
-            width={150}
-            height={82.5}
-            src={language ? logoLoadFarsi : logoLoadEnglish}
-            alt="logo"
-          />
+          <Link href="/" passHref>
+            <Image
+              width={150}
+              height={82.5}
+              src={language ? logoLoadFarsi : logoLoadEnglish}
+              alt="logo"
+            />
+          </Link>
         </div>
       </div>
     </footer>

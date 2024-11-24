@@ -54,7 +54,6 @@
 
 body {
   background: config.$background;
-  user-select: none;
   margin: auto;
   margin-top: 100px;
 }
@@ -244,4 +243,14 @@ label.file input[type="file"] {
     background-position: center;
     opacity: 0.5;
   }
+}
+
+::selection {
+  background: config.$yellow;
+  color: config.$black;
+}
+
+::-moz-selection {
+  background: config.$yellow;
+  color: config.$black;
 }

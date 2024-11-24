@@ -4,6 +4,7 @@
 .container {
   width: 100%;
   @include mixins.row-space-between-center();
+  user-select: none;
 
   .logoContainer,
   .logoContainerReverse {

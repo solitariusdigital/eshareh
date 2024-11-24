@@ -44,6 +44,8 @@
   }
 
   .coverBox {
+    user-select: none;
+
     @include mixins.allDesktop {
       cursor: pointer;
       &:hover {
@@ -158,6 +160,7 @@
   border-radius: 50px;
   box-shadow: config.$image-shadow;
   background: config.$white;
+  user-select: none;
 
   @include mixins.mobile {
     width: 40%;
@@ -199,6 +202,7 @@
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   gap: 16px;
   width: 100%;
+  user-select: none;
 
   @include mixins.mobile {
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));

@@ -12,6 +12,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Tooltip from "@mui/material/Tooltip";
 import { replaceSpacesAndHyphens } from "@/services/utility";
 import Router from "next/router";
+import Link from "next/link";
 
 export default function News({ adminNews, activeNews }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -30,11 +31,6 @@ export default function News({ adminNews, activeNews }) {
       );
     }
   }, [activeNews, adminNews, languageType, permissionControl]);
-
-  const directNews = (item) => {
-    let link = `/news/${replaceSpacesAndHyphens(item[languageType].title)}`;
-    Router.push(link);
-  };
 
   return (
     <Fragment>
@@ -85,79 +81,16 @@ export default function News({ adminNews, activeNews }) {
                 active,
               } = news[0];
               const lastMedia = media[media.length - 1];
+              const newsLink = `/news/${replaceSpacesAndHyphens(
+                news[0][languageType].title
+              )}`;
               return (
                 <div
                   className={classes.coverBox}
-                  onClick={() => directNews(news[0])}
+                  onClick={() => Router.push(newsLink)}
                 >
-                  <div className={classes.cover}>
-                    {lastMedia.type === "image" ? (
-                      <Image
-                        src={lastMedia.link}
-                        placeholder="blur"
-                        blurDataURL={lastMedia.link}
-                        alt={title}
-                        layout="fill"
-                        objectFit="cover"
-                        as="image"
-                        priority
-                      />
-                    ) : (
-                      <video
-                        className={classes.video}
-                        src={`${lastMedia.link}#t=0.1`}
-                        controls
-                        playsInline
-                        preload="metadata"
-                      />
-                    )}
-                    {permissionControl === "admin" && (
-                      <div className={classes.visibility}>
-                        {active ? (
-                          <Tooltip title="Visible">
-                            <VerifiedUserIcon sx={{ color: "#57a361" }} />
-                          </Tooltip>
-                        ) : (
-                          <Tooltip title="Hidden">
-                            <VisibilityOffIcon sx={{ color: "#d40d12" }} />
-                          </Tooltip>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                  <h3>{title}</h3>
-                </div>
-              );
-            })()}
-        </div>
-        <section
-          className={language ? classes.gridList : classes.gridListReverse}
-        >
-          {news
-            .map((item, index) => {
-              const { title } = item[languageType];
-              const { media } = item;
-              const lastMedia = media[media.length - 1];
-              return (
-                <Fragment key={index}>
-                  <div
-                    className={classes.item}
-                    onClick={() => directNews(item)}
-                  >
-                    {permissionControl === "admin" && (
-                      <div className={classes.visibility}>
-                        {item.active ? (
-                          <Tooltip title="Visible">
-                            <VerifiedUserIcon sx={{ color: "#57a361" }} />
-                          </Tooltip>
-                        ) : (
-                          <Tooltip title="Hidden">
-                            <VisibilityOffIcon sx={{ color: "#d40d12" }} />
-                          </Tooltip>
-                        )}
-                      </div>
-                    )}
-                    <div className={classes.box}>
+                  <Link href={newsLink} passHref>
+                    <div className={classes.cover}>
                       {lastMedia.type === "image" ? (
                         <Image
                           src={lastMedia.link}
@@ -172,24 +105,97 @@ export default function News({ adminNews, activeNews }) {
                       ) : (
                         <video
                           className={classes.video}
-                          src={lastMedia.link + "#t=0.1"}
+                          src={`${lastMedia.link}#t=0.1`}
                           controls
                           playsInline
                           preload="metadata"
                         />
                       )}
+                      {permissionControl === "admin" && (
+                        <div className={classes.visibility}>
+                          {active ? (
+                            <Tooltip title="Visible">
+                              <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                            </Tooltip>
+                          ) : (
+                            <Tooltip title="Hidden">
+                              <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                            </Tooltip>
+                          )}
+                        </div>
+                      )}
                     </div>
+                    <h3>{title}</h3>
+                  </Link>
+                </div>
+              );
+            })()}
+        </div>
+        <section
+          className={language ? classes.gridList : classes.gridListReverse}
+        >
+          {news
+            .map((item, index) => {
+              const { title } = item[languageType];
+              const { media } = item;
+              const lastMedia = media[media.length - 1];
+              const newsLink = `/news/${replaceSpacesAndHyphens(
+                item[languageType].title
+              )}`;
+              return (
+                <Fragment key={index}>
+                  <Link href={newsLink} passHref>
                     <div
-                      className={
-                        language ? classes.title : classes.titleReverse
-                      }
-                      style={{
-                        fontFamily: language ? "FarsiLight" : "EnglishLight",
-                      }}
+                      className={classes.item}
+                      onClick={() => Router.push(newsLink)}
                     >
-                      <h3>{title}</h3>
+                      {permissionControl === "admin" && (
+                        <div className={classes.visibility}>
+                          {item.active ? (
+                            <Tooltip title="Visible">
+                              <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                            </Tooltip>
+                          ) : (
+                            <Tooltip title="Hidden">
+                              <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                            </Tooltip>
+                          )}
+                        </div>
+                      )}
+                      <div className={classes.box}>
+                        {lastMedia.type === "image" ? (
+                          <Image
+                            src={lastMedia.link}
+                            placeholder="blur"
+                            blurDataURL={lastMedia.link}
+                            alt={title}
+                            layout="fill"
+                            objectFit="cover"
+                            as="image"
+                            priority
+                          />
+                        ) : (
+                          <video
+                            className={classes.video}
+                            src={lastMedia.link + "#t=0.1"}
+                            controls
+                            playsInline
+                            preload="metadata"
+                          />
+                        )}
+                      </div>
+                      <div
+                        className={
+                          language ? classes.title : classes.titleReverse
+                        }
+                        style={{
+                          fontFamily: language ? "FarsiLight" : "EnglishLight",
+                        }}
+                      >
+                        <h3>{title}</h3>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </Fragment>
               );
             })

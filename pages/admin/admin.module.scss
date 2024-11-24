@@ -28,6 +28,7 @@
   text-transform: capitalize;
   @include mixins.row-space-between-center();
   justify-content: space-around;
+  user-select: none;
 
   @include mixins.mobile {
     width: 100%;

@@ -6,6 +6,7 @@
   grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   gap: 12px;
   margin-bottom: 50px;
+  user-select: none;
 }
 
 .building {
@@ -22,6 +23,7 @@
   border-bottom: 1px solid config.$lightgrey;
   text-transform: capitalize;
   @include mixins.row-space-between-center();
+  user-select: none;
 
   @include mixins.mobile {
     width: 100%;
@@ -201,6 +203,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   gap: 20px;
+  user-select: none;
 
   @include mixins.mobile {
     display: flex;

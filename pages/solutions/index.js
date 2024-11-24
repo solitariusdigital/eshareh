@@ -14,6 +14,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Tooltip from "@mui/material/Tooltip";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
+import Link from "next/link";
 
 export default function Solutions({
   activeSolutions,
@@ -93,13 +94,6 @@ export default function Solutions({
     setNavigationTopBar([...navigationTopBar]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const directSolution = (project) => {
-    let link = `/solutions/${replaceSpacesAndHyphens(
-      project[languageType].title
-    )}`;
-    Router.push(link);
-  };
 
   return (
     <Fragment>
@@ -211,61 +205,66 @@ export default function Solutions({
             )
             .map((project, index) => {
               const { title } = project[languageType];
+              const projectLink = `/solutions/${replaceSpacesAndHyphens(
+                project[languageType].title
+              )}`;
               const { coverMedia } = project;
               return (
                 <Fragment key={index}>
-                  <div
-                    className={classes.project}
-                    onClick={() => directSolution(project)}
-                  >
-                    {permissionControl === "admin" && (
-                      <div className={classes.visibility}>
-                        {project.active ? (
-                          <Tooltip title="Visible">
-                            <VerifiedUserIcon sx={{ color: "#57a361" }} />
-                          </Tooltip>
+                  <Link href={projectLink} passHref>
+                    <div
+                      className={classes.project}
+                      onClick={() => Router.push(projectLink)}
+                    >
+                      {permissionControl === "admin" && (
+                        <div className={classes.visibility}>
+                          {project.active ? (
+                            <Tooltip title="Visible">
+                              <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                            </Tooltip>
+                          ) : (
+                            <Tooltip title="Hidden">
+                              <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                            </Tooltip>
+                          )}
+                        </div>
+                      )}
+                      <div className={classes.box}>
+                        {coverMedia.type === "image" ? (
+                          <Image
+                            className={classes.image}
+                            src={coverMedia.link}
+                            placeholder="blur"
+                            blurDataURL={coverMedia.link}
+                            alt={title}
+                            layout="fill"
+                            objectFit="cover"
+                            as="image"
+                            priority
+                          />
                         ) : (
-                          <Tooltip title="Hidden">
-                            <VisibilityOffIcon sx={{ color: "#d40d12" }} />
-                          </Tooltip>
+                          <video
+                            className={classes.video}
+                            id={project["_id"]}
+                            src={coverMedia.link + "#t=0.1"}
+                            muted
+                            playsInline
+                            preload="metadata"
+                          />
                         )}
                       </div>
-                    )}
-                    <div className={classes.box}>
-                      {coverMedia.type === "image" ? (
-                        <Image
-                          className={classes.image}
-                          src={coverMedia.link}
-                          placeholder="blur"
-                          blurDataURL={coverMedia.link}
-                          alt={title}
-                          layout="fill"
-                          objectFit="cover"
-                          as="image"
-                          priority
-                        />
-                      ) : (
-                        <video
-                          className={classes.video}
-                          id={project["_id"]}
-                          src={coverMedia.link + "#t=0.1"}
-                          muted
-                          playsInline
-                          preload="metadata"
-                        />
-                      )}
+                      <div
+                        className={
+                          language ? classes.title : classes.titleReverse
+                        }
+                        style={{
+                          fontFamily: language ? "FarsiLight" : "EnglishLight",
+                        }}
+                      >
+                        <h3>{title}</h3>
+                      </div>
                     </div>
-                    <div
-                      className={
-                        language ? classes.title : classes.titleReverse
-                      }
-                      style={{
-                        fontFamily: language ? "FarsiLight" : "EnglishLight",
-                      }}
-                    >
-                      <h3>{title}</h3>
-                    </div>
-                  </div>
+                  </Link>
                 </Fragment>
               );
             })}
