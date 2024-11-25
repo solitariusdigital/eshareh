@@ -110,6 +110,7 @@
   height: 50vh;
   text-align: center;
   background: config.$yellow;
+  user-select: none;
 
   .swiper {
     height: 70%;

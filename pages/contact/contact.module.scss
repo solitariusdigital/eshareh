@@ -121,18 +121,20 @@
   max-width: config.$max-widthHeigh;
   width: config.$content-width;
   margin: auto;
+  user-select: none;
 
   @include mixins.mobile {
     display: flex;
     justify-content: center;
   }
   @include mixins.tablet {
-    width: 90%;
+    width: config.$content-widthTablet;
   }
   @include mixins.tabletPortrait {
     display: flex;
     justify-content: center;
   }
+
   p {
     background: config.$yellow;
     font-size: config.$tiny-font;

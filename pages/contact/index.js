@@ -268,9 +268,12 @@ export default function Contact({ pageData, mediaData }) {
         style={{
           fontFamily: language ? "Farsi" : "English",
         }}
-        onClick={() => Router.push("/jobs")}
       >
-        {language ? <p>ارسال رزومه</p> : <p>Send your resume</p>}
+        {language ? (
+          <p onClick={() => Router.push("/jobs")}>ارسال رزومه</p>
+        ) : (
+          <p onClick={() => Router.push("/jobs")}>Send your resume</p>
+        )}
       </div>
     </Fragment>
   );

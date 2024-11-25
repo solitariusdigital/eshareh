@@ -10,8 +10,17 @@ import { enToFaDigits } from "@/services/utility";
 export default function Jobs() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+
+  useEffect(() => {
+    navigationTopBar.map((nav, i) => {
+      nav.active = false;
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const jobTypes = [
     {
