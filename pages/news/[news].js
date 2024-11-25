@@ -4,11 +4,6 @@ import { useRouter } from "next/router";
 import classes from "./news.module.scss";
 import dbConnect from "@/services/dbConnect";
 import newsModel from "@/models/News";
-import {
-  replaceSpacesAndHyphens,
-  enToFaDigits,
-  applyFontToEnglishWords,
-} from "@/services/utility";
 import Image from "next/legacy/image";
 import Router from "next/router";
 import { NextSeo } from "next-seo";
@@ -19,6 +14,11 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import EditIcon from "@mui/icons-material/Edit";
 import Tooltip from "@mui/material/Tooltip";
 import { getSingleNewsApi, updateNewsApi } from "@/services/api";
+import {
+  replaceSpacesAndHyphens,
+  enToFaDigits,
+  applyFontToEnglishWords,
+} from "@/services/utility";
 
 export default function News({ news, newsTitle }) {
   const { language, setLanguage } = useContext(StateContext);

@@ -3,13 +3,12 @@
 
 .information,
 .informationReverse {
+  display: flex;
+  flex-direction: column;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
   margin: auto;
   direction: rtl;
-
-  display: flex;
-  flex-direction: column;
 
   @include mixins.tablet {
     width: config.$content-widthTablet;
