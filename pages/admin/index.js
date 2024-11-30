@@ -10,6 +10,7 @@ import dbConnect from "@/services/dbConnect";
 import coverModel from "@/models/Cover";
 import pageModel from "@/models/Page";
 import mediaModel from "@/models/Media";
+import Jobs from "@/components/forms/Jobs";
 
 export default function Admin({ covers, pages, mediaData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
@@ -17,9 +18,9 @@ export default function Admin({ covers, pages, mediaData }) {
   const { editNews, setEditNews } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
   const [formType, setFormType] = useState(
-    "solutions" || "pages" || "news" || "covers"
+    "solutions" || "pages" || "news" || "covers" || "jobs"
   );
-  const navigation = ["solutions", "covers", "news", "pages"];
+  const navigation = ["solutions", "covers", "news", "pages", "jobs"];
 
   useEffect(() => {
     if (permissionControl !== "admin") {
@@ -59,6 +60,7 @@ export default function Admin({ covers, pages, mediaData }) {
       {formType === "covers" && <Cover covers={covers} />}
       {formType === "news" && <News />}
       {formType === "pages" && <Pages pages={pages} mediaData={mediaData} />}
+      {formType === "jobs" && <Jobs />}
     </div>
   );
 }

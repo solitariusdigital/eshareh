@@ -626,7 +626,7 @@ export default function Team({ pages, mediaData }) {
             </select>
           </div>
           {selectedUser && (
-            <div className={classes.delete}>
+            <div className={classes.deleteUser}>
               <button
                 style={{
                   fontFamily: "FarsiMedium",

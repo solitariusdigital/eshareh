@@ -5,7 +5,8 @@ import Image from "next/legacy/image";
 import portal from "@/assets/portal.png";
 import next from "@/assets/next.svg";
 import nextYellow from "@/assets/nextYellow.svg";
-import { enToFaDigits } from "@/services/utility";
+import Router from "next/router";
+import { enToFaDigits, replaceSpacesAndHyphens } from "@/services/utility";
 
 export default function Jobs() {
   const { language, setLanguage } = useContext(StateContext);
@@ -107,7 +108,14 @@ export default function Jobs() {
                 ? `${enToFaDigits(6)} پیشنهاد شغلی موجود`
                 : `${6} Avilable job offers`}
             </h3>
-            <div className={classes.job}>
+            <div
+              className={classes.job}
+              onClick={() =>
+                Router.push(
+                  `/jobs/${replaceSpacesAndHyphens("Account Manager")}`
+                )
+              }
+            >
               <Image
                 className={classes.jobIcon}
                 src={screenSize === "mobile" ? nextYellow : next}

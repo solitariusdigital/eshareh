@@ -9,12 +9,6 @@
   user-select: none;
 }
 
-.building {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .pageNavigation {
   width: 65%;
   margin: auto;
@@ -52,6 +46,7 @@
   display: flex;
   flex-direction: column;
   font-weight: 300;
+  user-select: none;
 
   .input,
   .inputTextArea {
@@ -102,17 +97,39 @@
   @include mixins.mobile {
     width: 100%;
   }
+
+  .addField {
+    @include mixins.button(config.$green, config.$white);
+    width: 100px;
+    @include mixins.allDesktop() {
+      &:hover {
+        color: config.$green;
+      }
+    }
+  }
+  .removeField {
+    @include mixins.button(config.$red, config.$white);
+    width: 100px;
+    margin-top: 12px;
+    @include mixins.allDesktop() {
+      &:hover {
+        color: config.$red;
+      }
+    }
+  }
 }
 
-.delete {
+.deleteUser {
   display: flex;
   justify-content: center;
 
   button {
     @include mixins.button(config.$red, config.$white);
     margin: auto;
-    &:hover {
-      color: config.$red;
+    @include mixins.allDesktop() {
+      &:hover {
+        color: config.$red;
+      }
     }
   }
 }
@@ -157,6 +174,7 @@
   flex-direction: column;
   text-align: center;
   width: 100%;
+  user-select: none;
 
   .mediaContainer {
     display: grid;
@@ -196,6 +214,33 @@
   .alert {
     margin: 16px 0px;
     color: config.$red;
+  }
+
+  .resume,
+  .resumeReverse {
+    color: config.$grey;
+    text-align: right;
+    margin-bottom: 8px;
+  }
+  .resumeReverse {
+    text-align: left;
+  }
+  .row {
+    @include mixins.row-space-between-center();
+    width: 100%;
+
+    button {
+      margin: 0px;
+      width: 200px;
+    }
+
+    .file {
+      cursor: pointer;
+      height: 40px;
+      width: 200px;
+      color: config.$white;
+      background: config.$grey;
+    }
   }
 }
 
