@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./CoverSlider.module.scss";
 import Image from "next/legacy/image";
-import { enToFaDigits } from "@/services/utility";
+import { toFarsiNumber } from "@/services/utility";
 import Router from "next/router";
 import Progress from "@/components/Progress";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -97,7 +97,7 @@ export default function CoverSlider({ covers }) {
             fontFamily: language ? "Farsi" : "English",
           }}
         >
-          <h2>{language ? enToFaDigits(current + 1) : current + 1}</h2>
+          <h2>{language ? toFarsiNumber(current + 1) : current + 1}</h2>
           <span
             style={{
               fontFamily: language ? "English" : "English",
@@ -105,7 +105,7 @@ export default function CoverSlider({ covers }) {
           >
             /
           </span>
-          <h2>{language ? enToFaDigits(length) : length}</h2>
+          <h2>{language ? toFarsiNumber(length) : length}</h2>
         </div>
       </div>
     </div>

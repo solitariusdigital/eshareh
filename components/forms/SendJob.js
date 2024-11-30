@@ -3,6 +3,14 @@ import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
+import {
+  fourGenerator,
+  sixGenerator,
+  uploadMedia,
+  toEnglishNumber,
+  validateEmail,
+  isEnglishNumber,
+} from "@/services/utility";
 
 export default function SendJob() {
   const { language, setLanguage } = useContext(StateContext);
@@ -16,6 +24,37 @@ export default function SendJob() {
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
   const [media, setMedia] = useState("");
+
+  const checkFormValidity = () => {
+    if (!name || !birth || !phone || !email || !description) {
+      showAlert(language ? "همه موارد الزامیست" : "All fields are required");
+      return;
+    }
+    if (!validateEmail(email)) {
+      showAlert(language ? "ایمیل اشتباه" : "Invalid email");
+      return;
+    }
+    let phoneEnglish = isEnglishNumber(phone) ? phone : toEnglishNumber(phone);
+    if (phoneEnglish.length === 11 && phoneEnglish.startsWith("09")) {
+      submitResume();
+    } else {
+      showAlert(language ? "موبایل اشتباه" : "Invalid phone");
+    }
+  };
+
+  const submitResume = () => {
+    showAlert("submit");
+
+    //  setLoader(true);
+    // setDisableButton(true);
+  };
+
+  const showAlert = (message) => {
+    setAlert(message);
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
+  };
 
   return (
     <Fragment>
@@ -207,7 +246,7 @@ export default function SendJob() {
             style={{
               fontFamily: language ? "FarsiMedium" : "EnglishMedium",
             }}
-            onClick={() => updateAboutContent()}
+            onClick={() => checkFormValidity()}
           >
             {language ? "ارسال" : "Submit"}
           </button>
@@ -215,7 +254,7 @@ export default function SendJob() {
         <p
           className={classes.alert}
           style={{
-            fontFamily: "Farsi",
+            fontFamily: language ? "Farsi" : "English",
           }}
         >
           {alert}

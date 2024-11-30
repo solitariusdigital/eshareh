@@ -12,7 +12,7 @@ import {
   fourGenerator,
   sixGenerator,
   uploadMedia,
-  enToFaDigits,
+  toFarsiNumber,
 } from "@/services/utility";
 const jalaali = require("jalali-date");
 
@@ -112,7 +112,7 @@ export default function News() {
     const gregorian = jalaali.toGregorian(year, month, day);
     const parts = gregorian.toString().split(" ");
     const gregorianDateString = `${parts[1]} ${parts[3]}`;
-    const persianDateString = `${enToFaDigits(year)} ${
+    const persianDateString = `${toFarsiNumber(year)} ${
       monthNames[month - 1]
     } ماه`;
     return {

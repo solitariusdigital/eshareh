@@ -6,7 +6,7 @@ import portal from "@/assets/portal.png";
 import next from "@/assets/next.svg";
 import nextYellow from "@/assets/nextYellow.svg";
 import Router from "next/router";
-import { enToFaDigits, replaceSpacesAndHyphens } from "@/services/utility";
+import { toFarsiNumber, replaceSpacesAndHyphens } from "@/services/utility";
 
 export default function Jobs() {
   const { language, setLanguage } = useContext(StateContext);
@@ -105,7 +105,7 @@ export default function Jobs() {
           <div className={classes.jobBox}>
             <h3>
               {language
-                ? `${enToFaDigits(6)} پیشنهاد شغلی موجود`
+                ? `${toFarsiNumber(6)} پیشنهاد شغلی موجود`
                 : `${6} Avilable job offers`}
             </h3>
             <div

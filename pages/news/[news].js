@@ -16,7 +16,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { getSingleNewsApi, updateNewsApi } from "@/services/api";
 import {
   replaceSpacesAndHyphens,
-  enToFaDigits,
+  toFarsiNumber,
   applyFontToEnglishWords,
 } from "@/services/utility";
 
@@ -57,7 +57,7 @@ export default function News({ news, newsTitle }) {
     const readingTime = Math.ceil(wordCount / wordsPerMinute);
     return {
       time: language
-        ? `${enToFaDigits(readingTime)} دقیقه مطالعه`
+        ? `${toFarsiNumber(readingTime)} دقیقه مطالعه`
         : `${readingTime} min read`,
     };
   };

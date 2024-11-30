@@ -254,72 +254,58 @@
     width: config.$content-widthTablet;
   }
 
-  .jobBox {
+  .banner {
+    height: fit-content;
+    background: config.$yellow;
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 50px;
-    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    gap: 10px;
+    border-radius: 4px;
+    padding: 10px;
     margin-top: 14px;
+    width: 55%;
+
+    .row,
+    .rowReverse {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      direction: rtl;
+
+      p {
+        margin-right: 2px;
+      }
+    }
+
+    .rowReverse {
+      direction: ltr;
+      p {
+        margin-left: 2px;
+      }
+    }
+  }
+
+  .jobBox {
+    @include mixins.row-space-between-center();
+    width: 100%;
+    margin: 14px 0px;
 
     @include mixins.tabletPortrait {
       display: flex;
       flex-direction: column;
     }
 
-    .banner {
-      height: fit-content;
-      background: config.$yellow;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-      gap: 10px;
-      border-radius: 4px;
-      padding: 10px;
-
-      .row,
-      .rowReverse {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        direction: rtl;
-
-        p {
-          margin-right: 2px;
-        }
-      }
-
-      .rowReverse {
-        direction: ltr;
-        p {
-          margin-left: 2px;
-        }
-      }
-    }
     .senJobForm,
     .senJobFormReverse {
-      margin-top: 50px;
-      width: 450px;
-      position: absolute;
-
-      @include mixins.tabletPortrait {
-        position: relative;
-        margin: auto;
-      }
-      @include mixins.fourK {
-        width: 550px;
-      }
-    }
-    .senJobForm {
-      left: 0px;
-    }
-    .senJobFormReverse {
-      right: 0px;
+      width: 40%;
     }
 
     .information {
-      margin-top: 16px;
+      width: 55%;
 
       div {
         margin-bottom: 32px;
+
         h3 {
           margin-bottom: 8px;
         }

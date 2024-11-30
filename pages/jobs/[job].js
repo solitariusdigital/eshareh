@@ -1,7 +1,7 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./jobs.module.scss";
-import { enToFaDigits, replaceSpacesAndHyphens } from "@/services/utility";
+import { toFarsiNumber, replaceSpacesAndHyphens } from "@/services/utility";
 import SendJob from "@/components/forms/SendJob";
 
 export default function Job({ jobTitle }) {
@@ -17,122 +17,120 @@ export default function Job({ jobTitle }) {
     >
       <h1>{language ? "مشاغل" : "Jobs"}</h1>
       <h2>{jobTitle}</h2>
+      <div className={classes.banner}>
+        <div className={language ? classes.row : classes.rowReverse}>
+          <p
+            style={{
+              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+            }}
+          >
+            Work type:
+          </p>
+          <p
+            style={{
+              fontFamily: language ? "FarsiLight" : "EnglishLight",
+            }}
+          >
+            Full Time
+          </p>
+        </div>
+        <div className={language ? classes.row : classes.rowReverse}>
+          <p
+            style={{
+              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+            }}
+          >
+            Work type:
+          </p>
+          <p
+            style={{
+              fontFamily: language ? "FarsiLight" : "EnglishLight",
+            }}
+          >
+            Full Time
+          </p>
+        </div>
+        <div className={language ? classes.row : classes.rowReverse}>
+          <p
+            style={{
+              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+            }}
+          >
+            Work type:
+          </p>
+          <p
+            style={{
+              fontFamily: language ? "FarsiLight" : "EnglishLight",
+            }}
+          >
+            Full Time
+          </p>
+        </div>
+      </div>
       <div className={classes.jobBox}>
-        <div>
-          <div className={classes.banner}>
-            <div className={language ? classes.row : classes.rowReverse}>
-              <p
-                style={{
-                  fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                }}
-              >
-                Work type:
-              </p>
-              <p
-                style={{
-                  fontFamily: language ? "FarsiLight" : "EnglishLight",
-                }}
-              >
-                Full Time
-              </p>
-            </div>
-            <div className={language ? classes.row : classes.rowReverse}>
-              <p
-                style={{
-                  fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                }}
-              >
-                Work type:
-              </p>
-              <p
-                style={{
-                  fontFamily: language ? "FarsiLight" : "EnglishLight",
-                }}
-              >
-                Full Time
-              </p>
-            </div>
-            <div className={language ? classes.row : classes.rowReverse}>
-              <p
-                style={{
-                  fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                }}
-              >
-                Work type:
-              </p>
-              <p
-                style={{
-                  fontFamily: language ? "FarsiLight" : "EnglishLight",
-                }}
-              >
-                Full Time
-              </p>
-            </div>
+        <div className={classes.information}>
+          <div>
+            <h3
+              style={{
+                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              }}
+            >
+              Job Description
+            </h3>
+            <p
+              style={{
+                fontFamily: language ? "FarsiLight" : "EnglishLight",
+              }}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
+              congue mauris rhoncus aenean vel elit scelerisque. In egestas erat
+              imperdiet sed euismod nisi porta lorem mollis. Morbi tristique
+              senectus et netus.
+            </p>
           </div>
-          <div className={classes.information}>
-            <div className={language ? classes.row : classes.rowReverse}>
-              <h3
-                style={{
-                  fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                }}
-              >
-                Job Description
-              </h3>
-              <p
-                style={{
-                  fontFamily: language ? "FarsiLight" : "EnglishLight",
-                }}
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
-                congue mauris rhoncus aenean vel elit scelerisque. In egestas
-                erat imperdiet sed euismod nisi porta lorem mollis. Morbi
-                tristique senectus et netus.
-              </p>
-            </div>
-            <div className={language ? classes.row : classes.rowReverse}>
-              <h3
-                style={{
-                  fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                }}
-              >
-                Responsibilities
-              </h3>
-              <p
-                style={{
-                  fontFamily: language ? "FarsiLight" : "EnglishLight",
-                }}
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
-                congue mauris rhoncus aenean vel elit scelerisque. In egestas
-                erat imperdiet sed euismod nisi porta lorem mollis. Morbi
-                tristique senectus et netus.
-              </p>
-            </div>
-            <div className={language ? classes.row : classes.rowReverse}>
-              <h3
-                style={{
-                  fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                }}
-              >
-                Requirements
-              </h3>
-              <p
-                style={{
-                  fontFamily: language ? "FarsiLight" : "EnglishLight",
-                }}
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
-                congue mauris rhoncus aenean vel elit scelerisque. In egestas
-                erat imperdiet sed euismod nisi porta lorem mollis. Morbi
-                tristique senectus et netus.
-              </p>
-            </div>
+          <div>
+            <h3
+              style={{
+                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              }}
+            >
+              Responsibilities
+            </h3>
+            <p
+              style={{
+                fontFamily: language ? "FarsiLight" : "EnglishLight",
+              }}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
+              congue mauris rhoncus aenean vel elit scelerisque. In egestas erat
+              imperdiet sed euismod nisi porta lorem mollis. Morbi tristique
+              senectus et netus.
+            </p>
+          </div>
+          <div>
+            <h3
+              style={{
+                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              }}
+            >
+              Requirements
+            </h3>
+            <p
+              style={{
+                fontFamily: language ? "FarsiLight" : "EnglishLight",
+              }}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae
+              congue mauris rhoncus aenean vel elit scelerisque. In egestas erat
+              imperdiet sed euismod nisi porta lorem mollis. Morbi tristique
+              senectus et netus.
+            </p>
           </div>
         </div>
         <div
