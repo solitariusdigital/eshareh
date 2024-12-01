@@ -324,6 +324,9 @@
     .senJobFormReverse {
       width: 40%;
 
+      @include mixins.fourK {
+        width: 30%;
+      }
       @include mixins.tabletPortrait {
         width: 65%;
       }
