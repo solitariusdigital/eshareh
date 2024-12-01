@@ -232,6 +232,12 @@
     button {
       margin: 0px;
       width: 200px;
+      @include mixins.mobile {
+        width: 150px;
+      }
+      @include mixins.tablet {
+        width: 170px;
+      }
     }
 
     .file {
@@ -240,6 +246,13 @@
       width: 200px;
       color: config.$white;
       background: config.$grey;
+
+      @include mixins.mobile {
+        width: 150px;
+      }
+      @include mixins.tablet {
+        width: 170px;
+      }
     }
   }
 }

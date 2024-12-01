@@ -265,6 +265,23 @@
     margin-top: 14px;
     width: 55%;
 
+    @include mixins.mobile {
+      width: 100%;
+      @include mixins.row-space-between-center();
+      flex-wrap: wrap;
+    }
+    @include mixins.tabletPortrait {
+      width: 100%;
+      @include mixins.row-space-between-center();
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    @include mixins.tablet {
+      width: 55%;
+      @include mixins.row-space-between-center();
+      flex-wrap: wrap;
+    }
+
     .row,
     .rowReverse {
       display: flex;
@@ -286,11 +303,18 @@
   }
 
   .jobBox {
-    @include mixins.row-space-between-center();
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 100%;
     margin: 14px 0px;
 
     @include mixins.tabletPortrait {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    @include mixins.mobile {
       display: flex;
       flex-direction: column;
     }
@@ -298,10 +322,30 @@
     .senJobForm,
     .senJobFormReverse {
       width: 40%;
+
+      @include mixins.tabletPortrait {
+        width: 65%;
+      }
+      @include mixins.mobile {
+        width: 100%;
+      }
+      @include mixins.allDesktop {
+        position: relative;
+        bottom: 15px;
+      }
     }
 
     .information {
       width: 55%;
+
+      @include mixins.tabletPortrait {
+        width: 100%;
+        margin-bottom: 50px;
+      }
+      @include mixins.mobile {
+        width: 100%;
+        margin-bottom: 50px;
+      }
 
       div {
         margin-bottom: 32px;

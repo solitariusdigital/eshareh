@@ -24,6 +24,24 @@ export default function SendJob() {
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
   const [media, setMedia] = useState("");
+  const [fileName, setFileName] = useState("");
+
+  const handleFileChange = (event) => {
+    setMedia(event);
+    const file = event;
+    if (file && file.type === "application/pdf") {
+      setFileName(file.name);
+    } else {
+      setFileName("");
+    }
+  };
+
+  const resetFileSelect = () => {
+    const inputFile = document.getElementById("inputFile");
+    inputFile.value = null;
+    setMedia("");
+    setFileName("");
+  };
 
   const checkFormValidity = () => {
     if (!name || !birth || !phone || !email || !description) {
@@ -32,6 +50,19 @@ export default function SendJob() {
     }
     if (!validateEmail(email)) {
       showAlert(language ? "ایمیل اشتباه" : "Invalid email");
+      return;
+    }
+    if (!media) {
+      showAlert(language ? "انتخاب فایل" : "Select a file");
+      return;
+    }
+    const maxSizeInBytes = 5 * 1024 * 1024;
+    if (media.size > maxSizeInBytes) {
+      showAlert(
+        language ? "حداکثر حجم فایل 5 مگابایت" : "Max file size is 5mb"
+      );
+      const inputFile = document.getElementById("inputFile");
+      inputFile.value = null;
       return;
     }
     let phoneEnglish = isEnglishNumber(phone) ? phone : toEnglishNumber(phone);
@@ -223,12 +254,30 @@ export default function SendJob() {
           {language ? "رزومه / نمونه کار" : "Resume / Portfolio"}
         </p>
         <div className={classes.row}>
+          <p
+            className={language ? classes.resume : classes.resumeReverse}
+            style={{
+              fontFamily: language ? "English" : "English",
+            }}
+          >
+            {fileName}
+          </p>
+          {media && (
+            <CloseIcon
+              className="icon"
+              onClick={() => resetFileSelect()}
+              sx={{ fontSize: 16 }}
+            />
+          )}
+        </div>
+        <div className={classes.row}>
           <div className={classes.input}>
             <label className={`file ${classes.file}`}>
               <input
                 onChange={(e) => {
-                  setMedia(e.target.files[0]);
+                  handleFileChange(e.target.files[0]);
                 }}
+                id="inputFile"
                 type="file"
                 accept=".pdf"
               />
@@ -237,7 +286,7 @@ export default function SendJob() {
                   fontFamily: language ? "FarsiMedium" : "EnglishMedium",
                 }}
               >
-                {language ? "انتخاب فایل" : "Upload"}
+                {language ? "انتخاب فایل" : "Select a file"}
               </p>
             </label>
           </div>
@@ -259,21 +308,6 @@ export default function SendJob() {
         >
           {alert}
         </p>
-        {media !== "" && (
-          <div className={classes.mediaPreview}>
-            <CloseIcon
-              className="icon"
-              onClick={() => setMedia("")}
-              sx={{ fontSize: 16 }}
-            />
-            <embed
-              className={classes.media}
-              src={URL.createObjectURL(media)}
-              height="300px"
-              type="application/pdf"
-            />
-          </div>
-        )}
       </div>
     </Fragment>
   );
