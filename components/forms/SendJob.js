@@ -2,6 +2,8 @@ import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
+import Image from "next/legacy/image";
+import loaderImage from "@/assets/loader.png";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   fourGenerator,
@@ -20,11 +22,11 @@ export default function SendJob() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
+  const [media, setMedia] = useState("");
+  const [fileName, setFileName] = useState("");
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [media, setMedia] = useState("");
-  const [fileName, setFileName] = useState("");
 
   const handleFileChange = (event) => {
     setMedia(event);
@@ -74,8 +76,6 @@ export default function SendJob() {
   };
 
   const submitResume = () => {
-    showAlert("submit");
-
     //  setLoader(true);
     // setDisableButton(true);
   };
@@ -308,6 +308,20 @@ export default function SendJob() {
         >
           {alert}
         </p>
+        {loader && (
+          <div
+            style={{
+              fontFamily: language ? "Farsi" : "English",
+            }}
+          >
+            <p>
+              {language
+                ? "در حال آپلود، لطفا صبر کنید"
+                : "Uploading, please wait"}
+            </p>
+            <Image width={50} height={50} src={loaderImage} alt="isLoading" />
+          </div>
+        )}
       </div>
     </Fragment>
   );
