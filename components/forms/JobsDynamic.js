@@ -1,6 +1,7 @@
 import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
+import CloseIcon from "@mui/icons-material/Close";
 import classes from "./Form.module.scss";
 import {
   fourGenerator,
@@ -15,8 +16,10 @@ export default function JobsDynamic() {
   const { language, setLanguage } = useContext(StateContext);
 
   const [fields, setFields] = useState([
-    { en: { label: "", value: "" }, fa: { label: "", value: "" } },
+    { en: { title: "", description: "" }, fa: { title: "", description: "" } },
   ]);
+  const [title, setTitle] = useState({ en: "", fa: "" });
+  const [department, setDepartment] = useState({ en: "", fa: "" });
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
 
@@ -25,27 +28,30 @@ export default function JobsDynamic() {
   const handleAddField = () => {
     setFields([
       ...fields,
-      { en: { label: "", value: "" }, fa: { label: "", value: "" } },
+      {
+        en: { title: "", description: "" },
+        fa: { title: "", description: "" },
+      },
     ]);
   };
   const handleEnglishLabelChange = (index, newLabel) => {
     const newFields = [...fields];
-    newFields[index].en.label = newLabel;
+    newFields[index].en.title = newLabel;
     setFields(newFields);
   };
   const handleEnglishValueChange = (index, newValue) => {
     const newFields = [...fields];
-    newFields[index].en.value = newValue;
+    newFields[index].en.description = newValue;
     setFields(newFields);
   };
   const handleFarsiLabelChange = (index, newLabel) => {
     const newFields = [...fields];
-    newFields[index].fa.label = newLabel;
+    newFields[index].fa.title = newLabel;
     setFields(newFields);
   };
   const handleFarsiValueChange = (index, newValue) => {
     const newFields = [...fields];
-    newFields[index].fa.value = newValue;
+    newFields[index].fa.description = newValue;
     setFields(newFields);
   };
   const handleRemoveField = (index) => {
@@ -54,20 +60,27 @@ export default function JobsDynamic() {
   };
 
   const createForm = async () => {
-    if (fields.length === 0) {
-      return;
-    }
-    const isValid = fields.every(
+    const isValid = areAllStatesValid([title, department]);
+    const isValidFields = fields.every(
       (field) => areAllStatesValid([field.en]) && areAllStatesValid([field.fa])
     );
-    if (!isValid) {
-      showAlert("تمام ورودی‌ها پر کنید");
+
+    if (!isValid || !isValidFields) {
+      showAlert("همه موارد الزامیست");
       return;
     }
 
     setDisableButton(true);
 
     const jobsObject = {
+      fa: {
+        title: title.fa,
+        department: department.fa,
+      },
+      en: {
+        title: title.en,
+        department: department.en,
+      },
       fields: fields,
       active: true,
       jobsId: `jobs${sixGenerator()}`,
@@ -76,7 +89,12 @@ export default function JobsDynamic() {
     await createJobsApi(jobsObject);
     router.replace(router.asPath);
     setDisableButton(false);
-    setFields([{ en: { label: "", value: "" }, fa: { label: "", value: "" } }]);
+    setFields([
+      {
+        en: { title: "", description: "" },
+        fa: { title: "", description: "" },
+      },
+    ]);
   };
 
   const showAlert = (message) => {
@@ -88,6 +106,164 @@ export default function JobsDynamic() {
 
   return (
     <Fragment>
+      <div className={classes.container}>
+        <div
+          className={classes.form}
+          style={{
+            fontFamily: "English",
+          }}
+        >
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                Job Title
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() =>
+                  setTitle((prevData) => ({
+                    ...prevData,
+                    en: "",
+                  }))
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "English",
+              }}
+              placeholder="..."
+              type="text"
+              id="titleEn"
+              name="title"
+              onChange={(e) =>
+                setTitle((prevData) => ({
+                  ...prevData,
+                  en: e.target.value,
+                }))
+              }
+              value={title.en}
+              autoComplete="off"
+            ></input>
+          </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                Department
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() =>
+                  setDepartment((prevData) => ({
+                    ...prevData,
+                    en: "",
+                  }))
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "English",
+              }}
+              placeholder="..."
+              type="text"
+              id="departmentEn"
+              name="department"
+              onChange={(e) =>
+                setDepartment((prevData) => ({
+                  ...prevData,
+                  en: e.target.value,
+                }))
+              }
+              value={department.en}
+              autoComplete="off"
+            ></input>
+          </div>
+        </div>
+        <div
+          className={classes.form}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
+          <div className={classes.input}>
+            <div className={classes.barReverse}>
+              <p className={classes.label}>
+                <span>*</span>
+                عنوان شغل
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() =>
+                  setTitle((prevData) => ({
+                    ...prevData,
+                    fa: "",
+                  }))
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "Farsi",
+              }}
+              placeholder="..."
+              type="text"
+              id="titleFa"
+              name="title"
+              onChange={(e) =>
+                setTitle((prevData) => ({
+                  ...prevData,
+                  fa: e.target.value,
+                }))
+              }
+              value={title.fa}
+              autoComplete="off"
+              dir="rtl"
+            ></input>
+          </div>
+          <div className={classes.input}>
+            <div className={classes.barReverse}>
+              <p className={classes.label}>
+                <span>*</span>
+                دپارتمان
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() =>
+                  setDepartment((prevData) => ({
+                    ...prevData,
+                    fa: "",
+                  }))
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "Farsi",
+              }}
+              placeholder="..."
+              type="text"
+              id="departmentFa"
+              name="department"
+              onChange={(e) =>
+                setDepartment((prevData) => ({
+                  ...prevData,
+                  fa: e.target.value,
+                }))
+              }
+              value={department.fa}
+              autoComplete="off"
+              dir="rtl"
+            ></input>
+          </div>
+        </div>
+      </div>
       <div className={classes.form}>
         <button
           style={{
@@ -111,7 +287,7 @@ export default function JobsDynamic() {
               <div className={classes.barReverse}>
                 <p className={classes.label}>
                   <span>*</span>
-                  برچسب فارسی
+                  عنوان
                 </p>
               </div>
               <input
@@ -120,14 +296,14 @@ export default function JobsDynamic() {
                   marginBottom: "12px",
                 }}
                 type="text"
-                value={field.fa.label}
+                value={field.fa.title}
                 dir="rtl"
                 onChange={(e) => handleFarsiLabelChange(index, e.target.value)}
               />
               <div className={classes.barReverse}>
                 <p className={classes.label}>
                   <span>*</span>
-                  مقدار فارسی
+                  توضیحات
                 </p>
               </div>
               <textarea
@@ -135,7 +311,7 @@ export default function JobsDynamic() {
                   fontFamily: "Farsi",
                 }}
                 type="text"
-                value={field.fa.value}
+                value={field.fa.description}
                 dir="rtl"
                 onChange={(e) => handleFarsiValueChange(index, e.target.value)}
               />
@@ -148,7 +324,7 @@ export default function JobsDynamic() {
             >
               <div className={classes.bar}>
                 <p className={classes.label}>
-                  English Label
+                  Title
                   <span>*</span>
                 </p>
               </div>
@@ -158,14 +334,14 @@ export default function JobsDynamic() {
                   marginBottom: "12px",
                 }}
                 type="text"
-                value={field.en.label}
+                value={field.en.title}
                 onChange={(e) =>
                   handleEnglishLabelChange(index, e.target.value)
                 }
               />
               <div className={classes.bar}>
                 <p className={classes.label}>
-                  English Value
+                  Description
                   <span>*</span>
                 </p>
               </div>
@@ -174,7 +350,7 @@ export default function JobsDynamic() {
                   fontFamily: "English",
                 }}
                 type="text"
-                value={field.en.value}
+                value={field.en.description}
                 onChange={(e) =>
                   handleEnglishValueChange(index, e.target.value)
                 }

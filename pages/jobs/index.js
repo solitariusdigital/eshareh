@@ -6,9 +6,11 @@ import portal from "@/assets/portal.png";
 import next from "@/assets/next.svg";
 import nextYellow from "@/assets/nextYellow.svg";
 import Router from "next/router";
+import dbConnect from "@/services/dbConnect";
+import jobsModel from "@/models/Jobs";
 import { toFarsiNumber, replaceSpacesAndHyphens } from "@/services/utility";
 
-export default function Jobs() {
+export default function Jobs({ jobs }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
@@ -105,9 +107,45 @@ export default function Jobs() {
           <div className={classes.jobBox}>
             <h3>
               {language
-                ? `${toFarsiNumber(6)} پیشنهاد شغلی موجود`
-                : `${6} Avilable job offers`}
+                ? `${toFarsiNumber(jobs?.length)} پیشنهاد شغلی موجود`
+                : `${jobs?.length} Avilable job offers`}
             </h3>
+            {/* {jobs?.map((job, index) => {
+              console.log(job);
+              const { title, description } = job[languageType];
+              const projectLink = `/solutions/${replaceSpacesAndHyphens(
+                job[languageType].title
+              )}`;
+              return (
+                <div
+                  key={index}
+                  className={classes.job}
+                  onClick={() =>
+                    Router.push(
+                      `/jobs/${replaceSpacesAndHyphens("Account Manager")}`
+                    )
+                  }
+                >
+                  <Image
+                    className={classes.jobIcon}
+                    src={screenSize === "mobile" ? nextYellow : next}
+                    blurDataURL={screenSize === "mobile" ? nextYellow : next}
+                    alt="image"
+                    width={10}
+                    priority
+                  />
+                  <p>{job[languageType].title}</p>
+                  <p>|</p>
+                  <p
+                    style={{
+                      fontFamily: language ? "EnglishLight" : "EnglishLight",
+                    }}
+                  >
+                    {description}
+                  </p>
+                </div>
+              );
+            })} */}
             <div
               className={classes.job}
               onClick={() =>
@@ -116,25 +154,6 @@ export default function Jobs() {
                 )
               }
             >
-              <Image
-                className={classes.jobIcon}
-                src={screenSize === "mobile" ? nextYellow : next}
-                blurDataURL={screenSize === "mobile" ? nextYellow : next}
-                alt="image"
-                width={10}
-                priority
-              />
-              <p>Account Manager</p>
-              <p>|</p>
-              <p
-                style={{
-                  fontFamily: language ? "EnglishLight" : "EnglishLight",
-                }}
-              >
-                Account
-              </p>
-            </div>
-            <div className={classes.job}>
               <Image
                 className={classes.jobIcon}
                 src={screenSize === "mobile" ? nextYellow : next}
@@ -247,4 +266,22 @@ export default function Jobs() {
       </div>
     </>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  await dbConnect();
+  const jobs = await jobsModel.find();
+
+  try {
+    return {
+      props: {
+        jobs: JSON.parse(JSON.stringify(jobs)),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 }
