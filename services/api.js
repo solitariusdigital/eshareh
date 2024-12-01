@@ -238,6 +238,55 @@ export const deleteNewsApi = async (id) => {
   return await response.json();
 };
 
+// jobs api
+export const updateJobsApi = async (data) => {
+  const response = await fetch("/api/jobs", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createJobsApi = async (data) => {
+  const response = await fetch("/api/jobs", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleJobsApi = async (id) => {
+  const response = await fetch(`/api/jobs?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getJobsApi = async () => {
+  const response = await fetch("/api/jobs", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteJobsApi = async (id) => {
+  const response = await fetch(`/api/jobs?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
 // pages api
 export const updatePageApi = async (data) => {
   const response = await fetch("/api/pages", {

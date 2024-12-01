@@ -2,7 +2,7 @@ import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./jobs.module.scss";
 import { toFarsiNumber, replaceSpacesAndHyphens } from "@/services/utility";
-import SendJob from "@/components/forms/SendJob";
+import JobSend from "@/components/forms/JobSend";
 
 export default function Job({ jobTitle }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -136,7 +136,7 @@ export default function Job({ jobTitle }) {
         <div
           className={language ? classes.senJobForm : classes.senJobFormReverse}
         >
-          <SendJob />
+          <JobSend />
         </div>
       </div>
     </div>

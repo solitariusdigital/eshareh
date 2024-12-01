@@ -10,7 +10,7 @@ import dbConnect from "@/services/dbConnect";
 import coverModel from "@/models/Cover";
 import pageModel from "@/models/Page";
 import mediaModel from "@/models/Media";
-import Jobs from "@/components/forms/Jobs";
+import JobsDynamic from "@/components/forms/JobsDynamic";
 
 export default function Admin({ covers, pages, mediaData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
@@ -60,7 +60,7 @@ export default function Admin({ covers, pages, mediaData }) {
       {formType === "covers" && <Cover covers={covers} />}
       {formType === "news" && <News />}
       {formType === "pages" && <Pages pages={pages} mediaData={mediaData} />}
-      {formType === "jobs" && <Jobs />}
+      {formType === "jobs" && <JobsDynamic />}
     </div>
   );
 }

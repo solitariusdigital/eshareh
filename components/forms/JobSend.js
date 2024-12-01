@@ -14,7 +14,7 @@ import {
   isEnglishNumber,
 } from "@/services/utility";
 
-export default function SendJob() {
+export default function JobSend() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const [name, setName] = useState("");

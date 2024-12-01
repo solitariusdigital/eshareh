@@ -1,45 +1,89 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState, useEffect } from "react";
+import { StateContext } from "@/context/stateContext";
+import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
+import {
+  fourGenerator,
+  sixGenerator,
+  uploadMedia,
+  replaceSpacesAndHyphens,
+  areAllStatesValid,
+} from "@/services/utility";
+import { createJobsApi } from "@/services/api";
 
-export default function Jobs() {
+export default function JobsDynamic() {
+  const { language, setLanguage } = useContext(StateContext);
+
   const [fields, setFields] = useState([
-    { english: { label: "", value: "" }, farsi: { label: "", value: "" } },
+    { en: { label: "", value: "" }, fa: { label: "", value: "" } },
   ]);
+  const [disableButton, setDisableButton] = useState(false);
+  const [alert, setAlert] = useState("");
+
+  const router = useRouter();
 
   const handleAddField = () => {
     setFields([
       ...fields,
-      { english: { label: "", value: "" }, farsi: { label: "", value: "" } },
+      { en: { label: "", value: "" }, fa: { label: "", value: "" } },
     ]);
   };
-
   const handleEnglishLabelChange = (index, newLabel) => {
     const newFields = [...fields];
-    newFields[index].english.label = newLabel;
+    newFields[index].en.label = newLabel;
     setFields(newFields);
   };
-
   const handleEnglishValueChange = (index, newValue) => {
     const newFields = [...fields];
-    newFields[index].english.value = newValue;
+    newFields[index].en.value = newValue;
     setFields(newFields);
   };
-
   const handleFarsiLabelChange = (index, newLabel) => {
     const newFields = [...fields];
-    newFields[index].farsi.label = newLabel;
+    newFields[index].fa.label = newLabel;
     setFields(newFields);
   };
-
   const handleFarsiValueChange = (index, newValue) => {
     const newFields = [...fields];
-    newFields[index].farsi.value = newValue;
+    newFields[index].fa.value = newValue;
     setFields(newFields);
   };
-
   const handleRemoveField = (index) => {
     const newFields = fields.filter((_, i) => i !== index);
     setFields(newFields);
+  };
+
+  const createForm = async () => {
+    if (fields.length === 0) {
+      return;
+    }
+    const isValid = fields.every(
+      (field) => areAllStatesValid([field.en]) && areAllStatesValid([field.fa])
+    );
+    if (!isValid) {
+      showAlert("تمام ورودی‌ها پر کنید");
+      return;
+    }
+
+    setDisableButton(true);
+
+    const jobsObject = {
+      fields: fields,
+      active: true,
+      jobsId: `jobs${sixGenerator()}`,
+    };
+
+    await createJobsApi(jobsObject);
+    router.replace(router.asPath);
+    setDisableButton(false);
+    setFields([{ en: { label: "", value: "" }, fa: { label: "", value: "" } }]);
+  };
+
+  const showAlert = (message) => {
+    setAlert(message);
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
   };
 
   return (
@@ -66,25 +110,32 @@ export default function Jobs() {
             >
               <div className={classes.barReverse}>
                 <p className={classes.label}>
-                  برچسب فارسی
                   <span>*</span>
+                  برچسب فارسی
                 </p>
               </div>
               <input
+                style={{
+                  fontFamily: "Farsi",
+                  marginBottom: "12px",
+                }}
                 type="text"
-                value={field.farsi.label}
+                value={field.fa.label}
                 dir="rtl"
                 onChange={(e) => handleFarsiLabelChange(index, e.target.value)}
               />
               <div className={classes.barReverse}>
                 <p className={classes.label}>
-                  مقدار فارسی
                   <span>*</span>
+                  مقدار فارسی
                 </p>
               </div>
-              <input
+              <textarea
+                style={{
+                  fontFamily: "Farsi",
+                }}
                 type="text"
-                value={field.farsi.value}
+                value={field.fa.value}
                 dir="rtl"
                 onChange={(e) => handleFarsiValueChange(index, e.target.value)}
               />
@@ -102,8 +153,12 @@ export default function Jobs() {
                 </p>
               </div>
               <input
+                style={{
+                  fontFamily: "English",
+                  marginBottom: "12px",
+                }}
                 type="text"
-                value={field.english.label}
+                value={field.en.label}
                 onChange={(e) =>
                   handleEnglishLabelChange(index, e.target.value)
                 }
@@ -114,9 +169,12 @@ export default function Jobs() {
                   <span>*</span>
                 </p>
               </div>
-              <input
+              <textarea
+                style={{
+                  fontFamily: "English",
+                }}
                 type="text"
-                value={field.english.value}
+                value={field.en.value}
                 onChange={(e) =>
                   handleEnglishValueChange(index, e.target.value)
                 }
@@ -133,6 +191,25 @@ export default function Jobs() {
             </div>
           </div>
         ))}
+      </div>
+      <div className={classes.formAction}>
+        <p
+          className={classes.alert}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
+          {alert}
+        </p>
+        <button
+          disabled={disableButton}
+          style={{
+            fontFamily: "FarsiMedium",
+          }}
+          onClick={() => createForm()}
+        >
+          ذخیره داده
+        </button>
       </div>
     </Fragment>
   );
