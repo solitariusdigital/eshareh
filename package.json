@@ -15,7 +15,7 @@
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
     "@mui/styled-engine-sc": "^5.14.10",
-    "aws-sdk": "^2.1691.0",
+    "aws-sdk": "^2.1692.0",
     "crypto-js": "^4.2.0",
     "get-node-cli": "^8.1.0",
     "jalali-date": "^1.1.5",
