@@ -61,7 +61,7 @@ export default function SendJob() {
     const maxSizeInBytes = 5 * 1024 * 1024;
     if (media.size > maxSizeInBytes) {
       showAlert(
-        language ? "حداکثر حجم فایل 5 مگابایت" : "Max file size is 5mb"
+        language ? "حداکثر حجم فایل 5 مگابایت" : "Max file size is 5MB"
       );
       const inputFile = document.getElementById("inputFile");
       inputFile.value = null;
