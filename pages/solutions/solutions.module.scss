@@ -369,53 +369,6 @@
   }
 }
 
-.controlPanel,
-.dropDown {
-  position: absolute;
-  left: 50%;
-  top: 120px;
-  transform: translate(-50%, -50%);
-  width: 15%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 40px;
-  border-radius: 50px;
-  box-shadow: config.$image-shadow;
-  background: config.$white;
-  user-select: none;
-
-  @include mixins.mobile {
-    width: 40%;
-  }
-  @include mixins.tablet {
-    width: 25%;
-  }
-}
-
-.dropDown {
-  top: 190px;
-  flex-direction: column;
-  height: 80px;
-  border-radius: 4px;
-
-  .confirm {
-    color: config.$green;
-    cursor: pointer;
-  }
-  .cancel {
-    color: config.$red;
-    cursor: pointer;
-  }
-
-  .action {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-  }
-}
-
 .gridList {
   direction: rtl;
 }

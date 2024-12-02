@@ -65,7 +65,7 @@ export default function Jobs({ jobs }) {
   ];
 
   return (
-    <>
+    <Fragment>
       <div className={language ? classes.rowOne : classes.rowOneReverse}>
         <div className={classes.infoBox}>
           <h1>{language ? "مشاغل" : "Jobs"}</h1>
@@ -107,147 +107,58 @@ export default function Jobs({ jobs }) {
           <div className={classes.jobBox}>
             <h3>
               {language
-                ? `${toFarsiNumber(jobs?.length)} پیشنهاد شغلی موجود`
-                : `${jobs?.length} Avilable job offers`}
+                ? `${toFarsiNumber(
+                    jobs.filter((job) => job.active).length
+                  )} پیشنهاد شغلی موجود`
+                : `${
+                    jobs.filter((job) => job.active).length
+                  } Avilable job offers`}
             </h3>
-            {/* {jobs?.map((job, index) => {
-              console.log(job);
-              const { title, description } = job[languageType];
-              const projectLink = `/solutions/${replaceSpacesAndHyphens(
-                job[languageType].title
-              )}`;
-              return (
-                <div
-                  key={index}
-                  className={classes.job}
-                  onClick={() =>
-                    Router.push(
-                      `/jobs/${replaceSpacesAndHyphens("Account Manager")}`
-                    )
-                  }
-                >
-                  <Image
-                    className={classes.jobIcon}
-                    src={screenSize === "mobile" ? nextYellow : next}
-                    blurDataURL={screenSize === "mobile" ? nextYellow : next}
-                    alt="image"
-                    width={10}
-                    priority
-                  />
-                  <p>{job[languageType].title}</p>
-                  <p>|</p>
-                  <p
-                    style={{
-                      fontFamily: language ? "EnglishLight" : "EnglishLight",
-                    }}
+            {jobs
+              .filter((job) => job.active)
+              .map((job, index) => {
+                const { title, department } = job[languageType];
+                const projectLink = `/jobs/${replaceSpacesAndHyphens(
+                  job[languageType].title
+                )}`;
+                return (
+                  <div
+                    key={index}
+                    className={classes.job}
+                    onClick={() => Router.push(projectLink)}
                   >
-                    {description}
-                  </p>
-                </div>
-              );
-            })} */}
-            <div
-              className={classes.job}
-              onClick={() =>
-                Router.push(
-                  `/jobs/${replaceSpacesAndHyphens("Account Manager")}`
-                )
-              }
-            >
-              <Image
-                className={classes.jobIcon}
-                src={screenSize === "mobile" ? nextYellow : next}
-                blurDataURL={screenSize === "mobile" ? nextYellow : next}
-                alt="image"
-                width={10}
-                priority
-              />
-              <p>Illustrator</p>
-              <p>|</p>
-              <p
-                style={{
-                  fontFamily: language ? "EnglishLight" : "EnglishLight",
-                }}
-              >
-                Studio
-              </p>
-            </div>
-            <div className={classes.job}>
-              <Image
-                className={classes.jobIcon}
-                src={screenSize === "mobile" ? nextYellow : next}
-                blurDataURL={screenSize === "mobile" ? nextYellow : next}
-                alt="image"
-                width={10}
-                priority
-              />
-              <p>Senior CopyWriter</p>
-              <p>|</p>
-              <p
-                style={{
-                  fontFamily: language ? "EnglishLight" : "EnglishLight",
-                }}
-              >
-                Creative
-              </p>
-            </div>
-            <div className={classes.job}>
-              <Image
-                className={classes.jobIcon}
-                src={screenSize === "mobile" ? nextYellow : next}
-                blurDataURL={screenSize === "mobile" ? nextYellow : next}
-                alt="image"
-                width={10}
-                priority
-              />
-              <p>Acountent</p>
-              <p>|</p>
-              <p
-                style={{
-                  fontFamily: language ? "EnglishLight" : "EnglishLight",
-                }}
-              >
-                Finance
-              </p>
-            </div>
-            <div className={classes.job}>
-              <Image
-                className={classes.jobIcon}
-                src={screenSize === "mobile" ? nextYellow : next}
-                blurDataURL={screenSize === "mobile" ? nextYellow : next}
-                alt="image"
-                width={10}
-                priority
-              />
-              <p>Account Manager</p>
-              <p>|</p>
-              <p
-                style={{
-                  fontFamily: language ? "EnglishLight" : "EnglishLight",
-                }}
-              >
-                Account
-              </p>
-            </div>
-            <div className={classes.job}>
-              <Image
-                className={classes.jobIcon}
-                src={screenSize === "mobile" ? nextYellow : next}
-                blurDataURL={screenSize === "mobile" ? nextYellow : next}
-                alt="image"
-                width={10}
-                priority
-              />
-              <p>Digital Marketing Specialist</p>
-              <p>|</p>
-              <p
-                style={{
-                  fontFamily: language ? "EnglishLight" : "EnglishLight",
-                }}
-              >
-                Digital
-              </p>
-            </div>
+                    <Image
+                      className={classes.jobIcon}
+                      src={screenSize === "mobile" ? nextYellow : next}
+                      blurDataURL={screenSize === "mobile" ? nextYellow : next}
+                      alt="image"
+                      width={10}
+                      priority
+                    />
+                    <p
+                      style={{
+                        fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                      }}
+                    >
+                      {title}
+                    </p>
+                    <span
+                      style={{
+                        fontFamily: "English",
+                      }}
+                    >
+                      |
+                    </span>
+                    <p
+                      style={{
+                        fontFamily: language ? "Farsi" : "English",
+                      }}
+                    >
+                      {department}
+                    </p>
+                  </div>
+                );
+              })}
           </div>
           <div className={classes.imageBox}>
             <Image
@@ -264,7 +175,7 @@ export default function Jobs({ jobs }) {
           </div>
         </div>
       </div>
-    </>
+    </Fragment>
   );
 }
 

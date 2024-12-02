@@ -16,6 +16,7 @@ export default function Admin({ covers, pages, mediaData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { editNews, setEditNews } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
   const [formType, setFormType] = useState(
     "solutions" || "pages" || "news" || "covers" || "jobs"
@@ -33,6 +34,14 @@ export default function Admin({ covers, pages, mediaData }) {
       }
     }
   }, [editNews, permissionControl, setFormType]);
+
+  useEffect(() => {
+    navigationTopBar.map((nav, i) => {
+      nav.active = false;
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={classes.container}>

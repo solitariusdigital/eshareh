@@ -125,7 +125,7 @@ export default function News({ news, newsTitle }) {
           />
           {permissionControl === "admin" && (
             <Fragment>
-              <div className={classes.controlPanel}>
+              <div className="controlPanel">
                 {displayNews.active ? (
                   <Tooltip title="Hide">
                     <VerifiedUserIcon
@@ -155,21 +155,18 @@ export default function News({ news, newsTitle }) {
               </div>
               {dropDown && (
                 <div
-                  className={classes.dropDown}
+                  className="dropDown"
                   style={{
                     fontFamily: language ? "English" : "English",
                   }}
                 >
                   <h3>{confirmMessage}</h3>
-                  <div className={classes.action}>
-                    <p
-                      className={classes.cancel}
-                      onClick={() => setDropDpwn(false)}
-                    >
+                  <div className="action">
+                    <p className="cancel" onClick={() => setDropDpwn(false)}>
                       Cancel
                     </p>
                     <p
-                      className={classes.confirm}
+                      className="confirm"
                       onClick={() => updateNews(displayNews["_id"])}
                     >
                       Confirm

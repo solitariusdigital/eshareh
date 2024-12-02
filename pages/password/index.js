@@ -13,9 +13,8 @@ import { enc } from "crypto-js";
 export default function Password() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
-
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [visibility, setVisibility] = useState(false);
-
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
@@ -25,6 +24,14 @@ export default function Password() {
       Router.push("/");
     }
   }, [currentUser]);
+
+  useEffect(() => {
+    navigationTopBar.map((nav, i) => {
+      nav.active = false;
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const showAlert = (message) => {
     setAlert(message);

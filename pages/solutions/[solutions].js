@@ -416,7 +416,7 @@ export default function Solution({ solutions, projectTitle }) {
           />
           {permissionControl === "admin" && !displayGallerySlider && (
             <Fragment>
-              <div className={classes.controlPanel}>
+              <div className="controlPanel">
                 {project.active ? (
                   <Tooltip title="Hide">
                     <VerifiedUserIcon
@@ -455,21 +455,18 @@ export default function Solution({ solutions, projectTitle }) {
               </div>
               {dropDown && (
                 <div
-                  className={classes.dropDown}
+                  className="dropDown"
                   style={{
                     fontFamily: language ? "English" : "English",
                   }}
                 >
                   <h3>{confirmMessage}</h3>
-                  <div className={classes.action}>
-                    <p
-                      className={classes.cancel}
-                      onClick={() => setDropDpwn(false)}
-                    >
+                  <div className="action">
+                    <p className="cancel" onClick={() => setDropDpwn(false)}>
                       Cancel
                     </p>
                     <p
-                      className={classes.confirm}
+                      className="confirm"
                       onClick={() => updateSolution(project["_id"])}
                     >
                       Confirm
