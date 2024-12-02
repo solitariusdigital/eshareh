@@ -287,6 +287,55 @@ export const deleteJobsApi = async (id) => {
   return await response.json();
 };
 
+// resume api
+export const updateResumeApi = async (data) => {
+  const response = await fetch("/api/resume", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createResumeApi = async (data) => {
+  const response = await fetch("/api/resume", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleResumeApi = async (id) => {
+  const response = await fetch(`/api/resume?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getResumeApi = async () => {
+  const response = await fetch("/api/resume", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteResumeApi = async (id) => {
+  const response = await fetch(`/api/resume?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
 // pages api
 export const updatePageApi = async (data) => {
   const response = await fetch("/api/pages", {
