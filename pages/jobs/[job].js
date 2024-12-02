@@ -207,7 +207,7 @@ export default function Job({ jobs, jobTitle }) {
                   language ? classes.senJobForm : classes.senJobFormReverse
                 }
               >
-                <JobSend />
+                <JobSend jobsId={displayJob.jobsId} />
               </div>
             </div>
           </div>

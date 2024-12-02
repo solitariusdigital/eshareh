@@ -8,7 +8,7 @@ const ResumeSchema = new Schema(
     email: String,
     description: String,
     media: String,
-    JobsId: String,
+    jobsId: String,
     accepted: Boolean,
     rejected: Boolean,
   },

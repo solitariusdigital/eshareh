@@ -1,22 +1,21 @@
-import { Fragment, useContext, useState, useEffect } from "react";
+import { Fragment, useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
-import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import Image from "next/legacy/image";
 import loaderImage from "@/assets/loader.png";
+import dot from "@/assets/dot.png";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   fourGenerator,
-  sixGenerator,
   uploadMedia,
   toEnglishNumber,
   validateEmail,
   isEnglishNumber,
 } from "@/services/utility";
+import { createResumeApi } from "@/services/api";
 
-export default function JobSend() {
+export default function JobSend({ jobsId }) {
   const { language, setLanguage } = useContext(StateContext);
-  const { languageType, setLanguageType } = useContext(StateContext);
   const [name, setName] = useState("");
   const [birth, setBirth] = useState("");
   const [phone, setPhone] = useState("");
@@ -27,6 +26,8 @@ export default function JobSend() {
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [resumeRecieved, setResumeRecieved] = useState(false);
+  const sourceLink = "https://eshareh.storage.iran.liara.space";
 
   const handleFileChange = (event) => {
     setMedia(event);
@@ -69,15 +70,48 @@ export default function JobSend() {
     }
     let phoneEnglish = isEnglishNumber(phone) ? phone : toEnglishNumber(phone);
     if (phoneEnglish.length === 11 && phoneEnglish.startsWith("09")) {
-      submitResume();
+      submitResume(phoneEnglish);
     } else {
       showAlert(language ? "موبایل اشتباه" : "Invalid phone");
     }
   };
 
-  const submitResume = () => {
-    //  setLoader(true);
-    // setDisableButton(true);
+  const submitResume = async (phoneEnglish) => {
+    setDisableButton(true);
+    setLoader(true);
+    setResumeRecieved(false);
+
+    let mediaLink = "";
+    let mediaFolder = "jobs";
+    let format = ".pdf";
+    let mediaId = `jobs${fourGenerator()}`;
+    mediaLink = `${sourceLink}/${mediaFolder}/${jobsId}/${mediaId}${format}`;
+    await uploadMedia(media, mediaId, mediaFolder, jobsId, format);
+
+    const resumeObject = {
+      name: name.trim(),
+      birth: birth.trim(),
+      phone: phoneEnglish,
+      email: email.trim(),
+      description: description.trim(),
+      media: mediaLink,
+      jobsId: jobsId,
+      accepted: false,
+      rejected: false,
+    };
+
+    await createResumeApi(resumeObject);
+
+    setName("");
+    setBirth("");
+    setPhone("");
+    setEmail("");
+    setDescription("");
+    setMedia("");
+    resetFileSelect();
+    setDisableButton(false);
+    setLoader(false);
+    setResumeRecieved(true);
   };
 
   const showAlert = (message) => {
@@ -300,6 +334,21 @@ export default function JobSend() {
             {language ? "ارسال" : "Submit"}
           </button>
         </div>
+        {resumeRecieved && (
+          <div
+            className={classes.resumeRecieved}
+            style={{
+              fontFamily: language ? "FarsiMedium" : "English",
+            }}
+          >
+            <Image width={50} height={50} src={dot} alt="isLoading" />
+            <h3>
+              {language
+                ? "ما رزومه شما را دریافت کردیم، با تشکر"
+                : "We recieved your resume, Thank you"}
+            </h3>
+          </div>
+        )}
         <p
           className={classes.alert}
           style={{
