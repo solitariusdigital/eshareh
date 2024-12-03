@@ -168,6 +168,7 @@ export default function Cover({ covers }) {
                 style={{
                   fontFamily: "English",
                 }}
+                placeholder="..."
                 type="text"
                 id="titleEn"
                 name="title"
@@ -202,6 +203,7 @@ export default function Cover({ covers }) {
                 style={{
                   fontFamily: "English",
                 }}
+                placeholder="..."
                 type="text"
                 id="link"
                 name="link"
@@ -240,6 +242,7 @@ export default function Cover({ covers }) {
                 style={{
                   fontFamily: "Farsi",
                 }}
+                placeholder="..."
                 type="text"
                 id="titleFa"
                 name="title"

@@ -8,18 +8,41 @@ import {
   extractParagraphs,
   areAllStatesValid,
 } from "@/services/utility";
-import { createJobsApi } from "@/services/api";
+import { createJobsApi, updateJobsApi } from "@/services/api";
 
 export default function JobsDynamic() {
-  const { language, setLanguage } = useContext(StateContext);
+  const { editJobs, setEditJobs } = useContext(StateContext);
+  const [fields, setFields] = useState(
+    editJobs
+      ? editJobs.fields
+      : [
+          {
+            en: { title: "", description: "" },
+            fa: { title: "", description: "" },
+          },
+        ]
+  );
+  const [title, setTitle] = useState(
+    editJobs
+      ? { en: editJobs.en.title, fa: editJobs.fa.title }
+      : { en: "", fa: "" }
+  );
+  const [department, setDepartment] = useState(
+    editJobs
+      ? { en: editJobs.en.department, fa: editJobs.fa.department }
+      : { en: "", fa: "" }
+  );
+  const [location, setLocation] = useState(
+    editJobs
+      ? { en: editJobs.en.location, fa: editJobs.fa.location }
+      : { en: "", fa: "" }
+  );
+  const [type, setType] = useState(
+    editJobs
+      ? { en: editJobs.en.workType, fa: editJobs.fa.workType }
+      : { en: "", fa: "" }
+  );
 
-  const [fields, setFields] = useState([
-    { en: { title: "", description: "" }, fa: { title: "", description: "" } },
-  ]);
-  const [title, setTitle] = useState({ en: "", fa: "" });
-  const [department, setDepartment] = useState({ en: "", fa: "" });
-  const [location, setLocation] = useState({ en: "", fa: "" });
-  const [type, setType] = useState({ en: "", fa: "" });
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
 
@@ -89,10 +112,15 @@ export default function JobsDynamic() {
         workType: type.en,
       },
       fields: fields,
-      active: true,
+      active: false,
       jobsId: `jobs${sixGenerator()}`,
     };
-    await createJobsApi(jobsObject);
+    if (editJobs) {
+      jobsObject.id = editJobs["_id"];
+      await updateJobsApi(jobsObject);
+    } else {
+      await createJobsApi(jobsObject);
+    }
     router.reload(router.asPath);
   };
 

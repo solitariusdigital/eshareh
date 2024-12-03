@@ -15,9 +15,10 @@ import JobsDynamic from "@/components/forms/JobsDynamic";
 export default function Admin({ covers, pages, mediaData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
-  const { editNews, setEditNews } = useContext(StateContext);
-  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
+  const { editNews, setEditNews } = useContext(StateContext);
+  const { editJobs, setEditJobs } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [formType, setFormType] = useState(
     "solutions" || "pages" || "news" || "covers" || "jobs"
   );
@@ -29,11 +30,14 @@ export default function Admin({ covers, pages, mediaData }) {
     } else {
       if (editNews) {
         setFormType("news");
+      } else if (editJobs) {
+        setFormType("jobs");
       } else {
         setFormType("solutions");
       }
     }
-  }, [editNews, permissionControl, setFormType]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     navigationTopBar.map((nav, i) => {
@@ -57,8 +61,9 @@ export default function Admin({ covers, pages, mediaData }) {
             className={formType === nav ? classes.navActive : classes.nav}
             onClick={() => {
               setFormType(nav);
-              setEditNews(null);
               setEditSolution(null);
+              setEditNews(null);
+              setEditJobs(null);
             }}
           >
             {nav}

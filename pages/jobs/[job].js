@@ -17,7 +17,7 @@ export default function Job({ jobs, jobTitle }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
-  const { screenSize, setScreenSize } = useContext(StateContext);
+  const { editJobs, setEditJobs } = useContext(StateContext);
   const [displayJob, setDisplayJob] = useState(null);
   const [dropDown, setDropDpwn] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
@@ -91,7 +91,7 @@ export default function Job({ jobs, jobTitle }) {
                     className="icon"
                     onClick={() => {
                       Router.push("/admin");
-                      setEditNews(displayJob);
+                      setEditJobs(displayJob);
                     }}
                   />
                 </Tooltip>

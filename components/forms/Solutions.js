@@ -305,6 +305,7 @@ export default function Solutions() {
               style={{
                 fontFamily: "English",
               }}
+              placeholder="..."
               type="text"
               id="titleEn"
               name="title"
@@ -339,6 +340,7 @@ export default function Solutions() {
               style={{
                 fontFamily: "English",
               }}
+              placeholder="..."
               type="text"
               id="subtitleEn"
               name="subtitle"
@@ -516,6 +518,7 @@ export default function Solutions() {
               style={{
                 fontFamily: "Farsi",
               }}
+              placeholder="..."
               type="text"
               id="titleFa"
               name="title"
@@ -551,6 +554,7 @@ export default function Solutions() {
               style={{
                 fontFamily: "Farsi",
               }}
+              placeholder="..."
               type="text"
               id="subtitleFa"
               name="subtitle"

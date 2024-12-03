@@ -7,6 +7,7 @@ export const StateProvider = (props) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [editSolution, setEditSolution] = useState(null);
   const [editNews, setEditNews] = useState(null);
+  const [editJobs, setEditJobs] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuColor, setMenuColor] = useState({});
   const [displayMenu, setDisplayMenu] = useState(true);
@@ -15,7 +16,6 @@ export const StateProvider = (props) => {
     "desktop" || "tablet-landscape" || "tablet-portrait" || "mobile"
   );
   const [solutionsCategory, setSolutionsCategory] = useState("all");
-
   const [heroHeight, setHeroHeight] = useState(null);
   const [permissionControl, setPermissionControl] = useState("user" || "admin");
   const [navigationTopBar, setNavigationTopBar] = useState([
@@ -94,6 +94,8 @@ export const StateProvider = (props) => {
     setEditSolution,
     editNews,
     setEditNews,
+    editJobs,
+    setEditJobs,
     heroHeight,
     setHeroHeight,
     solutionsCategory,

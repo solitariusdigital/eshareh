@@ -16,12 +16,22 @@ export default function Jobs({ jobs }) {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const [displayJobs, setDisplayJobs] = useState([]);
 
   useEffect(() => {
     navigationTopBar.map((nav, i) => {
       nav.active = false;
     });
     setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (permissionControl === "admin") {
+      setDisplayJobs(jobs);
+    } else {
+      setDisplayJobs(jobs.filter((job) => job.active));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -107,56 +117,50 @@ export default function Jobs({ jobs }) {
           <div className={classes.jobBox}>
             <h3>
               {language
-                ? `${toFarsiNumber(
-                    jobs.filter((job) => job.active).length
-                  )} پیشنهاد شغلی موجود`
-                : `${
-                    jobs.filter((job) => job.active).length
-                  } Avilable job offers`}
+                ? `${toFarsiNumber(displayJobs.length)} پیشنهاد شغلی موجود`
+                : `${displayJobs.length} Avilable job offers`}
             </h3>
-            {jobs
-              .filter((job) => job.active)
-              .map((job, index) => {
-                const { title, department } = job[languageType];
-                const projectLink = `/jobs/${replaceSpacesAndHyphens(title)}`;
-                return (
-                  <div
-                    key={index}
-                    className={classes.job}
-                    onClick={() => Router.push(projectLink)}
+            {displayJobs.map((job, index) => {
+              const { title, department } = job[languageType];
+              const projectLink = `/jobs/${replaceSpacesAndHyphens(title)}`;
+              return (
+                <div
+                  key={index}
+                  className={classes.job}
+                  onClick={() => Router.push(projectLink)}
+                >
+                  <Image
+                    className={classes.jobIcon}
+                    src={screenSize === "mobile" ? nextYellow : next}
+                    blurDataURL={screenSize === "mobile" ? nextYellow : next}
+                    alt="image"
+                    width={10}
+                    priority
+                  />
+                  <p
+                    style={{
+                      fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                    }}
                   >
-                    <Image
-                      className={classes.jobIcon}
-                      src={screenSize === "mobile" ? nextYellow : next}
-                      blurDataURL={screenSize === "mobile" ? nextYellow : next}
-                      alt="image"
-                      width={10}
-                      priority
-                    />
-                    <p
-                      style={{
-                        fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                      }}
-                    >
-                      {title}
-                    </p>
-                    <span
-                      style={{
-                        fontFamily: "English",
-                      }}
-                    >
-                      |
-                    </span>
-                    <p
-                      style={{
-                        fontFamily: language ? "Farsi" : "English",
-                      }}
-                    >
-                      {department}
-                    </p>
-                  </div>
-                );
-              })}
+                    {title}
+                  </p>
+                  <span
+                    style={{
+                      fontFamily: "English",
+                    }}
+                  >
+                    |
+                  </span>
+                  <p
+                    style={{
+                      fontFamily: language ? "Farsi" : "English",
+                    }}
+                  >
+                    {department}
+                  </p>
+                </div>
+              );
+            })}
           </div>
           <div className={classes.imageBox}>
             <Image
