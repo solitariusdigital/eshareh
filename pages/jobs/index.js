@@ -8,6 +8,9 @@ import nextYellow from "@/assets/nextYellow.svg";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
 import jobsModel from "@/models/Jobs";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import Tooltip from "@mui/material/Tooltip";
 import { toFarsiNumber, replaceSpacesAndHyphens } from "@/services/utility";
 
 export default function Jobs({ jobs }) {
@@ -158,6 +161,23 @@ export default function Jobs({ jobs }) {
                   >
                     {department}
                   </p>
+                  {permissionControl === "admin" && (
+                    <Fragment>
+                      {job.active ? (
+                        <Tooltip title="Visible">
+                          <VerifiedUserIcon
+                            sx={{ color: "#57a361", fontSize: 18 }}
+                          />
+                        </Tooltip>
+                      ) : (
+                        <Tooltip title="Hidden">
+                          <VisibilityOffIcon
+                            sx={{ color: "#d40d12", fontSize: 18 }}
+                          />
+                        </Tooltip>
+                      )}
+                    </Fragment>
+                  )}
                 </div>
               );
             })}
