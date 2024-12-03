@@ -250,6 +250,17 @@
     width: config.$content-widthTablet;
   }
 
+  h1 {
+    user-select: none;
+    width: fit-content;
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$yellow;
+      }
+    }
+  }
+
   .banner {
     height: fit-content;
     background: config.$yellow;

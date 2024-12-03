@@ -88,9 +88,9 @@ export default function JobSend({ jobsId }) {
     setLoader(true);
 
     let mediaLink = "";
-    let mediaFolder = "jobs";
+    let mediaFolder = "res";
     let format = ".pdf";
-    let mediaId = `jobs${fourGenerator()}`;
+    let mediaId = `res${fourGenerator()}`;
     mediaLink = `${sourceLink}/${mediaFolder}/${jobsId}/${mediaId}${format}`;
     await uploadMedia(media, mediaId, mediaFolder, jobsId, format);
 

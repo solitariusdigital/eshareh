@@ -124,8 +124,19 @@ export default function Job({ jobs, jobTitle }) {
               language ? classes.jobContainer : classes.jobContainerReverse
             }
           >
-            <h1>{language ? "مشاغل" : "Jobs"}</h1>
+            <h1 onClick={() => Router.push("/jobs")}>
+              {language ? "مشاغل" : "Jobs"}
+            </h1>
             <h2>{displayJob[languageType].title}</h2>
+            {permissionControl === "admin" && (
+              <p
+                style={{
+                  fontFamily: language ? "English" : "English",
+                }}
+              >
+                {displayJob.jobsId}
+              </p>
+            )}
             <div className={classes.banner}>
               <div className={language ? classes.row : classes.rowReverse}>
                 <p
@@ -191,13 +202,18 @@ export default function Job({ jobs, jobTitle }) {
                       >
                         {title}
                       </h3>
-                      <p
-                        style={{
-                          fontFamily: language ? "FarsiLight" : "EnglishLight",
-                        }}
-                      >
-                        {description}
-                      </p>
+                      {description.split("\n\n").map((desc, index) => (
+                        <p
+                          key={index}
+                          style={{
+                            fontFamily: language
+                              ? "FarsiLight"
+                              : "EnglishLight",
+                          }}
+                        >
+                          {desc}
+                        </p>
+                      ))}
                     </div>
                   );
                 })}
