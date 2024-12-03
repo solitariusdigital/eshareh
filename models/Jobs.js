@@ -5,10 +5,14 @@ const JobsSchema = new Schema(
     fa: {
       title: String,
       department: String,
+      location: String,
+      type: String,
     },
     en: {
       title: String,
       department: String,
+      location: String,
+      type: String,
     },
     fields: [],
     active: Boolean,

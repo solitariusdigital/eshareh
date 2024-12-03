@@ -118,9 +118,7 @@ export default function Jobs({ jobs }) {
               .filter((job) => job.active)
               .map((job, index) => {
                 const { title, department } = job[languageType];
-                const projectLink = `/jobs/${replaceSpacesAndHyphens(
-                  job[languageType].title
-                )}`;
+                const projectLink = `/jobs/${replaceSpacesAndHyphens(title)}`;
                 return (
                   <div
                     key={index}
@@ -183,7 +181,6 @@ export default function Jobs({ jobs }) {
 export async function getServerSideProps(context) {
   await dbConnect();
   const jobs = await jobsModel.find();
-
   try {
     return {
       props: {

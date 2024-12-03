@@ -26,7 +26,7 @@ export default function JobSend({ jobsId }) {
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [resumeRecieved, setResumeRecieved] = useState(false);
+  const [resumeRecieved, setResumeRecieved] = useState(true);
   const sourceLink = "https://eshareh.storage.iran.liara.space";
 
   const handleFileChange = (event) => {
@@ -334,21 +334,6 @@ export default function JobSend({ jobsId }) {
             {language ? "ارسال" : "Submit"}
           </button>
         </div>
-        {resumeRecieved && (
-          <div
-            className={classes.resumeRecieved}
-            style={{
-              fontFamily: language ? "FarsiMedium" : "English",
-            }}
-          >
-            <Image width={50} height={50} src={dot} alt="isLoading" />
-            <h3>
-              {language
-                ? "ما رزومه شما را دریافت کردیم، با تشکر"
-                : "We recieved your resume, Thank you"}
-            </h3>
-          </div>
-        )}
         <p
           className={classes.alert}
           style={{
@@ -369,6 +354,21 @@ export default function JobSend({ jobsId }) {
                 : "Uploading, please wait"}
             </p>
             <Image width={50} height={50} src={loaderImage} alt="isLoading" />
+          </div>
+        )}
+        {resumeRecieved && (
+          <div
+            className={classes.resumeRecieved}
+            style={{
+              fontFamily: language ? "FarsiMedium" : "English",
+            }}
+          >
+            <Image width={50} height={50} src={dot} alt="isLoading" />
+            <h3>
+              {language
+                ? "ما درخواست شما را دریافت کرده‌ایم. از اینکه به‌عنوان گام بعدی شغلی خود اشاره را در نظر می‌گیرید سپاسگزاریم."
+                : "We have recieved your application. Thank you for considering Eshareh as your next career step."}
+            </h3>
           </div>
         )}
       </div>

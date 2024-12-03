@@ -4,10 +4,8 @@ import { useRouter } from "next/router";
 import CloseIcon from "@mui/icons-material/Close";
 import classes from "./Form.module.scss";
 import {
-  fourGenerator,
   sixGenerator,
-  uploadMedia,
-  replaceSpacesAndHyphens,
+  extractParagraphs,
   areAllStatesValid,
 } from "@/services/utility";
 import { createJobsApi } from "@/services/api";
@@ -20,6 +18,8 @@ export default function JobsDynamic() {
   ]);
   const [title, setTitle] = useState({ en: "", fa: "" });
   const [department, setDepartment] = useState({ en: "", fa: "" });
+  const [location, setLocation] = useState({ en: "", fa: "" });
+  const [type, setType] = useState({ en: "", fa: "" });
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
 
@@ -41,7 +41,7 @@ export default function JobsDynamic() {
   };
   const handleEnglishValueChange = (index, newValue) => {
     const newFields = [...fields];
-    newFields[index].en.description = newValue;
+    newFields[index].en.description = extractParagraphs(newValue).join("\n\n");
     setFields(newFields);
   };
   const handleFarsiLabelChange = (index, newLabel) => {
@@ -51,7 +51,7 @@ export default function JobsDynamic() {
   };
   const handleFarsiValueChange = (index, newValue) => {
     const newFields = [...fields];
-    newFields[index].fa.description = newValue;
+    newFields[index].fa.description = extractParagraphs(newValue).join("\n\n");
     setFields(newFields);
   };
   const handleRemoveField = (index) => {
@@ -59,12 +59,15 @@ export default function JobsDynamic() {
     setFields(newFields);
   };
 
-  const createForm = async () => {
-    const isValid = areAllStatesValid([title, department]);
+  const createJob = async () => {
+    const isValid = areAllStatesValid([title, department, location, type]);
     const isValidFields = fields.every(
       (field) => areAllStatesValid([field.en]) && areAllStatesValid([field.fa])
     );
-
+    if (fields.length === 0) {
+      showAlert("فیلد ورودی الزامیست");
+      return;
+    }
     if (!isValid || !isValidFields) {
       showAlert("همه موارد الزامیست");
       return;
@@ -76,10 +79,14 @@ export default function JobsDynamic() {
       fa: {
         title: title.fa,
         department: department.fa,
+        location: location.fa,
+        type: type.fa,
       },
       en: {
         title: title.en,
         department: department.en,
+        location: location.en,
+        type: type.en,
       },
       fields: fields,
       active: true,
@@ -87,7 +94,6 @@ export default function JobsDynamic() {
     };
 
     await createJobsApi(jobsObject);
-    router.replace(router.asPath);
     setDisableButton(false);
     setFields([
       {
@@ -95,6 +101,11 @@ export default function JobsDynamic() {
         fa: { title: "", description: "" },
       },
     ]);
+    setTitle("");
+    setDepartment("");
+    setLocation("");
+    setType("");
+    router.replace(router.asPath);
   };
 
   const showAlert = (message) => {
@@ -116,7 +127,7 @@ export default function JobsDynamic() {
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
-                Job Title
+                Work Title
                 <span>*</span>
               </p>
               <CloseIcon
@@ -183,6 +194,76 @@ export default function JobsDynamic() {
               autoComplete="off"
             ></input>
           </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                Work Type
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() =>
+                  setType((prevData) => ({
+                    ...prevData,
+                    en: "",
+                  }))
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "English",
+              }}
+              placeholder="..."
+              type="text"
+              id="typeEn"
+              name="type"
+              onChange={(e) =>
+                setType((prevData) => ({
+                  ...prevData,
+                  en: e.target.value,
+                }))
+              }
+              value={type.en}
+              autoComplete="off"
+            ></input>
+          </div>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                Work Location
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() =>
+                  setLocation((prevData) => ({
+                    ...prevData,
+                    en: "",
+                  }))
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "English",
+              }}
+              placeholder="..."
+              type="text"
+              id="locationEn"
+              name="location"
+              onChange={(e) =>
+                setLocation((prevData) => ({
+                  ...prevData,
+                  en: e.target.value,
+                }))
+              }
+              value={location.en}
+              autoComplete="off"
+            ></input>
+          </div>
         </div>
         <div
           className={classes.form}
@@ -194,7 +275,7 @@ export default function JobsDynamic() {
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
-                عنوان شغل
+                عنوان کار
               </p>
               <CloseIcon
                 className="icon"
@@ -262,6 +343,78 @@ export default function JobsDynamic() {
               dir="rtl"
             ></input>
           </div>
+          <div className={classes.input}>
+            <div className={classes.barReverse}>
+              <p className={classes.label}>
+                <span>*</span>
+                نوع کار
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() =>
+                  setType((prevData) => ({
+                    ...prevData,
+                    fa: "",
+                  }))
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "Farsi",
+              }}
+              placeholder="..."
+              type="text"
+              id="typeFa"
+              name="type"
+              onChange={(e) =>
+                setType((prevData) => ({
+                  ...prevData,
+                  fa: e.target.value,
+                }))
+              }
+              value={type.fa}
+              autoComplete="off"
+              dir="rtl"
+            ></input>
+          </div>
+          <div className={classes.input}>
+            <div className={classes.barReverse}>
+              <p className={classes.label}>
+                <span>*</span>
+                محل کار
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() =>
+                  setLocation((prevData) => ({
+                    ...prevData,
+                    fa: "",
+                  }))
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "Farsi",
+              }}
+              placeholder="..."
+              type="text"
+              id="locationFa"
+              name="location"
+              onChange={(e) =>
+                setLocation((prevData) => ({
+                  ...prevData,
+                  fa: e.target.value,
+                }))
+              }
+              value={location.fa}
+              autoComplete="off"
+              dir="rtl"
+            ></input>
+          </div>
         </div>
       </div>
       <div className={classes.form}>
@@ -287,7 +440,7 @@ export default function JobsDynamic() {
               <div className={classes.barReverse}>
                 <p className={classes.label}>
                   <span>*</span>
-                  عنوان
+                  عنوان مورد
                 </p>
               </div>
               <input
@@ -295,6 +448,7 @@ export default function JobsDynamic() {
                   fontFamily: "Farsi",
                   marginBottom: "12px",
                 }}
+                placeholder="..."
                 type="text"
                 value={field.fa.title}
                 dir="rtl"
@@ -303,13 +457,14 @@ export default function JobsDynamic() {
               <div className={classes.barReverse}>
                 <p className={classes.label}>
                   <span>*</span>
-                  توضیحات
+                  توضیحات مورد
                 </p>
               </div>
               <textarea
                 style={{
                   fontFamily: "Farsi",
                 }}
+                placeholder="..."
                 type="text"
                 value={field.fa.description}
                 dir="rtl"
@@ -324,7 +479,7 @@ export default function JobsDynamic() {
             >
               <div className={classes.bar}>
                 <p className={classes.label}>
-                  Title
+                  Item Title
                   <span>*</span>
                 </p>
               </div>
@@ -333,6 +488,7 @@ export default function JobsDynamic() {
                   fontFamily: "English",
                   marginBottom: "12px",
                 }}
+                placeholder="..."
                 type="text"
                 value={field.en.title}
                 onChange={(e) =>
@@ -341,7 +497,7 @@ export default function JobsDynamic() {
               />
               <div className={classes.bar}>
                 <p className={classes.label}>
-                  Description
+                  Item Description
                   <span>*</span>
                 </p>
               </div>
@@ -349,6 +505,7 @@ export default function JobsDynamic() {
                 style={{
                   fontFamily: "English",
                 }}
+                placeholder="..."
                 type="text"
                 value={field.en.description}
                 onChange={(e) =>
@@ -382,7 +539,7 @@ export default function JobsDynamic() {
           style={{
             fontFamily: "FarsiMedium",
           }}
-          onClick={() => createForm()}
+          onClick={() => createJob()}
         >
           ذخیره داده
         </button>
