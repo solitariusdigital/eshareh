@@ -175,6 +175,7 @@ export default function JobSend({ jobsId }) {
               style={{
                 fontFamily: language ? "English" : "English",
               }}
+              placeholder="..."
               type="email"
               id="email"
               name="email"
