@@ -96,7 +96,7 @@ export default function Team({ pages, mediaData }) {
       return;
     }
     if (!validateEmail(email)) {
-      showAlert(language ? "ایمیل اشتباه" : "Invalid email");
+      showAlert(language ? "ایمیل نامعتبر" : "Invalid email");
       return;
     }
     if (password.length < 8) {

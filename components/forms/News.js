@@ -13,6 +13,7 @@ import {
   sixGenerator,
   uploadMedia,
   toFarsiNumber,
+  isValidDateFormat,
 } from "@/services/utility";
 const jalaali = require("jalali-date");
 
@@ -108,7 +109,7 @@ export default function News() {
       "بهمن",
       "اسفند",
     ];
-    const [year, month, day] = date.split("-").map(Number);
+    const [day, month, year] = date.split("/").map(Number);
     const gregorian = jalaali.toGregorian(year, month, day);
     const parts = gregorian.toString().split(" ");
     const gregorianDateString = `${parts[1]} ${parts[3]}`;
@@ -122,6 +123,15 @@ export default function News() {
   };
 
   const handleSubmit = async () => {
+    const isValid = areAllStatesValid([title, subtitle, paragraph]);
+    if (!isValid) {
+      showAlert("همه موارد الزامیست");
+      return;
+    }
+    if (!isValidDateFormat(dateString)) {
+      showAlert("تاریخ نامعتبر");
+      return;
+    }
     let date;
     if (!dateString) {
       showAlert("تاریخ الزامیست");
@@ -129,12 +139,6 @@ export default function News() {
     } else {
       date = await transformDate(dateString);
     }
-    const isValid = areAllStatesValid([title, subtitle, date, paragraph]);
-    if (!isValid) {
-      showAlert("همه موارد الزامیست");
-      return;
-    }
-
     if (
       !editNews &&
       imagesPreview.length === 0 &&
@@ -476,7 +480,7 @@ export default function News() {
               style={{
                 fontFamily: "English",
               }}
-              placeholder="1403-7-21"
+              placeholder="dd/mm/yyyy"
               type="text"
               id="date"
               name="date"

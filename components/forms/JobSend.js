@@ -1,5 +1,6 @@
 import { Fragment, useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
+import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import Image from "next/legacy/image";
 import loaderImage from "@/assets/loader.png";
@@ -10,6 +11,7 @@ import {
   uploadMedia,
   toEnglishNumber,
   validateEmail,
+  isValidDateFormat,
   isEnglishNumber,
 } from "@/services/utility";
 import { createResumeApi } from "@/services/api";
@@ -26,8 +28,9 @@ export default function JobSend({ jobsId }) {
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [resumeRecieved, setResumeRecieved] = useState(true);
+  const [resumeRecieved, setResumeRecieved] = useState(false);
   const sourceLink = "https://eshareh.storage.iran.liara.space";
+  const router = useRouter();
 
   const handleFileChange = (event) => {
     setMedia(event);
@@ -51,8 +54,12 @@ export default function JobSend({ jobsId }) {
       showAlert(language ? "همه موارد الزامیست" : "All fields are required");
       return;
     }
+    if (!isValidDateFormat(birth)) {
+      showAlert(language ? "تاریخ تولد نامعتبر" : "Invalid date of birth");
+      return;
+    }
     if (!validateEmail(email)) {
-      showAlert(language ? "ایمیل اشتباه" : "Invalid email");
+      showAlert(language ? "ایمیل نامعتبر" : "Invalid email");
       return;
     }
     if (!media) {
@@ -79,7 +86,6 @@ export default function JobSend({ jobsId }) {
   const submitResume = async (phoneEnglish) => {
     setDisableButton(true);
     setLoader(true);
-    setResumeRecieved(false);
 
     let mediaLink = "";
     let mediaFolder = "jobs";
@@ -101,17 +107,10 @@ export default function JobSend({ jobsId }) {
     };
 
     await createResumeApi(resumeObject);
-
-    setName("");
-    setBirth("");
-    setPhone("");
-    setEmail("");
-    setDescription("");
-    setMedia("");
-    resetFileSelect();
-    setDisableButton(false);
-    setLoader(false);
     setResumeRecieved(true);
+    setTimeout(() => {
+      router.reload(router.asPath);
+    }, 6000);
   };
 
   const showAlert = (message) => {
