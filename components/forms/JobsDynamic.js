@@ -80,32 +80,20 @@ export default function JobsDynamic() {
         title: title.fa,
         department: department.fa,
         location: location.fa,
-        type: type.fa,
+        workType: type.fa,
       },
       en: {
         title: title.en,
         department: department.en,
         location: location.en,
-        type: type.en,
+        workType: type.en,
       },
       fields: fields,
       active: true,
       jobsId: `jobs${sixGenerator()}`,
     };
-
     await createJobsApi(jobsObject);
-    setDisableButton(false);
-    setFields([
-      {
-        en: { title: "", description: "" },
-        fa: { title: "", description: "" },
-      },
-    ]);
-    setTitle("");
-    setDepartment("");
-    setLocation("");
-    setType("");
-    router.replace(router.asPath);
+    router.reload(router.asPath);
   };
 
   const showAlert = (message) => {
@@ -448,6 +436,7 @@ export default function JobsDynamic() {
                   fontFamily: "Farsi",
                   marginBottom: "12px",
                 }}
+                id={index}
                 placeholder="..."
                 type="text"
                 value={field.fa.title}
@@ -464,6 +453,7 @@ export default function JobsDynamic() {
                 style={{
                   fontFamily: "Farsi",
                 }}
+                id={index}
                 placeholder="..."
                 type="text"
                 value={field.fa.description}
@@ -488,6 +478,7 @@ export default function JobsDynamic() {
                   fontFamily: "English",
                   marginBottom: "12px",
                 }}
+                id={index}
                 placeholder="..."
                 type="text"
                 value={field.en.title}
@@ -505,6 +496,7 @@ export default function JobsDynamic() {
                 style={{
                   fontFamily: "English",
                 }}
+                id={index}
                 placeholder="..."
                 type="text"
                 value={field.en.description}

@@ -116,6 +116,7 @@ export default function Menu() {
                 layout="fill"
                 objectFit="cover"
                 alt="image"
+                as="image"
               />
             </div>
           )}
@@ -149,6 +150,7 @@ export default function Menu() {
                   objectFit="cover"
                   src={language ? logoFarsi : logoEnglish}
                   alt="logo"
+                  as="image"
                 />
               </Link>
             </div>
@@ -206,6 +208,7 @@ export default function Menu() {
                                 alt="logo"
                                 onMouseEnter={() => setHoverLanguage(true)}
                                 priority
+                                as="image"
                               />
                             ) : (
                               <Image
@@ -215,6 +218,7 @@ export default function Menu() {
                                 alt="logo"
                                 onMouseLeave={() => setHoverLanguage(false)}
                                 priority
+                                as="image"
                               />
                             )}
                           </div>
@@ -242,6 +246,7 @@ export default function Menu() {
                                     alt="logo"
                                     onMouseEnter={() => setHover(true)}
                                     priority
+                                    as="image"
                                   />
                                 ) : (
                                   <Image
@@ -251,6 +256,7 @@ export default function Menu() {
                                     alt="logo"
                                     onMouseLeave={() => setHover(false)}
                                     priority
+                                    as="image"
                                   />
                                 )}
                               </Fragment>
@@ -303,6 +309,7 @@ export default function Menu() {
                               alt="logo"
                               onMouseEnter={() => setHoverLanguage(true)}
                               priority
+                              as="image"
                             />
                           ) : (
                             <Image
@@ -312,6 +319,7 @@ export default function Menu() {
                               alt="logo"
                               onMouseLeave={() => setHoverLanguage(false)}
                               priority
+                              as="image"
                             />
                           )}
                         </div>
@@ -337,6 +345,7 @@ export default function Menu() {
                                   alt="logo"
                                   onMouseEnter={() => setHover(true)}
                                   priority
+                                  as="image"
                                 />
                               ) : (
                                 <Image
@@ -346,6 +355,7 @@ export default function Menu() {
                                   alt="logo"
                                   onMouseLeave={() => setHover(false)}
                                   priority
+                                  as="image"
                                 />
                               )}
                             </Fragment>
@@ -377,6 +387,7 @@ export default function Menu() {
                     objectFit="cover"
                     src={!language ? logoEnglish : logoFarsi}
                     alt="logo"
+                    as="image"
                   />
                 </Link>
               </div>
@@ -398,6 +409,7 @@ export default function Menu() {
                     alt="logo"
                     onMouseEnter={() => setHoverLanguage(true)}
                     priority
+                    as="image"
                   />
                 ) : (
                   <Image
@@ -407,6 +419,7 @@ export default function Menu() {
                     alt="logo"
                     onMouseLeave={() => setHoverLanguage(false)}
                     priority
+                    as="image"
                   />
                 )}
               </div>
