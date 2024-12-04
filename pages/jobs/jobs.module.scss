@@ -343,6 +343,10 @@
         position: relative;
         bottom: 15px;
       }
+      @include mixins.tablet {
+        position: relative;
+        bottom: 15px;
+      }
     }
 
     .information {

@@ -20,6 +20,7 @@ export default function Jobs({ jobs }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [displayJobs, setDisplayJobs] = useState([]);
+  const [jobTypes, setJobTypes] = useState([]);
 
   useEffect(() => {
     navigationTopBar.map((nav, i) => {
@@ -38,44 +39,58 @@ export default function Jobs({ jobs }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const jobTypes = [
-    {
-      type: language ? "همه" : "All",
-      active: true,
-    },
-    {
-      type: language ? "امور مالی" : "Finance",
-      active: false,
-    },
-    {
-      type: language ? "حساب داری" : "Account",
-      active: false,
-    },
-    {
-      type: language ? "خلاقیت" : "Creative",
-      active: false,
-    },
-    {
-      type: language ? "استودیو" : "Studio",
-      active: false,
-    },
-    {
-      type: language ? "دیجیتال" : "Digital",
-      active: false,
-    },
-    {
-      type: language ? "رسانه" : "Media",
-      active: false,
-    },
-    {
-      type: language ? "تولید" : "Production",
-      active: false,
-    },
-    {
-      type: language ? "منابع انسانی" : "HR",
-      active: false,
-    },
-  ];
+  useEffect(() => {
+    let jobTypes = jobs.map((job) => {
+      return {
+        type: job[languageType].department,
+        active: false,
+      };
+    });
+    const allType = { type: language ? "همه" : "All", active: true };
+    // Use a Set to track unique types
+    const uniqueTypes = new Set();
+    // Add the "All" type if it's not already present
+    if (!uniqueTypes.has(allType.type)) {
+      jobTypes.unshift(allType);
+      uniqueTypes.add(allType.type);
+    }
+    // Filter out duplicates based on the 'type'
+    jobTypes = jobTypes.filter(
+      (jobType, index, self) =>
+        index === self.findIndex((t) => t.type === jobType.type)
+    );
+    // Assign the unique jobTypes to setJobTypes
+    setJobTypes(jobTypes);
+  }, [jobs, language, languageType]);
+
+  const filterDisplayJobs = (type) => {
+    const isAll = type === "All" || type === "همه";
+    if (isAll) {
+      if (permissionControl === "admin") {
+        setDisplayJobs(jobs);
+      } else {
+        setDisplayJobs(jobs.filter((job) => job.active));
+      }
+      jobTypes.forEach((t, index) => {
+        t.active = index === 0;
+      });
+    } else {
+      if (permissionControl === "admin") {
+        setDisplayJobs(
+          jobs.filter((job) => job[languageType].department === type)
+        );
+      } else {
+        setDisplayJobs(
+          jobs.filter(
+            (job) => job[languageType].department === type && job.active
+          )
+        );
+      }
+      jobTypes.forEach((t) => {
+        t.active = t.type === type;
+      });
+    }
+  };
 
   return (
     <Fragment>
@@ -97,17 +112,16 @@ export default function Jobs({ jobs }) {
               <p
                 key={index}
                 className={!nav.active ? classes.nav : classes.navActive}
+                onClick={() => filterDisplayJobs(nav.type)}
               >
                 {nav.type}
-                {index !== jobTypes.length - 1 && (
-                  <span
-                    style={{
-                      fontFamily: language ? "EnglishLight" : "EnglishLight",
-                    }}
-                  >
-                    |
-                  </span>
-                )}
+                <span
+                  style={{
+                    fontFamily: language ? "EnglishLight" : "EnglishLight",
+                  }}
+                >
+                  |
+                </span>
               </p>
             ))}
           </div>
