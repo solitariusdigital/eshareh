@@ -114,9 +114,7 @@ export default function About({ pageData }) {
             url: language ? logoFarsi : logoEnglish,
             width: 1200,
             height: 630,
-            alt: language
-              ? "آژانس تبلیغاتی اشاره"
-              : "Eshareh Advertising Agency",
+            alt: language ? "اشاره" : "Eshareh",
           },
         }}
         robotsProps={{
