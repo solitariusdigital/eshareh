@@ -147,7 +147,8 @@ export default function Search({ activeSolutions }) {
                         />
                       ) : (
                         <video
-                          src={coverMedia.link + "#t=0.1"}
+                          className={classes.video}
+                          src={`${coverMedia.link}#t=0.1`}
                           playsInline
                           preload="metadata"
                         />

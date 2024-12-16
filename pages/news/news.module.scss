@@ -70,6 +70,14 @@
       }
     }
 
+    .video {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .visibility {
       position: absolute;
       top: 20px;
