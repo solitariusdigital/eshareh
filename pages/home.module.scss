@@ -55,16 +55,11 @@
       justify-content: space-between;
       float: left;
       cursor: pointer;
-
       color: config.$yellow;
       margin-top: 10px;
       margin-bottom: 50px;
       padding: 5px;
-      width: 125px;
-
-      @include mixins.mobile {
-        width: 115px;
-      }
+      width: 130px;
 
       @include mixins.allDesktop {
         &:hover {
@@ -84,10 +79,6 @@
       direction: rtl;
       float: right;
       width: 140px;
-
-      @include mixins.mobile {
-        width: 125px;
-      }
 
       .icon {
         transform: rotateY(180deg);
