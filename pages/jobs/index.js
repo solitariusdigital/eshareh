@@ -3,6 +3,9 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./jobs.module.scss";
 import Image from "next/legacy/image";
 import portal from "@/assets/portal.png";
+import { NextSeo } from "next-seo";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
 import next from "@/assets/next.svg";
 import nextYellow from "@/assets/nextYellow.svg";
 import Router from "next/router";
@@ -94,6 +97,38 @@ export default function Jobs({ jobs }) {
 
   return (
     <Fragment>
+      <NextSeo
+        title={language ? "مشاغل" : "Jobs"}
+        description={
+          language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio"
+        }
+        canonical="https://eshareh.com/jobs"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://eshareh.com/jobs",
+          title: language ? "مشاغل" : "Jobs",
+          description: language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio",
+          siteName: language
+            ? "آژانس تبلیغاتی اشاره"
+            : "Eshareh Advertising Agency",
+          images: {
+            url: language ? logoFarsi : logoEnglish,
+            width: 1200,
+            height: 630,
+            alt: language ? "اشاره" : "Eshareh",
+          },
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
+        }}
+      />
       <div className={language ? classes.rowOne : classes.rowOneReverse}>
         <div className={classes.infoBox}>
           <h1>{language ? "مشاغل" : "Jobs"}</h1>
@@ -217,9 +252,9 @@ export default function Jobs({ jobs }) {
 
 // initial connection to db
 export async function getServerSideProps(context) {
-  await dbConnect();
-  const jobs = await jobsModel.find();
   try {
+    await dbConnect();
+    const jobs = await jobsModel.find();
     return {
       props: {
         jobs: JSON.parse(JSON.stringify(jobs)),

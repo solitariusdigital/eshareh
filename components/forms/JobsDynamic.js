@@ -100,16 +100,16 @@ export default function JobsDynamic() {
 
     const jobsObject = {
       fa: {
-        title: title.fa,
-        department: department.fa,
-        location: location.fa,
-        workType: type.fa,
+        title: title.fa.trim(),
+        department: department.fa.trim(),
+        location: location.fa.trim(),
+        workType: type.fa.trim(),
       },
       en: {
-        title: title.en,
-        department: department.en,
-        location: location.en,
-        workType: type.en,
+        title: title.en.trim(),
+        department: department.en.trim(),
+        location: location.en.trim(),
+        workType: type.en.trim(),
       },
       fields: fields,
       active: false,
