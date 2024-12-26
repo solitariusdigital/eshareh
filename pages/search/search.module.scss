@@ -6,6 +6,7 @@
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
   margin-top: 150px;
+  user-select: none;
 
   @include mixins.mobile {
     width: calc(100% - 24px);

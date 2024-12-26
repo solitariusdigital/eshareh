@@ -7,9 +7,9 @@ import Image from "next/legacy/image";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 import { replaceSpacesAndHyphens } from "@/services/utility";
-import Router from "next/router";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
+import Link from "next/link";
 
 export default function Search({ activeSolutions }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -33,13 +33,6 @@ export default function Search({ activeSolutions }) {
     );
     setSolutions(searchSolutions);
     setSearchEmpty(searchSolutions.length === 0);
-  };
-
-  const directSolution = (project) => {
-    let link = `/solutions/${replaceSpacesAndHyphens(
-      project[languageType].title
-    )}`;
-    Router.push(link);
   };
 
   return (
@@ -126,46 +119,47 @@ export default function Search({ activeSolutions }) {
           {search &&
             solutions.map((project, index) => {
               const { title } = project[languageType];
+              const projectLink = `/solutions/${replaceSpacesAndHyphens(
+                project[languageType].title
+              )}`;
               const { coverMedia } = project;
               return (
-                <Fragment key={index}>
-                  <div
-                    className={classes.project}
-                    onClick={() => directSolution(project)}
-                  >
-                    <div className={classes.box}>
-                      {coverMedia.type === "image" ? (
-                        <Image
-                          src={coverMedia.link}
-                          placeholder="blur"
-                          blurDataURL={coverMedia.link}
-                          alt={title}
-                          layout="fill"
-                          objectFit="cover"
-                          as="image"
-                          priority
-                        />
-                      ) : (
-                        <video
-                          className={classes.video}
-                          src={`${coverMedia.link}#t=0.1`}
-                          playsInline
-                          preload="metadata"
-                        />
-                      )}
-                    </div>
-                    <div
-                      className={
-                        language ? classes.title : classes.titleReverse
-                      }
-                      style={{
-                        fontFamily: language ? "FarsiLight" : "EnglishLight",
-                      }}
-                    >
-                      <h3>{title}</h3>
-                    </div>
+                <Link
+                  key={index}
+                  className={classes.project}
+                  href={projectLink}
+                  passHref
+                >
+                  <div className={classes.box}>
+                    {coverMedia.type === "image" ? (
+                      <Image
+                        src={coverMedia.link}
+                        placeholder="blur"
+                        blurDataURL={coverMedia.link}
+                        alt={title}
+                        layout="fill"
+                        objectFit="cover"
+                        as="image"
+                        priority
+                      />
+                    ) : (
+                      <video
+                        className={classes.video}
+                        src={`${coverMedia.link}#t=0.1`}
+                        playsInline
+                        preload="metadata"
+                      />
+                    )}
                   </div>
-                </Fragment>
+                  <div
+                    className={language ? classes.title : classes.titleReverse}
+                    style={{
+                      fontFamily: language ? "FarsiLight" : "EnglishLight",
+                    }}
+                  >
+                    <h3>{title}</h3>
+                  </div>
+                </Link>
               );
             })}
         </div>

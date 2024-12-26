@@ -18,6 +18,7 @@ import mediaModel from "@/models/Media";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import { applyFontToEnglishWords } from "@/services/utility";
+import Link from "next/link";
 
 export default function Home({
   solutions,
@@ -261,7 +262,7 @@ export default function Home({
                 {solutionsContent[1].data[languageType].split("\n\n")[0]}
               </h3>
             </div>
-            <div
+            <Link
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() =>
                 screenSize !== "mobile" ? setHoverOne(true) : null
@@ -270,9 +271,10 @@ export default function Home({
                 screenSize !== "mobile" ? setHoverOne(false) : null
               }
               onClick={() => {
-                Router.push("/solutions");
                 setSolutionsCategory("advertising");
               }}
+              href="/solutions"
+              passHref
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
@@ -284,7 +286,7 @@ export default function Home({
                   priority
                 />
               </div>
-            </div>
+            </Link>
           </div>
           <div className={classes.box}>
             <div className={classes.methods}>
@@ -306,7 +308,7 @@ export default function Home({
                 {solutionsContent[3].data[languageType].split("\n\n")[0]}
               </h3>
             </div>
-            <div
+            <Link
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() =>
                 screenSize !== "mobile" ? setHoverTwo(true) : null
@@ -315,9 +317,10 @@ export default function Home({
                 screenSize !== "mobile" ? setHoverTwo(false) : null
               }
               onClick={() => {
-                Router.push("/solutions");
                 setSolutionsCategory("media");
               }}
+              href="/solutions"
+              passHref
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
@@ -329,7 +332,7 @@ export default function Home({
                   priority
                 />
               </div>
-            </div>
+            </Link>
           </div>
           <div className={classes.box}>
             <div className={classes.methods}>
@@ -351,7 +354,7 @@ export default function Home({
                 {solutionsContent[5].data[languageType].split("\n\n")[0]}
               </h3>
             </div>
-            <div
+            <Link
               className={language ? classes.more : classes.moreReverse}
               onMouseEnter={() =>
                 screenSize !== "mobile" ? setHoverThree(true) : null
@@ -360,9 +363,10 @@ export default function Home({
                 screenSize !== "mobile" ? setHoverThree(false) : null
               }
               onClick={() => {
-                Router.push("/solutions");
                 setSolutionsCategory("digital");
               }}
+              href="/solutions"
+              passHref
             >
               <h3>{language ? "بیشتر بخوانید" : "Read more"}</h3>
               <div className={classes.icon}>
@@ -374,7 +378,7 @@ export default function Home({
                   priority
                 />
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>

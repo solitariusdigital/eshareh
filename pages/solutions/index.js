@@ -3,7 +3,6 @@ import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./solutions.module.scss";
 import Image from "next/legacy/image";
-import Router from "next/router";
 import { replaceSpacesAndHyphens } from "@/services/utility";
 import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
@@ -208,62 +207,58 @@ export default function Solutions({
               )}`;
               const { coverMedia } = project;
               return (
-                <Fragment key={index}>
-                  <Link href={projectLink} passHref>
-                    <div
-                      className={classes.project}
-                      onClick={() => Router.push(projectLink)}
-                    >
-                      {permissionControl === "admin" && (
-                        <div className={classes.visibility}>
-                          {project.active ? (
-                            <Tooltip title="Visible">
-                              <VerifiedUserIcon sx={{ color: "#57a361" }} />
-                            </Tooltip>
-                          ) : (
-                            <Tooltip title="Hidden">
-                              <VisibilityOffIcon sx={{ color: "#d40d12" }} />
-                            </Tooltip>
-                          )}
-                        </div>
+                <Link
+                  key={index}
+                  className={classes.project}
+                  href={projectLink}
+                  passHref
+                >
+                  {permissionControl === "admin" && (
+                    <div className={classes.visibility}>
+                      {project.active ? (
+                        <Tooltip title="Visible">
+                          <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                        </Tooltip>
+                      ) : (
+                        <Tooltip title="Hidden">
+                          <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                        </Tooltip>
                       )}
-                      <div className={classes.box}>
-                        {coverMedia.type === "image" ? (
-                          <Image
-                            className={classes.image}
-                            src={coverMedia.link}
-                            placeholder="blur"
-                            blurDataURL={coverMedia.link}
-                            alt={title}
-                            layout="fill"
-                            objectFit="cover"
-                            as="image"
-                            priority
-                          />
-                        ) : (
-                          <video
-                            className={classes.video}
-                            id={project["_id"]}
-                            src={`${coverMedia.link}#t=0.1`}
-                            muted
-                            playsInline
-                            preload="metadata"
-                          />
-                        )}
-                      </div>
-                      <div
-                        className={
-                          language ? classes.title : classes.titleReverse
-                        }
-                        style={{
-                          fontFamily: language ? "FarsiLight" : "EnglishLight",
-                        }}
-                      >
-                        <h3>{title}</h3>
-                      </div>
                     </div>
-                  </Link>
-                </Fragment>
+                  )}
+                  <div className={classes.box}>
+                    {coverMedia.type === "image" ? (
+                      <Image
+                        className={classes.image}
+                        src={coverMedia.link}
+                        placeholder="blur"
+                        blurDataURL={coverMedia.link}
+                        alt={title}
+                        layout="fill"
+                        objectFit="cover"
+                        as="image"
+                        priority
+                      />
+                    ) : (
+                      <video
+                        className={classes.video}
+                        id={project["_id"]}
+                        src={`${coverMedia.link}#t=0.1`}
+                        muted
+                        playsInline
+                        preload="metadata"
+                      />
+                    )}
+                  </div>
+                  <div
+                    className={language ? classes.title : classes.titleReverse}
+                    style={{
+                      fontFamily: language ? "FarsiLight" : "EnglishLight",
+                    }}
+                  >
+                    <h3>{title}</h3>
+                  </div>
+                </Link>
               );
             })}
         </section>

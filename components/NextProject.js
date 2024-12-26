@@ -2,24 +2,23 @@ import { useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./NextProject.module.scss";
 import Image from "next/legacy/image";
+import Link from "next/link";
 import {
   replaceSpacesAndHyphens,
   applyFontToEnglishWords,
 } from "@/services/utility";
-import Router from "next/router";
 
 export default function NextProject({ project }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
 
   return (
-    <div
+    <Link
       className={classes.container}
-      onClick={() =>
-        Router.push(
-          `/solutions/${replaceSpacesAndHyphens(project[languageType].title)}`
-        )
-      }
+      href={`/solutions/${replaceSpacesAndHyphens(
+        project[languageType].title
+      )}`}
+      passHref
     >
       <h4 className={classes.next}>
         {language ? "پروژه بعدی" : "Next Project"}
@@ -93,6 +92,6 @@ export default function NextProject({ project }) {
           />
         )}
       </div>
-    </div>
+    </Link>
   );
 }
