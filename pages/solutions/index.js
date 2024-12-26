@@ -251,7 +251,6 @@ export default function Solutions({
                     )}
                   </div>
                   <div
-                    className={language ? classes.title : classes.titleReverse}
                     style={{
                       fontFamily: language ? "FarsiLight" : "EnglishLight",
                     }}

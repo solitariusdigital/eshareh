@@ -42,7 +42,7 @@
     @include mixins.allDesktop {
       &:hover {
         cursor: pointer;
-        color: config.$black;
+        color: config.$yellow;
       }
     }
   }
@@ -52,11 +52,11 @@
   flex-direction: row-reverse;
 }
 
-.gridList {
+.gridList,
+.gridListReverse {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   gap: 16px;
-  direction: rtl;
   margin-top: 50px;
 
   @include mixins.mobile {
@@ -67,24 +67,14 @@
   }
 
   .project {
-    cursor: pointer;
-    color: config.$grey;
     position: relative;
+    color: config.$grey;
+    cursor: pointer;
 
     @include mixins.allDesktop {
       &:hover {
         color: config.$black;
       }
-    }
-
-    .title,
-    .titleReverse {
-      display: flex;
-      flex-direction: row;
-    }
-
-    .titleReverse {
-      flex-direction: row-reverse;
     }
   }
 
@@ -105,4 +95,8 @@
       object-fit: cover;
     }
   }
+}
+
+.gridList {
+  direction: rtl;
 }

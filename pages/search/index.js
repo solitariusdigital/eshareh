@@ -115,7 +115,7 @@ export default function Search({ activeSolutions }) {
               : "There is no content to display, search again"}
           </p>
         )}
-        <div className={classes.gridList}>
+        <div className={language ? classes.gridList : classes.gridListReverse}>
           {search &&
             solutions.map((project, index) => {
               const { title } = project[languageType];
@@ -152,7 +152,6 @@ export default function Search({ activeSolutions }) {
                     )}
                   </div>
                   <div
-                    className={language ? classes.title : classes.titleReverse}
                     style={{
                       fontFamily: language ? "FarsiLight" : "EnglishLight",
                     }}

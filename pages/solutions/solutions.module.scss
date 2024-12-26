@@ -369,9 +369,6 @@
   }
 }
 
-.gridList {
-  direction: rtl;
-}
 .gridList,
 .gridListReverse {
   display: grid;
@@ -395,10 +392,6 @@
       &:hover {
         color: config.$black;
       }
-    }
-
-    .titleReverse {
-      direction: ltr;
     }
 
     .visibility {
@@ -426,6 +419,9 @@
       object-fit: cover;
     }
   }
+}
+.gridList {
+  direction: rtl;
 }
 
 .category,
