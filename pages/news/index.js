@@ -66,10 +66,14 @@ export default function News({ adminNews, activeNews }) {
         }}
       />
       <div className={classes.container}>
-        <div
-          className={language ? classes.newsCover : classes.newsCoverReverse}
-        >
-          <h1>{language ? "اخبار" : "News"}</h1>
+        <div className={classes.newsCover}>
+          <h1
+            style={{
+              fontFamily: language ? "Farsi" : "Farsi",
+            }}
+          >
+            اخبار
+          </h1>
           {news[0] &&
             (() => {
               const {
@@ -118,14 +122,18 @@ export default function News({ adminNews, activeNews }) {
                       </div>
                     )}
                   </div>
-                  <h3>{title}</h3>
+                  <h2
+                    style={{
+                      fontFamily: language ? "FarsiLight" : "FarsiLight",
+                    }}
+                  >
+                    {title}
+                  </h2>
                 </Link>
               );
             })()}
         </div>
-        <section
-          className={language ? classes.gridList : classes.gridListReverse}
-        >
+        <section className={classes.gridList}>
           {news
             .map((item, index) => {
               const { title } = item[languageType];
@@ -177,12 +185,12 @@ export default function News({ adminNews, activeNews }) {
                     )}
                   </div>
                   <div
-                    className={language ? classes.title : classes.titleReverse}
+                    className={classes.title}
                     style={{
-                      fontFamily: language ? "FarsiLight" : "EnglishLight",
+                      fontFamily: language ? "FarsiLight" : "FarsiLight",
                     }}
                   >
-                    <h3>{title}</h3>
+                    <h2>{title}</h2>
                   </div>
                 </Link>
               );

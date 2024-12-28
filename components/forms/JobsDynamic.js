@@ -441,7 +441,7 @@ export default function JobsDynamic() {
           className={classes.addField}
           onClick={handleAddField}
         >
-          فیلد ورودی
+          فیلد جدید
         </button>
       </div>
       <div className={classes.container}>

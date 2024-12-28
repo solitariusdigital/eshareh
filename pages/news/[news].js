@@ -1,4 +1,11 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import {
+  useState,
+  useContext,
+  Fragment,
+  useEffect,
+  useRef,
+  createElement,
+} from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./news.module.scss";
@@ -13,6 +20,9 @@ import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import EditIcon from "@mui/icons-material/Edit";
 import Tooltip from "@mui/material/Tooltip";
+import Link from "next/link";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { getSingleNewsApi, updateNewsApi } from "@/services/api";
 import {
   replaceSpacesAndHyphens,
@@ -29,7 +39,9 @@ export default function News({ news, newsTitle }) {
   const [displayNews, setDisplayNews] = useState(null);
   const [dropDown, setDropDpwn] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
+  const [expandedItem, setExpandedItem] = useState(false);
   const router = useRouter();
+  const refs = useRef([]);
 
   useEffect(() => {
     let displayNews = null;
@@ -58,7 +70,7 @@ export default function News({ news, newsTitle }) {
     return {
       time: language
         ? `${toFarsiNumber(readingTime)} دقیقه مطالعه`
-        : `${readingTime} min read`,
+        : `${toFarsiNumber(readingTime)} دقیقه مطالعه`,
     };
   };
 
@@ -82,13 +94,27 @@ export default function News({ news, newsTitle }) {
     router.replace(router.asPath);
   };
 
+  const replaceKeywordsWithLinks = (text, keyword, link) => {
+    let modifiedText = text;
+    const linkTag = `<a style="color: #fdb714;" href="${link}" target="_blank" rel="noopener noreferrer">${keyword}</a>`;
+    const regex = new RegExp(keyword, "g");
+    modifiedText = modifiedText.replace(regex, linkTag);
+    return modifiedText;
+  };
+
+  const scrollToDiv = (index) => {
+    if (refs.current[index]) {
+      refs.current[index].scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <Fragment>
       {displayNews && (
         <Fragment>
           <NextSeo
-            title={displayNews[languageType].title}
-            description={displayNews[languageType].subtitle}
+            title={displayNews[languageType].titleSeo}
+            description={displayNews[languageType].descriptionSeo}
             canonical={`https://eshareh.com/news/${replaceSpacesAndHyphens(
               displayNews[languageType].title
             )}`}
@@ -98,8 +124,8 @@ export default function News({ news, newsTitle }) {
               url: `https://eshareh.com/news/${replaceSpacesAndHyphens(
                 displayNews[languageType].title
               )}`,
-              title: `${displayNews[languageType].title}`,
-              description: `${displayNews[languageType].subtitle}`,
+              title: `${displayNews[languageType].titleSeo}`,
+              description: `${displayNews[languageType].descriptionSeo}`,
               siteName: language
                 ? "آژانس تبلیغاتی اشاره"
                 : "Eshareh Advertising Agency",
@@ -120,6 +146,12 @@ export default function News({ news, newsTitle }) {
               maxImagePreview: "large",
               maxVideoPreview: -1,
             }}
+            additionalMetaTags={[
+              {
+                name: "keywords",
+                content: displayNews[languageType].category,
+              },
+            ]}
           />
           {permissionControl === "admin" && (
             <Fragment>
@@ -174,31 +206,37 @@ export default function News({ news, newsTitle }) {
               )}
             </Fragment>
           )}
-          <div className={classes.container}>
-            <div
-              className={
-                language ? classes.singleNews : classes.singleNewsReverse
-              }
-            >
+          <article
+            className={classes.container}
+            style={{
+              fontFamily: language ? "Farsi" : "Farsi",
+            }}
+          >
+            <div className={classes.singleNews}>
               <h1
                 style={{
-                  fontFamily: language ? "FarsiBold" : "EnglishBold",
+                  fontFamily: language ? "FarsiBold" : "FarsiBold",
                 }}
               >
                 {displayNews[languageType].title}
               </h1>
               <h2>{displayNews[languageType].subtitle}</h2>
-              <div className={classes.info}>
-                <h3 className={language ? classes.date : classes.dateReverse}>
-                  {displayNews[languageType].date}
-                </h3>
-                <p>
-                  {
-                    calculateReadingTime(displayNews[languageType].paragraph)
-                      .time
-                  }
-                </p>
-              </div>
+              <ul className={classes.info}>
+                <Link href={"/news"} passHref>
+                  <li className={classes.date}>
+                    {displayNews[languageType].date}
+                  </li>
+                </Link>
+                <li className={classes.gap}>|</li>
+                <Link href={"/news"} passHref>
+                  <li>
+                    {
+                      calculateReadingTime(displayNews[languageType].paragraph)
+                        .time
+                    }
+                  </li>
+                </Link>
+              </ul>
               {displayNews.voice?.length > 0 && (
                 <div>
                   <audio className={classes.voice} preload="metadata" controls>
@@ -237,10 +275,10 @@ export default function News({ news, newsTitle }) {
               {displayNews[languageType].paragraph
                 .split("\n\n")
                 .map((desc, index) => (
-                  <h3
+                  <p
                     key={index}
                     style={{
-                      fontFamily: language ? "FarsiLight" : "EnglishLight",
+                      fontFamily: language ? "FarsiLight" : "FarsiLight",
                     }}
                     className={classes.paragraph}
                     dangerouslySetInnerHTML={{
@@ -251,10 +289,58 @@ export default function News({ news, newsTitle }) {
                         language
                       ),
                     }}
-                  ></h3>
+                  ></p>
                 ))}
+              <div className={classes.table}>
+                <div
+                  className={classes.main}
+                  onClick={() => setExpandedItem(!expandedItem)}
+                >
+                  <h4>فهرست مطالب</h4>
+                  {expandedItem ? (
+                    <ExpandLessIcon sx={{ fontSize: 20 }} />
+                  ) : (
+                    <ExpandMoreIcon sx={{ fontSize: 20 }} />
+                  )}
+                </div>
+                {expandedItem && (
+                  <ul className={classes.list}>
+                    {displayNews.fields.map((list, index) => (
+                      <li key={index} onClick={() => scrollToDiv(index)}>
+                        {list[languageType].title}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              {displayNews.fields.map((list, index) => (
+                <div
+                  className={classes.paragraphs}
+                  key={index}
+                  ref={(el) => (refs.current[index] = el)}
+                  id={`div-${index}`}
+                >
+                  {createElement(
+                    list[languageType].tag,
+                    null,
+                    list[languageType].title
+                  )}
+                  <div
+                    style={{
+                      fontFamily: language ? "FarsiLight" : "FarsiLight",
+                    }}
+                    dangerouslySetInnerHTML={{
+                      __html: replaceKeywordsWithLinks(
+                        list[languageType].description,
+                        list[languageType].word,
+                        list[languageType].link
+                      ),
+                    }}
+                  />
+                </div>
+              ))}
             </div>
-          </div>
+          </article>
         </Fragment>
       )}
     </Fragment>

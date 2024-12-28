@@ -34,7 +34,7 @@
     margin-bottom: 36px;
   }
 
-  h3 {
+  h2 {
     margin-top: 16px;
     color: config.$grey;
   }
@@ -105,16 +105,22 @@
 
   .info {
     display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     color: config.$grey;
     margin-bottom: 36px;
-  }
+    width: fit-content;
+    user-select: none;
 
-  .date {
-    display: flex;
-    justify-content: flex-end;
-    direction: ltr;
+    .date {
+      display: flex;
+      justify-content: flex-end;
+      direction: ltr;
+    }
+
+    .gap {
+      margin: 0px 8px;
+    }
   }
 
   .voice {
@@ -150,8 +156,43 @@
   }
 
   .paragraph {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
+}
+
+.table {
+  width: fit-content;
+  margin-bottom: 24px;
+  color: config.$grey;
+  user-select: none;
+
+  .main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    @include mixins.allDesktop {
+      cursor: pointer;
+      &:hover {
+        color: config.$yellow;
+      }
+    }
+  }
+
+  .list {
+    li {
+      @include mixins.allDesktop {
+        cursor: pointer;
+        &:hover {
+          color: config.$yellow;
+        }
+      }
+    }
+  }
+}
+
+.paragraphs {
+  margin-bottom: 12px;
 }
 
 .gridList {

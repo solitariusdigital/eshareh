@@ -19,14 +19,19 @@ const jalaali = require("jalali-date");
 
 export default function News() {
   const { editNews, setEditNews } = useContext(StateContext);
+  const [fields, setFields] = useState(
+    editNews
+      ? editNews.fields
+      : [
+          {
+            en: { title: "", description: "", tag: "", word: "", link: "" },
+            fa: { title: "", description: "", tag: "", word: "", link: "" },
+          },
+        ]
+  );
   const [title, setTitle] = useState(
     editNews
       ? { en: editNews.en.title, fa: editNews.fa.title }
-      : { en: "", fa: "" }
-  );
-  const [subtitle, setSubtitle] = useState(
-    editNews
-      ? { en: editNews.en.subtitle, fa: editNews.fa.subtitle }
       : { en: "", fa: "" }
   );
   const [paragraph, setParagraph] = useState(
@@ -34,9 +39,25 @@ export default function News() {
       ? { en: editNews.en.paragraph, fa: editNews.fa.paragraph }
       : { en: "", fa: "" }
   );
+  const [titleSeo, setTitleSeo] = useState(
+    editNews
+      ? { en: editNews.en.titleSeo, fa: editNews.fa.titleSeo }
+      : { en: "", fa: "" }
+  );
+  const [descriptionSeo, setDescriptionSeo] = useState(
+    editNews
+      ? { en: editNews.en.descriptionSeo, fa: editNews.fa.descriptionSeo }
+      : { en: "", fa: "" }
+  );
+  const [category, setCategory] = useState(
+    editNews
+      ? { en: editNews.en.category, fa: editNews.fa.category }
+      : { en: "", fa: "" }
+  );
   const [dateString, setDateString] = useState(
     editNews ? editNews.dateString : ""
   );
+
   const [alert, setAlert] = useState("");
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
@@ -49,6 +70,50 @@ export default function News() {
   const [uploadImages, setUploadImages] = useState([]);
   const [uploadVideos, setUploadVideos] = useState([]);
   const [uploadVoices, setUploadVoices] = useState([]);
+
+  const handleAddField = () => {
+    setFields([
+      ...fields,
+      {
+        en: { title: "", description: "", tag: "", word: "", link: "" },
+        fa: { title: "", description: "", tag: "", word: "", link: "" },
+      },
+    ]);
+  };
+  const handleTitleChange = (index, value) => {
+    const newFields = [...fields];
+    newFields[index].fa.title = value;
+    newFields[index].en.title = value;
+    setFields(newFields);
+  };
+  const handleTagChange = (index, value) => {
+    const newFields = [...fields];
+    newFields[index].fa.tag = value;
+    newFields[index].en.tag = value;
+    setFields(newFields);
+  };
+  const handleWordChange = (index, value) => {
+    const newFields = [...fields];
+    newFields[index].fa.word = value;
+    newFields[index].en.word = value;
+    setFields(newFields);
+  };
+  const handleLinkChange = (index, value) => {
+    const newFields = [...fields];
+    newFields[index].fa.link = value;
+    newFields[index].en.link = value;
+    setFields(newFields);
+  };
+  const handleDescriptionChange = (index, value) => {
+    const newFields = [...fields];
+    newFields[index].fa.description = extractParagraphs(value).join("\n\n");
+    newFields[index].en.description = extractParagraphs(value).join("\n\n");
+    setFields(newFields);
+  };
+  const handleRemoveField = (index) => {
+    const newFields = fields.filter((_, i) => i !== index);
+    setFields(newFields);
+  };
 
   const handleImageChange = (event) => {
     const array = Array.from(event.target.files);
@@ -123,8 +188,17 @@ export default function News() {
   };
 
   const handleSubmit = async () => {
-    const isValid = areAllStatesValid([title, subtitle, paragraph]);
-    if (!isValid) {
+    const isValidFields = fields.every(
+      (field) => areAllStatesValid([field.en]) && areAllStatesValid([field.fa])
+    );
+    if (
+      !isValidFields ||
+      !title.fa ||
+      !paragraph.fa ||
+      !titleSeo.fa ||
+      !descriptionSeo.fa ||
+      !category.fa
+    ) {
       showAlert("همه موارد الزامیست");
       return;
     }
@@ -202,17 +276,22 @@ export default function News() {
     const newsObject = {
       fa: {
         title: title.fa,
-        subtitle: subtitle.fa,
         paragraph: extractParagraphs(paragraph.fa).join("\n\n"),
+        titleSeo: titleSeo.fa,
+        descriptionSeo: descriptionSeo.fa,
+        category: category.fa,
         date: date.fa,
       },
       en: {
-        title: title.en,
-        subtitle: subtitle.en,
-        paragraph: extractParagraphs(paragraph.en).join("\n\n"),
-        date: date.en,
+        title: title.fa,
+        paragraph: extractParagraphs(paragraph.fa).join("\n\n"),
+        titleSeo: titleSeo.fa,
+        descriptionSeo: descriptionSeo.fa,
+        category: category.fa,
+        date: date.fa,
       },
       dateString: dateString,
+      fields: fields,
       media: mediaLinks,
       voice: voice,
       active: false,
@@ -241,21 +320,21 @@ export default function News() {
         <div
           className={classes.form}
           style={{
-            fontFamily: "English",
+            fontFamily: "Farsi",
           }}
         >
           <div className={classes.input}>
-            <div className={classes.bar}>
+            <div className={classes.barReverse}>
               <p className={classes.label}>
-                Title
                 <span>*</span>
+                عنوان سئو
               </p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
-                  setTitle((prevData) => ({
+                  setTitleSeo((prevData) => ({
                     ...prevData,
-                    en: "",
+                    fa: "",
                   }))
                 }
                 sx={{ fontSize: 16 }}
@@ -263,69 +342,35 @@ export default function News() {
             </div>
             <input
               style={{
-                fontFamily: "English",
+                fontFamily: "Farsi",
               }}
               placeholder="..."
               type="text"
-              id="titleEn"
-              name="title"
+              id="titleSeoFa"
+              name="titleSeo"
               onChange={(e) =>
-                setTitle((prevData) => ({
+                setTitleSeo((prevData) => ({
                   ...prevData,
-                  en: e.target.value,
+                  fa: e.target.value,
                 }))
               }
-              value={title.en}
+              value={titleSeo.fa}
               autoComplete="off"
-            ></input>
-          </div>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p className={classes.label}>
-                Subtitle
-                <span>*</span>
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() =>
-                  setSubtitle((prevData) => ({
-                    ...prevData,
-                    en: "",
-                  }))
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              style={{
-                fontFamily: "English",
-              }}
-              placeholder="..."
-              type="text"
-              id="subtitleEn"
-              name="subtitle"
-              onChange={(e) =>
-                setSubtitle((prevData) => ({
-                  ...prevData,
-                  en: e.target.value,
-                }))
-              }
-              value={subtitle.en}
-              autoComplete="off"
+              dir="rtl"
             ></input>
           </div>
           <div className={classes.inputTextArea}>
-            <div className={classes.bar}>
+            <div className={classes.barReverse}>
               <p className={classes.label}>
-                Paragraph
                 <span>*</span>
+                توضیحات سئو
               </p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
-                  setParagraph((prevData) => ({
+                  setDescriptionSeo((prevData) => ({
                     ...prevData,
-                    en: "",
+                    fa: "",
                   }))
                 }
                 sx={{ fontSize: 16 }}
@@ -333,20 +378,21 @@ export default function News() {
             </div>
             <textarea
               style={{
-                fontFamily: "English",
+                fontFamily: "Farsi",
               }}
               placeholder="..."
               type="text"
-              id="paragraphEn"
-              name="paragraph"
+              id="descriptionSeoFa"
+              name="descriptionSeo"
               onChange={(e) =>
-                setParagraph((prevData) => ({
+                setDescriptionSeo((prevData) => ({
                   ...prevData,
-                  en: e.target.value,
+                  fa: e.target.value,
                 }))
               }
-              value={paragraph.en}
+              value={descriptionSeo.fa}
               autoComplete="off"
+              dir="rtl"
             ></textarea>
           </div>
         </div>
@@ -392,47 +438,11 @@ export default function News() {
               dir="rtl"
             ></input>
           </div>
-          <div className={classes.input}>
-            <div className={classes.barReverse}>
-              <p className={classes.label}>
-                <span>*</span>
-                عنوان فرعی
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() =>
-                  setSubtitle((prevData) => ({
-                    ...prevData,
-                    fa: "",
-                  }))
-                }
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              style={{
-                fontFamily: "Farsi",
-              }}
-              placeholder="..."
-              type="text"
-              id="subtitleFa"
-              name="subtitle"
-              onChange={(e) =>
-                setSubtitle((prevData) => ({
-                  ...prevData,
-                  fa: e.target.value,
-                }))
-              }
-              value={subtitle.fa}
-              autoComplete="off"
-              dir="rtl"
-            ></input>
-          </div>
           <div className={classes.inputTextArea}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
-                پاراگراف
+                توضیحات
               </p>
               <CloseIcon
                 className="icon"
@@ -468,6 +478,42 @@ export default function News() {
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
+                کلمات کلیدی | دسته‌بندی
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() =>
+                  setCategory((prevData) => ({
+                    ...prevData,
+                    fa: "",
+                  }))
+                }
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "Farsi",
+              }}
+              placeholder="تبلیغات کمپین شرکت"
+              type="text"
+              id="categoryFa"
+              name="category"
+              onChange={(e) =>
+                setCategory((prevData) => ({
+                  ...prevData,
+                  fa: e.target.value,
+                }))
+              }
+              value={category.fa}
+              autoComplete="off"
+              dir="rtl"
+            ></input>
+          </div>
+          <div className={classes.input}>
+            <div className={classes.barReverse}>
+              <p className={classes.label}>
+                <span>*</span>
                 تاریخ شمسی
               </p>
               <CloseIcon
@@ -490,6 +536,112 @@ export default function News() {
             ></input>
           </div>
         </div>
+      </div>
+      <div className={classes.form}>
+        <button
+          style={{
+            fontFamily: "Farsi",
+          }}
+          className={classes.addField}
+          onClick={handleAddField}
+        >
+          پاراگراف جدید
+        </button>
+      </div>
+      <div className={classes.container}>
+        {fields.map((field, index) => (
+          <div key={index} className={classes.form}>
+            <div
+              className={classes.input}
+              style={{
+                fontFamily: "Farsi",
+              }}
+            >
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  <span>*</span>
+                  عنوان پاراگراف
+                </p>
+              </div>
+              <input
+                style={{
+                  fontFamily: "Farsi",
+                  marginBottom: "12px",
+                }}
+                id={index}
+                placeholder="..."
+                type="text"
+                value={field.fa.title}
+                dir="rtl"
+                onChange={(e) => handleTitleChange(index, e.target.value)}
+              />
+              <input
+                style={{
+                  fontFamily: "english",
+                  marginBottom: "12px",
+                }}
+                id={index}
+                placeholder="h4"
+                type="text"
+                value={field.fa.tag}
+                onChange={(e) => handleTagChange(index, e.target.value)}
+                maxLength={2}
+              />
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  <span>*</span>
+                  توضیحات پاراگراف
+                </p>
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                id={index}
+                placeholder="..."
+                type="text"
+                value={field.fa.description}
+                dir="rtl"
+                onChange={(e) => handleDescriptionChange(index, e.target.value)}
+              />
+              <div className={classes.barReverse}>
+                <p className={classes.label}>لینک کلمه</p>
+              </div>
+              <input
+                style={{
+                  fontFamily: "Farsi",
+                  marginBottom: "12px",
+                }}
+                id={index}
+                placeholder="آژانس تبلیغاتی"
+                type="text"
+                value={field.fa.word}
+                dir="rtl"
+                onChange={(e) => handleWordChange(index, e.target.value)}
+              />
+              <input
+                style={{
+                  fontFamily: "English",
+                  marginBottom: "12px",
+                }}
+                id={index}
+                placeholder="..."
+                type="text"
+                value={field.fa.link}
+                onChange={(e) => handleLinkChange(index, e.target.value)}
+              />
+            </div>
+            <button
+              className={classes.removeField}
+              style={{
+                fontFamily: "Farsi",
+              }}
+              onClick={() => handleRemoveField(index)}
+            >
+              حذف
+            </button>
+          </div>
+        ))}
       </div>
       <div className={classes.formAction}>
         <div className={classes.mediaContainer}>

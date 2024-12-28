@@ -20,9 +20,9 @@ export default function Admin({ covers, pages, mediaData }) {
   const { editJobs, setEditJobs } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [formType, setFormType] = useState(
-    "solutions" || "pages" || "news" || "covers" || "jobs"
+    "solutions" || "news" || "pages" || "covers" || "jobs"
   );
-  const navigation = ["solutions", "covers", "news", "pages", "jobs"];
+  const navigation = ["solutions", "covers", "pages", "news", "jobs"];
 
   useEffect(() => {
     if (permissionControl !== "admin") {
