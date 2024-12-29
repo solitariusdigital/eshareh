@@ -37,6 +37,7 @@ export default function News({ news, newsTitle }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { editNews, setEditNews } = useContext(StateContext);
   const [displayNews, setDisplayNews] = useState(null);
+  const [similarNews, setSimilarNews] = useState([]);
   const [dropDown, setDropDpwn] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
   const [expandedItem, setExpandedItem] = useState(false);
@@ -55,12 +56,24 @@ export default function News({ news, newsTitle }) {
         (p) => p.en.title === newsTitle || p.fa.title === newsTitle
       );
     }
+
+    const categoriesArray = displayNews[languageType].category.split(" ");
+    const filterSimilarNews = news
+      .filter(
+        (news) =>
+          categoriesArray.some((word) =>
+            news[languageType].category.includes(word)
+          ) && news["_id"] !== displayNews["_id"]
+      )
+      .slice(0, 2);
+    setSimilarNews(filterSimilarNews);
+
     if (!displayNews) {
       Router.push("/404");
       return;
     }
     setDisplayNews(displayNews);
-  }, [permissionControl, displayNews, news, newsTitle]);
+  }, [permissionControl, displayNews, news, newsTitle, languageType]);
 
   const getTotalReadingTime = (data) => {
     const paragraph = data[languageType].paragraph;
@@ -342,6 +355,48 @@ export default function News({ news, newsTitle }) {
               ))}
             </div>
           </article>
+          <section
+            className={classes.similar}
+            style={{
+              fontFamily: language ? "Farsi" : "Farsi",
+            }}
+          >
+            {similarNews.map((news, index) => (
+              <Link
+                key={index}
+                className={classes.cover}
+                href={`/news/${replaceSpacesAndHyphens(
+                  news[languageType].title
+                )}`}
+                passHref
+              >
+                <h3>{news[languageType].title}</h3>
+                <div className={classes.cover}>
+                  {news.media[news.media.length - 1].type === "image" ? (
+                    <Image
+                      className={classes.image}
+                      src={news.media[news.media.length - 1].link}
+                      placeholder="blur"
+                      blurDataURL={news.media[news.media.length - 1].link}
+                      alt={news[languageType].subtitle}
+                      layout="fill"
+                      objectFit="cover"
+                      as="image"
+                      priority
+                    />
+                  ) : (
+                    <video
+                      className={classes.video}
+                      src={news.media[0].link + "#t=0.1"}
+                      controls
+                      playsInline
+                      preload="metadata"
+                    />
+                  )}
+                </div>
+              </Link>
+            ))}
+          </section>
         </Fragment>
       )}
     </Fragment>

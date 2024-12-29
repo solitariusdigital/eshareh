@@ -255,3 +255,60 @@
     }
   }
 }
+
+.similar {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  direction: rtl;
+  gap: 16px;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  margin: 100px auto;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+    display: flex;
+    flex-direction: column;
+  }
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+  @include mixins.tabletPortrait {
+    width: config.$content-widthTablet;
+  }
+
+  .cover {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 350px;
+    width: 100%;
+    user-select: none;
+
+    @include mixins.fourK {
+      height: 40vh;
+      max-height: 450px;
+    }
+    @include mixins.mobile {
+      height: 300px;
+    }
+    .video {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h3 {
+      margin-bottom: 16px;
+    }
+
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$yellow;
+      }
+    }
+  }
+}
