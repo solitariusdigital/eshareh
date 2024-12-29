@@ -339,18 +339,24 @@ export default function News({ news, newsTitle }) {
                     null,
                     list[languageType].title
                   )}
-                  <div
-                    style={{
-                      fontFamily: language ? "FarsiLight" : "FarsiLight",
-                    }}
-                    dangerouslySetInnerHTML={{
-                      __html: replaceKeywordsWithLinks(
-                        list[languageType].description,
-                        list[languageType].word,
-                        list[languageType].link
-                      ),
-                    }}
-                  />
+                  {list[languageType].description
+                    .split("\n\n")
+                    .map((desc, index) => (
+                      <p
+                        key={index}
+                        style={{
+                          fontFamily: "FarsiLight",
+                        }}
+                        className={classes.paragraph}
+                        dangerouslySetInnerHTML={{
+                          __html: replaceKeywordsWithLinks(
+                            desc,
+                            list[languageType].word,
+                            list[languageType].link
+                          ),
+                        }}
+                      />
+                    ))}
                 </div>
               ))}
             </div>
@@ -370,7 +376,6 @@ export default function News({ news, newsTitle }) {
                 )}`}
                 passHref
               >
-                <h3>{news[languageType].title}</h3>
                 <div className={classes.cover}>
                   {news.media[news.media.length - 1].type === "image" ? (
                     <Image
@@ -394,6 +399,7 @@ export default function News({ news, newsTitle }) {
                     />
                   )}
                 </div>
+                <h3>{news[languageType].title}</h3>
               </Link>
             ))}
           </section>

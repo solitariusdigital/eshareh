@@ -16,6 +16,12 @@
   @include mixins.tabletPortrait {
     width: config.$content-widthTablet;
   }
+
+  p {
+    @include mixins.allDesktop {
+      font-size: 1.1rem;
+    }
+  }
 }
 
 .newsCover {
@@ -156,7 +162,7 @@
   }
 
   .paragraph {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 }
 
@@ -263,7 +269,9 @@
   gap: 16px;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
-  margin: 100px auto;
+  margin: 50px auto;
+  border-top: 1px solid config.$lightgrey;
+  padding-top: 50px;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
@@ -292,6 +300,7 @@
     @include mixins.mobile {
       height: 300px;
     }
+
     .video {
       position: absolute;
       top: 0px;
@@ -301,7 +310,7 @@
     }
 
     h3 {
-      margin-bottom: 16px;
+      margin-top: 4px;
     }
 
     @include mixins.allDesktop {
