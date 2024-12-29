@@ -62,16 +62,22 @@ export default function News({ news, newsTitle }) {
     setDisplayNews(displayNews);
   }, [permissionControl, displayNews, news, newsTitle]);
 
+  const getTotalReadingTime = (data) => {
+    const paragraph = data[languageType].paragraph;
+    const descriptions = data.fields
+      .map((field) => field[languageType].description)
+      .join(" ");
+    const combinedText = paragraph + " " + descriptions;
+    const readingTime = calculateReadingTime(combinedText);
+    return `${toFarsiNumber(readingTime)} دقیقه مطالعه`;
+  };
+
   const calculateReadingTime = (text) => {
-    const wordsPerMinute = 200;
+    const wordsPerMinute = 180;
     const words = text.trim().split(/\s+/);
     const wordCount = words.length;
     const readingTime = Math.ceil(wordCount / wordsPerMinute);
-    return {
-      time: language
-        ? `${toFarsiNumber(readingTime)} دقیقه مطالعه`
-        : `${toFarsiNumber(readingTime)} دقیقه مطالعه`,
-    };
+    return readingTime;
   };
 
   const manageNews = (type) => {
@@ -229,12 +235,7 @@ export default function News({ news, newsTitle }) {
                 </Link>
                 <li className={classes.gap}>|</li>
                 <Link href={"/news"} passHref>
-                  <li>
-                    {
-                      calculateReadingTime(displayNews[languageType].paragraph)
-                        .time
-                    }
-                  </li>
+                  <li>{getTotalReadingTime(displayNews)}</li>
                 </Link>
               </ul>
               {displayNews.voice?.length > 0 && (

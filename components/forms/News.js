@@ -605,7 +605,7 @@ export default function News() {
                 onChange={(e) => handleDescriptionChange(index, e.target.value)}
               />
               <div className={classes.barReverse}>
-                <p className={classes.label}>لینک کلمه</p>
+                <p className={classes.label}>لینک کلمه پاراگراف</p>
               </div>
               <input
                 style={{
@@ -625,7 +625,7 @@ export default function News() {
                   marginBottom: "12px",
                 }}
                 id={index}
-                placeholder="..."
+                placeholder="Link address"
                 type="text"
                 value={field.fa.link}
                 onChange={(e) => handleLinkChange(index, e.target.value)}

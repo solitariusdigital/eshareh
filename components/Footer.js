@@ -39,47 +39,39 @@ export default function Footer() {
       }}
     >
       <div>
-        <Link href="https://www.linkedin.com/company/esharehmarcom" passHref>
-          <LinkedInIcon
-            className={classes.icon}
-            onClick={() =>
-              window.open(
-                "https://www.linkedin.com/company/esharehmarcom",
-                "_ self"
-              )
-            }
-          />
+        <Link
+          href="https://www.linkedin.com/company/esharehmarcom"
+          target="_blank"
+          rel="noopener noreferrer"
+          passHref
+        >
+          <LinkedInIcon className={classes.icon} />
         </Link>
-        <Link href="https://www.instagram.com/esharehmarcom" passHref>
-          <InstagramIcon
-            className={classes.icon}
-            onClick={() =>
-              window.open("https://www.instagram.com/esharehmarcom", "_ self")
-            }
-          />
+        <Link
+          href="https://www.instagram.com/esharehmarcom"
+          target="_blank"
+          rel="noopener noreferrer"
+          passHref
+        >
+          <InstagramIcon className={classes.icon} />
         </Link>
         <Link
           href="https://www.youtube.com/channel/UCO5L7FnGyEvme6Ckr9kBaOw"
+          target="_blank"
+          rel="noopener noreferrer"
           passHref
         >
-          <YouTubeIcon
-            sx={{ fontSize: 30 }}
-            className={classes.youtube}
-            onClick={() =>
-              window.open(
-                "https://www.youtube.com/channel/UCO5L7FnGyEvme6Ckr9kBaOw",
-                "_ self"
-              )
-            }
-          />
+          <YouTubeIcon sx={{ fontSize: 30 }} className={classes.youtube} />
         </Link>
         {!hover ? (
-          <Link href="https://www.aparat.com/esharehmarcom" passHref>
+          <Link
+            href="https://www.aparat.com/esharehmarcom"
+            target="_blank"
+            rel="noopener noreferrer"
+            passHref
+          >
             <Image
               className={classes.icon}
-              onClick={() =>
-                window.open("https://www.aparat.com/esharehmarcom", "_ self")
-              }
               onMouseEnter={() => setHover(true)}
               width={25}
               height={25}
@@ -89,12 +81,14 @@ export default function Footer() {
             />
           </Link>
         ) : (
-          <Link href="https://www.aparat.com/esharehmarcom" passHref>
+          <Link
+            href="https://www.aparat.com/esharehmarcom"
+            target="_blank"
+            rel="noopener noreferrer"
+            passHref
+          >
             <Image
               className={classes.icon}
-              onClick={() =>
-                window.open("https://www.aparat.com/esharehmarcom", "_ self")
-              }
               onMouseLeave={() => setHover(false)}
               width={25}
               height={25}
