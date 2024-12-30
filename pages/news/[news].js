@@ -123,7 +123,14 @@ export default function News({ news, newsTitle }) {
 
   const scrollToDiv = (index) => {
     if (refs.current[index]) {
-      refs.current[index].scrollIntoView({ behavior: "smooth" });
+      const element = refs.current[index];
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - 110;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 

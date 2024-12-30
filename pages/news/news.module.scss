@@ -39,10 +39,8 @@
   h1 {
     margin-bottom: 36px;
   }
-
   h2 {
     margin-top: 16px;
-    color: config.$grey;
   }
 
   .video {
@@ -55,8 +53,8 @@
     @include mixins.allDesktop {
       cursor: pointer;
       &:hover {
-        h3 {
-          color: config.$black;
+        h2 {
+          color: config.$yellow;
         }
       }
     }
@@ -221,21 +219,19 @@
 
   .item {
     cursor: pointer;
-    color: config.$grey;
     position: relative;
 
     @include mixins.allDesktop {
+      cursor: pointer;
       &:hover {
-        color: config.$black;
+        h2 {
+          color: config.$yellow;
+        }
       }
     }
 
-    .title,
-    .titleReverse {
+    h2 {
       margin-top: 16px;
-    }
-    .titleReverse {
-      direction: ltr;
     }
 
     .visibility {

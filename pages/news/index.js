@@ -10,7 +10,7 @@ import newsModel from "@/models/News";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Tooltip from "@mui/material/Tooltip";
-import { replaceSpacesAndHyphens } from "@/services/utility";
+import { replaceSpacesAndHyphens, sliceString } from "@/services/utility";
 import Link from "next/link";
 
 export default function News({ adminNews, activeNews }) {
@@ -78,7 +78,7 @@ export default function News({ adminNews, activeNews }) {
             (() => {
               const {
                 media,
-                [languageType]: { title },
+                [languageType]: { title, paragraph },
                 active,
               } = news[0];
               const lastMedia = media[media.length - 1];
@@ -108,6 +108,7 @@ export default function News({ adminNews, activeNews }) {
                         preload="metadata"
                       />
                     )}
+
                     {permissionControl === "admin" && (
                       <div className={classes.visibility}>
                         {active ? (
@@ -129,6 +130,13 @@ export default function News({ adminNews, activeNews }) {
                   >
                     {title}
                   </h2>
+                  <p
+                    style={{
+                      fontFamily: language ? "FarsiLight" : "FarsiLight",
+                    }}
+                  >
+                    {sliceString(paragraph, 150)}
+                  </p>
                 </Link>
               );
             })()}
@@ -136,7 +144,7 @@ export default function News({ adminNews, activeNews }) {
         <section className={classes.gridList}>
           {news
             .map((item, index) => {
-              const { title } = item[languageType];
+              const { title, paragraph } = item[languageType];
               const { media } = item;
               const lastMedia = media[media.length - 1];
               const newsLink = `/news/${replaceSpacesAndHyphens(
@@ -184,14 +192,21 @@ export default function News({ adminNews, activeNews }) {
                       />
                     )}
                   </div>
-                  <div
-                    className={classes.title}
+
+                  <h2
                     style={{
                       fontFamily: language ? "FarsiLight" : "FarsiLight",
                     }}
                   >
-                    <h2>{title}</h2>
-                  </div>
+                    {title}
+                  </h2>
+                  <p
+                    style={{
+                      fontFamily: language ? "FarsiLight" : "FarsiLight",
+                    }}
+                  >
+                    {sliceString(paragraph, 100)}
+                  </p>
                 </Link>
               );
             })
