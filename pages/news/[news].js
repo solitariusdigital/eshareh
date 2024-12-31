@@ -28,6 +28,7 @@ import {
   replaceSpacesAndHyphens,
   toFarsiNumber,
   applyFontToEnglishWords,
+  sliceString,
 } from "@/services/utility";
 
 export default function News({ news, newsTitle }) {
@@ -383,6 +384,13 @@ export default function News({ news, newsTitle }) {
                 )}`}
                 passHref
               >
+                <div className={classes.keywords}>
+                  {displayNews[languageType].category
+                    .split(" ")
+                    .map((cat, index) => (
+                      <p key={index}>{cat}</p>
+                    ))}
+                </div>
                 <div className={classes.cover}>
                   {news.media[news.media.length - 1].type === "image" ? (
                     <Image
@@ -407,6 +415,13 @@ export default function News({ news, newsTitle }) {
                   )}
                 </div>
                 <h3>{news[languageType].title}</h3>
+                <p
+                  style={{
+                    fontFamily: language ? "FarsiLight" : "FarsiLight",
+                  }}
+                >
+                  {sliceString(news[languageType].paragraph, 150)}
+                </p>
               </Link>
             ))}
           </section>
