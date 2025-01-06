@@ -70,8 +70,8 @@
       justify-content: center;
       margin: 4px 0px;
     }
-
     @include mixins.allDesktop {
+      width: fit-content;
       &:hover {
         color: config.$yellow;
         font-weight: bold;
@@ -88,6 +88,9 @@
     @include mixins.mobile {
       justify-content: center;
       margin: 4px 0px;
+    }
+    @include mixins.allDesktop {
+      width: fit-content;
     }
   }
 }
