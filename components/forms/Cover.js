@@ -52,7 +52,7 @@ export default function Cover({ covers }) {
   const handleSubmit = async () => {
     const isValid = areAllStatesValid([title]);
     if (!isValid || !color || !media) {
-      showAlert("همه موارد الزامیست");
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
 

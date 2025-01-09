@@ -97,7 +97,7 @@ export default function Contact({ pages, mediaData }) {
     ]);
 
     if (!isValid) {
-      showAlert("همه موارد الزامیست");
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
 

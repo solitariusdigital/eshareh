@@ -51,7 +51,9 @@ export default function JobSend({ jobsId }) {
 
   const checkFormValidity = () => {
     if (!name || !birth || !phone || !email || !description) {
-      showAlert(language ? "همه موارد الزامیست" : "All fields are required");
+      showAlert(
+        language ? "موارد ستاره‌دار الزامیست" : "All fields are required"
+      );
       return;
     }
     if (!isValidDateFormat(birth)) {

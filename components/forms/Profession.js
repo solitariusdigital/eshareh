@@ -49,7 +49,7 @@ export default function Profession({ pages, mediaData }) {
     const isValid = areAllStatesValid([main, paragraph]);
 
     if (!isValid) {
-      showAlert("همه موارد الزامیست");
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
 

@@ -92,7 +92,7 @@ export default function JobsDynamic() {
       return;
     }
     if (!isValid || !isValidFields) {
-      showAlert("همه موارد الزامیست");
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
 

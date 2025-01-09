@@ -72,7 +72,7 @@ export default function SolutionsContent({ pages, mediaData }) {
     ]);
 
     if (!isValid) {
-      showAlert("همه موارد الزامیست");
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
 

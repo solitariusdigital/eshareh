@@ -147,7 +147,7 @@ export default function Solutions() {
     ]);
 
     if (!isValid) {
-      showAlert("همه موارد الزامیست");
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
 

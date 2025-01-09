@@ -92,7 +92,7 @@ export default function Team({ pages, mediaData }) {
   const createUser = async () => {
     const isValid = areAllStatesValid([name, title]);
     if (!isValid || !email || !password || !media) {
-      showAlert("همه موارد الزامیست");
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
     if (!validateEmail(email)) {
@@ -149,7 +149,7 @@ export default function Team({ pages, mediaData }) {
   const updateAboutContent = async () => {
     const isValid = areAllStatesValid([description, main, paragraph]);
     if (!isValid) {
-      showAlert("همه موارد الزامیست");
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
 
@@ -195,7 +195,7 @@ export default function Team({ pages, mediaData }) {
   const updateUser = async () => {
     const isValid = areAllStatesValid([name, title]);
     if (!isValid) {
-      showAlert("همه موارد الزامیست");
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
 

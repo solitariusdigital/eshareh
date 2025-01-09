@@ -24,8 +24,8 @@ export default function News() {
       ? editNews.fields
       : [
           {
-            en: { title: "", description: "", tag: "", word: "", link: "" },
-            fa: { title: "", description: "", tag: "", word: "", link: "" },
+            en: { title: "", description: "", tag: "h2", word: "", link: "" },
+            fa: { title: "", description: "", tag: "h2", word: "", link: "" },
           },
         ]
   );
@@ -70,6 +70,8 @@ export default function News() {
   const [uploadImages, setUploadImages] = useState([]);
   const [uploadVideos, setUploadVideos] = useState([]);
   const [uploadVoices, setUploadVoices] = useState([]);
+
+  const tags = ["h2", "h3"];
 
   const handleAddField = () => {
     setFields([
@@ -187,10 +189,20 @@ export default function News() {
     };
   };
 
+  const keysToRemove = ["word", "link"];
+  const removeKeys = (obj, keysToRemove) => {
+    const newObj = { ...obj };
+    keysToRemove.forEach((key) => {
+      delete newObj[key];
+    });
+    return newObj;
+  };
   const handleSubmit = async () => {
-    const isValidFields = fields.every(
-      (field) => areAllStatesValid([field.en]) && areAllStatesValid([field.fa])
-    );
+    const isValidFields = fields.every((field) => {
+      const cleanedEn = removeKeys(field.en, keysToRemove);
+      const cleanedFa = removeKeys(field.fa, keysToRemove);
+      return areAllStatesValid([cleanedEn]) && areAllStatesValid([cleanedFa]);
+    });
     if (
       !isValidFields ||
       !title.fa ||
@@ -199,7 +211,7 @@ export default function News() {
       !descriptionSeo.fa ||
       !category.fa
     ) {
-      showAlert("همه موارد الزامیست");
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
     if (!isValidDateFormat(dateString)) {
@@ -575,18 +587,22 @@ export default function News() {
                 dir="rtl"
                 onChange={(e) => handleTitleChange(index, e.target.value)}
               />
-              <input
+              <select
                 style={{
-                  fontFamily: "english",
+                  fontFamily: "English",
                   marginBottom: "12px",
                 }}
-                id={index}
-                placeholder="h4"
-                type="text"
                 value={field.fa.tag}
                 onChange={(e) => handleTagChange(index, e.target.value)}
-                maxLength={2}
-              />
+              >
+                {tags.map((tag, index) => {
+                  return (
+                    <option key={index} value={tag}>
+                      {tag}
+                    </option>
+                  );
+                })}
+              </select>
               <div className={classes.barReverse}>
                 <p className={classes.label}>
                   <span>*</span>
@@ -605,7 +621,7 @@ export default function News() {
                 onChange={(e) => handleDescriptionChange(index, e.target.value)}
               />
               <div className={classes.barReverse}>
-                <p className={classes.label}>لینک کلمه پاراگراف</p>
+                <p className={classes.label}>لینک کلمه</p>
               </div>
               <input
                 style={{
