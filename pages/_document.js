@@ -20,7 +20,7 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#fdb714" />
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=G-YGNKJ9EZSV"
+            src="https://www.googletagmanager.com/gtag/js?id=G-Z14DF4983K"
           ></script>
           <script
             dangerouslySetInnerHTML={{
@@ -28,7 +28,7 @@ export default class MyDocument extends Document {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'G-YGNKJ9EZSV');
+                gtag('config', 'G-Z14DF4983K');
               `,
             }}
           />
