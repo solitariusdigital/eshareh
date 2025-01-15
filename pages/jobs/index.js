@@ -98,7 +98,7 @@ export default function Jobs({ jobs }) {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "مشاغل" : "Jobs"}
+        title={language ? "فرصت‌های شغلی" : "Jobs"}
         description={
           language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
@@ -109,7 +109,7 @@ export default function Jobs({ jobs }) {
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/jobs",
-          title: language ? "مشاغل" : "Jobs",
+          title: language ? "فرصت‌های شغلی" : "Jobs",
           description: language
             ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
@@ -131,17 +131,15 @@ export default function Jobs({ jobs }) {
       />
       <div className={language ? classes.rowOne : classes.rowOneReverse}>
         <div className={classes.infoBox}>
-          <h1>{language ? "مشاغل" : "Jobs"}</h1>
+          <h1>{language ? "فرصت‌های شغلی" : "Jobs"}</h1>
           <p>
             {language
-              ? "در پورتال شغلی ما، می توانید تمام مشاغل و مشاغل فعلی را پیدا کنید ارائه می دهد. ما مشتاقانه منتظر دریافت درخواست آنلاین شما هستیم."
+              ? "در پورتال شغلی ما، می توانید تمام فرصت‌ها و مشاغل فعلی را پیدا کنید. ما مشتاقانه منتظر دریافت درخواست آنلاین شما هستیم."
               : "In our job portal, you can find all current vacancies and job offers. We are looking forward to receiving your online application."}
           </p>
         </div>
         <div className={classes.navBox}>
-          <h3>
-            {language ? "پیشنهادهای شغلی را پیدا کنید" : "Find job offers"}
-          </h3>
+          <h3>{language ? "فرصت‌های شغلی را پیدا کنید" : "Find job offers"}</h3>
           <div className={classes.navigation}>
             {jobTypes.map((nav, index) => (
               <p
@@ -169,7 +167,7 @@ export default function Jobs({ jobs }) {
           <div className={classes.jobBox}>
             <h3>
               {language
-                ? `${toFarsiNumber(displayJobs.length)} پیشنهاد شغلی موجود`
+                ? `${toFarsiNumber(displayJobs.length)} فرصت‌ شغلی موجود`
                 : `${displayJobs.length} Avilable job offers`}
             </h3>
             {displayJobs.map((job, index) => {

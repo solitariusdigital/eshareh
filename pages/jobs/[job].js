@@ -125,7 +125,7 @@ export default function Job({ jobs, jobTitle }) {
             }
           >
             <h1 onClick={() => Router.push("/jobs")}>
-              {language ? "مشاغل" : "Jobs"}
+              {language ? "فرصت‌های شغلی" : "Jobs"}
             </h1>
             <h2>{displayJob[languageType].title}</h2>
             {permissionControl === "admin" && (
@@ -144,7 +144,7 @@ export default function Job({ jobs, jobTitle }) {
                     fontFamily: language ? "FarsiMedium" : "EnglishMedium",
                   }}
                 >
-                  {language ? "نوع کار:" : " Work type:"}
+                  {language ? "نوع همکاری:" : " Work type:"}
                 </p>
                 <p
                   style={{
@@ -160,7 +160,7 @@ export default function Job({ jobs, jobTitle }) {
                     fontFamily: language ? "FarsiMedium" : "EnglishMedium",
                   }}
                 >
-                  {language ? "بخش:" : "Department:"}
+                  {language ? "دپارتمان:" : "Department:"}
                 </p>
                 <p
                   style={{

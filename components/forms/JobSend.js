@@ -158,12 +158,7 @@ export default function JobSend({ jobsId }) {
           </div>
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p
-                className={classes.label}
-                style={{
-                  fontFamily: language ? "Farsi" : "English",
-                }}
-              >
+              <p className={classes.label}>
                 {language ? "ایمیل" : "Email"}
                 <span>*</span>
               </p>
@@ -223,7 +218,7 @@ export default function JobSend({ jobsId }) {
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
-                {language ? "تماس" : "Phone"}
+                {language ? "موبایل" : "Phone"}
                 <span>*</span>
               </p>
               <CloseIcon
@@ -234,7 +229,7 @@ export default function JobSend({ jobsId }) {
             </div>
             <input
               style={{
-                fontFamily: language ? "Farsi" : "English",
+                fontFamily: language ? "English" : "English",
               }}
               placeholder="09123456789"
               type="tel"
@@ -288,6 +283,7 @@ export default function JobSend({ jobsId }) {
           className={language ? classes.resume : classes.resumeReverse}
         >
           {language ? "رزومه / نمونه کار" : "Resume / Portfolio"}
+          <span>*</span>
         </p>
         <div className={classes.row}>
           <p

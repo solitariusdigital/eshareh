@@ -222,6 +222,10 @@
     color: config.$grey;
     text-align: right;
     margin-bottom: 8px;
+
+    span {
+      color: config.$red;
+    }
   }
   .resumeReverse {
     text-align: left;
