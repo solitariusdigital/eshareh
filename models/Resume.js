@@ -9,8 +9,7 @@ const ResumeSchema = new Schema(
     description: String,
     media: String,
     jobsId: String,
-    accepted: Boolean,
-    rejected: Boolean,
+    status: String,
   },
   { timestamps: true }
 );

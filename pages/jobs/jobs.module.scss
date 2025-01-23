@@ -62,6 +62,17 @@
       width: calc(100% - 24px);
     }
 
+    button {
+      margin-bottom: 12px;
+      @include mixins.button(config.$yellow, config.$white);
+
+      @include mixins.allDesktop() {
+        &:hover {
+          color: config.$yellow;
+        }
+      }
+    }
+
     .navigation {
       display: flex;
       flex-direction: row;
@@ -147,22 +158,27 @@
 
     @include mixins.allDesktop {
       position: absolute;
-      top: -240px;
+      left: 80%;
+      top: 20%;
+      transform: translate(-50%, -50%);
       width: 40%;
     }
     @include mixins.fourK {
-      position: absolute;
-      top: -340px;
+      left: 76%;
       width: 50%;
     }
     @include mixins.tablet {
       position: absolute;
-      top: -280px;
+      left: 76%;
+      top: 20%;
+      transform: translate(-50%, -50%);
       width: 50%;
     }
     @include mixins.tabletPortrait {
       position: absolute;
-      top: -220px;
+      left: 76%;
+      top: 20%;
+      transform: translate(-50%, -50%);
       width: 50%;
     }
     @include mixins.mobile {
@@ -215,7 +231,25 @@
   }
 
   .imageBox {
-    left: 0px;
+    @include mixins.allDesktop {
+      left: 20%;
+    }
+    @include mixins.allDesktop {
+      left: 20%;
+    }
+    @include mixins.fourK {
+      left: 24%;
+      width: 50%;
+    }
+    @include mixins.tablet {
+      left: 24%;
+    }
+    @include mixins.tabletPortrait {
+      left: 24%;
+    }
+    @include mixins.mobile {
+      width: 100%;
+    }
 
     .image {
       display: inline-block;
@@ -234,8 +268,8 @@
 .jobContainerReverse {
   position: relative;
   margin: auto;
-  color: config.$black;
   margin-top: 150px;
+  color: config.$black;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
   direction: rtl;
@@ -331,7 +365,7 @@
       width: 40%;
 
       @include mixins.fourK {
-        width: 30%;
+        width: 35%;
       }
       @include mixins.tabletPortrait {
         width: 65%;
@@ -341,7 +375,7 @@
       }
       @include mixins.allDesktop {
         position: relative;
-        bottom: 15px;
+        bottom: 10px;
       }
       @include mixins.tablet {
         position: relative;
@@ -373,4 +407,48 @@
 }
 .jobContainerReverse {
   direction: ltr;
+}
+
+.resumeContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  gap: 20px;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  margin: 150px auto;
+  direction: rtl;
+
+  .resume {
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: config.$card-shadow;
+    height: fit-content;
+
+    p,
+    h3 {
+      margin: 4px 0px;
+    }
+
+    h3 {
+      color: config.$yellow;
+    }
+  }
+
+  .action {
+    margin-top: 12px;
+
+    .row {
+      width: 50%;
+      @include mixins.row-space-between-center();
+
+      h3 {
+        @include mixins.allDesktop {
+          &:hover {
+            color: config.$yellow !important;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
 }

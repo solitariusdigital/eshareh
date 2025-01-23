@@ -10,6 +10,7 @@ import {
   fourGenerator,
   uploadMedia,
   toEnglishNumber,
+  toFarsiNumber,
   validateEmail,
   isValidDateFormat,
   isEnglishNumber,
@@ -31,6 +32,7 @@ export default function JobSend({ jobsId }) {
   const [resumeRecieved, setResumeRecieved] = useState(false);
   const sourceLink = "https://eshareh.storage.iran.liara.space";
   const router = useRouter();
+  const maxWords = 150;
 
   const handleFileChange = (event) => {
     setMedia(event);
@@ -49,10 +51,30 @@ export default function JobSend({ jobsId }) {
     setFileName("");
   };
 
+  const handleDescriptionChange = (e) => {
+    const inputText = e.target.value;
+    const wordCount = inputText.trim()
+      ? inputText.trim().split(/\s+/).length
+      : 0;
+
+    if (wordCount <= maxWords) {
+      setDescription(inputText);
+    }
+  };
+  const currentWordCount = description.trim()
+    ? description.trim().split(/\s+/).length
+    : 0;
+  const remainingWords = maxWords - currentWordCount;
+
   const checkFormValidity = () => {
+    let phoneEnglish = isEnglishNumber(phone) ? phone : toEnglishNumber(phone);
+
+    console.log(phoneEnglish);
     if (!name || !birth || !phone || !email || !description) {
       showAlert(
-        language ? "موارد ستاره‌دار الزامیست" : "All fields are required"
+        language
+          ? "موارد ستاره‌دار الزامیست"
+          : "Fields with an asterisk are required"
       );
       return;
     }
@@ -77,7 +99,7 @@ export default function JobSend({ jobsId }) {
       inputFile.value = null;
       return;
     }
-    let phoneEnglish = isEnglishNumber(phone) ? phone : toEnglishNumber(phone);
+    // let phoneEnglish = isEnglishNumber(phone) ? phone : toEnglishNumber(phone);
     if (phoneEnglish.length === 11 && phoneEnglish.startsWith("09")) {
       submitResume(phoneEnglish);
     } else {
@@ -104,8 +126,7 @@ export default function JobSend({ jobsId }) {
       description: description.trim(),
       media: mediaLink,
       jobsId: jobsId,
-      accepted: false,
-      rejected: false,
+      status: "",
     };
 
     await createResumeApi(resumeObject);
@@ -126,7 +147,7 @@ export default function JobSend({ jobsId }) {
     <Fragment>
       <div className={classes.container} style={{ margin: "0px" }}>
         <div
-          className={classes.form}
+          className={classes.formJobSend}
           style={{
             fontFamily: language ? "Farsi" : "English",
           }}
@@ -184,7 +205,7 @@ export default function JobSend({ jobsId }) {
           </div>
         </div>
         <div
-          className={classes.form}
+          className={classes.formJobSend}
           style={{
             fontFamily: language ? "Farsi" : "English",
           }}
@@ -243,7 +264,7 @@ export default function JobSend({ jobsId }) {
           </div>
         </div>
       </div>
-      <div className={classes.form}>
+      <div className={classes.formJobSend}>
         <div className={classes.inputTextArea}>
           <div className={classes.bar}>
             <p className={classes.label}>
@@ -264,11 +285,13 @@ export default function JobSend({ jobsId }) {
             type="text"
             id="description"
             name="description"
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={handleDescriptionChange}
             value={description}
             autoComplete="off"
+            maxLength={maxWords * 5}
           ></textarea>
         </div>
+        <p>{language ? toFarsiNumber(remainingWords) : remainingWords}</p>
       </div>
       <div
         className={classes.formAction}
@@ -282,7 +305,7 @@ export default function JobSend({ jobsId }) {
           }}
           className={language ? classes.resume : classes.resumeReverse}
         >
-          {language ? "رزومه / نمونه کار" : "Resume / Portfolio"}
+          {language ? "رزومه / پورتفولیو" : "Resume / Portfolio"}
           <span>*</span>
         </p>
         <div className={classes.row}>
@@ -303,25 +326,24 @@ export default function JobSend({ jobsId }) {
           )}
         </div>
         <div className={classes.row}>
-          <div className={classes.input}>
-            <label className={`file ${classes.file}`}>
-              <input
-                onChange={(e) => {
-                  handleFileChange(e.target.files[0]);
-                }}
-                id="inputFile"
-                type="file"
-                accept=".pdf"
-              />
-              <p
-                style={{
-                  fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                }}
-              >
-                {language ? "انتخاب فایل" : "Select a file"}
-              </p>
-            </label>
-          </div>
+          <label className={classes.file}>
+            <input
+              onChange={(e) => {
+                handleFileChange(e.target.files[0]);
+              }}
+              id="inputFile"
+              type="file"
+              accept=".pdf"
+            />
+            <p
+              className={language ? classes.label : classes.labelReverse}
+              style={{
+                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              }}
+            >
+              {language ? "بارگذاری" : "Select a file"}
+            </p>
+          </label>
           <button
             disabled={disableButton}
             style={{
@@ -329,7 +351,7 @@ export default function JobSend({ jobsId }) {
             }}
             onClick={() => checkFormValidity()}
           >
-            {language ? "ارسال" : "Submit"}
+            {language ? "تایید" : "Submit"}
           </button>
         </div>
         <p

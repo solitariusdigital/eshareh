@@ -2,7 +2,7 @@ import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./jobs.module.scss";
 import Image from "next/legacy/image";
-import portal from "@/assets/portal.png";
+import jobsImage from "@/assets/jobsImage.png";
 import { NextSeo } from "next-seo";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
@@ -134,12 +134,28 @@ export default function Jobs({ jobs }) {
           <h1>{language ? "فرصت‌های شغلی" : "Jobs"}</h1>
           <p>
             {language
-              ? "در پورتال شغلی ما، می توانید تمام فرصت‌ها و مشاغل فعلی را پیدا کنید. ما مشتاقانه منتظر دریافت درخواست آنلاین شما هستیم."
+              ? "در پورتال شغلی ما می‌توانید تمام فرصت‌های شغلی و آگهی‌های استخدام فعلی را مشاهده کنید. مشتاقانه منتظر دریافت درخواست آنلاین شما هستیم."
               : "In our job portal, you can find all current vacancies and job offers. We are looking forward to receiving your online application."}
           </p>
         </div>
         <div className={classes.navBox}>
-          <h3>{language ? "فرصت‌های شغلی را پیدا کنید" : "Find job offers"}</h3>
+          {permissionControl === "admin" && (
+            <button
+              style={{
+                fontFamily: language ? "Farsi" : "English",
+              }}
+              onClick={() => Router.push("/jobs/resume")}
+            >
+              {language ? "لیست رزومه" : "Resume list"}
+            </button>
+          )}
+          <h3
+            style={{
+              fontFamily: language ? "FarsiBold" : "EnglishMedium",
+            }}
+          >
+            {language ? "جستجو در فرصت‌های شغلی" : "Find job offers"}
+          </h3>
           <div className={classes.navigation}>
             {jobTypes.map((nav, index) => (
               <p
@@ -232,8 +248,8 @@ export default function Jobs({ jobs }) {
           <div className={classes.imageBox}>
             <Image
               className={classes.image}
-              src={portal}
-              blurDataURL={portal}
+              src={jobsImage}
+              blurDataURL={jobsImage}
               placeholder="blur"
               alt="image"
               layout="responsive"
