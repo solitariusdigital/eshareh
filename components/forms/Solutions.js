@@ -11,6 +11,7 @@ import {
   uploadMedia,
   replaceSpacesAndHyphens,
   areAllStatesValid,
+  isValidDateFormat,
 } from "@/services/utility";
 
 export default function Solutions() {
@@ -145,12 +146,14 @@ export default function Solutions() {
       year,
       category,
     ]);
-
     if (!isValid) {
       showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
-
+    if (!isValidDateFormat(year.fa) || !isValidDateFormat(year.en)) {
+      showAlert("تاریخ نامعتبر");
+      return;
+    }
     if (
       !editSolution &&
       imagesPreview.length === 0 &&
@@ -427,7 +430,7 @@ export default function Solutions() {
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
-                Year
+                Date
                 <span>*</span>
               </p>
               <CloseIcon
@@ -442,7 +445,7 @@ export default function Solutions() {
               />
             </div>
             <input
-              placeholder="2023"
+              placeholder="dd/mm/yyyy"
               style={{
                 fontFamily: "English",
               }}
@@ -645,7 +648,7 @@ export default function Solutions() {
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
-                سال
+                تاریخ شمسی
               </p>
               <CloseIcon
                 className="icon"
@@ -659,7 +662,7 @@ export default function Solutions() {
               />
             </div>
             <input
-              placeholder="1403"
+              placeholder="dd/mm/yyyy"
               style={{
                 fontFamily: "English",
               }}

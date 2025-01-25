@@ -3,7 +3,7 @@ import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./solutions.module.scss";
 import Image from "next/legacy/image";
-import { replaceSpacesAndHyphens } from "@/services/utility";
+import { replaceSpacesAndHyphens, parsePersianDate } from "@/services/utility";
 import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
@@ -34,13 +34,17 @@ export default function Solutions({
     if (permissionControl === "admin") {
       setSolutions(
         adminSolutions.sort(
-          (a, b) => b[languageType].year - a[languageType].year
+          (a, b) =>
+            parsePersianDate(b[languageType].year) -
+            parsePersianDate(a[languageType].year)
         )
       );
     } else {
       setSolutions(
         activeSolutions.sort(
-          (a, b) => b[languageType].year - a[languageType].year
+          (a, b) =>
+            parsePersianDate(b[languageType].year) -
+            parsePersianDate(a[languageType].year)
         )
       );
     }

@@ -7,7 +7,7 @@ const SolutionSchema = new Schema(
       subtitle: String,
       brief: String,
       solution: String,
-      year: Number,
+      year: String,
       category: String,
     },
     en: {
@@ -15,7 +15,7 @@ const SolutionSchema = new Schema(
       subtitle: String,
       brief: String,
       solution: String,
-      year: Number,
+      year: String,
       category: String,
     },
     media: [],

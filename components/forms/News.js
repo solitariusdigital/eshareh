@@ -72,13 +72,12 @@ export default function News() {
   const [uploadVoices, setUploadVoices] = useState([]);
 
   const tags = ["h2", "h3"];
-
   const handleAddField = () => {
     setFields([
       ...fields,
       {
-        en: { title: "", description: "", tag: "", word: "", link: "" },
-        fa: { title: "", description: "", tag: "", word: "", link: "" },
+        en: { title: "", description: "", tag: "h2", word: "", link: "" },
+        fa: { title: "", description: "", tag: "h2", word: "", link: "" },
       },
     ]);
   };

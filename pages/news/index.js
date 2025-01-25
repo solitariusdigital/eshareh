@@ -10,7 +10,11 @@ import newsModel from "@/models/News";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Tooltip from "@mui/material/Tooltip";
-import { replaceSpacesAndHyphens, sliceString } from "@/services/utility";
+import {
+  replaceSpacesAndHyphens,
+  sliceString,
+  parsePersianDate,
+} from "@/services/utility";
 import Link from "next/link";
 
 export default function News({ adminNews, activeNews }) {
@@ -22,11 +26,17 @@ export default function News({ adminNews, activeNews }) {
   useEffect(() => {
     if (permissionControl === "admin") {
       setNews(
-        adminNews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        adminNews.sort(
+          (a, b) =>
+            parsePersianDate(b.dateString) - parsePersianDate(a.dateString)
+        )
       );
     } else {
       setNews(
-        activeNews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        activeNews.sort(
+          (a, b) =>
+            parsePersianDate(b.dateString) - parsePersianDate(a.dateString)
+        )
       );
     }
   }, [activeNews, adminNews, languageType, permissionControl]);

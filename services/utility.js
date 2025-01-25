@@ -120,6 +120,13 @@ export function areAllStatesValid(states) {
   return true;
 }
 
+export function parsePersianDate(dateString) {
+  const [day, month, year] = dateString.split("/").map(Number);
+  const gregorianYear = year + 621;
+  const date = new Date(gregorianYear, month - 1, day);
+  return date.getTime();
+}
+
 export function validateEmail(value) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(value);
