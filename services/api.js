@@ -86,6 +86,15 @@ export const getSolutionsApi = async () => {
   });
   return await response.json();
 };
+export const deleteSolutionApi = async (id) => {
+  const response = await fetch(`/api/solutions?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
 
 // controls api
 export const updateControlApi = async (data) => {

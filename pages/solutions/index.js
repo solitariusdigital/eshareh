@@ -259,7 +259,13 @@ export default function Solutions({
                       fontFamily: language ? "FarsiLight" : "EnglishLight",
                     }}
                   >
-                    <h3>{title}</h3>
+                    <h3
+                      style={{
+                        fontSize: language ? "21px" : "",
+                      }}
+                    >
+                      {title}
+                    </h3>
                   </div>
                 </Link>
               );

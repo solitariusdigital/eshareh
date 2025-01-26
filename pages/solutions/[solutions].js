@@ -19,12 +19,14 @@ import StarIcon from "@mui/icons-material/Star";
 import Tooltip from "@mui/material/Tooltip";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {
   getSingleSolutionApi,
   updateSolutionApi,
   createCoverApi,
   getCoversApi,
   updateCoverApi,
+  deleteSolutionApi,
 } from "@/services/api";
 import {
   replaceSpacesAndHyphens,
@@ -372,6 +374,15 @@ export default function Solution({ solutions, projectTitle }) {
     router.replace(router.asPath);
   };
 
+  const deleteSolution = async (project) => {
+    let confirmationMessage = "حذف مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      await deleteSolutionApi(project["_id"]);
+      Router.push("/solutions");
+    }
+  };
+
   return (
     <Fragment>
       {project && (
@@ -448,6 +459,12 @@ export default function Solution({ solutions, projectTitle }) {
                       setEditSolution(project);
                       setEditNews(null);
                     }}
+                  />
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <DeleteOutlineIcon
+                    className="icon"
+                    onClick={() => deleteSolution(project)}
                   />
                 </Tooltip>
               </div>

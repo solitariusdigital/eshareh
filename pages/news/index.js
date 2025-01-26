@@ -113,12 +113,11 @@ export default function News({ adminNews, activeNews }) {
                       <video
                         className={classes.video}
                         src={`${lastMedia.link}#t=0.1`}
-                        controls
+                        // controls
                         playsInline
                         preload="metadata"
                       />
                     )}
-
                     {permissionControl === "admin" && (
                       <div className={classes.visibility}>
                         {active ? (
@@ -196,7 +195,7 @@ export default function News({ adminNews, activeNews }) {
                       <video
                         className={classes.video}
                         src={lastMedia.link + "#t=0.1"}
-                        controls
+                        // controls
                         playsInline
                         preload="metadata"
                       />

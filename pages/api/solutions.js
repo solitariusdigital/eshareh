@@ -43,6 +43,16 @@ export default async function solutionsHandler(req, res) {
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
+    case "DELETE":
+      try {
+        const deleteSolution = await Solution.findByIdAndDelete(req.query.id);
+        if (!deleteSolution) {
+          return res.status(404).json({ msg: "Solution not found" });
+        }
+        return res.status(200).json({ msg: "Solution deleted successfully" });
+      } catch (err) {
+        return res.status(400).json({ msg: err.message });
+      }
     default:
       return res.status(405).json({ msg: "Method Not Allowed" });
   }

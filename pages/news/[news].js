@@ -1,11 +1,4 @@
-import {
-  useState,
-  useContext,
-  Fragment,
-  useEffect,
-  useRef,
-  createElement,
-} from "react";
+import { useState, useContext, Fragment, useEffect, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./news.module.scss";
@@ -19,11 +12,12 @@ import logoFarsi from "@/assets/logoFarsi.svg";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Tooltip from "@mui/material/Tooltip";
 import Link from "next/link";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { getSingleNewsApi, updateNewsApi } from "@/services/api";
+import { getSingleNewsApi, updateNewsApi, deleteNewsApi } from "@/services/api";
 import {
   replaceSpacesAndHyphens,
   toFarsiNumber,
@@ -114,12 +108,28 @@ export default function News({ news, newsTitle }) {
     router.replace(router.asPath);
   };
 
-  const replaceKeywordsWithLinks = (text, keyword, link) => {
-    let modifiedText = text;
-    const linkTag = `<a style="color: #fdb714;" href="${link}" target="_blank" rel="noopener noreferrer">${keyword}</a>`;
-    const regex = new RegExp(keyword, "g");
-    modifiedText = modifiedText.replace(regex, linkTag);
-    return modifiedText;
+  const applyFontAndReplaceKeywords = (
+    string,
+    fontType,
+    size,
+    language,
+    keyword,
+    link
+  ) => {
+    // Apply font to English words
+    let fontSize = language ? size : null;
+    const pattern = language ? /[a-zA-Z0-9۰-۹]+/g : /[0-9]+/g;
+    // Find and replace English words with span tags for specific font type
+    let outputString = string.replace(pattern, function (match) {
+      return `<span style="font-family: ${fontType}; font-size: ${fontSize};">${match}</span>`;
+    });
+    // Replace specified keyword with a link
+    if (keyword && link) {
+      const linkTag = `<a style="color: #fdb714;" href="${link}" target="_blank" rel="noopener noreferrer">${keyword}</a>`;
+      const regex = new RegExp(keyword, "g");
+      outputString = outputString.replace(regex, linkTag);
+    }
+    return outputString;
   };
 
   const scrollToDiv = (index) => {
@@ -132,6 +142,29 @@ export default function News({ news, newsTitle }) {
         top: offsetPosition,
         behavior: "smooth",
       });
+    }
+  };
+
+  const CombinedComponent = ({ list, languageType, language }) => {
+    const Tag = list[languageType].tag;
+    const title = list[languageType].title;
+    return (
+      <Tag>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: applyFontToEnglishWords(title, "English", "22px", language),
+          }}
+        />
+      </Tag>
+    );
+  };
+
+  const deleteNews = async (news) => {
+    let confirmationMessage = "حذف مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      await deleteNewsApi(news["_id"]);
+      Router.push("/news");
     }
   };
 
@@ -207,6 +240,12 @@ export default function News({ news, newsTitle }) {
                       Router.push("/admin");
                       setEditNews(displayNews);
                     }}
+                  />
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <DeleteOutlineIcon
+                    className="icon"
+                    onClick={() => deleteNews(displayNews)}
                   />
                 </Tooltip>
               </div>
@@ -342,11 +381,11 @@ export default function News({ news, newsTitle }) {
                   ref={(el) => (refs.current[index] = el)}
                   id={`div-${index}`}
                 >
-                  {createElement(
-                    list[languageType].tag,
-                    null,
-                    list[languageType].title
-                  )}
+                  <CombinedComponent
+                    list={list}
+                    languageType={languageType}
+                    language={language}
+                  />
                   {list[languageType].description
                     .split("\n\n")
                     .map((desc, index) => (
@@ -357,8 +396,11 @@ export default function News({ news, newsTitle }) {
                         }}
                         className={classes.paragraph}
                         dangerouslySetInnerHTML={{
-                          __html: replaceKeywordsWithLinks(
+                          __html: applyFontAndReplaceKeywords(
                             desc,
+                            "English",
+                            "16px",
+                            language,
                             list[languageType].word,
                             list[languageType].link
                           ),
