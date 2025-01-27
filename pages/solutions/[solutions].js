@@ -262,40 +262,32 @@ export default function Solution({ solutions, projectTitle }) {
   };
 
   const makeCover = async (index) => {
-    // Validate index
-    if (index < 0 || index >= project.media.length) {
-      console.error("Invalid index for cover media.");
-      return;
-    }
-    // Push current cover media to the media array
-    project.media.push(project.coverMedia);
-    // Create the updated data object
-    let dataObject = {
-      ...project,
-      media: project.media.filter((item, i) => i !== index),
-      coverMedia: project.media[index],
-    };
-    try {
-      // Update the solution
-      await updateSolutionApi(dataObject);
-      // Retrieve existing covers
-      let getCovers = await getCoversApi();
-      const foundCover = getCovers.find(
-        (cover) => cover.title.en === project.en.title
-      );
-      // Update cover if found
-      if (foundCover) {
-        const cover = {
-          ...foundCover,
-          coverMedia: project.media[index],
-        };
-        await updateCoverApi(cover);
+    let confirmationMessage = "کاور مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      let dataObject = {
+        ...project,
+        media: project.media.filter((item, i) => i !== index),
+        coverMedia: project.media[index],
+      };
+      try {
+        await updateSolutionApi(dataObject);
+        let getCovers = await getCoversApi();
+        const foundCover = getCovers.find(
+          (cover) => cover.title.en === project.en.title
+        );
+        // Update cover if found
+        if (foundCover) {
+          const cover = {
+            ...foundCover,
+            coverMedia: project.media[index],
+          };
+          await updateCoverApi(cover);
+        }
+      } finally {
+        router.replace(router.asPath);
       }
-    } catch (error) {
-      console.error("Error updating project or cover:", error);
-      // Handle error appropriately (e.g., show a message to the user)
     }
-    router.replace(router.asPath);
   };
 
   const manageCoverSlide = async () => {
@@ -364,22 +356,27 @@ export default function Solution({ solutions, projectTitle }) {
     router.replace(router.asPath);
   };
 
-  const imageActivation = async (value, index) => {
-    project.media[index].active = value;
-    let dataObject = {
-      ...project,
-      media: project.media,
-    };
-    await updateSolutionApi(dataObject);
-    router.replace(router.asPath);
-  };
-
   const deleteSolution = async (project) => {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
       await deleteSolutionApi(project["_id"]);
       Router.push("/solutions");
+    }
+  };
+
+  const deleteImage = async (index) => {
+    let confirmationMessage = "حذف مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      let media = [...project.media];
+      media.splice(index, 1);
+      let dataObject = {
+        ...project,
+        media: media,
+      };
+      await updateSolutionApi(dataObject);
+      router.replace(router.asPath);
     }
   };
 
@@ -633,69 +630,54 @@ export default function Solution({ solutions, projectTitle }) {
                             fontFamily: language ? "English" : "English",
                           }}
                         >
-                          <div className={classes.item}>
-                            {image.active ? (
-                              <Tooltip title="Hide">
-                                <VerifiedUserIcon
-                                  sx={{ color: "#57a361" }}
-                                  className="icon"
-                                  onClick={() => imageActivation(false, index)}
-                                />
-                              </Tooltip>
-                            ) : (
-                              <Tooltip title="Show">
-                                <VisibilityOffIcon
-                                  sx={{ color: "#d40d12" }}
-                                  className="icon"
-                                  onClick={() => imageActivation(true, index)}
-                                />
-                              </Tooltip>
+                          <Fragment>
+                            <p
+                              className={classes.item}
+                              onClick={() => deleteImage(index)}
+                            >
+                              Delete
+                            </p>
+                            <p
+                              className={classes.item}
+                              onClick={() => makeCover(index)}
+                            >
+                              Cover
+                            </p>
+                            <p
+                              className={classes.item}
+                              onClick={() => makeSlide(index)}
+                            >
+                              Slide
+                            </p>
+                            <p
+                              className={classes.item}
+                              onClick={() => moveItem(index, "up")}
+                            >
+                              Up
+                            </p>
+                            <p
+                              className={classes.item}
+                              onClick={() => moveItem(index, "down")}
+                            >
+                              Down
+                            </p>
+                            {project.mediaDouble.length < 2 && (
+                              <p
+                                className={classes.item}
+                                onClick={() => makeDouble(index)}
+                              >
+                                2x
+                              </p>
                             )}
-                          </div>
-                          {image.active && (
-                            <Fragment>
+                            {project.mediaQuadruple.length < 4 && (
                               <p
                                 className={classes.item}
-                                onClick={() => makeCover(index)}
+                                onClick={() => makeQuadruple(index)}
                               >
-                                Cover
+                                4x
                               </p>
-                              <p
-                                className={classes.item}
-                                onClick={() => makeSlide(index)}
-                              >
-                                Slide
-                              </p>
-                              <p
-                                className={classes.item}
-                                onClick={() => moveItem(index, "up")}
-                              >
-                                Up
-                              </p>
-                              <p
-                                className={classes.item}
-                                onClick={() => moveItem(index, "down")}
-                              >
-                                Down
-                              </p>
-                              {project.mediaDouble.length < 2 && (
-                                <p
-                                  className={classes.item}
-                                  onClick={() => makeDouble(index)}
-                                >
-                                  2x
-                                </p>
-                              )}
-                              {project.mediaQuadruple.length < 4 && (
-                                <p
-                                  className={classes.item}
-                                  onClick={() => makeQuadruple(index)}
-                                >
-                                  4x
-                                </p>
-                              )}
-                            </Fragment>
-                          )}
+                            )}
+                          </Fragment>
                         </div>
                       )}
                     {image.type === "image" && (

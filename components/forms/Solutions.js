@@ -64,6 +64,7 @@ export default function Solutions() {
     "Advertising-Media",
     "Advertising-Digital",
     "Media-Digital",
+    "Advertising-Media-Digital",
   ];
 
   const selectCategories = {
@@ -90,6 +91,10 @@ export default function Solutions() {
     "Media-Digital": {
       fa: "media-digital",
       en: "media-digital",
+    },
+    "Advertising-Media-Digital": {
+      fa: "advertising-media-digital",
+      en: "advertising-media-digital",
     },
   };
 
