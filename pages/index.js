@@ -17,7 +17,7 @@ import pageModel from "@/models/Page";
 import mediaModel from "@/models/Media";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
-import { applyFontToEnglishWords } from "@/services/utility";
+import { applyFontToEnglishWords, parsePersianDate } from "@/services/utility";
 import Link from "next/link";
 
 export default function Home({
@@ -430,7 +430,10 @@ export async function getServerSideProps(context) {
 
     let activeSolutions = solutions
       .filter((project) => project.active)
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      .sort(
+        (a, b) =>
+          parsePersianDate(b["fa"].year) - parsePersianDate(a["fa"].year)
+      );
 
     let activeCovers = covers.filter((project) => project.active);
 
