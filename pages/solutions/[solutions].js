@@ -235,6 +235,16 @@ export default function Solution({ solutions, projectTitle }) {
     router.replace(router.asPath);
   };
 
+  const imageActivation = async (value, index) => {
+    project.media[index].active = value;
+    let dataObject = {
+      ...project,
+      media: project.media,
+    };
+    await updateSolutionApi(dataObject);
+    router.replace(router.asPath);
+  };
+
   const makeSlide = async (index) => {
     let slideMedia = [...project.slideMedia, project.media[index]];
     let findIndex = project.media.indexOf(project.media[index]);
@@ -630,6 +640,25 @@ export default function Solution({ solutions, projectTitle }) {
                             fontFamily: language ? "English" : "English",
                           }}
                         >
+                          <div className={classes.item}>
+                            {image.active ? (
+                              <Tooltip title="Hide">
+                                <VerifiedUserIcon
+                                  sx={{ color: "#57a361" }}
+                                  className="icon"
+                                  onClick={() => imageActivation(false, index)}
+                                />
+                              </Tooltip>
+                            ) : (
+                              <Tooltip title="Show">
+                                <VisibilityOffIcon
+                                  sx={{ color: "#d40d12" }}
+                                  className="icon"
+                                  onClick={() => imageActivation(true, index)}
+                                />
+                              </Tooltip>
+                            )}
+                          </div>
                           <Fragment>
                             <p
                               className={classes.item}
