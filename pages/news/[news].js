@@ -383,8 +383,8 @@ export default function News({ news, newsTitle }) {
                 >
                   <CombinedComponent
                     list={list}
-                    languageType={languageType}
-                    language={language}
+                    languageType={"en"}
+                    language={"english"}
                   />
                   {list[languageType].description
                     .split("\n\n")
@@ -400,7 +400,7 @@ export default function News({ news, newsTitle }) {
                             desc,
                             "English",
                             "16px",
-                            language,
+                            "en",
                             list[languageType].word,
                             list[languageType].link
                           ),
