@@ -48,11 +48,7 @@ export default function Profession({ pageData, mediaData }) {
             alt: language ? "اشاره" : "Eshareh",
           },
         }}
-        robotsProps={{
-          maxSnippet: -1,
-          maxImagePreview: "large",
-          maxVideoPreview: -1,
-        }}
+        robots="index, follow"
       />
       <div
         className={classes.container}

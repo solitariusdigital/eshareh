@@ -63,11 +63,7 @@ export default function Search({ activeSolutions }) {
             alt: language ? "اشاره" : "Eshareh",
           },
         }}
-        robotsProps={{
-          maxSnippet: -1,
-          maxImagePreview: "large",
-          maxVideoPreview: -1,
-        }}
+        robots="index, follow"
       />
       <div
         className={`${classes.container} animate__animated animate__slideInDown`}

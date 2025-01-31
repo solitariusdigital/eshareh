@@ -201,11 +201,7 @@ export default function News({ news, newsTitle }) {
                 alt: language ? "اشاره" : "Eshareh",
               },
             }}
-            robotsProps={{
-              maxSnippet: -1,
-              maxImagePreview: "large",
-              maxVideoPreview: -1,
-            }}
+            robots="index, follow"
             additionalMetaTags={[
               {
                 name: "keywords",

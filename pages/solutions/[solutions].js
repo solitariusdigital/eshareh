@@ -424,11 +424,7 @@ export default function Solution({ solutions, projectTitle }) {
                 alt: language ? "اشاره" : "Eshareh",
               },
             }}
-            robotsProps={{
-              maxSnippet: -1,
-              maxImagePreview: "large",
-              maxVideoPreview: -1,
-            }}
+            robots="index, follow"
           />
           {permissionControl === "admin" && !displayGallerySlider && (
             <Fragment>
