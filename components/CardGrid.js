@@ -84,7 +84,13 @@ export default function CardGrid({ solutions, direction }) {
               )}`}
               passHref
             >
-              <h4>{solutions[0][languageType].title}</h4>
+              <h4
+                style={{
+                  fontSize: language ? "18px" : "",
+                }}
+              >
+                {solutions[0][languageType].title}
+              </h4>
             </Link>
           </div>
           <div className={classes.grid}>
@@ -131,7 +137,13 @@ export default function CardGrid({ solutions, direction }) {
                     )}`}
                     passHref
                   >
-                    <h4>{project[languageType].title}</h4>
+                    <h4
+                      style={{
+                        fontSize: language ? "18px" : "",
+                      }}
+                    >
+                      {project[languageType].title}
+                    </h4>
                   </Link>
                 </div>
               ))
@@ -180,7 +192,13 @@ export default function CardGrid({ solutions, direction }) {
                 )}`}
                 passHref
               >
-                <h4>{project[languageType].title}</h4>
+                <h4
+                  style={{
+                    fontSize: language ? "18px" : "",
+                  }}
+                >
+                  {project[languageType].title}
+                </h4>
               </Link>
             </div>
           ))}

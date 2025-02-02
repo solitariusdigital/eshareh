@@ -50,7 +50,7 @@ export default function NextProject({ project }) {
             </h3>
             <h3
               style={{
-                fontFamily: language ? "EnglishLight" : "EnglishLight",
+                fontFamily: language ? "FarsiLight" : "EnglishLight",
               }}
               className={classes.seperation}
             >

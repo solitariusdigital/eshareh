@@ -524,7 +524,7 @@ export default function Solution({ solutions, projectTitle }) {
                   </h3>
                   <h3
                     style={{
-                      fontFamily: language ? "EnglishLight" : "EnglishLight",
+                      fontFamily: language ? "FarsiLight" : "EnglishLight",
                     }}
                     className={classes.seperation}
                   >
@@ -791,7 +791,7 @@ export default function Solution({ solutions, projectTitle }) {
                           <h3
                             style={{
                               fontFamily: language
-                                ? "EnglishLight"
+                                ? "FarsiLight"
                                 : "EnglishLight",
                             }}
                             className={classes.seperation}

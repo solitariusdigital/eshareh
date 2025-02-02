@@ -348,28 +348,30 @@ export default function News({ news, newsTitle }) {
                     }}
                   ></p>
                 ))}
-              <div className={classes.table}>
-                <div
-                  className={classes.main}
-                  onClick={() => setExpandedItem(!expandedItem)}
-                >
-                  <h4>فهرست مطالب</h4>
-                  {expandedItem ? (
-                    <ExpandLessIcon sx={{ fontSize: 20 }} />
-                  ) : (
-                    <ExpandMoreIcon sx={{ fontSize: 20 }} />
+              {displayNews.fields.length > 0 && (
+                <div className={classes.table}>
+                  <div
+                    className={classes.main}
+                    onClick={() => setExpandedItem(!expandedItem)}
+                  >
+                    <h4>فهرست مطالب</h4>
+                    {expandedItem ? (
+                      <ExpandLessIcon sx={{ fontSize: 20 }} />
+                    ) : (
+                      <ExpandMoreIcon sx={{ fontSize: 20 }} />
+                    )}
+                  </div>
+                  {expandedItem && (
+                    <ul className={classes.list}>
+                      {displayNews.fields.map((list, index) => (
+                        <li key={index} onClick={() => scrollToDiv(index)}>
+                          {list[languageType].title}
+                        </li>
+                      ))}
+                    </ul>
                   )}
                 </div>
-                {expandedItem && (
-                  <ul className={classes.list}>
-                    {displayNews.fields.map((list, index) => (
-                      <li key={index} onClick={() => scrollToDiv(index)}>
-                        {list[languageType].title}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+              )}
               {displayNews.fields.map((list, index) => (
                 <div
                   className={classes.paragraphs}
