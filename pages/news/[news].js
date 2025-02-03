@@ -364,9 +364,18 @@ export default function News({ news, newsTitle }) {
                   {expandedItem && (
                     <ul className={classes.list}>
                       {displayNews.fields.map((list, index) => (
-                        <li key={index} onClick={() => scrollToDiv(index)}>
-                          {list[languageType].title}
-                        </li>
+                        <li
+                          key={index}
+                          onClick={() => scrollToDiv(index)}
+                          dangerouslySetInnerHTML={{
+                            __html: applyFontToEnglishWords(
+                              list[languageType].title,
+                              "English",
+                              "14px",
+                              "fa"
+                            ),
+                          }}
+                        ></li>
                       ))}
                     </ul>
                   )}
