@@ -1,6 +1,10 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
+.development {
+  margin: 200px auto;
+  text-align: center;
+}
 .rowOne,
 .rowOneReverse {
   display: flex;

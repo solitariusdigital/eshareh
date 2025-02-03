@@ -7,6 +7,7 @@ import { NextSeo } from "next-seo";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import next from "@/assets/next.svg";
+import dot from "@/assets/dot.png";
 import nextYellow from "@/assets/nextYellow.svg";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
@@ -24,6 +25,7 @@ export default function Jobs({ jobs }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [displayJobs, setDisplayJobs] = useState([]);
   const [jobTypes, setJobTypes] = useState([]);
+  const [development, setDevelopment] = useState(true);
 
   useEffect(() => {
     navigationTopBar.map((nav, i) => {
@@ -125,137 +127,153 @@ export default function Jobs({ jobs }) {
         }}
         robots="index, follow"
       />
-      <div className={language ? classes.rowOne : classes.rowOneReverse}>
-        <div className={classes.infoBox}>
-          <h1>{language ? "فرصت‌های شغلی" : "Jobs"}</h1>
-          <p>
-            {language
-              ? "در پورتال شغلی ما می‌توانید تمام فرصت‌های شغلی و آگهی‌های استخدام فعلی را مشاهده کنید. مشتاقانه منتظر دریافت درخواست آنلاین شما هستیم."
-              : "In our job portal, you can find all current vacancies and job offers. We are looking forward to receiving your online application."}
-          </p>
+      {development && (
+        <div className={classes.development}>
+          <Image width={50} height={50} src={dot} alt="isLoading" />
+          <p>{language ? "به زودی" : "Coming soon"}</p>
         </div>
-        <div className={classes.navBox}>
-          {permissionControl === "admin" && (
-            <button
-              style={{
-                fontFamily: language ? "Farsi" : "English",
-              }}
-              onClick={() => Router.push("/jobs/resume")}
-            >
-              {language ? "لیست رزومه" : "Resume list"}
-            </button>
-          )}
-          <h3
-            style={{
-              fontFamily: language ? "FarsiBold" : "EnglishMedium",
-            }}
-          >
-            {language ? "جستجو در فرصت‌های شغلی" : "Find job offers"}
-          </h3>
-          <div className={classes.navigation}>
-            {jobTypes.map((nav, index) => (
-              <p
-                key={index}
-                className={!nav.active ? classes.nav : classes.navActive}
-                onClick={() => filterDisplayJobs(nav.type)}
-              >
-                {nav.type}
-                <span
-                  style={{
-                    fontFamily: language ? "EnglishLight" : "EnglishLight",
-                  }}
-                >
-                  |
-                </span>
+      )}
+      {!development && (
+        <Fragment>
+          <div className={language ? classes.rowOne : classes.rowOneReverse}>
+            <div className={classes.infoBox}>
+              <h1>{language ? "فرصت‌های شغلی" : "Jobs"}</h1>
+              <p>
+                {language
+                  ? "در پورتال شغلی ما می‌توانید تمام فرصت‌های شغلی و آگهی‌های استخدام فعلی را مشاهده کنید. مشتاقانه منتظر دریافت درخواست آنلاین شما هستیم."
+                  : "In our job portal, you can find all current vacancies and job offers. We are looking forward to receiving your online application."}
               </p>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className={language ? classes.rowTwo : classes.rowTwoReverse}>
-        <div
-          className={language ? classes.containerRow : classes.containerReverse}
-        >
-          <div className={classes.jobBox}>
-            <h3>
-              {language
-                ? `${toFarsiNumber(displayJobs.length)} فرصت‌ شغلی موجود`
-                : `${displayJobs.length} Avilable job offers`}
-            </h3>
-            {displayJobs.map((job, index) => {
-              const { title, department } = job[languageType];
-              const projectLink = `/jobs/${replaceSpacesAndHyphens(title)}`;
-              return (
-                <div
-                  key={index}
-                  className={classes.job}
-                  onClick={() => Router.push(projectLink)}
+            </div>
+            <div className={classes.navBox}>
+              {permissionControl === "admin" && (
+                <button
+                  style={{
+                    fontFamily: language ? "Farsi" : "English",
+                  }}
+                  onClick={() => Router.push("/jobs/resume")}
                 >
-                  <Image
-                    className={classes.jobIcon}
-                    src={screenSize === "mobile" ? nextYellow : next}
-                    blurDataURL={screenSize === "mobile" ? nextYellow : next}
-                    alt="image"
-                    width={10}
-                    priority
-                  />
+                  {language ? "لیست رزومه" : "Resume list"}
+                </button>
+              )}
+              <h3
+                style={{
+                  fontFamily: language ? "FarsiBold" : "EnglishMedium",
+                }}
+              >
+                {language ? "جستجو در فرصت‌های شغلی" : "Find job offers"}
+              </h3>
+              <div className={classes.navigation}>
+                {jobTypes.map((nav, index) => (
                   <p
-                    style={{
-                      fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                    }}
+                    key={index}
+                    className={!nav.active ? classes.nav : classes.navActive}
+                    onClick={() => filterDisplayJobs(nav.type)}
                   >
-                    {title}
+                    {nav.type}
+                    <span
+                      style={{
+                        fontFamily: language ? "EnglishLight" : "EnglishLight",
+                      }}
+                    >
+                      |
+                    </span>
                   </p>
-                  <span
-                    style={{
-                      fontFamily: "English",
-                    }}
-                  >
-                    |
-                  </span>
-                  <p
-                    style={{
-                      fontFamily: language ? "Farsi" : "English",
-                    }}
-                  >
-                    {department}
-                  </p>
-                  {permissionControl === "admin" && (
-                    <Fragment>
-                      {job.active ? (
-                        <Tooltip title="Visible">
-                          <VerifiedUserIcon
-                            sx={{ color: "#57a361", fontSize: 18 }}
-                          />
-                        </Tooltip>
-                      ) : (
-                        <Tooltip title="Hidden">
-                          <VisibilityOffIcon
-                            sx={{ color: "#d40d12", fontSize: 18 }}
-                          />
-                        </Tooltip>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className={language ? classes.rowTwo : classes.rowTwoReverse}>
+            <div
+              className={
+                language ? classes.containerRow : classes.containerReverse
+              }
+            >
+              <div className={classes.jobBox}>
+                <h3>
+                  {language
+                    ? `${toFarsiNumber(displayJobs.length)} فرصت‌ شغلی موجود`
+                    : `${displayJobs.length} Avilable job offers`}
+                </h3>
+                {displayJobs.map((job, index) => {
+                  const { title, department } = job[languageType];
+                  const projectLink = `/jobs/${replaceSpacesAndHyphens(title)}`;
+                  return (
+                    <div
+                      key={index}
+                      className={classes.job}
+                      onClick={() => Router.push(projectLink)}
+                    >
+                      <Image
+                        className={classes.jobIcon}
+                        src={screenSize === "mobile" ? nextYellow : next}
+                        blurDataURL={
+                          screenSize === "mobile" ? nextYellow : next
+                        }
+                        alt="image"
+                        width={10}
+                        priority
+                      />
+                      <p
+                        style={{
+                          fontFamily: language
+                            ? "FarsiMedium"
+                            : "EnglishMedium",
+                        }}
+                      >
+                        {title}
+                      </p>
+                      <span
+                        style={{
+                          fontFamily: "English",
+                        }}
+                      >
+                        |
+                      </span>
+                      <p
+                        style={{
+                          fontFamily: language ? "Farsi" : "English",
+                        }}
+                      >
+                        {department}
+                      </p>
+                      {permissionControl === "admin" && (
+                        <Fragment>
+                          {job.active ? (
+                            <Tooltip title="Visible">
+                              <VerifiedUserIcon
+                                sx={{ color: "#57a361", fontSize: 18 }}
+                              />
+                            </Tooltip>
+                          ) : (
+                            <Tooltip title="Hidden">
+                              <VisibilityOffIcon
+                                sx={{ color: "#d40d12", fontSize: 18 }}
+                              />
+                            </Tooltip>
+                          )}
+                        </Fragment>
                       )}
-                    </Fragment>
-                  )}
-                </div>
-              );
-            })}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className={classes.imageBox}>
+                <Image
+                  className={classes.image}
+                  src={jobsImage}
+                  blurDataURL={jobsImage}
+                  placeholder="blur"
+                  alt="image"
+                  layout="responsive"
+                  objectFit="contain"
+                  as="image"
+                  priority
+                />
+              </div>
+            </div>
           </div>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={jobsImage}
-              blurDataURL={jobsImage}
-              placeholder="blur"
-              alt="image"
-              layout="responsive"
-              objectFit="contain"
-              as="image"
-              priority
-            />
-          </div>
-        </div>
-      </div>
+        </Fragment>
+      )}
     </Fragment>
   );
 }
