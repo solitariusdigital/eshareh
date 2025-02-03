@@ -24,6 +24,10 @@ import {
   applyFontToEnglishWords,
   sliceString,
 } from "@/services/utility";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 export default function News({ news, newsTitle }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -304,30 +308,49 @@ export default function News({ news, newsTitle }) {
                 </div>
               )}
               <div className={classes.cover}>
-                {displayNews.media[displayNews.media.length - 1].type ===
-                "image" ? (
-                  <Image
-                    className={classes.image}
-                    src={displayNews.media[displayNews.media.length - 1].link}
-                    placeholder="blur"
-                    blurDataURL={
-                      displayNews.media[displayNews.media.length - 1].link
-                    }
-                    alt={displayNews[languageType].subtitle}
-                    layout="fill"
-                    objectFit="cover"
-                    as="image"
-                    priority
-                  />
-                ) : (
-                  <video
-                    className={classes.video}
-                    src={displayNews.media[0].link + "#t=0.1"}
-                    controls
-                    playsInline
-                    preload="metadata"
-                  />
-                )}
+                <div className={classes.swiper}>
+                  <Swiper
+                    className={classes.slide}
+                    slidesPerView="auto"
+                    spaceBetween={0}
+                    mousewheel={true}
+                    loop={true}
+                    modules={[Autoplay]}
+                    autoplay={{
+                      delay: 3000,
+                      disableOnInteraction: true,
+                    }}
+                    speed={1500}
+                  >
+                    {displayNews.media.map((image, index) => (
+                      <SwiperSlide key={index}>
+                        <div className={classes.imageContainer}>
+                          {image.type === "image" ? (
+                            <Image
+                              className={classes.image}
+                              src={image.link}
+                              blurDataURL={image.link}
+                              placeholder="blur"
+                              alt={image.link}
+                              layout="fill"
+                              objectFit="cover"
+                              as="image"
+                              priority
+                            />
+                          ) : (
+                            <video
+                              className={classes.video}
+                              src={image.link + "#t=0.1"}
+                              controls
+                              playsInline
+                              preload="metadata"
+                            />
+                          )}
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
               </div>
               {displayNews[languageType].paragraph
                 .split("\n\n")
