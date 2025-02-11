@@ -136,7 +136,7 @@ export default function Solutions({
           }}
         >
           {categories.map((item, index) => (
-            <p
+            <h2
               key={index}
               className={
                 solutionsCategory === item.type
@@ -168,7 +168,7 @@ export default function Solutions({
                   /
                 </span>
               )}
-            </p>
+            </h2>
           ))}
         </div>
         {solutionsCategory !== "all" && (
@@ -179,7 +179,7 @@ export default function Solutions({
                 : classes.categoryDescriptionReverse
             }
           >
-            <h3
+            <p
               style={{
                 fontFamily: language ? "FarsiLight" : "EnglishLight",
                 color: information[solutionsCategory].color,
@@ -187,7 +187,7 @@ export default function Solutions({
               }}
             >
               {information[solutionsCategory].content}
-            </h3>
+            </p>
           </div>
         )}
         <section

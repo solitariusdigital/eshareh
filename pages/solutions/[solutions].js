@@ -594,7 +594,7 @@ export default function Solution({ solutions, projectTitle }) {
                             src={image.link}
                             blurDataURL={image.link}
                             placeholder="blur"
-                            alt={image.link}
+                            alt={project[languageType].title}
                             layout="fill"
                             objectFit="cover"
                             as="image"
