@@ -172,6 +172,37 @@ export default function News({ news, newsTitle }) {
     }
   };
 
+  const deleteImage = async (index) => {
+    let confirmationMessage = "حذف مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      let media = [...displayNews.media];
+      media.splice(index, 1);
+      let dataObject = {
+        ...displayNews,
+        media: media,
+      };
+      await updateNewsApi(dataObject);
+      router.replace(router.asPath);
+    }
+  };
+
+  const makeCover = async (index) => {
+    let confirmationMessage = "کاور مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      let media = [...displayNews.media];
+      let itemToMove = media.splice(index, 1)[0];
+      media.push(itemToMove);
+      let dataObject = {
+        ...displayNews,
+        media: media,
+      };
+      await updateNewsApi(dataObject);
+      router.replace(router.asPath);
+    }
+  };
+
   return (
     <Fragment>
       {displayNews && (
@@ -324,6 +355,27 @@ export default function News({ news, newsTitle }) {
                   >
                     {displayNews.media.map((image, index) => (
                       <SwiperSlide key={index}>
+                        {permissionControl === "admin" && (
+                          <div
+                            className={classes.control}
+                            style={{
+                              fontFamily: language ? "English" : "English",
+                            }}
+                          >
+                            <p
+                              className={classes.item}
+                              onClick={() => deleteImage(index)}
+                            >
+                              Delete
+                            </p>
+                            <p
+                              className={classes.item}
+                              onClick={() => makeCover(index)}
+                            >
+                              Cover
+                            </p>
+                          </div>
+                        )}
                         <div className={classes.imageContainer}>
                           {image.type === "image" ? (
                             <Image
