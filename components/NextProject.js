@@ -11,6 +11,7 @@ import {
 export default function NextProject({ project }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
 
   return (
     <Link
@@ -44,6 +45,7 @@ export default function NextProject({ project }) {
             <h3
               style={{
                 fontFamily: language ? "FarsiBold" : "EnglishBold",
+                width: language && screenSize === "mobile" ? "90px" : "",
               }}
             >
               {language ? "صورت مسئله" : "Brief"}

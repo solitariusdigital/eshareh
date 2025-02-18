@@ -40,6 +40,7 @@ import "swiper/css/navigation";
 export default function Solution({ solutions, projectTitle }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
@@ -518,6 +519,7 @@ export default function Solution({ solutions, projectTitle }) {
                   <h3
                     style={{
                       fontFamily: language ? "FarsiBold" : "EnglishBold",
+                      width: language && screenSize === "mobile" ? "90px" : "",
                     }}
                   >
                     {language ? "صورت مسئله" : "Brief"}
