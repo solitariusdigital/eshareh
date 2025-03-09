@@ -34,7 +34,7 @@
     "sharp": "^0.33.5",
     "sitemap": "^8.0.0",
     "styled-components": "^5.3.5",
-    "swiper": "^11.2.2",
+    "swiper": "^11.2.4",
     "webpack": "^5.96.1"
   },
   "devDependencies": {
