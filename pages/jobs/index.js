@@ -24,7 +24,7 @@ export default function Jobs({ jobs }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [displayJobs, setDisplayJobs] = useState([]);
   const [jobTypes, setJobTypes] = useState([]);
-  const [development, setDevelopment] = useState(false);
+  const [development, setDevelopment] = useState(true);
 
   useEffect(() => {
     navigationTopBar.map((nav, i) => {
@@ -37,6 +37,7 @@ export default function Jobs({ jobs }) {
   useEffect(() => {
     if (permissionControl === "admin") {
       setDisplayJobs(jobs);
+      setDevelopment(false);
     } else {
       setDisplayJobs(jobs.filter((job) => job.active));
     }
