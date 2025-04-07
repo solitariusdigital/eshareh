@@ -172,7 +172,7 @@ export default function Jobs({ jobs }) {
                     {nav.type}
                     <span
                       style={{
-                        fontFamily: language ? "EnglishLight" : "EnglishLight",
+                        fontFamily: language ? "FarsiLight" : "EnglishLight",
                       }}
                     >
                       |
