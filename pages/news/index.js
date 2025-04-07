@@ -118,11 +118,11 @@ export default function News({ adminNews, activeNews }) {
                       <div className={classes.visibility}>
                         {active ? (
                           <Tooltip title="Visible">
-                            <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                            <VerifiedUserIcon sx={{ color: "#6b8745" }} />
                           </Tooltip>
                         ) : (
                           <Tooltip title="Hidden">
-                            <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                            <VisibilityOffIcon sx={{ color: "#a70237" }} />
                           </Tooltip>
                         )}
                       </div>
@@ -166,11 +166,11 @@ export default function News({ adminNews, activeNews }) {
                     <div className={classes.visibility}>
                       {item.active ? (
                         <Tooltip title="Visible">
-                          <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                          <VerifiedUserIcon sx={{ color: "#6b8745" }} />
                         </Tooltip>
                       ) : (
                         <Tooltip title="Hidden">
-                          <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                          <VisibilityOffIcon sx={{ color: "#a70237" }} />
                         </Tooltip>
                       )}
                     </div>

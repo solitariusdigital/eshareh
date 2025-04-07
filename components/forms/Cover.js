@@ -434,7 +434,7 @@ export default function Cover({ covers }) {
                   <Tooltip title="Delete">
                     <DeleteOutlineIcon
                       className="icon"
-                      sx={{ color: "#d40d12" }}
+                      sx={{ color: "#a70237" }}
                       onClick={() => deleteCover(index)}
                     />
                   </Tooltip>
@@ -442,7 +442,7 @@ export default function Cover({ covers }) {
                     <Tooltip title="Hide">
                       <VerifiedUserIcon
                         className="icon"
-                        sx={{ color: "#57a361" }}
+                        sx={{ color: "#6b8745" }}
                         onClick={() => manageVisibility("hide", index)}
                       />
                     </Tooltip>
@@ -450,7 +450,7 @@ export default function Cover({ covers }) {
                     <Tooltip title="Show">
                       <VisibilityOffIcon
                         className="icon"
-                        sx={{ color: "#d40d12" }}
+                        sx={{ color: "#a70237" }}
                         onClick={() => manageVisibility("show", index)}
                       />
                     </Tooltip>

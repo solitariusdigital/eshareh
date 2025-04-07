@@ -155,13 +155,13 @@ export default function Resume({ resumeData }) {
                   {!status ? (
                     <div className={classes.row}>
                       <h3
-                        style={{ color: "#57a361" }}
+                        style={{ color: "#6b8745" }}
                         onClick={() => handleStatus(item["_id"], "accept")}
                       >
                         قبول کردن
                       </h3>
                       <h3
-                        style={{ color: "#d40d12" }}
+                        style={{ color: "#a70237" }}
                         onClick={() => handleStatus(item["_id"], "reject")}
                       >
                         رد کردن
@@ -170,7 +170,7 @@ export default function Resume({ resumeData }) {
                   ) : (
                     <h3
                       style={{
-                        color: status === "رد شد" ? "#d40d12" : "#57a361",
+                        color: status === "رد شد" ? "#a70237" : "#6b8745",
                       }}
                     >
                       {status}

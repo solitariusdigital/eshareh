@@ -217,11 +217,11 @@ export default function Solutions({
                     <div className={classes.visibility}>
                       {project.active ? (
                         <Tooltip title="Visible">
-                          <VerifiedUserIcon sx={{ color: "#57a361" }} />
+                          <VerifiedUserIcon sx={{ color: "#6b8745" }} />
                         </Tooltip>
                       ) : (
                         <Tooltip title="Hidden">
-                          <VisibilityOffIcon sx={{ color: "#d40d12" }} />
+                          <VisibilityOffIcon sx={{ color: "#a70237" }} />
                         </Tooltip>
                       )}
                     </div>

@@ -251,7 +251,7 @@ export default function News({ news, newsTitle }) {
                   <Tooltip title="Hide">
                     <VerifiedUserIcon
                       className="icon"
-                      sx={{ color: "#57a361" }}
+                      sx={{ color: "#6b8745" }}
                       onClick={() => manageNews("hide")}
                     />
                   </Tooltip>
@@ -259,7 +259,7 @@ export default function News({ news, newsTitle }) {
                   <Tooltip title="Publish">
                     <VisibilityOffIcon
                       className="icon"
-                      sx={{ color: "#d40d12" }}
+                      sx={{ color: "#a70237" }}
                       onClick={() => manageNews("show")}
                     />
                   </Tooltip>

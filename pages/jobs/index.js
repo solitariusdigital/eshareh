@@ -66,7 +66,8 @@ export default function Jobs({ jobs }) {
     );
     // Assign the unique jobTypes to setJobTypes
     setJobTypes(jobTypes);
-  }, [jobs, language]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const filterDisplayJobs = (type) => {
     const isAll = type === "همه" || type === "همه";
@@ -239,13 +240,13 @@ export default function Jobs({ jobs }) {
                           {job.active ? (
                             <Tooltip title="Visible">
                               <VerifiedUserIcon
-                                sx={{ color: "#57a361", fontSize: 18 }}
+                                sx={{ color: "#6b8745", fontSize: 18 }}
                               />
                             </Tooltip>
                           ) : (
                             <Tooltip title="Hidden">
                               <VisibilityOffIcon
-                                sx={{ color: "#d40d12", fontSize: 18 }}
+                                sx={{ color: "#a70237", fontSize: 18 }}
                               />
                             </Tooltip>
                           )}

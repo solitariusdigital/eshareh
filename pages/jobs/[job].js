@@ -72,7 +72,7 @@ export default function Job({ jobs, jobTitle }) {
                   <Tooltip title="Hide">
                     <VerifiedUserIcon
                       className="icon"
-                      sx={{ color: "#57a361" }}
+                      sx={{ color: "#6b8745" }}
                       onClick={() => manageJob("hide")}
                     />
                   </Tooltip>
@@ -80,7 +80,7 @@ export default function Job({ jobs, jobTitle }) {
                   <Tooltip title="Publish">
                     <VisibilityOffIcon
                       className="icon"
-                      sx={{ color: "#d40d12" }}
+                      sx={{ color: "#a70237" }}
                       onClick={() => manageJob("show")}
                     />
                   </Tooltip>

@@ -434,7 +434,7 @@ export default function Solution({ solutions, projectTitle }) {
                   <Tooltip title="Hide">
                     <VerifiedUserIcon
                       className="icon"
-                      sx={{ color: "#57a361" }}
+                      sx={{ color: "#6b8745" }}
                       onClick={() => manageSolution("hide")}
                     />
                   </Tooltip>
@@ -442,7 +442,7 @@ export default function Solution({ solutions, projectTitle }) {
                   <Tooltip title="Publish">
                     <VisibilityOffIcon
                       className="icon"
-                      sx={{ color: "#d40d12" }}
+                      sx={{ color: "#a70237" }}
                       onClick={() => manageSolution("show")}
                     />
                   </Tooltip>
@@ -642,7 +642,7 @@ export default function Solution({ solutions, projectTitle }) {
                             {image.active ? (
                               <Tooltip title="Hide">
                                 <VerifiedUserIcon
-                                  sx={{ color: "#57a361" }}
+                                  sx={{ color: "#6b8745" }}
                                   className="icon"
                                   onClick={() => imageActivation(false, index)}
                                 />
@@ -650,7 +650,7 @@ export default function Solution({ solutions, projectTitle }) {
                             ) : (
                               <Tooltip title="Show">
                                 <VisibilityOffIcon
-                                  sx={{ color: "#d40d12" }}
+                                  sx={{ color: "#a70237" }}
                                   className="icon"
                                   onClick={() => imageActivation(true, index)}
                                 />
