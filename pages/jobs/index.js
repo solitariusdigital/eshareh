@@ -19,13 +19,12 @@ import { toFarsiNumber, replaceSpacesAndHyphens } from "@/services/utility";
 
 export default function Jobs({ jobs }) {
   const { language, setLanguage } = useContext(StateContext);
-  const { languageType, setLanguageType } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [displayJobs, setDisplayJobs] = useState([]);
   const [jobTypes, setJobTypes] = useState([]);
-  const [development, setDevelopment] = useState(true);
+  const [development, setDevelopment] = useState(false);
 
   useEffect(() => {
     navigationTopBar.map((nav, i) => {
@@ -47,11 +46,11 @@ export default function Jobs({ jobs }) {
   useEffect(() => {
     let jobTypes = jobs.map((job) => {
       return {
-        type: job[languageType].department,
+        type: job["fa"].department,
         active: false,
       };
     });
-    const allType = { type: language ? "همه" : "All", active: true };
+    const allType = { type: language ? "همه" : "همه", active: true };
     // Use a Set to track unique types
     const uniqueTypes = new Set();
     // Add the "All" type if it's not already present
@@ -66,10 +65,10 @@ export default function Jobs({ jobs }) {
     );
     // Assign the unique jobTypes to setJobTypes
     setJobTypes(jobTypes);
-  }, [jobs, language, languageType]);
+  }, [jobs, language]);
 
   const filterDisplayJobs = (type) => {
-    const isAll = type === "All" || type === "همه";
+    const isAll = type === "همه" || type === "همه";
     if (isAll) {
       if (permissionControl === "admin") {
         setDisplayJobs(jobs);
@@ -81,14 +80,10 @@ export default function Jobs({ jobs }) {
       });
     } else {
       if (permissionControl === "admin") {
-        setDisplayJobs(
-          jobs.filter((job) => job[languageType].department === type)
-        );
+        setDisplayJobs(jobs.filter((job) => job["fa"].department === type));
       } else {
         setDisplayJobs(
-          jobs.filter(
-            (job) => job[languageType].department === type && job.active
-          )
+          jobs.filter((job) => job["fa"].department === type && job.active)
         );
       }
       jobTypes.forEach((t) => {
@@ -135,32 +130,37 @@ export default function Jobs({ jobs }) {
       )}
       {!development && (
         <Fragment>
-          <div className={language ? classes.rowOne : classes.rowOneReverse}>
+          <div
+            className={classes.rowOne}
+            style={{
+              fontFamily: language ? "Farsi" : "Farsi",
+            }}
+          >
             <div className={classes.infoBox}>
-              <h1>{language ? "فرصت‌های شغلی" : "Jobs"}</h1>
+              <h1>فرصت‌های شغلی</h1>
               <p>
-                {language
-                  ? "در پورتال شغلی ما می‌توانید تمام فرصت‌های شغلی و آگهی‌های استخدام فعلی را مشاهده کنید. مشتاقانه منتظر دریافت درخواست آنلاین شما هستیم."
-                  : "In our job portal, you can find all current vacancies and job offers. We are looking forward to receiving your online application."}
+                در پورتال شغلی ما می‌توانید تمام فرصت‌های شغلی و آگهی‌های
+                استخدام فعلی را مشاهده کنید. مشتاقانه منتظر دریافت درخواست
+                آنلاین شما هستیم.
               </p>
             </div>
             <div className={classes.navBox}>
               {permissionControl === "admin" && (
                 <button
                   style={{
-                    fontFamily: language ? "Farsi" : "English",
+                    fontFamily: language ? "Farsi" : "Farsi",
                   }}
                   onClick={() => Router.push("/jobs/resume")}
                 >
-                  {language ? "لیست رزومه" : "Resume list"}
+                  لیست رزومه
                 </button>
               )}
               <h3
                 style={{
-                  fontFamily: language ? "FarsiBold" : "EnglishMedium",
+                  fontFamily: language ? "FarsiBold" : "FarsiBold",
                 }}
               >
-                {language ? "جستجو در فرصت‌های شغلی" : "Find job offers"}
+                جستجو در فرصت‌های شغلی
               </h3>
               <div className={classes.navigation}>
                 {jobTypes.map((nav, index) => (
@@ -172,7 +172,7 @@ export default function Jobs({ jobs }) {
                     {nav.type}
                     <span
                       style={{
-                        fontFamily: language ? "FarsiLight" : "EnglishLight",
+                        fontFamily: language ? "FarsiLight" : "FarsiLight",
                       }}
                     >
                       |
@@ -182,20 +182,19 @@ export default function Jobs({ jobs }) {
               </div>
             </div>
           </div>
-          <div className={language ? classes.rowTwo : classes.rowTwoReverse}>
-            <div
-              className={
-                language ? classes.containerRow : classes.containerReverse
-              }
-            >
+          <div
+            className={classes.rowTwo}
+            style={{
+              fontFamily: language ? "Farsi" : "Farsi",
+            }}
+          >
+            <div className={classes.containerRow}>
               <div className={classes.jobBox}>
                 <h3>
-                  {language
-                    ? `${toFarsiNumber(displayJobs.length)} فرصت‌ شغلی موجود`
-                    : `${displayJobs.length} Avilable job offers`}
+                  {`${toFarsiNumber(displayJobs.length)} فرصت‌ شغلی موجود`}
                 </h3>
                 {displayJobs.map((job, index) => {
-                  const { title, department } = job[languageType];
+                  const { title, department } = job["fa"];
                   const projectLink = `/jobs/${replaceSpacesAndHyphens(title)}`;
                   return (
                     <div
@@ -215,23 +214,21 @@ export default function Jobs({ jobs }) {
                       />
                       <p
                         style={{
-                          fontFamily: language
-                            ? "FarsiMedium"
-                            : "EnglishMedium",
+                          fontFamily: language ? "FarsiMedium" : "FarsiMedium",
                         }}
                       >
                         {title}
                       </p>
                       <span
                         style={{
-                          fontFamily: "English",
+                          fontFamily: "Farsi",
                         }}
                       >
                         |
                       </span>
                       <p
                         style={{
-                          fontFamily: language ? "Farsi" : "English",
+                          fontFamily: language ? "Farsi" : "Farsi",
                         }}
                       >
                         {department}

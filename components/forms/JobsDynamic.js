@@ -17,7 +17,7 @@ export default function JobsDynamic() {
       ? editJobs.fields
       : [
           {
-            en: { title: "", description: "" },
+            en: { title: "-", description: "-" },
             fa: { title: "", description: "" },
           },
         ]
@@ -25,34 +25,33 @@ export default function JobsDynamic() {
   const [title, setTitle] = useState(
     editJobs
       ? { en: editJobs.en.title, fa: editJobs.fa.title }
-      : { en: "", fa: "" }
+      : { en: "-", fa: "" }
   );
   const [department, setDepartment] = useState(
     editJobs
       ? { en: editJobs.en.department, fa: editJobs.fa.department }
-      : { en: "", fa: "" }
+      : { en: "-", fa: "" }
   );
   const [location, setLocation] = useState(
     editJobs
       ? { en: editJobs.en.location, fa: editJobs.fa.location }
-      : { en: "", fa: "" }
+      : { en: "-", fa: "" }
   );
   const [type, setType] = useState(
     editJobs
       ? { en: editJobs.en.workType, fa: editJobs.fa.workType }
-      : { en: "", fa: "" }
+      : { en: "-", fa: "" }
   );
 
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
-
   const router = useRouter();
 
   const handleAddField = () => {
     setFields([
       ...fields,
       {
-        en: { title: "", description: "" },
+        en: { title: "-", description: "-" },
         fa: { title: "", description: "" },
       },
     ]);
@@ -83,7 +82,6 @@ export default function JobsDynamic() {
   };
 
   const createJob = async () => {
-    const isValid = areAllStatesValid([title, department, location, type]);
     const isValidFields = fields.every(
       (field) => areAllStatesValid([field.en]) && areAllStatesValid([field.fa])
     );
@@ -91,7 +89,7 @@ export default function JobsDynamic() {
       showAlert("فیلد ورودی الزامیست");
       return;
     }
-    if (!isValid || !isValidFields) {
+    if (!isValidFields || !title.fa || !department.fa) {
       showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
@@ -142,10 +140,7 @@ export default function JobsDynamic() {
         >
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p className={classes.label}>
-                Work Title
-                <span>*</span>
-              </p>
+              <p className={classes.label}>Work Title</p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
@@ -173,14 +168,12 @@ export default function JobsDynamic() {
               }
               value={title.en}
               autoComplete="off"
+              disabled
             ></input>
           </div>
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p className={classes.label}>
-                Department
-                <span>*</span>
-              </p>
+              <p className={classes.label}>Department</p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
@@ -208,14 +201,12 @@ export default function JobsDynamic() {
               }
               value={department.en}
               autoComplete="off"
+              disabled
             ></input>
           </div>
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p className={classes.label}>
-                Work Type
-                <span>*</span>
-              </p>
+              <p className={classes.label}>Work Type</p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
@@ -243,14 +234,12 @@ export default function JobsDynamic() {
               }
               value={type.en}
               autoComplete="off"
+              disabled
             ></input>
           </div>
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p className={classes.label}>
-                Work Location
-                <span>*</span>
-              </p>
+              <p className={classes.label}>Work Location</p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
@@ -278,6 +267,7 @@ export default function JobsDynamic() {
               }
               value={location.en}
               autoComplete="off"
+              disabled
             ></input>
           </div>
         </div>
@@ -361,10 +351,7 @@ export default function JobsDynamic() {
           </div>
           <div className={classes.input}>
             <div className={classes.barReverse}>
-              <p className={classes.label}>
-                <span>*</span>
-                نوع کار
-              </p>
+              <p className={classes.label}>نوع کار</p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
@@ -397,10 +384,7 @@ export default function JobsDynamic() {
           </div>
           <div className={classes.input}>
             <div className={classes.barReverse}>
-              <p className={classes.label}>
-                <span>*</span>
-                محل کار
-              </p>
+              <p className={classes.label}>محل کار</p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
@@ -496,10 +480,7 @@ export default function JobsDynamic() {
               }}
             >
               <div className={classes.bar}>
-                <p className={classes.label}>
-                  Item Title
-                  <span>*</span>
-                </p>
+                <p className={classes.label}>Item Title</p>
               </div>
               <input
                 style={{
@@ -513,12 +494,10 @@ export default function JobsDynamic() {
                 onChange={(e) =>
                   handleEnglishLabelChange(index, e.target.value)
                 }
+                disabled
               />
               <div className={classes.bar}>
-                <p className={classes.label}>
-                  Item Description
-                  <span>*</span>
-                </p>
+                <p className={classes.label}>Item Description</p>
               </div>
               <textarea
                 style={{
@@ -531,6 +510,7 @@ export default function JobsDynamic() {
                 onChange={(e) =>
                   handleEnglishValueChange(index, e.target.value)
                 }
+                disabled
               />
               <button
                 className={classes.removeField}

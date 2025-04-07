@@ -197,7 +197,6 @@ export default function News({ adminNews, activeNews }) {
                       />
                     )}
                   </div>
-
                   <h2
                     style={{
                       fontFamily: language ? "FarsiLight" : "FarsiLight",

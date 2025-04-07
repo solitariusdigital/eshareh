@@ -15,7 +15,6 @@ import { getSingleJobsApi, updateJobsApi } from "@/services/api";
 
 export default function Job({ jobs, jobTitle }) {
   const { language, setLanguage } = useContext(StateContext);
-  const { languageType, setLanguageType } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { editJobs, setEditJobs } = useContext(StateContext);
   const [displayJob, setDisplayJob] = useState(null);
@@ -120,14 +119,13 @@ export default function Job({ jobs, jobTitle }) {
             </Fragment>
           )}
           <div
-            className={
-              language ? classes.jobContainer : classes.jobContainerReverse
-            }
+            className={classes.jobContainer}
+            style={{
+              fontFamily: language ? "Farsi" : "Farsi",
+            }}
           >
-            <h1 onClick={() => Router.push("/jobs")}>
-              {language ? "فرصت‌های شغلی" : "Jobs"}
-            </h1>
-            <h2>{displayJob[languageType].title}</h2>
+            <h1 onClick={() => Router.push("/jobs")}>فرصت‌های شغلی</h1>
+            <h2>{displayJob["fa"].title}</h2>
             {permissionControl === "admin" && (
               <p
                 style={{
@@ -138,66 +136,50 @@ export default function Job({ jobs, jobTitle }) {
               </p>
             )}
             <div className={classes.banner}>
-              <div className={language ? classes.row : classes.rowReverse}>
+              <div className={classes.row}>
                 <p
                   style={{
-                    fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                    fontFamily: language ? "FarsiMedium" : "FarsiMedium",
                   }}
                 >
-                  {language ? "نوع همکاری:" : " Work type:"}
+                  دپارتمان:
                 </p>
+                <p>{displayJob["fa"].department}</p>
+              </div>
+              <div className={classes.row}>
                 <p
                   style={{
-                    fontFamily: language ? "Farsi" : "English",
+                    fontFamily: language ? "FarsiMedium" : "FarsiMedium",
                   }}
                 >
-                  {language ? "تمام وقت" : "Full Time"}
+                  نوع همکاری:
+                </p>
+                <p>
+                  {displayJob["fa"].workType ? displayJob["fa"].workType : "-"}
                 </p>
               </div>
-              <div className={language ? classes.row : classes.rowReverse}>
+              <div className={classes.row}>
                 <p
                   style={{
-                    fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                    fontFamily: language ? "FarsiMedium" : "FarsiMedium",
                   }}
                 >
-                  {language ? "دپارتمان:" : "Department:"}
+                  مکان:
                 </p>
-                <p
-                  style={{
-                    fontFamily: language ? "Farsi" : "English",
-                  }}
-                >
-                  {displayJob[languageType].department}
-                </p>
-              </div>
-              <div className={language ? classes.row : classes.rowReverse}>
-                <p
-                  style={{
-                    fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-                  }}
-                >
-                  {language ? "مکان:" : "Location:"}
-                </p>
-                <p
-                  style={{
-                    fontFamily: language ? "Farsi" : "English",
-                  }}
-                >
-                  {language ? "تهران" : "Tehran"}
+                <p>
+                  {displayJob["fa"].location ? displayJob["fa"].location : "-"}
                 </p>
               </div>
             </div>
             <div className={classes.jobBox}>
               <div className={classes.information}>
                 {displayJob.fields.map((field, index) => {
-                  const { title, description } = field[languageType];
+                  const { title, description } = field["fa"];
                   return (
                     <div key={index}>
                       <h3
                         style={{
-                          fontFamily: language
-                            ? "FarsiMedium"
-                            : "EnglishMedium",
+                          fontFamily: language ? "FarsiMedium" : "FarsiMedium",
                         }}
                       >
                         {title}
@@ -206,9 +188,7 @@ export default function Job({ jobs, jobTitle }) {
                         <p
                           key={index}
                           style={{
-                            fontFamily: language
-                              ? "FarsiLight"
-                              : "EnglishLight",
+                            fontFamily: language ? "FarsiLight" : "FarsiLight",
                           }}
                         >
                           {desc}

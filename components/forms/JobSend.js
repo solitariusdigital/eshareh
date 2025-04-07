@@ -67,43 +67,34 @@ export default function JobSend({ jobsId }) {
   const remainingWords = maxWords - currentWordCount;
 
   const checkFormValidity = () => {
-    let phoneEnglish = isEnglishNumber(phone) ? phone : toEnglishNumber(phone);
-
-    console.log(phoneEnglish);
     if (!name || !birth || !phone || !email || !description) {
-      showAlert(
-        language
-          ? "موارد ستاره‌دار الزامیست"
-          : "Fields with an asterisk are required"
-      );
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
     if (!isValidDateFormat(birth)) {
-      showAlert(language ? "تاریخ تولد نامعتبر" : "Invalid date of birth");
+      showAlert("تاریخ تولد نامعتبر");
       return;
     }
     if (!validateEmail(email)) {
-      showAlert(language ? "ایمیل نامعتبر" : "Invalid email");
+      showAlert("ایمیل نامعتبر");
       return;
     }
     if (!media) {
-      showAlert(language ? "انتخاب فایل" : "Select a file");
+      showAlert("انتخاب فایل");
       return;
     }
     const maxSizeInBytes = 5 * 1024 * 1024;
     if (media.size > maxSizeInBytes) {
-      showAlert(
-        language ? "حداکثر حجم فایل 5 مگابایت" : "Max file size is 5MB"
-      );
+      showAlert("حداکثر حجم فایل 5 مگابایت");
       const inputFile = document.getElementById("inputFile");
       inputFile.value = null;
       return;
     }
-    // let phoneEnglish = isEnglishNumber(phone) ? phone : toEnglishNumber(phone);
+    let phoneEnglish = isEnglishNumber(phone) ? phone : toEnglishNumber(phone);
     if (phoneEnglish.length === 11 && phoneEnglish.startsWith("09")) {
       submitResume(phoneEnglish);
     } else {
-      showAlert(language ? "موبایل اشتباه" : "Invalid phone");
+      showAlert("موبایل اشتباه");
     }
   };
 
@@ -149,13 +140,13 @@ export default function JobSend({ jobsId }) {
         <div
           className={classes.formJobSend}
           style={{
-            fontFamily: language ? "Farsi" : "English",
+            fontFamily: language ? "Farsi" : "Farsi",
           }}
         >
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
-                {language ? "نام کامل" : "Full Name"}
+                نام کامل
                 <span>*</span>
               </p>
               <CloseIcon
@@ -166,7 +157,7 @@ export default function JobSend({ jobsId }) {
             </div>
             <input
               style={{
-                fontFamily: language ? "Farsi" : "English",
+                fontFamily: language ? "Farsi" : "Farsi",
               }}
               placeholder="..."
               type="text"
@@ -180,7 +171,7 @@ export default function JobSend({ jobsId }) {
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
-                {language ? "ایمیل" : "Email"}
+                ایمیل
                 <span>*</span>
               </p>
               <CloseIcon
@@ -204,16 +195,11 @@ export default function JobSend({ jobsId }) {
             />
           </div>
         </div>
-        <div
-          className={classes.formJobSend}
-          style={{
-            fontFamily: language ? "Farsi" : "English",
-          }}
-        >
+        <div className={classes.formJobSend}>
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
-                {language ? "تاریخ تولد" : "Date of Birth"}
+                تاریخ تولد
                 <span>*</span>
               </p>
               <CloseIcon
@@ -239,7 +225,7 @@ export default function JobSend({ jobsId }) {
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
-                {language ? "موبایل" : "Phone"}
+                موبایل
                 <span>*</span>
               </p>
               <CloseIcon
@@ -268,7 +254,7 @@ export default function JobSend({ jobsId }) {
         <div className={classes.inputTextArea}>
           <div className={classes.bar}>
             <p className={classes.label}>
-              {language ? "درباره من" : "About Me"}
+              درباره من
               <span>*</span>
             </p>
             <CloseIcon
@@ -279,7 +265,7 @@ export default function JobSend({ jobsId }) {
           </div>
           <textarea
             style={{
-              fontFamily: language ? "Farsi" : "English",
+              fontFamily: language ? "Farsi" : "Farsi",
             }}
             placeholder="..."
             type="text"
@@ -291,26 +277,16 @@ export default function JobSend({ jobsId }) {
             maxLength={maxWords * 5}
           ></textarea>
         </div>
-        <p>{language ? toFarsiNumber(remainingWords) : remainingWords}</p>
+        <p>{toFarsiNumber(remainingWords)}</p>
       </div>
-      <div
-        className={classes.formAction}
-        style={{
-          fontFamily: "English",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: language ? "Farsi" : "English",
-          }}
-          className={language ? classes.resume : classes.resumeReverse}
-        >
-          {language ? "رزومه / پورتفولیو" : "Resume / Portfolio"}
+      <div className={classes.formAction}>
+        <p className={classes.resume}>
+          رزومه / پورتفولیو
           <span>*</span>
         </p>
         <div className={classes.row}>
           <p
-            className={language ? classes.resume : classes.resumeReverse}
+            className={classes.resume}
             style={{
               fontFamily: language ? "English" : "English",
             }}
@@ -336,43 +312,35 @@ export default function JobSend({ jobsId }) {
               accept=".pdf"
             />
             <p
-              className={language ? classes.label : classes.labelReverse}
+              className={classes.label}
               style={{
-                fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+                fontFamily: language ? "FarsiMedium" : "FarsiMedium",
               }}
             >
-              {language ? "بارگذاری" : "Select a file"}
+              بارگذاری
             </p>
           </label>
           <button
             disabled={disableButton}
             style={{
-              fontFamily: language ? "FarsiMedium" : "EnglishMedium",
+              fontFamily: language ? "FarsiMedium" : "FarsiMedium",
             }}
             onClick={() => checkFormValidity()}
           >
-            {language ? "تایید" : "Submit"}
+            تایید
           </button>
         </div>
         <p
           className={classes.alert}
           style={{
-            fontFamily: language ? "Farsi" : "English",
+            fontFamily: language ? "Farsi" : "Farsi",
           }}
         >
           {alert}
         </p>
         {loader && (
-          <div
-            style={{
-              fontFamily: language ? "Farsi" : "English",
-            }}
-          >
-            <p>
-              {language
-                ? "در حال آپلود، لطفا صبر کنید"
-                : "Uploading, please wait"}
-            </p>
+          <div>
+            <p>در حال بارگذاری، لطفا صبر کنید</p>
             <Image width={50} height={50} src={loaderImage} alt="isLoading" />
           </div>
         )}
@@ -380,14 +348,13 @@ export default function JobSend({ jobsId }) {
           <div
             className={classes.resumeRecieved}
             style={{
-              fontFamily: language ? "FarsiMedium" : "English",
+              fontFamily: language ? "FarsiMedium" : "FarsiMedium",
             }}
           >
             <Image width={50} height={50} src={dot} alt="isLoading" />
             <h3>
-              {language
-                ? "ما درخواست شما را دریافت کرده‌ایم. از اینکه به‌عنوان گام بعدی شغلی خود اشاره را در نظر می‌گیرید سپاسگزاریم."
-                : "We have recieved your application. Thank you for considering Eshareh as your next career step."}
+              ما درخواست شما را دریافت کرده‌ایم. از اینکه به‌عنوان گام بعدی شغلی
+              خود اشاره را در نظر می‌گیرید سپاسگزاریم.
             </h3>
           </div>
         )}

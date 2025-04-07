@@ -242,8 +242,7 @@
     margin-top: 20px;
   }
 
-  .resume,
-  .resumeReverse {
+  .resume {
     color: config.$black;
     text-align: right;
     margin-bottom: 4px;
@@ -252,9 +251,7 @@
       color: config.$red;
     }
   }
-  .resumeReverse {
-    text-align: left;
-  }
+
   .row {
     @include mixins.row-space-between-center();
     width: 100%;
