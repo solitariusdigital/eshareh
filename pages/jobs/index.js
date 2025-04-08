@@ -154,7 +154,7 @@ export default function Jobs({ jobs }) {
                   }}
                   onClick={() => Router.push("/jobs/resume")}
                 >
-                  لیست رزومه
+                  لیست رزومه‌ها
                 </button>
               )}
               <h3
