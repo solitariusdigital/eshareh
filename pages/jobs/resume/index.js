@@ -8,8 +8,14 @@ import resumeModel from "@/models/Resume";
 import { NextSeo } from "next-seo";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import Tooltip from "@mui/material/Tooltip";
 import Link from "next/link";
-import { getSingleResumeApi, updateResumeApi } from "@/services/api";
+import {
+  getSingleResumeApi,
+  updateResumeApi,
+  deleteResumeApi,
+} from "@/services/api";
 
 export default function Resume({ resumeData }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -42,6 +48,15 @@ export default function Resume({ resumeData }) {
       }
       await updateResumeApi(data);
       router.replace(router.asPath);
+    }
+  };
+
+  const deleteResume = async (resume) => {
+    let confirmationMessage = "حذف مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      await deleteResumeApi(resume["_id"]);
+      Router.push("/jobs/resume");
     }
   };
 
@@ -152,6 +167,12 @@ export default function Resume({ resumeData }) {
                     fontFamily: "FarsiBold",
                   }}
                 >
+                  <Tooltip title="Delete">
+                    <DeleteOutlineIcon
+                      className="icon"
+                      onClick={() => deleteResume(item)}
+                    />
+                  </Tooltip>
                   {!status ? (
                     <div className={classes.row}>
                       <h3
@@ -191,6 +212,8 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const resumeData = await resumeModel.find();
+    resumeData.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+
     return {
       props: {
         resumeData: JSON.parse(JSON.stringify(resumeData)),

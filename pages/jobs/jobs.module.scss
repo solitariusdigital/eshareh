@@ -417,11 +417,20 @@
 .resumeContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  gap: 20px;
+  gap: 12px;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
   margin: 150px auto;
   direction: rtl;
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    width: calc(100% - 24px);
+  }
+  @include mixins.tablet {
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    width: config.$content-widthTablet;
+  }
 
   .resume {
     padding: 16px;

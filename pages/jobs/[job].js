@@ -10,8 +10,9 @@ import Router from "next/router";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Tooltip from "@mui/material/Tooltip";
-import { getSingleJobsApi, updateJobsApi } from "@/services/api";
+import { getSingleJobsApi, updateJobsApi, deleteJobsApi } from "@/services/api";
 
 export default function Job({ jobs, jobTitle }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -61,6 +62,15 @@ export default function Job({ jobs, jobTitle }) {
     router.replace(router.asPath);
   };
 
+  const deleteJob = async (job) => {
+    let confirmationMessage = "حذف مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      await deleteJobsApi(job["_id"]);
+      Router.push("/jobs");
+    }
+  };
+
   return (
     <Fragment>
       {displayJob && (
@@ -92,6 +102,12 @@ export default function Job({ jobs, jobTitle }) {
                       Router.push("/admin");
                       setEditJobs(displayJob);
                     }}
+                  />
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <DeleteOutlineIcon
+                    className="icon"
+                    onClick={() => deleteJob(displayJob)}
                   />
                 </Tooltip>
               </div>

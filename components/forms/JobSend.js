@@ -121,10 +121,11 @@ export default function JobSend({ jobsId }) {
     };
 
     await createResumeApi(resumeObject);
+    setLoader(false);
     setResumeRecieved(true);
     setTimeout(() => {
       router.reload(router.asPath);
-    }, 6000);
+    }, 3000);
   };
 
   const showAlert = (message) => {
