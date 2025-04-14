@@ -2,7 +2,6 @@ import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./jobs.module.scss";
-import { replaceSpacesAndHyphens } from "@/services/utility";
 import JobSend from "@/components/forms/JobSend";
 import dbConnect from "@/services/dbConnect";
 import jobsModel from "@/models/Jobs";
@@ -13,6 +12,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Tooltip from "@mui/material/Tooltip";
 import { getSingleJobsApi, updateJobsApi, deleteJobsApi } from "@/services/api";
+import {
+  applyFontToEnglishWords,
+  replaceSpacesAndHyphens,
+} from "@/services/utility";
 
 export default function Job({ jobs, jobTitle }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -158,7 +161,7 @@ export default function Job({ jobs, jobTitle }) {
                     fontFamily: language ? "FarsiMedium" : "FarsiMedium",
                   }}
                 >
-                  دپارتمان:
+                  واحد:
                 </p>
                 <p>{displayJob["fa"].department}</p>
               </div>
@@ -202,13 +205,20 @@ export default function Job({ jobs, jobTitle }) {
                       </h3>
                       {description.split("\n\n").map((desc, index) => (
                         <p
+                          className={classes.description}
                           key={index}
                           style={{
                             fontFamily: language ? "FarsiLight" : "FarsiLight",
                           }}
-                        >
-                          {desc}
-                        </p>
+                          dangerouslySetInnerHTML={{
+                            __html: applyFontToEnglishWords(
+                              desc,
+                              "English",
+                              "16px",
+                              "en"
+                            ),
+                          }}
+                        ></p>
                       ))}
                     </div>
                   );

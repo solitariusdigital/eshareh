@@ -140,11 +140,11 @@ export default function Jobs({ jobs }) {
           >
             <div className={classes.infoBox}>
               <h1>فرصت‌های شغلی</h1>
-              <p>
+              <h3>
                 در پورتال شغلی ما می‌توانید تمام فرصت‌های شغلی و آگهی‌های
                 استخدام فعلی را مشاهده کنید. مشتاقانه منتظر دریافت درخواست
                 آنلاین شما هستیم.
-              </p>
+              </h3>
             </div>
             <div className={classes.navBox}>
               {permissionControl === "admin" && (
@@ -166,20 +166,22 @@ export default function Jobs({ jobs }) {
               </h3>
               <div className={classes.navigation}>
                 {jobTypes.map((nav, index) => (
-                  <p
+                  <h3
                     key={index}
                     className={!nav.active ? classes.nav : classes.navActive}
                     onClick={() => filterDisplayJobs(nav.type)}
                   >
                     {nav.type}
-                    <span
-                      style={{
-                        fontFamily: language ? "FarsiLight" : "FarsiLight",
-                      }}
-                    >
-                      |
-                    </span>
-                  </p>
+                    {index < jobTypes.length - 1 && (
+                      <span
+                        style={{
+                          fontFamily: language ? "FarsiLight" : "FarsiLight",
+                        }}
+                      >
+                        |
+                      </span>
+                    )}
+                  </h3>
                 ))}
               </div>
             </div>
@@ -215,6 +217,7 @@ export default function Jobs({ jobs }) {
                         priority
                       />
                       <p
+                        className={classes.title}
                         style={{
                           fontFamily: language ? "FarsiMedium" : "FarsiMedium",
                         }}
@@ -229,6 +232,7 @@ export default function Jobs({ jobs }) {
                         |
                       </span>
                       <p
+                        className={classes.title}
                         style={{
                           fontFamily: language ? "Farsi" : "Farsi",
                         }}

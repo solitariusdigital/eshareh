@@ -60,14 +60,14 @@ export default function About({ pageData }) {
     let height = "";
     switch (screenSize) {
       case "desktop":
-        height = language ? "120px" : "180px";
+        height = language ? "140px" : "250px";
         break;
       case "tablet-landscape":
       case "tablet-portrait":
-        height = language ? "160px" : "220px";
+        height = language ? "160px" : "250px";
         break;
       case "mobile":
-        height = language ? "220px" : "320px";
+        height = language ? "250px" : "400px";
         break;
     }
     return height;
@@ -121,8 +121,9 @@ export default function About({ pageData }) {
       />
       <div className={classes.container}>
         <div className={language ? classes.title : classes.titleReverse}>
-          <p
+          <h3
             style={{
+              fontFamily: language ? "FarsiBold" : "EnglishMedium",
               color: `#${pageContent[0].setting.split(" ")[0]}`,
               fontSize: `${pageContent[0].setting.split(" ")[1]}px`,
             }}
@@ -134,7 +135,7 @@ export default function About({ pageData }) {
                 language
               ),
             }}
-          ></p>
+          ></h3>
         </div>
         <div
           className={
@@ -151,14 +152,14 @@ export default function About({ pageData }) {
             {pageContent[1].data[languageType]}
           </h1>
           <div>
-            <p
+            <h3
               style={{
                 color: `#${pageContent[2].setting.split(" ")[0]}`,
                 fontSize: `${pageContent[2].setting.split(" ")[1]}px`,
               }}
             >
               {pageContent[2].data[languageType]}
-            </p>
+            </h3>
           </div>
         </div>
         {users.length > 0 && (
@@ -204,7 +205,16 @@ export default function About({ pageData }) {
               >
                 {users[current]["name"][languageType]}
               </h1>
-              <h3>{users[current]["title"][languageType]}</h3>
+              <h3
+                dangerouslySetInnerHTML={{
+                  __html: applyFontToEnglishWords(
+                    users[current]["title"][languageType],
+                    "English",
+                    "20px",
+                    language
+                  ),
+                }}
+              ></h3>
             </div>
           </div>
         )}

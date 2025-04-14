@@ -61,7 +61,7 @@ export default function Profession({ pageData, mediaData }) {
             language ? classes.information : classes.informationReverse
           }
         >
-          <p
+          <h3
             style={{
               fontFamily: language ? "FarsiBold" : "EnglishMedium",
               color: `#${pageData.content[0].setting.split(" ")[0]}`,
@@ -69,7 +69,7 @@ export default function Profession({ pageData, mediaData }) {
             }}
           >
             {pageData.content[0].data[languageType]}
-          </p>
+          </h3>
         </div>
         {paragraph[languageType].map((para, index) => (
           <div
@@ -88,7 +88,7 @@ export default function Profession({ pageData, mediaData }) {
                 className={classes.icon}
                 sx={{ fontSize: 8, color: "#fdb714" }}
               />
-              <p
+              <h3
                 style={{
                   color: `#${pageData.content[1].setting.split(" ")[0]}`,
                   fontSize: `${pageData.content[1].setting.split(" ")[1]}px`,
@@ -101,7 +101,7 @@ export default function Profession({ pageData, mediaData }) {
                     language
                   ),
                 }}
-              ></p>
+              ></h3>
             </div>
           </div>
         ))}

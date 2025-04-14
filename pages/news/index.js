@@ -135,13 +135,13 @@ export default function News({ adminNews, activeNews }) {
                   >
                     {title}
                   </h2>
-                  <p
+                  <h3
                     style={{
                       fontFamily: language ? "FarsiLight" : "FarsiLight",
                     }}
                   >
                     {sliceString(paragraph, 150)}
-                  </p>
+                  </h3>
                 </Link>
               );
             })()}

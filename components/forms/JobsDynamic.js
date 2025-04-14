@@ -317,7 +317,7 @@ export default function JobsDynamic() {
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
-                دپارتمان
+                واحد
               </p>
               <CloseIcon
                 className="icon"

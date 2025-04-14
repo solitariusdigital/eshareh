@@ -5,7 +5,7 @@
   margin: auto;
   color: config.$black;
   margin-top: 150px;
-  height: calc(100vh - 150px);
+  height: fit-content;
 
   @include mixins.mobile {
     width: 100%;
@@ -14,20 +14,6 @@
   @include mixins.tablet {
     width: 100%;
     min-height: 770px;
-  }
-  @include mixins.desktop {
-    background: linear-gradient(
-      to bottom,
-      config.$white 50%,
-      config.$yellow 50%
-    );
-  }
-  @include mixins.fourK {
-    background: linear-gradient(
-      to bottom,
-      config.$white 50%,
-      config.$yellow 50%
-    );
   }
 }
 
@@ -112,18 +98,22 @@
   background: config.$yellow;
   user-select: none;
 
+  @include mixins.fourK {
+    height: 70vh;
+  }
+
   .swiper {
     height: 70%;
+
+    @include mixins.fourK {
+      height: 60%;
+    }
 
     background: linear-gradient(
       to bottom,
       config.$black 70%,
       config.$yellow 0%
     );
-
-    @include mixins.fourK {
-      height: 80%;
-    }
   }
 
   .swiperSlide {
