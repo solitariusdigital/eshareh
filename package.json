@@ -35,7 +35,7 @@
     "sitemap": "^8.0.0",
     "styled-components": "^5.3.5",
     "swiper": "^11.2.6",
-    "webpack": "^5.98.0"
+    "webpack": "^5.99.5"
   },
   "devDependencies": {
     "eslint": "^8.23.0",
