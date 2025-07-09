@@ -1,243 +1,262 @@
-import { useState, useContext, useEffect, Fragment } from "react";
+import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./portal.module.scss";
-import CloseIcon from "@mui/icons-material/Close";
-import Router from "next/router";
-import secureLocalStorage from "react-secure-storage";
-import AES from "crypto-js/aes";
-import { enc } from "crypto-js";
 import Image from "next/legacy/image";
-import portal from "@/assets/portal.png";
-import { createUserApi, getUsersApi } from "@/services/api";
-import { validateEmail } from "@/services/utility";
+import { NextSeo } from "next-seo";
+import Router from "next/router";
+import logoEnglish from "@/assets/logoEnglish.svg";
+import logoFarsi from "@/assets/logoFarsi.svg";
+import english from "@/assets/english.svg";
+import englishHover from "@/assets/englishHover.svg";
+import farsi from "@/assets/farsi.svg";
+import farsiHover from "@/assets/farsiHover.svg";
+import logout from "@/assets/logout.svg";
+import logoutHover from "@/assets/logoutHover.svg";
+import mode from "@/assets/mode.svg";
+import modeHover from "@/assets/modeHover.svg";
+import secureLocalStorage from "react-secure-storage";
+import home from "@/assets/home.svg";
+import tasks from "@/assets/tasks.svg";
+import news from "@/assets/news.svg";
+import inbox from "@/assets/inbox.svg";
+import profile from "@/assets/profile.svg";
+import setting from "@/assets/setting.svg";
 
 export default function Portal() {
-  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
-  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
+  const { displayMenu, setDisplayMenu } = useContext(StateContext);
+  const { displayFooter, setFooter } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
-  const { editSolution, setEditSolution } = useContext(StateContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [alert, setAlert] = useState("");
-  const [formType, setFormType] = useState(true);
-  const [displayForm, setDisplayForm] = useState(false);
+  const { screenSize, setScreenSize } = useContext(StateContext);
+
+  const menuItemsTopData = [
+    { src: home, alt: "home", label: "Home", active: false },
+    { src: tasks, alt: "tasks", label: "Tasks", active: false },
+    { src: news, alt: "news", label: "News", active: false },
+    { src: inbox, alt: "inbox", label: "Inbox", active: false },
+  ];
+  const menuItemsBottomData = [
+    { src: profile, alt: "profile", active: false },
+    { src: setting, alt: "setting", active: false },
+  ];
+
+  const [menuItemsTop, setMenuItemsTop] = useState(menuItemsTopData);
+  const [menuItemsBottom, setMenuItemsBottom] = useState(menuItemsBottomData);
+  const handleClick = (index, menuType) => {
+    if (menuType === "top") {
+      const updatedItemsTop = menuItemsTop.map((item, idx) => ({
+        ...item,
+        active: idx === index,
+      }));
+      setMenuItemsTop(updatedItemsTop);
+      setMenuItemsBottom(
+        menuItemsBottom.map((item) => ({ ...item, active: false }))
+      );
+    } else if (menuType === "bottom") {
+      const updatedItemsBottom = menuItemsBottom.map((item, idx) => ({
+        ...item,
+        active: idx === index,
+      }));
+      setMenuItemsBottom(updatedItemsBottom);
+      setMenuItemsTop(menuItemsTop.map((item) => ({ ...item, active: false })));
+    }
+  };
 
   useEffect(() => {
-    if (permissionControl === "admin") {
-      Router.push("/admin");
-      setEditSolution(null);
+    if (!currentUser) {
+      Router.push("/");
     } else {
-      setDisplayForm(true);
+      document.body.style.marginTop = "0px";
+      document.body.style.background = "#f6f6f6";
+      setDisplayMenu(false);
+      setFooter(false);
     }
-  }, [permissionControl, setEditSolution]);
+  }, [currentUser, setDisplayMenu, setFooter]);
 
-  useEffect(() => {
-    navigationTopBar.map((nav, i) => {
-      nav.active = false;
-    });
-    setNavigationTopBar([...navigationTopBar]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const showAlert = (message) => {
-    setAlert(message);
-    setTimeout(() => {
-      setAlert("");
-    }, 3000);
+  const toggleLanguage = () => {
+    setLanguage(!language);
+    setLanguageType(!language ? "fa" : "en");
+    secureLocalStorage.setItem("languageBrowser", language);
   };
 
-  const handleLogin = () => {
-    if (!email || !password) {
-      showAlert(
-        language ? "ایمیل و رمز عبور الزامیست" : "Email & Password are required"
-      );
-      return;
-    }
-    if (!validateEmail(email)) {
-      showAlert(language ? "ایمیل نامعتبر" : "Invalid email");
-      return;
-    }
-    if (password.length < 8) {
-      showAlert(
-        language
-          ? "رمز عبور باید حداقل 8 کاراکتر باشد"
-          : "Password must be minimum 8 characters"
-      );
-      return;
-    }
-
-    if (formType) {
-      signinUser();
-    } else {
-      signupUser();
-    }
+  const signOut = () => {
+    window.location.assign("/");
+    secureLocalStorage.removeItem("currentUser");
+    setCurrentUser(null);
   };
 
-  // signin existing user
-  const signinUser = async () => {
-    const users = await getUsersApi();
-    const userData = users.find((user) => user.email === email);
-    if (userData) {
-      if (decryptPassword(userData.password) === password) {
-        setCurrentUser(userData);
-        secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
-        if (userData.permission === "admin") {
-          window.location.assign("/admin");
-        } else {
-          window.location.assign("/");
-        }
-      } else {
-        showAlert(language ? "رمز عبور اشتباه" : "Wrong password");
-      }
-    } else {
-      showAlert(language ? "ایمیل وجود ندارد" : "Email does not exist");
-    }
-  };
+  const controlsData = [
+    {
+      id: "language",
+      alt: "language",
+      hover: false,
+      src: (language) => (language ? english : farsi),
+      hoverSrc: (language) => (language ? englishHover : farsiHover),
+      onClick: toggleLanguage,
+    },
+    {
+      id: "mode",
+      alt: "mode",
+      hover: false,
+      src: () => mode,
+      hoverSrc: () => modeHover,
+      onClick: () => {}, // Assuming you have a function for toggling mode
+    },
+    {
+      id: "logout",
+      alt: "logout",
+      hover: false,
+      src: () => logout,
+      hoverSrc: () => logoutHover,
+      onClick: signOut,
+    },
+  ];
 
-  // signup new user into db/state/localstorage
-  const signupUser = async () => {
-    const user = {
-      name: "",
-      email: email.trim(),
-      password: cryptPassword(),
-      permission: "user",
-    };
-    try {
-      const userData = await createUserApi(user);
-      if (userData.hasOwnProperty("error")) {
-        showAlert("خطا در برقراری ارتباط");
-      } else {
-        setCurrentUser(userData);
-        secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
-        window.location.assign("/");
-      }
-    } catch (error) {
-      showAlert("خطا در برقراری ارتباط");
-    }
+  const [hoverStates, setHoverStates] = useState({
+    language: false,
+    mode: false,
+    logout: false,
+  });
+  const handleMouseEnter = (controlId) => {
+    setHoverStates((prev) => ({ ...prev, [controlId]: true }));
   };
-
-  // encrypt password
-  const cryptPassword = () => {
-    return AES.encrypt(
-      password.trim(),
-      process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY
-    ).toString();
-  };
-
-  // dencrypt password
-  const decryptPassword = (password) => {
-    let decryptedBytes = AES.decrypt(
-      password,
-      process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY
-    );
-    return decryptedBytes.toString(enc.Utf8);
+  const handleMouseLeave = (controlId) => {
+    setHoverStates((prev) => ({ ...prev, [controlId]: false }));
   };
 
   return (
     <Fragment>
-      {displayForm && (
+      <NextSeo
+        title={language ? "پورتال" : "Portal"}
+        description={
+          language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio"
+        }
+        canonical="https://eshareh.com/portal"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://eshareh.com/portal",
+          title: language ? "پورتال" : "Portal",
+          description: language
+            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            : "Eshareh is a multidisciplinary, independently owned design studio",
+          siteName: language
+            ? "آژانس تبلیغاتی اشاره"
+            : "Eshareh Advertising Agency",
+          images: {
+            url: language ? logoFarsi : logoEnglish,
+            width: 1200,
+            height: 630,
+            alt: language ? "اشاره" : "Eshareh",
+          },
+        }}
+        robots="index, follow"
+      />
+      {currentUser && (
         <div className={classes.container}>
-          <div
-            className={
-              language ? classes.gridLayout : classes.gridLayoutReverse
-            }
-          >
-            <h1>{language ? "پورتال" : "Portal"}</h1>
-            <div className={classes.form}>
-              <div className={classes.input}>
-                <div className={classes.bar}>
-                  <p
-                    className={classes.label}
-                    style={{
-                      fontFamily: language ? "Farsi" : "English",
-                    }}
-                  >
-                    {language ? "ایمیل" : "Email"}
-                  </p>
-                  <CloseIcon
-                    className="icon"
-                    onClick={() => setEmail("")}
-                    sx={{ fontSize: 16 }}
-                  />
-                </div>
-                <input
-                  style={{
-                    fontFamily: language ? "English" : "English",
-                  }}
-                  type="email"
-                  id="email"
-                  name="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  autoComplete="off"
-                  dir="ltr"
+          <div className={classes.menu}>
+            <div className={classes.profile}>
+              <div className={classes.image}>
+                <Image
+                  className={classes.image}
+                  src={currentUser.media}
+                  blurDataURL={currentUser.media}
+                  layout="fill"
+                  objectFit="cover"
+                  alt="profile"
+                  as="image"
                 />
               </div>
-              <div className={classes.input}>
-                <div className={classes.bar}>
-                  <p
-                    className={classes.label}
-                    style={{
-                      fontFamily: language ? "Farsi" : "English",
-                    }}
-                  >
-                    {language ? "رمز عبور" : "Password"}
-                  </p>
-                  <CloseIcon
-                    className="icon"
-                    onClick={() => setPassword("")}
-                    sx={{ fontSize: 16 }}
-                  />
-                </div>
-                <input
-                  style={{
-                    fontFamily: language ? "English" : "English",
-                  }}
-                  type="password"
-                  id="password"
-                  name="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  autoComplete="off"
-                  dir="ltr"
-                />
-              </div>
-              <div className={classes.formAction}>
-                <p
-                  className={classes.alert}
-                  style={{
-                    fontFamily: language ? "Farsi" : "English",
-                  }}
-                >
-                  {alert}
-                </p>
-                <button
-                  onClick={() => handleLogin()}
+              <div>
+                <h3
                   style={{
                     fontFamily: language ? "FarsiBold" : "EnglishMedium",
                   }}
                 >
-                  {formType ? (
-                    <>{language ? "ورود" : "Sign in"}</>
-                  ) : (
-                    <>{language ? "ثبت نام" : "Sign up"}</>
-                  )}
-                </button>
+                  {currentUser.name[languageType]}
+                </h3>
+                <p>{currentUser.title[languageType]}</p>
               </div>
             </div>
-            <div className={classes.imageBox}>
-              <Image
-                src={portal}
-                blurDataURL={portal}
-                placeholder="blur"
-                alt="image"
-                layout="responsive"
-                objectFit="contain"
-                as="image"
-                priority
-              />
+            <div className={classes.control}>
+              {controlsData.map((control) => (
+                <div
+                  key={control.id}
+                  onClick={control.onClick}
+                  onMouseEnter={() => handleMouseEnter(control.id)}
+                  onMouseLeave={() => handleMouseLeave(control.id)}
+                >
+                  <Image
+                    width={20}
+                    height={20}
+                    src={
+                      hoverStates[control.id]
+                        ? control.hoverSrc(language)
+                        : control.src(language)
+                    }
+                    alt={control.alt}
+                    priority
+                    as="image"
+                  />
+                </div>
+              ))}
             </div>
+          </div>
+          <div className={classes.portal}>
+            <div className={classes.vertical}>
+              <div style={{ marginTop: "24px" }}>
+                {menuItemsTop.map((item, index) => (
+                  <div
+                    key={index}
+                    className={item.active ? classes.itemActive : classes.item}
+                    style={{
+                      fontFamily: language ? "FarsiLight" : "EnglishLight",
+                    }}
+                    onClick={() => handleClick(index, "top")}
+                  >
+                    <Image
+                      width={24}
+                      height={24}
+                      src={item.src}
+                      alt={item.alt}
+                      priority
+                      as="image"
+                    />
+                    <p>{item.label}</p>
+                  </div>
+                ))}
+              </div>
+              <div
+                style={{
+                  marginBottom: "24px",
+                }}
+              >
+                {menuItemsBottom.map((item, index) => (
+                  <div
+                    key={index}
+                    className={item.active ? classes.itemActive : classes.item}
+                    style={{
+                      fontFamily: language ? "FarsiLight" : "EnglishLight",
+                    }}
+                    onClick={() => handleClick(index, "bottom")}
+                  >
+                    <Image
+                      width={24}
+                      height={24}
+                      src={item.src}
+                      alt={item.alt}
+                      priority
+                      as="image"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={classes.panel}></div>
           </div>
         </div>
       )}

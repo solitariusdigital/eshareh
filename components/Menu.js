@@ -115,7 +115,7 @@ export default function Menu() {
                 blurDataURL={currentUser.media}
                 layout="fill"
                 objectFit="cover"
-                alt="image"
+                alt="profile"
                 as="image"
               />
             </div>
@@ -205,7 +205,7 @@ export default function Menu() {
                                 width={20}
                                 height={20}
                                 src={english}
-                                alt="logo"
+                                alt="language"
                                 onMouseEnter={() => setHoverLanguage(true)}
                                 priority
                                 as="image"
@@ -215,7 +215,7 @@ export default function Menu() {
                                 width={20}
                                 height={20}
                                 src={englishHover}
-                                alt="logo"
+                                alt="language"
                                 onMouseLeave={() => setHoverLanguage(false)}
                                 priority
                                 as="image"
@@ -243,7 +243,7 @@ export default function Menu() {
                                     width={20}
                                     height={20}
                                     src={search}
-                                    alt="logo"
+                                    alt="search"
                                     onMouseEnter={() => setHover(true)}
                                     priority
                                     as="image"
@@ -253,7 +253,7 @@ export default function Menu() {
                                     width={20}
                                     height={20}
                                     src={searchHover}
-                                    alt="logo"
+                                    alt="search"
                                     onMouseLeave={() => setHover(false)}
                                     priority
                                     as="image"
@@ -306,7 +306,7 @@ export default function Menu() {
                               width={20}
                               height={20}
                               src={farsi}
-                              alt="logo"
+                              alt="language"
                               onMouseEnter={() => setHoverLanguage(true)}
                               priority
                               as="image"
@@ -316,7 +316,7 @@ export default function Menu() {
                               width={20}
                               height={20}
                               src={farsiHover}
-                              alt="logo"
+                              alt="language"
                               onMouseLeave={() => setHoverLanguage(false)}
                               priority
                               as="image"
@@ -342,7 +342,7 @@ export default function Menu() {
                                   width={20}
                                   height={20}
                                   src={search}
-                                  alt="logo"
+                                  alt="search"
                                   onMouseEnter={() => setHover(true)}
                                   priority
                                   as="image"
@@ -352,7 +352,7 @@ export default function Menu() {
                                   width={20}
                                   height={20}
                                   src={searchHover}
-                                  alt="logo"
+                                  alt="search"
                                   onMouseLeave={() => setHover(false)}
                                   priority
                                   as="image"
@@ -406,7 +406,7 @@ export default function Menu() {
                     width={20}
                     height={20}
                     src={language ? english : farsi}
-                    alt="logo"
+                    alt="language"
                     onMouseEnter={() => setHoverLanguage(true)}
                     priority
                     as="image"
@@ -416,7 +416,7 @@ export default function Menu() {
                     width={20}
                     height={20}
                     src={language ? englishHover : farsiHover}
-                    alt="logo"
+                    alt="language"
                     onMouseLeave={() => setHoverLanguage(false)}
                     priority
                     as="image"
@@ -459,7 +459,7 @@ export default function Menu() {
                   >
                     {nav.title[languageType]}
                     {nav.title[languageType] === "" && (
-                      <Image width={20} height={20} src={search} alt="logo" />
+                      <Image width={20} height={20} src={search} alt="search" />
                     )}
                   </a>
                 ))}

@@ -2,159 +2,94 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  display: flex;
-  background: linear-gradient(to bottom, config.$white 50%, config.$black 50%);
-  margin-top: 120px;
-  height: calc(100vh - 120px);
+  margin: auto;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
 
-  @include mixins.tablet {
-    height: 100%;
-  }
   @include mixins.mobile {
-    height: 100%;
+    width: 100%;
+    padding: 0px 12px;
   }
   @include mixins.tabletPortrait {
-    height: 100%;
+    width: config.$content-widthTablet;
+  }
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
   }
 
-  .gridLayout,
-  .gridLayoutReverse {
+  .menu {
+    height: 100px;
+    @include mixins.row-space-between-center();
+
+    .control {
+      width: 100px;
+      cursor: pointer;
+      @include mixins.row-space-between-center();
+
+      div {
+        height: 20px;
+      }
+    }
+
+    .profile {
+      @include mixins.row-space-between-center();
+
+      .image {
+        position: relative;
+        width: 65px;
+        height: 65px;
+        border-radius: 50px;
+        margin-right: 30px;
+      }
+    }
+  }
+
+  .portal {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
-    width: config.$content-width;
-    max-width: config.$max-widthHeigh;
-    margin-top: 40px;
-    position: relative;
-    direction: rtl;
+    height: calc(100vh - 100px);
+    max-height: 900px !important;
 
-    h1 {
-      position: absolute;
-      top: 0px;
-    }
-
-    @include mixins.desktop {
-      position: relative;
-      bottom: 40px;
-    }
-    @include mixins.mobile {
-      width: 100%;
+    .vertical {
       display: flex;
       flex-direction: column;
-      margin-top: 0px;
-    }
-    @include mixins.tablet {
-      display: flex;
-      flex-direction: column;
-      width: config.$content-widthTablet;
-    }
-    @include mixins.tabletPortrait {
-      display: flex;
-      flex-direction: column;
-      width: config.$content-widthTablet;
-    }
-
-    .imageBox {
-      position: relative;
-      width: 50%;
-
-      @include mixins.mobile {
-        width: 100%;
-      }
-      @include mixins.tablet {
-        width: 70%;
-      }
-      @include mixins.tabletPortrait {
-        width: 80%;
-      }
-    }
-  }
-
-  .gridLayoutReverse {
-    direction: ltr;
-  }
-
-  .gridLayout {
-    .imageBox {
-      display: inline-block;
-      transform: scaleX(-1);
-    }
-  }
-}
-
-.form {
-  position: relative;
-  width: 40%;
-
-  @include mixins.desktop {
-    bottom: 20px;
-  }
-  @include mixins.tablet {
-    width: 500px;
-    margin: 100px 0px;
-  }
-  @include mixins.tabletPortrait {
-    width: 500px;
-    margin: 100px 0px;
-  }
-  @include mixins.mobile {
-    width: calc(100% - 24px);
-    margin: 50px 0px;
-  }
-
-  .input {
-    margin: 10px auto;
-
-    .bar {
-      display: flex;
       justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
-    .label {
-      color: config.$grey;
-      font-size: config.$small-font;
-      margin-bottom: 8px;
-    }
-
-    input {
-      @include mixins.input();
-      width: 100%;
-    }
-  }
-
-  .formAction {
-    display: flex;
-    flex-direction: column;
-    @include mixins.mobile {
       align-items: center;
-    }
-    @include mixins.tablet {
-      align-items: center;
-    }
-    @include mixins.tabletPortrait {
-      align-items: center;
-    }
-    button {
-      @include mixins.button(config.$yellow, config.$black);
-    }
-  }
+      background: config.$yellow;
+      width: 65px;
+      border-radius: 5px;
 
-  .alert {
-    height: 25px;
-    margin: 16px 0px;
-    color: config.$red;
+      .item,
+      .itemActive {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        color: config.$white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
 
-    @include mixins.tablet {
-      color: config.$red;
+        &:hover {
+          background: config.$black;
+          cursor: pointer;
+        }
+
+        p {
+          font-size: small;
+        }
+      }
+
+      .itemActive {
+        background: config.$black;
+      }
     }
-    @include mixins.tabletPortrait {
-      color: config.$red;
-    }
-    @include mixins.mobile {
-      color: config.$red;
+
+    .panel {
+      border: 1px solid red;
+      margin-left: 30px;
+      width: calc(100% - 95px);
     }
   }
 }

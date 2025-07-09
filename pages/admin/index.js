@@ -26,7 +26,7 @@ export default function Admin({ covers, pages, mediaData }) {
 
   useEffect(() => {
     if (permissionControl !== "admin") {
-      Router.push("/portal");
+      Router.push("/login");
     } else {
       if (editNews) {
         setFormType("news");

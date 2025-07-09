@@ -64,7 +64,7 @@ export default function Password() {
         password: cryptPassword(),
       };
       await updateUserApi(user);
-      window.location.assign("/portal");
+      window.location.assign("/login");
       secureLocalStorage.removeItem("currentUser");
       setCurrentUser(null);
     } else {
