@@ -54,7 +54,9 @@
 
       &:hover {
         @include mixins.background-anime();
-        filter: none;
+        & {
+          filter: none;
+        }
       }
     }
 
@@ -64,7 +66,9 @@
       object-fit: cover;
 
       &:hover {
-        filter: none;
+        & {
+          filter: none;
+        }
       }
     }
   }
@@ -102,7 +106,9 @@
 
         &:hover {
           @include mixins.background-anime();
-          filter: none;
+          & {
+            filter: none;
+          }
         }
       }
 
@@ -113,7 +119,9 @@
         object-fit: cover;
 
         &:hover {
-          filter: none;
+          & {
+            filter: none;
+          }
         }
       }
     }
@@ -175,7 +183,9 @@
     .image {
       &:hover {
         @include mixins.background-anime();
-        filter: none;
+        & {
+          filter: none;
+        }
       }
     }
 
@@ -186,7 +196,9 @@
       object-fit: cover;
 
       &:hover {
-        filter: none;
+        & {
+          filter: none;
+        }
       }
     }
   }

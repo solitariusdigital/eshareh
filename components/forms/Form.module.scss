@@ -99,7 +99,9 @@
 
   .addField {
     @include mixins.button(config.$green, config.$white);
-    width: 100px;
+    & {
+      width: 100px;
+    }
     @include mixins.allDesktop() {
       &:hover {
         color: config.$green;
@@ -108,8 +110,10 @@
   }
   .removeField {
     @include mixins.button(config.$red, config.$white);
-    width: 100px;
-    margin-top: 12px;
+    & {
+      width: 100px;
+      margin-top: 12px;
+    }
     @include mixins.allDesktop() {
       &:hover {
         color: config.$red;
@@ -141,7 +145,9 @@
 
   button {
     @include mixins.button(config.$red, config.$white);
-    margin: auto;
+    & {
+      margin: auto;
+    }
     @include mixins.allDesktop() {
       &:hover {
         color: config.$red;
@@ -206,7 +212,9 @@
 
   button {
     @include mixins.button(config.$yellow, config.$white);
-    margin: auto;
+    & {
+      margin: auto;
+    }
 
     &:hover {
       background: config.$white;

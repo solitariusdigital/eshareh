@@ -109,11 +109,13 @@
       height: 60%;
     }
 
-    background: linear-gradient(
-      to bottom,
-      config.$black 70%,
-      config.$yellow 0%
-    );
+    & {
+      background: linear-gradient(
+        to bottom,
+        config.$black 70%,
+        config.$yellow 0%
+      );
+    }
   }
 
   .swiperSlide {

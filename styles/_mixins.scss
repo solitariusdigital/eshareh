@@ -128,7 +128,8 @@ $screen-fourK: 6000px;
 }
 
 @mixin transparentBackground($alpha, $color) {
-  background-color: rgba(red($color), green($color), blue($color), $alpha);
+  background: $color;
+  opacity: $alpha;
 }
 
 @mixin row-space-between-center() {
