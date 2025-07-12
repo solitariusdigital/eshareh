@@ -32,19 +32,51 @@ export default function Portal() {
   const { screenSize, setScreenSize } = useContext(StateContext);
 
   const menuItemsTopData = [
-    { src: home, alt: "home", label: "Home", active: false },
-    { src: tasks, alt: "tasks", label: "Tasks", active: false },
-    { src: news, alt: "news", label: "News", active: false },
-    { src: inbox, alt: "inbox", label: "Inbox", active: false },
+    {
+      src: home,
+      alt: "home",
+      label: {
+        fa: "خانه",
+        en: "Home",
+      },
+      active: false,
+    },
+    {
+      src: tasks,
+      alt: "tasks",
+      label: {
+        fa: "وظایف",
+        en: "Tasks",
+      },
+      active: false,
+    },
+    {
+      src: news,
+      alt: "news",
+      label: {
+        fa: "اخبار",
+        en: "News",
+      },
+      active: false,
+    },
+    {
+      src: inbox,
+      alt: "inbox",
+      label: {
+        fa: "ورودی",
+        en: "Inbox",
+      },
+      active: false,
+    },
   ];
   const menuItemsBottomData = [
     { src: profile, alt: "profile", active: false },
     { src: setting, alt: "setting", active: false },
   ];
-
   const [menuItemsTop, setMenuItemsTop] = useState(menuItemsTopData);
   const [menuItemsBottom, setMenuItemsBottom] = useState(menuItemsBottomData);
-  const handleClick = (index, menuType) => {
+
+  const handleClickMenu = (index, menuType) => {
     if (menuType === "top") {
       const updatedItemsTop = menuItemsTop.map((item, idx) => ({
         ...item,
@@ -64,29 +96,16 @@ export default function Portal() {
     }
   };
 
-  useEffect(() => {
-    if (!currentUser) {
-      Router.push("/");
-    } else {
-      document.body.style.marginTop = "0px";
-      document.body.style.background = "#f6f6f6";
-      setDisplayMenu(false);
-      setFooter(false);
-    }
-  }, [currentUser, setDisplayMenu, setFooter]);
-
   const toggleLanguage = () => {
     setLanguage(!language);
     setLanguageType(!language ? "fa" : "en");
     secureLocalStorage.setItem("languageBrowser", language);
   };
-
   const signOut = () => {
     window.location.assign("/");
     secureLocalStorage.removeItem("currentUser");
     setCurrentUser(null);
   };
-
   const controlsData = [
     {
       id: "language",
@@ -119,6 +138,18 @@ export default function Portal() {
     mode: false,
     logout: false,
   });
+
+  useEffect(() => {
+    if (!currentUser) {
+      Router.push("/");
+    } else {
+      document.body.style.marginTop = "0px";
+      document.body.style.background = "#f6f6f6";
+      setDisplayMenu(false);
+      setFooter(false);
+    }
+  }, [currentUser, setDisplayMenu, setFooter]);
+
   const handleMouseEnter = (controlId) => {
     setHoverStates((prev) => ({ ...prev, [controlId]: true }));
   };
@@ -214,9 +245,9 @@ export default function Portal() {
                     key={index}
                     className={item.active ? classes.itemActive : classes.item}
                     style={{
-                      fontFamily: language ? "FarsiLight" : "EnglishLight",
+                      fontFamily: language ? "Farsi" : "EnglishLight",
                     }}
-                    onClick={() => handleClick(index, "top")}
+                    onClick={() => handleClickMenu(index, "top")}
                   >
                     <Image
                       width={24}
@@ -226,7 +257,7 @@ export default function Portal() {
                       priority
                       as="image"
                     />
-                    <p>{item.label}</p>
+                    <p>{item.label[languageType]}</p>
                   </div>
                 ))}
               </div>
@@ -239,10 +270,7 @@ export default function Portal() {
                   <div
                     key={index}
                     className={item.active ? classes.itemActive : classes.item}
-                    style={{
-                      fontFamily: language ? "FarsiLight" : "EnglishLight",
-                    }}
-                    onClick={() => handleClick(index, "bottom")}
+                    onClick={() => handleClickMenu(index, "bottom")}
                   >
                     <Image
                       width={24}
