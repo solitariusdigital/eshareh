@@ -1,15 +1,10 @@
-import { Fragment, useContext, useState, useEffect } from "react";
+import { Fragment, useContext, useState, useEffect, useMemo } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./portal.module.scss";
 import Image from "next/legacy/image";
 import { NextSeo } from "next-seo";
 import Router from "next/router";
-import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
-import english from "@/assets/english.svg";
-import englishHover from "@/assets/englishHover.svg";
-import farsi from "@/assets/farsi.svg";
-import farsiHover from "@/assets/farsiHover.svg";
 import logout from "@/assets/logout.svg";
 import logoutHover from "@/assets/logoutHover.svg";
 import mode from "@/assets/mode.svg";
@@ -30,42 +25,44 @@ export default function Portal() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const [themeMode, setThemeMode] = useState("light");
+
+  const backgroundColor = useMemo(() => {
+    return {
+      light: {
+        background: "#f6f6f6",
+        color: "#1b1b1bff",
+      },
+      dark: {
+        background: "#1b1b1bff",
+        color: "#f6f6f6",
+      },
+    };
+  }, []);
 
   const menuItemsTopData = [
     {
       src: home,
       alt: "home",
-      label: {
-        fa: "خانه",
-        en: "Home",
-      },
+      label: "خانه",
       active: false,
     },
     {
       src: tasks,
       alt: "tasks",
-      label: {
-        fa: "وظایف",
-        en: "Tasks",
-      },
+      label: "وظایف",
       active: false,
     },
     {
       src: news,
       alt: "news",
-      label: {
-        fa: "اخبار",
-        en: "News",
-      },
+      label: "اخبار",
       active: false,
     },
     {
       src: inbox,
       alt: "inbox",
-      label: {
-        fa: "ورودی",
-        en: "Inbox",
-      },
+      label: "ورودی",
       active: false,
     },
   ];
@@ -96,32 +93,22 @@ export default function Portal() {
     }
   };
 
-  const toggleLanguage = () => {
-    setLanguage(!language);
-    setLanguageType(!language ? "fa" : "en");
-    secureLocalStorage.setItem("languageBrowser", language);
-  };
   const signOut = () => {
     window.location.assign("/");
     secureLocalStorage.removeItem("currentUser");
     setCurrentUser(null);
   };
+  const toggleMode = () => {
+    setThemeMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  };
   const controlsData = [
-    {
-      id: "language",
-      alt: "language",
-      hover: false,
-      src: (language) => (language ? english : farsi),
-      hoverSrc: (language) => (language ? englishHover : farsiHover),
-      onClick: toggleLanguage,
-    },
     {
       id: "mode",
       alt: "mode",
       hover: false,
       src: () => mode,
       hoverSrc: () => modeHover,
-      onClick: () => {}, // Assuming you have a function for toggling mode
+      onClick: toggleMode, // Assuming you have a function for toggling mode
     },
     {
       id: "logout",
@@ -144,11 +131,25 @@ export default function Portal() {
       Router.push("/");
     } else {
       document.body.style.marginTop = "0px";
-      document.body.style.background = "#f6f6f6";
+      document.body.style.background = backgroundColor.light;
       setDisplayMenu(false);
       setFooter(false);
+      setLanguageType("fa");
+      setLanguage(true);
     }
-  }, [currentUser, setDisplayMenu, setFooter]);
+  }, [
+    backgroundColor,
+    currentUser,
+    setDisplayMenu,
+    setFooter,
+    setLanguage,
+    setLanguageType,
+  ]);
+
+  useEffect(() => {
+    document.body.style.background = backgroundColor[themeMode].background;
+    document.body.style.color = backgroundColor[themeMode].color;
+  }, [backgroundColor, themeMode]);
 
   const handleMouseEnter = (controlId) => {
     setHoverStates((prev) => ({ ...prev, [controlId]: true }));
@@ -160,29 +161,21 @@ export default function Portal() {
   return (
     <Fragment>
       <NextSeo
-        title={language ? "پورتال" : "Portal"}
-        description={
-          language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
-            : "Eshareh is a multidisciplinary, independently owned design studio"
-        }
+        title={"پورتال"}
+        description={"اشاره یک استودیوی طراحی چند رشته ای و مستقل است"}
         canonical="https://eshareh.com/portal"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/portal",
-          title: language ? "پورتال" : "Portal",
-          description: language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
-            : "Eshareh is a multidisciplinary, independently owned design studio",
-          siteName: language
-            ? "آژانس تبلیغاتی اشاره"
-            : "Eshareh Advertising Agency",
+          title: "پورتال",
+          description: "اشاره یک استودیوی طراحی چند رشته ای و مستقل است",
+          siteName: "آژانس تبلیغاتی اشاره",
           images: {
-            url: language ? logoFarsi : logoEnglish,
+            url: logoFarsi,
             width: 1200,
             height: 630,
-            alt: language ? "اشاره" : "Eshareh",
+            alt: "اشاره",
           },
         }}
         robots="index, follow"
@@ -205,12 +198,12 @@ export default function Portal() {
               <div>
                 <h3
                   style={{
-                    fontFamily: language ? "FarsiBold" : "EnglishMedium",
+                    fontFamily: "FarsiBold",
                   }}
                 >
-                  {currentUser.name[languageType]}
+                  {currentUser.name.fa}
                 </h3>
-                <p>{currentUser.title[languageType]}</p>
+                <p>{currentUser.title.fa}</p>
               </div>
             </div>
             <div className={classes.control}>
@@ -244,9 +237,6 @@ export default function Portal() {
                   <div
                     key={index}
                     className={item.active ? classes.itemActive : classes.item}
-                    style={{
-                      fontFamily: language ? "Farsi" : "EnglishLight",
-                    }}
                     onClick={() => handleClickMenu(index, "top")}
                   >
                     <Image
@@ -257,7 +247,7 @@ export default function Portal() {
                       priority
                       as="image"
                     />
-                    <p>{item.label[languageType]}</p>
+                    <p>{item.label}</p>
                   </div>
                 ))}
               </div>
