@@ -5,9 +5,11 @@ import Image from "next/legacy/image";
 import { NextSeo } from "next-seo";
 import Router from "next/router";
 import logoFarsi from "@/assets/logoFarsi.svg";
-import logout from "@/assets/logout.svg";
+import logoutLight from "@/assets/logoutLight.svg";
+import logoutDark from "@/assets/logoutDark.svg";
 import logoutHover from "@/assets/logoutHover.svg";
-import mode from "@/assets/mode.svg";
+import modeLight from "@/assets/modeLight.svg";
+import modeDark from "@/assets/modeDark.svg";
 import modeHover from "@/assets/modeHover.svg";
 import secureLocalStorage from "react-secure-storage";
 import home from "@/assets/home.svg";
@@ -21,7 +23,6 @@ export default function Portal() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
-  const { displayFooter, setFooter } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -31,10 +32,10 @@ export default function Portal() {
     return {
       light: {
         background: "#f6f6f6",
-        color: "#1b1b1bff",
+        color: "#231F20",
       },
       dark: {
-        background: "#1b1b1bff",
+        background: "#231F20",
         color: "#f6f6f6",
       },
     };
@@ -106,15 +107,15 @@ export default function Portal() {
       id: "mode",
       alt: "mode",
       hover: false,
-      src: () => mode,
+      src: () => (themeMode === "light" ? modeLight : modeDark),
       hoverSrc: () => modeHover,
-      onClick: toggleMode, // Assuming you have a function for toggling mode
+      onClick: toggleMode,
     },
     {
       id: "logout",
       alt: "logout",
       hover: false,
-      src: () => logout,
+      src: () => (themeMode === "light" ? logoutLight : logoutDark),
       hoverSrc: () => logoutHover,
       onClick: signOut,
     },
@@ -133,7 +134,6 @@ export default function Portal() {
       document.body.style.marginTop = "0px";
       document.body.style.background = backgroundColor.light;
       setDisplayMenu(false);
-      setFooter(false);
       setLanguageType("fa");
       setLanguage(true);
     }
@@ -141,7 +141,6 @@ export default function Portal() {
     backgroundColor,
     currentUser,
     setDisplayMenu,
-    setFooter,
     setLanguage,
     setLanguageType,
   ]);
@@ -219,8 +218,8 @@ export default function Portal() {
                     height={20}
                     src={
                       hoverStates[control.id]
-                        ? control.hoverSrc(language)
-                        : control.src(language)
+                        ? control.hoverSrc()
+                        : control.src()
                     }
                     alt={control.alt}
                     priority
