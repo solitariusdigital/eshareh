@@ -11,8 +11,10 @@
 
   button {
     @include mixins.button(config.$yellow, config.$black);
-    border-radius: 50px;
-    margin: 20px auto;
+    & {
+      border-radius: 50px;
+      margin: 20px auto;
+    }
   }
 
   .content {
