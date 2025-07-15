@@ -58,6 +58,14 @@
     height: calc(100vh - 100px);
     max-height: 1200px !important;
 
+    @include mixins.mobile {
+      display: flex;
+      flex-direction: column;
+    }
+    @include mixins.tabletPortrait {
+      display: flex;
+      flex-direction: column;
+    }
     .menu {
       display: flex;
       flex-direction: column;
@@ -66,6 +74,33 @@
       background: config.$yellow;
       width: 65px;
       border-radius: 5px;
+
+      @include mixins.mobile {
+        width: 100%;
+        height: 45px;
+        @include mixins.row-space-between-center();
+      }
+      @include mixins.tabletPortrait {
+        width: 100%;
+        height: 65px;
+        @include mixins.row-space-between-center();
+      }
+      .box {
+        @include mixins.mobile {
+          @include mixins.row-space-between-center();
+          margin: 0px !important;
+          p {
+            display: none;
+          }
+        }
+        @include mixins.tabletPortrait {
+          @include mixins.row-space-between-center();
+          margin: 0px !important;
+          p {
+            display: none;
+          }
+        }
+      }
 
       .item,
       .itemActive {
@@ -78,6 +113,11 @@
         width: 65px;
         height: 65px;
         border-radius: 5px;
+
+        @include mixins.mobile {
+          width: 45px;
+          height: 45px;
+        }
 
         &:hover {
           background: config.$black;
@@ -97,6 +137,15 @@
     .board {
       margin-right: 30px;
       width: calc(100% - 95px);
+
+      @include mixins.mobile {
+        width: 100%;
+        margin-top: 16px;
+      }
+      @include mixins.tabletPortrait {
+        width: 100%;
+        margin-top: 16px;
+      }
     }
   }
 }

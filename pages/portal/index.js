@@ -260,7 +260,7 @@ export default function Portal() {
             </div>
             <div className={classes.panel}>
               <div className={classes.menu}>
-                <div style={{ marginTop: "24px" }}>
+                <div className={classes.box} style={{ marginTop: "24px" }}>
                   {menuItemsTop.map((item, index) => (
                     <div
                       key={index}
@@ -282,6 +282,7 @@ export default function Portal() {
                   ))}
                 </div>
                 <div
+                  className={classes.box}
                   style={{
                     marginBottom: "24px",
                   }}
