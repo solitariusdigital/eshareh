@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
-  const { displayFooter, setFooter } = useContext(StateContext);
+  const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { menuColor, setMenuColor } = useContext(StateContext);
   const { heroHeight, setHeroHeight } = useContext(StateContext);
   const [scrollArrow, setScrollArrow] = useState(false);

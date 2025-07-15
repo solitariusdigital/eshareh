@@ -29,7 +29,7 @@ export default function Menu() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const { displayFooter, setFooter } = useContext(StateContext);
+  const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { menuColor, setMenuColor } = useContext(StateContext);
   const [colorPicker, setColorPicker] = useState(false);
   const [textPicker, setTextPicker] = useState(false);
@@ -39,7 +39,7 @@ export default function Menu() {
 
   const activateNav = (link, index) => {
     setMenuMobile(false);
-    setFooter(true);
+    setDisplayFooter(true);
     navigationTopBar.map((nav, i) => {
       if (i === index) {
         Router.push(link);

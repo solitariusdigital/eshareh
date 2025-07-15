@@ -11,6 +11,7 @@ import logoutHover from "@/assets/logoutHover.svg";
 import modeLight from "@/assets/modeLight.svg";
 import modeDark from "@/assets/modeDark.svg";
 import modeHover from "@/assets/modeHover.svg";
+import prev from "@/assets/prev.svg";
 import secureLocalStorage from "react-secure-storage";
 import home from "@/assets/home.svg";
 import tasks from "@/assets/tasks.svg";
@@ -23,20 +24,24 @@ export default function Portal() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
+  const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [themeMode, setThemeMode] = useState("light");
+  const [boardType, setBoardType] = useState(
+    "home" || "tasks" || "news" || "inbox" || "setting" || "profile"
+  );
 
   const backgroundColor = useMemo(() => {
     return {
       light: {
-        background: "#f6f6f6",
+        background: "#ffffff",
         color: "#231F20",
       },
       dark: {
         background: "#231F20",
-        color: "#f6f6f6",
+        color: "#ffffff",
       },
     };
   }, []);
@@ -47,29 +52,49 @@ export default function Portal() {
       alt: "home",
       label: "خانه",
       active: false,
+      onClick: () => setBoardType("home"),
     },
     {
       src: tasks,
       alt: "tasks",
       label: "وظایف",
       active: false,
+      onClick: () => setBoardType("tasks"),
     },
     {
       src: news,
       alt: "news",
       label: "اخبار",
       active: false,
+      onClick: () => setBoardType("news"),
     },
     {
       src: inbox,
       alt: "inbox",
       label: "ورودی",
       active: false,
+      onClick: () => setBoardType("inbox"),
     },
   ];
   const menuItemsBottomData = [
-    { src: profile, alt: "profile", active: false },
-    { src: setting, alt: "setting", active: false },
+    {
+      src: profile,
+      alt: "profile",
+      active: false,
+      onClick: () => setBoardType("profile"),
+    },
+    {
+      src: setting,
+      alt: "setting",
+      active: false,
+      onClick: () => setBoardType("setting"),
+    },
+    {
+      src: prev,
+      alt: "logo",
+      active: false,
+      onClick: () => window.location.assign("/"),
+    },
   ];
   const [menuItemsTop, setMenuItemsTop] = useState(menuItemsTopData);
   const [menuItemsBottom, setMenuItemsBottom] = useState(menuItemsBottomData);
@@ -84,6 +109,7 @@ export default function Portal() {
       setMenuItemsBottom(
         menuItemsBottom.map((item) => ({ ...item, active: false }))
       );
+      menuItemsTopData[index].onClick();
     } else if (menuType === "bottom") {
       const updatedItemsBottom = menuItemsBottom.map((item, idx) => ({
         ...item,
@@ -91,6 +117,7 @@ export default function Portal() {
       }));
       setMenuItemsBottom(updatedItemsBottom);
       setMenuItemsTop(menuItemsTop.map((item) => ({ ...item, active: false })));
+      menuItemsBottomData[index].onClick();
     }
   };
 
@@ -131,23 +158,24 @@ export default function Portal() {
     if (!currentUser) {
       Router.push("/");
     } else {
-      document.body.style.marginTop = "0px";
-      document.body.style.background = backgroundColor.light;
       setDisplayMenu(false);
+      setDisplayFooter(false);
       setLanguageType("fa");
       setLanguage(true);
     }
   }, [
-    backgroundColor,
     currentUser,
     setDisplayMenu,
-    setLanguage,
+    setDisplayFooter,
     setLanguageType,
+    setLanguage,
   ]);
 
   useEffect(() => {
-    document.body.style.background = backgroundColor[themeMode].background;
-    document.body.style.color = backgroundColor[themeMode].color;
+    document.body.style.marginTop = "0px";
+    let element = document.getElementById("portal");
+    element.style.background = backgroundColor[themeMode].background;
+    element.style.color = backgroundColor[themeMode].color;
   }, [backgroundColor, themeMode]);
 
   const handleMouseEnter = (controlId) => {
@@ -180,92 +208,49 @@ export default function Portal() {
         robots="index, follow"
       />
       {currentUser && (
-        <div className={classes.container}>
-          <div className={classes.menu}>
-            <div className={classes.profile}>
-              <div className={classes.image}>
-                <Image
-                  className={classes.image}
-                  src={currentUser.media}
-                  blurDataURL={currentUser.media}
-                  layout="fill"
-                  objectFit="cover"
-                  alt="profile"
-                  as="image"
-                />
-              </div>
-              <div>
-                <h3
-                  style={{
-                    fontFamily: "FarsiBold",
-                  }}
-                >
-                  {currentUser.name.fa}
-                </h3>
-                <p>{currentUser.title.fa}</p>
-              </div>
-            </div>
-            <div className={classes.control}>
-              {controlsData.map((control) => (
-                <div
-                  key={control.id}
-                  onClick={control.onClick}
-                  onMouseEnter={() => handleMouseEnter(control.id)}
-                  onMouseLeave={() => handleMouseLeave(control.id)}
-                >
+        <div className={classes.container} id="portal">
+          <div className={classes.portal}>
+            <div className={classes.topBar}>
+              <div className={classes.profile}>
+                <div className={classes.image}>
                   <Image
-                    width={20}
-                    height={20}
-                    src={
-                      hoverStates[control.id]
-                        ? control.hoverSrc()
-                        : control.src()
-                    }
-                    alt={control.alt}
-                    priority
+                    className={classes.image}
+                    src={currentUser.media}
+                    blurDataURL={currentUser.media}
+                    layout="fill"
+                    objectFit="cover"
+                    alt="profile"
                     as="image"
                   />
                 </div>
-              ))}
-            </div>
-          </div>
-          <div className={classes.portal}>
-            <div className={classes.vertical}>
-              <div style={{ marginTop: "24px" }}>
-                {menuItemsTop.map((item, index) => (
-                  <div
-                    key={index}
-                    className={item.active ? classes.itemActive : classes.item}
-                    onClick={() => handleClickMenu(index, "top")}
+                <div>
+                  <h3
+                    style={{
+                      fontFamily: "FarsiBold",
+                    }}
                   >
-                    <Image
-                      width={24}
-                      height={24}
-                      src={item.src}
-                      alt={item.alt}
-                      priority
-                      as="image"
-                    />
-                    <p>{item.label}</p>
-                  </div>
-                ))}
+                    {currentUser.name.fa}
+                  </h3>
+                  <p>{currentUser.title.fa}</p>
+                </div>
               </div>
-              <div
-                style={{
-                  marginBottom: "24px",
-                }}
-              >
-                {menuItemsBottom.map((item, index) => (
+              <div className={classes.control}>
+                {controlsData.map((control) => (
                   <div
-                    key={index}
-                    className={item.active ? classes.itemActive : classes.item}
-                    onClick={() => handleClickMenu(index, "bottom")}
+                    key={control.id}
+                    onClick={control.onClick}
+                    onMouseEnter={() => handleMouseEnter(control.id)}
+                    onMouseLeave={() => handleMouseLeave(control.id)}
                   >
                     <Image
-                      width={24}
-                      height={24}
-                      src={item.src}
-                      alt={item.alt}
+                      width={20}
+                      height={20}
+                      src={
+                        hoverStates[control.id]
+                          ? control.hoverSrc()
+                          : control.src()
+                      }
+                      alt={control.alt}
                       priority
                       as="image"
                     />
@@ -273,7 +258,58 @@ export default function Portal() {
                 ))}
               </div>
             </div>
-            <div className={classes.panel}></div>
+            <div className={classes.panel}>
+              <div className={classes.menu}>
+                <div style={{ marginTop: "24px" }}>
+                  {menuItemsTop.map((item, index) => (
+                    <div
+                      key={index}
+                      className={
+                        item.active ? classes.itemActive : classes.item
+                      }
+                      onClick={() => handleClickMenu(index, "top")}
+                    >
+                      <Image
+                        width={24}
+                        height={24}
+                        src={item.src}
+                        alt={item.alt}
+                        priority
+                        as="image"
+                      />
+                      <p>{item.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <div
+                  style={{
+                    marginBottom: "24px",
+                  }}
+                >
+                  {menuItemsBottom.map((item, index) => (
+                    <div
+                      key={index}
+                      className={
+                        item.active ? classes.itemActive : classes.item
+                      }
+                      onClick={() => handleClickMenu(index, "bottom")}
+                    >
+                      <Image
+                        width={24}
+                        height={24}
+                        src={item.src}
+                        alt={item.alt}
+                        priority
+                        as="image"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className={classes.board}>
+                <h3>{boardType}</h3>
+              </div>
+            </div>
           </div>
         </div>
       )}

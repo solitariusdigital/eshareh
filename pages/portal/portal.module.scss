@@ -2,9 +2,13 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  margin: auto;
-  width: config.$content-width;
-  max-width: config.$max-widthHeigh;
+  height: 100vh;
+
+  .portal {
+    margin: auto;
+    width: config.$content-width;
+    max-width: config.$max-widthHeigh;
+  }
 
   @include mixins.mobile {
     width: 100%;
@@ -17,7 +21,7 @@
     width: config.$content-widthTablet;
   }
 
-  .menu {
+  .topBar {
     height: 100px;
     @include mixins.row-space-between-center();
     flex-direction: row-reverse;
@@ -48,13 +52,13 @@
     }
   }
 
-  .portal {
+  .panel {
     display: flex;
     flex-direction: row-reverse;
     height: calc(100vh - 100px);
     max-height: 1200px !important;
 
-    .vertical {
+    .menu {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -90,8 +94,7 @@
       }
     }
 
-    .panel {
-      border: 1px solid red;
+    .board {
       margin-right: 30px;
       width: calc(100% - 95px);
     }

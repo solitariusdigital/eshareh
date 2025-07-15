@@ -17,9 +17,18 @@ export default function Login() {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
+  const [displayForm, setDisplayForm] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
+
+  useEffect(() => {
+    if (currentUser) {
+      Router.push("/portal");
+    } else {
+      setDisplayForm(true);
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     if (permissionControl === "admin") {
@@ -81,14 +90,6 @@ export default function Login() {
     }
   };
 
-  // encrypt password
-  const cryptPassword = () => {
-    return AES.encrypt(
-      password.trim(),
-      process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY
-    ).toString();
-  };
-
   // dencrypt password
   const decryptPassword = (password) => {
     let decryptedBytes = AES.decrypt(
@@ -99,102 +100,108 @@ export default function Login() {
   };
 
   return (
-    <div className={classes.container}>
-      <div
-        className={language ? classes.gridLayout : classes.gridLayoutReverse}
-      >
-        <h1>{language ? "پورتال" : "Portal"}</h1>
-        <div className={classes.form}>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p
-                className={classes.label}
-                style={{
-                  fontFamily: language ? "Farsi" : "English",
-                }}
-              >
-                {language ? "ایمیل" : "Email"}
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() => setEmail("")}
-                sx={{ fontSize: 16 }}
+    <Fragment>
+      {displayForm && (
+        <div className={classes.container}>
+          <div
+            className={
+              language ? classes.gridLayout : classes.gridLayoutReverse
+            }
+          >
+            <h1>{language ? "پورتال" : "Portal"}</h1>
+            <div className={classes.form}>
+              <div className={classes.input}>
+                <div className={classes.bar}>
+                  <p
+                    className={classes.label}
+                    style={{
+                      fontFamily: language ? "Farsi" : "English",
+                    }}
+                  >
+                    {language ? "ایمیل" : "Email"}
+                  </p>
+                  <CloseIcon
+                    className="icon"
+                    onClick={() => setEmail("")}
+                    sx={{ fontSize: 16 }}
+                  />
+                </div>
+                <input
+                  style={{
+                    fontFamily: language ? "English" : "English",
+                  }}
+                  type="email"
+                  id="email"
+                  name="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  autoComplete="off"
+                  dir="ltr"
+                />
+              </div>
+              <div className={classes.input}>
+                <div className={classes.bar}>
+                  <p
+                    className={classes.label}
+                    style={{
+                      fontFamily: language ? "Farsi" : "English",
+                    }}
+                  >
+                    {language ? "رمز عبور" : "Password"}
+                  </p>
+                  <CloseIcon
+                    className="icon"
+                    onClick={() => setPassword("")}
+                    sx={{ fontSize: 16 }}
+                  />
+                </div>
+                <input
+                  style={{
+                    fontFamily: language ? "English" : "English",
+                  }}
+                  type="password"
+                  id="password"
+                  name="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  autoComplete="off"
+                  dir="ltr"
+                />
+              </div>
+              <div className={classes.formAction}>
+                <p
+                  className={classes.alert}
+                  style={{
+                    fontFamily: language ? "Farsi" : "English",
+                  }}
+                >
+                  {alert}
+                </p>
+                <button
+                  onClick={() => handleLogin()}
+                  style={{
+                    fontFamily: language ? "FarsiBold" : "EnglishMedium",
+                  }}
+                >
+                  <>{language ? "ورود" : "Sign in"}</>
+                </button>
+              </div>
+            </div>
+            <div className={classes.imageBox}>
+              <Image
+                src={portal}
+                blurDataURL={portal}
+                placeholder="blur"
+                alt="image"
+                layout="responsive"
+                objectFit="contain"
+                as="image"
+                priority
               />
             </div>
-            <input
-              style={{
-                fontFamily: language ? "English" : "English",
-              }}
-              type="email"
-              id="email"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              autoComplete="off"
-              dir="ltr"
-            />
-          </div>
-          <div className={classes.input}>
-            <div className={classes.bar}>
-              <p
-                className={classes.label}
-                style={{
-                  fontFamily: language ? "Farsi" : "English",
-                }}
-              >
-                {language ? "رمز عبور" : "Password"}
-              </p>
-              <CloseIcon
-                className="icon"
-                onClick={() => setPassword("")}
-                sx={{ fontSize: 16 }}
-              />
-            </div>
-            <input
-              style={{
-                fontFamily: language ? "English" : "English",
-              }}
-              type="password"
-              id="password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              autoComplete="off"
-              dir="ltr"
-            />
-          </div>
-          <div className={classes.formAction}>
-            <p
-              className={classes.alert}
-              style={{
-                fontFamily: language ? "Farsi" : "English",
-              }}
-            >
-              {alert}
-            </p>
-            <button
-              onClick={() => handleLogin()}
-              style={{
-                fontFamily: language ? "FarsiBold" : "EnglishMedium",
-              }}
-            >
-              <>{language ? "ورود" : "Sign in"}</>
-            </button>
           </div>
         </div>
-        <div className={classes.imageBox}>
-          <Image
-            src={portal}
-            blurDataURL={portal}
-            placeholder="blur"
-            alt="image"
-            layout="responsive"
-            objectFit="contain"
-            as="image"
-            priority
-          />
-        </div>
-      </div>
-    </div>
+      )}
+    </Fragment>
   );
 }

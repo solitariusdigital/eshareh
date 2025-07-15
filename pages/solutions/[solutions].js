@@ -43,7 +43,7 @@ export default function Solution({ solutions, projectTitle }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
-  const { displayFooter, setFooter } = useContext(StateContext);
+  const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { editNews, setEditNews } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
@@ -126,7 +126,7 @@ export default function Solution({ solutions, projectTitle }) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setDisplayNextController(false);
-          setFooter(false);
+          setDisplayFooter(false);
         }
       });
     }, options);
@@ -139,7 +139,7 @@ export default function Solution({ solutions, projectTitle }) {
         observer.unobserve(targetRef.current);
       }
     };
-  }, [setFooter]);
+  }, [setDisplayFooter]);
 
   useEffect(() => {
     if (!displayGallerySlider) {
@@ -149,15 +149,15 @@ export default function Solution({ solutions, projectTitle }) {
         const isScrollAtBottom =
           window.innerHeight + window.scrollY >= document.body.offsetHeight;
         if (currentScrollY > prevScrollY) {
-          setFooter(false);
+          setDisplayFooter(false);
           setDisplayNextController(true);
         } else if (currentScrollY < prevScrollY) {
-          setFooter(true);
+          setDisplayFooter(true);
           setDisplayNextController(false);
         }
         if (isScrollAtBottom) {
           setDisplayNextController(false);
-          setFooter(false);
+          setDisplayFooter(false);
         }
         prevScrollY = currentScrollY;
       };
@@ -166,7 +166,7 @@ export default function Solution({ solutions, projectTitle }) {
         window.removeEventListener("scroll", handleScroll);
       };
     }
-  }, [displayGallerySlider, setFooter]);
+  }, [displayGallerySlider, setDisplayFooter]);
 
   const gallerySlider = () => {
     setDisplayMenu(false);
