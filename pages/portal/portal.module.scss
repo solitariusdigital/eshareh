@@ -8,17 +8,17 @@
     margin: auto;
     width: config.$content-width;
     max-width: config.$max-widthHeigh;
-  }
 
-  @include mixins.mobile {
-    width: 100%;
-    padding: 0px 12px;
-  }
-  @include mixins.tabletPortrait {
-    width: config.$content-widthTablet;
-  }
-  @include mixins.tablet {
-    width: config.$content-widthTablet;
+    @include mixins.mobile {
+      width: 100%;
+      padding: 0px 12px;
+    }
+    @include mixins.tabletPortrait {
+      width: config.$content-widthTablet;
+    }
+    @include mixins.tablet {
+      width: config.$content-widthTablet;
+    }
   }
 
   .topBar {
