@@ -146,6 +146,22 @@ export default function Solution({ solutions, projectTitle }) {
       let prevScrollY = window.scrollY;
       let timeoutId = null; // To store the timeout ID
       let hasReachedBottom = false; // Flag to check if the user has reached the bottom
+      let isScrollDownListenerActive = false; // Flag to check if the scroll down listener is active
+      // Define handleScrollDown outside of setTimeout
+      const handleScrollDown = (event) => {
+        // Check if the scroll is down
+        if (event.deltaY > 0) {
+          Router.push(
+            `/solutions/${replaceSpacesAndHyphens(
+              nextProject[languageType].title
+            )}`
+          );
+          // Clean up the event listener and timeout
+          window.removeEventListener("wheel", handleScrollDown);
+          clearTimeout(timeoutId);
+          isScrollDownListenerActive = false; // Reset the listener flag
+        }
+      };
       const handleScroll = () => {
         const currentScrollY = window.scrollY;
         const isScrollAtBottom =
@@ -165,22 +181,9 @@ export default function Solution({ solutions, projectTitle }) {
             hasReachedBottom = true; // Set the flag
             // Start a 3-second timer
             timeoutId = setTimeout(() => {
-              // Add a temporary scroll listener for the next scroll down
-              const handleScrollDown = (event) => {
-                // Check if the scroll is down
-                if (event.deltaY > 0) {
-                  Router.push(
-                    `/solutions/${replaceSpacesAndHyphens(
-                      nextProject[languageType].title
-                    )}`
-                  );
-                  // Clean up the event listener and timeout
-                  window.removeEventListener("wheel", handleScrollDown);
-                  clearTimeout(timeoutId);
-                }
-              };
               // Add a temporary scroll listener for the wheel event
               window.addEventListener("wheel", handleScrollDown);
+              isScrollDownListenerActive = true; // Set the listener flag
             }, 3000);
           }
         } else {
@@ -190,17 +193,25 @@ export default function Solution({ solutions, projectTitle }) {
             if (timeoutId) {
               clearTimeout(timeoutId); // Clear the timer if user scrolls up
             }
+            // If the user scrolls up, remove the scroll down listener if it's active
+            if (isScrollDownListenerActive) {
+              window.removeEventListener("wheel", handleScrollDown);
+              isScrollDownListenerActive = false; // Reset the listener flag
+            }
           }
         }
         prevScrollY = currentScrollY;
       };
       window.addEventListener("scroll", handleScroll);
-
       return () => {
         window.removeEventListener("scroll", handleScroll);
         // Clear the timeout on cleanup
         if (timeoutId) {
           clearTimeout(timeoutId);
+        }
+        // Clean up the scroll down listener if it was added
+        if (isScrollDownListenerActive) {
+          window.removeEventListener("wheel", handleScrollDown);
         }
       };
     }
