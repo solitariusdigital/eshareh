@@ -144,10 +144,13 @@ export default function Solution({ solutions, projectTitle }) {
   useEffect(() => {
     if (!displayGallerySlider) {
       let prevScrollY = window.scrollY;
+      let timeoutId = null; // To store the timeout ID
+      let hasReachedBottom = false; // Flag to check if the user has reached the bottom
       const handleScroll = () => {
         const currentScrollY = window.scrollY;
         const isScrollAtBottom =
           window.innerHeight + window.scrollY >= document.body.offsetHeight;
+        // Original Functionality: Show/hide footer and next controller
         if (currentScrollY > prevScrollY) {
           setFooter(false);
           setDisplayNextController(true);
@@ -155,18 +158,53 @@ export default function Solution({ solutions, projectTitle }) {
           setFooter(true);
           setDisplayNextController(false);
         }
+        // New Functionality: Handle reaching the bottom
         if (isScrollAtBottom) {
           setDisplayNextController(false);
-          setFooter(false);
+          if (!hasReachedBottom) {
+            hasReachedBottom = true; // Set the flag
+            // Start a 3-second timer
+            timeoutId = setTimeout(() => {
+              // Add a temporary scroll listener for the next scroll down
+              const handleScrollDown = (event) => {
+                // Check if the scroll is down
+                if (event.deltaY > 0) {
+                  Router.push(
+                    `/solutions/${replaceSpacesAndHyphens(
+                      nextProject[languageType].title
+                    )}`
+                  );
+                  // Clean up the event listener and timeout
+                  window.removeEventListener("wheel", handleScrollDown);
+                  clearTimeout(timeoutId);
+                }
+              };
+              // Add a temporary scroll listener for the wheel event
+              window.addEventListener("wheel", handleScrollDown);
+            }, 3000);
+          }
+        } else {
+          // Reset the flag if the user scrolls up or down before reaching the bottom again
+          if (hasReachedBottom) {
+            hasReachedBottom = false; // Reset the flag
+            if (timeoutId) {
+              clearTimeout(timeoutId); // Clear the timer if user scrolls up
+            }
+          }
         }
         prevScrollY = currentScrollY;
       };
       window.addEventListener("scroll", handleScroll);
+
       return () => {
         window.removeEventListener("scroll", handleScroll);
+        // Clear the timeout on cleanup
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
       };
     }
-  }, [displayGallerySlider, setFooter]);
+  }, [displayGallerySlider, setFooter, languageType, nextProject]);
 
   const gallerySlider = () => {
     setDisplayMenu(false);
