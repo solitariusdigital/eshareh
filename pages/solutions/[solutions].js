@@ -175,7 +175,7 @@ export default function Solution({ solutions, projectTitle }) {
           setDisplayNextController(false);
         }
         // New Functionality: Handle reaching the bottom
-        if (isScrollAtBottom) {
+        if (isScrollAtBottom && screenSize === "desktop") {
           setDisplayNextController(false);
           if (!hasReachedBottom) {
             hasReachedBottom = true; // Set the flag
