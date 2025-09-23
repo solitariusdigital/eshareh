@@ -189,14 +189,14 @@ export default function Portal() {
     <Fragment>
       <NextSeo
         title={"پورتال"}
-        description={"اشاره یک استودیوی طراحی چند رشته ای و مستقل است"}
+        description={"اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"}
         canonical="https://eshareh.com/portal"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/portal",
           title: "پورتال",
-          description: "اشاره یک استودیوی طراحی چند رشته ای و مستقل است",
+          description: "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است",
           siteName: "آژانس تبلیغاتی اشاره",
           images: {
             url: logoFarsi,

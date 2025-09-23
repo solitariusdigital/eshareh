@@ -95,7 +95,7 @@ export default function About({ pageData }) {
         title={language ? "درباره ما" : "About Us"}
         description={
           language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
         canonical="https://eshareh.com/about"
@@ -105,7 +105,7 @@ export default function About({ pageData }) {
           url: "https://eshareh.com/about",
           title: language ? "درباره ما" : "About Us",
           description: language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
           siteName: language
             ? "آژانس تبلیغاتی اشاره"

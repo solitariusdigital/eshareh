@@ -26,7 +26,7 @@ export default function Profession({ pageData, mediaData }) {
         title={language ? "چه می‌کنیم" : "What We Do"}
         description={
           language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
         canonical="https://eshareh.com/profession"
@@ -36,7 +36,7 @@ export default function Profession({ pageData, mediaData }) {
           url: "https://eshareh.com/profession",
           title: language ? "چه می‌کنیم" : "What We Do",
           description: language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
           siteName: language
             ? "آژانس تبلیغاتی اشاره"

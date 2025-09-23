@@ -100,7 +100,7 @@ export default function Jobs({ jobs }) {
         title={language ? "فرصت‌های شغلی" : "Jobs"}
         description={
           language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
         canonical="https://eshareh.com/jobs"
@@ -110,7 +110,7 @@ export default function Jobs({ jobs }) {
           url: "https://eshareh.com/jobs",
           title: language ? "فرصت‌های شغلی" : "Jobs",
           description: language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
           siteName: language
             ? "آژانس تبلیغاتی اشاره"

@@ -66,7 +66,7 @@ export default function Resume({ resumeData }) {
         title={language ? "رزومه" : "Resume"}
         description={
           language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
         canonical="https://eshareh.com/jobs/resume"
@@ -76,7 +76,7 @@ export default function Resume({ resumeData }) {
           url: "https://eshareh.com/jobs/resume",
           title: language ? "رزومه" : "Resume",
           description: language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
           siteName: language
             ? "آژانس تبلیغاتی اشاره"
