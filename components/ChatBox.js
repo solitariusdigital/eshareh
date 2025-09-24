@@ -66,7 +66,7 @@ export default function ChatBox() {
           <div className={classes.title}>
             <h3>چت</h3>
           </div>
-          <div className={classes.messages}>
+          <div className={classes.messageBox}>
             <div className={classes.message}>
               <p>
                 message 1 asds sad asd asdasd asdasd. sdasdasd asdasdasd
