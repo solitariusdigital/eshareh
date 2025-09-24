@@ -3,6 +3,9 @@
 
 .container {
   height: 100%;
+  border: 1px solid config.$lightgrey;
+  border-radius: 5px;
+
   @include mixins.desktop {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
@@ -16,18 +19,17 @@
     position: relative;
     top: 0px;
     width: 100%;
-    @include mixins.row-space-between-center();
+    height: 40px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    border: 1px solid config.$lightgrey;
-    height: 40px;
+    border-bottom: 1px solid config.$lightgrey;
+    @include mixins.row-space-between-center();
 
     .item,
     .itemActive {
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
       justify-content: center;
       width: 100%;
       height: 100%;
@@ -51,8 +53,6 @@
     justify-content: flex-end;
     padding: 12px;
     padding-bottom: 24px;
-    border-left: 1px solid config.$lightgrey;
-    border-right: 1px solid config.$lightgrey;
     height: calc(100% - 40px);
 
     @include mixins.desktop {
@@ -82,43 +82,27 @@
   }
   .file {
     padding: 12px;
-    border-left: 1px solid config.$lightgrey;
     height: calc(100% - 40px);
 
     @include mixins.desktop {
       height: 100%;
+      border-right: 1px solid config.$lightgrey;
     }
     @include mixins.fourK {
       height: 100%;
-    }
-    @include mixins.mobile {
-      border-right: 1px solid config.$lightgrey;
-    }
-    @include mixins.tablet {
-      border-right: 1px solid config.$lightgrey;
-    }
-    @include mixins.tabletPortrait {
       border-right: 1px solid config.$lightgrey;
     }
   }
   .group {
     padding: 12px;
-    border-right: 1px solid config.$lightgrey;
     height: calc(100% - 40px);
 
     @include mixins.desktop {
       height: 100%;
+      border-left: 1px solid config.$lightgrey;
     }
     @include mixins.fourK {
       height: 100%;
-    }
-    @include mixins.mobile {
-      border-left: 1px solid config.$lightgrey;
-    }
-    @include mixins.tablet {
-      border-left: 1px solid config.$lightgrey;
-    }
-    @include mixins.tabletPortrait {
       border-left: 1px solid config.$lightgrey;
     }
   }
