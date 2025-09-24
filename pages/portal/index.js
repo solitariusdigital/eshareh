@@ -16,9 +16,10 @@ import secureLocalStorage from "react-secure-storage";
 import home from "@/assets/home.svg";
 import tasks from "@/assets/tasks.svg";
 import news from "@/assets/news.svg";
-import inbox from "@/assets/inbox.svg";
+import chat from "@/assets/chat.svg";
 import profile from "@/assets/profile.svg";
 import setting from "@/assets/setting.svg";
+import ChatBox from "@/components/ChatBox";
 
 export default function Portal() {
   const { language, setLanguage } = useContext(StateContext);
@@ -30,7 +31,7 @@ export default function Portal() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [themeMode, setThemeMode] = useState("light");
   const [boardType, setBoardType] = useState(
-    "home" || "tasks" || "news" || "inbox" || "setting" || "profile"
+    "home" || "tasks" || "news" || "chat" || "setting" || "profile"
   );
 
   const backgroundColor = useMemo(() => {
@@ -69,11 +70,11 @@ export default function Portal() {
       onClick: () => setBoardType("news"),
     },
     {
-      src: inbox,
-      alt: "inbox",
-      label: "ورودی",
+      src: chat,
+      alt: "chat",
+      label: "چت",
       active: false,
-      onClick: () => setBoardType("inbox"),
+      onClick: () => setBoardType("chat"),
     },
   ];
   const menuItemsBottomData = [
@@ -308,7 +309,7 @@ export default function Portal() {
                 </div>
               </div>
               <div className={classes.board}>
-                <h3>{boardType}</h3>
+                {boardType === "chat" && <ChatBox />}
               </div>
             </div>
           </div>

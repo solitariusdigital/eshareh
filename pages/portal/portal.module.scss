@@ -56,7 +56,7 @@
     display: flex;
     flex-direction: row-reverse;
     height: calc(100vh - 100px);
-    max-height: 1200px !important;
+    max-height: 1500px !important;
 
     @include mixins.mobile {
       display: flex;
@@ -144,11 +144,13 @@
 
       @include mixins.mobile {
         width: 100%;
-        margin-top: 16px;
+        margin-top: 8px;
+        height: 100vh;
       }
       @include mixins.tabletPortrait {
         width: 100%;
-        margin-top: 16px;
+        margin-top: 8px;
+        height: 100vh;
       }
     }
   }
