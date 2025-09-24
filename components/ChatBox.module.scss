@@ -5,7 +5,12 @@
   height: 100%;
   border: 1px solid config.$lightgrey;
   border-radius: 5px;
+  text-align: right;
 
+  @include mixins.tablet {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
   @include mixins.desktop {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
@@ -47,14 +52,22 @@
     }
   }
 
+  .title {
+    padding: 8px;
+    border-bottom: 1px solid config.$lightgrey;
+  }
+
   .chat {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 12px;
-    padding-bottom: 24px;
+    justify-content: space-between;
+    padding: 12px 0px;
     height: calc(100% - 40px);
+    max-height: 1500px !important;
 
+    @include mixins.tablet {
+      height: 100%;
+    }
     @include mixins.desktop {
       height: 100%;
     }
@@ -64,6 +77,8 @@
 
     .input {
       @include mixins.row-space-between-center();
+      height: 50px;
+      padding: 8px;
 
       .sendIcon {
         display: flex;
@@ -76,14 +91,38 @@
         max-height: 50px;
         min-height: 50px;
         min-width: 90%;
-        border-radius: 10px;
+        border-radius: 5px;
+      }
+    }
+
+    .messages {
+      display: flex;
+      flex-direction: column-reverse;
+      height: calc(100vh - 250px);
+      max-height: 100%;
+      overflow-y: auto;
+
+      @include mixins.mobile {
+        height: calc(100vh - 350px);
+      }
+      @include mixins.tabletPortrait {
+        height: calc(100vh - 350px);
+      }
+      .message {
+        padding: 4px 12px;
+        border-bottom: 1px solid config.$lightgrey;
       }
     }
   }
+
   .file {
     padding: 12px;
     height: calc(100% - 40px);
 
+    @include mixins.tablet {
+      height: 100%;
+      border-right: 1px solid config.$lightgrey;
+    }
     @include mixins.desktop {
       height: 100%;
       border-right: 1px solid config.$lightgrey;
@@ -93,10 +132,15 @@
       border-right: 1px solid config.$lightgrey;
     }
   }
+
   .group {
     padding: 12px;
     height: calc(100% - 40px);
 
+    @include mixins.tablet {
+      height: 100%;
+      border-left: 1px solid config.$lightgrey;
+    }
     @include mixins.desktop {
       height: 100%;
       border-left: 1px solid config.$lightgrey;

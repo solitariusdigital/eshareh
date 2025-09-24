@@ -1,14 +1,16 @@
-import { Fragment, useContext, useState, useEffect, useMemo } from "react";
+import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./ChatBox.module.scss";
 import Image from "next/legacy/image";
-import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 
 export default function ChatBox() {
   const [sendMessage, setSendMessage] = useState("");
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [chatPanel, setChatPanel] = useState("file" || "chat" || "group");
+
+  const fullSizeChatBox =
+    screenSize === "desktop" || screenSize === "tablet-landscape";
 
   const chatPanelData = [
     {
@@ -40,7 +42,7 @@ export default function ChatBox() {
 
   return (
     <div className={classes.container}>
-      {screenSize !== "desktop" && (
+      {!fullSizeChatBox && (
         <div className={classes.navigation}>
           {chatPanelItems.map((item, index) => (
             <div
@@ -53,11 +55,75 @@ export default function ChatBox() {
           ))}
         </div>
       )}
-      {(screenSize === "desktop" || chatPanel === "file") && (
-        <div className={classes.file}>file</div>
+      {(fullSizeChatBox || chatPanel === "file") && (
+        <div className={classes.file}>
+          <h3>فایل</h3>
+        </div>
       )}
-      {(screenSize === "desktop" || chatPanel === "chat") && (
+      {(fullSizeChatBox || chatPanel === "chat") && (
         <div className={classes.chat}>
+          <div className={classes.title}>
+            <h3>چت</h3>
+          </div>
+          <div className={classes.messages}>
+            <div className={classes.message}>
+              <p>
+                message 1 asds sad asd asdasd asdasd. sdasdasd asdasdasd
+                asdasdsd asd asdasdasd sadasdasd
+              </p>
+            </div>
+            <div className={classes.message}>
+              <p>message 2</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 3</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 4</p>
+            </div>
+            <div className={classes.message}>
+              <p>message 200</p>
+            </div>
+          </div>
           <div className={classes.input}>
             <div className={classes.sendIcon}>
               <SendIcon
@@ -72,7 +138,7 @@ export default function ChatBox() {
 
                 resize: "none",
               }}
-              placeholder="ارسال پیام"
+              placeholder="..."
               id="sendMessage"
               name="sendMessage"
               onChange={(e) => setSendMessage(e.target.value)}
@@ -83,9 +149,10 @@ export default function ChatBox() {
           </div>
         </div>
       )}
-
-      {(screenSize === "desktop" || chatPanel === "group") && (
-        <div className={classes.group}>group</div>
+      {(fullSizeChatBox || chatPanel === "group") && (
+        <div className={classes.group}>
+          <h3>گروه</h3>
+        </div>
       )}
     </div>
   );
