@@ -3,6 +3,7 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./ChatBox.module.scss";
 import Image from "next/legacy/image";
 import SendIcon from "@mui/icons-material/Send";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 export default function ChatBox() {
   const [sendMessage, setSendMessage] = useState("");
@@ -125,11 +126,16 @@ export default function ChatBox() {
             </div>
           </div>
           <div className={classes.input}>
-            <div className={classes.sendIcon}>
+            <div className={classes.icon}>
               <SendIcon
                 className="icon"
                 onClick={() => setSendMessage("")}
-                sx={{ fontSize: 28, color: "#fdb714" }}
+                sx={{ color: "#fdb714" }}
+              />
+              <AttachFileIcon
+                className="icon"
+                onClick={() => setSendMessage("")}
+                sx={{ color: "#d1d3d4" }}
               />
             </div>
             <textarea
