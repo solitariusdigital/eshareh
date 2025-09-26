@@ -63,7 +63,7 @@
     justify-content: space-between;
     padding: 12px 0px;
     height: calc(100% - 40px);
-    max-height: 1500px !important;
+    max-height: config.$max-widthHeigh !important;
 
     @include mixins.tablet {
       height: 100%;
@@ -114,43 +114,82 @@
         background: config.$backgroundgrey;
         margin: 4px 0px;
         border-radius: 5px;
+
+        p {
+          color: config.$black !important;
+        }
       }
     }
   }
 
-  .file {
+  .groupBox {
     padding: 12px;
     height: calc(100% - 40px);
+    max-height: 100%;
+    overflow-y: auto;
+    @include mixins.mobile {
+      height: calc(100vh - 200px);
+    }
+    @include mixins.tabletPortrait {
+      height: calc(100vh - 200px);
+    }
 
     @include mixins.tablet {
       height: 100%;
-      border-right: 1px solid config.$lightgrey;
+      border-left: 1px solid config.$lightgrey;
     }
     @include mixins.desktop {
       height: 100%;
-      border-right: 1px solid config.$lightgrey;
+      border-left: 1px solid config.$lightgrey;
     }
     @include mixins.fourK {
       height: 100%;
-      border-right: 1px solid config.$lightgrey;
+      border-left: 1px solid config.$lightgrey;
+    }
+
+    .group,
+    .groupActive {
+      @include mixins.row-space-between-center();
+      margin-bottom: 8px;
+      padding: 4px;
+      border-radius: 5px;
+      border: 1px solid config.$lightgrey;
+
+      &:hover {
+        background: config.$yellow;
+        border: 1px solid config.$yellow;
+        cursor: pointer;
+      }
+
+      .image {
+        position: relative;
+        width: 35px;
+        height: 35px;
+        border-radius: 50px;
+      }
+    }
+
+    .groupActive {
+      background: config.$yellow;
+      border: 1px solid config.$yellow;
     }
   }
 
-  .group {
+  .fileBox {
     padding: 12px;
     height: calc(100% - 40px);
 
     @include mixins.tablet {
       height: 100%;
-      border-left: 1px solid config.$lightgrey;
+      border-right: 1px solid config.$lightgrey;
     }
     @include mixins.desktop {
       height: 100%;
-      border-left: 1px solid config.$lightgrey;
+      border-right: 1px solid config.$lightgrey;
     }
     @include mixins.fourK {
       height: 100%;
-      border-left: 1px solid config.$lightgrey;
+      border-right: 1px solid config.$lightgrey;
     }
   }
 }

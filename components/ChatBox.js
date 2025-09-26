@@ -4,11 +4,13 @@ import classes from "./ChatBox.module.scss";
 import Image from "next/legacy/image";
 import SendIcon from "@mui/icons-material/Send";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 export default function ChatBox() {
   const [sendMessage, setSendMessage] = useState("");
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [chatPanel, setChatPanel] = useState("file" || "chat" || "group");
+  const { currentUser, setCurrentUser } = useContext(StateContext);
 
   const fullSizeChatBox =
     screenSize === "desktop" || screenSize === "tablet-landscape";
@@ -30,26 +32,51 @@ export default function ChatBox() {
       onClick: () => setChatPanel("group"),
     },
   ];
-  const [chatPanelItems, setChatPanelItems] = useState(chatPanelData);
+  const [chatPanelDisplay, setChatPanelDisplay] = useState(chatPanelData);
 
-  const handleClickPanel = (index) => {
-    const updatedItems = chatPanelItems.map((item, idx) => ({
+  const handleClickChatPanel = (index) => {
+    const updatedItems = chatPanelDisplay.map((item, idx) => ({
       ...item,
       active: idx === index,
     }));
-    setChatPanelItems(updatedItems);
+    setChatPanelDisplay(updatedItems);
     chatPanelData[index].onClick();
+  };
+
+  const groupsData = [
+    {
+      title: "اسم گروه",
+      image: currentUser.media,
+      active: false,
+      // onClick: () => setSendMessage(""),
+    },
+    {
+      title: "اسم گروه",
+      image: currentUser.media,
+      active: false,
+      // onClick: () => setSendMessage(""),
+    },
+  ];
+  const [groupsDataDisplay, setGroupsDataDisplay] = useState(groupsData);
+
+  const handleGroupsData = (index) => {
+    const updatedItems = groupsDataDisplay.map((item, idx) => ({
+      ...item,
+      active: idx === index,
+    }));
+    setGroupsDataDisplay(updatedItems);
+    // groupsData[index].onClick();
   };
 
   return (
     <div className={classes.container}>
       {!fullSizeChatBox && (
         <div className={classes.navigation}>
-          {chatPanelItems.map((item, index) => (
+          {chatPanelDisplay.map((item, index) => (
             <div
               key={index}
               className={item.active ? classes.itemActive : classes.item}
-              onClick={() => handleClickPanel(index)}
+              onClick={() => handleClickChatPanel(index)}
             >
               <p>{item.label}</p>
             </div>
@@ -57,14 +84,14 @@ export default function ChatBox() {
         </div>
       )}
       {(fullSizeChatBox || chatPanel === "file") && (
-        <div className={classes.file}>
+        <div className={classes.fileBox}>
           <h3>فایل</h3>
         </div>
       )}
       {(fullSizeChatBox || chatPanel === "chat") && (
         <div className={classes.chat}>
           <div className={classes.title}>
-            <h3>چت</h3>
+            <h3>اسم چت</h3>
           </div>
           <div className={classes.messageBox}>
             <div className={classes.message}>
@@ -156,8 +183,28 @@ export default function ChatBox() {
         </div>
       )}
       {(fullSizeChatBox || chatPanel === "group") && (
-        <div className={classes.group}>
-          <h3>گروه</h3>
+        <div className={classes.groupBox}>
+          {groupsDataDisplay.map((group, index) => (
+            <div
+              key={index}
+              className={group.active ? classes.groupActive : classes.group}
+              onClick={() => handleGroupsData(index)}
+            >
+              <KeyboardArrowLeftIcon className="icon" />
+              <h4>{group.title}</h4>
+              <div className={classes.image}>
+                <Image
+                  className={classes.image}
+                  src={group.image}
+                  blurDataURL={group.image}
+                  layout="fill"
+                  objectFit="cover"
+                  alt="profile"
+                  as="image"
+                />
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
