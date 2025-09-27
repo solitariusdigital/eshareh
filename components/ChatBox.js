@@ -2,15 +2,21 @@ import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./ChatBox.module.scss";
 import Image from "next/legacy/image";
+import Tooltip from "@mui/material/Tooltip";
 import SendIcon from "@mui/icons-material/Send";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import CircleIcon from "@mui/icons-material/Circle";
+import AddIcon from "@mui/icons-material/Add";
+import CloseIcon from "@mui/icons-material/Close";
+import Chat from "./forms/Chat";
 
 export default function ChatBox() {
-  const [sendMessage, setSendMessage] = useState("");
   const { screenSize, setScreenSize } = useContext(StateContext);
-  const [chatPanel, setChatPanel] = useState("file" || "chat" || "group");
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const [sendMessage, setSendMessage] = useState("");
+  const [chatPanel, setChatPanel] = useState("file" || "chat" || "group");
+  const [displayPopup, setDisplayPopup] = useState(false);
 
   const fullSizeChatBox =
     screenSize === "desktop" || screenSize === "tablet-landscape";
@@ -45,15 +51,17 @@ export default function ChatBox() {
 
   const groupsData = [
     {
-      title: "اسم گروه",
+      title: "1اسم گروه گروه",
       image: currentUser.media,
       active: false,
+      isRead: false,
       // onClick: () => setSendMessage(""),
     },
     {
-      title: "اسم گروه",
+      title: "2اسم گروه",
       image: currentUser.media,
       active: false,
+      isRead: true,
       // onClick: () => setSendMessage(""),
     },
   ];
@@ -154,16 +162,19 @@ export default function ChatBox() {
           </div>
           <div className={classes.input}>
             <div className={classes.icon}>
-              <SendIcon
-                className="icon"
-                onClick={() => setSendMessage("")}
-                sx={{ color: "#fdb714" }}
-              />
-              <AttachFileIcon
-                className="icon"
-                onClick={() => setSendMessage("")}
-                sx={{ color: "#d1d3d4" }}
-              />
+              <Tooltip title="Send">
+                <SendIcon
+                  className="icon"
+                  onClick={() => setSendMessage("")}
+                  sx={{ color: "#fdb714" }}
+                />
+              </Tooltip>
+              <Tooltip title="Attach">
+                <AttachFileIcon
+                  className="icon"
+                  onClick={() => setSendMessage("")}
+                />
+              </Tooltip>
             </div>
             <textarea
               style={{
@@ -184,27 +195,47 @@ export default function ChatBox() {
       )}
       {(fullSizeChatBox || chatPanel === "group") && (
         <div className={classes.groupBox}>
+          <Tooltip title="New Chat">
+            <AddIcon className="icon" onClick={() => setDisplayPopup(true)} />
+          </Tooltip>
           {groupsDataDisplay.map((group, index) => (
             <div
               key={index}
               className={group.active ? classes.groupActive : classes.group}
               onClick={() => handleGroupsData(index)}
             >
-              <KeyboardArrowLeftIcon className="icon" />
-              <h4>{group.title}</h4>
-              <div className={classes.image}>
-                <Image
-                  className={classes.image}
-                  src={group.image}
-                  blurDataURL={group.image}
-                  layout="fill"
-                  objectFit="cover"
-                  alt="profile"
-                  as="image"
-                />
+              <div className={classes.indicators}>
+                <KeyboardArrowLeftIcon />
+                {group.isRead && (
+                  <CircleIcon sx={{ fontSize: 12, color: "#a70237" }} />
+                )}
+              </div>
+              <div className={classes.info}>
+                <h4>{group.title}</h4>
+                <div className={classes.image}>
+                  <Image
+                    className={classes.image}
+                    src={group.image}
+                    blurDataURL={group.image}
+                    layout="fill"
+                    objectFit="cover"
+                    alt="profile"
+                    as="image"
+                  />
+                </div>
               </div>
             </div>
           ))}
+        </div>
+      )}
+      {displayPopup && (
+        <div className={classes.popup}>
+          <CloseIcon
+            className="icon"
+            onClick={() => setDisplayPopup(false)}
+            sx={{ fontSize: 16 }}
+          />
+          <Chat />
         </div>
       )}
     </div>

@@ -133,7 +133,6 @@
     @include mixins.tabletPortrait {
       height: calc(100vh - 200px);
     }
-
     @include mixins.tablet {
       height: 100%;
       border-left: 1px solid config.$lightgrey;
@@ -154,6 +153,7 @@
       padding: 4px;
       border-radius: 5px;
       border: 1px solid config.$lightgrey;
+      position: relative;
 
       &:hover {
         background: config.$yellow;
@@ -163,9 +163,23 @@
 
       .image {
         position: relative;
-        width: 35px;
-        height: 35px;
+        min-width: 35px;
+        min-height: 35px;
         border-radius: 50px;
+      }
+
+      .info {
+        @include mixins.row-space-between-center();
+        justify-content: right;
+        min-width: 60%;
+
+        h4 {
+          margin-right: 12px;
+        }
+      }
+      .indicators {
+        @include mixins.row-space-between-center();
+        width: 20%;
       }
     }
 
@@ -192,4 +206,20 @@
       border-right: 1px solid config.$lightgrey;
     }
   }
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  width: 100%;
+  height: calc(100vh - 100px);
+  margin-top: 100px;
+  padding: 12px;
+  background: config.$white;
+  border: 1px solid config.$lightgrey;
 }

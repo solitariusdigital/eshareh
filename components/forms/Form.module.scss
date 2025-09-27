@@ -394,3 +394,31 @@
     }
   }
 }
+
+.chatForm {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  gap: 4px;
+  width: 60%;
+  margin-top: 16px;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+  @include mixins.tabletPortrait {
+    width: 100%;
+  }
+
+  .row {
+    @include mixins.row-space-between-center();
+    flex-direction: row-reverse;
+    border: 1px solid config.$lightgrey;
+    padding: 8px;
+    border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+      border: 1px solid config.$yellow;
+    }
+  }
+}
