@@ -80,6 +80,7 @@ export default function Login() {
     if (userData) {
       if (decryptPassword(userData.password) === password) {
         setCurrentUser(userData);
+        setPermissionControl(userData.permission);
         secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
         Router.push("/portal");
       } else {

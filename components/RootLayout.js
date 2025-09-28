@@ -89,12 +89,8 @@ export default function RootLayout({ children }) {
         if (currentUser) {
           const userData = await getSingleUserApi(currentUser["_id"]);
           setCurrentUser(userData);
+          setPermissionControl(userData.permission);
           secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
-          if (userData.permission === "admin") {
-            setPermissionControl("admin");
-          } else {
-            setPermissionControl("user");
-          }
         }
         const colorObject = await getControlsApi();
         setMenuColor(colorObject[0].menu);

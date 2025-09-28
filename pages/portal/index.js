@@ -17,7 +17,7 @@ import home from "@/assets/home.svg";
 import tasks from "@/assets/tasks.svg";
 import news from "@/assets/news.svg";
 import chat from "@/assets/chat.svg";
-import profile from "@/assets/profile.svg";
+import admin from "@/assets/admin.svg";
 import setting from "@/assets/setting.svg";
 import ChatBox from "@/components/ChatBox";
 import Password from "@/components/forms/Password";
@@ -31,7 +31,7 @@ export default function Portal() {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [themeMode, setThemeMode] = useState("light");
   const [boardType, setBoardType] = useState(
-    "home" || "tasks" || "news" || "chat" || "setting" || "profile"
+    "home" || "tasks" || "news" || "chat" || "setting" || "admin"
   );
 
   const backgroundColor = useMemo(() => {
@@ -53,6 +53,7 @@ export default function Portal() {
       alt: "خانه",
       label: "خانه",
       active: false,
+      requiredPermission: "all",
       onClick: () => setBoardType("home"),
     },
     {
@@ -60,6 +61,7 @@ export default function Portal() {
       alt: "وظایف",
       label: "وظایف",
       active: false,
+      requiredPermission: "all",
       onClick: () => setBoardType("tasks"),
     },
     {
@@ -67,6 +69,7 @@ export default function Portal() {
       alt: "اخبار",
       label: "اخبار",
       active: false,
+      requiredPermission: "all",
       onClick: () => setBoardType("news"),
     },
     {
@@ -74,26 +77,30 @@ export default function Portal() {
       alt: "چت",
       label: "چت",
       active: false,
+      requiredPermission: "all",
       onClick: () => setBoardType("chat"),
     },
   ];
   const menuItemsBottomData = [
     {
-      src: profile,
-      alt: "profile",
+      src: admin,
+      alt: "admin",
       active: false,
-      onClick: () => setBoardType("profile"),
+      requiredPermission: "admin",
+      onClick: () => setBoardType("admin"),
     },
     {
       src: setting,
       alt: "setting",
       active: false,
+      requiredPermission: "all",
       onClick: () => setBoardType("setting"),
     },
     {
       src: prev,
       alt: "logo",
       active: false,
+      requiredPermission: "all",
       onClick: () => window.location.assign("/"),
     },
   ];
@@ -222,7 +229,7 @@ export default function Portal() {
                     blurDataURL={currentUser.media}
                     layout="fill"
                     objectFit="cover"
-                    alt="profile"
+                    alt="image"
                     as="image"
                   />
                 </div>
@@ -264,25 +271,34 @@ export default function Portal() {
             <div className={classes.panel}>
               <div className={classes.menu}>
                 <div className={classes.box} style={{ marginTop: "24px" }}>
-                  {menuItemsTop.map((item, index) => (
-                    <div
-                      key={index}
-                      className={
-                        item.active ? classes.itemActive : classes.item
+                  {menuItemsTop
+                    .filter((item) => {
+                      const requiredPermission =
+                        item.requiredPermission || "all";
+                      if (requiredPermission === "all") {
+                        return true;
                       }
-                      onClick={() => handleClickMenu(index, "top")}
-                    >
-                      <Image
-                        width={24}
-                        height={24}
-                        src={item.src}
-                        alt={item.alt}
-                        priority
-                        as="image"
-                      />
-                      <p>{item.label}</p>
-                    </div>
-                  ))}
+                      return permissionControl === requiredPermission;
+                    })
+                    .map((item, index) => (
+                      <div
+                        key={index}
+                        className={
+                          item.active ? classes.itemActive : classes.item
+                        }
+                        onClick={() => handleClickMenu(index, "top")}
+                      >
+                        <Image
+                          width={24}
+                          height={24}
+                          src={item.src}
+                          alt={item.alt}
+                          priority
+                          as="image"
+                        />
+                        <p>{item.label}</p>
+                      </div>
+                    ))}
                 </div>
                 <div
                   className={classes.box}
@@ -290,24 +306,33 @@ export default function Portal() {
                     marginBottom: "24px",
                   }}
                 >
-                  {menuItemsBottom.map((item, index) => (
-                    <div
-                      key={index}
-                      className={
-                        item.active ? classes.itemActive : classes.item
+                  {menuItemsBottom
+                    .filter((item) => {
+                      const requiredPermission =
+                        item.requiredPermission || "all";
+                      if (requiredPermission === "all") {
+                        return true;
                       }
-                      onClick={() => handleClickMenu(index, "bottom")}
-                    >
-                      <Image
-                        width={24}
-                        height={24}
-                        src={item.src}
-                        alt={item.alt}
-                        priority
-                        as="image"
-                      />
-                    </div>
-                  ))}
+                      return permissionControl === requiredPermission;
+                    })
+                    .map((item, index) => (
+                      <div
+                        key={index}
+                        className={
+                          item.active ? classes.itemActive : classes.item
+                        }
+                        onClick={() => handleClickMenu(index, "bottom")}
+                      >
+                        <Image
+                          width={24}
+                          height={24}
+                          src={item.src}
+                          alt={item.alt}
+                          priority
+                          as="image"
+                        />
+                      </div>
+                    ))}
                 </div>
               </div>
               <div className={classes.board}>
