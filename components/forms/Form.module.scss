@@ -399,14 +399,19 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
   gap: 4px;
-  width: 60%;
   margin-top: 16px;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
 
   @include mixins.mobile {
     width: 100%;
+    padding: 0px 12px;
   }
   @include mixins.tabletPortrait {
-    width: 100%;
+    width: config.$content-widthTablet;
+  }
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
   }
 
   .row {
