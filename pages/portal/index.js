@@ -51,28 +51,28 @@ export default function Portal() {
   const menuItemsTopData = [
     {
       src: home,
-      alt: "home",
+      alt: "خانه",
       label: "خانه",
       active: false,
       onClick: () => setBoardType("home"),
     },
     {
       src: tasks,
-      alt: "tasks",
+      alt: "وظایف",
       label: "وظایف",
       active: false,
       onClick: () => setBoardType("tasks"),
     },
     {
       src: news,
-      alt: "news",
+      alt: "اخبار",
       label: "اخبار",
       active: false,
       onClick: () => setBoardType("news"),
     },
     {
       src: chat,
-      alt: "chat",
+      alt: "چت",
       label: "چت",
       active: false,
       onClick: () => setBoardType("chat"),
@@ -128,9 +128,11 @@ export default function Portal() {
     secureLocalStorage.removeItem("currentUser");
     setCurrentUser(null);
   };
+
   const toggleMode = () => {
     setThemeMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
+
   const controlsData = [
     {
       id: "mode",
@@ -311,7 +313,7 @@ export default function Portal() {
               </div>
               <div className={classes.board}>
                 {boardType === "chat" && <ChatBox />}
-                {boardType === "profile" && <Password />}
+                {boardType === "setting" && <Password />}
               </div>
             </div>
           </div>
