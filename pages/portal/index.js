@@ -21,6 +21,7 @@ import admin from "@/assets/admin.svg";
 import setting from "@/assets/setting.svg";
 import ChatBox from "@/components/ChatBox";
 import Password from "@/components/forms/Password";
+import Admin from "@/components/Admin";
 
 export default function Portal() {
   const { language, setLanguage } = useContext(StateContext);
@@ -337,6 +338,7 @@ export default function Portal() {
               </div>
               <div className={classes.board}>
                 {boardType === "chat" && <ChatBox />}
+                {boardType === "admin" && <Admin />}
                 {boardType === "setting" && <Password />}
               </div>
             </div>

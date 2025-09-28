@@ -33,7 +33,6 @@ export default function Menu() {
   const { menuColor, setMenuColor } = useContext(StateContext);
   const [colorPicker, setColorPicker] = useState(false);
   const [textPicker, setTextPicker] = useState(false);
-  const [dropDown, setDropDpwn] = useState(false);
   const [hover, setHover] = useState(false);
   const [hoverLanguage, setHoverLanguage] = useState(false);
 
@@ -102,7 +101,7 @@ export default function Menu() {
           {currentUser && (
             <div
               className={classes.profile}
-              onClick={() => setDropDpwn(!dropDown)}
+              onClick={() => Router.push("/portal")}
             >
               <Image
                 src={currentUser.media}
@@ -112,18 +111,6 @@ export default function Menu() {
                 alt="profile"
                 as="image"
               />
-            </div>
-          )}
-          {dropDown && currentUser && screenSize === "desktop" && (
-            <div
-              className={`${classes.dropDown}  animate__animated animate__zoomIn`}
-              style={{
-                fontFamily: language ? "English" : "English",
-              }}
-            >
-              {permissionControl === "admin" && (
-                <p onClick={() => Router.push("/admin")}>Admin</p>
-              )}
             </div>
           )}
           <div

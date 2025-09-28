@@ -78,34 +78,6 @@
     cursor: pointer;
     @include mixins.arrow-shape();
   }
-
-  .dropDown {
-    position: absolute;
-    right: -100px;
-    top: 80px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    height: 50px;
-    padding: 0px 10px;
-    background: config.$white;
-    border-radius: 50px;
-    font-size: config.$tiny-font;
-    box-shadow: config.$card-shadow;
-    border: 1px solid config.$yellow;
-
-    p {
-      margin: 5px 10px;
-      cursor: pointer;
-
-      @include mixins.allDesktop {
-        &:hover {
-          color: config.$yellow;
-        }
-      }
-    }
-  }
 }
 
 .menuWrapper {
