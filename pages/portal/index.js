@@ -20,6 +20,7 @@ import chat from "@/assets/chat.svg";
 import profile from "@/assets/profile.svg";
 import setting from "@/assets/setting.svg";
 import ChatBox from "@/components/ChatBox";
+import Password from "@/components/forms/Password";
 
 export default function Portal() {
   const { language, setLanguage } = useContext(StateContext);
@@ -310,6 +311,7 @@ export default function Portal() {
               </div>
               <div className={classes.board}>
                 {boardType === "chat" && <ChatBox />}
+                {boardType === "profile" && <Password />}
               </div>
             </div>
           </div>

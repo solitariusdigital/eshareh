@@ -90,12 +90,6 @@ export default function Menu() {
     secureLocalStorage.setItem("languageBrowser", language);
   };
 
-  const signOut = () => {
-    window.location.assign("/");
-    secureLocalStorage.removeItem("currentUser");
-    setCurrentUser(null);
-  };
-
   return (
     <div
       className={classes.container}
@@ -130,8 +124,6 @@ export default function Menu() {
               {permissionControl === "admin" && (
                 <p onClick={() => Router.push("/admin")}>Admin</p>
               )}
-              <p onClick={() => Router.push("/password")}>Password</p>
-              <p onClick={() => signOut()}>Sign out</p>
             </div>
           )}
           <div
