@@ -29,7 +29,6 @@ export default function Portal() {
   const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
-  const { screenSize, setScreenSize } = useContext(StateContext);
   const [themeMode, setThemeMode] = useState("light");
   const [boardType, setBoardType] = useState(
     "home" || "tasks" || "news" || "chat" || "setting" || "profile"
