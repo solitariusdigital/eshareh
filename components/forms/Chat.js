@@ -55,8 +55,11 @@ export default function Chat() {
       showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
-
-    setDisableButton(true);
+    let selectedUsersId = users
+      .filter((user) => user.selection)
+      .map((user) => user["_id"]);
+    console.log(selectedUsersId);
+    // setDisableButton(true);
 
     // router.reload(router.asPath);
   };
