@@ -17,6 +17,7 @@ export default function ChatBox() {
   const [sendMessage, setSendMessage] = useState("");
   const [chatPanel, setChatPanel] = useState("file" || "chat" || "group");
   const [displayPopup, setDisplayPopup] = useState(false);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
 
   const fullSizeChatBox =
     screenSize === "desktop" || screenSize === "tablet-landscape";

@@ -394,17 +394,55 @@
   }
 }
 
-.chatForm {
+.usersInput {
+  width: 100%;
+  max-width: 400px;
+  margin: 12px 0px;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+
+  input {
+    @include mixins.input();
+    width: 100%;
+  }
+
+  .bar {
+    @include mixins.row-space-between-center();
+    flex-direction: row-reverse;
+    height: 30px;
+  }
+
+  .label {
+    color: config.$grey;
+    font-size: config.$small-font;
+
+    span {
+      color: config.$red;
+      font-size: config.$tiny-font;
+    }
+  }
+
+  .formAction {
+    .label {
+      color: config.$grey;
+      margin-bottom: 12px;
+    }
+  }
+}
+
+.usersForm {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
   gap: 4px;
   margin-top: 16px;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
 
   @include mixins.mobile {
-    width: 100%;
-    padding: 0px 12px;
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+    width: calc(100% - 24px);
   }
   @include mixins.tabletPortrait {
     width: config.$content-widthTablet;

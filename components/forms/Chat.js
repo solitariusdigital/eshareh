@@ -10,9 +10,12 @@ import { applyFontToEnglishWords } from "@/services/utility";
 
 export default function Chat() {
   const { languageType, setLanguageType } = useContext(StateContext);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
 
   const [title, setTitle] = useState("");
   const [users, setUsers] = useState([]);
+  const [disableButton, setDisableButton] = useState(false);
+  const [alert, setAlert] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,36 +41,121 @@ export default function Chat() {
     );
   };
 
+  const selectAllUsers = () => {
+    setUsers(
+      users.map((user) => ({
+        ...user,
+        selection: !user.selection,
+      }))
+    );
+  };
+
+  const createChat = async () => {
+    if (!title) {
+      showAlert("موارد ستاره‌دار الزامیست");
+      return;
+    }
+
+    setDisableButton(true);
+
+    // router.reload(router.asPath);
+  };
+
+  const showAlert = (message) => {
+    setAlert(message);
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
+  };
+
   return (
-    <div className={classes.chatForm}>
-      {users?.map((user, index) => {
-        return (
-          <div
-            key={index}
-            className={classes.row}
-            onClick={() => handleUserSelection(index, !user.selection)}
-          >
-            <div>
-              <h3>{user.name[languageType]}</h3>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: applyFontToEnglishWords(
-                    user["title"][languageType],
-                    "English",
-                    "16px",
-                    "fa"
-                  ),
-                }}
-              ></p>
-            </div>
-            {user.selection ? (
-              <RadioButtonCheckedIcon className="icon" />
-            ) : (
-              <RadioButtonUncheckedIcon className="icon" />
-            )}
+    <Fragment>
+      <div className={classes.usersInput}>
+        <div className={classes.input}>
+          <div className={classes.bar}>
+            <p className={classes.label}>
+              <span>*</span>
+              عنوان چت
+            </p>
+            <CloseIcon
+              className="icon"
+              onClick={() => setTitle("")}
+              sx={{ fontSize: 16 }}
+            />
           </div>
-        );
-      })}
-    </div>
+          <input
+            style={{
+              fontFamily: "Farsi",
+            }}
+            type="text"
+            id="title"
+            name="title"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            autoComplete="off"
+            dir="rtl"
+          />
+        </div>
+        <div className={classes.formAction}>
+          <p className={classes.label}>انتخاب اعضای گروه چت جدید</p>
+          {permissionControl === "admin" && (
+            <button
+              disabled={disableButton}
+              style={{
+                fontFamily: "FarsiMedium",
+              }}
+              onClick={() => selectAllUsers()}
+            >
+              انتخاب همه
+            </button>
+          )}
+        </div>
+      </div>
+      <div className={classes.usersForm}>
+        {users?.map((user, index) => {
+          return (
+            <div
+              key={index}
+              className={classes.row}
+              onClick={() => handleUserSelection(index, !user.selection)}
+            >
+              <div>
+                <h3>{user.name[languageType]}</h3>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: applyFontToEnglishWords(
+                      user["title"][languageType],
+                      "English",
+                      "16px",
+                      "fa"
+                    ),
+                  }}
+                ></p>
+              </div>
+              {user.selection ? (
+                <RadioButtonCheckedIcon
+                  className="icon"
+                  sx={{ color: "#fdb714" }}
+                />
+              ) : (
+                <RadioButtonUncheckedIcon className="icon" />
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <div className={classes.formAction}>
+        <p className={classes.alert}>{alert}</p>
+        <button
+          disabled={disableButton}
+          style={{
+            fontFamily: "FarsiMedium",
+          }}
+          onClick={() => createChat()}
+        >
+          ایجاد چت
+        </button>
+      </div>
+    </Fragment>
   );
 }
