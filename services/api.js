@@ -455,3 +455,52 @@ export const deleteChatApi = async (id) => {
   });
   return await response.json();
 };
+
+// message api
+export const updateMessageApi = async (data) => {
+  const response = await fetch("/api/message", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createMessageApi = async (data) => {
+  const response = await fetch("/api/message", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleMessageApi = async (id) => {
+  const response = await fetch(`/api/message?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getMessagesApi = async () => {
+  const response = await fetch("/api/message", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteMessageApi = async (id) => {
+  const response = await fetch(`/api/message?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

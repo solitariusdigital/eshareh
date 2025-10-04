@@ -55,7 +55,7 @@ export default function Chat() {
   };
 
   const createChat = async () => {
-    if (!title) {
+    if (!title.trim()) {
       showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
@@ -67,8 +67,8 @@ export default function Chat() {
 
     const chatObject = {
       type: "public",
-      title: title,
-      description: description,
+      title: title.trim(),
+      description: description.trim(),
       users: usersId,
       adminsId: [currentUser["_id"]],
       lastMessageId: "",
