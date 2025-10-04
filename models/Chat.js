@@ -3,11 +3,11 @@ import { Schema, model, models } from "mongoose";
 const ChatSchema = new Schema(
   {
     type: String, // "private", "public"
-    name: String,
+    title: String,
     description: String,
     users: [],
-    admins: [],
-    lastMessage: String,
+    adminsId: [],
+    lastMessageId: String,
   },
   { timestamps: true }
 );

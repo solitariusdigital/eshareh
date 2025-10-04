@@ -7,15 +7,19 @@ import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { getUsersApi } from "@/services/api";
 import { applyFontToEnglishWords } from "@/services/utility";
+import { createChatApi } from "@/services/api";
 
 export default function Chat() {
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
 
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [users, setUsers] = useState([]);
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,13 +59,23 @@ export default function Chat() {
       showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
-    let selectedUsersId = users
+    setDisableButton(true);
+
+    let usersId = users
       .filter((user) => user.selection)
       .map((user) => user["_id"]);
-    console.log(selectedUsersId);
-    // setDisableButton(true);
 
-    // router.reload(router.asPath);
+    const chatObject = {
+      type: "public",
+      title: title,
+      description: description,
+      users: usersId,
+      adminsId: [currentUser["_id"]],
+      lastMessageId: "",
+    };
+
+    await createChatApi(chatObject);
+    router.reload(router.asPath);
   };
 
   const showAlert = (message) => {
@@ -99,6 +113,28 @@ export default function Chat() {
             dir="rtl"
           />
         </div>
+        <div className={classes.input}>
+          <div className={classes.bar}>
+            <p className={classes.label}>توضیحات</p>
+            <CloseIcon
+              className="icon"
+              onClick={() => setDescription("")}
+              sx={{ fontSize: 16 }}
+            />
+          </div>
+          <input
+            style={{
+              fontFamily: "Farsi",
+            }}
+            type="text"
+            id="description"
+            name="description"
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
+            autoComplete="off"
+            dir="rtl"
+          />
+        </div>
         <div className={classes.formAction}>
           <p className={classes.label}>انتخاب اعضای گروه چت جدید</p>
           {permissionControl === "admin" && (
@@ -114,7 +150,7 @@ export default function Chat() {
           )}
         </div>
       </div>
-      <div className={classes.usersForm}>
+      <div className={classes.usersSelection}>
         {users?.map((user, index) => {
           return (
             <div

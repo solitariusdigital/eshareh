@@ -10,6 +10,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import Chat from "./forms/Chat";
+import { getChatsApi } from "@/services/api";
 
 export default function ChatBox() {
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -17,10 +18,25 @@ export default function ChatBox() {
   const [sendMessage, setSendMessage] = useState("");
   const [chatPanel, setChatPanel] = useState("file" || "chat" || "group");
   const [displayPopup, setDisplayPopup] = useState(false);
-  const { permissionControl, setPermissionControl } = useContext(StateContext);
+  const [groupsDataDisplay, setGroupsDataDisplay] = useState([]);
+  const [selectedChat, setSelectedChat] = useState([]);
+  const [chatDisplay, setChatDisplay] = useState([]);
 
   const fullSizeChatBox =
     screenSize === "desktop" || screenSize === "tablet-landscape";
+
+  useEffect(() => {
+    const handleChatApi = async () => {
+      const chatsData = await getChatsApi();
+      let addOption = chatsData.map((data) => ({
+        ...data,
+        active: false,
+      }));
+      addOption.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+      setGroupsDataDisplay(addOption);
+    };
+    handleChatApi();
+  }, []);
 
   const chatPanelData = [
     {
@@ -50,31 +66,17 @@ export default function ChatBox() {
     chatPanelData[index].onClick();
   };
 
-  const groupsData = [
-    {
-      title: "1اسم گروه گروه",
-      image: currentUser.media,
-      active: false,
-      isRead: false,
-      // onClick: () => setSendMessage(""),
-    },
-    {
-      title: "2اسم گروه",
-      image: currentUser.media,
-      active: false,
-      isRead: true,
-      // onClick: () => setSendMessage(""),
-    },
-  ];
-  const [groupsDataDisplay, setGroupsDataDisplay] = useState(groupsData);
-
   const handleGroupsData = (index) => {
     const updatedItems = groupsDataDisplay.map((item, idx) => ({
       ...item,
       active: idx === index,
     }));
     setGroupsDataDisplay(updatedItems);
-    // groupsData[index].onClick();
+    setSelectedChat(updatedItems[index]);
+  };
+
+  const createNewMessage = async () => {
+    console.log(selectedChat["_id"]);
   };
 
   return (
@@ -100,7 +102,7 @@ export default function ChatBox() {
       {(fullSizeChatBox || chatPanel === "chat") && (
         <div className={classes.chat}>
           <div className={classes.title}>
-            <h3>اسم چت</h3>
+            <h3>{selectedChat.title}</h3>
           </div>
           <div className={classes.messageBox}>
             <div className={classes.message}>
@@ -166,7 +168,7 @@ export default function ChatBox() {
               <Tooltip title="Send">
                 <SendIcon
                   className="icon"
-                  onClick={() => setSendMessage("")}
+                  onClick={() => createNewMessage()}
                   sx={{ color: "#fdb714" }}
                 />
               </Tooltip>
@@ -213,17 +215,17 @@ export default function ChatBox() {
               </div>
               <div className={classes.info}>
                 <h4>{group.title}</h4>
-                <div className={classes.image}>
-                  <Image
-                    className={classes.image}
-                    src={group.image}
-                    blurDataURL={group.image}
-                    layout="fill"
-                    objectFit="cover"
-                    alt="profile"
-                    as="image"
-                  />
-                </div>
+                <p>
+                  اعضا
+                  <span
+                    style={{
+                      fontFamily: "English",
+                    }}
+                  >
+                    {group.users.length}
+                  </span>
+                  نفر
+                </p>
               </div>
             </div>
           ))}

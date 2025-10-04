@@ -53,6 +53,7 @@
   }
 
   .title {
+    height: 50px;
     padding: 8px;
     border-bottom: 1px solid config.$lightgrey;
   }
@@ -127,6 +128,7 @@
     height: calc(100% - 40px);
     max-height: 100%;
     overflow-y: auto;
+
     @include mixins.mobile {
       height: calc(100vh - 200px);
     }
@@ -156,27 +158,28 @@
       position: relative;
 
       &:hover {
-        background: config.$yellow;
         border: 1px solid config.$yellow;
         cursor: pointer;
-      }
 
-      .image {
-        position: relative;
-        min-width: 35px;
-        min-height: 35px;
-        border-radius: 50px;
+        h4 {
+          color: config.$yellow;
+        }
       }
 
       .info {
-        @include mixins.row-space-between-center();
-        justify-content: right;
+        display: flex;
+        flex-direction: column;
         min-width: 60%;
 
-        h4 {
-          margin-right: 12px;
+        p {
+          color: config.$grey;
+          font-size: small;
+        }
+        span {
+          margin: 0px 4px;
         }
       }
+
       .indicators {
         @include mixins.row-space-between-center();
         width: 20%;
@@ -184,8 +187,10 @@
     }
 
     .groupActive {
-      background: config.$yellow;
       border: 1px solid config.$yellow;
+      h4 {
+        color: config.$yellow;
+      }
     }
   }
 

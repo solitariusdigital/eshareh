@@ -406,6 +406,7 @@
   input {
     @include mixins.input();
     width: 100%;
+    margin-bottom: 8px;
   }
 
   .bar {
@@ -432,7 +433,7 @@
   }
 }
 
-.usersForm {
+.usersSelection {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
   gap: 4px;

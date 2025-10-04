@@ -239,6 +239,7 @@ export default function Portal() {
                     objectFit="cover"
                     alt="image"
                     as="image"
+                    priority
                   />
                 </div>
                 <div>
@@ -269,7 +270,6 @@ export default function Portal() {
                           : control.src()
                       }
                       alt={control.alt}
-                      priority
                       as="image"
                     />
                   </div>
@@ -301,7 +301,6 @@ export default function Portal() {
                           height={24}
                           src={item.src}
                           alt={item.alt}
-                          priority
                           as="image"
                         />
                         <p>{item.label}</p>
@@ -336,7 +335,6 @@ export default function Portal() {
                           height={24}
                           src={item.src}
                           alt={item.alt}
-                          priority
                           as="image"
                         />
                       </div>

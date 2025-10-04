@@ -77,7 +77,6 @@ export default function Footer() {
               height={25}
               src={aparat}
               alt="aparat"
-              priority
             />
           </Link>
         ) : (
@@ -94,7 +93,6 @@ export default function Footer() {
               height={25}
               src={aparatHover}
               alt="aparat"
-              priority
             />
           </Link>
         )}
