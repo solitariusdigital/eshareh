@@ -406,3 +406,52 @@ export const getMediaApi = async () => {
   });
   return await response.json();
 };
+
+// chat api
+export const updateChatApi = async (data) => {
+  const response = await fetch("/api/chat", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createChatApi = async (data) => {
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleChatApi = async (id) => {
+  const response = await fetch(`/api/chat?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getChatsApi = async () => {
+  const response = await fetch("/api/chat", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteChatApi = async (id) => {
+  const response = await fetch(`/api/chat?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
