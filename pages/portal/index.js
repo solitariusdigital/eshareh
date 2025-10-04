@@ -120,13 +120,20 @@ export default function Portal() {
       );
       menuItemsTopData[index].onClick();
     } else if (menuType === "bottom") {
-      const updatedItemsBottom = menuItemsBottom.map((item, idx) => ({
+      let accessibleItems = menuItemsBottom.filter((item) => {
+        const requiredPermission = item.requiredPermission || "all";
+        if (requiredPermission === "all") {
+          return true;
+        }
+        return permissionControl === requiredPermission;
+      });
+      const updatedItemsBottom = accessibleItems.map((item, idx) => ({
         ...item,
         active: idx === index,
       }));
       setMenuItemsBottom(updatedItemsBottom);
       setMenuItemsTop(menuItemsTop.map((item) => ({ ...item, active: false })));
-      menuItemsBottomData[index].onClick();
+      accessibleItems[index].onClick();
     }
   };
 
