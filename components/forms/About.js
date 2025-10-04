@@ -133,6 +133,9 @@ export default function Team({ pages, mediaData }) {
       media: mediaLink,
       permission: "user",
       display: userActivation,
+      lastSeen: new Date(),
+      notifications: false,
+      status: "offline",
     };
     await createUserApi(user);
     router.reload(router.asPath);
