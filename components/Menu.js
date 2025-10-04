@@ -14,6 +14,7 @@ import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import { getControlsApi, updateControlApi } from "@/services/api";
 import Tooltip from "@mui/material/Tooltip";
 import secureLocalStorage from "react-secure-storage";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import search from "@/assets/search.svg";
 import searchHover from "@/assets/searchHover.svg";
 import english from "@/assets/english.svg";
@@ -99,19 +100,33 @@ export default function Menu() {
           className={language ? classes.largeMenuReverse : classes.largeMenu}
         >
           {currentUser && (
-            <div
-              className={classes.profile}
-              onClick={() => Router.push("/portal")}
-            >
-              <Image
-                src={currentUser.media}
-                blurDataURL={currentUser.media}
-                layout="fill"
-                objectFit="cover"
-                alt="profile"
-                as="image"
-              />
-            </div>
+            <Fragment>
+              <div
+                className={classes.profile}
+                onClick={() => Router.push("/portal")}
+              >
+                <Image
+                  src={currentUser.media}
+                  blurDataURL={currentUser.media}
+                  layout="fill"
+                  objectFit="cover"
+                  alt="profile"
+                  as="image"
+                />
+              </div>
+              {currentUser.notifications && (
+                <div
+                  className={classes.notifications}
+                  onClick={() => Router.push("/portal")}
+                >
+                  <Tooltip title="New Message">
+                    <NotificationsIcon
+                      sx={{ fontSize: 20, color: "#a70237" }}
+                    />
+                  </Tooltip>
+                </div>
+              )}
+            </Fragment>
           )}
           <div
             className={
