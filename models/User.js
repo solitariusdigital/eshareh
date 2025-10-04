@@ -24,7 +24,7 @@ const UserSchema = new Schema(
     display: Boolean,
     lastSeen: Date,
     notifications: Boolean,
-    status: String,
+    status: String, // "online", "offline" , "busy"
   },
   { timestamps: true }
 );
