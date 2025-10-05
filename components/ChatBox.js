@@ -245,13 +245,27 @@ export default function ChatBox() {
                     }
                   >
                     <div className={classes.row}>
-                      <h4
-                        style={{
-                          fontFamily: "FarsiBold",
-                        }}
-                      >
-                        {chat.user.name["fa"]}
-                      </h4>
+                      <div className={classes.row}>
+                        <div className={classes.image}>
+                          <Image
+                            className={classes.image}
+                            src={chat.user.media}
+                            blurDataURL={currentUser.media}
+                            layout="fill"
+                            objectFit="cover"
+                            alt="image"
+                            as="image"
+                            priority
+                          />
+                        </div>
+                        <h4
+                          style={{
+                            fontFamily: "FarsiBold",
+                          }}
+                        >
+                          {chat.user.name["fa"]}
+                        </h4>
+                      </div>
                       <p className={classes.date}>
                         {convertDate(chat.updatedAt)}
                       </p>
@@ -279,12 +293,28 @@ export default function ChatBox() {
                       onClick={() => createNewMessage()}
                     />
                   </Tooltip>
-                  <Tooltip title="Attach">
-                    <AttachFileIcon
-                      className="icon"
-                      onClick={() => setMessageContent("")}
-                    />
-                  </Tooltip>
+                  <div className={classes.input}>
+                    <label
+                      className="file"
+                      style={{
+                        border: "none",
+                        padding: "0px",
+                      }}
+                    >
+                      <Tooltip title="Attach">
+                        <AttachFileIcon
+                          className="icon"
+                          onClick={() => setMessageContent("")}
+                        />
+                      </Tooltip>
+                      <input
+                        onChange={(e) => {
+                          setMedia(e.target.files[0]);
+                        }}
+                        type="file"
+                      />
+                    </label>
+                  </div>
                 </div>
                 <textarea
                   style={{

@@ -89,20 +89,23 @@
     .input {
       @include mixins.row-space-between-center();
       height: 50px;
-      padding: 8px;
+      padding: 0px 12px;
 
       .icon {
         display: flex;
+        align-items: center;
         transform: scaleX(-1);
       }
 
       textarea {
         @include mixins.input();
         height: 50px;
-        max-height: 50px;
-        min-height: 50px;
-        min-width: 88%;
+        min-width: 80%;
         border-radius: 5px;
+
+        @include mixins.mobile {
+          min-width: 75%;
+        }
       }
     }
 
@@ -151,6 +154,14 @@
 
       .senderMsg {
         background: config.$sendMessage;
+      }
+
+      .image {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        border-radius: 50px;
+        margin-left: 8px;
       }
     }
   }

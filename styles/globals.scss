@@ -213,8 +213,7 @@ p {
 
 // input file
 label.file input[type="file"] {
-  position: absolute;
-  top: -1000px;
+  display: none;
 }
 .file {
   display: flex;
