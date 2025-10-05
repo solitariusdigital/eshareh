@@ -12,7 +12,8 @@
 
 .navigation {
   width: 450px;
-  margin: 12px auto;
+  margin: 0px auto;
+  margin-bottom: 12px;
   border-radius: 50px;
   height: 40px;
   border: 1px solid config.$lightgrey;
@@ -23,6 +24,7 @@
 
   @include mixins.mobile {
     width: 100%;
+    margin: 12px auto;
   }
 
   .nav {
