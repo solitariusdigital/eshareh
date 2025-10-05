@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState, useEffect, useCallback } from "react";
+import { Fragment, useContext, useState, useEffect, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./ChatBox.module.scss";
 import Image from "next/legacy/image";
@@ -35,6 +35,7 @@ export default function ChatBox() {
 
   const fullSizeChatBox =
     screenSize === "desktop" || screenSize === "tablet-landscape";
+  const intervalRef = useRef(null);
 
   useEffect(() => {
     const handleUserApi = async () => {
@@ -64,42 +65,19 @@ export default function ChatBox() {
   };
 
   useEffect(() => {
-    let intervalId;
-    const fetchMessages = async () => {
-      if (!selectedChat?._id) return;
-      try {
-        const chatData = await getMessagesApi();
-        const currentChat = chatData.filter(
-          (chat) => chat.chatId === selectedChat._id
-        );
-        const enrichedChat = await enrichChatWithUser(currentChat, usersData);
-        enrichedChat.sort(
-          (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
-        );
-        setChatDisplay(enrichedChat);
-      } catch (error) {
-        console.error("Error fetching messages:", error);
-      }
-    };
-
-    const enrichChatWithUser = (chatData, usersData) =>
-      Promise.all(
-        chatData.map((chat) => ({
-          ...chat,
-          user: usersData.find((user) => user._id === chat.senderId) || null,
-        }))
-      );
-
+    const abortController = new AbortController();
     const startPolling = () => {
-      if (!intervalId) {
-        intervalId = setInterval(fetchMessages, 5000);
+      if (!intervalRef.current) {
+        intervalRef.current = setInterval(() => {
+          fetchMessages(abortController.signal);
+        }, 5000);
       }
     };
 
     const stopPolling = () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
     };
 
@@ -107,22 +85,62 @@ export default function ChatBox() {
       if (document.hidden) {
         stopPolling();
       } else {
-        fetchMessages(); // Refresh immediately when user returns
+        fetchMessages(abortController.signal); // Refresh immediately when user returns
         startPolling();
       }
     };
 
-    if (selectedChat?._id) {
-      fetchMessages(); // Initial fetch
-      startPolling();
-      document.addEventListener("visibilitychange", handleVisibilityChange);
-    }
+    const handleWindowBlur = () => {
+      stopPolling();
+    };
 
+    const handleWindowFocus = () => {
+      fetchMessages(abortController.signal); // Refresh immediately on focus
+      startPolling();
+    };
+
+    if (selectedChat?._id) {
+      fetchMessages(abortController.signal); // Initial fetch
+      startPolling();
+      // Add event listeners
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      window.addEventListener("blur", handleWindowBlur);
+      window.addEventListener("focus", handleWindowFocus);
+    }
     return () => {
       stopPolling();
+      abortController.abort(); // Cancel pending requests
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("blur", handleWindowBlur);
+      window.removeEventListener("focus", handleWindowFocus);
     };
-  }, [selectedChat, usersData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedChat?._id]);
+
+  const fetchMessages = async (signal) => {
+    if (!selectedChat?._id) return;
+    try {
+      const chatData = await getMessagesApi({ signal });
+      const currentChat = chatData.filter(
+        (chat) => chat.chatId === selectedChat._id
+      );
+      const enrichedChat = enrichChatWithUser(currentChat, usersData);
+      enrichedChat.sort(
+        (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+      );
+      setChatDisplay(enrichedChat);
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        console.error("Error fetching messages:", error);
+      }
+    }
+  };
+
+  const enrichChatWithUser = (chatData, usersData) =>
+    chatData.map((chat) => ({
+      ...chat,
+      user: usersData.find((user) => user._id === chat.senderId) || null,
+    }));
 
   const chatPanelData = [
     {
@@ -179,6 +197,7 @@ export default function ChatBox() {
     let lastMessage = await createMessageApi(messageObject);
     await updateCurrentChat(lastMessage);
     setMessageContent("");
+    fetchMessages();
   };
 
   const updateCurrentChat = async (lastMessage) => {
