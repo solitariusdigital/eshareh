@@ -504,3 +504,52 @@ export const deleteMessageApi = async (id) => {
   });
   return await response.json();
 };
+
+// notification api
+export const updateNotificationApi = async (data) => {
+  const response = await fetch("/api/notification", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createNotificationApi = async (data) => {
+  const response = await fetch("/api/notification", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleNotificationApi = async (id) => {
+  const response = await fetch(`/api/notification?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getNotificationApi = async () => {
+  const response = await fetch("/api/notification", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteNotificationApi = async (id) => {
+  const response = await fetch(`/api/notification?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

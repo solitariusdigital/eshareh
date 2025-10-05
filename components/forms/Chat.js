@@ -9,9 +9,15 @@ import Tooltip from "@mui/material/Tooltip";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-import { getUsersApi } from "@/services/api";
+import { createNotificationApi, getUsersApi } from "@/services/api";
 import { applyFontToEnglishWords } from "@/services/utility";
-import { createChatApi, getSingleChatApi, updateChatApi } from "@/services/api";
+import {
+  createChatApi,
+  getSingleChatApi,
+  updateChatApi,
+  getSingleUserApi,
+  updateUserApi,
+} from "@/services/api";
 
 export default function Chat({ selectedChat }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -81,15 +87,36 @@ export default function Chat({ selectedChat }) {
       lastMessageId: "",
       archive: false,
     };
+    let chatData = null;
     if (editChat) {
       chatObject.id = editChat._id;
       chatObject.archive = editChat.archive;
       chatObject.lastMessageId = editChat.lastMessageId;
-      await updateChatApi(chatObject);
+      chatData = await updateChatApi(chatObject);
     } else {
-      await createChatApi(chatObject);
+      chatData = await createChatApi(chatObject);
     }
-    router.reload(router.asPath);
+
+    let baseNotificationObject = {
+      chatId: chatData._id,
+      messageId: "",
+      type: "message",
+      isRead: false,
+    };
+
+    for (const id of usersId) {
+      const notificationObject = {
+        ...baseNotificationObject,
+        userId: id,
+      };
+      let userData = await getSingleUserApi(id);
+      await updateUserApi({
+        ...userData,
+        notifications: true,
+      });
+      await createNotificationApi(notificationObject);
+      router.reload(router.asPath);
+    }
   };
 
   const showAlert = (message) => {
