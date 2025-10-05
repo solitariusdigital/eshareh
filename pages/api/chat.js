@@ -29,7 +29,7 @@ export default async function chatHandler(req, res) {
     case "PUT":
       try {
         const updateChat = await Chat.findByIdAndUpdate(
-          body.id || body["_id"],
+          body.id || body._id,
           body,
           {
             new: true,

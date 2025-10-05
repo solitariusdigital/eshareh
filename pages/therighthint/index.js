@@ -96,7 +96,7 @@ export default function Therighthint() {
     let count = dataCharity[0].count;
     count += 1;
     let dataObject = {
-      id: charity["_id"],
+      id: charity._id,
       count: count,
     };
     await updateCharityApi(dataObject);

@@ -79,7 +79,7 @@ export default function Menu() {
   };
   const saveColorObject = async (data) => {
     let colorObject = await getControlsApi();
-    data.id = colorObject[0]["_id"];
+    data.id = colorObject[0]._id;
     await updateControlApi(data);
   };
 
@@ -201,7 +201,6 @@ export default function Menu() {
                                 src={english}
                                 alt="language"
                                 onMouseEnter={() => setHoverLanguage(true)}
-                                priority
                                 as="image"
                               />
                             ) : (
@@ -211,7 +210,6 @@ export default function Menu() {
                                 src={englishHover}
                                 alt="language"
                                 onMouseLeave={() => setHoverLanguage(false)}
-                                priority
                                 as="image"
                               />
                             )}
@@ -239,7 +237,6 @@ export default function Menu() {
                                     src={search}
                                     alt="search"
                                     onMouseEnter={() => setHover(true)}
-                                    priority
                                     as="image"
                                   />
                                 ) : (
@@ -249,7 +246,6 @@ export default function Menu() {
                                     src={searchHover}
                                     alt="search"
                                     onMouseLeave={() => setHover(false)}
-                                    priority
                                     as="image"
                                   />
                                 )}
@@ -302,7 +298,6 @@ export default function Menu() {
                               src={farsi}
                               alt="language"
                               onMouseEnter={() => setHoverLanguage(true)}
-                              priority
                               as="image"
                             />
                           ) : (
@@ -312,7 +307,6 @@ export default function Menu() {
                               src={farsiHover}
                               alt="language"
                               onMouseLeave={() => setHoverLanguage(false)}
-                              priority
                               as="image"
                             />
                           )}
@@ -338,7 +332,6 @@ export default function Menu() {
                                   src={search}
                                   alt="search"
                                   onMouseEnter={() => setHover(true)}
-                                  priority
                                   as="image"
                                 />
                               ) : (
@@ -348,7 +341,6 @@ export default function Menu() {
                                   src={searchHover}
                                   alt="search"
                                   onMouseLeave={() => setHover(false)}
-                                  priority
                                   as="image"
                                 />
                               )}
@@ -402,7 +394,6 @@ export default function Menu() {
                     src={language ? english : farsi}
                     alt="language"
                     onMouseEnter={() => setHoverLanguage(true)}
-                    priority
                     as="image"
                   />
                 ) : (
@@ -412,7 +403,6 @@ export default function Menu() {
                     src={language ? englishHover : farsiHover}
                     alt="language"
                     onMouseLeave={() => setHoverLanguage(false)}
-                    priority
                     as="image"
                   />
                 )}

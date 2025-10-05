@@ -100,7 +100,7 @@ export default function Solution({ solutions, projectTitle }) {
       return;
     }
     // Find the index of the project with the given id
-    let index = solutionsData.findIndex((p) => p["_id"] === project["_id"]);
+    let index = solutionsData.findIndex((p) => p._id === project._id);
     previousProject =
       index === 0
         ? solutionsData[solutionsData.length - 1]
@@ -371,7 +371,7 @@ export default function Solution({ solutions, projectTitle }) {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      await deleteSolutionApi(project["_id"]);
+      await deleteSolutionApi(project._id);
       Router.push("/solutions");
     }
   };
@@ -486,7 +486,7 @@ export default function Solution({ solutions, projectTitle }) {
                     </p>
                     <p
                       className="confirm"
-                      onClick={() => updateSolution(project["_id"])}
+                      onClick={() => updateSolution(project._id)}
                     >
                       Confirm
                     </p>

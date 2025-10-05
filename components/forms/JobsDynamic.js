@@ -114,7 +114,7 @@ export default function JobsDynamic() {
       jobsId: `jobs${sixGenerator()}`,
     };
     if (editJobs) {
-      jobsObject.id = editJobs["_id"];
+      jobsObject.id = editJobs._id;
       await updateJobsApi(jobsObject);
     } else {
       await createJobsApi(jobsObject);

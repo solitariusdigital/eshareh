@@ -160,7 +160,7 @@ export default function Team({ pages, mediaData }) {
     setDisableButton(true);
 
     const contentObject = {
-      _id: aboutContent["_id"],
+      _id: aboutContent._id,
       slug: "about",
       title: "About Us",
       content: [
@@ -226,7 +226,7 @@ export default function Team({ pages, mediaData }) {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      await deleteUserApi(users[index]["_id"]);
+      await deleteUserApi(users[index]._id);
       router.reload(router.asPath);
     }
   };

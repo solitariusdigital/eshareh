@@ -242,7 +242,7 @@ export default function Solutions({
                     ) : (
                       <video
                         className={classes.video}
-                        id={project["_id"]}
+                        id={project._id}
                         src={`${coverMedia.link}#t=0.1`}
                         muted
                         playsInline

@@ -48,7 +48,7 @@ export default function Password() {
       showAlert("رمز عبور جدید باید حداقل 8 کاراکتر باشد");
       return;
     }
-    const userData = await getSingleUserApi(currentUser["_id"]);
+    const userData = await getSingleUserApi(currentUser._id);
     if (decryptPassword(userData.password) === oldPassword) {
       const user = {
         ...currentUser,

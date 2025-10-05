@@ -24,7 +24,7 @@ export default async function coversHandler(req, res) {
     case "PUT":
       try {
         const updateCover = await Cover.findByIdAndUpdate(
-          body.id || body["_id"],
+          body.id || body._id,
           body,
           {
             new: true,

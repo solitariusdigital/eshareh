@@ -56,7 +56,7 @@ export default function Profession({ pages, mediaData }) {
     setDisableButton(true);
 
     const contentObject = {
-      _id: professionContent["_id"],
+      _id: professionContent._id,
       slug: "profession",
       title: "What We Do",
       content: [
@@ -96,7 +96,7 @@ export default function Profession({ pages, mediaData }) {
       await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
 
       const mediaObject = {
-        _id: mediaContent["_id"],
+        _id: mediaContent._id,
         slug: "profession",
         title: "What We Do",
         content: [

@@ -29,7 +29,7 @@ export default async function messageHandler(req, res) {
     case "PUT":
       try {
         const updateMessage = await Message.findByIdAndUpdate(
-          body.id || body["_id"],
+          body.id || body._id,
           body,
           {
             new: true,

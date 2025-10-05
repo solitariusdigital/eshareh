@@ -29,7 +29,7 @@ export default async function solutionsHandler(req, res) {
     case "PUT":
       try {
         const updateSolution = await Solution.findByIdAndUpdate(
-          body.id || body["_id"],
+          body.id || body._id,
           body,
           {
             new: true,

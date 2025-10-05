@@ -10,6 +10,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import GroupIcon from "@mui/icons-material/Group";
+import EditIcon from "@mui/icons-material/Edit";
 import Chat from "./forms/Chat";
 import { convertDate, applyFontToEnglishWords } from "@/services/utility";
 import {
@@ -17,13 +18,15 @@ import {
   createMessageApi,
   getMessagesApi,
   getUsersApi,
+  getSingleChatApi,
+  updateChatApi,
 } from "@/services/api";
 
 export default function ChatBox() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [messageContent, setMessageContent] = useState("");
-  const [chatPanel, setChatPanel] = useState("file" || "chat" || "group");
+  const [chatPanel, setChatPanel] = useState("group" || "chat" || "file");
   const [displayPopup, setDisplayPopup] = useState(false);
   const [groupsDataDisplay, setGroupsDataDisplay] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
@@ -42,17 +45,23 @@ export default function ChatBox() {
   }, []);
 
   useEffect(() => {
-    const handleChatApi = async () => {
-      const chatsData = await getChatsApi();
-      let addOption = chatsData.map((data) => ({
-        ...data,
-        active: false,
-      }));
-      addOption.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
-      setGroupsDataDisplay(addOption);
-    };
-    handleChatApi();
+    fetchChats();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const fetchChats = async () => {
+    const chatsData = await getChatsApi();
+    let filterChats = chatsData.filter(
+      (chat) => chat.active && chat.users.includes(currentUser._id)
+    );
+    let addOption = filterChats.map((chat) => ({
+      ...chat,
+      active: true ? chat._id === selectedChat?._id : false,
+      adminAccess: chat.adminsId.includes(currentUser._id),
+    }));
+    addOption.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    setGroupsDataDisplay(addOption);
+  };
 
   useEffect(() => {
     if (selectedChat?._id) {
@@ -64,7 +73,7 @@ export default function ChatBox() {
   const fetchMessages = async () => {
     const chatData = await getMessagesApi();
     const currentChat = chatData.filter(
-      (chat) => chat.chatId === selectedChat["_id"]
+      (chat) => chat.chatId === selectedChat._id
     );
     const enrichedChat = await enrichChatWithUser(currentChat, usersData);
     enrichedChat.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
@@ -75,7 +84,7 @@ export default function ChatBox() {
     Promise.all(
       chatData.map((chat) => ({
         ...chat,
-        user: usersData.find((user) => user["_id"] === chat.senderId) || null,
+        user: usersData.find((user) => user._id === chat.senderId) || null,
       }))
     );
 
@@ -85,14 +94,14 @@ export default function ChatBox() {
       active: false,
       onClick: () => setChatPanel("file"),
     },
-    {
-      label: "چت",
-      active: false,
-      onClick: () => setChatPanel("chat"),
-    },
+    // {
+    //   label: "چت",
+    //   active: false,
+    //   onClick: () => setChatPanel("chat"),
+    // },
     {
       label: "گروه",
-      active: false,
+      active: true,
       onClick: () => setChatPanel("group"),
     },
   ];
@@ -114,6 +123,7 @@ export default function ChatBox() {
     }));
     setGroupsDataDisplay(updatedItems);
     setSelectedChat(updatedItems[index]);
+    setChatPanel("chat");
   };
 
   const createNewMessage = async () => {
@@ -121,8 +131,8 @@ export default function ChatBox() {
       return;
     }
     const messageObject = {
-      chatId: selectedChat["_id"],
-      senderId: currentUser["_id"],
+      chatId: selectedChat._id,
+      senderId: currentUser._id,
       type: "text",
       content: messageContent.trim(),
       fileUrl: "",
@@ -130,9 +140,19 @@ export default function ChatBox() {
       isDeleted: false,
       isEdited: false,
     };
-    await createMessageApi(messageObject);
+    let lastMessage = await createMessageApi(messageObject);
+    await updateCurrentChat(lastMessage);
     setMessageContent("");
     fetchMessages();
+  };
+
+  const updateCurrentChat = async (lastMessage) => {
+    let currentChat = await getSingleChatApi(selectedChat._id);
+    await updateChatApi({
+      ...currentChat,
+      lastMessageId: lastMessage._id,
+    });
+    fetchChats();
   };
 
   const handleKeyDown = (e) => {
@@ -177,6 +197,11 @@ export default function ChatBox() {
                     {selectedChat.users.length}
                   </p>
                 </div>
+                {selectedChat.adminAccess && (
+                  <Tooltip title="Edit">
+                    <EditIcon className="icon" sx={{ fontSize: 20 }} />
+                  </Tooltip>
+                )}
                 <div>
                   <h3
                     style={{
@@ -193,7 +218,7 @@ export default function ChatBox() {
                   <div
                     key={index}
                     className={
-                      chat.senderId === currentUser["_id"]
+                      chat.senderId === currentUser._id
                         ? classes.senderMsg
                         : classes.message
                     }

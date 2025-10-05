@@ -24,7 +24,7 @@ export default async function pagesHandler(req, res) {
     case "PUT":
       try {
         const updatePage = await Page.findByIdAndUpdate(
-          body.id || body["_id"],
+          body.id || body._id,
           body,
           {
             new: true,

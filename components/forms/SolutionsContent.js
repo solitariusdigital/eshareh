@@ -79,7 +79,7 @@ export default function SolutionsContent({ pages, mediaData }) {
     setDisableButton(true);
 
     const contentObject = {
-      _id: solutionsContent["_id"],
+      _id: solutionsContent._id,
       slug: "solutions",
       title: "Solutions",
       content: [

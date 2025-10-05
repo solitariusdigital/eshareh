@@ -69,7 +69,7 @@ export default function Job({ jobs, jobTitle }) {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      await deleteJobsApi(job["_id"]);
+      await deleteJobsApi(job._id);
       Router.push("/jobs");
     }
   };
@@ -128,7 +128,7 @@ export default function Job({ jobs, jobTitle }) {
                     </p>
                     <p
                       className="confirm"
-                      onClick={() => updateJob(displayJob["_id"])}
+                      onClick={() => updateJob(displayJob._id)}
                     >
                       Confirm
                     </p>

@@ -63,15 +63,16 @@ export default function Chat() {
 
     let usersId = users
       .filter((user) => user.selection)
-      .map((user) => user["_id"]);
+      .map((user) => user._id);
 
     const chatObject = {
       type: "public",
       title: title.trim(),
       description: description.trim(),
       users: usersId,
-      adminsId: [currentUser["_id"]],
+      adminsId: [currentUser._id],
       lastMessageId: "",
+      active: true,
     };
 
     await createChatApi(chatObject);

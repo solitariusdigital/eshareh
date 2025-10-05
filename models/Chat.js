@@ -8,6 +8,7 @@ const ChatSchema = new Schema(
     users: [],
     adminsId: [],
     lastMessageId: String,
+    active: Boolean,
   },
   { timestamps: true }
 );
