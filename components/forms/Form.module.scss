@@ -426,10 +426,8 @@
   }
 
   .formAction {
-    .label {
-      color: config.$grey;
-      margin-bottom: 12px;
-    }
+    @include mixins.row-space-between-center();
+    justify-content: space-around;
   }
 }
 

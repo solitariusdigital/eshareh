@@ -38,31 +38,32 @@
       justify-content: center;
       width: 100%;
       height: 100%;
-      border-bottom: 2px solid config.$white;
 
       &:hover {
         color: config.$yellow;
-        border-bottom: 2px solid config.$yellow;
         cursor: pointer;
       }
     }
 
     .itemActive {
       color: config.$yellow;
-      border-bottom: 2px solid config.$yellow;
     }
   }
 
-  .title {
+  .topBar {
     @include mixins.row-space-between-center();
     padding: 0px 12px;
     border-bottom: 1px solid config.$lightgrey;
 
-    .row {
+    .indocators {
       @include mixins.row-space-between-center();
 
-      p {
-        margin-left: 4px;
+      .row {
+        @include mixins.row-space-between-center();
+        p {
+          margin: 0px 4px;
+          font-size: small;
+        }
       }
     }
   }

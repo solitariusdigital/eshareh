@@ -3,22 +3,28 @@ import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
+import ToggleOnIcon from "@mui/icons-material/ToggleOn";
+import ToggleOffIcon from "@mui/icons-material/ToggleOff";
+import Tooltip from "@mui/material/Tooltip";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { getUsersApi } from "@/services/api";
 import { applyFontToEnglishWords } from "@/services/utility";
-import { createChatApi } from "@/services/api";
+import { createChatApi, getSingleChatApi, updateChatApi } from "@/services/api";
 
-export default function Chat() {
+export default function Chat({ selectedChat }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
-
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(selectedChat?.title || "");
+  const [description, setDescription] = useState(
+    selectedChat?.description || ""
+  );
   const [users, setUsers] = useState([]);
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
+  const [editChat, setEditChat] = useState(selectedChat);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,7 +33,7 @@ export default function Chat() {
         const users = await getUsersApi();
         let addSelectOption = users.map((user) => ({
           ...user,
-          selection: false,
+          selection: selectedChat?.users.includes(user._id) ? true : false,
         }));
         setUsers(addSelectOption);
       } catch (error) {
@@ -35,6 +41,7 @@ export default function Chat() {
       }
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleUserSelection = (index, isActive) => {
@@ -72,10 +79,16 @@ export default function Chat() {
       users: usersId,
       adminsId: [currentUser._id],
       lastMessageId: "",
-      active: true,
+      archive: false,
     };
-
-    await createChatApi(chatObject);
+    if (editChat) {
+      chatObject.id = editChat._id;
+      chatObject.archive = editChat.archive;
+      chatObject.lastMessageId = editChat.lastMessageId;
+      await updateChatApi(chatObject);
+    } else {
+      await createChatApi(chatObject);
+    }
     router.reload(router.asPath);
   };
 
@@ -84,6 +97,20 @@ export default function Chat() {
     setTimeout(() => {
       setAlert("");
     }, 3000);
+  };
+
+  const toggleChatActivation = async (type) => {
+    let chatData = await getSingleChatApi(editChat._id);
+    switch (type) {
+      case "active":
+        chatData.archive = true;
+        break;
+      case "deactive":
+        chatData.archive = false;
+        break;
+    }
+    let updateChat = await updateChatApi(chatData);
+    setEditChat(updateChat);
   };
 
   return (
@@ -137,17 +164,31 @@ export default function Chat() {
           />
         </div>
         <div className={classes.formAction}>
-          <p className={classes.label}>انتخاب اعضای گروه چت جدید</p>
+          {editChat && (
+            <Tooltip title={editChat.archive ? "Deactive" : "Active"}>
+              {editChat.archive ? (
+                <ToggleOffIcon
+                  className="icon"
+                  sx={{ fontSize: 32, color: "#a70237" }}
+                  onClick={() => toggleChatActivation("deactive")}
+                />
+              ) : (
+                <ToggleOnIcon
+                  className="icon"
+                  sx={{ fontSize: 32, color: "#6b8745" }}
+                  onClick={() => toggleChatActivation("active")}
+                />
+              )}
+            </Tooltip>
+          )}
           {permissionControl === "admin" && (
-            <button
-              disabled={disableButton}
-              style={{
-                fontFamily: "FarsiMedium",
-              }}
-              onClick={() => selectAllUsers()}
-            >
-              انتخاب همه
-            </button>
+            <Tooltip title="Select all">
+              <DoneAllIcon
+                className="icon"
+                sx={{ fontSize: 32 }}
+                onClick={() => selectAllUsers()}
+              />
+            </Tooltip>
           )}
         </div>
       </div>
@@ -193,7 +234,7 @@ export default function Chat() {
           }}
           onClick={() => createChat()}
         >
-          ایجاد چت
+          {editChat ? "ویرایش چت" : "ذخیره چت"}
         </button>
       </div>
     </Fragment>

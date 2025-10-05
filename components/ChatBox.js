@@ -51,8 +51,8 @@ export default function ChatBox() {
 
   const fetchChats = async () => {
     const chatsData = await getChatsApi();
-    let filterChats = chatsData.filter(
-      (chat) => chat.active && chat.users.includes(currentUser._id)
+    let filterChats = chatsData.filter((chat) =>
+      chat.users.includes(currentUser._id)
     );
     let addOption = filterChats.map((chat) => ({
       ...chat,
@@ -162,6 +162,16 @@ export default function ChatBox() {
     }
   };
 
+  const createNewChat = () => {
+    setDisplayPopup(true);
+    setSelectedChat(null);
+    const updatedItems = groupsDataDisplay.map((item) => ({
+      ...item,
+      active: false,
+    }));
+    setGroupsDataDisplay(updatedItems);
+  };
+
   return (
     <div className={classes.container}>
       {!fullSizeChatBox && (
@@ -186,22 +196,33 @@ export default function ChatBox() {
         <div className={classes.chat}>
           {selectedChat && (
             <Fragment>
-              <div className={classes.title}>
-                <div className={classes.row}>
-                  <GroupIcon sx={{ fontSize: 20 }} />
-                  <p
-                    style={{
-                      fontFamily: "English",
-                    }}
-                  >
-                    {selectedChat.users.length}
-                  </p>
+              <div className={classes.topBar}>
+                <div className={classes.indocators}>
+                  <div className={classes.row}>
+                    <Tooltip title={selectedChat.users.length}>
+                      <GroupIcon sx={{ fontSize: 20 }} />
+                    </Tooltip>
+                    <p
+                      style={{
+                        fontFamily: "English",
+                      }}
+                    >
+                      {selectedChat.users.length}
+                    </p>
+                  </div>
+                  {selectedChat.adminAccess && (
+                    <Tooltip title="Edit">
+                      <EditIcon
+                        className="icon"
+                        style={{
+                          marginRight: "4px",
+                        }}
+                        sx={{ fontSize: 20 }}
+                        onClick={() => setDisplayPopup(true)}
+                      />
+                    </Tooltip>
+                  )}
                 </div>
-                {selectedChat.adminAccess && (
-                  <Tooltip title="Edit">
-                    <EditIcon className="icon" sx={{ fontSize: 20 }} />
-                  </Tooltip>
-                )}
                 <div>
                   <h3
                     style={{
@@ -278,6 +299,7 @@ export default function ChatBox() {
                   value={messageContent}
                   autoComplete="off"
                   dir="rtl"
+                  disabled={selectedChat.archive}
                 ></textarea>
               </div>
             </Fragment>
@@ -287,7 +309,7 @@ export default function ChatBox() {
       {(fullSizeChatBox || chatPanel === "group") && (
         <div className={classes.groupBox}>
           <Tooltip title="New Chat">
-            <AddIcon className="icon" onClick={() => setDisplayPopup(true)} />
+            <AddIcon className="icon" onClick={() => createNewChat()} />
           </Tooltip>
           {groupsDataDisplay.map((group, index) => (
             <div
@@ -327,7 +349,7 @@ export default function ChatBox() {
             onClick={() => setDisplayPopup(false)}
             sx={{ fontSize: 16 }}
           />
-          <Chat />
+          <Chat selectedChat={selectedChat} />
         </div>
       )}
     </div>
