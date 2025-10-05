@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState, useEffect } from "react";
+import { Fragment, useContext, useState, useEffect, useCallback } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./ChatBox.module.scss";
 import Image from "next/legacy/image";
@@ -64,29 +64,65 @@ export default function ChatBox() {
   };
 
   useEffect(() => {
+    let intervalId;
+    const fetchMessages = async () => {
+      if (!selectedChat?._id) return;
+      try {
+        const chatData = await getMessagesApi();
+        const currentChat = chatData.filter(
+          (chat) => chat.chatId === selectedChat._id
+        );
+        const enrichedChat = await enrichChatWithUser(currentChat, usersData);
+        enrichedChat.sort(
+          (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+        );
+        setChatDisplay(enrichedChat);
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+      }
+    };
+
+    const enrichChatWithUser = (chatData, usersData) =>
+      Promise.all(
+        chatData.map((chat) => ({
+          ...chat,
+          user: usersData.find((user) => user._id === chat.senderId) || null,
+        }))
+      );
+
+    const startPolling = () => {
+      if (!intervalId) {
+        intervalId = setInterval(fetchMessages, 5000);
+      }
+    };
+
+    const stopPolling = () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopPolling();
+      } else {
+        fetchMessages(); // Refresh immediately when user returns
+        startPolling();
+      }
+    };
+
     if (selectedChat?._id) {
-      fetchMessages();
+      fetchMessages(); // Initial fetch
+      startPolling();
+      document.addEventListener("visibilitychange", handleVisibilityChange);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedChat]);
 
-  const fetchMessages = async () => {
-    const chatData = await getMessagesApi();
-    const currentChat = chatData.filter(
-      (chat) => chat.chatId === selectedChat._id
-    );
-    const enrichedChat = await enrichChatWithUser(currentChat, usersData);
-    enrichedChat.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
-    setChatDisplay(enrichedChat);
-  };
-
-  const enrichChatWithUser = (chatData, usersData) =>
-    Promise.all(
-      chatData.map((chat) => ({
-        ...chat,
-        user: usersData.find((user) => user._id === chat.senderId) || null,
-      }))
-    );
+    return () => {
+      stopPolling();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [selectedChat, usersData]);
 
   const chatPanelData = [
     {
@@ -143,7 +179,6 @@ export default function ChatBox() {
     let lastMessage = await createMessageApi(messageObject);
     await updateCurrentChat(lastMessage);
     setMessageContent("");
-    fetchMessages();
   };
 
   const updateCurrentChat = async (lastMessage) => {
