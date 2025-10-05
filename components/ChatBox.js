@@ -20,6 +20,7 @@ import {
   getUsersApi,
   getSingleChatApi,
   updateChatApi,
+  getNotificationApi,
 } from "@/services/api";
 
 export default function ChatBox() {
@@ -52,13 +53,20 @@ export default function ChatBox() {
 
   const fetchChats = async () => {
     const chatsData = await getChatsApi();
+    const notificationsData = await getNotificationApi();
     let filterChats = chatsData.filter((chat) =>
       chat.users.includes(currentUser._id)
+    );
+    let filterNotifications = notificationsData.filter(
+      (notification) => notification.userId === currentUser._id
     );
     let addOption = filterChats.map((chat) => ({
       ...chat,
       active: true ? chat._id === selectedChat?._id : false,
       adminAccess: chat.adminsId.includes(currentUser._id),
+      isRead: filterNotifications
+        .filter((notification) => notification.chatId === chat._id)
+        .some((item) => item.isRead),
     }));
     addOption.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
     setGroupsDataDisplay(addOption);
@@ -405,7 +413,7 @@ export default function ChatBox() {
                 <KeyboardArrowLeftIcon
                   sx={{ color: group.active ? "#fdb714" : "" }}
                 />
-                {group.isRead && (
+                {!group.isRead && (
                   <CircleIcon sx={{ fontSize: 12, color: "#a70237" }} />
                 )}
               </div>
