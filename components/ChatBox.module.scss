@@ -136,10 +136,13 @@
           flex-direction: row-reverse;
           margin-bottom: 4px;
 
-          h4 {
+          .title {
             color: config.$black !important;
-            margin-right: 8px;
-            margin-left: 4px;
+            margin: 0px 8px;
+
+            p {
+              font-size: x-small;
+            }
           }
 
           .date {
@@ -160,9 +163,14 @@
 
       .image {
         position: relative;
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
         border-radius: 50px;
+      }
+      .status {
+        position: relative;
+        right: 22px;
+        top: 22px;
       }
     }
   }

@@ -116,6 +116,19 @@ export default function ChatBox() {
         status: "online",
       };
       await updateUserApi(updateUserData);
+      // delete notifications
+      const notificationsData = await getNotificationApi();
+      let filterNotifications = notificationsData.filter(
+        (notification) =>
+          notification.userId === currentUser._id &&
+          notification.chatId === selectedChat._id
+      );
+      if (filterNotifications.length > 0) {
+        const deletionPromises = filterNotifications.map((notification) =>
+          deleteNotificationApi(notification._id)
+        );
+        await Promise.all(deletionPromises);
+      }
       if (navigator.onLine) {
         fetchMessages(abortController.signal);
       }
@@ -212,11 +225,11 @@ export default function ChatBox() {
     }));
     setChatsDataDisplay(updatedItems);
     setSelectedChat(updatedItems[index]);
-    await handleNotifications(index);
+    await handleDeleteNotifications(index);
     setChatPanel("chat");
   };
 
-  const handleNotifications = async (index) => {
+  const handleDeleteNotifications = async (index) => {
     const notificationsData = await getNotificationApi();
     let filterNotifications = notificationsData.filter(
       (notification) =>
@@ -224,9 +237,10 @@ export default function ChatBox() {
         notification.chatId === chatsDataDisplay[index]._id
     );
     if (filterNotifications.length > 0) {
-      for (const notification of filterNotifications) {
-        await deleteNotificationApi(notification._id);
-      }
+      const deletionPromises = filterNotifications.map((notification) =>
+        deleteNotificationApi(notification._id)
+      );
+      await Promise.all(deletionPromises);
     }
   };
 
@@ -386,23 +400,27 @@ export default function ChatBox() {
                             as="image"
                             priority
                           />
+                          <CircleIcon
+                            className={classes.status}
+                            sx={{
+                              fontSize: 8,
+                              color:
+                                chat.user.status === "online"
+                                  ? "#6b8745"
+                                  : "#a70237",
+                            }}
+                          />
                         </div>
-                        <h4
-                          style={{
-                            fontFamily: "FarsiBold",
-                          }}
-                        >
-                          {chat.user.name["fa"]}
-                        </h4>
-                        <CircleIcon
-                          sx={{
-                            fontSize: 8,
-                            color:
-                              chat.user.status === "online"
-                                ? "#6b8745"
-                                : "#a70237",
-                          }}
-                        />
+                        <div className={classes.title}>
+                          <h4
+                            style={{
+                              fontFamily: "FarsiBold",
+                            }}
+                          >
+                            {chat.user.name["fa"]}
+                          </h4>
+                          <p>{chat.user.title["fa"]}</p>
+                        </div>
                       </div>
                       <p className={classes.date}>
                         {convertDate(chat.updatedAt)}
