@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import { useState, useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Menu.module.scss";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -21,11 +21,6 @@ import english from "@/assets/english.svg";
 import englishHover from "@/assets/englishHover.svg";
 import farsi from "@/assets/farsi.svg";
 import farsiHover from "@/assets/farsiHover.svg";
-import {
-  getNotificationApi,
-  getSingleUserApi,
-  updateUserApi,
-} from "@/services/api";
 
 export default function Menu() {
   const { language, setLanguage } = useContext(StateContext);
@@ -41,28 +36,6 @@ export default function Menu() {
   const [textPicker, setTextPicker] = useState(false);
   const [hover, setHover] = useState(false);
   const [hoverLanguage, setHoverLanguage] = useState(false);
-
-  useEffect(() => {
-    const handleNotificationsApi = async () => {
-      const notificationRecords = await getNotificationApi();
-      const hasNotification = notificationRecords.some(
-        (notification) => notification.userId === currentUser._id
-      );
-      if (hasNotification) {
-        return;
-      }
-      const userData = await getSingleUserApi(currentUser._id);
-      const updateUserData = {
-        ...userData,
-        notifications: false,
-      };
-      await updateUserApi(updateUserData);
-      setCurrentUser(updateUserData);
-      secureLocalStorage.setItem("currentUser", JSON.stringify(updateUserData));
-    };
-    handleNotificationsApi();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const activateNav = (link, index) => {
     setMenuMobile(false);
