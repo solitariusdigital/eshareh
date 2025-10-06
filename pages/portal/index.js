@@ -32,7 +32,7 @@ export default function Portal() {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [themeMode, setThemeMode] = useState("light");
   const [boardType, setBoardType] = useState(
-    "home" || "tasks" || "news" || "chat" || "setting" || "admin"
+    "chat" || "tasks" || "news" || "home" || "setting" || "admin"
   );
 
   const backgroundColor = useMemo(() => {
@@ -48,15 +48,47 @@ export default function Portal() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!currentUser) {
+      Router.push("/");
+    } else {
+      setDisplayMenu(false);
+      setDisplayFooter(false);
+      setLanguageType("fa");
+      setLanguage(true);
+    }
+  }, [
+    currentUser,
+    setDisplayMenu,
+    setDisplayFooter,
+    setLanguageType,
+    setLanguage,
+  ]);
+
+  useEffect(() => {
+    document.body.style.marginTop = "0px";
+    let element = document.getElementById("portal");
+    element.style.background = backgroundColor[themeMode].background;
+    element.style.color = backgroundColor[themeMode].color;
+  }, [backgroundColor, themeMode]);
+
   const menuItemsTopData = [
     {
-      src: home,
-      alt: "خانه",
-      label: "خانه",
-      active: false,
+      src: chat,
+      alt: "چت",
+      label: "چت",
+      active: true,
       requiredPermission: "all",
-      onClick: () => setBoardType("home"),
+      onClick: () => setBoardType("chat"),
     },
+    // {
+    //   src: home,
+    //   alt: "خانه",
+    //   label: "خانه",
+    //   active: false,
+    //   requiredPermission: "all",
+    //   onClick: () => setBoardType("home"),
+    // },
     {
       src: tasks,
       alt: "وظایف",
@@ -72,14 +104,6 @@ export default function Portal() {
       active: false,
       requiredPermission: "all",
       onClick: () => setBoardType("news"),
-    },
-    {
-      src: chat,
-      alt: "چت",
-      label: "چت",
-      active: false,
-      requiredPermission: "all",
-      onClick: () => setBoardType("chat"),
     },
   ];
   const menuItemsBottomData = [
@@ -171,30 +195,6 @@ export default function Portal() {
     mode: false,
     logout: false,
   });
-
-  useEffect(() => {
-    if (!currentUser) {
-      Router.push("/");
-    } else {
-      setDisplayMenu(false);
-      setDisplayFooter(false);
-      setLanguageType("fa");
-      setLanguage(true);
-    }
-  }, [
-    currentUser,
-    setDisplayMenu,
-    setDisplayFooter,
-    setLanguageType,
-    setLanguage,
-  ]);
-
-  useEffect(() => {
-    document.body.style.marginTop = "0px";
-    let element = document.getElementById("portal");
-    element.style.background = backgroundColor[themeMode].background;
-    element.style.color = backgroundColor[themeMode].color;
-  }, [backgroundColor, themeMode]);
 
   const handleMouseEnter = (controlId) => {
     setHoverStates((prev) => ({ ...prev, [controlId]: true }));
