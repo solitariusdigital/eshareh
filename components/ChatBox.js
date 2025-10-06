@@ -21,6 +21,10 @@ import {
   getSingleChatApi,
   updateChatApi,
   getNotificationApi,
+  deleteNotificationApi,
+  createNotificationApi,
+  getSingleUserApi,
+  updateUserApi,
 } from "@/services/api";
 
 export default function ChatBox() {
@@ -62,11 +66,12 @@ export default function ChatBox() {
     );
     let addOption = filterChats.map((chat) => ({
       ...chat,
-      active: true ? chat._id === selectedChat?._id : false,
+      active: chat._id === selectedChat?._id,
       adminAccess: chat.adminsId.includes(currentUser._id),
-      isRead: filterNotifications
-        .filter((notification) => notification.chatId === chat._id)
-        .some((item) => item.isRead),
+      isRead:
+        filterNotifications.filter(
+          (notification) => notification.chatId === chat._id
+        ).length === 0,
     }));
     addOption.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
     setChatsDataDisplay(addOption);
@@ -173,14 +178,29 @@ export default function ChatBox() {
     chatPanelData[index].onClick();
   };
 
-  const handleChatsData = (index) => {
+  const handleChatSelection = async (index) => {
     const updatedItems = chatsDataDisplay.map((item, idx) => ({
       ...item,
       active: idx === index,
     }));
     setChatsDataDisplay(updatedItems);
     setSelectedChat(updatedItems[index]);
+    await handleNotifications(index);
     setChatPanel("chat");
+  };
+
+  const handleNotifications = async (index) => {
+    const notificationsData = await getNotificationApi();
+    let filterNotifications = notificationsData.filter(
+      (notification) =>
+        notification.userId === currentUser._id &&
+        notification.chatId === chatsDataDisplay[index]._id
+    );
+    if (filterNotifications.length > 0) {
+      for (const notification of filterNotifications) {
+        await deleteNotificationApi(notification._id);
+      }
+    }
   };
 
   const createNewMessage = async () => {
@@ -209,7 +229,32 @@ export default function ChatBox() {
       ...currentChat,
       lastMessageId: lastMessage._id,
     });
+    await createNotification(lastMessage);
     fetchChats();
+  };
+
+  const createNotification = async (lastMessage) => {
+    let baseNotificationObject = {
+      chatId: selectedChat._id,
+      messageId: lastMessage._id,
+      type: "message",
+      isRead: false,
+    };
+    let filterCurrentUser = selectedChat.users.filter(
+      (user) => user !== currentUser._id
+    );
+    for (const id of filterCurrentUser) {
+      const notificationObject = {
+        ...baseNotificationObject,
+        userId: id,
+      };
+      let userData = await getSingleUserApi(id);
+      await updateUserApi({
+        ...userData,
+        notifications: true,
+      });
+      await createNotificationApi(notificationObject);
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -402,7 +447,7 @@ export default function ChatBox() {
             <div
               key={index}
               className={chat.active ? classes.groupActive : classes.group}
-              onClick={() => handleChatsData(index)}
+              onClick={() => handleChatSelection(index)}
             >
               <div className={classes.indicators}>
                 <KeyboardArrowLeftIcon

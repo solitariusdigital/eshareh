@@ -96,7 +96,11 @@ export default function Chat({ selectedChat }) {
     } else {
       chatData = await createChatApi(chatObject);
     }
+    await createNotification(usersId, chatData);
+    router.reload(router.asPath);
+  };
 
+  const createNotification = async (usersId, chatData) => {
     let baseNotificationObject = {
       chatId: chatData._id,
       messageId: "",
@@ -115,15 +119,7 @@ export default function Chat({ selectedChat }) {
         notifications: true,
       });
       await createNotificationApi(notificationObject);
-      router.reload(router.asPath);
     }
-  };
-
-  const showAlert = (message) => {
-    setAlert(message);
-    setTimeout(() => {
-      setAlert("");
-    }, 3000);
   };
 
   const toggleChatActivation = async (type) => {
@@ -138,6 +134,13 @@ export default function Chat({ selectedChat }) {
     }
     let updateChat = await updateChatApi(chatData);
     setEditChat(updateChat);
+  };
+
+  const showAlert = (message) => {
+    setAlert(message);
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
   };
 
   return (
