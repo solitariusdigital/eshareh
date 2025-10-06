@@ -121,7 +121,7 @@ export default function Menu() {
                 >
                   <Tooltip title="New Message">
                     <NotificationsIcon
-                      sx={{ fontSize: 20, color: "#a70237" }}
+                      sx={{ fontSize: 20, color: "#fdb714" }}
                     />
                   </Tooltip>
                 </div>

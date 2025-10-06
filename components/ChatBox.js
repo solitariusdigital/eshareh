@@ -36,19 +36,10 @@ export default function ChatBox() {
   const [chatRender, setChatRender] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [messageContent, setMessageContent] = useState("");
-  const [usersData, setUsersData] = useState([]);
 
   const fullSizeChatBox =
     screenSize === "desktop" || screenSize === "tablet-landscape";
   const intervalRef = useRef(null);
-
-  useEffect(() => {
-    const handleUserApi = async () => {
-      const userData = await getUsersApi();
-      setUsersData(userData);
-    };
-    handleUserApi();
-  }, []);
 
   useEffect(() => {
     fetchChats();
@@ -79,10 +70,13 @@ export default function ChatBox() {
 
   useEffect(() => {
     const abortController = new AbortController();
+
     const startPolling = () => {
       if (!intervalRef.current) {
         intervalRef.current = setInterval(() => {
-          fetchMessages(abortController.signal);
+          if (navigator.onLine) {
+            fetchMessages(abortController.signal);
+          }
         }, 5000);
       }
     };
@@ -98,34 +92,66 @@ export default function ChatBox() {
       if (document.hidden) {
         stopPolling();
       } else {
-        fetchMessages(abortController.signal); // Refresh immediately when user returns
+        if (navigator.onLine) {
+          fetchMessages(abortController.signal);
+        }
         startPolling();
       }
     };
 
-    const handleWindowBlur = () => {
+    const handleWindowBlur = async () => {
+      const userData = await getSingleUserApi(currentUser._id);
+      const updateUserData = {
+        ...userData,
+        status: "offline",
+      };
+      await updateUserApi(updateUserData);
       stopPolling();
     };
 
-    const handleWindowFocus = () => {
-      fetchMessages(abortController.signal); // Refresh immediately on focus
+    const handleWindowFocus = async () => {
+      const userData = await getSingleUserApi(currentUser._id);
+      const updateUserData = {
+        ...userData,
+        status: "online",
+      };
+      await updateUserApi(updateUserData);
+      if (navigator.onLine) {
+        fetchMessages(abortController.signal);
+      }
       startPolling();
+    };
+
+    const handleOnline = () => {
+      fetchMessages(abortController.signal);
+      startPolling();
+    };
+
+    const handleOffline = () => {
+      stopPolling();
     };
 
     if (selectedChat?._id) {
-      fetchMessages(abortController.signal); // Initial fetch
+      if (navigator.onLine) {
+        fetchMessages(abortController.signal);
+      }
       startPolling();
-      // Add event listeners
+
       document.addEventListener("visibilitychange", handleVisibilityChange);
       window.addEventListener("blur", handleWindowBlur);
       window.addEventListener("focus", handleWindowFocus);
+      window.addEventListener("online", handleOnline);
+      window.addEventListener("offline", handleOffline);
     }
+
     return () => {
       stopPolling();
-      abortController.abort(); // Cancel pending requests
+      abortController.abort();
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("blur", handleWindowBlur);
       window.removeEventListener("focus", handleWindowFocus);
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedChat?._id]);
@@ -134,6 +160,7 @@ export default function ChatBox() {
     if (!selectedChat?._id) return;
     try {
       const chatData = await getMessagesApi({ signal });
+      const usersData = await getUsersApi();
       const currentChat = chatData.filter(
         (chat) => chat.chatId === selectedChat._id
       );
@@ -367,6 +394,15 @@ export default function ChatBox() {
                         >
                           {chat.user.name["fa"]}
                         </h4>
+                        <CircleIcon
+                          sx={{
+                            fontSize: 8,
+                            color:
+                              chat.user.status === "online"
+                                ? "#6b8745"
+                                : "#a70237",
+                          }}
+                        />
                       </div>
                       <p className={classes.date}>
                         {convertDate(chat.updatedAt)}
@@ -454,7 +490,7 @@ export default function ChatBox() {
                   sx={{ color: chat.active ? "#fdb714" : "" }}
                 />
                 {!chat.isRead && (
-                  <CircleIcon sx={{ fontSize: 12, color: "#a70237" }} />
+                  <CircleIcon sx={{ fontSize: 12, color: "#fdb714" }} />
                 )}
               </div>
               <div className={classes.info}>
