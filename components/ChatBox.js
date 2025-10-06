@@ -26,12 +26,12 @@ import {
 export default function ChatBox() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const [messageContent, setMessageContent] = useState("");
   const [chatPanel, setChatPanel] = useState("group" || "chat" || "file");
   const [displayPopup, setDisplayPopup] = useState(false);
-  const [groupsDataDisplay, setGroupsDataDisplay] = useState([]);
+  const [chatsDataDisplay, setChatsDataDisplay] = useState([]);
+  const [chatRender, setChatRender] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
-  const [chatDisplay, setChatDisplay] = useState([]);
+  const [messageContent, setMessageContent] = useState("");
   const [usersData, setUsersData] = useState([]);
 
   const fullSizeChatBox =
@@ -69,7 +69,7 @@ export default function ChatBox() {
         .some((item) => item.isRead),
     }));
     addOption.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
-    setGroupsDataDisplay(addOption);
+    setChatsDataDisplay(addOption);
   };
 
   useEffect(() => {
@@ -136,7 +136,7 @@ export default function ChatBox() {
       enrichedChat.sort(
         (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
       );
-      setChatDisplay(enrichedChat);
+      setChatRender(enrichedChat);
     } catch (error) {
       if (error.name !== "AbortError") {
         console.error("Error fetching messages:", error);
@@ -156,11 +156,6 @@ export default function ChatBox() {
       active: false,
       onClick: () => setChatPanel("file"),
     },
-    // {
-    //   label: "چت",
-    //   active: false,
-    //   onClick: () => setChatPanel("chat"),
-    // },
     {
       label: "گروه",
       active: true,
@@ -178,12 +173,12 @@ export default function ChatBox() {
     chatPanelData[index].onClick();
   };
 
-  const handleGroupsData = (index) => {
-    const updatedItems = groupsDataDisplay.map((item, idx) => ({
+  const handleChatsData = (index) => {
+    const updatedItems = chatsDataDisplay.map((item, idx) => ({
       ...item,
       active: idx === index,
     }));
-    setGroupsDataDisplay(updatedItems);
+    setChatsDataDisplay(updatedItems);
     setSelectedChat(updatedItems[index]);
     setChatPanel("chat");
   };
@@ -227,11 +222,11 @@ export default function ChatBox() {
   const createNewChat = () => {
     setDisplayPopup(true);
     setSelectedChat(null);
-    const updatedItems = groupsDataDisplay.map((item) => ({
+    const updatedItems = chatsDataDisplay.map((item) => ({
       ...item,
       active: false,
     }));
-    setGroupsDataDisplay(updatedItems);
+    setChatsDataDisplay(updatedItems);
   };
 
   return (
@@ -297,7 +292,7 @@ export default function ChatBox() {
                 </div>
               </div>
               <div className={classes.messageBox}>
-                {chatDisplay.map((chat, index) => (
+                {chatRender.map((chat, index) => (
                   <div
                     key={index}
                     className={
@@ -403,29 +398,29 @@ export default function ChatBox() {
           <Tooltip title="New Chat">
             <AddIcon className="icon" onClick={() => createNewChat()} />
           </Tooltip>
-          {groupsDataDisplay.map((group, index) => (
+          {chatsDataDisplay.map((chat, index) => (
             <div
               key={index}
-              className={group.active ? classes.groupActive : classes.group}
-              onClick={() => handleGroupsData(index)}
+              className={chat.active ? classes.groupActive : classes.group}
+              onClick={() => handleChatsData(index)}
             >
               <div className={classes.indicators}>
                 <KeyboardArrowLeftIcon
-                  sx={{ color: group.active ? "#fdb714" : "" }}
+                  sx={{ color: chat.active ? "#fdb714" : "" }}
                 />
-                {!group.isRead && (
+                {!chat.isRead && (
                   <CircleIcon sx={{ fontSize: 12, color: "#a70237" }} />
                 )}
               </div>
               <div className={classes.info}>
-                <h4>{group.title}</h4>
+                <h4>{chat.title}</h4>
                 <div className={classes.row}>
                   <p
                     style={{
                       fontFamily: "English",
                     }}
                   >
-                    {group.users.length}
+                    {chat.users.length}
                   </p>
                   <GroupIcon sx={{ fontSize: 18 }} />
                 </div>
