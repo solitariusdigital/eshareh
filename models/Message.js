@@ -4,7 +4,7 @@ const MessageSchema = new Schema(
   {
     chatId: String,
     senderId: String,
-    type: String, // "text", "image", "file", "video", "audio"
+    type: String,
     content: String,
     fileUrl: String,
     fileType: String,

@@ -11,8 +11,16 @@ import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import GroupIcon from "@mui/icons-material/Group";
 import EditIcon from "@mui/icons-material/Edit";
+import DownloadIcon from "@mui/icons-material/Download";
+import loaderImage from "@/assets/loader.png";
 import Chat from "./forms/Chat";
-import { convertDate, applyFontToEnglishWords } from "@/services/utility";
+import Link from "next/link";
+import {
+  convertDate,
+  applyFontToEnglishWords,
+  uploadMedia,
+  sixGenerator,
+} from "@/services/utility";
 import {
   getChatsApi,
   createMessageApi,
@@ -30,12 +38,14 @@ import {
 export default function ChatBox() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const [chatPanel, setChatPanel] = useState("group" || "chat" || "file");
+  const [chatPanel, setChatPanel] = useState("group" || "chat" || "document");
   const [displayPopup, setDisplayPopup] = useState(false);
   const [chatsDataDisplay, setChatsDataDisplay] = useState([]);
   const [chatRender, setChatRender] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [messageContent, setMessageContent] = useState("");
+  const [media, setMedia] = useState(null);
+  const sourceLink = "https://eshareh.storage.iran.liara.space";
 
   const fullSizeChatBox =
     screenSize === "desktop" || screenSize === "tablet-landscape";
@@ -199,7 +209,7 @@ export default function ChatBox() {
     {
       label: "فایل",
       active: false,
-      onClick: () => setChatPanel("file"),
+      onClick: () => setChatPanel("document"),
     },
     {
       label: "گروه",
@@ -225,8 +235,8 @@ export default function ChatBox() {
     }));
     setChatsDataDisplay(updatedItems);
     setSelectedChat(updatedItems[index]);
-    await handleDeleteNotifications(index);
     setChatPanel("chat");
+    await handleDeleteNotifications(index);
   };
 
   const handleDeleteNotifications = async (index) => {
@@ -244,20 +254,28 @@ export default function ChatBox() {
     }
   };
 
-  const createNewMessage = async () => {
-    if (!messageContent.trim()) {
-      return;
-    }
+  const createNewMessage = async (
+    type,
+    content = "",
+    fileName = "",
+    fileType = ""
+  ) => {
+    const textContent = messageContent?.trim() || "";
+    const finalContent = content || textContent;
+    const isText = type === "text";
+    const isDocument = type === "document";
+
     const messageObject = {
       chatId: selectedChat._id,
       senderId: currentUser._id,
-      type: "text",
-      content: messageContent.trim(),
-      fileUrl: "",
-      fileType: "",
+      type,
+      content: isText ? finalContent : fileName,
+      fileUrl: isDocument ? finalContent : "",
+      fileType: fileType,
       isDeleted: false,
       isEdited: false,
     };
+
     let lastMessage = await createMessageApi(messageObject);
     await updateCurrentChat(lastMessage);
     setMessageContent("");
@@ -301,7 +319,7 @@ export default function ChatBox() {
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      createNewMessage();
+      createNewMessage("text");
     }
   };
 
@@ -313,6 +331,87 @@ export default function ChatBox() {
       active: false,
     }));
     setChatsDataDisplay(updatedItems);
+  };
+
+  const validateFile = (file) => {
+    if (!file) return { valid: false, message: "فایلی ارائه نشده است." };
+
+    const name = file.name?.toLowerCase() || "";
+    const type = file.type?.toLowerCase() || "";
+
+    const mimeToExt = {
+      // Images
+      "image/jpeg": ".jpg",
+      "image/png": ".png",
+      "image/gif": ".gif",
+      "image/webp": ".webp",
+      "image/bmp": ".bmp",
+      "image/svg+xml": ".svg",
+      // Documents
+      "application/pdf": ".pdf",
+      "application/msword": ".doc",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        ".docx",
+      "application/vnd.ms-excel": ".xls",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+        ".xlsx",
+      "application/vnd.ms-powerpoint": ".ppt",
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+        ".pptx",
+      "text/plain": ".txt",
+      // Archives
+      "application/zip": ".zip",
+      "application/x-zip-compressed": ".zip",
+      "application/x-rar-compressed": ".rar",
+    };
+
+    const allowedMimeTypes = Object.keys(mimeToExt);
+    const allowedExtensions = Object.values(mimeToExt);
+
+    if (
+      type.startsWith("audio/") ||
+      type.startsWith("video/") ||
+      name.endsWith(".mp4") ||
+      name.endsWith(".mov") ||
+      name.endsWith(".webm")
+    ) {
+      setMedia(null);
+      return { valid: false, message: "ارسال فایل صوتی یا ویدئویی مجاز نیست." };
+    }
+    // Allow if MIME type is explicitly supported
+    if (allowedMimeTypes.includes(type)) {
+      const extension = mimeToExt[type];
+      return { valid: true, extension };
+    }
+    // Fallback: check by file extension
+    const matchedExt = allowedExtensions.find((ext) => name.endsWith(ext));
+    if (matchedExt) {
+      return { valid: true, extension: matchedExt };
+    }
+    // Reject otherwise
+    setMedia(null);
+    return { valid: false, message: "نوع فایل مجاز نیست." };
+  };
+
+  const uploadFile = async (file) => {
+    const result = validateFile(file);
+    if (!result.valid) {
+      alert(result.message);
+    } else {
+      let mediaFolder = "documents";
+      let subFolder = `doc${sixGenerator()}`;
+      let mediaName = file.name.replace(/\.[^/.]+$/, "");
+      let mediaFormat = result.extension;
+      let mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaName}${mediaFormat}`;
+      await uploadMedia(file, mediaName, mediaFolder, subFolder, mediaFormat);
+      await createNewMessage(
+        "document",
+        mediaLink,
+        mediaName,
+        result.extension
+      );
+      setMedia(null);
+    }
   };
 
   return (
@@ -330,7 +429,7 @@ export default function ChatBox() {
           ))}
         </div>
       )}
-      {(fullSizeChatBox || chatPanel === "file") && (
+      {(fullSizeChatBox || chatPanel === "document") && (
         <div className={classes.fileBox}>
           <h3>فایل</h3>
         </div>
@@ -397,8 +496,6 @@ export default function ChatBox() {
                             layout="fill"
                             objectFit="cover"
                             alt="image"
-                            as="image"
-                            priority
                           />
                           <CircleIcon
                             className={classes.status}
@@ -437,6 +534,25 @@ export default function ChatBox() {
                         ),
                       }}
                     ></p>
+                    {chat.type === "document" && (
+                      <div
+                        className={classes.document}
+                        onClick={() =>
+                          window.open(
+                            chat.fileUrl,
+                            "_blank",
+                            "noopener,noreferrer"
+                          )
+                        }
+                      >
+                        <Tooltip title="View">
+                          <DownloadIcon
+                            sx={{ fontSize: 16, color: "#fdb714" }}
+                          />
+                        </Tooltip>
+                        <p>مشاهده فایل</p>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -446,7 +562,7 @@ export default function ChatBox() {
                     <SendIcon
                       className="icon"
                       sx={{ color: "#fdb714" }}
-                      onClick={() => createNewMessage()}
+                      onClick={() => createNewMessage("text")}
                     />
                   </Tooltip>
                   <div className={classes.input}>
@@ -457,18 +573,30 @@ export default function ChatBox() {
                         padding: "0px",
                       }}
                     >
-                      <Tooltip title="Attach">
-                        <AttachFileIcon
-                          className="icon"
-                          onClick={() => setMessageContent("")}
+                      {!media ? (
+                        <Fragment>
+                          <Tooltip title="Attach">
+                            <AttachFileIcon
+                              className="icon"
+                              onClick={() => setMessageContent("")}
+                            />
+                          </Tooltip>
+                          <input
+                            onChange={(e) => {
+                              setMedia(e.target.files[0]);
+                              uploadFile(e.target.files[0]);
+                            }}
+                            type="file"
+                          />
+                        </Fragment>
+                      ) : (
+                        <Image
+                          width={25}
+                          height={25}
+                          src={loaderImage}
+                          alt="isLoading"
                         />
-                      </Tooltip>
-                      <input
-                        onChange={(e) => {
-                          setMedia(e.target.files[0]);
-                        }}
-                        type="file"
-                      />
+                      )}
                     </label>
                   </div>
                 </div>

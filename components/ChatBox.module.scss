@@ -155,6 +155,13 @@
           color: config.$black !important;
           direction: rtl;
         }
+
+        .document {
+          @include mixins.row-space-between-center();
+          color: config.$yellow !important;
+          width: 100px;
+          cursor: pointer;
+        }
       }
 
       .senderMsg {
