@@ -156,10 +156,9 @@
           direction: rtl;
         }
 
-        .document {
+        .indicators {
           @include mixins.row-space-between-center();
-          color: config.$yellow !important;
-          width: 100px;
+          width: fit-content;
           cursor: pointer;
         }
       }
@@ -291,8 +290,11 @@
 
       &:hover {
         border: 1px solid config.$yellow;
-        color: config.$yellow;
         cursor: pointer;
+      }
+
+      .fileType {
+        font-size: x-small;
       }
     }
   }

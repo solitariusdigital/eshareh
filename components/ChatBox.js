@@ -13,8 +13,8 @@ import GroupIcon from "@mui/icons-material/Group";
 import EditIcon from "@mui/icons-material/Edit";
 import DownloadIcon from "@mui/icons-material/Download";
 import loaderImage from "@/assets/loader.png";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Chat from "./forms/Chat";
-import Link from "next/link";
 import {
   convertDate,
   applyFontToEnglishWords,
@@ -33,6 +33,7 @@ import {
   createNotificationApi,
   getSingleUserApi,
   updateUserApi,
+  deleteMessageApi,
 } from "@/services/api";
 
 export default function ChatBox() {
@@ -182,26 +183,18 @@ export default function ChatBox() {
 
   const fetchMessages = async (signal) => {
     if (!selectedChat?._id) return;
-    try {
-      const chatData = await getMessagesApi({ signal });
-      const usersData = await getUsersApi();
-      const currentChat = chatData.filter(
-        (chat) => chat.chatId === selectedChat._id
-      );
-      const chatFiles = currentChat
-        .filter((chat) => chat.type === "document")
-        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
-      const enrichedChat = enrichChatWithUser(currentChat, usersData);
-      enrichedChat.sort(
-        (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
-      );
-      setChatRender(enrichedChat);
-      setDocumentsRender(chatFiles);
-    } catch (error) {
-      if (error.name !== "AbortError") {
-        console.error("Error fetching messages:", error);
-      }
-    }
+    const chatData = await getMessagesApi({ signal });
+    const usersData = await getUsersApi();
+    const currentChat = chatData.filter(
+      (chat) => chat.chatId === selectedChat._id
+    );
+    const chatFiles = currentChat
+      .filter((chat) => chat.type === "document")
+      .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    const enrichedChat = enrichChatWithUser(currentChat, usersData);
+    enrichedChat.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    setChatRender(enrichedChat);
+    setDocumentsRender(chatFiles);
   };
 
   const enrichChatWithUser = (chatData, usersData) =>
@@ -419,6 +412,14 @@ export default function ChatBox() {
     }
   };
 
+  const deleteMessage = async (id) => {
+    let confirmationMessage = "حذف مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      await deleteMessageApi(id);
+    }
+  };
+
   return (
     <div className={classes.container}>
       {!fullSizeChatBox && (
@@ -437,18 +438,53 @@ export default function ChatBox() {
       {(fullSizeChatBox || chatPanel === "document") && (
         <div className={classes.documentBox}>
           {documentsRender.map((document, index) => (
-            <div
-              key={index}
-              className={classes.document}
-              onClick={() =>
-                window.open(document.fileUrl, "_blank", "noopener,noreferrer")
-              }
-            >
+            <div key={index} className={classes.document}>
               <div className={classes.row}>
-                <p>{document.content}</p>
-                <Tooltip title="View">
-                  <DownloadIcon sx={{ fontSize: 16, color: "#fdb714" }} />
-                </Tooltip>
+                <div>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: applyFontToEnglishWords(
+                        document.content,
+                        "EnglishLight",
+                        "14px",
+                        "fa"
+                      ),
+                    }}
+                  ></p>
+                  <p
+                    className={classes.fileType}
+                    style={{
+                      fontFamily: "English",
+                    }}
+                  >
+                    {document.fileType}
+                  </p>
+                </div>
+                <div className={classes.row}>
+                  <Tooltip title="View">
+                    <DownloadIcon
+                      className="icon"
+                      sx={{ fontSize: 16 }}
+                      onClick={() =>
+                        window.open(
+                          document.fileUrl,
+                          "_blank",
+                          "noopener,noreferrer"
+                        )
+                      }
+                    />
+                  </Tooltip>
+                  <Tooltip title="Detele">
+                    <DeleteOutlineIcon
+                      className="icon"
+                      sx={{
+                        fontSize: 16,
+                        color: "#a70237",
+                      }}
+                      onClick={() => deleteMessage(document._id)}
+                    />
+                  </Tooltip>
+                </div>
               </div>
               <p className={classes.date}>{convertDate(document.updatedAt)}</p>
             </div>
@@ -548,32 +584,40 @@ export default function ChatBox() {
                       className={classes.content}
                       dangerouslySetInnerHTML={{
                         __html: applyFontToEnglishWords(
-                          chat["content"],
+                          chat.content,
                           "EnglishLight",
                           "14px",
                           "fa"
                         ),
                       }}
                     ></p>
-                    {chat.type === "document" && (
-                      <div
-                        className={classes.document}
-                        onClick={() =>
-                          window.open(
-                            chat.fileUrl,
-                            "_blank",
-                            "noopener,noreferrer"
-                          )
-                        }
-                      >
+                    <div className={classes.indicators}>
+                      <Tooltip title="Detele">
+                        <DeleteOutlineIcon
+                          className="icon"
+                          sx={{
+                            fontSize: 16,
+                            color: "#a70237",
+                          }}
+                          onClick={() => deleteMessage(chat._id)}
+                        />
+                      </Tooltip>
+                      {chat.type === "document" && (
                         <Tooltip title="View">
                           <DownloadIcon
-                            sx={{ fontSize: 16, color: "#fdb714" }}
+                            className="icon"
+                            sx={{ fontSize: 16, color: "#000000" }}
+                            onClick={() =>
+                              window.open(
+                                chat.fileUrl,
+                                "_blank",
+                                "noopener,noreferrer"
+                              )
+                            }
                           />
                         </Tooltip>
-                        <p>مشاهده فایل</p>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>

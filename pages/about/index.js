@@ -208,7 +208,7 @@ export default function About({ pageData }) {
               <h3
                 dangerouslySetInnerHTML={{
                   __html: applyFontToEnglishWords(
-                    users[current]["title"][languageType],
+                    users[current].title[languageType],
                     "English",
                     "20px",
                     language

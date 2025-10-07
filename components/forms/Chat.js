@@ -235,7 +235,7 @@ export default function Chat({ selectedChat }) {
                 <p
                   dangerouslySetInnerHTML={{
                     __html: applyFontToEnglishWords(
-                      user["title"][languageType],
+                      user.title[languageType],
                       "English",
                       "16px",
                       "fa"
