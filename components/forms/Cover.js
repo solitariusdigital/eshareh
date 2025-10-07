@@ -59,12 +59,11 @@ export default function Cover({ covers }) {
     setLoader(true);
     setDisableButton(true);
 
-    let mediaLink = "";
     let mediaFormat = mediaType === "image" ? ".jpg" : ".mp4";
     let mediaFolder = "cover";
-    const subFolder = `cov${sixGenerator()}`;
+    let subFolder = `cov${sixGenerator()}`;
     let mediaId = `img${fourGenerator()}`;
-    mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
+    let mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
     await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
 
     const cover = {

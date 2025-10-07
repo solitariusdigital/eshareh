@@ -87,12 +87,11 @@ export default function Profession({ pages, mediaData }) {
     setLoader(true);
     setDisableButton(true);
     if (media) {
-      let mediaLink = "";
       let mediaFormat = mediaType === "image" ? ".jpg" : ".gif";
       let mediaFolder = "page";
-      const subFolder = "profession";
+      let subFolder = "profession";
       let mediaId = `img${fourGenerator()}`;
-      mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
+      let mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
       await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
 
       const mediaObject = {

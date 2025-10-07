@@ -102,11 +102,10 @@ export default function JobSend({ jobsId }) {
     setDisableButton(true);
     setLoader(true);
 
-    let mediaLink = "";
     let mediaFolder = "res";
     let format = ".pdf";
     let mediaId = `res${fourGenerator()}`;
-    mediaLink = `${sourceLink}/${mediaFolder}/${jobsId}/${mediaId}${format}`;
+    let mediaLink = `${sourceLink}/${mediaFolder}/${jobsId}/${mediaId}${format}`;
     await uploadMedia(media, mediaId, mediaFolder, jobsId, format);
 
     const resumeObject = {
