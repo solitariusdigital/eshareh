@@ -42,6 +42,7 @@ export default function ChatBox() {
   const [displayPopup, setDisplayPopup] = useState(false);
   const [chatsDataDisplay, setChatsDataDisplay] = useState([]);
   const [chatRender, setChatRender] = useState([]);
+  const [documentsRender, setDocumentsRender] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [messageContent, setMessageContent] = useState("");
   const [media, setMedia] = useState(null);
@@ -187,11 +188,15 @@ export default function ChatBox() {
       const currentChat = chatData.filter(
         (chat) => chat.chatId === selectedChat._id
       );
+      const chatFiles = currentChat
+        .filter((chat) => chat.type === "document")
+        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
       const enrichedChat = enrichChatWithUser(currentChat, usersData);
       enrichedChat.sort(
         (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
       );
       setChatRender(enrichedChat);
+      setDocumentsRender(chatFiles);
     } catch (error) {
       if (error.name !== "AbortError") {
         console.error("Error fetching messages:", error);
@@ -430,8 +435,24 @@ export default function ChatBox() {
         </div>
       )}
       {(fullSizeChatBox || chatPanel === "document") && (
-        <div className={classes.fileBox}>
-          <h3>فایل</h3>
+        <div className={classes.documentBox}>
+          {documentsRender.map((document, index) => (
+            <div
+              key={index}
+              className={classes.document}
+              onClick={() =>
+                window.open(document.fileUrl, "_blank", "noopener,noreferrer")
+              }
+            >
+              <div className={classes.row}>
+                <p>{document.content}</p>
+                <Tooltip title="View">
+                  <DownloadIcon sx={{ fontSize: 16, color: "#fdb714" }} />
+                </Tooltip>
+              </div>
+              <p className={classes.date}>{convertDate(document.updatedAt)}</p>
+            </div>
+          ))}
         </div>
       )}
       {(fullSizeChatBox || chatPanel === "chat") && (
