@@ -25,51 +25,22 @@
     font-size: small;
   }
 
-  .navigation {
-    position: relative;
-    top: 0px;
-    width: 100%;
-    height: 40px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom: 1px solid config.$lightgrey;
+  .indocators {
     @include mixins.row-space-between-center();
-
-    .item,
-    .itemActive {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-
-      &:hover {
-        color: config.$yellow;
-        cursor: pointer;
-      }
-    }
-
-    .itemActive {
-      color: config.$yellow;
-    }
   }
 
   .topBar {
     @include mixins.row-space-between-center();
     padding: 0px 12px;
+    width: 100%;
     border-bottom: 1px solid config.$lightgrey;
+  }
 
-    .indocators {
-      @include mixins.row-space-between-center();
-
-      .row {
-        @include mixins.row-space-between-center();
-        p {
-          margin: 0px 4px;
-          font-size: small;
-        }
-      }
+  .row {
+    @include mixins.row-space-between-center();
+    p {
+      margin: 0px 4px;
+      font-size: small;
     }
   }
 
@@ -78,7 +49,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 12px 0px;
-    height: calc(100% - 40px);
+    height: 100%;
     max-height: config.$max-widthHeigh !important;
 
     @include mixins.tablet {
@@ -123,10 +94,10 @@
       padding: 0px 12px;
 
       @include mixins.mobile {
-        height: calc(100vh - 350px);
+        height: calc(100vh - 310px);
       }
       @include mixins.tabletPortrait {
-        height: calc(100vh - 350px);
+        height: calc(100vh - 310px);
       }
 
       .message,
@@ -230,11 +201,11 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        min-width: 60%;
+        min-width: 70%;
 
         .row {
           @include mixins.row-space-between-center();
-          width: 30px;
+          width: fit-content;
           color: config.$grey;
 
           p {

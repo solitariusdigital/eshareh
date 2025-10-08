@@ -14,6 +14,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DownloadIcon from "@mui/icons-material/Download";
 import loaderImage from "@/assets/loader.png";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import Chat from "./forms/Chat";
 import {
   convertDate,
@@ -202,29 +204,6 @@ export default function ChatBox() {
       ...chat,
       user: usersData.find((user) => user._id === chat.senderId) || null,
     }));
-
-  const chatPanelData = [
-    {
-      label: "فایل",
-      active: false,
-      onClick: () => setChatPanel("document"),
-    },
-    {
-      label: "گروه",
-      active: true,
-      onClick: () => setChatPanel("group"),
-    },
-  ];
-  const [chatPanelDisplay, setChatPanelDisplay] = useState(chatPanelData);
-
-  const handleClickChatPanel = (index) => {
-    const updatedItems = chatPanelDisplay.map((item, idx) => ({
-      ...item,
-      active: idx === index,
-    }));
-    setChatPanelDisplay(updatedItems);
-    chatPanelData[index].onClick();
-  };
 
   const handleChatSelection = async (index) => {
     const updatedItems = chatsDataDisplay.map((item, idx) => ({
@@ -422,21 +401,17 @@ export default function ChatBox() {
 
   return (
     <div className={classes.container}>
-      {!fullSizeChatBox && (
-        <div className={classes.navigation}>
-          {chatPanelDisplay.map((item, index) => (
-            <div
-              key={index}
-              className={item.active ? classes.itemActive : classes.item}
-              onClick={() => handleClickChatPanel(index)}
-            >
-              <p>{item.label}</p>
-            </div>
-          ))}
-        </div>
-      )}
       {(fullSizeChatBox || chatPanel === "document") && (
         <div className={classes.documentBox}>
+          {!fullSizeChatBox && (
+            <Tooltip title="Back">
+              <ArrowForwardIosIcon
+                className="icon"
+                sx={{ fontSize: 20 }}
+                onClick={() => setChatPanel("chat")}
+              />
+            </Tooltip>
+          )}
           {documentsRender.map((document, index) => (
             <div key={index} className={classes.document}>
               <div className={classes.row}>
@@ -464,7 +439,7 @@ export default function ChatBox() {
                   <Tooltip title="View">
                     <DownloadIcon
                       className="icon"
-                      sx={{ fontSize: 16 }}
+                      sx={{ fontSize: 20 }}
                       onClick={() =>
                         window.open(
                           document.fileUrl,
@@ -478,8 +453,7 @@ export default function ChatBox() {
                     <DeleteOutlineIcon
                       className="icon"
                       sx={{
-                        fontSize: 16,
-                        color: "#a70237",
+                        fontSize: 18,
                       }}
                       onClick={() => deleteMessage(document._id)}
                     />
@@ -514,23 +488,46 @@ export default function ChatBox() {
                       <EditIcon
                         className="icon"
                         style={{
-                          marginRight: "4px",
+                          margin: "0px 4px",
                         }}
                         sx={{ fontSize: 20 }}
                         onClick={() => setDisplayPopup(true)}
                       />
                     </Tooltip>
                   )}
+                  {!fullSizeChatBox && (
+                    <Tooltip title="Documents">
+                      <InsertDriveFileIcon
+                        sx={{ fontSize: 20 }}
+                        onClick={() => setChatPanel("document")}
+                      />
+                    </Tooltip>
+                  )}
                 </div>
-                <div>
-                  <h3
+                <div className={classes.row}>
+                  <div
                     style={{
-                      fontFamily: "FarsiBold",
+                      marginRight: !fullSizeChatBox ? "8px" : null,
                     }}
                   >
-                    {selectedChat.title}
-                  </h3>
-                  <p>{selectedChat.description}</p>
+                    <h3
+                      style={{
+                        fontFamily: "FarsiBold",
+                      }}
+                    >
+                      {selectedChat.title}
+                    </h3>
+                    <p>{selectedChat.description}</p>
+                  </div>
+                  {!fullSizeChatBox && (
+                    <Tooltip title="Back">
+                      <ArrowForwardIosIcon
+                        className="icon"
+                        sx={{ fontSize: 20 }}
+                        onClick={() => setChatPanel("group")}
+                      />
+                    </Tooltip>
+                  )}
                 </div>
               </div>
               <div className={classes.messageBox}>
@@ -596,8 +593,7 @@ export default function ChatBox() {
                         <DeleteOutlineIcon
                           className="icon"
                           sx={{
-                            fontSize: 16,
-                            color: "#a70237",
+                            fontSize: 18,
                           }}
                           onClick={() => deleteMessage(chat._id)}
                         />
@@ -606,7 +602,7 @@ export default function ChatBox() {
                         <Tooltip title="View">
                           <DownloadIcon
                             className="icon"
-                            sx={{ fontSize: 16, color: "#000000" }}
+                            sx={{ fontSize: 20, color: "#000000" }}
                             onClick={() =>
                               window.open(
                                 chat.fileUrl,
@@ -688,7 +684,11 @@ export default function ChatBox() {
       {(fullSizeChatBox || chatPanel === "group") && (
         <div className={classes.groupBox}>
           <Tooltip title="New Chat">
-            <AddIcon className="icon" onClick={() => createNewChat()} />
+            <AddIcon
+              className="icon"
+              sx={{ fontSize: 20 }}
+              onClick={() => createNewChat()}
+            />
           </Tooltip>
           {chatsDataDisplay.map((chat, index) => (
             <div
@@ -714,7 +714,7 @@ export default function ChatBox() {
                   >
                     {chat.users.length}
                   </p>
-                  <GroupIcon sx={{ fontSize: 18 }} />
+                  <GroupIcon sx={{ fontSize: 16 }} />
                 </div>
               </div>
             </div>
@@ -726,7 +726,7 @@ export default function ChatBox() {
           <CloseIcon
             className="icon"
             onClick={() => setDisplayPopup(false)}
-            sx={{ fontSize: 16 }}
+            sx={{ fontSize: 20 }}
           />
           <Chat selectedChat={selectedChat} />
         </div>
