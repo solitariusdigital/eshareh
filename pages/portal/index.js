@@ -8,9 +8,10 @@ import logoFarsi from "@/assets/logoFarsi.svg";
 import logoutLight from "@/assets/logoutLight.svg";
 import logoutDark from "@/assets/logoutDark.svg";
 import logoutHover from "@/assets/logoutHover.svg";
-import modeLight from "@/assets/modeLight.svg";
-import modeDark from "@/assets/modeDark.svg";
-import modeHover from "@/assets/modeHover.svg";
+import lightMode from "@/assets/lightMode.svg";
+import darkMode from "@/assets/darkMode.svg";
+import lightModeHover from "@/assets/lightModeHover.svg";
+import darkModeHover from "@/assets/darkModeHover.svg";
 import prev from "@/assets/prev.svg";
 import secureLocalStorage from "react-secure-storage";
 import home from "@/assets/home.svg";
@@ -176,8 +177,8 @@ export default function Portal() {
       id: "mode",
       alt: "mode",
       hover: false,
-      src: () => (themeMode === "light" ? modeLight : modeDark),
-      hoverSrc: () => modeHover,
+      src: () => (themeMode === "dark" ? lightMode : darkMode),
+      hoverSrc: () => (themeMode === "dark" ? lightModeHover : darkModeHover),
       onClick: toggleMode,
     },
     {
