@@ -2,10 +2,9 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  background: config.$grey;
   position: absolute;
   top: 0px;
   width: 100%;
   height: 100vb;
-  overflow: none;
+  background: config.$grey;
 }
