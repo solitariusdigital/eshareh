@@ -15,7 +15,7 @@ import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import loaderImage from "@/assets/loader.png";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import Chat from "./forms/Chat";
 import {
   convertDate,
@@ -509,7 +509,7 @@ export default function ChatBox() {
                   )}
                   {!fullSizeChatBox && (
                     <Tooltip title="Documents">
-                      <InsertDriveFileIcon
+                      <InsertDriveFileOutlinedIcon
                         sx={{ fontSize: 20 }}
                         onClick={() => setChatPanel("document")}
                       />
@@ -519,7 +519,7 @@ export default function ChatBox() {
                 <div className={classes.row}>
                   <div
                     style={{
-                      marginRight: !fullSizeChatBox ? "8px" : null,
+                      marginRight: !fullSizeChatBox ? "12px" : null,
                     }}
                   >
                     <h3
