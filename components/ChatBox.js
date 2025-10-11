@@ -11,7 +11,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import GroupIcon from "@mui/icons-material/Group";
 import EditIcon from "@mui/icons-material/Edit";
-import DownloadIcon from "@mui/icons-material/Download";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import loaderImage from "@/assets/loader.png";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -48,6 +48,7 @@ export default function ChatBox() {
   const [documentsRender, setDocumentsRender] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [messageContent, setMessageContent] = useState("");
+  const [isFarsi, setIsFarsi] = useState(false);
   const [media, setMedia] = useState(null);
   const sourceLink = "https://eshareh.storage.iran.liara.space";
 
@@ -293,11 +294,20 @@ export default function ChatBox() {
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDownMessage = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       createNewMessage("text");
     }
+  };
+
+  const handleChangeMessage = (e) => {
+    const value = e.target.value;
+    setMessageContent(value);
+
+    // Detect if message contains Persian (Farsi) characters
+    const persianRegex = /[\u0600-\u06FF]/; // Persian/Arabic Unicode range
+    setIsFarsi(persianRegex.test(value));
   };
 
   const createNewChat = () => {
@@ -437,7 +447,7 @@ export default function ChatBox() {
                 </div>
                 <div className={classes.row}>
                   <Tooltip title="View">
-                    <DownloadIcon
+                    <FileDownloadOutlinedIcon
                       className="icon"
                       sx={{ fontSize: 20 }}
                       onClick={() =>
@@ -449,15 +459,17 @@ export default function ChatBox() {
                       }
                     />
                   </Tooltip>
-                  <Tooltip title="Detele">
-                    <DeleteOutlineIcon
-                      className="icon"
-                      sx={{
-                        fontSize: 18,
-                      }}
-                      onClick={() => deleteMessage(document._id)}
-                    />
-                  </Tooltip>
+                  {document.senderId === currentUser._id && (
+                    <Tooltip title="Detele">
+                      <DeleteOutlineIcon
+                        className="icon"
+                        sx={{
+                          fontSize: 18,
+                        }}
+                        onClick={() => deleteMessage(document._id)}
+                      />
+                    </Tooltip>
+                  )}
                 </div>
               </div>
               <p className={classes.date}>{convertDate(document.updatedAt)}</p>
@@ -551,16 +563,18 @@ export default function ChatBox() {
                             objectFit="cover"
                             alt="image"
                           />
-                          <CircleIcon
-                            className={classes.status}
-                            sx={{
-                              fontSize: 8,
-                              color:
-                                chat.user.status === "online"
-                                  ? "#6b8745"
-                                  : "#a70237",
-                            }}
-                          />
+                          {chat.senderId !== currentUser._id && (
+                            <CircleIcon
+                              className={classes.status}
+                              sx={{
+                                fontSize: 8,
+                                color:
+                                  chat.user.status === "online"
+                                    ? "#6b8745"
+                                    : "#a70237",
+                              }}
+                            />
+                          )}
                         </div>
                         <div className={classes.title}>
                           <h4
@@ -589,18 +603,21 @@ export default function ChatBox() {
                       }}
                     ></p>
                     <div className={classes.indicators}>
-                      <Tooltip title="Detele">
-                        <DeleteOutlineIcon
-                          className="icon"
-                          sx={{
-                            fontSize: 18,
-                          }}
-                          onClick={() => deleteMessage(chat._id)}
-                        />
-                      </Tooltip>
+                      {chat.senderId === currentUser._id && (
+                        <Tooltip title="Detele">
+                          <DeleteOutlineIcon
+                            className="icon"
+                            sx={{
+                              fontSize: 18,
+                              color: "#000000",
+                            }}
+                            onClick={() => deleteMessage(chat._id)}
+                          />
+                        </Tooltip>
+                      )}
                       {chat.type === "document" && (
                         <Tooltip title="View">
-                          <DownloadIcon
+                          <FileDownloadOutlinedIcon
                             className="icon"
                             sx={{ fontSize: 20, color: "#000000" }}
                             onClick={() =>
@@ -663,18 +680,18 @@ export default function ChatBox() {
                 </div>
                 <textarea
                   style={{
-                    fontFamily: "Farsi",
+                    fontFamily: isFarsi ? "Farsi" : "English",
                     resize: "none",
                   }}
                   placeholder="..."
                   id="message"
                   name="message"
-                  onChange={(e) => setMessageContent(e.target.value)}
-                  onKeyDown={handleKeyDown}
+                  onChange={handleChangeMessage}
+                  onKeyDown={handleKeyDownMessage}
                   value={messageContent}
                   autoComplete="off"
-                  dir="rtl"
-                  disabled={selectedChat.archive}
+                  dir={isFarsi ? "rtl" : "ltr"}
+                  disabled={selectedChat?.archive}
                 ></textarea>
               </div>
             </Fragment>
