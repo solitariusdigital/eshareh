@@ -147,6 +147,7 @@ export default function ChatBox() {
       if (navigator.onLine) {
         fetchMessages(abortController.signal);
       }
+      fetchChats();
       startPolling();
     };
 
@@ -238,6 +239,7 @@ export default function ChatBox() {
     fileName = "",
     fileType = ""
   ) => {
+    if (type === "text" && !messageContent?.trim()) return;
     const textContent = messageContent?.trim() || "";
     const finalContent = content || textContent;
     const isText = type === "text";
@@ -356,7 +358,6 @@ export default function ChatBox() {
     const allowedExtensions = Object.values(mimeToExt);
 
     if (
-      type.startsWith("audio/") ||
       type.startsWith("video/") ||
       name.endsWith(".mp4") ||
       name.endsWith(".mov") ||
@@ -381,24 +382,28 @@ export default function ChatBox() {
   };
 
   const uploadFile = async (file) => {
-    const result = validateFile(file);
-    if (!result.valid) {
-      alert(result.message);
-    } else {
-      let mediaFolder = "documents";
-      let subFolder = `doc${sixGenerator()}`;
-      let mediaName = file.name.replace(/\.[^/.]+$/, "");
-      let mediaFormat = result.extension;
-      let mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaName}${mediaFormat}`;
-      await uploadMedia(file, mediaName, mediaFolder, subFolder, mediaFormat);
-      await createNewMessage(
-        "document",
-        mediaLink,
-        mediaName,
-        result.extension
-      );
-      setMedia(null);
+    let confirmationMessage = `ارسال فایل ${file.name} مطمئنی؟`;
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      const result = validateFile(file);
+      if (!result.valid) {
+        alert(result.message);
+      } else {
+        let mediaFolder = "documents";
+        let subFolder = `doc${sixGenerator()}`;
+        let mediaName = file.name.replace(/\.[^/.]+$/, "");
+        let mediaFormat = result.extension;
+        let mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaName}${mediaFormat}`;
+        await uploadMedia(file, mediaName, mediaFolder, subFolder, mediaFormat);
+        await createNewMessage(
+          "document",
+          mediaLink,
+          mediaName,
+          result.extension
+        );
+      }
     }
+    setMedia(null);
   };
 
   const deleteMessage = async (id) => {
@@ -656,6 +661,7 @@ export default function ChatBox() {
                           <Tooltip title="Attach">
                             <AttachFileIcon
                               className="icon"
+                              sx={{ color: "#fdb714" }}
                               onClick={() => setMessageContent("")}
                             />
                           </Tooltip>
