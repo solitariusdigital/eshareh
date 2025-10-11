@@ -185,16 +185,12 @@
       padding: 4px;
       border-radius: 5px;
       border: 1px solid config.$lightgrey;
-      position: relative;
 
       &:hover {
         border: 1px solid config.$yellow;
-        color: config.$yellow;
+        background: config.$yellowShade;
+        color: config.$black !important;
         cursor: pointer;
-
-        h4 {
-          color: config.$yellow;
-        }
       }
 
       .info {
@@ -206,11 +202,6 @@
         .row {
           @include mixins.row-space-between-center();
           width: fit-content;
-          color: config.$grey;
-
-          p {
-            font-size: small;
-          }
         }
       }
 
@@ -222,9 +213,8 @@
 
     .groupActive {
       border: 1px solid config.$yellow;
-      h4 {
-        color: config.$yellow;
-      }
+      background: config.$yellowShade;
+      color: config.$black !important;
     }
   }
 

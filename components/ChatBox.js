@@ -714,9 +714,7 @@ export default function ChatBox() {
               onClick={() => handleChatSelection(index)}
             >
               <div className={classes.indicators}>
-                <KeyboardArrowLeftIcon
-                  sx={{ color: chat.active ? "#fdb714" : "" }}
-                />
+                <KeyboardArrowLeftIcon />
                 {!chat.isRead && (
                   <CircleIcon sx={{ fontSize: 12, color: "#fdb714" }} />
                 )}
