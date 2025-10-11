@@ -722,7 +722,10 @@ export default function ChatBox() {
               <div className={classes.indicators}>
                 <KeyboardArrowLeftIcon />
                 {!chat.isRead && (
-                  <CircleIcon sx={{ fontSize: 12, color: "#fdb714" }} />
+                  <CircleIcon
+                    className="animate__animated animate__heartBeat"
+                    sx={{ fontSize: 12, color: "#fdb714" }}
+                  />
                 )}
               </div>
               <div className={classes.info}>

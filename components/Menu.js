@@ -116,7 +116,7 @@ export default function Menu() {
               </div>
               {currentUser.notifications && (
                 <div
-                  className={classes.notifications}
+                  className={`${classes.notifications} animate__animated animate__swing`}
                   onClick={() => Router.push("/portal")}
                 >
                   <Tooltip title="New Message">
