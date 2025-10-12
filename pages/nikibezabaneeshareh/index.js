@@ -1,9 +1,11 @@
 import { useContext, Fragment, useEffect, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./nikibezabaneeshareh.module.scss";
+import Image from "next/legacy/image";
 import { NextSeo } from "next-seo";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import prevYellow from "@/assets/prevYellow.svg";
 import { getCharityApi, updateCharityApi } from "@/services/api";
 
 export default function Nikibezabaneeshareh() {
@@ -107,6 +109,15 @@ export default function Nikibezabaneeshareh() {
               به نیکی اشاره کنید
             </h2>
           </div>
+        </div>
+        <div className={classes.logo}>
+          <Image
+            src={prevYellow}
+            layout="fill"
+            objectFit="contain"
+            alt="logo"
+            as="image"
+          />
         </div>
       </div>
     </Fragment>
