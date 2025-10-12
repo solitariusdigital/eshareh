@@ -112,7 +112,7 @@ export default function Nikibezabaneeshareh() {
         </div>
         <div
           className={classes.logo}
-          onClick={() => window.location.assign("/")}
+          // onClick={() => window.location.assign("/")}
         >
           <Image
             src={prevYellow}
