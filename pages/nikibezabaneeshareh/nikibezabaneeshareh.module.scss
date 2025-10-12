@@ -60,7 +60,7 @@
       &:hover {
         color: config.$yellow;
         background: config.$black;
-        cursor: pointer !important;
+        cursor: pointer;
       }
 
       h2 {
@@ -76,5 +76,9 @@
     width: 10vw;
     height: 10vh;
     margin-bottom: 3vw;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
