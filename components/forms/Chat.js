@@ -68,15 +68,18 @@ export default function Chat({ selectedChat }) {
   };
 
   const createChat = async () => {
+    let usersId = users
+      .filter((user) => user.selection)
+      .map((user) => user._id);
     if (!title.trim()) {
       showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
+    if (usersId.length < 2) {
+      showAlert("انتخاب ۲ عضو الزامیست");
+      return;
+    }
     setDisableButton(true);
-
-    let usersId = users
-      .filter((user) => user.selection)
-      .map((user) => user._id);
 
     const chatObject = {
       type: "public",
