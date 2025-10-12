@@ -17,6 +17,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import Chat from "./forms/Chat";
+import imageCompression from "browser-image-compression";
 import {
   convertDate,
   applyFontToEnglishWords,
@@ -382,28 +383,52 @@ export default function ChatBox() {
   };
 
   const uploadFile = async (file) => {
-    let confirmationMessage = `ارسال فایل ${file.name} مطمئنی؟`;
-    let confirm = window.confirm(confirmationMessage);
-    if (confirm) {
-      const result = validateFile(file);
-      if (!result.valid) {
-        alert(result.message);
-      } else {
-        let mediaFolder = "documents";
-        let subFolder = `doc${sixGenerator()}`;
-        let mediaName = file.name.replace(/\.[^/.]+$/, "");
-        let mediaFormat = result.extension;
-        let mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaName}${mediaFormat}`;
-        await uploadMedia(file, mediaName, mediaFolder, subFolder, mediaFormat);
-        await createNewMessage(
-          "document",
-          mediaLink,
-          mediaName,
-          result.extension
-        );
-      }
+    if (!file) return;
+    const isConfirmed = window.confirm(`ارسال فایل ${file.name} مطمئنی؟`);
+    if (!isConfirmed) {
+      setMedia(null);
+      return;
     }
-    setMedia(null);
+    const { valid, message, extension } = validateFile(file);
+    if (!valid) {
+      alert(message);
+      setMedia(null);
+      return;
+    }
+    try {
+      const isImage = [".png", ".jpg", ".jpeg"].includes(
+        extension.toLowerCase()
+      );
+      const fileToUpload = isImage ? await compressImage(file) : file;
+      const mediaFolder = "documents";
+      const subFolder = `doc${sixGenerator()}`;
+      const mediaName = fileToUpload.name.replace(/\.[^/.]+$/, "");
+      const mediaFormat = extension;
+      const mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaName}${mediaFormat}`;
+      await Promise.all([
+        uploadMedia(
+          fileToUpload,
+          mediaName,
+          mediaFolder,
+          subFolder,
+          mediaFormat
+        ),
+        createNewMessage("document", mediaLink, mediaName, mediaFormat),
+      ]);
+    } catch (err) {
+      alert("مشکلی در آپلود فایل پیش آمد.");
+    } finally {
+      setMedia(null);
+    }
+  };
+
+  const compressImage = async (file) => {
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1280,
+      useWebWorker: true,
+    };
+    return await imageCompression(file, options);
   };
 
   const deleteMessage = async (id) => {

@@ -110,6 +110,10 @@
         background: config.$generalMessage;
         border: 1px solid config.$lightgrey;
 
+        &:hover {
+          border: 1px solid config.$yellow;
+        }
+
         .row {
           @include mixins.row-space-between-center();
           flex-direction: row-reverse;
