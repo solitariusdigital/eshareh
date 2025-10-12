@@ -2,49 +2,54 @@ import { useContext, Fragment, useEffect, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./nikibezabaneeshareh.module.scss";
 import { NextSeo } from "next-seo";
-import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { getCharityApi, updateCharityApi } from "@/services/api";
 
 export default function Nikibezabaneeshareh() {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { displayFooter, setFooter } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
 
   useEffect(() => {
     setFooter(false);
     setDisplayMenu(false);
+    setLanguageType("fa");
+    setLanguage(true);
     document.body.style.marginTop = "0px";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const updateCharityCount = async () => {
+    const dataCharity = await getCharityApi();
+    let count = dataCharity[0].nikibezabaneeshareh;
+    count += 1;
+    let dataObject = {
+      ...dataCharity[0],
+      nikibezabaneeshareh: count,
+    };
+    await updateCharityApi(dataObject);
+  };
+
   return (
     <Fragment>
       <NextSeo
-        title={language ? "نیکی به زبان اشاره" : "Niki be zabane Eshareh"}
-        description={
-          language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
-            : "Eshareh is a multidisciplinary, independently owned design studio"
-        }
+        title="نیکی به زبان اشاره"
+        description="اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
         canonical="https://eshareh.com/nikibezabaneeshareh"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/nikibezabaneeshareh",
-          title: language ? "نیکی به زبان اشاره" : "Niki be zabane Eshareh",
-          description: language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
-            : "Eshareh is a multidisciplinary, independently owned design studio",
-          siteName: language
-            ? "آژانس تبلیغاتی اشاره"
-            : "Eshareh Advertising Agency",
+          title: "نیکی به زبان اشاره",
+          description: "اشاره یک استودیوی طراحی چند رشته ای و مستقل است",
+          siteName: "آژانس تبلیغاتی اشاره",
           images: {
-            url: language ? logoFarsi : logoEnglish,
+            url: logoFarsi,
             width: 1200,
             height: 630,
-            alt: language ? "اشاره" : "Eshareh",
+            alt: "اشاره",
           },
         }}
         robots="index, follow"
@@ -53,7 +58,7 @@ export default function Nikibezabaneeshareh() {
         <div className={classes.information}>
           <h1
             style={{
-              fontFamily: language ? "FarsiFat" : "FarsiFat",
+              fontFamily: "FarsiFat",
             }}
           >
             نیکی به زبان اشاره
@@ -93,10 +98,10 @@ export default function Nikibezabaneeshareh() {
             شنوايان اختصاص خواهد يافت.
           </p>
           <h2>بياييد در نيكى به زبان اشاره همراه شويم.</h2>
-          <div className={classes.button}>
+          <div className={classes.button} onClick={() => updateCharityCount()}>
             <h2
               style={{
-                fontFamily: language ? "FarsiBold" : "FarsiBold",
+                fontFamily: "FarsiBold",
               }}
             >
               به نیکی اشاره کنید

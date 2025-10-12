@@ -58,7 +58,8 @@
       box-shadow: config.$button-shadow;
 
       &:hover {
-        color: config.$black;
+        color: config.$yellow;
+        background: config.$black;
         cursor: pointer !important;
       }
 

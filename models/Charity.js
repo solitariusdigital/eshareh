@@ -4,6 +4,7 @@ const CharitySchema = new Schema(
   {
     count: Number,
     maxCount: Number,
+    nikibezabaneeshareh: Number,
   },
   { timestamps: true }
 );
