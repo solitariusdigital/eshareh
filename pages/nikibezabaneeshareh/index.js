@@ -63,15 +63,15 @@ export default function Nikibezabaneeshareh() {
             دوخته ايم كه كمتر ديده مى شوند؛ عزيزانى از جامعه دكَرتوان، به ويژه
             ناشنوايان و كم شنوايانى كه در برابر ابتدايى ترين نيازهاى روزمره با
             چالش هاى حياتى روبه رو هستند. ما در اشاره بر اين باوريم كه كَام هاى
-            کوچک، مي توانند راه را برای تغييرهاى بزرگ هموار كنند. از همين رو،
+            کوچک، مى توانند راه را برای تغييرهاى بزرگ هموار كنند. از همين رو،
             كمپين امسال در سه مسير حركت خواهد كرد:
           </p>
           <div className={classes.row}>
-            <FiberManualRecordIcon sx={{ fontSize: 10 }} />
+            <FiberManualRecordIcon sx={{ fontSize: "0.6vw" }} />
             <p>تهيه و اهداى تعدادى دستكَاه سمعک براى افراد كم شنوا</p>
           </div>
           <div className={classes.row}>
-            <FiberManualRecordIcon sx={{ fontSize: 10 }} />
+            <FiberManualRecordIcon sx={{ fontSize: "0.6vw" }} />
 
             <p>
               طراحى و ارائه دفترچه فيزيكى ويژه ناشنوايان و كم شنوايان براى آسان
@@ -79,7 +79,7 @@ export default function Nikibezabaneeshareh() {
             </p>
           </div>
           <div className={classes.row}>
-            <FiberManualRecordIcon sx={{ fontSize: 10 }} />
+            <FiberManualRecordIcon sx={{ fontSize: "0.6vw" }} />
 
             <p>
               انتشار دفترچه آنلاين راهنماى برخورد با كم شنوايان / ناشنوايان براى
@@ -93,6 +93,15 @@ export default function Nikibezabaneeshareh() {
             شنوايان اختصاص خواهد يافت.
           </p>
           <h2>بياييد در نيكى به زبان اشاره همراه شويم.</h2>
+          <div className={classes.button}>
+            <h2
+              style={{
+                fontFamily: language ? "FarsiBold" : "FarsiBold",
+              }}
+            >
+              به نیکی اشاره کنید
+            </h2>
+          </div>
         </div>
       </div>
     </Fragment>

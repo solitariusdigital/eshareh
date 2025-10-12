@@ -7,30 +7,32 @@
   width: 100%;
   height: 100vb;
   direction: rtl;
+  user-select: none;
   background: #ca9678;
 
   .information {
     position: absolute;
     bottom: 0px;
-    color: config.$white;
-    direction: rtl;
-    width: 50%;
     text-align: justify;
-    padding: 0px 24px;
+    direction: rtl;
+    width: 40vw;
+    margin: 0 auto;
+    padding: 1vw;
+    padding-right: 3vw;
+    color: config.$white;
 
     h1 {
+      font-size: 6.17vw;
+      line-height: 11vh;
       text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
     }
-    h1,
     h2 {
-      text-align: justify;
-      font-size: 7.1rem;
-    }
-    h2 {
-      font-size: 3.2rem;
+      font-size: 2.73vw;
+      line-height: 6vh;
       text-shadow: 1px 3px 2px rgba(0, 0, 0, 0.2);
     }
     p {
+      font-size: 1vw;
       text-shadow: 0.5px 2px 2px rgba(0, 0, 0, 0.2);
     }
 
@@ -38,10 +40,30 @@
       @include mixins.row-space-between-center();
       justify-content: flex-start;
       align-items: baseline;
-      margin: 4px 0px;
 
       p {
-        margin-right: 8px;
+        margin-right: 0.5vw;
+      }
+    }
+
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 10vh;
+      width: 65%;
+      border-radius: 5vw;
+      margin: 2vw auto;
+      background: config.$yellow;
+      box-shadow: config.$button-shadow;
+
+      &:hover {
+        color: config.$black;
+        cursor: pointer !important;
+      }
+
+      h2 {
+        text-shadow: none;
       }
     }
   }
