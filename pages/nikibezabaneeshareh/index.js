@@ -1,11 +1,11 @@
-import { useContext, Fragment, useEffect, useState } from "react";
+import { useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./nikibezabaneeshareh.module.scss";
 import Image from "next/legacy/image";
 import { NextSeo } from "next-seo";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import prevYellow from "@/assets/prevYellow.svg";
+import prev from "@/assets/prev.svg";
 import { getCharityApi, updateCharityApi } from "@/services/api";
 
 export default function Nikibezabaneeshareh() {
@@ -66,40 +66,38 @@ export default function Nikibezabaneeshareh() {
             نیکی به زبان اشاره
           </h1>
           <p>
-            امسال در كمپين مسئوليت اجتماعى اشاره، نكَاه خود را به سوى كسانى
-            دوخته ايم كه كمتر ديده مى شوند؛ عزيزانى از جامعه دكَرتوان، به ويژه
-            ناشنوايان و كم شنوايانى كه در برابر ابتدايى ترين نيازهاى روزمره با
-            چالش هاى حياتى روبه رو هستند. ما در اشاره بر اين باوريم كه كَام هاى
-            کوچک، مى توانند راه را برای تغييرهاى بزرگ هموار كنند. از همين رو،
-            كمپين امسال در سه مسير حركت خواهد كرد:
+            امسال در کمپین مسئولیت اجتماعی اشاره، به سراغ عزیزان ناشنوا و
+            کم‌شنوا رفته‌ایم تا از دریچه‌ای تازه به زندگی روزمره و چالش‌هایی که
+            با آن مواجه‌اند، بپردازیم؛ چرا که ما در اشاره باور داریم هر گام
+            کوچکی می‌تواند راه را برای تغییری بزرگ هموار کند. در این راستا
+            کمپینی طراحی شد با شعار «نیکی به زبان اشاره»
           </p>
+          <p>کمپینی که شامل سه بخش زیر است:</p>
           <div className={classes.row}>
             <FiberManualRecordIcon sx={{ fontSize: "0.6vw" }} />
-            <p>تهيه و اهداى تعدادى دستكَاه سمعک براى افراد كم شنوا</p>
+            <p>تهیه و اهدای تعدادی دستگاه سمعک برای افراد کم‌شنوا</p>
           </div>
           <div className={classes.row}>
             <FiberManualRecordIcon sx={{ fontSize: "0.6vw" }} />
-
             <p>
-              طراحى و ارائه دفترچه فيزيكى ويژه ناشنوايان و كم شنوايان براى آسان
-              تر شدن ارتباط با آن ها
+              طراحی و ارائه دفترچه فیزیکی ویژه ناشنوایان و کم‌شنوایان برای
+              آسان‌تر شدن ارتباط با آن‌ها
             </p>
           </div>
           <div className={classes.row}>
             <FiberManualRecordIcon sx={{ fontSize: "0.6vw" }} />
-
             <p>
-              انتشار دفترچه آنلاين راهنماى برخورد با كم شنوايان / ناشنوايان براى
-              ارتقاى سطح آكَاهى عمومى و رسميت بخشيدن به زبان اشاره به عنوان پلی
-              براى برقرارى ارتباط مؤثر
+              انتشار دفترچه آنلاین راهنمای برخورد با کم‌شنوایان/ناشنوایان برای
+              ارتقای سطح آگاهی عمومی و رسمیت‌بخشیدن به زبان اشاره به ‌عنوان پلی
+              برای برقراری ارتباط مؤثر
             </p>
           </div>
           <p>
-            با دانلود و مطالعه دفترچه آنلاين، نه تنها سهمى در كَسترش اين آگاهى
-            خواهيد داشت، بلكه به ازاى هر دانلود، مبلغى نيز براى تهيه سمعک به كم
-            شنوايان اختصاص خواهد يافت.
+            با دانلود و مطالعه دفترچه آنلاین، نه‌ تنها سهمی در گسترش این آگاهی
+            خواهید داشت، بلکه به ازای هر دانلود، مبلغی نیز برای تهیه سمعک‌ به
+            کم‌شنوایان اختصاص خواهد یافت.
           </p>
-          <h2>بياييد در نيكى به زبان اشاره همراه شويم.</h2>
+          <h2>در نیکــــی به زبان اشـــــاره هـــمراه ﺷــــﻮﯾﺪ.</h2>
           <div className={classes.button} onClick={() => updateCharityCount()}>
             <h2
               style={{
@@ -110,12 +108,9 @@ export default function Nikibezabaneeshareh() {
             </h2>
           </div>
         </div>
-        <div
-          className={classes.logo}
-          // onClick={() => window.location.assign("/")}
-        >
+        <div className={classes.logo}>
           <Image
-            src={prevYellow}
+            src={prev}
             layout="fill"
             objectFit="contain"
             alt="logo"
