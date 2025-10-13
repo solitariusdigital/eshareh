@@ -13,6 +13,10 @@ export default function Nikibezabaneeshareh() {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
+
+  const fullSizeChatBox =
+    screenSize === "desktop" || screenSize === "tablet-landscape";
 
   useEffect(() => {
     setDisplayFooter(false);
@@ -57,14 +61,26 @@ export default function Nikibezabaneeshareh() {
         robots="index, follow"
       />
       <div className={classes.container}>
-        <div className={classes.information}>
+        {!fullSizeChatBox && (
           <h1
+            className={classes.title}
             style={{
               fontFamily: "FarsiFat",
             }}
           >
             نیکی به زبان اشاره
           </h1>
+        )}
+        <div className={classes.information}>
+          {fullSizeChatBox && (
+            <h1
+              style={{
+                fontFamily: "FarsiFat",
+              }}
+            >
+              نیکی به زبان اشاره
+            </h1>
+          )}
           <p>
             امسال در کمپین مسئولیت اجتماعی اشاره، به سراغ عزیزان ناشنوا و
             کم‌شنوا رفته‌ایم تا از دریچه‌ای تازه به زندگی روزمره و چالش‌هایی که
@@ -72,10 +88,10 @@ export default function Nikibezabaneeshareh() {
             کوچکی می‌تواند راه را برای تغییری بزرگ هموار کند. در این راستا
             کمپینی طراحی شد با شعار «نیکی به زبان اشاره»
           </p>
-          <p>کمپینی که شامل سه بخش زیر است:</p>
+          {screenSize !== "mobile" && <p>کمپینی که شامل سه بخش زیر است:</p>}
           <div className={classes.row}>
             <FiberManualRecordIcon sx={{ fontSize: "0.6vw" }} />
-            <p>تهیه و اهدای تعدادی دستگاه سمعک برای افراد کم‌شنوا</p>
+            <p>تهیه و اهدای تعدادی دستگاه سمعک برای افرادکم‌شنوا</p>
           </div>
           <div className={classes.row}>
             <FiberManualRecordIcon sx={{ fontSize: "0.6vw" }} />

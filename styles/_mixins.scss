@@ -1,4 +1,5 @@
 @use "config" as config;
+@use "sass:color";
 
 $screen-mobile: 700px;
 $screen-tablet: 1400px;
@@ -128,7 +129,7 @@ $screen-fourK: 6000px;
 }
 
 @mixin transparentBackground($alpha, $color) {
-  background: transparentize($color, $alpha);
+  background: color.adjust($color, $alpha: -$alpha);
 }
 
 @mixin row-space-between-center() {
