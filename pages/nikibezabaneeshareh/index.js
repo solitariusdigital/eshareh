@@ -11,11 +11,11 @@ import { getCharityApi, updateCharityApi } from "@/services/api";
 export default function Nikibezabaneeshareh() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
-  const { displayFooter, setFooter } = useContext(StateContext);
+  const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
 
   useEffect(() => {
-    setFooter(false);
+    setDisplayFooter(false);
     setDisplayMenu(false);
     setLanguageType("fa");
     setLanguage(true);
@@ -92,7 +92,11 @@ export default function Nikibezabaneeshareh() {
               برای برقراری ارتباط مؤثر
             </p>
           </div>
-          <p>
+          <p
+            style={{
+              marginTop: "1vh",
+            }}
+          >
             با دانلود و مطالعه دفترچه آنلاین، نه‌ تنها سهمی در گسترش این آگاهی
             خواهید داشت، بلکه به ازای هر دانلود، مبلغی نیز برای تهیه سمعک‌ به
             کم‌شنوایان اختصاص خواهد یافت.
