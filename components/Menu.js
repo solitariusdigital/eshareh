@@ -14,6 +14,7 @@ import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import { getControlsApi, updateControlApi } from "@/services/api";
 import Tooltip from "@mui/material/Tooltip";
 import secureLocalStorage from "react-secure-storage";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import search from "@/assets/search.svg";
 import searchHover from "@/assets/searchHover.svg";
 import english from "@/assets/english.svg";
@@ -29,17 +30,16 @@ export default function Menu() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const { displayFooter, setFooter } = useContext(StateContext);
+  const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { menuColor, setMenuColor } = useContext(StateContext);
   const [colorPicker, setColorPicker] = useState(false);
   const [textPicker, setTextPicker] = useState(false);
-  const [dropDown, setDropDpwn] = useState(false);
   const [hover, setHover] = useState(false);
   const [hoverLanguage, setHoverLanguage] = useState(false);
 
   const activateNav = (link, index) => {
     setMenuMobile(false);
-    setFooter(true);
+    setDisplayFooter(true);
     navigationTopBar.map((nav, i) => {
       if (i === index) {
         Router.push(link);
@@ -79,7 +79,7 @@ export default function Menu() {
   };
   const saveColorObject = async (data) => {
     let colorObject = await getControlsApi();
-    data.id = colorObject[0]["_id"];
+    data.id = colorObject[0]._id;
     await updateControlApi(data);
   };
 
@@ -88,12 +88,6 @@ export default function Menu() {
     setLanguage(!language);
     setLanguageType(!language ? "fa" : "en");
     secureLocalStorage.setItem("languageBrowser", language);
-  };
-
-  const signOut = () => {
-    window.location.assign("/");
-    secureLocalStorage.removeItem("currentUser");
-    setCurrentUser(null);
   };
 
   return (
@@ -106,33 +100,33 @@ export default function Menu() {
           className={language ? classes.largeMenuReverse : classes.largeMenu}
         >
           {currentUser && (
-            <div
-              className={classes.profile}
-              onClick={() => setDropDpwn(!dropDown)}
-            >
-              <Image
-                src={currentUser.media}
-                blurDataURL={currentUser.media}
-                layout="fill"
-                objectFit="cover"
-                alt="image"
-                as="image"
-              />
-            </div>
-          )}
-          {dropDown && currentUser && screenSize === "desktop" && (
-            <div
-              className={`${classes.dropDown}  animate__animated animate__zoomIn`}
-              style={{
-                fontFamily: language ? "English" : "English",
-              }}
-            >
-              {permissionControl === "admin" && (
-                <p onClick={() => Router.push("/admin")}>Admin</p>
+            <Fragment>
+              <div
+                className={classes.profile}
+                onClick={() => Router.push("/portal")}
+              >
+                <Image
+                  src={currentUser.media}
+                  blurDataURL={currentUser.media}
+                  layout="fill"
+                  objectFit="cover"
+                  alt="profile"
+                  as="image"
+                />
+              </div>
+              {currentUser.notifications && (
+                <div
+                  className={`${classes.notifications} animate__animated animate__swing`}
+                  onClick={() => Router.push("/portal")}
+                >
+                  <Tooltip title="New Message">
+                    <NotificationsIcon
+                      sx={{ fontSize: 20, color: "#fdb714" }}
+                    />
+                  </Tooltip>
+                </div>
               )}
-              <p onClick={() => Router.push("/password")}>Password</p>
-              <p onClick={() => signOut()}>Sign out</p>
-            </div>
+            </Fragment>
           )}
           <div
             className={
@@ -205,9 +199,8 @@ export default function Menu() {
                                 width={20}
                                 height={20}
                                 src={english}
-                                alt="logo"
+                                alt="language"
                                 onMouseEnter={() => setHoverLanguage(true)}
-                                priority
                                 as="image"
                               />
                             ) : (
@@ -215,9 +208,8 @@ export default function Menu() {
                                 width={20}
                                 height={20}
                                 src={englishHover}
-                                alt="logo"
+                                alt="language"
                                 onMouseLeave={() => setHoverLanguage(false)}
-                                priority
                                 as="image"
                               />
                             )}
@@ -243,9 +235,8 @@ export default function Menu() {
                                     width={20}
                                     height={20}
                                     src={search}
-                                    alt="logo"
+                                    alt="search"
                                     onMouseEnter={() => setHover(true)}
-                                    priority
                                     as="image"
                                   />
                                 ) : (
@@ -253,9 +244,8 @@ export default function Menu() {
                                     width={20}
                                     height={20}
                                     src={searchHover}
-                                    alt="logo"
+                                    alt="search"
                                     onMouseLeave={() => setHover(false)}
-                                    priority
                                     as="image"
                                   />
                                 )}
@@ -306,9 +296,8 @@ export default function Menu() {
                               width={20}
                               height={20}
                               src={farsi}
-                              alt="logo"
+                              alt="language"
                               onMouseEnter={() => setHoverLanguage(true)}
-                              priority
                               as="image"
                             />
                           ) : (
@@ -316,9 +305,8 @@ export default function Menu() {
                               width={20}
                               height={20}
                               src={farsiHover}
-                              alt="logo"
+                              alt="language"
                               onMouseLeave={() => setHoverLanguage(false)}
-                              priority
                               as="image"
                             />
                           )}
@@ -342,9 +330,8 @@ export default function Menu() {
                                   width={20}
                                   height={20}
                                   src={search}
-                                  alt="logo"
+                                  alt="search"
                                   onMouseEnter={() => setHover(true)}
-                                  priority
                                   as="image"
                                 />
                               ) : (
@@ -352,9 +339,8 @@ export default function Menu() {
                                   width={20}
                                   height={20}
                                   src={searchHover}
-                                  alt="logo"
+                                  alt="search"
                                   onMouseLeave={() => setHover(false)}
-                                  priority
                                   as="image"
                                 />
                               )}
@@ -406,9 +392,8 @@ export default function Menu() {
                     width={20}
                     height={20}
                     src={language ? english : farsi}
-                    alt="logo"
+                    alt="language"
                     onMouseEnter={() => setHoverLanguage(true)}
-                    priority
                     as="image"
                   />
                 ) : (
@@ -416,9 +401,8 @@ export default function Menu() {
                     width={20}
                     height={20}
                     src={language ? englishHover : farsiHover}
-                    alt="logo"
+                    alt="language"
                     onMouseLeave={() => setHoverLanguage(false)}
-                    priority
                     as="image"
                   />
                 )}
@@ -459,7 +443,7 @@ export default function Menu() {
                   >
                     {nav.title[languageType]}
                     {nav.title[languageType] === "" && (
-                      <Image width={20} height={20} src={search} alt="logo" />
+                      <Image width={20} height={20} src={search} alt="search" />
                     )}
                   </a>
                 ))}

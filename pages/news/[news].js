@@ -62,7 +62,7 @@ export default function News({ news, newsTitle }) {
         (news) =>
           categoriesArray.some((word) =>
             news[languageType].category.includes(word)
-          ) && news["_id"] !== displayNews["_id"]
+          ) && news._id !== displayNews._id
       )
       .slice(0, 2);
     setSimilarNews(filterSimilarNews);
@@ -167,7 +167,7 @@ export default function News({ news, newsTitle }) {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      await deleteNewsApi(news["_id"]);
+      await deleteNewsApi(news._id);
       Router.push("/news");
     }
   };
@@ -294,7 +294,7 @@ export default function News({ news, newsTitle }) {
                     </p>
                     <p
                       className="confirm"
-                      onClick={() => updateNews(displayNews["_id"])}
+                      onClick={() => updateNews(displayNews._id)}
                     >
                       Confirm
                     </p>

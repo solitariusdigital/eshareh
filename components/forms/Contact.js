@@ -104,7 +104,7 @@ export default function Contact({ pages, mediaData }) {
     setDisableButton(true);
 
     const contentObject = {
-      _id: contactContent["_id"],
+      _id: contactContent._id,
       slug: "contact",
       title: "Contact Us",
       content: [
@@ -226,7 +226,7 @@ export default function Contact({ pages, mediaData }) {
       }
       await Promise.all(uploadPromises);
       const mediaObject = {
-        _id: mediaContent["_id"],
+        _id: mediaContent._id,
         slug: "contact",
         title: "Contact Us",
         content: [

@@ -29,7 +29,7 @@ export default async function jobsHandler(req, res) {
     case "PUT":
       try {
         const updateResume = await Resume.findByIdAndUpdate(
-          body.id || body["_id"],
+          body.id || body._id,
           body,
           {
             new: true,

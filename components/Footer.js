@@ -77,7 +77,6 @@ export default function Footer() {
               height={25}
               src={aparat}
               alt="aparat"
-              priority
             />
           </Link>
         ) : (
@@ -94,7 +93,6 @@ export default function Footer() {
               height={25}
               src={aparatHover}
               alt="aparat"
-              priority
             />
           </Link>
         )}
@@ -127,7 +125,7 @@ export default function Footer() {
             fontSize: language ? "1.2rem" : "",
           }}
           className={classes.button}
-          onClick={() => Router.push("/portal")}
+          onClick={() => Router.push("/login")}
         >
           {language ? "پورتال" : "Portal"}
         </button>

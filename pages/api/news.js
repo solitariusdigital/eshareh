@@ -29,7 +29,7 @@ export default async function newsHandler(req, res) {
     case "PUT":
       try {
         const updateNews = await News.findByIdAndUpdate(
-          body.id || body["_id"],
+          body.id || body._id,
           body,
           {
             new: true,

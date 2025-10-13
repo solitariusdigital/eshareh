@@ -406,3 +406,150 @@ export const getMediaApi = async () => {
   });
   return await response.json();
 };
+
+// chat api
+export const updateChatApi = async (data) => {
+  const response = await fetch("/api/chat", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createChatApi = async (data) => {
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleChatApi = async (id) => {
+  const response = await fetch(`/api/chat?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getChatsApi = async () => {
+  const response = await fetch("/api/chat", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteChatApi = async (id) => {
+  const response = await fetch(`/api/chat?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
+// message api
+export const updateMessageApi = async (data) => {
+  const response = await fetch("/api/message", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createMessageApi = async (data) => {
+  const response = await fetch("/api/message", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleMessageApi = async (id) => {
+  const response = await fetch(`/api/message?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getMessagesApi = async () => {
+  const response = await fetch("/api/message", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteMessageApi = async (id) => {
+  const response = await fetch(`/api/message?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
+// notification api
+export const updateNotificationApi = async (data) => {
+  const response = await fetch("/api/notification", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createNotificationApi = async (data) => {
+  const response = await fetch("/api/notification", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleNotificationApi = async (id) => {
+  const response = await fetch(`/api/notification?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getNotificationApi = async () => {
+  const response = await fetch("/api/notification", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteNotificationApi = async (id) => {
+  const response = await fetch(`/api/notification?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

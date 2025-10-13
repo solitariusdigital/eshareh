@@ -11,7 +11,7 @@ export const StateProvider = (props) => {
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuColor, setMenuColor] = useState({});
   const [displayMenu, setDisplayMenu] = useState(true);
-  const [displayFooter, setFooter] = useState(true);
+  const [displayFooter, setDisplayFooter] = useState(true);
   const [screenSize, setScreenSize] = useState(
     "desktop" || "tablet-landscape" || "tablet-portrait" || "mobile"
   );
@@ -87,7 +87,7 @@ export const StateProvider = (props) => {
     displayMenu,
     setDisplayMenu,
     displayFooter,
-    setFooter,
+    setDisplayFooter,
     permissionControl,
     setPermissionControl,
     editSolution,

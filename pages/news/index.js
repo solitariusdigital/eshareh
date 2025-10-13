@@ -47,7 +47,7 @@ export default function News({ adminNews, activeNews }) {
         title={language ? "اخبار" : "News"}
         description={
           language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
         canonical="https://eshareh.com/news"
@@ -57,7 +57,7 @@ export default function News({ adminNews, activeNews }) {
           url: "https://eshareh.com/news",
           title: language ? "اخبار" : "News",
           description: language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
           siteName: language
             ? "آژانس تبلیغاتی اشاره"

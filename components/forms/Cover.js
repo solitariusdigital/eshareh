@@ -59,12 +59,11 @@ export default function Cover({ covers }) {
     setLoader(true);
     setDisableButton(true);
 
-    let mediaLink = "";
     let mediaFormat = mediaType === "image" ? ".jpg" : ".mp4";
     let mediaFolder = "cover";
-    const subFolder = `cov${sixGenerator()}`;
+    let subFolder = `cov${sixGenerator()}`;
     let mediaId = `img${fourGenerator()}`;
-    mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
+    let mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
     await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
 
     const cover = {
@@ -87,7 +86,7 @@ export default function Cover({ covers }) {
 
   useEffect(() => {
     const textObject = covers.reduce((acc, entry) => {
-      acc[entry["_id"]] = entry.text;
+      acc[entry._id] = entry.text;
       return acc;
     }, {});
     setText(textObject);
@@ -97,7 +96,7 @@ export default function Cover({ covers }) {
     const coverObject = {
       ...coversGrid[index],
       color: coversGrid[index].color,
-      text: text[coversGrid[index]["_id"]],
+      text: text[coversGrid[index]._id],
     };
     await updateCoverApi(coverObject);
     let updatedCovers = await getCoversApi(coverObject);
@@ -116,7 +115,7 @@ export default function Cover({ covers }) {
 
   const handleColorChange = (value, id) => {
     const newCovers = [...coversGrid];
-    const coverIndex = newCovers.findIndex((object) => object["_id"] === id);
+    const coverIndex = newCovers.findIndex((object) => object._id === id);
     newCovers[coverIndex].color = value;
     setCoversGrid(newCovers);
     setText(false);
@@ -133,7 +132,7 @@ export default function Cover({ covers }) {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      await deleteCoverApi(coversGrid[index]["_id"]);
+      await deleteCoverApi(coversGrid[index]._id);
       router.reload(router.asPath);
     }
   };
@@ -465,28 +464,24 @@ export default function Cover({ covers }) {
                     id="color"
                     name="color"
                     onChange={(e) =>
-                      handleColorChange(e.target.value, cover["_id"])
+                      handleColorChange(e.target.value, cover._id)
                     }
                     value={cover.color}
                     autoComplete="off"
                     maxLength={6}
                   />
-                  {text[cover["_id"]] ? (
+                  {text[cover._id] ? (
                     <Tooltip title="Hide Text">
                       <RadioButtonCheckedIcon
                         className="icon"
-                        onClick={() =>
-                          handleText(cover["_id"], !text[cover["_id"]])
-                        }
+                        onClick={() => handleText(cover._id, !text[cover._id])}
                       />
                     </Tooltip>
                   ) : (
                     <Tooltip title="Show Text">
                       <RadioButtonUncheckedIcon
                         className="icon"
-                        onClick={() =>
-                          handleText(cover["_id"], !text[cover["_id"]])
-                        }
+                        onClick={() => handleText(cover._id, !text[cover._id])}
                       />
                     </Tooltip>
                   )}

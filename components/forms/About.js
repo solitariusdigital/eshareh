@@ -111,12 +111,11 @@ export default function Team({ pages, mediaData }) {
     setLoader(true);
     setDisableButton(true);
 
-    let mediaLink = "";
     let mediaFormat = ".jpg";
     let mediaFolder = "team";
-    const subFolder = `usr${sixGenerator()}`;
+    let subFolder = `usr${sixGenerator()}`;
     let mediaId = `img${fourGenerator()}`;
-    mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
+    let mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
     await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
 
     const user = {
@@ -133,6 +132,9 @@ export default function Team({ pages, mediaData }) {
       media: mediaLink,
       permission: "user",
       display: userActivation,
+      lastSeen: new Date(),
+      notifications: false,
+      status: "offline",
     };
     await createUserApi(user);
     router.reload(router.asPath);
@@ -157,7 +159,7 @@ export default function Team({ pages, mediaData }) {
     setDisableButton(true);
 
     const contentObject = {
-      _id: aboutContent["_id"],
+      _id: aboutContent._id,
       slug: "about",
       title: "About Us",
       content: [
@@ -223,7 +225,7 @@ export default function Team({ pages, mediaData }) {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      await deleteUserApi(users[index]["_id"]);
+      await deleteUserApi(users[index]._id);
       router.reload(router.asPath);
     }
   };

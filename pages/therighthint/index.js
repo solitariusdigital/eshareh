@@ -96,7 +96,7 @@ export default function Therighthint() {
     let count = dataCharity[0].count;
     count += 1;
     let dataObject = {
-      id: charity["_id"],
+      id: charity._id,
       count: count,
     };
     await updateCharityApi(dataObject);
@@ -109,7 +109,7 @@ export default function Therighthint() {
         title={language ? "اشاره‌ای درست" : "The Right Hint"}
         description={
           language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
         canonical="https://eshareh.com/therighthint"
@@ -119,7 +119,7 @@ export default function Therighthint() {
           url: "https://eshareh.com/therighthint",
           title: language ? "اشاره‌ای درست" : "The Right Hint",
           description: language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
           siteName: language
             ? "آژانس تبلیغاتی اشاره"

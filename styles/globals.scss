@@ -213,8 +213,7 @@ p {
 
 // input file
 label.file input[type="file"] {
-  position: absolute;
-  top: -1000px;
+  display: none;
 }
 .file {
   display: flex;
@@ -228,7 +227,7 @@ label.file input[type="file"] {
   cursor: pointer;
 }
 .file:hover {
-  color: config.$black;
+  color: config.$yellow;
   border: 1px solid config.$yellow;
 }
 

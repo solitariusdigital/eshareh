@@ -8,7 +8,12 @@ import logoLoadEnglish from "@/assets/logoLoadEnglish.svg";
 import logoLoadFarsi from "@/assets/logoLoadFarsi.svg";
 import arrowUp from "@/assets/arrowUp.svg";
 import secureLocalStorage from "react-secure-storage";
-import { getSingleUserApi, getControlsApi } from "@/services/api";
+import {
+  getSingleUserApi,
+  getControlsApi,
+  getNotificationApi,
+  updateUserApi,
+} from "@/services/api";
 
 export default function RootLayout({ children }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -18,7 +23,7 @@ export default function RootLayout({ children }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
-  const { displayFooter, setFooter } = useContext(StateContext);
+  const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { menuColor, setMenuColor } = useContext(StateContext);
   const { heroHeight, setHeroHeight } = useContext(StateContext);
   const [scrollArrow, setScrollArrow] = useState(false);
@@ -69,11 +74,11 @@ export default function RootLayout({ children }) {
 
   // check app live
   useEffect(() => {
-    const fetchData = async () => {
+    const handleControlApi = async () => {
       const data = await getControlsApi();
       setAppLive(data[0].live);
     };
-    fetchData().catch(console.error);
+    handleControlApi().catch(console.error);
     setTimeout(() => {
       setAppLoader(true);
     }, 1000);
@@ -81,20 +86,28 @@ export default function RootLayout({ children }) {
 
   // checks user login and set user data
   useEffect(() => {
-    const fetchData = async () => {
+    const handleUserDataApi = async () => {
       try {
         const currentUser = JSON.parse(
           secureLocalStorage.getItem("currentUser")
         );
         if (currentUser) {
-          const userData = await getSingleUserApi(currentUser["_id"]);
-          setCurrentUser(userData);
-          secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
-          if (userData.permission === "admin") {
-            setPermissionControl("admin");
-          } else {
-            setPermissionControl("user");
-          }
+          const userData = await getSingleUserApi(currentUser._id);
+          const notificationRecords = await getNotificationApi();
+          const hasNotification = notificationRecords.some(
+            (notification) => notification.userId === currentUser._id
+          );
+          const updateUserData = {
+            ...userData,
+            notifications: hasNotification,
+          };
+          await updateUserApi(updateUserData);
+          setCurrentUser(updateUserData);
+          setPermissionControl(updateUserData.permission);
+          secureLocalStorage.setItem(
+            "currentUser",
+            JSON.stringify(updateUserData)
+          );
         }
         const colorObject = await getControlsApi();
         setMenuColor(colorObject[0].menu);
@@ -102,7 +115,7 @@ export default function RootLayout({ children }) {
         console.error(error);
       }
     };
-    fetchData();
+    handleUserDataApi();
     setTimeout(() => {
       setAppLoader(true);
     }, 1000);

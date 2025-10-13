@@ -55,7 +55,7 @@ export default function Resume({ resumeData }) {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      await deleteResumeApi(resume["_id"]);
+      await deleteResumeApi(resume._id);
       Router.push("/jobs/resume");
     }
   };
@@ -66,7 +66,7 @@ export default function Resume({ resumeData }) {
         title={language ? "رزومه" : "Resume"}
         description={
           language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
         canonical="https://eshareh.com/jobs/resume"
@@ -76,7 +76,7 @@ export default function Resume({ resumeData }) {
           url: "https://eshareh.com/jobs/resume",
           title: language ? "رزومه" : "Resume",
           description: language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
           siteName: language
             ? "آژانس تبلیغاتی اشاره"
@@ -177,13 +177,13 @@ export default function Resume({ resumeData }) {
                     <div className={classes.row}>
                       <h3
                         style={{ color: "#6b8745" }}
-                        onClick={() => handleStatus(item["_id"], "accept")}
+                        onClick={() => handleStatus(item._id, "accept")}
                       >
                         قبول کردن
                       </h3>
                       <h3
                         style={{ color: "#a70237" }}
-                        onClick={() => handleStatus(item["_id"], "reject")}
+                        onClick={() => handleStatus(item._id, "reject")}
                       >
                         رد کردن
                       </h3>

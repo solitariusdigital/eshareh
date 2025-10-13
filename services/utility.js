@@ -30,7 +30,15 @@ export function getMobileOperatingSystem() {
 }
 
 export function convertDate(date) {
-  return new Date(date).toLocaleDateString("fa-IR");
+  const options = {
+    timeZone: "Asia/Tehran",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  return new Date(date).toLocaleString("fa-IR", options);
 }
 
 export function abbreviateNumber(num) {

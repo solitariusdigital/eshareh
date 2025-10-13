@@ -266,7 +266,7 @@ export default function Solutions() {
       solutionId: solutionId,
     };
     if (editSolution) {
-      solutionData.id = editSolution["_id"];
+      solutionData.id = editSolution._id;
       await updateSolutionApi(solutionData);
     } else {
       await createSolutionApi(solutionData);

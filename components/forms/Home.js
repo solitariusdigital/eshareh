@@ -85,7 +85,7 @@ export default function Home({ pages, mediaData }) {
     setDisableButton(true);
 
     const contentObject = {
-      _id: homeContent["_id"],
+      _id: homeContent._id,
       slug: "home",
       title: "Home",
       content: [
@@ -183,7 +183,7 @@ export default function Home({ pages, mediaData }) {
       }
       await Promise.all(uploadPromises);
       const mediaObject = {
-        _id: mediaContent["_id"],
+        _id: mediaContent._id,
         slug: "home",
         title: "Home",
         content: [

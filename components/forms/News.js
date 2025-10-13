@@ -309,7 +309,7 @@ export default function News() {
       newsId: newsId,
     };
     if (editNews) {
-      newsObject.id = editNews["_id"];
+      newsObject.id = editNews._id;
       await updateNewsApi(newsObject);
     } else {
       await createNewsApi(newsObject);

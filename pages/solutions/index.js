@@ -104,7 +104,7 @@ export default function Solutions({
         title={language ? "راه‌کارها" : "Solutions"}
         description={
           language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio"
         }
         canonical="https://eshareh.com/solutions"
@@ -114,7 +114,7 @@ export default function Solutions({
           url: "https://eshareh.com/solutions",
           title: language ? "راه‌کارها" : "Solutions",
           description: language
-            ? "اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+            ? "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
             : "Eshareh is a multidisciplinary, independently owned design studio",
           siteName: language
             ? "آژانس تبلیغاتی اشاره"
@@ -242,7 +242,7 @@ export default function Solutions({
                     ) : (
                       <video
                         className={classes.video}
-                        id={project["_id"]}
+                        id={project._id}
                         src={`${coverMedia.link}#t=0.1`}
                         muted
                         playsInline

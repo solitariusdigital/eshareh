@@ -43,7 +43,7 @@ export default function Solution({ solutions, projectTitle }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
-  const { displayFooter, setFooter } = useContext(StateContext);
+  const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { editNews, setEditNews } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
@@ -100,7 +100,7 @@ export default function Solution({ solutions, projectTitle }) {
       return;
     }
     // Find the index of the project with the given id
-    let index = solutionsData.findIndex((p) => p["_id"] === project["_id"]);
+    let index = solutionsData.findIndex((p) => p._id === project._id);
     previousProject =
       index === 0
         ? solutionsData[solutionsData.length - 1]
@@ -126,7 +126,7 @@ export default function Solution({ solutions, projectTitle }) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setDisplayNextController(false);
-          setFooter(false);
+          setDisplayFooter(false);
         }
       });
     }, options);
@@ -139,7 +139,7 @@ export default function Solution({ solutions, projectTitle }) {
         observer.unobserve(targetRef.current);
       }
     };
-  }, [setFooter]);
+  }, [setDisplayFooter]);
 
   useEffect(() => {
     if (!displayGallerySlider) {
@@ -168,10 +168,10 @@ export default function Solution({ solutions, projectTitle }) {
           window.innerHeight + window.scrollY >= document.body.offsetHeight;
         // Original Functionality: Show/hide footer and next controller
         if (currentScrollY > prevScrollY) {
-          setFooter(false);
+          setDisplayFooter(false);
           setDisplayNextController(true);
         } else if (currentScrollY < prevScrollY) {
-          setFooter(true);
+          setDisplayFooter(true);
           setDisplayNextController(false);
         }
         // New Functionality: Handle reaching the bottom
@@ -215,7 +215,7 @@ export default function Solution({ solutions, projectTitle }) {
         }
       };
     }
-  }, [displayGallerySlider, setFooter, languageType, nextProject]);
+  }, [displayGallerySlider, languageType, nextProject, setDisplayFooter]);
 
   const gallerySlider = () => {
     setDisplayMenu(false);
@@ -420,7 +420,7 @@ export default function Solution({ solutions, projectTitle }) {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      await deleteSolutionApi(project["_id"]);
+      await deleteSolutionApi(project._id);
       Router.push("/solutions");
     }
   };
@@ -535,7 +535,7 @@ export default function Solution({ solutions, projectTitle }) {
                     </p>
                     <p
                       className="confirm"
-                      onClick={() => updateSolution(project["_id"])}
+                      onClick={() => updateSolution(project._id)}
                     >
                       Confirm
                     </p>

@@ -24,7 +24,7 @@ export default async function charityHandler(req, res) {
     case "PUT":
       try {
         const updateCharity = await Charity.findByIdAndUpdate(
-          body.id || body["_id"],
+          body.id || body._id,
           body,
           {
             new: true,

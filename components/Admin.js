@@ -1,18 +1,15 @@
 import { useState, useContext, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./admin.module.scss";
+import classes from "./Admin.module.scss";
 import Solutions from "@/components/forms/Solutions";
 import Cover from "@/components/forms/Cover";
 import News from "@/components/forms/News";
 import Pages from "@/components/Pages";
 import Router from "next/router";
-import dbConnect from "@/services/dbConnect";
-import coverModel from "@/models/Cover";
-import pageModel from "@/models/Page";
-import mediaModel from "@/models/Media";
 import JobsDynamic from "@/components/forms/JobsDynamic";
+import { getCoversApi, getPagesApi, getMediaApi } from "@/services/api";
 
-export default function Admin({ covers, pages, mediaData }) {
+export default function Admin() {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { editSolution, setEditSolution } = useContext(StateContext);
@@ -24,9 +21,13 @@ export default function Admin({ covers, pages, mediaData }) {
   );
   const navigation = ["solutions", "covers", "pages", "news", "jobs"];
 
+  const [covers, setCovers] = useState([]);
+  const [pages, setPages] = useState([]);
+  const [mediaData, setMediaData] = useState([]);
+
   useEffect(() => {
     if (permissionControl !== "admin") {
-      Router.push("/portal");
+      Router.push("/login");
     } else {
       if (editNews) {
         setFormType("news");
@@ -38,6 +39,21 @@ export default function Admin({ covers, pages, mediaData }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setCovers(await getCoversApi());
+        setPages(await getPagesApi());
+        setMediaData(await getMediaApi());
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (permissionControl === "admin") {
+      fetchData();
+    }
+  }, [permissionControl]);
 
   useEffect(() => {
     navigationTopBar.map((nav, i) => {
@@ -77,26 +93,4 @@ export default function Admin({ covers, pages, mediaData }) {
       {formType === "jobs" && <JobsDynamic />}
     </div>
   );
-}
-
-// initial connection to db
-export async function getServerSideProps(context) {
-  try {
-    await dbConnect();
-    const covers = await coverModel.find();
-    const pages = await pageModel.find();
-    const mediaData = await mediaModel.find();
-    return {
-      props: {
-        covers: JSON.parse(JSON.stringify(covers)),
-        pages: JSON.parse(JSON.stringify(pages)),
-        mediaData: JSON.parse(JSON.stringify(mediaData)),
-      },
-    };
-  } catch (error) {
-    console.error(error);
-    return {
-      notFound: true,
-    };
-  }
 }

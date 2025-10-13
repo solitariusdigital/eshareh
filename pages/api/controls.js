@@ -24,7 +24,7 @@ export default async function controlsHandler(req, res) {
     case "PUT":
       try {
         const updateControl = await Control.findByIdAndUpdate(
-          body.id || body["_id"],
+          body.id || body._id,
           body,
           {
             new: true,

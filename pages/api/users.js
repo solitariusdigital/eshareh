@@ -29,7 +29,7 @@ export default async function usersHandler(req, res) {
     case "PUT":
       try {
         const updateUser = await User.findByIdAndUpdate(
-          body.id || body["_id"],
+          body.id || body._id,
           body,
           {
             new: true,

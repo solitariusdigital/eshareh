@@ -24,7 +24,7 @@ export default async function mediaHandler(req, res) {
     case "PUT":
       try {
         const updateMedia = await Media.findByIdAndUpdate(
-          body.id || body["_id"],
+          body.id || body._id,
           body,
           {
             new: true,
