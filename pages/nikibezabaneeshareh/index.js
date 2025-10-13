@@ -120,18 +120,16 @@ export default function Nikibezabaneeshareh() {
           <h2>در نیکــــی به زبان اشـــــاره هـــمراه ﺷــــﻮﯾﺪ.</h2>
           <a
             className={classes.button}
-            onClick={() => updateCharityCount()}
-            href="https://eshareh.storage.iran.liara.space/nikibezabaneeshareh/دفترچه_ارتباط_با_ناشنوایان_و_کم_شنوایان.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => {
+              updateCharityCount();
+              window.open(
+                "https://eshareh.storage.iran.liara.space/nikibezabaneeshareh/دفترچه_ارتباط_با_ناشنوایان_و_کم_شنوایان.pdf",
+                "_blank",
+                "noopener,noreferrer"
+              );
+            }}
           >
-            <h2
-              style={{
-                fontFamily: "FarsiBold",
-              }}
-            >
-              به نیکی اشاره کنید
-            </h2>
+            <h2 style={{ fontFamily: "FarsiBold" }}>به نیکی اشاره کنید</h2>
           </a>
         </div>
         <div className={classes.logo}>
