@@ -51,16 +51,7 @@
     padding: 12px 0px;
     height: 100%;
     max-height: config.$max-widthHeigh !important;
-
-    @include mixins.tablet {
-      height: 100%;
-    }
-    @include mixins.desktop {
-      height: 100%;
-    }
-    @include mixins.fourK {
-      height: 100%;
-    }
+    flex: 1;
 
     .input {
       @include mixins.row-space-between-center();
@@ -88,7 +79,7 @@
     .messageBox {
       display: flex;
       flex-direction: column-reverse;
-      height: calc(100vh - 250px);
+      height: calc(100dvh - 250px);
       max-height: 100%;
       overflow-y: auto;
       padding: 0px 12px;
@@ -96,10 +87,10 @@
       border-bottom: 1px solid config.$lightgrey;
 
       @include mixins.mobile {
-        height: calc(100vh - 310px);
+        height: calc(100dvh - 310px);
       }
       @include mixins.tabletPortrait {
-        height: calc(100vh - 310px);
+        height: calc(100dvh - 310px);
       }
 
       .message,
@@ -157,26 +148,23 @@
 
   .groupBox {
     padding: 12px;
-    height: calc(100% - 40px);
     max-height: 100%;
     overflow-y: auto;
+    flex: 1;
 
     @include mixins.mobile {
-      height: calc(100vh - 200px);
+      height: calc(100dvh - 155px);
     }
     @include mixins.tabletPortrait {
-      height: calc(100vh - 200px);
+      height: calc(100dvh - 190px);
     }
     @include mixins.tablet {
-      height: 100%;
       border-left: 1px solid config.$lightgrey;
     }
     @include mixins.desktop {
-      height: 100%;
       border-left: 1px solid config.$lightgrey;
     }
     @include mixins.fourK {
-      height: 100%;
       border-left: 1px solid config.$lightgrey;
     }
 
@@ -222,20 +210,23 @@
 
   .documentBox {
     padding: 12px;
-    height: calc(100% - 40px);
     max-height: 100%;
     overflow-y: auto;
+    flex: 1;
 
+    @include mixins.mobile {
+      height: calc(100dvh - 155px);
+    }
+    @include mixins.tabletPortrait {
+      height: calc(100dvh - 190px);
+    }
     @include mixins.tablet {
-      height: 100%;
       border-right: 1px solid config.$lightgrey;
     }
     @include mixins.desktop {
-      height: 100%;
       border-right: 1px solid config.$lightgrey;
     }
     @include mixins.fourK {
-      height: 100%;
       border-right: 1px solid config.$lightgrey;
     }
 
@@ -273,7 +264,7 @@
   left: 0px;
   z-index: 1;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   max-height: 100%;
   overflow-y: auto;
   padding-top: 12px;

@@ -12,6 +12,7 @@
     @include mixins.mobile {
       width: 100%;
       padding: 0px 12px;
+      overflow: hidden;
     }
     @include mixins.tabletPortrait {
       width: config.$content-widthTablet;
@@ -27,7 +28,7 @@
     flex-direction: row-reverse;
 
     .control {
-      width: 65px;
+      width: 50px;
       cursor: pointer;
       @include mixins.row-space-between-center();
       flex-direction: row-reverse;
@@ -143,12 +144,12 @@
 
       @include mixins.mobile {
         width: 100%;
-        margin-top: 8px;
+        margin-top: 10px;
         height: 100dvh;
       }
       @include mixins.tabletPortrait {
         width: 100%;
-        margin-top: 8px;
+        margin-top: 10px;
         height: 100dvh;
       }
     }

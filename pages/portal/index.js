@@ -67,11 +67,13 @@ export default function Portal() {
   ]);
 
   useEffect(() => {
-    document.body.style.marginTop = "0px";
-    let element = document.getElementById("portal");
-    element.style.background = backgroundColor[themeMode].background;
-    element.style.color = backgroundColor[themeMode].color;
-  }, [backgroundColor, themeMode]);
+    if (currentUser) {
+      document.body.style.marginTop = "0px";
+      let element = document.getElementById("portal");
+      element.style.background = backgroundColor[themeMode].background;
+      element.style.color = backgroundColor[themeMode].color;
+    }
+  }, [backgroundColor, currentUser, themeMode]);
 
   const menuItemsTopData = [
     {
