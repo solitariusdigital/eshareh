@@ -124,7 +124,7 @@
   background: config.$yellow;
 
   @include mixins.mobile {
-    height: 100vh;
+    height: 100dvh;
     background: linear-gradient(
       to bottom,
       config.$white 50%,

@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   margin: auto;
 
   @include mixins.mobile {
@@ -24,7 +24,7 @@
 }
 
 .image {
-  height: calc(100vh - 130px);
+  height: calc(100dvh - 130px);
 
   @include mixins.mobile {
     height: 300px;

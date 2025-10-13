@@ -2,7 +2,7 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  height: 100vh;
+  height: 100dvh;
 
   .portal {
     margin: auto;
@@ -55,7 +55,7 @@
   .panel {
     display: flex;
     flex-direction: row-reverse;
-    height: calc(100vh - 100px);
+    height: calc(100dvh - 100px);
     max-height: config.$max-widthHeigh !important;
 
     @include mixins.mobile {
@@ -144,12 +144,12 @@
       @include mixins.mobile {
         width: 100%;
         margin-top: 8px;
-        height: 100vh;
+        height: 100dvh;
       }
       @include mixins.tabletPortrait {
         width: 100%;
         margin-top: 8px;
-        height: 100vh;
+        height: 100dvh;
       }
     }
   }

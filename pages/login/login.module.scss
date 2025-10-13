@@ -5,7 +5,7 @@
   display: flex;
   background: linear-gradient(to bottom, config.$white 50%, config.$black 50%);
   margin-top: 120px;
-  height: calc(100vh - 120px);
+  height: calc(100dvh - 120px);
 
   @include mixins.tablet {
     height: 100%;
