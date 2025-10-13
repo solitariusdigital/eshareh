@@ -109,7 +109,7 @@
     width: 100%;
     height: 70px;
     z-index: 5;
-    @include mixins.transparentBackground(0.95, config.$white);
+    @include mixins.transparentBackground(0.1, config.$white);
 
     .controller {
       display: flex;
@@ -214,8 +214,8 @@
     border-radius: 50px;
     padding: 8px 20px;
     color: config.$white;
-    @include mixins.transparentBackground(0.5, config.$lightgrey);
     user-select: none;
+    @include mixins.transparentBackground(0.3, config.$lightgrey);
 
     @include mixins.allDesktop {
       &:hover {
@@ -308,7 +308,7 @@
     height: 40px;
     margin-right: 10px;
     color: config.$black;
-    @include mixins.transparentBackground(0.7, config.$white);
+    @include mixins.transparentBackground(0.5, config.$white);
 
     @include mixins.mobile {
       margin-bottom: 10px;

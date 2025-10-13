@@ -394,7 +394,7 @@
       height: 40px;
       margin-right: 10px;
       color: config.$black;
-      @include mixins.transparentBackground(0.7, config.$white);
+      @include mixins.transparentBackground(0.5, config.$white);
 
       @include mixins.mobile {
         margin-bottom: 10px;

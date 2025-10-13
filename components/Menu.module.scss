@@ -188,7 +188,7 @@
     padding: 12px;
     box-shadow: config.$card-shadow;
     width: config.$content-width;
-    @include mixins.transparentBackground(0.95, config.$yellow);
+    @include mixins.transparentBackground(0.1, config.$yellow);
 
     @include mixins.tablet {
       width: config.$content-widthTablet;
