@@ -19,9 +19,8 @@ import {
   updateUserApi,
 } from "@/services/api";
 
-export default function Chat({ selectedChat }) {
+export default function Chat({ selectedChat, floatChat }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const { languageType, setLanguageType } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [title, setTitle] = useState(selectedChat?.title || "");
   const [description, setDescription] = useState(
@@ -225,7 +224,11 @@ export default function Chat({ selectedChat }) {
           )}
         </div>
       </div>
-      <div className={classes.usersSelection}>
+      <div
+        className={
+          floatChat ? classes.usersSelectionFloat : classes.usersSelection
+        }
+      >
         {users?.map((user, index) => {
           return (
             <div
@@ -234,11 +237,11 @@ export default function Chat({ selectedChat }) {
               onClick={() => handleUserSelection(index, !user.selection)}
             >
               <div>
-                <h3>{user.name[languageType]}</h3>
+                <h3>{user.name.fa}</h3>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: applyFontToEnglishWords(
-                      user.title[languageType],
+                      user.title.fa,
                       "English",
                       "16px",
                       "fa"

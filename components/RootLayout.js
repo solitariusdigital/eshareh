@@ -30,8 +30,8 @@ export default function RootLayout({ children }) {
   const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { menuColor, setMenuColor } = useContext(StateContext);
   const { heroHeight, setHeroHeight } = useContext(StateContext);
+  const { displayFloatChat, setDisplayFloatChat } = useContext(StateContext);
   const [scrollArrow, setScrollArrow] = useState(false);
-  const [displayFloatChat, setDisplayFloatChat] = useState(true);
   const [displayChatRoom, setDisplayChatRoom] = useState(false);
   const [loadImage, setLoadImage] = useState(null);
   const [appLoader, setAppLoader] = useState(false);
@@ -63,9 +63,6 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     handleResize();
     window.addEventListener("resize", handleResize);
-    if (pathname.includes("portal")) {
-      setDisplayFloatChat(false);
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

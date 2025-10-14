@@ -18,6 +18,7 @@ export const StateProvider = (props) => {
     pathname.includes("nikibezabaneeshareh") ? false : true
   );
   const [displayFooter, setDisplayFooter] = useState(true);
+  const [displayFloatChat, setDisplayFloatChat] = useState(true);
   const [screenSize, setScreenSize] = useState(
     "desktop" || "tablet-landscape" || "tablet-portrait" || "mobile"
   );
@@ -94,6 +95,8 @@ export const StateProvider = (props) => {
     setDisplayMenu,
     displayFooter,
     setDisplayFooter,
+    displayFloatChat,
+    setDisplayFloatChat,
     permissionControl,
     setPermissionControl,
     editSolution,

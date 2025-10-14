@@ -34,6 +34,7 @@ export default function Portal() {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { displayFooter, setDisplayFooter } = useContext(StateContext);
+  const { displayFloatChat, setDisplayFloatChat } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [themeMode, setThemeMode] = useState("light");
@@ -60,6 +61,7 @@ export default function Portal() {
     } else {
       setDisplayMenu(false);
       setDisplayFooter(false);
+      setDisplayFloatChat(false);
       setLanguageType("fa");
       setLanguage(true);
     }
@@ -69,6 +71,7 @@ export default function Portal() {
     setDisplayFooter,
     setLanguageType,
     setLanguage,
+    setDisplayFloatChat,
   ]);
 
   useEffect(() => {

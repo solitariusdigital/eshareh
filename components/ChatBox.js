@@ -776,13 +776,19 @@ export default function ChatBox({ floatChat }) {
         </div>
       )}
       {displayPopup && (
-        <div className={classes.popup}>
+        <div
+          className={classes.popup}
+          style={{
+            border: floatChat ? "1px solid #d1d3d4" : "none",
+            borderRadius: floatChat ? "5px" : "none",
+          }}
+        >
           <CloseIcon
             className="icon"
             onClick={() => setDisplayPopup(false)}
             sx={{ fontSize: 20 }}
           />
-          <Chat selectedChat={selectedChat} />
+          <Chat selectedChat={selectedChat} floatChat={floatChat} />
         </div>
       )}
     </div>
