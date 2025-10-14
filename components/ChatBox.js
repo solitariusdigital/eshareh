@@ -750,7 +750,6 @@ export default function ChatBox({ floatChat }) {
                 <Tooltip title="Chat">
                   <ArrowBackIosNewIcon className="icon" sx={{ fontSize: 18 }} />
                 </Tooltip>
-
                 {!chat.isRead && (
                   <CircleIcon
                     className="animate__animated animate__heartBeat"

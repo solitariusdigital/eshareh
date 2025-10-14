@@ -14,7 +14,6 @@ import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
 import { getControlsApi, updateControlApi } from "@/services/api";
 import Tooltip from "@mui/material/Tooltip";
 import secureLocalStorage from "react-secure-storage";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import search from "@/assets/search.svg";
 import searchHover from "@/assets/searchHover.svg";
 import english from "@/assets/english.svg";
@@ -29,7 +28,6 @@ export default function Menu() {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
-  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { menuColor, setMenuColor } = useContext(StateContext);
   const [colorPicker, setColorPicker] = useState(false);
@@ -99,35 +97,6 @@ export default function Menu() {
         <div
           className={language ? classes.largeMenuReverse : classes.largeMenu}
         >
-          {currentUser && (
-            <Fragment>
-              <div
-                className={classes.profile}
-                onClick={() => Router.push("/portal")}
-              >
-                <Image
-                  src={currentUser.media}
-                  blurDataURL={currentUser.media}
-                  layout="fill"
-                  objectFit="cover"
-                  alt="profile"
-                  as="image"
-                />
-              </div>
-              {currentUser.notifications && (
-                <div
-                  className={`${classes.notifications} animate__animated animate__swing`}
-                  onClick={() => Router.push("/portal")}
-                >
-                  <Tooltip title="New Message">
-                    <NotificationsIcon
-                      sx={{ fontSize: 20, color: "#fdb714" }}
-                    />
-                  </Tooltip>
-                </div>
-              )}
-            </Fragment>
-          )}
           <div
             className={
               language ? classes.logoContainer : classes.logoContainerReverse

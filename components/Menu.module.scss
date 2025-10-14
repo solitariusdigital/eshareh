@@ -68,23 +68,6 @@
     max-width: 700px;
     @include mixins.row-space-between-center();
   }
-
-  .profile {
-    position: absolute;
-    right: -100px;
-    bottom: 15px;
-    width: 40px;
-    height: 60px;
-    cursor: pointer;
-    @include mixins.arrow-shape();
-  }
-
-  .notifications {
-    position: absolute;
-    right: -90px;
-    bottom: -15px;
-    cursor: pointer;
-  }
 }
 
 .menuWrapper {

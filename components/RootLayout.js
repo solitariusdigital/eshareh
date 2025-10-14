@@ -1,6 +1,7 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
+import Router from "next/router";
 import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
 import Image from "next/legacy/image";
@@ -9,8 +10,10 @@ import logoLoadFarsi from "@/assets/logoLoadFarsi.svg";
 import arrowUp from "@/assets/arrowUp.svg";
 import secureLocalStorage from "react-secure-storage";
 import ChatBox from "./ChatBox";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
+import CircleIcon from "@mui/icons-material/Circle";
 import Tooltip from "@mui/material/Tooltip";
 import {
   getSingleUserApi,
@@ -207,35 +210,70 @@ export default function RootLayout({ children }) {
             <Fragment>
               <div
                 className="chatControl"
-                onClick={() => setDisplayChatRoom(!displayChatRoom)}
                 style={{
                   fontFamily: "Farsi",
                 }}
               >
-                {displayChatRoom ? (
-                  <Tooltip title="Close">
-                    <CloseIcon className="icon" sx={{ fontSize: 16 }} />
-                  </Tooltip>
-                ) : (
-                  <Tooltip title="Open">
-                    <ArrowBackIosNewIcon
+                {currentUser.notifications && (
+                  <div className="notifications animate__animated animate__swing">
+                    <CircleIcon
+                      className="animate__animated animate__heartBeat"
+                      sx={{ fontSize: 12, color: "#fdb714" }}
+                    />
+                  </div>
+                )}
+                <div
+                  className="row"
+                  style={{
+                    width: "22%",
+                  }}
+                >
+                  {displayChatRoom ? (
+                    <Tooltip title="Close">
+                      <KeyboardArrowDownIcon
+                        className="icon"
+                        onClick={() => setDisplayChatRoom(!displayChatRoom)}
+                      />
+                    </Tooltip>
+                  ) : (
+                    <Tooltip title="Open">
+                      <KeyboardArrowUpIcon
+                        className="icon"
+                        onClick={() => setDisplayChatRoom(!displayChatRoom)}
+                      />
+                    </Tooltip>
+                  )}
+                  <Tooltip title="Portal">
+                    <SpaceDashboardIcon
                       className="icon"
-                      sx={{ fontSize: 16 }}
+                      sx={{ fontSize: 20 }}
+                      onClick={() => Router.push("/portal")}
                     />
                   </Tooltip>
-                )}
-                <h4>پیام رسان</h4>
-                <div className="image">
-                  <Image
-                    className="image"
-                    src={currentUser.media}
-                    blurDataURL={currentUser.media}
-                    layout="fill"
-                    objectFit="cover"
-                    alt="image"
-                    as="image"
-                    priority
-                  />
+                </div>
+                <div
+                  className="row"
+                  onClick={() => setDisplayChatRoom(!displayChatRoom)}
+                >
+                  <h4
+                    style={{
+                      fontFamily: "FarsiBold",
+                    }}
+                  >
+                    پیام رسان
+                  </h4>
+                  <div className="image">
+                    <Image
+                      className="image"
+                      src={currentUser.media}
+                      blurDataURL={currentUser.media}
+                      layout="fill"
+                      objectFit="cover"
+                      alt="image"
+                      as="image"
+                      priority
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -244,7 +282,7 @@ export default function RootLayout({ children }) {
                   style={{
                     fontFamily: "Farsi",
                   }}
-                  className="chatRoom animate__animated animate__slideInRight"
+                  className="chatRoom animate__animated animate__slideInUp"
                 >
                   <ChatBox floatChat={true} />
                 </div>
