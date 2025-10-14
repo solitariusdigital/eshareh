@@ -61,6 +61,30 @@ export default function Nikibezabaneeshareh() {
         robots="index, follow"
       />
       <div className={classes.container}>
+        {fullSizeChatBox && (
+          <div className={classes.background}>
+            <Image
+              src="https://eshareh.storage.iran.liara.space/nikibezabaneeshareh/nikibezabaneeshareh-desktop.webp"
+              layout="fill"
+              objectFit="cover"
+              alt="logo"
+              as="image"
+              priority
+            />
+          </div>
+        )}
+        {!fullSizeChatBox && (
+          <div className={classes.background}>
+            <Image
+              src="https://eshareh.storage.iran.liara.space/nikibezabaneeshareh/nikibezabaneeshareh-phone.webp"
+              layout="fill"
+              objectFit="cover"
+              alt="logo"
+              as="image"
+              priority
+            />
+          </div>
+        )}
         {!fullSizeChatBox && (
           <h1
             className={classes.title}
