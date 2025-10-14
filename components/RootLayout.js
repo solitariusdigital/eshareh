@@ -8,6 +8,10 @@ import logoLoadEnglish from "@/assets/logoLoadEnglish.svg";
 import logoLoadFarsi from "@/assets/logoLoadFarsi.svg";
 import arrowUp from "@/assets/arrowUp.svg";
 import secureLocalStorage from "react-secure-storage";
+import ChatBox from "./ChatBox";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import CloseIcon from "@mui/icons-material/Close";
+import Tooltip from "@mui/material/Tooltip";
 import {
   getSingleUserApi,
   getControlsApi,
@@ -27,6 +31,8 @@ export default function RootLayout({ children }) {
   const { menuColor, setMenuColor } = useContext(StateContext);
   const { heroHeight, setHeroHeight } = useContext(StateContext);
   const [scrollArrow, setScrollArrow] = useState(false);
+  const [displayFloatChat, setDisplayFloatChat] = useState(true);
+  const [displayChatRoom, setDisplayChatRoom] = useState(false);
   const [loadImage, setLoadImage] = useState(null);
   const [appLoader, setAppLoader] = useState(false);
   const [appLive, setAppLive] = useState(false);
@@ -57,6 +63,9 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     handleResize();
     window.addEventListener("resize", handleResize);
+    if (pathname.includes("portal")) {
+      setDisplayFloatChat(false);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -196,6 +205,54 @@ export default function RootLayout({ children }) {
                 priority
               />
             </div>
+          )}
+          {currentUser && displayFloatChat && screenSize === "desktop" && (
+            <Fragment>
+              <div
+                className="chatControl"
+                onClick={() => setDisplayChatRoom(!displayChatRoom)}
+                style={{
+                  fontFamily: "Farsi",
+                }}
+              >
+                {displayChatRoom ? (
+                  <Tooltip title="Close">
+                    <CloseIcon className="icon" sx={{ fontSize: 16 }} />
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Open">
+                    <ArrowBackIosNewIcon
+                      className="icon"
+                      sx={{ fontSize: 16 }}
+                    />
+                  </Tooltip>
+                )}
+                <h4>پیام رسان</h4>
+                <div className="image">
+                  <Image
+                    className="image"
+                    src={currentUser.media}
+                    blurDataURL={currentUser.media}
+                    layout="fill"
+                    objectFit="cover"
+                    alt="image"
+                    as="image"
+                    priority
+                  />
+                </div>
+              </div>
+
+              {displayChatRoom && (
+                <div
+                  style={{
+                    fontFamily: "Farsi",
+                  }}
+                  className="chatRoom animate__animated animate__slideInRight"
+                >
+                  <ChatBox floatChat={true} />
+                </div>
+              )}
+            </Fragment>
           )}
         </div>
       ) : (

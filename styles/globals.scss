@@ -152,8 +152,8 @@ p {
   width: 45px;
   height: 45px;
   position: fixed;
-  right: 30px;
-  bottom: 30px;
+  right: 10px;
+  bottom: 60px;
   z-index: 2;
   cursor: pointer;
 
@@ -161,6 +161,47 @@ p {
     right: 12px;
     bottom: 12px;
   }
+}
+
+.chatControl {
+  width: 250px;
+  position: fixed;
+  right: 10px;
+  bottom: 0px;
+  height: 50px;
+  z-index: 5;
+  padding: 8px;
+  background: config.$generalMessage;
+  @include mixins.row-space-between-center();
+  justify-content: space-around;
+  user-select: none;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border: 1px solid config.$lightgrey;
+
+  &:hover {
+    cursor: pointer;
+    background: config.$yellowShade;
+  }
+
+  .image {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    margin-left: 12px;
+  }
+}
+
+.chatRoom {
+  position: fixed;
+  z-index: 5;
+  right: 10px;
+  top: 110px;
+  width: 100%;
+  width: 30%;
+  height: calc(100vh - 170px);
+  box-shadow: config.$card-shadow;
 }
 
 .controlPanel,

@@ -1,24 +1,13 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.container {
+.containerGrid,
+.containerFloat {
   height: 100%;
-  border: 1px solid config.$lightgrey;
   border-radius: 5px;
   text-align: right;
-
-  @include mixins.tablet {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-  }
-  @include mixins.desktop {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-  }
-  @include mixins.fourK {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-  }
+  background: config.$white;
+  border: 1px solid config.$lightgrey;
 
   .date {
     color: config.$grey !important;
@@ -158,15 +147,6 @@
     @include mixins.tabletPortrait {
       height: calc(100dvh - 190px);
     }
-    @include mixins.tablet {
-      border-left: 1px solid config.$lightgrey;
-    }
-    @include mixins.desktop {
-      border-left: 1px solid config.$lightgrey;
-    }
-    @include mixins.fourK {
-      border-left: 1px solid config.$lightgrey;
-    }
 
     .group,
     .groupActive {
@@ -220,15 +200,6 @@
     @include mixins.tabletPortrait {
       height: calc(100dvh - 190px);
     }
-    @include mixins.tablet {
-      border-right: 1px solid config.$lightgrey;
-    }
-    @include mixins.desktop {
-      border-right: 1px solid config.$lightgrey;
-    }
-    @include mixins.fourK {
-      border-right: 1px solid config.$lightgrey;
-    }
 
     .document {
       margin-bottom: 8px;
@@ -251,6 +222,45 @@
       .fileType {
         font-size: x-small;
       }
+    }
+  }
+}
+
+.containerGrid {
+  @include mixins.tablet {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  @include mixins.desktop {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  @include mixins.fourK {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+
+  .groupBox {
+    @include mixins.tablet {
+      border-left: 1px solid config.$lightgrey;
+    }
+    @include mixins.desktop {
+      border-left: 1px solid config.$lightgrey;
+    }
+    @include mixins.fourK {
+      border-left: 1px solid config.$lightgrey;
+    }
+  }
+
+  .documentBox {
+    @include mixins.tablet {
+      border-right: 1px solid config.$lightgrey;
+    }
+    @include mixins.desktop {
+      border-right: 1px solid config.$lightgrey;
+    }
+    @include mixins.fourK {
+      border-right: 1px solid config.$lightgrey;
     }
   }
 }

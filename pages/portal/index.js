@@ -378,7 +378,7 @@ export default function Portal() {
                 </div>
               </div>
               <div className={classes.board}>
-                {boardType === "chat" && <ChatBox />}
+                {boardType === "chat" && <ChatBox floatChat={false} />}
                 {boardType === "admin" && <Admin />}
                 {boardType === "setting" && <Password />}
               </div>

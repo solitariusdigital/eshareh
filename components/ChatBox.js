@@ -5,7 +5,6 @@ import Image from "next/legacy/image";
 import Tooltip from "@mui/material/Tooltip";
 import SendIcon from "@mui/icons-material/Send";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import CircleIcon from "@mui/icons-material/Circle";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
@@ -15,6 +14,7 @@ import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import loaderImage from "@/assets/loader.png";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import Chat from "./forms/Chat";
 import imageCompression from "browser-image-compression";
@@ -39,7 +39,7 @@ import {
   deleteMessageApi,
 } from "@/services/api";
 
-export default function ChatBox() {
+export default function ChatBox({ floatChat }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [chatPanel, setChatPanel] = useState("group" || "chat" || "document");
@@ -54,7 +54,8 @@ export default function ChatBox() {
   const sourceLink = "https://eshareh.storage.iran.liara.space";
 
   const fullSizeChatBox =
-    screenSize === "desktop" || screenSize === "tablet-landscape";
+    !floatChat &&
+    (screenSize === "desktop" || screenSize === "tablet-landscape");
   const intervalRef = useRef(null);
 
   useEffect(() => {
@@ -440,7 +441,7 @@ export default function ChatBox() {
   };
 
   return (
-    <div className={classes.container}>
+    <div className={floatChat ? classes.containerFloat : classes.containerGrid}>
       {(fullSizeChatBox || chatPanel === "document") && (
         <div className={classes.documentBox}>
           {!fullSizeChatBox && (
@@ -540,6 +541,7 @@ export default function ChatBox() {
                   {!fullSizeChatBox && (
                     <Tooltip title="Documents">
                       <InsertDriveFileOutlinedIcon
+                        className="icon"
                         sx={{ fontSize: 20 }}
                         onClick={() => setChatPanel("document")}
                       />
@@ -745,7 +747,10 @@ export default function ChatBox() {
               onClick={() => handleChatSelection(index)}
             >
               <div className={classes.indicators}>
-                <KeyboardArrowLeftIcon />
+                <Tooltip title="Chat">
+                  <ArrowBackIosNewIcon className="icon" sx={{ fontSize: 18 }} />
+                </Tooltip>
+
                 {!chat.isRead && (
                   <CircleIcon
                     className="animate__animated animate__heartBeat"
