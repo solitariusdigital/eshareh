@@ -5,7 +5,7 @@ import Image from "next/legacy/image";
 import { NextSeo } from "next-seo";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import prev from "@/assets/prev.svg";
+import esharehWhite from "@/assets/esharehWhite.svg";
 import { getCharityApi, updateCharityApi } from "@/services/api";
 
 export default function Nikibezabaneeshareh() {
@@ -142,13 +142,26 @@ export default function Nikibezabaneeshareh() {
           <h2>در نیکــــی به زبان اشـــــاره هـــمراه ﺷــــﻮﯾﺪ.</h2>
           <a
             className={classes.button}
-            onClick={() => {
+            onClick={async () => {
               updateCharityCount();
-              window.open(
-                "https://eshareh.storage.iran.liara.space/nikibezabaneeshareh/دفترچه_ارتباط_با_ناشنوایان_و_کم_شنوایان.pdf",
-                "_blank",
-                "noopener,noreferrer"
-              );
+              const fileUrl =
+                "https://eshareh.storage.iran.liara.space/nikibezabaneeshareh/دفترچه_ارتباط_با_ناشنوایان_و_کم_شنوایان.pdf";
+              const fileName = "دفترچه_ارتباط_با_ناشنوایان_و_کم_شنوایان.pdf";
+              window.open(fileUrl, "_blank", "noopener,noreferrer");
+              try {
+                const response = await fetch(fileUrl);
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = blobUrl;
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(blobUrl);
+              } catch (err) {
+                console.error("File download failed:", err);
+              }
             }}
           >
             <h2 style={{ fontFamily: "FarsiBold" }}>به نیکی اشاره کنید</h2>
@@ -156,7 +169,7 @@ export default function Nikibezabaneeshareh() {
         </div>
         <div className={classes.logo}>
           <Image
-            src={prev}
+            src={esharehWhite}
             layout="fill"
             objectFit="contain"
             alt="logo"

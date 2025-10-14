@@ -12,13 +12,18 @@ import lightMode from "@/assets/lightMode.svg";
 import darkMode from "@/assets/darkMode.svg";
 import lightModeHover from "@/assets/lightModeHover.svg";
 import darkModeHover from "@/assets/darkModeHover.svg";
-import prev from "@/assets/prev.svg";
+import esharehWhite from "@/assets/esharehWhite.svg";
+import esharehBlack from "@/assets/esharehBlack.svg";
 import secureLocalStorage from "react-secure-storage";
-import home from "@/assets/home.svg";
+import tasksActive from "@/assets/tasksActive.svg";
 import tasks from "@/assets/tasks.svg";
+import newsActive from "@/assets/newsActive.svg";
 import news from "@/assets/news.svg";
+import chatActive from "@/assets/chatActive.svg";
 import chat from "@/assets/chat.svg";
+import adminActive from "@/assets/adminActive.svg";
 import admin from "@/assets/admin.svg";
+import settingActive from "@/assets/settingActive.svg";
 import setting from "@/assets/setting.svg";
 import ChatBox from "@/components/ChatBox";
 import Password from "@/components/forms/Password";
@@ -33,7 +38,7 @@ export default function Portal() {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [themeMode, setThemeMode] = useState("light");
   const [boardType, setBoardType] = useState(
-    "chat" || "tasks" || "news" || "home" || "setting" || "admin"
+    "chat" || "tasks" || "news" || "setting" || "admin"
   );
 
   const backgroundColor = useMemo(() => {
@@ -77,89 +82,85 @@ export default function Portal() {
 
   const menuItemsTopData = [
     {
-      src: chat,
-      alt: "چت",
+      src: () => (boardType === "chat" ? chat : chatActive),
+      hoverSrc: () => (boardType === "chat" ? chatActive : chat),
+      alt: "chat",
       label: "چت",
-      active: true,
       requiredPermission: "all",
       onClick: () => setBoardType("chat"),
     },
-    // {
-    //   src: home,
-    //   alt: "خانه",
-    //   label: "خانه",
-    //   active: false,
-    //   requiredPermission: "all",
-    //   onClick: () => setBoardType("home"),
-    // },
     {
-      src: tasks,
-      alt: "وظایف",
+      src: () => (boardType === "tasks" ? tasksActive : tasks),
+      hoverSrc: () => (boardType === "tasks" ? tasks : tasksActive),
+      alt: "tasks",
       label: "وظایف",
-      active: false,
       requiredPermission: "all",
       onClick: () => setBoardType("tasks"),
     },
     {
-      src: news,
-      alt: "اخبار",
+      src: () => (boardType === "news" ? newsActive : news),
+      hoverSrc: () => (boardType === "news" ? news : newsActive),
+      alt: "news",
       label: "اخبار",
-      active: false,
       requiredPermission: "all",
       onClick: () => setBoardType("news"),
     },
   ];
+
   const menuItemsBottomData = [
     {
-      src: admin,
+      src: () => (boardType === "admin" ? adminActive : admin),
+      hoverSrc: () => (boardType === "admin" ? admin : adminActive),
       alt: "admin",
-      active: false,
       requiredPermission: "admin",
       onClick: () => setBoardType("admin"),
     },
     {
-      src: setting,
+      src: () => (boardType === "setting" ? settingActive : setting),
+      hoverSrc: () => (boardType === "setting" ? setting : settingActive),
       alt: "setting",
-      active: false,
       requiredPermission: "all",
       onClick: () => setBoardType("setting"),
     },
     {
-      src: prev,
+      src: () => (boardType === "logo" ? esharehWhite : esharehBlack),
+      hoverSrc: () => (boardType === "logo" ? esharehBlack : esharehWhite),
       alt: "logo",
-      active: false,
       requiredPermission: "all",
       onClick: () => window.location.assign("/"),
     },
   ];
+
   const [menuItemsTop, setMenuItemsTop] = useState(menuItemsTopData);
   const [menuItemsBottom, setMenuItemsBottom] = useState(menuItemsBottomData);
 
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredSection, setHoveredSection] = useState(null);
+
   const handleClickMenu = (index, menuType) => {
     if (menuType === "top") {
-      const updatedItemsTop = menuItemsTop.map((item, idx) => ({
-        ...item,
-        active: idx === index,
-      }));
-      setMenuItemsTop(updatedItemsTop);
-      setMenuItemsBottom(
-        menuItemsBottom.map((item) => ({ ...item, active: false }))
+      setMenuItemsTop((prev) =>
+        prev.map((item, idx) => ({ ...item, active: idx === index }))
       );
-      menuItemsTopData[index].onClick();
+      setMenuItemsBottom((prev) =>
+        prev.map((item) => ({ ...item, active: false }))
+      );
+      menuItemsTop[index].onClick();
     } else if (menuType === "bottom") {
-      let accessibleItems = menuItemsBottom.filter((item) => {
+      const accessibleItems = menuItemsBottom.filter((item) => {
         const requiredPermission = item.requiredPermission || "all";
-        if (requiredPermission === "all") {
-          return true;
-        }
-        return permissionControl === requiredPermission;
+        return (
+          requiredPermission === "all" ||
+          permissionControl === requiredPermission
+        );
       });
-      const updatedItemsBottom = accessibleItems.map((item, idx) => ({
-        ...item,
-        active: idx === index,
-      }));
-      setMenuItemsBottom(updatedItemsBottom);
-      setMenuItemsTop(menuItemsTop.map((item) => ({ ...item, active: false })));
+
+      setMenuItemsBottom((prev) =>
+        accessibleItems.map((item, idx) => ({ ...item, active: idx === index }))
+      );
+      setMenuItemsTop((prev) =>
+        prev.map((item) => ({ ...item, active: false }))
+      );
       accessibleItems[index].onClick();
     }
   };
@@ -286,62 +287,94 @@ export default function Portal() {
                     .filter((item) => {
                       const requiredPermission =
                         item.requiredPermission || "all";
-                      if (requiredPermission === "all") {
-                        return true;
-                      }
-                      return permissionControl === requiredPermission;
+                      return (
+                        requiredPermission === "all" ||
+                        permissionControl === requiredPermission
+                      );
                     })
-                    .map((item, index) => (
-                      <div
-                        key={index}
-                        className={
-                          item.active ? classes.itemActive : classes.item
-                        }
-                        onClick={() => handleClickMenu(index, "top")}
-                      >
-                        <Image
-                          width={24}
-                          height={24}
-                          src={item.src}
-                          alt={item.alt}
-                          as="image"
-                        />
-                        <p>{item.label}</p>
-                      </div>
-                    ))}
+                    .map((item, index) => {
+                      const isHovered =
+                        hoveredIndex === index && hoveredSection === "top";
+                      const isActive = boardType === item.alt;
+                      return (
+                        <div
+                          key={index}
+                          className={
+                            isActive ? classes.itemActive : classes.item
+                          }
+                          onClick={() => handleClickMenu(index, "top")}
+                          onMouseEnter={() => {
+                            setHoveredIndex(index);
+                            setHoveredSection("top");
+                          }}
+                          onMouseLeave={() => {
+                            setHoveredIndex(null);
+                            setHoveredSection(null);
+                          }}
+                        >
+                          <Image
+                            width={24}
+                            height={24}
+                            src={
+                              isHovered
+                                ? item.hoverSrc()
+                                : item.active || boardType === item.alt
+                                ? item.hoverSrc()
+                                : item.src()
+                            }
+                            alt={item.alt}
+                          />
+                          <p>{item.label}</p>
+                        </div>
+                      );
+                    })}
                 </div>
-                <div
-                  className={classes.box}
-                  style={{
-                    marginBottom: "24px",
-                  }}
-                >
+                <div className={classes.box} style={{ marginBottom: "24px" }}>
                   {menuItemsBottom
                     .filter((item) => {
                       const requiredPermission =
                         item.requiredPermission || "all";
-                      if (requiredPermission === "all") {
-                        return true;
-                      }
-                      return permissionControl === requiredPermission;
+                      return (
+                        requiredPermission === "all" ||
+                        permissionControl === requiredPermission
+                      );
                     })
-                    .map((item, index) => (
-                      <div
-                        key={index}
-                        className={
-                          item.active ? classes.itemActive : classes.item
-                        }
-                        onClick={() => handleClickMenu(index, "bottom")}
-                      >
-                        <Image
-                          width={24}
-                          height={24}
-                          src={item.src}
-                          alt={item.alt}
-                          as="image"
-                        />
-                      </div>
-                    ))}
+                    .map((item, index) => {
+                      const isHovered =
+                        hoveredIndex === index && hoveredSection === "bottom";
+                      const isActive = boardType === item.alt;
+                      return (
+                        <div
+                          key={index}
+                          className={
+                            isActive ? classes.itemActive : classes.item
+                          }
+                          onClick={() => handleClickMenu(index, "bottom")}
+                          onMouseEnter={() => {
+                            setHoveredIndex(index);
+                            setHoveredSection("bottom");
+                          }}
+                          onMouseLeave={() => {
+                            setHoveredIndex(null);
+                            setHoveredSection(null);
+                          }}
+                        >
+                          <Image
+                            width={24}
+                            height={24}
+                            src={
+                              isHovered
+                                ? item.hoverSrc()
+                                : item.active || boardType === item.alt
+                                ? item.hoverSrc()
+                                : item.src()
+                            }
+                            alt={item.alt}
+                          />
+                          <p>{item.label}</p>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
               <div className={classes.board}>
