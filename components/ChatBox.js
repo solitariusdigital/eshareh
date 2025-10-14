@@ -461,7 +461,7 @@ export default function ChatBox({ floatChat }) {
                     dangerouslySetInnerHTML={{
                       __html: applyFontToEnglishWords(
                         document.content,
-                        "EnglishLight",
+                        "English",
                         "14px",
                         "fa"
                       ),

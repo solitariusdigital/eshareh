@@ -151,8 +151,9 @@
     .group,
     .groupActive {
       @include mixins.row-space-between-center();
+      justify-content: space-around;
       margin-bottom: 8px;
-      padding: 4px;
+      padding: 4px 0px;
       border-radius: 5px;
       border: 1px solid config.$lightgrey;
 
