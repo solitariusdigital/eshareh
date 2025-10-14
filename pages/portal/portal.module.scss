@@ -81,12 +81,14 @@
         height: 45px;
         @include mixins.row-space-between-center();
         flex-direction: row-reverse;
+        padding: 0px 12px;
       }
       @include mixins.tabletPortrait {
         width: 100%;
         height: 65px;
         @include mixins.row-space-between-center();
         flex-direction: row-reverse;
+        padding: 0px 24px;
       }
       .box {
         @include mixins.mobile {
