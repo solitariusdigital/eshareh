@@ -143,10 +143,7 @@ export default function RootLayout({ children }) {
       const currentScrollY = window.scrollY;
       if (currentScrollY <= 0) {
         setScrollArrow(false);
-      } else if (
-        currentScrollY > prevScrollY &&
-        !router.asPath.includes("portal")
-      ) {
+      } else if (currentScrollY > prevScrollY && !pathname.includes("portal")) {
         setScrollArrow(true);
       }
       prevScrollY = currentScrollY;
@@ -155,7 +152,7 @@ export default function RootLayout({ children }) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [router.asPath, scrollArrow]);
+  }, [pathname, scrollArrow]);
 
   return (
     <Fragment>

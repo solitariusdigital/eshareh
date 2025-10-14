@@ -1,7 +1,11 @@
 import { useState, createContext } from "react";
+import { useRouter } from "next/router";
 export const StateContext = createContext();
 
 export const StateProvider = (props) => {
+  const router = useRouter();
+  let pathname = router.pathname;
+
   const [language, setLanguage] = useState(null);
   const [languageType, setLanguageType] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
@@ -10,7 +14,9 @@ export const StateProvider = (props) => {
   const [editJobs, setEditJobs] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuColor, setMenuColor] = useState({});
-  const [displayMenu, setDisplayMenu] = useState(true);
+  const [displayMenu, setDisplayMenu] = useState(
+    pathname.includes("nikibezabaneeshareh") ? false : true
+  );
   const [displayFooter, setDisplayFooter] = useState(true);
   const [screenSize, setScreenSize] = useState(
     "desktop" || "tablet-landscape" || "tablet-portrait" || "mobile"
