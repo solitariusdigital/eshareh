@@ -746,19 +746,24 @@ export default function ChatBox({ floatChat }) {
               className={chat.active ? classes.groupActive : classes.group}
               onClick={() => handleChatSelection(index)}
             >
-              <div className={classes.indicators}>
-                <Tooltip title="Chat">
-                  <ArrowBackIosNewIcon className="icon" sx={{ fontSize: 18 }} />
-                </Tooltip>
-                {!chat.isRead && (
-                  <CircleIcon
-                    className="animate__animated animate__heartBeat"
-                    sx={{ fontSize: 12, color: "#fdb714" }}
-                  />
-                )}
-              </div>
               <div className={classes.info}>
-                <h4>{chat.title}</h4>
+                <div className={classes.indicator}>
+                  <Tooltip title="Chat">
+                    <ArrowBackIosNewIcon
+                      className="icon"
+                      sx={{ fontSize: 18 }}
+                    />
+                  </Tooltip>
+                  {!chat.isRead && (
+                    <div className={classes.notification}>
+                      <CircleIcon
+                        className="animate__animated animate__heartBeat"
+                        sx={{ fontSize: 12, color: "#fdb714" }}
+                      />
+                    </div>
+                  )}
+                </div>
+                <p className={classes.date}>{convertDate(chat.updatedAt)}</p>
                 <div className={classes.row}>
                   <p
                     style={{
@@ -769,6 +774,13 @@ export default function ChatBox({ floatChat }) {
                   </p>
                   <GroupIcon sx={{ fontSize: 16 }} />
                 </div>
+                <h4
+                  style={{
+                    fontFamily: "FarsiBold",
+                  }}
+                >
+                  {chat.title}
+                </h4>
               </div>
             </div>
           ))}

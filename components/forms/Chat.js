@@ -237,7 +237,13 @@ export default function Chat({ selectedChat, floatChat }) {
               onClick={() => handleUserSelection(index, !user.selection)}
             >
               <div>
-                <h3>{user.name.fa}</h3>
+                <h3
+                  style={{
+                    fontFamily: "FarsiBold",
+                  }}
+                >
+                  {user.name.fa}
+                </h3>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: applyFontToEnglishWords(
