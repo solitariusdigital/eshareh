@@ -754,7 +754,7 @@ export default function ChatBox({ floatChat }) {
                       sx={{ fontSize: 18 }}
                     />
                   </Tooltip>
-                  {!chat.isRead && (
+                  {chat.isRead && (
                     <div className={classes.notification}>
                       <CircleIcon
                         className="animate__animated animate__heartBeat"

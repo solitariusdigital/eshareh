@@ -150,6 +150,7 @@
 
     .group,
     .groupActive {
+      position: relative;
       @include mixins.row-space-between-center();
       height: 50px;
       margin-bottom: 8px;
@@ -175,12 +176,11 @@
 
         .indicator {
           @include mixins.row-space-between-center();
-          position: relative;
 
           .notification {
             position: absolute;
-            right: 20px;
-            top: 0px;
+            left: 10px;
+            top: 15px;
           }
         }
       }
@@ -259,7 +259,7 @@
     }
 
     .notification {
-      right: 18px !important;
+      left: -5px !important;
     }
   }
 
