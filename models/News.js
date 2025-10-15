@@ -23,6 +23,7 @@ const NewsSchema = new Schema(
     media: [],
     voice: [],
     active: Boolean,
+    page: String,
     newsId: String,
   },
   { timestamps: true }

@@ -1,7 +1,8 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.container {
+.container,
+.containerPortal {
   margin: auto;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
@@ -22,6 +23,15 @@
       font-size: 1.1rem;
     }
   }
+}
+
+.containerPortal {
+  width: 100%;
+  margin-top: 0px;
+  height: calc(100dvh - 100px);
+  max-height: 100%;
+  overflow-y: auto;
+  padding-bottom: 100px;
 }
 
 .newsCover {

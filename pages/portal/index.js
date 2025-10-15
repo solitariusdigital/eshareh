@@ -28,8 +28,10 @@ import setting from "@/assets/setting.svg";
 import ChatBox from "@/components/ChatBox";
 import Password from "@/components/forms/Password";
 import Admin from "@/components/Admin";
+import News from "@/components/News";
+import { getNews } from "@/services/getNews";
 
-export default function Portal() {
+export default function Portal({ adminNews, activeNews }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
@@ -383,6 +385,13 @@ export default function Portal() {
               <div className={classes.board}>
                 {boardType === "chat" && <ChatBox floatChat={false} />}
                 {boardType === "admin" && <Admin />}
+                {boardType === "news" && (
+                  <News
+                    adminNews={adminNews}
+                    activeNews={activeNews}
+                    portal={true}
+                  />
+                )}
                 {boardType === "setting" && <Password />}
               </div>
             </div>
@@ -391,4 +400,13 @@ export default function Portal() {
       )}
     </Fragment>
   );
+}
+
+export async function getServerSideProps(context) {
+  try {
+    const { news, activeNews } = await getNews(context);
+    return { props: { adminNews: news, activeNews } };
+  } catch (e) {
+    return { notFound: true };
+  }
 }

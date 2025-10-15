@@ -6,6 +6,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import { createNewsApi, updateNewsApi } from "@/services/api";
 import Image from "next/legacy/image";
 import loaderImage from "@/assets/loader.png";
+import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import Tooltip from "@mui/material/Tooltip";
 import {
   areAllStatesValid,
   extractParagraphs,
@@ -57,7 +60,7 @@ export default function News() {
   const [dateString, setDateString] = useState(
     editNews ? editNews.dateString : ""
   );
-
+  const [page, setPage] = useState("portal");
   const [alert, setAlert] = useState("");
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
@@ -306,6 +309,7 @@ export default function News() {
       media: mediaLinks,
       voice: voice,
       active: false,
+      page: page,
       newsId: newsId,
     };
     if (editNews) {
@@ -545,6 +549,29 @@ export default function News() {
               value={dateString}
               autoComplete="off"
             ></input>
+          </div>
+          <div className={classes.input}>
+            <div className={classes.barReverse}>
+              <p className={classes.label}>خبر جدید برای صفحه عمومی است؟</p>
+              <p className={classes.label}>
+                {page === "portal" ? "خیر" : "بله"}
+              </p>
+              {page === "portal" ? (
+                <Tooltip title="News">
+                  <RadioButtonUncheckedIcon
+                    className="icon"
+                    onClick={() => setPage("news")}
+                  />
+                </Tooltip>
+              ) : (
+                <Tooltip title="Portal">
+                  <RadioButtonCheckedIcon
+                    className="icon"
+                    onClick={() => setPage("portal")}
+                  />
+                </Tooltip>
+              )}
+            </div>
           </div>
         </div>
       </div>

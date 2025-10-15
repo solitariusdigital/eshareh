@@ -214,7 +214,7 @@ export default function RootLayout({ children }) {
                   fontFamily: "Farsi",
                 }}
               >
-                {!currentUser.notifications && (
+                {currentUser.notifications && (
                   <div className="notifications">
                     <CircleIcon
                       className="animate__animated animate__heartBeat"
