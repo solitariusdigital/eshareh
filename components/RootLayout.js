@@ -276,7 +276,6 @@ export default function RootLayout({ children }) {
                   </div>
                 </div>
               </div>
-
               {displayChatRoom && (
                 <div
                   style={{

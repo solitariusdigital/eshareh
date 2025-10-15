@@ -209,9 +209,8 @@ export default function News() {
       !isValidFields ||
       !title.fa ||
       !paragraph.fa ||
-      !titleSeo.fa ||
-      !descriptionSeo.fa ||
-      !category.fa
+      !category.fa ||
+      (page !== "portal" && (!titleSeo.fa || !descriptionSeo.fa))
     ) {
       showAlert("موارد ستاره‌دار الزامیست");
       return;
@@ -372,6 +371,7 @@ export default function News() {
               value={titleSeo.fa}
               autoComplete="off"
               dir="rtl"
+              disabled={page === "portal" ? true : false}
             ></input>
           </div>
           <div className={classes.inputTextArea}>
@@ -408,6 +408,7 @@ export default function News() {
               value={descriptionSeo.fa}
               autoComplete="off"
               dir="rtl"
+              disabled={page === "portal" ? true : false}
             ></textarea>
           </div>
         </div>
