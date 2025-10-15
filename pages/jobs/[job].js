@@ -102,7 +102,7 @@ export default function Job({ jobs, jobTitle }) {
                   <EditIcon
                     className="icon"
                     onClick={() => {
-                      Router.push("/admin");
+                      Router.push("/portal");
                       setEditJobs(displayJob);
                     }}
                   />

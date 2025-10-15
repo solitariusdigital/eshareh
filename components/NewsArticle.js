@@ -265,7 +265,7 @@ export default function News({ news, newsTitle }) {
                   <EditIcon
                     className="icon"
                     onClick={() => {
-                      Router.push("/admin");
+                      Router.push("/portal");
                       setEditNews(displayNews);
                     }}
                   />

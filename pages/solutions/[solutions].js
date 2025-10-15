@@ -363,7 +363,7 @@ export default function Solution({ solutions, projectTitle }) {
       text: false,
     };
     await createCoverApi(cover);
-    window.location.assign("/admin");
+    window.location.assign("/portal");
   };
 
   const makeDouble = async (index) => {
@@ -508,7 +508,7 @@ export default function Solution({ solutions, projectTitle }) {
                   <EditIcon
                     className="icon"
                     onClick={() => {
-                      Router.push("/admin");
+                      Router.push("/portal");
                       setEditSolution(project);
                       setEditNews(null);
                     }}

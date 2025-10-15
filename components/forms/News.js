@@ -60,7 +60,7 @@ export default function News() {
   const [dateString, setDateString] = useState(
     editNews ? editNews.dateString : ""
   );
-  const [page, setPage] = useState("portal");
+  const [page, setPage] = useState(editNews ? editNews.page : "portal");
   const [alert, setAlert] = useState("");
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);

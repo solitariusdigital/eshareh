@@ -39,6 +39,10 @@ export default function Portal({ adminNews, activeNews }) {
   const { displayFloatChat, setDisplayFloatChat } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
+  const { editNews, setEditNews } = useContext(StateContext);
+  const { editJobs, setEditJobs } = useContext(StateContext);
+  const { editSolution, setEditSolution } = useContext(StateContext);
+
   const [themeMode, setThemeMode] = useState("light");
   const [boardType, setBoardType] = useState(
     "chat" || "tasks" || "news" || "setting" || "admin"
@@ -75,6 +79,12 @@ export default function Portal({ adminNews, activeNews }) {
     setLanguage,
     setDisplayFloatChat,
   ]);
+
+  useEffect(() => {
+    if (editNews || editJobs || editSolution) {
+      setBoardType("admin");
+    }
+  }, [editNews, editJobs, editSolution]);
 
   useEffect(() => {
     if (currentUser) {
