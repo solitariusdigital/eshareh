@@ -358,7 +358,7 @@ export default function News() {
               style={{
                 fontFamily: "Farsi",
               }}
-              placeholder="..."
+              placeholder={page === "portal" ? "غیر فعال" : "..."}
               type="text"
               id="titleSeoFa"
               name="titleSeo"
@@ -395,7 +395,7 @@ export default function News() {
               style={{
                 fontFamily: "Farsi",
               }}
-              placeholder="..."
+              placeholder={page === "portal" ? "غیر فعال" : "..."}
               type="text"
               id="descriptionSeoFa"
               name="descriptionSeo"
