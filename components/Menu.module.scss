@@ -83,9 +83,13 @@
   }
 }
 
+.portal {
+  @include mixins.row-space-between-center();
+  margin: 0px 12px;
+}
+
 .languageControl {
-  width: 20px;
-  height: 20px;
+  @include mixins.row-space-between-center();
   cursor: pointer;
 }
 

@@ -11,19 +11,21 @@ import logoFarsi from "@/assets/logoFarsi.svg";
 import { CompactPicker } from "react-color";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import AutoFixNormalIcon from "@mui/icons-material/AutoFixNormal";
-import { getControlsApi, updateControlApi } from "@/services/api";
+import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import Tooltip from "@mui/material/Tooltip";
-import secureLocalStorage from "react-secure-storage";
 import search from "@/assets/search.svg";
 import searchHover from "@/assets/searchHover.svg";
 import english from "@/assets/english.svg";
 import englishHover from "@/assets/englishHover.svg";
 import farsi from "@/assets/farsi.svg";
 import farsiHover from "@/assets/farsiHover.svg";
+import secureLocalStorage from "react-secure-storage";
+import { getControlsApi, updateControlApi } from "@/services/api";
 
 export default function Menu() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { menuMobile, setMenuMobile } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -118,7 +120,7 @@ export default function Menu() {
               </Link>
             </div>
             {permissionControl === "admin" && (
-              <div>
+              <di className={classes.portal}>
                 <Tooltip title="Background">
                   <ColorLensIcon
                     className="icon"
@@ -149,7 +151,7 @@ export default function Menu() {
                     <CompactPicker onChangeComplete={handleChangeText} />
                   </div>
                 )}
-              </div>
+              </di>
             )}
           </div>
           <nav className={classes.largeNavigation}>
@@ -377,17 +379,31 @@ export default function Menu() {
                 )}
               </div>
               {menuMobile ? (
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setMenuMobile(!menuMobile)}
-                  sx={{ fontSize: 30, color: "#000000" }}
-                />
+                <Tooltip title="Close">
+                  <CloseIcon
+                    className="icon"
+                    onClick={() => setMenuMobile(!menuMobile)}
+                    sx={{ fontSize: 30, color: "#000000" }}
+                  />
+                </Tooltip>
               ) : (
-                <MenuIcon
-                  className="icon"
-                  onClick={() => setMenuMobile(!menuMobile)}
-                  sx={{ fontSize: 30, color: "#000000" }}
-                />
+                <Tooltip title="Menu">
+                  <MenuIcon
+                    className="icon"
+                    onClick={() => setMenuMobile(!menuMobile)}
+                    sx={{ fontSize: 30, color: "#000000" }}
+                  />
+                </Tooltip>
+              )}
+              {currentUser && (
+                <div className={classes.portal}>
+                  <Tooltip title="Portal">
+                    <SpaceDashboardIcon
+                      className="icon"
+                      onClick={() => Router.push("/portal")}
+                    />
+                  </Tooltip>
+                </div>
               )}
             </div>
           </div>
