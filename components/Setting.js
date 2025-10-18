@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import Image from "next/legacy/image";
 import classes from "./Setting.module.scss";
@@ -93,7 +93,7 @@ export default function Setting() {
               style={{
                 fontFamily: "English",
               }}
-              placeholder="09121234567"
+              placeholder="09..."
               type="tel"
               id="mobile"
               name="mobile"
