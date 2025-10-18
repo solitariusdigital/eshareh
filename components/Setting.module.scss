@@ -48,6 +48,10 @@
   background: config.$yellowShade;
   color: config.$black !important;
 
+  @include mixins.mobile {
+    width: 100%;
+  }
+
   .logo {
     position: absolute;
     z-index: 1;

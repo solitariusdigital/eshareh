@@ -40,7 +40,7 @@ export default function Setting() {
         }
         const qrCodeData = {
           name: currentUser.name.fa,
-          org: "Eshareh Digital Agency",
+          org: "آژانس تبلیغاتی اشاره",
           title: currentUser.title.fa,
           phone: "+982188044244",
           mobile: mobile ? `+98${mobile.slice(1)}` : null,
