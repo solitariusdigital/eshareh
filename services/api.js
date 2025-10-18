@@ -553,3 +553,15 @@ export const deleteNotificationApi = async (id) => {
   });
   return await response.json();
 };
+
+// vcard
+export const createVcardApi = async (data) => {
+  const response = await fetch("/api/vcard", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

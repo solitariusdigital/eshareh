@@ -26,7 +26,7 @@ import admin from "@/assets/admin.svg";
 import settingActive from "@/assets/settingActive.svg";
 import setting from "@/assets/setting.svg";
 import ChatBox from "@/components/ChatBox";
-import Password from "@/components/forms/Password";
+import Setting from "@/components/Setting";
 import Admin from "@/components/Admin";
 import News from "@/components/News";
 import { getNews } from "@/services/getNews";
@@ -402,7 +402,7 @@ export default function Portal({ adminNews, activeNews }) {
                     portal={true}
                   />
                 )}
-                {boardType === "setting" && <Password />}
+                {boardType === "setting" && <Setting />}
               </div>
             </div>
           </div>
