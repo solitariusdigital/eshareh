@@ -39,7 +39,7 @@ END:VCARD
   const qrDataUrl = await QRCode.toDataURL(vCard, {
     errorCorrectionLevel: "H",
     margin: 2,
-    width: 400,
+    width: 1000,
     color: {
       dark: "#000000",
       light: "#FFFFFF",

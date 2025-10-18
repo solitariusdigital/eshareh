@@ -1,2 +1,53 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+.navigation {
+  width: 35%;
+  margin: auto;
+  margin-bottom: 24px;
+  height: 40px;
+  border: 1px solid config.$lightgrey;
+  border-radius: 50px;
+  text-transform: capitalize;
+  @include mixins.row-space-between-center();
+  justify-content: space-around;
+  user-select: none;
+
+  @include mixins.mobile {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .nav {
+    font-weight: bold !important;
+
+    &:hover {
+      cursor: pointer;
+      color: config.$yellow;
+    }
+  }
+
+  .navActive {
+    color: config.$yellow;
+    font-weight: bold !important;
+  }
+}
+
+.vcard {
+  position: relative;
+  margin: auto;
+
+  .logo {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

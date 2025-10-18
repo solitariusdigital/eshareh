@@ -4,10 +4,14 @@ import Image from "next/legacy/image";
 import classes from "./Setting.module.scss";
 import Password from "./forms/Password";
 import { createVcardApi } from "@/services/api";
+import prevYellow from "@/assets/prevYellow.svg";
 
 export default function Setting() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [vCard, setVcard] = useState(null);
+  const [settingType, setSettingType] = useState("vcard" || "password");
+
+  const typesName = ["vcard", "password"];
 
   useEffect(() => {
     const qrCodeData = {
@@ -28,16 +32,32 @@ export default function Setting() {
   }, []);
 
   return (
-    <div>
-      <Password />
-      <div>
-        <h2>vCard QR Code</h2>
-        {vCard ? (
-          <Image width={250} height={250} src={vCard} alt="vCard" />
-        ) : (
-          <p>Generating...</p>
-        )}
+    <div className={classes.container}>
+      <div
+        className={classes.navigation}
+        style={{
+          fontFamily: "English",
+        }}
+      >
+        {typesName.map((type, index) => (
+          <p
+            key={index}
+            className={settingType === type ? classes.navActive : classes.nav}
+            onClick={() => setSettingType(type)}
+          >
+            {type}
+          </p>
+        ))}
       </div>
+      {settingType === "password" && <Password />}
+      {settingType === "vcard" && (
+        <div className={classes.vcard}>
+          {vCard && <Image width={280} height={280} src={vCard} alt="vCard" />}
+          <div className={classes.logo}>
+            <Image width={100} height={100} src={prevYellow} alt="logo" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
