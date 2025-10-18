@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, Fragment } from "react";
+import { useEffect, useState, useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import Image from "next/legacy/image";
 import classes from "./Setting.module.scss";
@@ -50,11 +50,20 @@ export default function Setting() {
         ))}
       </div>
       {settingType === "password" && <Password />}
-      {settingType === "vcard" && (
+      {settingType === "vcard" && vCard && (
         <div className={classes.vcard}>
-          {vCard && <Image width={280} height={280} src={vCard} alt="vCard" />}
-          <div className={classes.logo}>
-            <Image width={100} height={100} src={prevYellow} alt="logo" />
+          <h3
+            style={{
+              fontFamily: "FarsiBold",
+            }}
+          >
+            کارت ویزیت دیجیتال
+          </h3>
+          <div className={classes.vcard}>
+            <Image width={280} height={280} src={vCard} alt="vCard" />
+            <div className={classes.logo}>
+              <Image width={100} height={100} src={prevYellow} alt="logo" />
+            </div>
           </div>
         </div>
       )}

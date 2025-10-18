@@ -42,6 +42,11 @@
 .vcard {
   position: relative;
   margin: auto;
+  text-align: center;
+  padding: 12px;
+  border-radius: 5px;
+  background: config.$yellowShade;
+  color: config.$black !important;
 
   .logo {
     position: absolute;
