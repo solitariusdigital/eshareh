@@ -55,4 +55,27 @@
     top: 50%;
     transform: translate(-50%, -50%);
   }
+
+  .input {
+    margin: 12px 0px;
+
+    input {
+      @include mixins.input();
+      width: 100%;
+    }
+
+    .bar {
+      @include mixins.row-space-between-center();
+      flex-direction: row-reverse;
+    }
+
+    .label {
+      color: config.$grey;
+    }
+
+    .alert {
+      margin: 8px 0px;
+      color: config.$red;
+    }
+  }
 }

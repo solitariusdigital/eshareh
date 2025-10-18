@@ -129,6 +129,7 @@ export default function Team({ pages, mediaData }) {
       },
       email: email,
       password: cryptPassword(),
+      mobile: "",
       media: mediaLink,
       permission: "user",
       display: userActivation,
