@@ -126,24 +126,28 @@ export default function Setting() {
               setDisplayVcard(!displayVcard);
             }}
           />
-          <h3
-            style={{
-              fontFamily: "FarsiBold",
-            }}
-          >
-            کارت ویزیت دیجیتال
-          </h3>
           <div className={classes.card}>
-            <Image width={280} height={280} src={vCard} alt="vCard" />
+            <Image
+              src={vCard}
+              width={280}
+              height={280}
+              alt="vCard"
+              as="image"
+            />
             <div className={classes.logo}>
-              <Image width={100} height={100} src={prevYellow} alt="logo" />
+              <Image
+                src={prevYellow}
+                width={100}
+                height={100}
+                alt="logo"
+                as="image"
+              />
             </div>
           </div>
           <Image
-            className={classes.image}
+            src={logoFarsi}
             width={280}
             height={120}
-            src={logoFarsi}
             alt="logo"
             as="image"
           />
