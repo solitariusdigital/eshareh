@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import Image from "next/legacy/image";
+import logoFarsi from "@/assets/logoFarsi.svg";
 import classes from "./Setting.module.scss";
 import Password from "./forms/Password";
 import { createVcardApi } from "@/services/api";
@@ -12,6 +13,7 @@ export default function Setting() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [settingType, setSettingType] = useState("vcard" || "password");
   const [vCard, setVcard] = useState(null);
+  const [displayVcard, setDisplayVcard] = useState(false);
   const [mobile, setMobile] = useState("");
   const typesName = ["vcard", "password"];
 
@@ -76,8 +78,8 @@ export default function Setting() {
         ))}
       </div>
       {settingType === "password" && <Password />}
-      {settingType === "vcard" && vCard && (
-        <div className={classes.vcard}>
+      {settingType === "vcard" && (
+        <Fragment>
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>موبایل</p>
@@ -103,6 +105,27 @@ export default function Setting() {
               maxLength={11}
             />
           </div>
+          <button
+            className={classes.button}
+            style={{
+              fontFamily: "FarsiBold",
+            }}
+            onClick={() => {
+              setDisplayVcard(!displayVcard);
+            }}
+          >
+            کارت ویزیت دیجیتال
+          </button>
+        </Fragment>
+      )}
+      {vCard && displayVcard && (
+        <div className={classes.vcard}>
+          <CloseIcon
+            className="icon"
+            onClick={() => {
+              setDisplayVcard(!displayVcard);
+            }}
+          />
           <h3
             style={{
               fontFamily: "FarsiBold",
@@ -110,12 +133,20 @@ export default function Setting() {
           >
             کارت ویزیت دیجیتال
           </h3>
-          <div className={classes.vcard}>
+          <div className={classes.card}>
             <Image width={280} height={280} src={vCard} alt="vCard" />
             <div className={classes.logo}>
               <Image width={100} height={100} src={prevYellow} alt="logo" />
             </div>
           </div>
+          <Image
+            className={classes.image}
+            width={280}
+            height={120}
+            src={logoFarsi}
+            alt="logo"
+            as="image"
+          />
         </div>
       )}
     </div>

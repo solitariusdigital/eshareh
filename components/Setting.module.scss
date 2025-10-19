@@ -5,6 +5,17 @@
   display: flex;
   flex-direction: column;
   user-select: none;
+
+  .button {
+    @include mixins.button(config.$yellow, config.$white);
+    & {
+      margin: 24px auto;
+    }
+    &:hover {
+      background: config.$white;
+      color: config.$yellow;
+    }
+  }
 }
 
 .navigation {
@@ -40,46 +51,62 @@
 }
 
 .vcard {
-  position: relative;
-  margin: auto;
-  text-align: center;
-  padding: 12px;
-  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 5;
+  width: 100%;
+  height: 100dvh;
   background: config.$yellowShade;
-  color: config.$black !important;
 
   @include mixins.mobile {
     width: 100%;
   }
 
-  .logo {
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  h3 {
+    margin: 12px;
   }
 
-  .input {
-    margin: 12px 0px;
+  .card {
+    position: relative;
 
-    input {
-      @include mixins.input();
-      width: 100%;
+    .logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
+  }
+}
 
-    .bar {
-      @include mixins.row-space-between-center();
-      flex-direction: row-reverse;
-    }
+.input {
+  width: 35%;
+  margin: auto;
 
-    .label {
-      color: config.$grey;
-    }
+  @include mixins.mobile {
+    width: 100%;
+  }
 
-    .alert {
-      margin: 8px 0px;
-      color: config.$red;
-    }
+  input {
+    @include mixins.input();
+    width: 100%;
+  }
+
+  .bar {
+    @include mixins.row-space-between-center();
+    flex-direction: row-reverse;
+  }
+
+  .label {
+    color: config.$grey;
+  }
+
+  .alert {
+    margin: 8px 0px;
+    color: config.$red;
   }
 }
