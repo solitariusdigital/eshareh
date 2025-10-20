@@ -20,11 +20,10 @@
 
 .navigation {
   width: 35%;
-  margin: auto;
-  margin-bottom: 24px;
+  margin: 12px auto;
+  border-radius: 50px;
   height: 40px;
   border: 1px solid config.$lightgrey;
-  border-radius: 50px;
   text-transform: capitalize;
   @include mixins.row-space-between-center();
   justify-content: space-around;
@@ -32,15 +31,17 @@
 
   @include mixins.mobile {
     width: 100%;
-    justify-content: space-around;
   }
 
   .nav {
     font-weight: bold !important;
+    font-size: small;
 
-    &:hover {
-      cursor: pointer;
-      color: config.$yellow;
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$yellow;
+      }
     }
   }
 
