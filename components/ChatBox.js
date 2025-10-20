@@ -262,6 +262,16 @@ export default function ChatBox({ floatChat }) {
     await updateCurrentChat(lastMessage);
     setMessageContent("");
     fetchMessages();
+
+    let messageBox = document.querySelector("#messageBox");
+    if (messageBox) {
+      setTimeout(() => {
+        messageBox.scrollTo({
+          top: messageBox.scrollHeight,
+          behavior: "smooth",
+        });
+      }, 500);
+    }
   };
 
   const updateCurrentChat = async (lastMessage) => {
@@ -574,7 +584,7 @@ export default function ChatBox({ floatChat }) {
                   )}
                 </div>
               </div>
-              <div className={classes.messageBox}>
+              <div className={classes.messageBox} id="messageBox">
                 {chatRender.map((chat, index) => (
                   <div
                     key={index}
@@ -754,7 +764,7 @@ export default function ChatBox({ floatChat }) {
                       sx={{ fontSize: 18 }}
                     />
                   </Tooltip>
-                  {chat.isRead && (
+                  {!chat.isRead && (
                     <div className={classes.notification}>
                       <CircleIcon
                         className="animate__animated animate__heartBeat"
