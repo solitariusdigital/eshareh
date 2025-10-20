@@ -358,7 +358,7 @@
     max-height: 780px;
 
     .image {
-      object-position: 0% 0%;
+      object-position: 0% 50%;
     }
 
     @include mixins.mobile {
@@ -378,7 +378,7 @@
     object-fit: cover;
 
     @include mixins.mobile {
-      height: 250px;
+      height: 200px;
     }
     @include mixins.tablet {
       height: 650px;

@@ -330,6 +330,29 @@ export default function News() {
 
   return (
     <Fragment>
+      <div className={classes.form} style={{ width: "50%" }}>
+        <div className={classes.input}>
+          <div className={classes.barReverse}>
+            <p className={classes.label}>خبر جدید برای صفحه عمومی است؟</p>
+            <p className={classes.label}>{page === "portal" ? "خیر" : "بله"}</p>
+            {page === "portal" ? (
+              <Tooltip title="News">
+                <RadioButtonUncheckedIcon
+                  className="icon"
+                  onClick={() => setPage("news")}
+                />
+              </Tooltip>
+            ) : (
+              <Tooltip title="Portal">
+                <RadioButtonCheckedIcon
+                  className="icon"
+                  onClick={() => setPage("portal")}
+                />
+              </Tooltip>
+            )}
+          </div>
+        </div>
+      </div>
       <div className={classes.container}>
         <div
           className={classes.form}
@@ -550,29 +573,6 @@ export default function News() {
               value={dateString}
               autoComplete="off"
             ></input>
-          </div>
-          <div className={classes.input}>
-            <div className={classes.barReverse}>
-              <p className={classes.label}>خبر جدید برای صفحه عمومی است؟</p>
-              <p className={classes.label}>
-                {page === "portal" ? "خیر" : "بله"}
-              </p>
-              {page === "portal" ? (
-                <Tooltip title="News">
-                  <RadioButtonUncheckedIcon
-                    className="icon"
-                    onClick={() => setPage("news")}
-                  />
-                </Tooltip>
-              ) : (
-                <Tooltip title="Portal">
-                  <RadioButtonCheckedIcon
-                    className="icon"
-                    onClick={() => setPage("portal")}
-                  />
-                </Tooltip>
-              )}
-            </div>
           </div>
         </div>
       </div>

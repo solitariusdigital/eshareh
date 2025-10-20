@@ -21,6 +21,7 @@
 .navigation {
   width: 35%;
   margin: 12px auto;
+  margin-bottom: 24px;
   border-radius: 50px;
   height: 40px;
   border: 1px solid config.$lightgrey;
@@ -98,6 +99,7 @@
   .bar {
     @include mixins.row-space-between-center();
     flex-direction: row-reverse;
+    margin-bottom: 8px;
   }
 
   .label {
