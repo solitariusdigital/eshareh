@@ -1,11 +1,10 @@
 import { useEffect, useState, useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import Image from "next/legacy/image";
-import logoFarsi from "@/assets/logoFarsi.svg";
+import logoEnglish from "@/assets/logoEnglish.svg";
 import classes from "./Setting.module.scss";
 import Password from "./forms/Password";
 import { createVcardApi } from "@/services/api";
-import prevYellow from "@/assets/prevYellow.svg";
 import CloseIcon from "@mui/icons-material/Close";
 import { getSingleUserApi, updateUserApi } from "@/services/api";
 
@@ -122,32 +121,24 @@ export default function Setting() {
         <div className={classes.vcard}>
           <CloseIcon
             className="icon"
+            sx={{ fontSize: 18 }}
             onClick={() => {
               setDisplayVcard(!displayVcard);
             }}
           />
-          <div className={classes.card}>
+          <div className={classes.code}>
             <Image
               src={vCard}
-              width={280}
-              height={280}
+              width={200}
+              height={200}
               alt="vCard"
               as="image"
             />
-            <div className={classes.logo}>
-              <Image
-                src={prevYellow}
-                width={100}
-                height={100}
-                alt="logo"
-                as="image"
-              />
-            </div>
           </div>
           <Image
-            src={logoFarsi}
-            width={280}
-            height={120}
+            src={logoEnglish}
+            width={200}
+            height={100}
             alt="logo"
             as="image"
           />
