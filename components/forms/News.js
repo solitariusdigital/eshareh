@@ -22,6 +22,7 @@ const jalaali = require("jalali-date");
 
 export default function News() {
   const { editNews, setEditNews } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
   const [fields, setFields] = useState(
     editNews
       ? editNews.fields
@@ -328,9 +329,17 @@ export default function News() {
     }, 3000);
   };
 
+  const fullSizeChatBox =
+    screenSize === "desktop" || screenSize === "tablet-landscape";
+
   return (
     <Fragment>
-      <div className={classes.form} style={{ width: "50%" }}>
+      <div
+        className={classes.form}
+        style={{
+          width: fullSizeChatBox ? "50%" : "100%",
+        }}
+      >
         <div className={classes.input}>
           <div className={classes.barReverse}>
             <p className={classes.label}>خبر جدید برای صفحه عمومی است؟</p>
