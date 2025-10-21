@@ -137,7 +137,7 @@ export default function Setting() {
           </div>
           <Image
             src={logoEnglish}
-            width={200}
+            width={150}
             height={100}
             alt="logo"
             as="image"
