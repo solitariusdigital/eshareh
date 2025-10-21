@@ -7,6 +7,16 @@
   direction: rtl;
   user-select: none;
 
+  .videoContainer {
+    .video {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
   h1,
   .title {
     position: relative;
