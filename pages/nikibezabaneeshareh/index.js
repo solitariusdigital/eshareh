@@ -32,7 +32,7 @@ export default function Nikibezabaneeshareh() {
       () => {
         setDisplayInfo(true);
       },
-      fullSizeChatBox ? 8000 : 6500
+      fullSizeChatBox ? 8500 : 7000
     );
     return () => clearTimeout(timeoutId);
   }, [screenSize, fullSizeChatBox]);
