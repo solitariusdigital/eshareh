@@ -48,6 +48,7 @@
 
   .navActive {
     color: config.$yellow;
+    font-size: small;
     font-weight: bold !important;
   }
 }
@@ -71,7 +72,7 @@
   }
 
   .code {
-    margin-top: 12px;
+    margin-top: 24px;
   }
 }
 

@@ -126,7 +126,7 @@ export default function Setting() {
               setDisplayVcard(!displayVcard);
             }}
           />
-          <div className={classes.code}>
+          <div className={`${classes.code} animate__animated animate__pulse`}>
             <Image
               src={vCard}
               width={200}
