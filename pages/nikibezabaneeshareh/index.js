@@ -89,7 +89,7 @@ export default function Nikibezabaneeshareh() {
           <div className={classes.videoContainer}>
             {displayInfo && (
               <h1
-                className={classes.title}
+                className={`${classes.title} animate__animated animate__slideInDown`}
                 style={{
                   fontFamily: "FarsiFat",
                 }}
@@ -110,7 +110,11 @@ export default function Nikibezabaneeshareh() {
           </div>
         )}
         {displayInfo && (
-          <div className={classes.information}>
+          <div
+            className={`${classes.information} animate__animated ${
+              fullSizeChatBox ? "animate__slideInRight" : "animate__slideInUp"
+            }`}
+          >
             {fullSizeChatBox && (
               <h1
                 style={{
