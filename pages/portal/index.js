@@ -100,7 +100,6 @@ export default function Portal({ adminNews, activeNews }) {
       src: () => (boardType === "chat" ? chat : chatActive),
       hoverSrc: () => (boardType === "chat" ? chatActive : chat),
       alt: "chat",
-      label: "چت",
       requiredPermission: "all",
       onClick: () => setBoardType("chat"),
     },
@@ -108,7 +107,6 @@ export default function Portal({ adminNews, activeNews }) {
       src: () => (boardType === "tasks" ? tasksActive : tasks),
       hoverSrc: () => (boardType === "tasks" ? tasks : tasksActive),
       alt: "tasks",
-      label: "وظایف",
       requiredPermission: "all",
       onClick: () => setBoardType("tasks"),
     },
@@ -116,7 +114,6 @@ export default function Portal({ adminNews, activeNews }) {
       src: () => (boardType === "news" ? newsActive : news),
       hoverSrc: () => (boardType === "news" ? news : newsActive),
       alt: "news",
-      label: "اخبار",
       requiredPermission: "all",
       onClick: () => setBoardType("news"),
     },
@@ -339,7 +336,6 @@ export default function Portal({ adminNews, activeNews }) {
                             }
                             alt={item.alt}
                           />
-                          <p>{item.label}</p>
                         </div>
                       );
                     })}
