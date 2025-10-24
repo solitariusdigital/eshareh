@@ -6,8 +6,8 @@
   width: config.$content-width;
   width: 100%;
   position: relative;
-  cursor: pointer;
   user-select: none;
+  cursor: pointer;
 
   .information,
   .informationReverse {
@@ -65,7 +65,7 @@
     margin-top: 50px;
 
     @include mixins.mobile {
-      height: 100px;
+      height: 120px;
     }
 
     .video {
@@ -75,7 +75,7 @@
       object-fit: cover;
 
       @include mixins.mobile {
-        height: 100px;
+        height: 120px;
       }
     }
   }
