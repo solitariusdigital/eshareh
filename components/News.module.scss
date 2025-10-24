@@ -371,7 +371,7 @@
       height: 40px;
       margin-right: 10px;
       color: config.$black;
-      @include mixins.border-radius(50px);
+      @include mixins.border-radius(5px);
       @include mixins.transparentBackground(0.5, config.$white);
 
       @include mixins.mobile {

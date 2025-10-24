@@ -186,20 +186,16 @@
     position: absolute;
     bottom: 10px;
     left: 10px;
-    padding: 8px 20px;
+    padding: 8px 12px;
     color: config.$white;
     user-select: none;
     @include mixins.transparentBackground(0.3, config.$lightgrey);
-    @include mixins.border-radius(50px);
+    @include mixins.border-radius(5px);
 
     @include mixins.allDesktop {
       &:hover {
         color: config.$yellow;
       }
-    }
-
-    @include mixins.mobile {
-      scale: 0.8;
     }
   }
 
@@ -264,18 +260,16 @@
   .item {
     display: flex;
     align-items: center;
-    padding: 8px 12px;
+    padding: 8px;
     z-index: 1;
     height: 40px;
-    margin-right: 10px;
+    margin-right: 8px;
     color: config.$black;
-    @include mixins.border-radius(50px);
+    @include mixins.border-radius(5px);
     @include mixins.transparentBackground(0.5, config.$white);
 
     @include mixins.mobile {
-      margin-bottom: 10px;
       scale: 0.8;
-      margin: 0px;
     }
   }
 
@@ -369,6 +363,7 @@
     }
   }
 }
+
 .gridList {
   direction: rtl;
 }
