@@ -373,10 +373,12 @@ export default function News({ news, newsTitle }) {
                             </p>
                           </div>
                         )}
-                        <div className={classes.imageContainer}>
+                        <div
+                          className={classes.imageContainer}
+                          style={{ aspectRatio: "16 / 9" }}
+                        >
                           {image.type === "image" ? (
                             <Image
-                              className={classes.image}
                               src={image.link}
                               blurDataURL={image.link}
                               placeholder="blur"

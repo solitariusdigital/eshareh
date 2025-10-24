@@ -637,6 +637,7 @@ export default function Solution({ solutions, projectTitle }) {
                       </div>
                       <div
                         className={classes.imageContainer}
+                        style={{ aspectRatio: "16 / 9" }}
                         onClick={() => gallerySlider()}
                       >
                         {image.type === "image" ? (
@@ -647,7 +648,7 @@ export default function Solution({ solutions, projectTitle }) {
                             placeholder="blur"
                             alt={project[languageType].title}
                             layout="fill"
-                            objectFit="cover"
+                            objectFit="contain"
                             as="image"
                             priority
                           />
@@ -757,7 +758,10 @@ export default function Solution({ solutions, projectTitle }) {
                         </div>
                       )}
                     {image.type === "image" && (
-                      <div onClick={() => gallerySlider()}>
+                      <div
+                        style={{ aspectRatio: "16 / 9" }}
+                        onClick={() => gallerySlider()}
+                      >
                         <Image
                           className={
                             index === 0 && project.slideMedia.length === 0
@@ -885,7 +889,10 @@ export default function Solution({ solutions, projectTitle }) {
                               </div>
                             )}
                           {image.type === "image" ? (
-                            <div onClick={() => gallerySlider()}>
+                            <div
+                              style={{ aspectRatio: "4 / 5" }}
+                              onClick={() => gallerySlider()}
+                            >
                               <Image
                                 className={
                                   index === 0 && project.slideMedia.length === 0
@@ -946,7 +953,10 @@ export default function Solution({ solutions, projectTitle }) {
                                 </div>
                               )}
                             {image.type === "image" ? (
-                              <div onClick={() => gallerySlider()}>
+                              <div
+                                style={{ aspectRatio: "4 / 5" }}
+                                onClick={() => gallerySlider()}
+                              >
                                 <Image
                                   className={
                                     index === 0 &&
