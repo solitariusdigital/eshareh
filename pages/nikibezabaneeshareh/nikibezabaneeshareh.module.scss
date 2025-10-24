@@ -120,11 +120,11 @@
       align-items: center;
       height: 10vh;
       width: 65%;
-      border-radius: 5vw;
       margin: 2vw auto;
       margin-top: 1vw;
       background: config.$yellow;
       box-shadow: config.$button-shadow;
+      @include mixins.border-radius(5vw);
 
       @include mixins.mobile {
         height: 6vh;

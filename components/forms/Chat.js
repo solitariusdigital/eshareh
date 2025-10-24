@@ -75,7 +75,7 @@ export default function Chat({ selectedChat, floatChat }) {
       return;
     }
     if (usersId.length < 2) {
-      showAlert("انتخاب ۲ عضو الزامیست");
+      showAlert("حداقل ۲ عضو الزامیست");
       return;
     }
     setDisableButton(true);

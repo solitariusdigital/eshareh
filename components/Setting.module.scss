@@ -22,10 +22,10 @@
   width: 35%;
   margin: 12px auto;
   margin-bottom: 24px;
-  border-radius: 50px;
   height: 40px;
   border: 1px solid config.$lightgrey;
   text-transform: capitalize;
+  @include mixins.border-radius(50px);
   @include mixins.row-space-between-center();
   justify-content: space-around;
   user-select: none;

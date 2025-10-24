@@ -167,7 +167,7 @@
   margin: auto;
   margin-bottom: 20px;
   border: 1px solid config.$lightgrey;
-  border-radius: 50px;
+  @include mixins.border-radius(50px);
 
   @include mixins.mobile {
     width: 100%;
@@ -293,7 +293,7 @@
       width: 200px;
       color: config.$white;
       background: config.$grey;
-      border-radius: 4px;
+      @include mixins.border-radius(5px);
 
       @include mixins.mobile {
         width: 150px;
@@ -442,6 +442,7 @@
   margin-top: 16px;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
+  direction: rtl;
 
   @include mixins.mobile {
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
@@ -456,10 +457,9 @@
 
   .row {
     @include mixins.row-space-between-center();
-    flex-direction: row-reverse;
     border: 1px solid config.$lightgrey;
-    padding: 8px;
-    border-radius: 5px;
+    padding: 4px;
+    @include mixins.border-radius(5px);
 
     &:hover {
       cursor: pointer;

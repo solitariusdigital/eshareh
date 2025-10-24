@@ -4,10 +4,10 @@
 .containerGrid,
 .containerFloat {
   height: 100%;
-  border-radius: 5px;
   text-align: right;
   background: config.$white;
   border: 1px solid config.$lightgrey;
+  @include mixins.border-radius(5px);
 
   .date {
     color: config.$grey !important;
@@ -65,7 +65,7 @@
         @include mixins.input();
         height: 50px;
         min-width: 80%;
-        border-radius: 5px;
+        @include mixins.border-radius(5px);
 
         @include mixins.mobile {
           min-width: 75%;
@@ -86,8 +86,8 @@
       .senderMsg {
         margin: 4px 0px;
         padding: 4px 8px;
-        border-radius: 5px;
         background: config.$generalMessage;
+        @include mixins.border-radius(5px);
 
         .row {
           @include mixins.row-space-between-center();
@@ -124,7 +124,7 @@
         position: relative;
         width: 35px;
         height: 35px;
-        border-radius: 50px;
+        @include mixins.border-radius(50px);
       }
 
       .status {
@@ -154,8 +154,8 @@
       @include mixins.row-space-between-center();
       height: 50px;
       margin-bottom: 8px;
-      border-radius: 5px;
       border: 1px solid config.$lightgrey;
+      @include mixins.border-radius(5px);
 
       &:hover {
         border: 1px solid config.$yellowShade;
@@ -209,9 +209,9 @@
     .document {
       margin-bottom: 8px;
       padding: 4px;
-      border-radius: 5px;
       text-align: left;
       border: 1px solid config.$lightgrey;
+      @include mixins.border-radius(5px);
 
       .row {
         @include mixins.row-space-between-center();

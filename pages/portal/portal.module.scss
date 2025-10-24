@@ -47,8 +47,8 @@
         position: relative;
         width: 65px;
         height: 65px;
-        border-radius: 50px;
         margin-left: 30px;
+        @include mixins.border-radius(50px);
       }
     }
   }
@@ -74,7 +74,7 @@
       align-items: center;
       background: config.$yellow;
       width: 65px;
-      border-radius: 5px;
+      @include mixins.border-radius(5px);
 
       @include mixins.mobile {
         width: 100%;

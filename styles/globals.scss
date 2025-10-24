@@ -191,8 +191,8 @@ p {
     position: relative;
     width: 30px;
     height: 30px;
-    border-radius: 50px;
     margin-left: 12px;
+    @include mixins.border-radius(50px);
   }
 
   .row {
@@ -221,6 +221,7 @@ p {
 .controlPanel,
 .dropDown {
   position: absolute;
+  z-index: 5;
   left: 50%;
   top: 120px;
   transform: translate(-50%, -50%);
@@ -229,11 +230,10 @@ p {
   justify-content: space-around;
   align-items: center;
   height: 40px;
-  border-radius: 50px;
   box-shadow: config.$image-shadow;
   background: config.$white;
   user-select: none;
-  z-index: 5;
+  @include mixins.border-radius(50px);
 
   @include mixins.mobile {
     width: 40%;
@@ -247,7 +247,7 @@ p {
   top: 190px;
   flex-direction: column;
   height: 80px;
-  border-radius: 4px;
+  @include mixins.border-radius(5px);
 
   .confirm {
     color: config.$green;
@@ -278,8 +278,8 @@ label.file input[type="file"] {
   padding: 8px;
   color: config.$grey;
   height: 50px;
-  border-radius: 4px;
   cursor: pointer;
+  @include mixins.border-radius(5px);
 }
 .file:hover {
   color: config.$yellow;

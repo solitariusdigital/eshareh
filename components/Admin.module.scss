@@ -13,7 +13,7 @@
 .navigation {
   width: 35%;
   margin: 12px auto;
-  border-radius: 50px;
+  @include mixins.border-radius(50px);
   height: 40px;
   border: 1px solid config.$lightgrey;
   text-transform: capitalize;
