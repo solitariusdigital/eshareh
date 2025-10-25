@@ -19,17 +19,17 @@ import {
   updateUserApi,
 } from "@/services/api";
 
-export default function Portal({ selectedChat, floatChat }) {
+export default function Assignment({ selectedData, floatChat, type }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
-  const [title, setTitle] = useState(selectedChat?.title || "");
+  const [title, setTitle] = useState(selectedData?.title || "");
   const [description, setDescription] = useState(
-    selectedChat?.description || ""
+    selectedData?.description || ""
   );
   const [users, setUsers] = useState([]);
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
-  const [editChat, setEditChat] = useState(selectedChat);
+  const [editChat, setEditChat] = useState(selectedData);
   const router = useRouter();
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Portal({ selectedChat, floatChat }) {
         const users = await getUsersApi();
         let addSelectOption = users.map((user) => ({
           ...user,
-          selection: selectedChat?.users.includes(user._id) ? true : false,
+          selection: selectedData?.users.includes(user._id) ? true : false,
         }));
         setUsers(addSelectOption);
       } catch (error) {
@@ -152,7 +152,7 @@ export default function Portal({ selectedChat, floatChat }) {
           <div className={classes.bar}>
             <p className={classes.label}>
               <span>*</span>
-              عنوان چت
+              عنوان
             </p>
             <CloseIcon
               className="icon"
@@ -276,7 +276,7 @@ export default function Portal({ selectedChat, floatChat }) {
           }}
           onClick={() => createChat()}
         >
-          {editChat ? "ویرایش چت" : "ذخیره چت"}
+          {editChat ? "ویرایش" : "ذخیره"}
         </button>
       </div>
     </Fragment>

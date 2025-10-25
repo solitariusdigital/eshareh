@@ -3,7 +3,7 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./TaskBox.module.scss";
 import CircleIcon from "@mui/icons-material/Circle";
 import Tooltip from "@mui/material/Tooltip";
-import Chat from "@/components/forms/Portal";
+import Chat from "@/components/forms/Assignment";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function TaskCard() {

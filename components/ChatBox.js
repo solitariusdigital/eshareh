@@ -16,7 +16,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
-import Portal from "@/components/forms/Portal";
+import Assignment from "@/components/forms/Assignment";
 import imageCompression from "browser-image-compression";
 import {
   convertDate,
@@ -809,7 +809,11 @@ export default function ChatBox({ floatChat }) {
             onClick={() => setDisplayPopup(false)}
             sx={{ fontSize: 20 }}
           />
-          <Portal selectedChat={selectedChat} floatChat={floatChat} />
+          <Assignment
+            selectedData={selectedChat}
+            floatChat={floatChat}
+            type="chat"
+          />
         </div>
       )}
     </div>

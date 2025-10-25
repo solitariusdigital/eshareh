@@ -10,12 +10,12 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import TaskCard from "@/components/TaskCard";
-import Portal from "@/components/forms/Portal";
+import Assignment from "@/components/forms/Assignment";
 
 export default function TaskBox() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const [selectedChat, setSelectedChat] = useState(null);
+  const [selectedTask, setSelectedTask] = useState(null);
   const [displayPopup, setDisplayPopup] = useState(false);
 
   const fullSizeChatBox =
@@ -74,7 +74,11 @@ export default function TaskBox() {
             onClick={() => setDisplayPopup(false)}
             sx={{ fontSize: 20 }}
           />
-          <Portal selectedChat={selectedChat} floatChat={false} />
+          <Assignment
+            selectedData={selectedTask}
+            floatChat={false}
+            type="task"
+          />
         </div>
       )}
     </Fragment>
