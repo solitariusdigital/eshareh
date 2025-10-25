@@ -33,7 +33,7 @@ export default function TaskBox() {
             >
               وظایف
             </h3>
-            <Tooltip title="New Task">
+            <Tooltip title="New Project">
               <AddIcon
                 className="icon"
                 sx={{ fontSize: 20 }}

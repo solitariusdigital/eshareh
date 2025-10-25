@@ -12,7 +12,6 @@
 
   .column {
     padding: 12px;
-    border: 1px solid config.$lightgrey;
     background: config.$generalMessage;
     @include mixins.border-radius(5px);
 

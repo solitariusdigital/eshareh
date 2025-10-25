@@ -147,7 +147,8 @@ export default function Assignment({ selectedData, floatChat, type }) {
 
   return (
     <Fragment>
-      <div className={classes.usersInput}>
+      <div className={classes.assignment}>
+        {!editChat && <h3>{type === "task" ? "پروژه جدید" : "چت جدید"}</h3>}
         <div className={classes.input}>
           <div className={classes.bar}>
             <p className={classes.label}>
@@ -226,7 +227,9 @@ export default function Assignment({ selectedData, floatChat, type }) {
       </div>
       <div
         className={
-          floatChat ? classes.usersSelectionFloat : classes.usersSelection
+          floatChat
+            ? classes.assignmentSelectionFloat
+            : classes.assignmentSelection
         }
       >
         {users?.map((user, index) => {

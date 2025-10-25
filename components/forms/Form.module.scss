@@ -397,10 +397,11 @@
   }
 }
 
-.usersInput {
+.assignment {
   width: 100%;
   max-width: 400px;
   margin: 12px 0px;
+  text-align: center;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
@@ -434,8 +435,8 @@
   }
 }
 
-.usersSelection,
-.usersSelectionFloat {
+.assignmentSelection,
+.assignmentSelectionFloat {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
   gap: 4px;
@@ -468,7 +469,7 @@
   }
 }
 
-.usersSelectionFloat {
+.assignmentSelectionFloat {
   grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   width: calc(100% - 24px);
 }
