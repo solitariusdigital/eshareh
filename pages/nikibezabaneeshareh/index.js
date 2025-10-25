@@ -191,7 +191,10 @@ export default function Nikibezabaneeshareh() {
             </a>
           </div>
         )}
-        <div className={classes.logo}>
+        <div
+          className={classes.logo}
+          onClick={() => window.location.assign("/")}
+        >
           <Image
             src={esharehWhite}
             layout="fill"

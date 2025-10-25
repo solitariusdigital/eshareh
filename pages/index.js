@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useContext, Fragment, useState } from "react";
+import { useContext, Fragment, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import CoverSlider from "@/components/CoverSlider";
 import CardGrid from "@/components/CardGrid";
@@ -31,6 +31,9 @@ export default function Home({
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { solutionsCategory, setSolutionsCategory } = useContext(StateContext);
+  const { displayMenu, setDisplayMenu } = useContext(StateContext);
+  const { displayFooter, setDisplayFooter } = useContext(StateContext);
+
   const [titleOne, setTitleOne] = useState({
     en: pageData.content[0].data.en,
     fa: pageData.content[0].data.fa,
@@ -72,6 +75,12 @@ export default function Home({
   const [paragraphTwoSetting, setParagraphTwoSetting] = useState(
     pageData.content[4].setting
   );
+
+  useEffect(() => {
+    setDisplayMenu(true);
+    setDisplayFooter(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const divideArray = (solutions) => {
     const dividedArrays = [];
