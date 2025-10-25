@@ -19,7 +19,7 @@ import {
   updateUserApi,
 } from "@/services/api";
 
-export default function Chat({ selectedChat, floatChat }) {
+export default function Portal({ selectedChat, floatChat }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [title, setTitle] = useState(selectedChat?.title || "");

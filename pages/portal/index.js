@@ -26,6 +26,7 @@ import admin from "@/assets/admin.svg";
 import settingActive from "@/assets/settingActive.svg";
 import setting from "@/assets/setting.svg";
 import ChatBox from "@/components/ChatBox";
+import TaskBox from "@/components/TaskBox";
 import Setting from "@/components/Setting";
 import Admin from "@/components/Admin";
 import News from "@/components/News";
@@ -390,7 +391,7 @@ export default function Portal({ adminNews, activeNews }) {
               </div>
               <div className={classes.board}>
                 {boardType === "chat" && <ChatBox floatChat={false} />}
-                {boardType === "admin" && <Admin />}
+                {/* {boardType === "tasks" && <TaskBox />} */}
                 {boardType === "news" && (
                   <News
                     adminNews={adminNews}
@@ -398,6 +399,7 @@ export default function Portal({ adminNews, activeNews }) {
                     portal={true}
                   />
                 )}
+                {boardType === "admin" && <Admin />}
                 {boardType === "setting" && <Setting />}
               </div>
             </div>
