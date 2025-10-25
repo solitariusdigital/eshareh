@@ -5,11 +5,17 @@ import Image from "next/legacy/image";
 import Tooltip from "@mui/material/Tooltip";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
+import GroupIcon from "@mui/icons-material/Group";
+import ListIcon from "@mui/icons-material/List";
+import TimelapseIcon from "@mui/icons-material/Timelapse";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import TaskCard from "@/components/TaskCard";
+import Progress from "@/components/Progress";
+
 import Assignment from "@/components/forms/Assignment";
 import { convertDate } from "@/services/utility";
 import {
@@ -35,7 +41,14 @@ export default function TaskBox() {
 
   const fetchProjects = async () => {
     const projectsData = await getProjectsApi();
-    setProjectsDataDisplay(projectsData);
+    setProjectsDataDisplay(
+      projectsData.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+    );
+  };
+
+  const calculatePercentage = (total) => {
+    let completed = 1;
+    return (completed / total) * 100;
   };
 
   return (
@@ -43,13 +56,22 @@ export default function TaskBox() {
       <div className={classes.container}>
         <div className={classes.column}>
           <div className={classes.topBar}>
-            <h3
-              style={{
-                fontFamily: "FarsiBold",
-              }}
-            >
-              پروژه
-            </h3>
+            <div className={classes.row}>
+              <h3
+                style={{
+                  fontFamily: "FarsiBold",
+                }}
+              >
+                پروژه
+              </h3>
+              <h5
+                style={{
+                  fontFamily: "EnglishMedium",
+                }}
+              >
+                {projectsDataDisplay.length}
+              </h5>
+            </div>
             <Tooltip title="New Project">
               <AddIcon
                 className="icon"
@@ -58,16 +80,36 @@ export default function TaskBox() {
               />
             </Tooltip>
           </div>
-
           {projectsDataDisplay.map((project, index) => (
             <div
               key={index}
-              className={project.active ? classes.groupActive : classes.group}
+              className={classes.project}
               onClick={() => handleChatSelection(index)}
             >
-              <div className={classes.info}>
-                <p className={classes.date}>{convertDate(project.updatedAt)}</p>
+              <h4
+                style={{
+                  fontFamily: "FarsiBold",
+                }}
+              >
+                {project.title}
+              </h4>
+              <p className={classes.description}>{project.description}</p>
+              <div className={classes.row}>
                 <div className={classes.row}>
+                  <Tooltip title="Due Date">
+                    <TimelapseIcon sx={{ fontSize: 20 }} />
+                  </Tooltip>
+                  <p>
+                    {convertDate(project.dueDate).slice(
+                      0,
+                      convertDate(project.dueDate).indexOf(",")
+                    )}
+                  </p>
+                </div>
+                <div className={classes.row}>
+                  <Tooltip title={project.users.length}>
+                    <ListIcon sx={{ fontSize: 20 }} />
+                  </Tooltip>
                   <p
                     style={{
                       fontFamily: "English",
@@ -76,13 +118,25 @@ export default function TaskBox() {
                     {project.users.length}
                   </p>
                 </div>
-                <h4
-                  style={{
-                    fontFamily: "FarsiBold",
-                  }}
-                >
-                  {project.title}
-                </h4>
+                <div className={classes.row}>
+                  <Tooltip title={project.users.length}>
+                    <GroupIcon sx={{ fontSize: 20 }} />
+                  </Tooltip>
+                  <p
+                    style={{
+                      fontFamily: "English",
+                    }}
+                  >
+                    {project.users.length}
+                  </p>
+                </div>
+              </div>
+              <div className={classes.progress}>
+                <Progress
+                  color={"#fdb714"}
+                  completed={calculatePercentage(project.users.length)}
+                  border={true}
+                />
               </div>
             </div>
           ))}

@@ -1,5 +1,4 @@
 import moment from "moment-jalaali";
-import momentTimezone from "moment-timezone";
 
 export function convertNumber(number) {
   return number.toLocaleString(undefined, {
@@ -157,10 +156,9 @@ export function extractParagraphs(text) {
 
 export function convertPersianToGregorian(persianDate) {
   const { day, month, year } = persianDate;
-  const gregorianDate = momentTimezone.tz(
+  const gregorianDate = moment(
     `${year}/${month}/${day} 00:00`,
-    "jYYYY/jM/jD HH:mm",
-    "Asia/Tehran"
+    "jYYYY/jM/jD HH:mm"
   );
   return gregorianDate.format("YYYY-MM-DDTHH:mm:ssZ");
 }

@@ -39,7 +39,7 @@ export default function Assignment({ selectedData, floatChat, type }) {
   const [editData, setEditData] = useState(selectedData);
   const [date, setDate] = useState(null);
   const [dueDate, setDueDate] = useState(null);
-  const [assignTasks, setAssignTasks] = useState(true);
+  const [assignTasks, setAssignTasks] = useState(false);
 
   const router = useRouter();
 
