@@ -12,6 +12,7 @@ export default function Nikibezabaneeshareh() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { displayFooter, setDisplayFooter } = useContext(StateContext);
+  const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [displayInfo, setDisplayInfo] = useState(false);
 
@@ -20,6 +21,7 @@ export default function Nikibezabaneeshareh() {
 
   useEffect(() => {
     setDisplayFooter(false);
+    setDisplayMenu(false);
     setLanguageType("fa");
     setLanguage(true);
     document.body.style.marginTop = "0px";
