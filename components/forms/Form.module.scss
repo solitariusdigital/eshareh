@@ -397,79 +397,95 @@
   }
 }
 
-.assignment {
-  width: 100%;
-  max-width: 400px;
-  margin: 12px 0px;
-  text-align: center;
+.assignmentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  @include mixins.mobile {
-    width: calc(100% - 24px);
-  }
-
-  input {
-    @include mixins.input();
+  .assignment {
     width: 100%;
-    margin-bottom: 8px;
-  }
+    max-width: 400px;
+    margin: 12px 0px;
+    text-align: center;
 
-  .bar {
-    @include mixins.row-space-between-center();
-    flex-direction: row-reverse;
-    height: 30px;
-  }
+    .calendar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-  .label {
-    color: config.$grey;
-    font-size: config.$small-font;
+      h3 {
+        margin: 12px 0px;
+      }
+    }
 
-    span {
-      color: config.$red;
-      font-size: config.$tiny-font;
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+    }
+
+    input {
+      @include mixins.input();
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .bar {
+      @include mixins.row-space-between-center();
+      flex-direction: row-reverse;
+      height: 30px;
+    }
+
+    .label {
+      color: config.$grey;
+      font-size: config.$small-font;
+
+      span {
+        color: config.$red;
+        font-size: config.$tiny-font;
+      }
+    }
+
+    .formAction {
+      @include mixins.row-space-between-center();
+      justify-content: space-around;
     }
   }
 
-  .formAction {
-    @include mixins.row-space-between-center();
-    justify-content: space-around;
+  .assignmentSelection,
+  .assignmentSelectionFloat {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    gap: 4px;
+    margin-top: 16px;
+    width: config.$content-width;
+    max-width: config.$max-widthHeigh;
+    direction: rtl;
+
+    @include mixins.mobile {
+      grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+      width: calc(100% - 24px);
+    }
+    @include mixins.tabletPortrait {
+      width: config.$content-widthTablet;
+    }
+    @include mixins.tablet {
+      width: config.$content-widthTablet;
+    }
+
+    .row {
+      @include mixins.row-space-between-center();
+      border: 1px solid config.$lightgrey;
+      padding: 4px;
+      @include mixins.border-radius(5px);
+
+      &:hover {
+        cursor: pointer;
+        border: 1px solid config.$yellow;
+      }
+    }
   }
-}
 
-.assignmentSelection,
-.assignmentSelectionFloat {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
-  gap: 4px;
-  margin-top: 16px;
-  width: config.$content-width;
-  max-width: config.$max-widthHeigh;
-  direction: rtl;
-
-  @include mixins.mobile {
+  .assignmentSelectionFloat {
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
     width: calc(100% - 24px);
   }
-  @include mixins.tabletPortrait {
-    width: config.$content-widthTablet;
-  }
-  @include mixins.tablet {
-    width: config.$content-widthTablet;
-  }
-
-  .row {
-    @include mixins.row-space-between-center();
-    border: 1px solid config.$lightgrey;
-    padding: 4px;
-    @include mixins.border-radius(5px);
-
-    &:hover {
-      cursor: pointer;
-      border: 1px solid config.$yellow;
-    }
-  }
-}
-
-.assignmentSelectionFloat {
-  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-  width: calc(100% - 24px);
 }

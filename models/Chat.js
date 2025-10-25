@@ -2,7 +2,7 @@ import { Schema, model, models } from "mongoose";
 
 const ChatSchema = new Schema(
   {
-    type: String, // "private", "public"
+    type: String, // private, public
     title: String,
     description: String,
     users: [],

@@ -11,15 +11,32 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import TaskCard from "@/components/TaskCard";
 import Assignment from "@/components/forms/Assignment";
+import { convertDate } from "@/services/utility";
+import {
+  getProjectsApi,
+  getTasksApi,
+  getNotificationApi,
+} from "@/services/api";
 
 export default function TaskBox() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [selectedTask, setSelectedTask] = useState(null);
   const [displayPopup, setDisplayPopup] = useState(false);
+  const [projectsDataDisplay, setProjectsDataDisplay] = useState([]);
 
   const fullSizeChatBox =
     screenSize === "desktop" || screenSize === "tablet-landscape";
+
+  useEffect(() => {
+    fetchProjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const fetchProjects = async () => {
+    const projectsData = await getProjectsApi();
+    setProjectsDataDisplay(projectsData);
+  };
 
   return (
     <Fragment>
@@ -31,7 +48,7 @@ export default function TaskBox() {
                 fontFamily: "FarsiBold",
               }}
             >
-              وظایف
+              پروژه
             </h3>
             <Tooltip title="New Project">
               <AddIcon
@@ -40,6 +57,45 @@ export default function TaskBox() {
                 onClick={() => setDisplayPopup(true)}
               />
             </Tooltip>
+          </div>
+
+          {projectsDataDisplay.map((project, index) => (
+            <div
+              key={index}
+              className={project.active ? classes.groupActive : classes.group}
+              onClick={() => handleChatSelection(index)}
+            >
+              <div className={classes.info}>
+                <p className={classes.date}>{convertDate(project.updatedAt)}</p>
+                <div className={classes.row}>
+                  <p
+                    style={{
+                      fontFamily: "English",
+                    }}
+                  >
+                    {project.users.length}
+                  </p>
+                </div>
+                <h4
+                  style={{
+                    fontFamily: "FarsiBold",
+                  }}
+                >
+                  {project.title}
+                </h4>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={classes.column}>
+          <div className={classes.topBar}>
+            <h3
+              style={{
+                fontFamily: "FarsiBold",
+              }}
+            >
+              وظایف
+            </h3>
           </div>
           <TaskCard />
           <TaskCard />
@@ -77,7 +133,7 @@ export default function TaskBox() {
           <Assignment
             selectedData={selectedTask}
             floatChat={false}
-            type="task"
+            type="project"
           />
         </div>
       )}

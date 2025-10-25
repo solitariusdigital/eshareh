@@ -505,6 +505,104 @@ export const deleteMessageApi = async (id) => {
   return await response.json();
 };
 
+// project api
+export const updateProjectApi = async (data) => {
+  const response = await fetch("/api/project", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createProjectApi = async (data) => {
+  const response = await fetch("/api/project", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleProjectApi = async (id) => {
+  const response = await fetch(`/api/project?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getProjectsApi = async () => {
+  const response = await fetch("/api/project", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteProjectApi = async (id) => {
+  const response = await fetch(`/api/project?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
+// task api
+export const updateTaskApi = async (data) => {
+  const response = await fetch("/api/task", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createTaskApi = async (data) => {
+  const response = await fetch("/api/task", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleTaskApi = async (id) => {
+  const response = await fetch(`/api/task?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getTasksApi = async () => {
+  const response = await fetch("/api/task", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteTaskApi = async (id) => {
+  const response = await fetch(`/api/task?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+
 // notification api
 export const updateNotificationApi = async (data) => {
   const response = await fetch("/api/notification", {

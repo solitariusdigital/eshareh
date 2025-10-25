@@ -357,3 +357,14 @@ label.file input[type="file"] {
   background: config.$yellow;
   color: config.$black;
 }
+
+.Calendar__day.-selected,
+.Calendar__day.-selectedStart,
+.Calendar__day.-selectedEnd {
+  background: config.$yellow !important;
+}
+
+.Calendar__monthSelectorItem.-active .Calendar__monthSelectorItemText,
+.Calendar__yearSelectorItem.-active .Calendar__yearSelectorText {
+  background: config.$yellow !important;
+}

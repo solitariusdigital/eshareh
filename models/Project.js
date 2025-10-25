@@ -6,11 +6,8 @@ const ProjectSchema = new Schema(
     description: String,
     users: [],
     adminsId: [],
-    dueDate: [
-      {
-        type: Date,
-      },
-    ],
+    completed: Boolean,
+    dueDate: Date,
   },
   { timestamps: true }
 );

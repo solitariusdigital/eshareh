@@ -78,7 +78,7 @@ export default function ChatBox({ floatChat }) {
       adminAccess: chat.adminsId.includes(currentUser._id),
       isRead:
         filterNotifications.filter(
-          (notification) => notification.chatId === chat._id
+          (notification) => notification.itemId === chat._id
         ).length === 0,
     }));
     addOption.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
@@ -138,7 +138,7 @@ export default function ChatBox({ floatChat }) {
       let filterNotifications = notificationsData.filter(
         (notification) =>
           notification.userId === currentUser._id &&
-          notification.chatId === selectedChat._id
+          notification.itemId === selectedChat._id
       );
       if (filterNotifications.length > 0) {
         const deletionPromises = filterNotifications.map((notification) =>
@@ -225,7 +225,7 @@ export default function ChatBox({ floatChat }) {
     let filterNotifications = notificationsData.filter(
       (notification) =>
         notification.userId === currentUser._id &&
-        notification.chatId === chatsDataDisplay[index]._id
+        notification.itemId === chatsDataDisplay[index]._id
     );
     if (filterNotifications.length > 0) {
       const deletionPromises = filterNotifications.map((notification) =>
@@ -286,9 +286,8 @@ export default function ChatBox({ floatChat }) {
 
   const createNotification = async (lastMessage) => {
     let baseNotificationObject = {
-      chatId: selectedChat._id,
-      messageId: lastMessage._id,
-      type: "message",
+      itemId: selectedChat._id,
+      type: "chat",
       isRead: false,
     };
     let filterCurrentUser = selectedChat.users.filter(

@@ -3,9 +3,8 @@ import { Schema, model, models } from "mongoose";
 const NotificationSchema = new Schema(
   {
     userId: String,
-    chatId: String,
-    messageId: String,
-    type: String, // "message", "mention", "file"
+    itemId: String,
+    type: String, // task, chat,
     isRead: Boolean,
   },
   { timestamps: true }

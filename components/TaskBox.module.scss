@@ -3,8 +3,8 @@
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+  gap: 4px;
   height: calc(100dvh - 100px);
   max-height: 100%;
   overflow-y: auto;
@@ -12,7 +12,7 @@
 
   .column {
     padding: 12px;
-    background: config.$generalMessage;
+    border: 1px solid config.$lightgrey;
     @include mixins.border-radius(5px);
 
     .topBar {
@@ -25,12 +25,12 @@
 }
 
 .taskCard {
-  background: config.$white;
   width: 100%;
   padding: 12px;
   margin: 12px 0px;
+  color: config.$black !important;
+  background: config.$generalMessage;
   @include mixins.border-radius(5px);
-
   .row {
     @include mixins.row-space-between-center();
   }
