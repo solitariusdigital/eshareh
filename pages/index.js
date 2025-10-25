@@ -79,6 +79,7 @@ export default function Home({
   useEffect(() => {
     setDisplayMenu(true);
     setDisplayFooter(true);
+    document.body.style.marginTop = "100px";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
