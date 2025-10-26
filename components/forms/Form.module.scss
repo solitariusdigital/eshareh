@@ -460,7 +460,8 @@
     }
   }
 
-  .formAction {
+  .indicatorAction {
+    margin-top: 12px;
     @include mixins.row-space-between-center();
     justify-content: space-around;
   }
@@ -512,6 +513,19 @@
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
   direction: rtl;
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    width: calc(100% - 24px);
+  }
+  @include mixins.tabletPortrait {
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    width: config.$content-widthTablet;
+  }
+  @include mixins.tablet {
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    width: config.$content-widthTablet;
+  }
 
   .usersTasks {
     background: config.$generalMessage;

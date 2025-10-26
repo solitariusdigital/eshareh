@@ -38,10 +38,11 @@ export default function Assignment({ selectedData, floatChat, type }) {
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
   const [editData, setEditData] = useState(selectedData);
-  const [date, setDate] = useState(null);
+  const [projectDate, setProjectDate] = useState(null);
   const [dueDate, setDueDate] = useState(null);
-  const [assignTasks, setAssignTasks] = useState(true);
   const [tasksUsers, setTasksUsers] = useState(null);
+  const [tasksFormData, setTasksFormData] = useState({});
+  const [assignTasks, setAssignTasks] = useState(true);
   const router = useRouter();
 
   const priorities = ["Low", "Medium", "High", "Urgent"];
@@ -193,10 +194,30 @@ export default function Assignment({ selectedData, floatChat, type }) {
     setEditData(updateChat);
   };
 
-  const assingDate = (day) => {
-    setDate(day);
+  const assingProjectDate = (day) => {
+    setProjectDate(day);
     let gregorian = convertPersianToGregorian(day);
     setDueDate(gregorian);
+  };
+
+  const handleTaskFormChange = (userId, field, value) => {
+    setTasksFormData((prev) => ({
+      ...prev,
+      [userId]: {
+        ...prev[userId],
+        [field]: value,
+      },
+    }));
+  };
+
+  const clearTaskFormField = (userId, field) => {
+    setTasksFormData((prev) => ({
+      ...prev,
+      [userId]: {
+        ...prev[userId],
+        [field]: "",
+      },
+    }));
   };
 
   const showAlert = (message) => {
@@ -268,8 +289,8 @@ export default function Assignment({ selectedData, floatChat, type }) {
                   تاریخ مهلت
                 </h3>
                 <DatePicker
-                  value={date}
-                  onChange={(date) => assingDate(date)}
+                  value={projectDate}
+                  onChange={(date) => assingProjectDate(date)}
                   inputPlaceholder="انتخاب"
                   shouldHighlightWeekends
                   minimumDate={utils("fa").getToday()}
@@ -277,7 +298,7 @@ export default function Assignment({ selectedData, floatChat, type }) {
                 />
               </div>
             )}
-            <div className={classes.formAction}>
+            <div className={classes.indicatorAction}>
               {type === "chat" && editData && (
                 <Tooltip title={editData.archive ? "Deactive" : "Active"}>
                   {editData.archive ? (
@@ -398,7 +419,7 @@ export default function Assignment({ selectedData, floatChat, type }) {
                     <div className={classes.bar}>
                       <CloseIcon
                         className="icon"
-                        onClick={() => setTitle("")}
+                        onClick={() => clearTaskFormField(user._id, "title")}
                         sx={{ fontSize: 16 }}
                       />
                     </div>
@@ -410,8 +431,10 @@ export default function Assignment({ selectedData, floatChat, type }) {
                       type="text"
                       id="title"
                       name="title"
-                      onChange={(e) => setTitle(e.target.value)}
-                      value={title}
+                      onChange={(e) =>
+                        handleTaskFormChange(user._id, "title", e.target.value)
+                      }
+                      value={tasksFormData[user._id]?.title || ""}
                       autoComplete="off"
                       dir="rtl"
                     />
@@ -420,7 +443,9 @@ export default function Assignment({ selectedData, floatChat, type }) {
                     <div className={classes.bar}>
                       <CloseIcon
                         className="icon"
-                        onClick={() => setDescription("")}
+                        onClick={() =>
+                          clearTaskFormField(user._id, "description")
+                        }
                         sx={{ fontSize: 16 }}
                       />
                     </div>
@@ -432,16 +457,24 @@ export default function Assignment({ selectedData, floatChat, type }) {
                       type="text"
                       id="description"
                       name="description"
-                      onChange={(e) => setDescription(e.target.value)}
-                      value={description}
+                      onChange={(e) =>
+                        handleTaskFormChange(
+                          user._id,
+                          "description",
+                          e.target.value
+                        )
+                      }
+                      value={tasksFormData[user._id]?.description || ""}
                       autoComplete="off"
                       dir="rtl"
                     />
                   </div>
                   <div className={classes.row}>
                     <DatePicker
-                      value={date}
-                      onChange={(date) => assingDate(date)}
+                      value={tasksFormData[user._id]?.date}
+                      onChange={(date) =>
+                        handleTaskFormChange(user._id, "date", date)
+                      }
                       inputPlaceholder="تاریخ مهلت"
                       shouldHighlightWeekends
                       minimumDate={utils("fa").getToday()}
@@ -451,8 +484,18 @@ export default function Assignment({ selectedData, floatChat, type }) {
                       style={{
                         fontFamily: "English",
                       }}
-                      // value={priority}
+                      value={tasksFormData[user._id]?.priority || "default"}
+                      onChange={(e) =>
+                        handleTaskFormChange(
+                          user._id,
+                          "priority",
+                          e.target.value
+                        )
+                      }
                     >
+                      <option value="default" disabled>
+                        Select
+                      </option>
                       {priorities.map((priority, index) => {
                         return (
                           <option key={index} value={priority}>
