@@ -429,7 +429,7 @@
   select {
     @include mixins.input();
     width: 100%;
-    margin-bottom: 8px;
+    margin: 8px 0px;
   }
 
   textarea {

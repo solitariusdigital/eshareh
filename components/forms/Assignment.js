@@ -2,9 +2,10 @@ import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
-import CloseIcon from "@mui/icons-material/Close";
 import ToggleOnIcon from "@mui/icons-material/ToggleOn";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import Tooltip from "@mui/material/Tooltip";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
@@ -20,6 +21,7 @@ import {
 import {
   createChatApi,
   getSingleChatApi,
+  getSingleProjectApi,
   updateChatApi,
   getSingleUserApi,
   updateUserApi,
@@ -27,7 +29,12 @@ import {
   updateProjectApi,
 } from "@/services/api";
 
-export default function Assignment({ selectedData, floatChat, type }) {
+export default function Assignment({
+  selectedData,
+  floatChat,
+  type,
+  projectId,
+}) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [title, setTitle] = useState(selectedData?.title || "");
@@ -42,20 +49,21 @@ export default function Assignment({ selectedData, floatChat, type }) {
   const [dueDate, setDueDate] = useState(null);
   const [tasksUsers, setTasksUsers] = useState(null);
   const [tasksFormData, setTasksFormData] = useState({});
-  const [assignTasks, setAssignTasks] = useState(true);
+  const [assignTasks, setAssignTasks] = useState(projectId);
+  const priorities = ["Low", "Medium", "High", "Urgent"];
   const router = useRouter();
 
-  const priorities = ["Low", "Medium", "High", "Urgent"];
-  let dummyUsers = [
-    "65a8ba82c2e90f78a7e6851d",
-    "6657301b8743ed8f2080e69c",
-    "665732638743ed8f2080e6be",
-    "665732cd8743ed8f2080e6c8",
-    "665733648743ed8f2080e6cd",
-  ];
-
   useEffect(() => {
-    enrichUserData(dummyUsers);
+    if (!projectId) return;
+    const fetchData = async () => {
+      try {
+        const projectData = await getSingleProjectApi(projectId);
+        enrichUserData(projectData.users);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -124,7 +132,7 @@ export default function Assignment({ selectedData, floatChat, type }) {
           resultData = await updateProjectApi(projectObject);
         } else {
           resultData = await createProjectApi(projectObject);
-          setAssignTasks(true);
+          setAssignTasks(resultData._id);
           enrichUserData(usersId);
         }
         break;
@@ -194,30 +202,60 @@ export default function Assignment({ selectedData, floatChat, type }) {
     setEditData(updateChat);
   };
 
+  const createTasks = async () => {
+    if (!tasksFormData) return;
+    console.log(tasksFormData);
+  };
+
   const assingProjectDate = (day) => {
     setProjectDate(day);
     let gregorian = convertPersianToGregorian(day);
     setDueDate(gregorian);
   };
 
-  const handleTaskFormChange = (userId, field, value) => {
-    setTasksFormData((prev) => ({
-      ...prev,
-      [userId]: {
-        ...prev[userId],
+  const handleTaskFormChange = (userId, index, field, value) => {
+    setTasksFormData((prev) => {
+      const userTasks = prev[userId] || [];
+      // Make a shallow copy
+      const updatedTasks = [...userTasks];
+      // Fill any gaps up to the index with empty objects
+      for (let i = updatedTasks.length; i <= index; i++) {
+        if (!updatedTasks[i]) updatedTasks[i] = {};
+      }
+      // Update the task at the index
+      updatedTasks[index] = {
+        ...updatedTasks[index],
         [field]: value,
-      },
-    }));
+      };
+      return {
+        ...prev,
+        [userId]: updatedTasks,
+      };
+    });
   };
 
-  const clearTaskFormField = (userId, field) => {
-    setTasksFormData((prev) => ({
-      ...prev,
-      [userId]: {
-        ...prev[userId],
-        [field]: "",
-      },
-    }));
+  const addMoreTask = async (id, index) => {
+    let getUser = await getSingleUserApi(id);
+    const newUsersData = [...tasksUsers];
+    // newUsersData.splice(index + 1, 0, getUser);
+    newUsersData.push(getUser);
+    setTasksUsers(newUsersData);
+  };
+
+  const removeTask = (index) => {
+    setTasksUsers((prevUsers) => {
+      const updatedUsers = prevUsers.filter((_, i) => i !== index);
+      setTasksFormData((prevData) => {
+        const newData = { ...prevData };
+        Object.keys(newData).forEach((userId) => {
+          if (Array.isArray(newData[userId])) {
+            newData[userId] = newData[userId].filter((_, i) => i !== index);
+          }
+        });
+        return newData;
+      });
+      return updatedUsers;
+    });
   };
 
   const showAlert = (message) => {
@@ -241,11 +279,6 @@ export default function Assignment({ selectedData, floatChat, type }) {
                   <span>*</span>
                   عنوان
                 </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setTitle("")}
-                  sx={{ fontSize: 16 }}
-                />
               </div>
               <input
                 style={{
@@ -263,11 +296,6 @@ export default function Assignment({ selectedData, floatChat, type }) {
             <div className={classes.input}>
               <div className={classes.bar}>
                 <p className={classes.label}>توضیحات</p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setDescription("")}
-                  sx={{ fontSize: 16 }}
-                />
               </div>
               <input
                 style={{
@@ -414,15 +442,24 @@ export default function Assignment({ selectedData, floatChat, type }) {
                         ),
                       }}
                     ></p>
+                    <div className={classes.row}>
+                      <Tooltip title="Add">
+                        <AddIcon
+                          className="icon"
+                          sx={{ fontSize: 18 }}
+                          onClick={() => addMoreTask(user._id, index)}
+                        />
+                      </Tooltip>
+                      <Tooltip title="Remove">
+                        <RemoveIcon
+                          className="icon"
+                          sx={{ fontSize: 18 }}
+                          onClick={() => removeTask(index)}
+                        />
+                      </Tooltip>
+                    </div>
                   </div>
                   <div className={classes.input}>
-                    <div className={classes.bar}>
-                      <CloseIcon
-                        className="icon"
-                        onClick={() => clearTaskFormField(user._id, "title")}
-                        sx={{ fontSize: 16 }}
-                      />
-                    </div>
                     <input
                       style={{
                         fontFamily: "Farsi",
@@ -432,23 +469,19 @@ export default function Assignment({ selectedData, floatChat, type }) {
                       id="title"
                       name="title"
                       onChange={(e) =>
-                        handleTaskFormChange(user._id, "title", e.target.value)
+                        handleTaskFormChange(
+                          user._id,
+                          index,
+                          "title",
+                          e.target.value
+                        )
                       }
-                      value={tasksFormData[user._id]?.title || ""}
+                      value={tasksFormData[user._id]?.[index]?.title || ""}
                       autoComplete="off"
                       dir="rtl"
                     />
                   </div>
                   <div className={classes.input}>
-                    <div className={classes.bar}>
-                      <CloseIcon
-                        className="icon"
-                        onClick={() =>
-                          clearTaskFormField(user._id, "description")
-                        }
-                        sx={{ fontSize: 16 }}
-                      />
-                    </div>
                     <textarea
                       style={{
                         fontFamily: "Farsi",
@@ -460,20 +493,23 @@ export default function Assignment({ selectedData, floatChat, type }) {
                       onChange={(e) =>
                         handleTaskFormChange(
                           user._id,
+                          index,
                           "description",
                           e.target.value
                         )
                       }
-                      value={tasksFormData[user._id]?.description || ""}
+                      value={
+                        tasksFormData[user._id]?.[index]?.description || ""
+                      }
                       autoComplete="off"
                       dir="rtl"
                     />
                   </div>
                   <div className={classes.row}>
                     <DatePicker
-                      value={tasksFormData[user._id]?.date}
+                      value={tasksFormData[user._id]?.[index]?.date}
                       onChange={(date) =>
-                        handleTaskFormChange(user._id, "date", date)
+                        handleTaskFormChange(user._id, index, "date", date)
                       }
                       inputPlaceholder="تاریخ مهلت"
                       shouldHighlightWeekends
@@ -484,10 +520,13 @@ export default function Assignment({ selectedData, floatChat, type }) {
                       style={{
                         fontFamily: "English",
                       }}
-                      value={tasksFormData[user._id]?.priority || "default"}
+                      value={
+                        tasksFormData[user._id]?.[index]?.priority || "default"
+                      }
                       onChange={(e) =>
                         handleTaskFormChange(
                           user._id,
+                          index,
                           "priority",
                           e.target.value
                         )
@@ -508,6 +547,18 @@ export default function Assignment({ selectedData, floatChat, type }) {
                 </div>
               );
             })}
+          </div>
+          <div className={classes.formAction}>
+            <p className={classes.alert}>{alert}</p>
+            <button
+              disabled={disableButton}
+              style={{
+                fontFamily: "FarsiMedium",
+              }}
+              onClick={() => createTasks()}
+            >
+              {editData ? "ویرایش" : "ذخیره"}
+            </button>
           </div>
         </Fragment>
       )}
