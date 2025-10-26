@@ -36,7 +36,7 @@
     position: relative;
     padding: 8px;
     margin: 8px 0px;
-    border: 1px solid config.$lightgrey;
+    background: config.$generalMessage;
     @include mixins.border-radius(5px);
 
     .row {

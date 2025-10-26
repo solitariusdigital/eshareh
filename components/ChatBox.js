@@ -524,7 +524,7 @@ export default function ChatBox({ floatChat }) {
               <div className={classes.topBar}>
                 <div className={classes.indocators}>
                   <div className={classes.row}>
-                    <Tooltip title={selectedChat.users.length}>
+                    <Tooltip title="Members">
                       <GroupIcon sx={{ fontSize: 20 }} />
                     </Tooltip>
                     <p
@@ -781,7 +781,9 @@ export default function ChatBox({ floatChat }) {
                   >
                     {chat.users.length}
                   </p>
-                  <GroupIcon sx={{ fontSize: 16 }} />
+                  <Tooltip title="Members">
+                    <GroupIcon sx={{ fontSize: 16 }} />
+                  </Tooltip>
                 </div>
                 <h4
                   style={{

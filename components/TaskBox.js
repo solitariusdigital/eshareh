@@ -97,7 +97,7 @@ export default function TaskBox() {
               <div className={classes.row}>
                 <div className={classes.row}>
                   <Tooltip title="Due Date">
-                    <TimelapseIcon sx={{ fontSize: 20 }} />
+                    <TimelapseIcon sx={{ fontSize: 18 }} />
                   </Tooltip>
                   <p>
                     {convertDate(project.dueDate).slice(
@@ -107,8 +107,8 @@ export default function TaskBox() {
                   </p>
                 </div>
                 <div className={classes.row}>
-                  <Tooltip title={project.users.length}>
-                    <ListIcon sx={{ fontSize: 20 }} />
+                  <Tooltip title="Tasks">
+                    <ListIcon sx={{ fontSize: 18 }} />
                   </Tooltip>
                   <p
                     style={{
@@ -119,8 +119,8 @@ export default function TaskBox() {
                   </p>
                 </div>
                 <div className={classes.row}>
-                  <Tooltip title={project.users.length}>
-                    <GroupIcon sx={{ fontSize: 20 }} />
+                  <Tooltip title="Members">
+                    <GroupIcon sx={{ fontSize: 18 }} />
                   </Tooltip>
                   <p
                     style={{
@@ -136,6 +136,7 @@ export default function TaskBox() {
                   color={"#fdb714"}
                   completed={calculatePercentage(project.users.length)}
                   border={true}
+                  height={2}
                 />
               </div>
             </div>
@@ -161,7 +162,7 @@ export default function TaskBox() {
                 fontFamily: "FarsiBold",
               }}
             >
-              در حال انجام
+              درحال انجام
             </h3>
           </div>
         </div>

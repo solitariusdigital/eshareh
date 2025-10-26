@@ -10,7 +10,8 @@ import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { createNotificationApi, getUsersApi } from "@/services/api";
-import { Calendar, utils } from "@hassanmojab/react-modern-calendar-datepicker";
+import DatePicker from "@hassanmojab/react-modern-calendar-datepicker";
+import { utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 import {
   applyFontToEnglishWords,
@@ -39,9 +40,23 @@ export default function Assignment({ selectedData, floatChat, type }) {
   const [editData, setEditData] = useState(selectedData);
   const [date, setDate] = useState(null);
   const [dueDate, setDueDate] = useState(null);
-  const [assignTasks, setAssignTasks] = useState(false);
-
+  const [assignTasks, setAssignTasks] = useState(true);
+  const [tasksUsers, setTasksUsers] = useState(null);
   const router = useRouter();
+
+  const priorities = ["Low", "Medium", "High", "Urgent"];
+  let dummyUsers = [
+    "65a8ba82c2e90f78a7e6851d",
+    "6657301b8743ed8f2080e69c",
+    "665732638743ed8f2080e6be",
+    "665732cd8743ed8f2080e6c8",
+    "665733648743ed8f2080e6cd",
+  ];
+
+  useEffect(() => {
+    enrichUserData(dummyUsers);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -109,6 +124,7 @@ export default function Assignment({ selectedData, floatChat, type }) {
         } else {
           resultData = await createProjectApi(projectObject);
           setAssignTasks(true);
+          enrichUserData(usersId);
         }
         break;
       case "chat":
@@ -133,6 +149,13 @@ export default function Assignment({ selectedData, floatChat, type }) {
         router.reload(router.asPath);
         break;
     }
+  };
+
+  const enrichUserData = async (usersId) => {
+    const allUsersData = await Promise.all(
+      usersId.map((id) => getSingleUserApi(id))
+    );
+    setTasksUsers(allUsersData);
   };
 
   const createNotification = async (usersId, resultData) => {
@@ -244,9 +267,10 @@ export default function Assignment({ selectedData, floatChat, type }) {
                   <span>*</span>
                   تاریخ مهلت
                 </h3>
-                <Calendar
+                <DatePicker
                   value={date}
                   onChange={(date) => assingDate(date)}
+                  inputPlaceholder="انتخاب"
                   shouldHighlightWeekends
                   minimumDate={utils("fa").getToday()}
                   locale="fa"
@@ -341,7 +365,110 @@ export default function Assignment({ selectedData, floatChat, type }) {
           </div>
         </Fragment>
       ) : (
-        <h2>task time</h2>
+        <Fragment>
+          <h3 style={{ margin: "8px 0px" }}>واگذاری وظایف</h3>
+          <div className={classes.tasksManager}>
+            {tasksUsers?.map((user, index) => {
+              return (
+                <div
+                  key={index}
+                  className={classes.usersTasks}
+                  onClick={() => handleUserSelection(index, !user.selection)}
+                >
+                  <div className={classes.row}>
+                    <h3
+                      style={{
+                        fontFamily: "FarsiBold",
+                      }}
+                    >
+                      {user.name.fa}
+                    </h3>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: applyFontToEnglishWords(
+                          user.title.fa,
+                          "English",
+                          "16px",
+                          "fa"
+                        ),
+                      }}
+                    ></p>
+                  </div>
+                  <div className={classes.input}>
+                    <div className={classes.bar}>
+                      <CloseIcon
+                        className="icon"
+                        onClick={() => setTitle("")}
+                        sx={{ fontSize: 16 }}
+                      />
+                    </div>
+                    <input
+                      style={{
+                        fontFamily: "Farsi",
+                      }}
+                      placeholder="عنوان"
+                      type="text"
+                      id="title"
+                      name="title"
+                      onChange={(e) => setTitle(e.target.value)}
+                      value={title}
+                      autoComplete="off"
+                      dir="rtl"
+                    />
+                  </div>
+                  <div className={classes.input}>
+                    <div className={classes.bar}>
+                      <CloseIcon
+                        className="icon"
+                        onClick={() => setDescription("")}
+                        sx={{ fontSize: 16 }}
+                      />
+                    </div>
+                    <textarea
+                      style={{
+                        fontFamily: "Farsi",
+                      }}
+                      placeholder="توضیحات"
+                      type="text"
+                      id="description"
+                      name="description"
+                      onChange={(e) => setDescription(e.target.value)}
+                      value={description}
+                      autoComplete="off"
+                      dir="rtl"
+                    />
+                  </div>
+                  <div className={classes.input}>
+                    <select
+                      style={{
+                        fontFamily: "English",
+                      }}
+                      // value={priority}
+                    >
+                      {priorities.map((priority, index) => {
+                        return (
+                          <option key={index} value={priority}>
+                            {priority}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                  <div className={classes.input}>
+                    <DatePicker
+                      value={date}
+                      onChange={(date) => assingDate(date)}
+                      inputPlaceholder="تاریخ مهلت"
+                      shouldHighlightWeekends
+                      minimumDate={utils("fa").getToday()}
+                      locale="fa"
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Fragment>
       )}
     </div>
   );
