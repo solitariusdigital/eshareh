@@ -438,7 +438,15 @@ export default function Assignment({ selectedData, floatChat, type }) {
                       dir="rtl"
                     />
                   </div>
-                  <div className={classes.input}>
+                  <div className={classes.row}>
+                    <DatePicker
+                      value={date}
+                      onChange={(date) => assingDate(date)}
+                      inputPlaceholder="تاریخ مهلت"
+                      shouldHighlightWeekends
+                      minimumDate={utils("fa").getToday()}
+                      locale="fa"
+                    />
                     <select
                       style={{
                         fontFamily: "English",
@@ -453,16 +461,6 @@ export default function Assignment({ selectedData, floatChat, type }) {
                         );
                       })}
                     </select>
-                  </div>
-                  <div className={classes.input}>
-                    <DatePicker
-                      value={date}
-                      onChange={(date) => assingDate(date)}
-                      inputPlaceholder="تاریخ مهلت"
-                      shouldHighlightWeekends
-                      minimumDate={utils("fa").getToday()}
-                      locale="fa"
-                    />
                   </div>
                 </div>
               );
