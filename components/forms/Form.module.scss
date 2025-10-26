@@ -481,9 +481,11 @@
       width: calc(100% - 24px);
     }
     @include mixins.tabletPortrait {
+      grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
       width: config.$content-widthTablet;
     }
     @include mixins.tablet {
+      grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
       width: config.$content-widthTablet;
     }
 
