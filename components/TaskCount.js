@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getTasksApi } from "@/services/api";
 
-export default function TaskCount({ projectId }) {
+export default function TaskCount({ projectId, type }) {
   const [count, setCount] = useState(null);
+
   useEffect(() => {
     const fetchTasks = async () => {
       const tasksData = await getTasksApi();

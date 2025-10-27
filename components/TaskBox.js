@@ -9,10 +9,10 @@ import ListIcon from "@mui/icons-material/List";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import TaskCard from "@/components/TaskCard";
 import Progress from "@/components/Progress";
+import TaskCount from "@/components/TaskCount";
 import Assignment from "@/components/forms/Assignment";
 import { convertDate } from "@/services/utility";
-import { getProjectsApi } from "@/services/api";
-import TaskCount from "@/components/TaskCount";
+import { getProjectsApi, getTasksApi } from "@/services/api";
 
 export default function TaskBox() {
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -21,6 +21,7 @@ export default function TaskBox() {
   const [displayPopup, setDisplayPopup] = useState(false);
   const [projectsDataDisplay, setProjectsDataDisplay] = useState([]);
   const [projectId, setProjectId] = useState(null);
+  const [completedMap, setCompletedMap] = useState({});
 
   const fullSizeChatBox =
     screenSize === "desktop" || screenSize === "tablet-landscape";
@@ -31,17 +32,33 @@ export default function TaskBox() {
   }, []);
 
   const fetchProjects = async () => {
-    const projectsData = await getProjectsApi();
-    setProjectsDataDisplay(
-      projectsData
+    try {
+      // Fetch projects and filter by current user
+      const projectsData = await getProjectsApi();
+      const filteredProjects = projectsData
         .filter((project) => project.users.includes(currentUser._id))
-        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
-    );
-  };
+        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+      setProjectsDataDisplay(filteredProjects);
 
-  const calculatePercentage = (total) => {
-    let completed = 1;
-    return (completed / total) * 100;
+      // Fetch tasks
+      const tasksData = await getTasksApi();
+      // Calculate completion percentage per project
+      const newCompletedMap = filteredProjects.reduce((acc, project) => {
+        const projectTasks = tasksData.filter(
+          (t) => t.projectId === project._id
+        );
+        const doneTasks = projectTasks.filter((t) => t.status === "done");
+        acc[project._id] =
+          projectTasks.length > 0
+            ? (doneTasks.length / projectTasks.length) * 100
+            : 0;
+        return acc;
+      }, {});
+
+      setCompletedMap(newCompletedMap);
+    } catch (error) {
+      console.error("Error fetching projects or tasks:", error);
+    }
   };
 
   return (
@@ -138,7 +155,7 @@ export default function TaskBox() {
               <div className={classes.progress}>
                 <Progress
                   color={"#fdb714"}
-                  completed={calculatePercentage(project.users.length)}
+                  completed={completedMap[project._id] ?? 0}
                   border={true}
                   height={2}
                 />
