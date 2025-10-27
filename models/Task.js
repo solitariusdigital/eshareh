@@ -6,7 +6,7 @@ const TaskSchema = new Schema(
     title: String,
     description: String,
     users: [],
-    status: String, // todo, in-progress, done
+    status: String, // todo, progress, done
     priority: String, // low, medium, high, urgent
     progress: Number, // 25, 50, 75, 100
     dueDate: Date,

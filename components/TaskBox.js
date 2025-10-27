@@ -21,7 +21,7 @@ export default function TaskBox() {
   const [displayPopup, setDisplayPopup] = useState(false);
   const [projectsDataDisplay, setProjectsDataDisplay] = useState([]);
   const [projectId, setProjectId] = useState(null);
-  const [completedMap, setCompletedMap] = useState({});
+  const [doneTasks, setDoneTasks] = useState({});
 
   const fullSizeChatBox =
     screenSize === "desktop" || screenSize === "tablet-landscape";
@@ -43,7 +43,7 @@ export default function TaskBox() {
       // Fetch tasks
       const tasksData = await getTasksApi();
       // Calculate completion percentage per project
-      const newCompletedMap = filteredProjects.reduce((acc, project) => {
+      const newDoneMap = filteredProjects.reduce((acc, project) => {
         const projectTasks = tasksData.filter(
           (t) => t.projectId === project._id
         );
@@ -54,8 +54,7 @@ export default function TaskBox() {
             : 0;
         return acc;
       }, {});
-
-      setCompletedMap(newCompletedMap);
+      setDoneTasks(newDoneMap);
     } catch (error) {
       console.error("Error fetching projects or tasks:", error);
     }
@@ -155,7 +154,7 @@ export default function TaskBox() {
               <div className={classes.progress}>
                 <Progress
                   color={"#fdb714"}
-                  completed={completedMap[project._id] ?? 0}
+                  completed={doneTasks[project._id] ?? 0}
                   border={true}
                   height={2}
                 />
