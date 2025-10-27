@@ -12,6 +12,7 @@ import Progress from "@/components/Progress";
 import Assignment from "@/components/forms/Assignment";
 import { convertDate } from "@/services/utility";
 import { getProjectsApi } from "@/services/api";
+import TaskCount from "@/components/TaskCount";
 
 export default function TaskBox() {
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -32,7 +33,9 @@ export default function TaskBox() {
   const fetchProjects = async () => {
     const projectsData = await getProjectsApi();
     setProjectsDataDisplay(
-      projectsData.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+      projectsData
+        .filter((project) => project.users.includes(currentUser._id))
+        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
     );
   };
 
@@ -104,7 +107,7 @@ export default function TaskBox() {
                       fontFamily: "English",
                     }}
                   >
-                    {project.users.length}
+                    <TaskCount projectId={project._id} />
                   </p>
                 </div>
                 <div className={classes.row}>

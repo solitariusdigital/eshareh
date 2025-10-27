@@ -27,6 +27,7 @@ import {
   updateUserApi,
   createProjectApi,
   updateProjectApi,
+  createTaskApi,
 } from "@/services/api";
 
 export default function Assignment({
@@ -49,7 +50,7 @@ export default function Assignment({
   const [dueDate, setDueDate] = useState(null);
   const [tasksUsers, setTasksUsers] = useState(null);
   const [tasksFormData, setTasksFormData] = useState({});
-  const [assignTasks, setAssignTasks] = useState(projectId);
+  const [selectedProjectId, setSelectedProjectId] = useState(projectId);
   const priorities = ["Low", "Medium", "High", "Urgent"];
   const router = useRouter();
 
@@ -132,7 +133,7 @@ export default function Assignment({
           resultData = await updateProjectApi(projectObject);
         } else {
           resultData = await createProjectApi(projectObject);
-          setAssignTasks(resultData._id);
+          setSelectedProjectId(resultData._id);
           enrichUserData(usersId);
         }
         break;
@@ -203,8 +204,27 @@ export default function Assignment({
   };
 
   const createTasks = async () => {
-    if (!tasksFormData) return;
-    console.log(tasksFormData);
+    if (Object.keys(tasksFormData).length === 0) return;
+
+    for (const userId of Object.keys(tasksFormData)) {
+      for (const taskData of tasksFormData[userId]) {
+        if (!taskData || Object.keys(taskData).length === 0) continue;
+        const taskObject = {
+          projectId,
+          title: taskData.title?.trim() || "",
+          description: taskData.description?.trim() || "",
+          users: [userId],
+          status: "todo",
+          priority: taskData.priority || "",
+          progress: 0,
+          dueDate: taskData.date
+            ? convertPersianToGregorian(taskData.date)
+            : "",
+        };
+        await createTaskApi(taskObject);
+      }
+    }
+    router.reload(router.asPath);
   };
 
   const assingProjectDate = (day) => {
@@ -234,10 +254,9 @@ export default function Assignment({
     });
   };
 
-  const addMoreTask = async (id, index) => {
+  const addMoreTask = async (id) => {
     let getUser = await getSingleUserApi(id);
     const newUsersData = [...tasksUsers];
-    // newUsersData.splice(index + 1, 0, getUser);
     newUsersData.push(getUser);
     setTasksUsers(newUsersData);
   };
@@ -267,7 +286,7 @@ export default function Assignment({
 
   return (
     <div className={classes.assignmentContainer}>
-      {!assignTasks ? (
+      {!selectedProjectId ? (
         <Fragment>
           <div className={classes.assignment}>
             {!editData && (
@@ -447,7 +466,7 @@ export default function Assignment({
                         <AddIcon
                           className="icon"
                           sx={{ fontSize: 18 }}
-                          onClick={() => addMoreTask(user._id, index)}
+                          onClick={() => addMoreTask(user._id)}
                         />
                       </Tooltip>
                       <Tooltip title="Remove">

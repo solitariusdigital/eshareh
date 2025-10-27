@@ -22,7 +22,7 @@ export default async function taskHandler(req, res) {
         } else {
           task = await Task.find();
         }
-        return res.status(200).json(project);
+        return res.status(200).json(task);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }

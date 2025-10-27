@@ -447,7 +447,6 @@
   .bar {
     @include mixins.row-space-between-center();
     flex-direction: row-reverse;
-    height: 30px;
   }
 
   .label {
