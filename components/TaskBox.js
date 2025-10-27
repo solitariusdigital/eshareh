@@ -6,6 +6,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import GroupIcon from "@mui/icons-material/Group";
 import ListIcon from "@mui/icons-material/List";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import TaskCard from "@/components/TaskCard";
 import Progress from "@/components/Progress";
@@ -59,7 +60,6 @@ export default function TaskBox() {
         currentUser._id
       );
       setProjectsDataDisplay(filteredProjects);
-
       const tasksData = await getTasksApi();
       setDoneTasksCount(calculateCompletion(filteredProjects, tasksData));
     } catch (error) {
@@ -70,10 +70,7 @@ export default function TaskBox() {
   const fetchTasks = async () => {
     try {
       const tasksData = await getTasksApi();
-      const filteredTasks = filterAndSortByUser(
-        tasksData,
-        currentUser._id
-      ).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+      const filteredTasks = filterAndSortByUser(tasksData, currentUser._id);
       setTasksDataDisplay(filteredTasks);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -114,13 +111,18 @@ export default function TaskBox() {
           </div>
           {projectsDataDisplay.map((project, index) => (
             <div key={index} className={classes.project}>
-              <h4
-                style={{
-                  fontFamily: "FarsiBold",
-                }}
-              >
-                {project.title}
-              </h4>
+              <div className={classes.row}>
+                <h4
+                  style={{
+                    fontFamily: "FarsiBold",
+                  }}
+                >
+                  {project.title}
+                </h4>
+                <Tooltip title="View">
+                  <ArrowBackIosNewIcon className="icon" sx={{ fontSize: 16 }} />
+                </Tooltip>
+              </div>
               <p className={classes.description}>{project.description}</p>
               <div className={classes.row}>
                 <div className={classes.row}>

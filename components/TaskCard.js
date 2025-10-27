@@ -50,7 +50,7 @@ export default function TaskCard({ taskData }) {
         </h4>
       </div>
       <p className={classes.description}>{taskData.description}</p>
-      <p>{projectData?.title}</p>
+      <p className={classes.projectTitle}>{projectData?.title}</p>
       <div className={classes.row}>
         <Tooltip title={taskData.priority}>
           <CircleIcon
