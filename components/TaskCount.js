@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getTasksApi } from "@/services/api";
 
-export default function TaskCount({ projectId, type }) {
+export default function TaskCount({ projectId }) {
   const [count, setCount] = useState(null);
 
   useEffect(() => {
