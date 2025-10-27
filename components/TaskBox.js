@@ -20,43 +20,63 @@ export default function TaskBox() {
   const [selectedTask, setSelectedTask] = useState(null);
   const [displayPopup, setDisplayPopup] = useState(false);
   const [projectsDataDisplay, setProjectsDataDisplay] = useState([]);
+  const [tasksDataDisplay, setTasksDataDisplay] = useState([]);
   const [projectId, setProjectId] = useState(null);
-  const [doneTasks, setDoneTasks] = useState({});
+  const [doneTasksCount, setDoneTasksCount] = useState({});
 
   const fullSizeChatBox =
     screenSize === "desktop" || screenSize === "tablet-landscape";
 
   useEffect(() => {
     fetchProjects();
+    fetchTasks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Generic helper to filter by user and sort by dueDate descending
+  const filterAndSortByUser = (items, userId) =>
+    items
+      .filter((item) => item.users.includes(userId))
+      .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+
+  // Calculate completion percentage per project
+  const calculateCompletion = (projects, tasks) =>
+    projects.reduce((acc, project) => {
+      const projectTasks = tasks.filter((t) => t.projectId === project._id);
+      const doneTasks = projectTasks.filter((t) => t.status === "done");
+      acc[project._id] =
+        projectTasks.length > 0
+          ? (doneTasks.length / projectTasks.length) * 100
+          : 0;
+      return acc;
+    }, {});
+
   const fetchProjects = async () => {
     try {
-      // Fetch projects and filter by current user
       const projectsData = await getProjectsApi();
-      const filteredProjects = projectsData
-        .filter((project) => project.users.includes(currentUser._id))
-        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+      const filteredProjects = filterAndSortByUser(
+        projectsData,
+        currentUser._id
+      );
       setProjectsDataDisplay(filteredProjects);
 
-      // Fetch tasks
       const tasksData = await getTasksApi();
-      // Calculate completion percentage per project
-      const newDoneMap = filteredProjects.reduce((acc, project) => {
-        const projectTasks = tasksData.filter(
-          (t) => t.projectId === project._id
-        );
-        const doneTasks = projectTasks.filter((t) => t.status === "done");
-        acc[project._id] =
-          projectTasks.length > 0
-            ? (doneTasks.length / projectTasks.length) * 100
-            : 0;
-        return acc;
-      }, {});
-      setDoneTasks(newDoneMap);
+      setDoneTasksCount(calculateCompletion(filteredProjects, tasksData));
     } catch (error) {
       console.error("Error fetching projects or tasks:", error);
+    }
+  };
+
+  const fetchTasks = async () => {
+    try {
+      const tasksData = await getTasksApi();
+      const filteredTasks = filterAndSortByUser(
+        tasksData,
+        currentUser._id
+      ).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+      setTasksDataDisplay(filteredTasks);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
     }
   };
 
@@ -154,9 +174,9 @@ export default function TaskBox() {
               <div className={classes.progress}>
                 <Progress
                   color={"#fdb714"}
-                  completed={doneTasks[project._id] ?? 0}
+                  completed={doneTasksCount[project._id] ?? 0}
                   border={true}
-                  height={2}
+                  height={3}
                 />
               </div>
             </div>
@@ -171,9 +191,21 @@ export default function TaskBox() {
             >
               وظایف
             </h3>
+            <h5
+              style={{
+                fontFamily: "EnglishMedium",
+              }}
+            >
+              {tasksDataDisplay.filter((task) => task.status === "todo").length}
+            </h5>
           </div>
-          <TaskCard />
-          <TaskCard />
+          {tasksDataDisplay
+            .filter((task) => task.status === "todo")
+            .map((task, index) => (
+              <Fragment key={index}>
+                <TaskCard taskData={task} />
+              </Fragment>
+            ))}
         </div>
         <div className={classes.column}>
           <div className={classes.topBar}>
@@ -184,7 +216,24 @@ export default function TaskBox() {
             >
               درحال انجام
             </h3>
+            <h5
+              style={{
+                fontFamily: "EnglishMedium",
+              }}
+            >
+              {
+                tasksDataDisplay.filter((task) => task.status === "progress")
+                  .length
+              }
+            </h5>
           </div>
+          {tasksDataDisplay
+            .filter((task) => task.status === "progress")
+            .map((task, index) => (
+              <Fragment key={index}>
+                <TaskCard taskData={task} />
+              </Fragment>
+            ))}
         </div>
         <div className={classes.column}>
           <div className={classes.topBar}>
@@ -195,7 +244,21 @@ export default function TaskBox() {
             >
               تکمیل
             </h3>
+            <h5
+              style={{
+                fontFamily: "EnglishMedium",
+              }}
+            >
+              {tasksDataDisplay.filter((task) => task.status === "done").length}
+            </h5>
           </div>
+          {tasksDataDisplay
+            .filter((task) => task.status === "done")
+            .map((task, index) => (
+              <Fragment key={index}>
+                <TaskCard taskData={task} />
+              </Fragment>
+            ))}
         </div>
       </div>
       {displayPopup && (

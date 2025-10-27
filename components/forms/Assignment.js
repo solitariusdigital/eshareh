@@ -215,7 +215,7 @@ export default function Assignment({
           description: taskData.description?.trim() || "",
           users: [userId],
           status: "todo",
-          priority: taskData.priority || "",
+          priority: taskData.priority || "Low",
           progress: 0,
           dueDate: taskData.date
             ? convertPersianToGregorian(taskData.date)

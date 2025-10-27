@@ -6,6 +6,7 @@
   grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
   gap: 8px;
   height: calc(100dvh - 100px);
+  max-height: config.$max-widthHeigh !important;
 
   direction: rtl;
 
@@ -37,6 +38,7 @@
     padding: 8px;
     margin: 8px 0px;
     background: config.$generalMessage;
+    color: config.$black !important;
     @include mixins.border-radius(5px);
 
     .row {
@@ -68,6 +70,18 @@
   color: config.$black !important;
   background: config.$generalMessage;
   @include mixins.border-radius(5px);
+
+  .description {
+    margin-bottom: 8px;
+    font-size: small;
+  }
+
+  .row {
+    p {
+      font-size: small;
+      margin: 0px 4px;
+    }
+  }
 }
 
 .popup {
