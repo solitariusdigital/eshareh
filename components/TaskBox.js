@@ -14,7 +14,8 @@ import TaskCard from "@/components/TaskCard";
 import Progress from "@/components/Progress";
 import TaskCount from "@/components/TaskCount";
 import Assignment from "@/components/forms/Assignment";
-import { convertDate } from "@/services/utility";
+import ProjectCard from "@/components/ProjectCard";
+import { convertDate, sliceString } from "@/services/utility";
 import {
   getProjectsApi,
   getTasksApi,
@@ -27,6 +28,7 @@ export default function TaskBox() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [selectedTask, setSelectedTask] = useState(null);
   const [displayPopup, setDisplayPopup] = useState(false);
+  const [displayProjectCard, setProjectDisplayCard] = useState(false);
   const [projectsDataDisplay, setProjectsDataDisplay] = useState([]);
   const [tasksDataDisplay, setTasksDataDisplay] = useState([]);
   const [projectId, setProjectId] = useState(null);
@@ -150,10 +152,19 @@ export default function TaskBox() {
                   {project.title}
                 </h4>
                 <Tooltip title="View">
-                  <ArrowBackIosNewIcon className="icon" sx={{ fontSize: 16 }} />
+                  <ArrowBackIosNewIcon
+                    className="icon"
+                    onClick={() => {
+                      setProjectDisplayCard(true);
+                      setProjectId(project._id);
+                    }}
+                    sx={{ fontSize: 16 }}
+                  />
                 </Tooltip>
               </div>
-              <p className={classes.description}>{project.description}</p>
+              <p className={classes.description}>
+                {sliceString(project.description, 70)}
+              </p>
               <div className={classes.row}>
                 <div className={classes.row}>
                   <Tooltip title="Due Date">
@@ -306,6 +317,16 @@ export default function TaskBox() {
             type="project"
             projectId={projectId}
           />
+        </div>
+      )}
+      {displayProjectCard && (
+        <div className={classes.popup}>
+          <CloseIcon
+            className="icon"
+            onClick={() => setProjectDisplayCard(false)}
+            sx={{ fontSize: 20 }}
+          />
+          <ProjectCard projectId={projectId} />
         </div>
       )}
     </Fragment>

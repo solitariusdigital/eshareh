@@ -107,6 +107,63 @@
   }
 }
 
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  padding: 8px;
+
+  .description {
+    width: 60%;
+    margin: 8px;
+    text-align: right;
+  }
+
+  .taskBox {
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+    direction: rtl;
+  }
+
+  .task {
+    padding: 8px;
+    background: config.$generalMessage;
+    height: fit-content;
+    @include mixins.border-radius(5px);
+
+    .row {
+      @include mixins.row-space-between-center();
+      margin: 8px 0px;
+
+      .description {
+        width: 100%;
+        margin: 0px;
+      }
+
+      .priority {
+        width: fit-content;
+        padding: 2px 4px;
+        color: config.$white;
+        @include mixins.border-radius(5px);
+        user-select: none;
+      }
+    }
+  }
+
+  .image {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    @include mixins.border-radius(50px);
+  }
+}
+
 .popup {
   display: flex;
   flex-direction: column;

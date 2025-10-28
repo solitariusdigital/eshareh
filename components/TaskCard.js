@@ -1,12 +1,11 @@
-import { Fragment, useContext, useState, useEffect } from "react";
-import { StateContext } from "@/context/stateContext";
+import { useState, useEffect } from "react";
 import classes from "./TaskBox.module.scss";
 import CircleIcon from "@mui/icons-material/Circle";
 import Tooltip from "@mui/material/Tooltip";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import RedoIcon from "@mui/icons-material/Redo";
-import { convertDate } from "@/services/utility";
+import { convertDate, sliceString } from "@/services/utility";
 import {
   getSingleProjectApi,
   updateTaskApi,
@@ -87,7 +86,9 @@ export default function TaskCard({ taskData, onTaskUpdate }) {
           </Tooltip>
         </div>
       </div>
-      <p className={classes.description}>{taskData.description}</p>
+      <p className={classes.description}>
+        {sliceString(taskData.description, 70)}
+      </p>
       <p className={classes.projectTitle}>{projectData?.title}</p>
       <div className={classes.row}>
         <div className={classes.row}>
