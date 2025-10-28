@@ -8,12 +8,19 @@ import GroupIcon from "@mui/icons-material/Group";
 import ListIcon from "@mui/icons-material/List";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import TaskCard from "@/components/TaskCard";
 import Progress from "@/components/Progress";
 import TaskCount from "@/components/TaskCount";
 import Assignment from "@/components/forms/Assignment";
 import { convertDate } from "@/services/utility";
-import { getProjectsApi, getTasksApi } from "@/services/api";
+import {
+  getProjectsApi,
+  getTasksApi,
+  deleteProjectApi,
+  deleteTaskApi,
+} from "@/services/api";
 
 export default function TaskBox() {
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -34,6 +41,11 @@ export default function TaskBox() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleTaskUpdated = () => {
+    fetchProjects();
+    fetchTasks();
+  };
+
   // Generic helper to filter by user and sort by dueDate descending
   const filterAndSortByUser = (items, userId) =>
     items
@@ -53,27 +65,31 @@ export default function TaskBox() {
     }, {});
 
   const fetchProjects = async () => {
-    try {
-      const projectsData = await getProjectsApi();
-      const filteredProjects = filterAndSortByUser(
-        projectsData,
-        currentUser._id
-      );
-      setProjectsDataDisplay(filteredProjects);
-      const tasksData = await getTasksApi();
-      setDoneTasksCount(calculateCompletion(filteredProjects, tasksData));
-    } catch (error) {
-      console.error("Error fetching projects or tasks:", error);
-    }
+    const projectsData = await getProjectsApi();
+    const filteredProjects = filterAndSortByUser(projectsData, currentUser._id);
+    setProjectsDataDisplay(filteredProjects);
+    const tasksData = await getTasksApi();
+    setDoneTasksCount(calculateCompletion(filteredProjects, tasksData));
   };
 
   const fetchTasks = async () => {
-    try {
+    const tasksData = await getTasksApi();
+    const filteredTasks = filterAndSortByUser(tasksData, currentUser._id);
+    setTasksDataDisplay(filteredTasks);
+  };
+
+  const deleteProject = async (id) => {
+    let confirmationMessage = "حذف پروژه و وظایف مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
       const tasksData = await getTasksApi();
-      const filteredTasks = filterAndSortByUser(tasksData, currentUser._id);
-      setTasksDataDisplay(filteredTasks);
-    } catch (error) {
-      console.error("Error fetching tasks:", error);
+      let tasksToDelete = tasksData.filter((task) => task.projectId === id);
+      const deletionPromises = tasksToDelete.map((task) =>
+        deleteTaskApi(task._id)
+      );
+      await Promise.all(deletionPromises);
+      await deleteProjectApi(id);
+      handleTaskUpdated();
     }
   };
 
@@ -111,6 +127,20 @@ export default function TaskBox() {
           </div>
           {projectsDataDisplay.map((project, index) => (
             <div key={index} className={classes.project}>
+              {project.adminsId.includes(currentUser._id) && (
+                <div className={classes.row}>
+                  <Tooltip title="Admin">
+                    <ShieldOutlinedIcon sx={{ fontSize: 16 }} />
+                  </Tooltip>
+                  <Tooltip title="Delete">
+                    <DeleteOutlineIcon
+                      className="icon"
+                      sx={{ fontSize: 16 }}
+                      onClick={() => deleteProject(project._id)}
+                    />
+                  </Tooltip>
+                </div>
+              )}
               <div className={classes.row}>
                 <h4
                   style={{
@@ -205,7 +235,7 @@ export default function TaskBox() {
             .filter((task) => task.status === "todo")
             .map((task, index) => (
               <Fragment key={index}>
-                <TaskCard taskData={task} />
+                <TaskCard taskData={task} onTaskUpdate={handleTaskUpdated} />
               </Fragment>
             ))}
         </div>
@@ -233,7 +263,7 @@ export default function TaskBox() {
             .filter((task) => task.status === "progress")
             .map((task, index) => (
               <Fragment key={index}>
-                <TaskCard taskData={task} />
+                <TaskCard taskData={task} onTaskUpdate={handleTaskUpdated} />
               </Fragment>
             ))}
         </div>
@@ -258,7 +288,7 @@ export default function TaskBox() {
             .filter((task) => task.status === "done")
             .map((task, index) => (
               <Fragment key={index}>
-                <TaskCard taskData={task} />
+                <TaskCard taskData={task} onTaskUpdate={handleTaskUpdated} />
               </Fragment>
             ))}
         </div>

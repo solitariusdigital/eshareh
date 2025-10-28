@@ -102,7 +102,8 @@ export default function Assignment({
     );
   };
 
-  const createChat = async () => {
+  // new chat - new project
+  const createNewData = async () => {
     let usersId = users
       .filter((user) => user.selection)
       .map((user) => user._id);
@@ -135,6 +136,7 @@ export default function Assignment({
           resultData = await createProjectApi(projectObject);
           setSelectedProjectId(resultData._id);
           enrichUserData(usersId);
+          setDisableButton(false);
         }
         break;
       case "chat":
@@ -205,24 +207,38 @@ export default function Assignment({
 
   const createTasks = async () => {
     if (Object.keys(tasksFormData).length === 0) return;
-
+    const allTasks = [];
     for (const userId of Object.keys(tasksFormData)) {
       for (const taskData of tasksFormData[userId]) {
         if (!taskData || Object.keys(taskData).length === 0) continue;
-        const taskObject = {
-          projectId,
-          title: taskData.title?.trim() || "",
-          description: taskData.description?.trim() || "",
-          users: [userId],
-          status: "todo",
-          priority: taskData.priority || "Low",
-          progress: 0,
-          dueDate: taskData.date
-            ? convertPersianToGregorian(taskData.date)
-            : "",
-        };
-        await createTaskApi(taskObject);
+        const hasRequiredFields =
+          taskData.title?.trim() &&
+          taskData.description?.trim() &&
+          taskData.priority &&
+          taskData.date &&
+          typeof taskData.date === "object" &&
+          taskData.date.day &&
+          taskData.date.month &&
+          taskData.date.year;
+        if (!hasRequiredFields) {
+          showAlert("همه موارد الزامیست");
+          return;
+        }
+        allTasks.push({ userId, taskData });
       }
+    }
+    for (const { userId, taskData } of allTasks) {
+      const taskObject = {
+        projectId: selectedProjectId,
+        title: taskData.title.trim(),
+        description: taskData.description.trim(),
+        users: [userId],
+        status: "todo",
+        priority: taskData.priority,
+        progress: 0,
+        dueDate: convertPersianToGregorian(taskData.date),
+      };
+      await createTaskApi(taskObject);
     }
     router.reload(router.asPath);
   };
@@ -426,7 +442,7 @@ export default function Assignment({
               style={{
                 fontFamily: "FarsiMedium",
               }}
-              onClick={() => createChat()}
+              onClick={() => createNewData()}
             >
               {editData ? "ویرایش" : "ذخیره"}
             </button>

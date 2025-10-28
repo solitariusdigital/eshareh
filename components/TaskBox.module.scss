@@ -41,7 +41,14 @@
     color: config.$black !important;
     @include mixins.border-radius(5px);
 
+    &:hover {
+      background: config.$yellowShade;
+      color: config.$black !important;
+    }
+
     .row {
+      margin-bottom: 8px;
+
       h4 {
         width: 90%;
       }
@@ -74,6 +81,11 @@
   color: config.$black !important;
   background: config.$generalMessage;
   @include mixins.border-radius(5px);
+
+  .indicator {
+    @include mixins.row-space-between-center();
+    transform: scaleX(-1);
+  }
 
   .description {
     margin: 8px 0px;

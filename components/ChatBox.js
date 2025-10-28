@@ -317,7 +317,6 @@ export default function ChatBox({ floatChat }) {
   const handleChangeMessage = (e) => {
     const value = e.target.value;
     setMessageContent(value);
-
     // Detect if message contains Persian (Farsi) characters
     const persianRegex = /[\u0600-\u06FF]/; // Persian/Arabic Unicode range
     setIsFarsi(persianRegex.test(value));

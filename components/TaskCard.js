@@ -4,11 +4,16 @@ import classes from "./TaskBox.module.scss";
 import CircleIcon from "@mui/icons-material/Circle";
 import Tooltip from "@mui/material/Tooltip";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import RedoIcon from "@mui/icons-material/Redo";
 import { convertDate } from "@/services/utility";
-import ChecklistIcon from "@mui/icons-material/Checklist";
-import { getSingleProjectApi } from "@/services/api";
+import {
+  getSingleProjectApi,
+  updateTaskApi,
+  deleteTaskApi,
+} from "@/services/api";
 
-export default function TaskCard({ taskData }) {
+export default function TaskCard({ taskData, onTaskUpdate }) {
   const [projectData, setProjectData] = useState(null);
 
   useEffect(() => {
@@ -17,25 +22,40 @@ export default function TaskCard({ taskData }) {
   }, []);
 
   const fetchProject = async () => {
-    try {
-      const projectsData = await getSingleProjectApi(taskData.projectId);
-      setProjectData(projectsData);
-    } catch (error) {
-      console.error("Error fetching projects or tasks:", error);
-    }
+    const projectsData = await getSingleProjectApi(taskData.projectId);
+    setProjectData(projectsData);
   };
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "Low":
-        return "yellowgreen";
-      case "Medium":
-        return "blueviolet";
-      case "High":
-        return "orange";
-      case "Urgent":
-        return "red";
+  const getPriorityColor = (priority) => {
+    const priorityColor = {
+      Low: "yellowgreen",
+      Medium: "blueviolet",
+      High: "orange",
+      Urgent: "red",
+    };
+    return priorityColor[priority];
+  };
+
+  const changeTaskStatus = async (status) => {
+    const nextStatus = {
+      todo: "progress",
+      progress: "done",
+      done: "todo",
+    };
+    await updateTaskApi({
+      ...taskData,
+      status: nextStatus[status],
+    });
+    onTaskUpdate();
+  };
+
+  const deleteTask = async (id) => {
+    let confirmationMessage = "حذف مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      await deleteTaskApi(id);
     }
+    onTaskUpdate();
   };
 
   return (
@@ -48,15 +68,28 @@ export default function TaskCard({ taskData }) {
         >
           {taskData.title}
         </h4>
+        <div className={classes.indicator}>
+          <Tooltip title="Next Status">
+            <RedoIcon
+              className="icon"
+              sx={{ fontSize: 18 }}
+              onClick={() => {
+                changeTaskStatus(taskData.status);
+              }}
+            />
+          </Tooltip>
+          <Tooltip title="Delete">
+            <DeleteOutlineIcon
+              className="icon"
+              sx={{ fontSize: 16 }}
+              onClick={() => deleteTask(taskData._id)}
+            />
+          </Tooltip>
+        </div>
       </div>
       <p className={classes.description}>{taskData.description}</p>
       <p className={classes.projectTitle}>{projectData?.title}</p>
       <div className={classes.row}>
-        <Tooltip title={taskData.priority}>
-          <CircleIcon
-            sx={{ fontSize: 12, color: getStatusColor(taskData.priority) }}
-          />
-        </Tooltip>
         <div className={classes.row}>
           <Tooltip title="Due Date">
             <TimelapseIcon sx={{ fontSize: 18 }} />
@@ -68,18 +101,11 @@ export default function TaskCard({ taskData }) {
             )}
           </p>
         </div>
-        <div className={classes.row}>
-          <Tooltip title="Progress">
-            <ChecklistIcon sx={{ fontSize: 18 }} />
-          </Tooltip>
-          <p
-            style={{
-              fontFamily: "English",
-            }}
-          >
-            {taskData.progress}%
-          </p>
-        </div>
+        <Tooltip title={taskData.priority}>
+          <CircleIcon
+            sx={{ fontSize: 12, color: getPriorityColor(taskData.priority) }}
+          />
+        </Tooltip>
       </div>
     </div>
   );
