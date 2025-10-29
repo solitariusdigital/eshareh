@@ -136,17 +136,38 @@
   }
 
   .description {
-    width: 60%;
+    width: 70%;
     text-align: right;
+
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+    }
+    @include mixins.tabletPortrait {
+      width: config.$content-widthTablet;
+    }
+    @include mixins.tablet {
+      width: config.$content-widthTablet;
+    }
   }
 
   .taskBox {
-    width: 60%;
+    width: 70%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
     gap: 8px;
     margin-top: 8px;
     direction: rtl;
+
+    @include mixins.mobile {
+      grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+      width: calc(100% - 24px);
+    }
+    @include mixins.tabletPortrait {
+      width: config.$content-widthTablet;
+    }
+    @include mixins.tablet {
+      width: config.$content-widthTablet;
+    }
   }
 
   .task {
