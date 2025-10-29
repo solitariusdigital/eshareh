@@ -7,6 +7,7 @@ const ProjectSchema = new Schema(
     users: [],
     adminsId: [],
     completed: Boolean,
+    dateObject: {},
     dueDate: Date,
   },
   { timestamps: true }

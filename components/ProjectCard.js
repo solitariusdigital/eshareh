@@ -9,10 +9,12 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import DatePicker from "@hassanmojab/react-modern-calendar-datepicker";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
+import EditIcon from "@mui/icons-material/Edit";
 import ToggleOnIcon from "@mui/icons-material/ToggleOn";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";
 import { utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
+import Assignment from "@/components/forms/Assignment";
 import { convertDate, convertPersianToGregorian } from "@/services/utility";
 import {
   getSingleProjectApi,
@@ -28,6 +30,7 @@ export default function ProjectCard({ projectId }) {
   const [projectDataDisplay, setProjectDataDisplay] = useState([]);
   const [taskDatadisplay, setTaskDataDisplay] = useState([]);
   const [tasksFormData, setTasksFormData] = useState({});
+  const [editProject, setEditProject] = useState(false);
 
   useEffect(() => {
     fetchProject();
@@ -137,192 +140,219 @@ export default function ProjectCard({ projectId }) {
   };
 
   return (
-    <div className={classes.projectCard}>
-      <div
-        className={classes.row}
-        style={{
-          fontFamily: "FarsiBold",
-        }}
-      >
-        {projectDataDisplay.adminsId?.includes(currentUser._id) && (
-          <Tooltip
-            title={projectDataDisplay.completed ? "Progress" : "Complete"}
-          >
-            {!projectDataDisplay.completed ? (
-              <ToggleOffIcon
-                className="icon"
-                style={{
-                  marginRight: "12px",
-                }}
-                sx={{ fontSize: 32, color: "#a70237" }}
-                onClick={() => {
-                  completeProject("complete");
-                }}
-              />
-            ) : (
-              <ToggleOnIcon
-                className="icon"
-                style={{
-                  marginRight: "12px",
-                }}
-                sx={{ fontSize: 32, color: "#6b8745" }}
-                onClick={() => {
-                  completeProject("progress");
-                }}
-              />
-            )}
-          </Tooltip>
-        )}
-        <h4
-          style={{
-            marginRight: "12px",
-          }}
-        >
-          <span
+    <>
+      {!editProject ? (
+        <div className={classes.projectCard}>
+          <div
+            className={classes.row}
             style={{
-              fontFamily: "EnglishMedium",
-              marginRight: "4px",
+              fontFamily: "FarsiBold",
             }}
           >
-            {calculateProgress() || 0}%
-          </span>
-          تکمیل
-        </h4>
-        <p
-          style={{
-            marginRight: "4px",
-          }}
-        >
-          {(() => {
-            const dateStr = convertDate(projectDataDisplay?.dueDate) || "-";
-            const commaIndex = dateStr.indexOf(",");
-            return commaIndex !== -1 ? dateStr.slice(0, commaIndex) : dateStr;
-          })()}
-        </p>
-        <Tooltip title="Due Date">
-          <TimelapseIcon sx={{ fontSize: 18 }} />
-        </Tooltip>
-      </div>
-      <h3
-        style={{
-          fontFamily: "FarsiBold",
-          margin: "8px",
-        }}
-      >
-        {projectDataDisplay?.title}
-      </h3>
-      <p className={classes.description}>{projectDataDisplay?.description}</p>
-      <div className={classes.taskBox}>
-        {taskDatadisplay.map((task, index) => (
-          <div key={index} className={classes.task}>
-            <div className={classes.row}>
-              <div className={classes.row}>
-                <div className={classes.image}>
-                  <Image
-                    className={classes.image}
-                    blurDataURL={task.userData.media}
-                    src={task.userData.media}
-                    layout="fill"
-                    objectFit="cover"
-                    alt="image"
+            {projectDataDisplay.adminsId?.includes(currentUser._id) && (
+              <Tooltip
+                title={projectDataDisplay.completed ? "Progress" : "Complete"}
+              >
+                {!projectDataDisplay.completed ? (
+                  <ToggleOffIcon
+                    className="icon"
+                    style={{
+                      marginRight: "12px",
+                    }}
+                    sx={{ fontSize: 32, color: "#a70237" }}
+                    onClick={() => {
+                      completeProject("complete");
+                    }}
                   />
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "FarsiBold",
-                    margin: "0px 8px",
-                  }}
-                >
-                  {task.userData.name.fa}
-                </h3>
-                {task.users.some((id) =>
-                  projectDataDisplay.adminsId.includes(id)
-                ) && (
-                  <Tooltip title="Project Admin">
-                    <ShieldOutlinedIcon sx={{ fontSize: 18 }} />
-                  </Tooltip>
+                ) : (
+                  <ToggleOnIcon
+                    className="icon"
+                    style={{
+                      marginRight: "12px",
+                    }}
+                    sx={{ fontSize: 32, color: "#6b8745" }}
+                    onClick={() => {
+                      completeProject("progress");
+                    }}
+                  />
                 )}
-              </div>
-              <h4>{task.userData.title.fa}</h4>
-            </div>
-            <div className={classes.row}>
-              <p>{task.title}</p>
-            </div>
-            <div className={classes.row}>
-              <p className={classes.description}>{task.description}</p>
-            </div>
-            <div className={classes.row} style={{ margin: "0px" }}>
-              <div className={classes.row}>
-                {isWithinThreeDays(task) && (
-                  <Tooltip title="Action">
-                    <NotificationsIcon sx={{ fontSize: 18, color: "red" }} />
-                  </Tooltip>
-                )}
-                {task.status === "done" && (
-                  <Tooltip title="Done">
-                    <DoneOutlineIcon sx={{ fontSize: 18, color: "green" }} />
-                  </Tooltip>
-                )}
-                {task.status !== "done" && (
-                  <Tooltip title="Due Date">
-                    <TimelapseIcon sx={{ fontSize: 18 }} />
-                  </Tooltip>
-                )}
-                <p
-                  style={{
-                    marginRight: "4px",
-                  }}
-                >
-                  {convertDate(task.dueDate).slice(
-                    0,
-                    convertDate(task.dueDate).indexOf(",")
-                  )}
-                </p>
-              </div>
-              <p
+              </Tooltip>
+            )}
+            <h4
+              style={{
+                marginRight: "12px",
+              }}
+            >
+              <span
                 style={{
-                  fontFamily: "FarsiBold",
+                  fontFamily: "EnglishMedium",
+                  marginRight: "4px",
                 }}
               >
-                {getStatus(task.status)}
-              </p>
-              <div
-                className={classes.priority}
-                style={{ background: getPriorityColor(task.priority) }}
-              >
-                <p
-                  style={{
-                    fontFamily: "English",
-                  }}
-                >
-                  {task.priority}
-                </p>
-              </div>
-            </div>
-            {projectDataDisplay.adminsId.includes(currentUser._id) && (
-              <div className={classes.indicator}>
-                <DatePicker
-                  value={tasksFormData[task._id]}
-                  onChange={(date) =>
-                    handleTaskDateChange(task._id, date, index)
-                  }
-                  inputPlaceholder="تغییر مهلت"
-                  shouldHighlightWeekends
-                  minimumDate={utils("fa").getToday()}
-                  locale="fa"
-                />
-                <Tooltip title="Delete">
-                  <DeleteOutlineIcon
-                    className="icon"
-                    sx={{ fontSize: 18 }}
-                    onClick={() => deleteTask(task._id)}
-                  />
-                </Tooltip>
-              </div>
-            )}
+                {calculateProgress() || 0}%
+              </span>
+              تکمیل
+            </h4>
+            <p
+              style={{
+                marginRight: "4px",
+              }}
+            >
+              {(() => {
+                const dateStr = convertDate(projectDataDisplay?.dueDate) || "-";
+                const commaIndex = dateStr.indexOf(",");
+                return commaIndex !== -1
+                  ? dateStr.slice(0, commaIndex)
+                  : dateStr;
+              })()}
+            </p>
+            <Tooltip title="Due Date">
+              <TimelapseIcon sx={{ fontSize: 18 }} />
+            </Tooltip>
           </div>
-        ))}
-      </div>
-    </div>
+          <Tooltip title="Edit Project">
+            <EditIcon
+              className="icon"
+              style={{
+                margin: "8px 0px",
+              }}
+              sx={{ fontSize: 20 }}
+              onClick={() => setEditProject(true)}
+            />
+          </Tooltip>
+          <h3
+            style={{
+              fontFamily: "FarsiBold",
+            }}
+          >
+            {projectDataDisplay?.title}
+          </h3>
+          <p className={classes.description}>
+            {projectDataDisplay?.description}
+          </p>
+          <div className={classes.taskBox}>
+            {taskDatadisplay.map((task, index) => (
+              <div key={index} className={classes.task}>
+                <div className={classes.row}>
+                  <div className={classes.row}>
+                    <div className={classes.image}>
+                      <Image
+                        className={classes.image}
+                        blurDataURL={task.userData.media}
+                        src={task.userData.media}
+                        layout="fill"
+                        objectFit="cover"
+                        alt="image"
+                      />
+                    </div>
+                    <h3
+                      style={{
+                        fontFamily: "FarsiBold",
+                        margin: "0px 8px",
+                      }}
+                    >
+                      {task.userData.name.fa}
+                    </h3>
+                    {task.users.some((id) =>
+                      projectDataDisplay.adminsId.includes(id)
+                    ) && (
+                      <Tooltip title="Project Admin">
+                        <ShieldOutlinedIcon sx={{ fontSize: 18 }} />
+                      </Tooltip>
+                    )}
+                  </div>
+                  <h4>{task.userData.title.fa}</h4>
+                </div>
+                <div className={classes.row}>
+                  <p>{task.title}</p>
+                </div>
+                <div className={classes.row}>
+                  <p className={classes.description}>{task.description}</p>
+                </div>
+                <div className={classes.row} style={{ margin: "0px" }}>
+                  <div className={classes.row}>
+                    {isWithinThreeDays(task) && (
+                      <Tooltip title="Action">
+                        <NotificationsIcon
+                          sx={{ fontSize: 18, color: "red" }}
+                        />
+                      </Tooltip>
+                    )}
+                    {task.status === "done" && (
+                      <Tooltip title="Done">
+                        <DoneOutlineIcon
+                          sx={{ fontSize: 18, color: "green" }}
+                        />
+                      </Tooltip>
+                    )}
+                    {task.status !== "done" && (
+                      <Tooltip title="Due Date">
+                        <TimelapseIcon sx={{ fontSize: 18 }} />
+                      </Tooltip>
+                    )}
+                    <p
+                      style={{
+                        marginRight: "4px",
+                      }}
+                    >
+                      {convertDate(task.dueDate).slice(
+                        0,
+                        convertDate(task.dueDate).indexOf(",")
+                      )}
+                    </p>
+                  </div>
+                  <p
+                    style={{
+                      fontFamily: "FarsiBold",
+                    }}
+                  >
+                    {getStatus(task.status)}
+                  </p>
+                  <div
+                    className={classes.priority}
+                    style={{ background: getPriorityColor(task.priority) }}
+                  >
+                    <p
+                      style={{
+                        fontFamily: "English",
+                      }}
+                    >
+                      {task.priority}
+                    </p>
+                  </div>
+                </div>
+                {projectDataDisplay.adminsId.includes(currentUser._id) && (
+                  <div className={classes.indicator}>
+                    <DatePicker
+                      value={tasksFormData[task._id]}
+                      onChange={(date) =>
+                        handleTaskDateChange(task._id, date, index)
+                      }
+                      inputPlaceholder="تغییر مهلت"
+                      shouldHighlightWeekends
+                      minimumDate={utils("fa").getToday()}
+                      locale="fa"
+                    />
+                    <Tooltip title="Delete">
+                      <DeleteOutlineIcon
+                        className="icon"
+                        sx={{ fontSize: 18 }}
+                        onClick={() => deleteTask(task._id)}
+                      />
+                    </Tooltip>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <Assignment
+          selectedData={projectDataDisplay}
+          floatChat={false}
+          type="project"
+        />
+      )}
+    </>
   );
 }

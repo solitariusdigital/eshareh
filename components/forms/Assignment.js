@@ -46,8 +46,8 @@ export default function Assignment({
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
   const [editData, setEditData] = useState(selectedData);
-  const [projectDate, setProjectDate] = useState(null);
-  const [dueDate, setDueDate] = useState(null);
+  const [projectDate, setProjectDate] = useState(editData?.dateObject || null);
+  const [dueDate, setDueDate] = useState(editData?.dueDate || null);
   const [tasksUsers, setTasksUsers] = useState(null);
   const [tasksFormData, setTasksFormData] = useState({});
   const [selectedProjectId, setSelectedProjectId] = useState(projectId);
@@ -126,18 +126,19 @@ export default function Assignment({
           users: usersId,
           adminsId: [currentUser._id],
           completed: false,
+          dateObject: projectDate,
           dueDate: dueDate,
         };
         if (editData) {
           projectObject.id = editData._id;
-          projectObject.dueDate = editData.dueDate;
           resultData = await updateProjectApi(projectObject);
+          showAlert("تغییرات انجام شد");
         } else {
           resultData = await createProjectApi(projectObject);
           setSelectedProjectId(resultData._id);
           enrichUserData(usersId);
-          setDisableButton(false);
         }
+        setDisableButton(false);
         break;
       case "chat":
         const chatObject = {
