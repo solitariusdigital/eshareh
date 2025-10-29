@@ -9,6 +9,8 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import DatePicker from "@hassanmojab/react-modern-calendar-datepicker";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
+import ToggleOnIcon from "@mui/icons-material/ToggleOn";
+import ToggleOffIcon from "@mui/icons-material/ToggleOff";
 import { utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 import { convertDate, convertPersianToGregorian } from "@/services/utility";
@@ -18,6 +20,7 @@ import {
   getSingleUserApi,
   deleteTaskApi,
   updateTaskApi,
+  updateProjectApi,
 } from "@/services/api";
 
 export default function ProjectCard({ projectId }) {
@@ -115,19 +118,86 @@ export default function ProjectCard({ projectId }) {
     }
   };
 
+  const calculateProgress = () => {
+    let doneTasks = taskDatadisplay.filter((task) => task.status === "done");
+    return (doneTasks.length / taskDatadisplay.length) * 100;
+  };
+
+  const completeProject = async (type) => {
+    switch (type) {
+      case "complete":
+        projectDataDisplay.completed = true;
+        break;
+      case "progress":
+        projectDataDisplay.completed = false;
+        break;
+    }
+    await updateProjectApi(projectDataDisplay);
+    fetchTasks();
+  };
+
   return (
     <div className={classes.projectCard}>
-      <div className={classes.row}>
+      <div
+        className={classes.row}
+        style={{
+          fontFamily: "FarsiBold",
+        }}
+      >
+        {projectDataDisplay.adminsId?.includes(currentUser._id) && (
+          <Tooltip
+            title={projectDataDisplay.completed ? "Progress" : "Complete"}
+          >
+            {!projectDataDisplay.completed ? (
+              <ToggleOffIcon
+                className="icon"
+                style={{
+                  marginRight: "12px",
+                }}
+                sx={{ fontSize: 32, color: "#a70237" }}
+                onClick={() => {
+                  completeProject("complete");
+                }}
+              />
+            ) : (
+              <ToggleOnIcon
+                className="icon"
+                style={{
+                  marginRight: "12px",
+                }}
+                sx={{ fontSize: 32, color: "#6b8745" }}
+                onClick={() => {
+                  completeProject("progress");
+                }}
+              />
+            )}
+          </Tooltip>
+        )}
+        <h4
+          style={{
+            marginRight: "12px",
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "EnglishMedium",
+              marginRight: "4px",
+            }}
+          >
+            {calculateProgress() || 0}%
+          </span>
+          تکمیل
+        </h4>
         <p
           style={{
-            fontFamily: "FarsiBold",
             marginRight: "4px",
           }}
         >
-          {convertDate(projectDataDisplay?.dueDate).slice(
-            0,
-            convertDate(projectDataDisplay?.dueDate).indexOf(",")
-          )}
+          {(() => {
+            const dateStr = convertDate(projectDataDisplay?.dueDate) || "-";
+            const commaIndex = dateStr.indexOf(",");
+            return commaIndex !== -1 ? dateStr.slice(0, commaIndex) : dateStr;
+          })()}
         </p>
         <Tooltip title="Due Date">
           <TimelapseIcon sx={{ fontSize: 18 }} />
@@ -135,8 +205,8 @@ export default function ProjectCard({ projectId }) {
       </div>
       <h3
         style={{
-          margin: "8px",
           fontFamily: "FarsiBold",
+          margin: "8px",
         }}
       >
         {projectDataDisplay?.title}

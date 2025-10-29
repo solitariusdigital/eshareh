@@ -70,6 +70,7 @@ export default function TaskBox() {
   const fetchProjects = async () => {
     const projectsData = await getProjectsApi();
     const filteredProjects = filterAndSortByUser(projectsData, currentUser._id);
+    filteredProjects.sort((a, b) => a.completed - b.completed);
     setProjectsDataDisplay(filteredProjects);
     const tasksData = await getTasksApi();
     setDoneTasksCount(calculateCompletion(filteredProjects, tasksData));
@@ -191,10 +192,13 @@ export default function TaskBox() {
                     <TimelapseIcon sx={{ fontSize: 18 }} />
                   </Tooltip>
                   <p>
-                    {convertDate(project.dueDate).slice(
-                      0,
-                      convertDate(project.dueDate).indexOf(",")
-                    )}
+                    {(() => {
+                      const dateStr = convertDate(project?.dueDate) || "-";
+                      const commaIndex = dateStr.indexOf(",");
+                      return commaIndex !== -1
+                        ? dateStr.slice(0, commaIndex)
+                        : dateStr;
+                    })()}
                   </p>
                 </div>
                 <div className={classes.row}>

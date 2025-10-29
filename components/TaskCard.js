@@ -125,12 +125,12 @@ export default function TaskCard({ taskData, onTaskUpdate }) {
               <TimelapseIcon sx={{ fontSize: 18 }} />
             </Tooltip>
           )}
-
           <p>
-            {convertDate(taskData.dueDate).slice(
-              0,
-              convertDate(taskData.dueDate).indexOf(",")
-            )}
+            {(() => {
+              const dateStr = convertDate(taskData?.dueDate) || "-";
+              const commaIndex = dateStr.indexOf(",");
+              return commaIndex !== -1 ? dateStr.slice(0, commaIndex) : dateStr;
+            })()}
           </p>
         </div>
         <Tooltip title={taskData.priority}>
