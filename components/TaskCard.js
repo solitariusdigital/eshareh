@@ -17,7 +17,6 @@ import {
 
 export default function TaskCard({ taskData, onTaskUpdate }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
-
   const [projectData, setProjectData] = useState(null);
 
   useEffect(() => {

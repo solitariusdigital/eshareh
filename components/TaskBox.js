@@ -10,6 +10,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import TaskCard from "@/components/TaskCard";
 import Progress from "@/components/Progress";
@@ -25,7 +26,6 @@ import {
 } from "@/services/api";
 
 export default function TaskBox() {
-  const { screenSize, setScreenSize } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [selectedTask, setSelectedTask] = useState(null);
   const [assignmentPopup, setAssignmentPopup] = useState(false);
@@ -34,9 +34,6 @@ export default function TaskBox() {
   const [tasksDataDisplay, setTasksDataDisplay] = useState([]);
   const [projectId, setProjectId] = useState(null);
   const [doneTasksCount, setDoneTasksCount] = useState({});
-
-  const fullSizeChatBox =
-    screenSize === "desktop" || screenSize === "tablet-landscape";
 
   useEffect(() => {
     fetchProjects();
@@ -140,6 +137,11 @@ export default function TaskBox() {
           </div>
           {projectsDataDisplay.map((project, index) => (
             <div key={index} className={classes.project}>
+              {project.completed && (
+                <Tooltip title="Completed">
+                  <DoneOutlineIcon sx={{ fontSize: 18, color: "green" }} />
+                </Tooltip>
+              )}
               {project.adminsId.includes(currentUser._id) && (
                 <div className={classes.row}>
                   <Tooltip title="Project Admin">
@@ -256,10 +258,12 @@ export default function TaskBox() {
           </div>
           {tasksDataDisplay
             .filter((task) => task.status === "todo")
-            .map((task, index) => (
-              <Fragment key={index}>
-                <TaskCard taskData={task} onTaskUpdate={handleTaskUpdated} />
-              </Fragment>
+            .map((task) => (
+              <TaskCard
+                key={task._id}
+                taskData={task}
+                onTaskUpdate={handleTaskUpdated}
+              />
             ))}
         </div>
         <div className={classes.column}>
@@ -284,10 +288,12 @@ export default function TaskBox() {
           </div>
           {tasksDataDisplay
             .filter((task) => task.status === "progress")
-            .map((task, index) => (
-              <Fragment key={index}>
-                <TaskCard taskData={task} onTaskUpdate={handleTaskUpdated} />
-              </Fragment>
+            .map((task) => (
+              <TaskCard
+                key={task._id}
+                taskData={task}
+                onTaskUpdate={handleTaskUpdated}
+              />
             ))}
         </div>
         <div className={classes.column}>
@@ -309,10 +315,12 @@ export default function TaskBox() {
           </div>
           {tasksDataDisplay
             .filter((task) => task.status === "done")
-            .map((task, index) => (
-              <Fragment key={index}>
-                <TaskCard taskData={task} onTaskUpdate={handleTaskUpdated} />
-              </Fragment>
+            .map((task) => (
+              <TaskCard
+                key={task._id}
+                taskData={task}
+                onTaskUpdate={handleTaskUpdated}
+              />
             ))}
         </div>
       </div>
