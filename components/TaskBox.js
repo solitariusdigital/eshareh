@@ -10,6 +10,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import TaskCard from "@/components/TaskCard";
 import Progress from "@/components/Progress";
 import TaskCount from "@/components/TaskCount";
@@ -27,8 +28,8 @@ export default function TaskBox() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [selectedTask, setSelectedTask] = useState(null);
-  const [displayPopup, setDisplayPopup] = useState(false);
-  const [displayProjectCard, setProjectDisplayCard] = useState(false);
+  const [assignmentPopup, setAssignmentPopup] = useState(false);
+  const [projectCardPopup, setProjectPopup] = useState(false);
   const [projectsDataDisplay, setProjectsDataDisplay] = useState([]);
   const [tasksDataDisplay, setTasksDataDisplay] = useState([]);
   const [projectId, setProjectId] = useState(null);
@@ -116,12 +117,21 @@ export default function TaskBox() {
                 {projectsDataDisplay.length}
               </h5>
             </div>
+            <Tooltip title="Refresh">
+              <RefreshIcon
+                className="icon"
+                sx={{ fontSize: 20 }}
+                onClick={() => {
+                  handleTaskUpdated();
+                }}
+              />
+            </Tooltip>
             <Tooltip title="New Project">
               <AddIcon
                 className="icon"
                 sx={{ fontSize: 20 }}
                 onClick={() => {
-                  setDisplayPopup(true);
+                  setAssignmentPopup(true);
                   setProjectId(null);
                 }}
               />
@@ -155,7 +165,7 @@ export default function TaskBox() {
                   <ArrowBackIosNewIcon
                     className="icon"
                     onClick={() => {
-                      setProjectDisplayCard(true);
+                      setProjectPopup(true);
                       setProjectId(project._id);
                     }}
                     sx={{ fontSize: 16 }}
@@ -165,7 +175,7 @@ export default function TaskBox() {
               <p className={classes.description}>
                 {sliceString(project.description, 70)}
               </p>
-              <div className={classes.row}>
+              <div className={classes.indicator}>
                 <div className={classes.row}>
                   <Tooltip title="Due Date">
                     <TimelapseIcon sx={{ fontSize: 18 }} />
@@ -207,7 +217,7 @@ export default function TaskBox() {
                       className="icon"
                       sx={{ fontSize: 18 }}
                       onClick={() => {
-                        setDisplayPopup(true);
+                        setAssignmentPopup(true);
                         setProjectId(project._id);
                       }}
                     />
@@ -304,11 +314,11 @@ export default function TaskBox() {
             ))}
         </div>
       </div>
-      {displayPopup && (
+      {assignmentPopup && (
         <div className={classes.popup}>
           <CloseIcon
             className="icon"
-            onClick={() => setDisplayPopup(false)}
+            onClick={() => setAssignmentPopup(false)}
             sx={{ fontSize: 20 }}
           />
           <Assignment
@@ -319,11 +329,11 @@ export default function TaskBox() {
           />
         </div>
       )}
-      {displayProjectCard && (
+      {projectCardPopup && (
         <div className={classes.popup}>
           <CloseIcon
             className="icon"
-            onClick={() => setProjectDisplayCard(false)}
+            onClick={() => setProjectPopup(false)}
             sx={{ fontSize: 20 }}
           />
           <ProjectCard projectId={projectId} />

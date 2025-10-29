@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
+import { Fragment, useContext, useState, useEffect } from "react";
+import { StateContext } from "@/context/stateContext";
 import classes from "./TaskBox.module.scss";
 import CircleIcon from "@mui/icons-material/Circle";
 import Tooltip from "@mui/material/Tooltip";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import RedoIcon from "@mui/icons-material/Redo";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import { convertDate, sliceString } from "@/services/utility";
 import {
   getSingleProjectApi,
@@ -13,6 +16,8 @@ import {
 } from "@/services/api";
 
 export default function TaskCard({ taskData, onTaskUpdate }) {
+  const { currentUser, setCurrentUser } = useContext(StateContext);
+
   const [projectData, setProjectData] = useState(null);
 
   useEffect(() => {
@@ -30,7 +35,7 @@ export default function TaskCard({ taskData, onTaskUpdate }) {
       Low: "yellowgreen",
       Medium: "blueviolet",
       High: "orange",
-      Urgent: "red",
+      Urgent: "crimson",
     };
     return priorityColor[priority];
   };
@@ -57,6 +62,17 @@ export default function TaskCard({ taskData, onTaskUpdate }) {
     onTaskUpdate();
   };
 
+  const isWithinThreeDays = () => {
+    if (taskData.status === "done") return;
+    const dueDate = new Date(taskData.dueDate);
+    const today = new Date();
+    dueDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+    const diffInMs = dueDate - today;
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    return diffInDays <= 3 && diffInDays >= 0;
+  };
+
   return (
     <div className={classes.taskCard}>
       <div className={classes.row}>
@@ -77,13 +93,15 @@ export default function TaskCard({ taskData, onTaskUpdate }) {
               }}
             />
           </Tooltip>
-          <Tooltip title="Delete">
-            <DeleteOutlineIcon
-              className="icon"
-              sx={{ fontSize: 16 }}
-              onClick={() => deleteTask(taskData._id)}
-            />
-          </Tooltip>
+          {projectData?.adminsId.includes(currentUser._id) && (
+            <Tooltip title="Delete">
+              <DeleteOutlineIcon
+                className="icon"
+                sx={{ fontSize: 16 }}
+                onClick={() => deleteTask(taskData._id)}
+              />
+            </Tooltip>
+          )}
         </div>
       </div>
       <p className={classes.description}>
@@ -92,9 +110,22 @@ export default function TaskCard({ taskData, onTaskUpdate }) {
       <p className={classes.projectTitle}>{projectData?.title}</p>
       <div className={classes.row}>
         <div className={classes.row}>
-          <Tooltip title="Due Date">
-            <TimelapseIcon sx={{ fontSize: 18 }} />
-          </Tooltip>
+          {isWithinThreeDays() && (
+            <Tooltip title="Action">
+              <NotificationsIcon sx={{ fontSize: 18, color: "red" }} />
+            </Tooltip>
+          )}
+          {taskData.status === "done" && (
+            <Tooltip title="Done">
+              <DoneOutlineIcon sx={{ fontSize: 18, color: "green" }} />
+            </Tooltip>
+          )}
+          {taskData.status !== "done" && (
+            <Tooltip title="Due Date">
+              <TimelapseIcon sx={{ fontSize: 18 }} />
+            </Tooltip>
+          )}
+
           <p>
             {convertDate(taskData.dueDate).slice(
               0,
@@ -104,7 +135,7 @@ export default function TaskCard({ taskData, onTaskUpdate }) {
         </div>
         <Tooltip title={taskData.priority}>
           <CircleIcon
-            sx={{ fontSize: 12, color: getPriorityColor(taskData.priority) }}
+            sx={{ fontSize: 14, color: getPriorityColor(taskData.priority) }}
           />
         </Tooltip>
       </div>

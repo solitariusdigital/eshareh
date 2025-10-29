@@ -52,6 +52,11 @@
       h4 {
         width: 90%;
       }
+    }
+
+    .indicator {
+      @include mixins.row-space-between-center();
+
       p {
         font-size: small;
         margin: 0px 4px;
@@ -116,9 +121,22 @@
   width: 100%;
   padding: 8px;
 
+  .indicator {
+    margin-top: 8px;
+    @include mixins.row-space-between-center();
+
+    input {
+      @include mixins.input();
+      height: 40px;
+    }
+  }
+
+  .row {
+    @include mixins.row-space-between-center();
+  }
+
   .description {
     width: 60%;
-    margin: 8px;
     text-align: right;
   }
 
@@ -148,7 +166,7 @@
 
       .priority {
         width: fit-content;
-        padding: 2px 4px;
+        padding: 2px 8px;
         color: config.$white;
         @include mixins.border-radius(5px);
         user-select: none;
