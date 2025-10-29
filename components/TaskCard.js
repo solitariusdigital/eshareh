@@ -97,7 +97,7 @@ export default function TaskCard({ taskData, onTaskUpdate }) {
             <Tooltip title="Delete">
               <DeleteOutlineIcon
                 className="icon"
-                sx={{ fontSize: 16 }}
+                sx={{ fontSize: 18 }}
                 onClick={() => deleteTask(taskData._id)}
               />
             </Tooltip>

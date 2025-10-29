@@ -235,7 +235,6 @@ export default function Assignment({
         users: [userId],
         status: "todo",
         priority: taskData.priority,
-        progress: 0,
         dueDate: convertPersianToGregorian(taskData.date),
       };
       await createTaskApi(taskObject);

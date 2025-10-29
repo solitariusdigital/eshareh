@@ -8,6 +8,7 @@ import TimelapseIcon from "@mui/icons-material/Timelapse";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import DatePicker from "@hassanmojab/react-modern-calendar-datepicker";
+import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import { utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 import { convertDate, convertPersianToGregorian } from "@/services/utility";
@@ -145,23 +146,33 @@ export default function ProjectCard({ projectId }) {
         {taskDatadisplay.map((task, index) => (
           <div key={index} className={classes.task}>
             <div className={classes.row}>
-              <div className={classes.image}>
-                <Image
-                  className={classes.image}
-                  blurDataURL={task.userData.media}
-                  src={task.userData.media}
-                  layout="fill"
-                  objectFit="cover"
-                  alt="image"
-                />
+              <div className={classes.row}>
+                <div className={classes.image}>
+                  <Image
+                    className={classes.image}
+                    blurDataURL={task.userData.media}
+                    src={task.userData.media}
+                    layout="fill"
+                    objectFit="cover"
+                    alt="image"
+                  />
+                </div>
+                <h3
+                  style={{
+                    fontFamily: "FarsiBold",
+                    margin: "0px 8px",
+                  }}
+                >
+                  {task.userData.name.fa}
+                </h3>
+                {task.users.some((id) =>
+                  projectDataDisplay.adminsId.includes(id)
+                ) && (
+                  <Tooltip title="Project Admin">
+                    <ShieldOutlinedIcon sx={{ fontSize: 18 }} />
+                  </Tooltip>
+                )}
               </div>
-              <h3
-                style={{
-                  fontFamily: "FarsiBold",
-                }}
-              >
-                {task.userData.name.fa}
-              </h3>
               <h4>{task.userData.title.fa}</h4>
             </div>
             <div className={classes.row}>

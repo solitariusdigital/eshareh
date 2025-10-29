@@ -141,13 +141,13 @@ export default function TaskBox() {
             <div key={index} className={classes.project}>
               {project.adminsId.includes(currentUser._id) && (
                 <div className={classes.row}>
-                  <Tooltip title="Admin">
-                    <ShieldOutlinedIcon sx={{ fontSize: 16 }} />
+                  <Tooltip title="Project Admin">
+                    <ShieldOutlinedIcon sx={{ fontSize: 18 }} />
                   </Tooltip>
                   <Tooltip title="Delete">
                     <DeleteOutlineIcon
                       className="icon"
-                      sx={{ fontSize: 16 }}
+                      sx={{ fontSize: 18 }}
                       onClick={() => deleteProject(project._id)}
                     />
                   </Tooltip>
