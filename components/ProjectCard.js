@@ -120,8 +120,8 @@ export default function ProjectCard({ projectId }) {
       <div className={classes.row}>
         <p
           style={{
-            marginRight: "4px",
             fontFamily: "FarsiBold",
+            marginRight: "4px",
           }}
         >
           {convertDate(projectDataDisplay?.dueDate).slice(

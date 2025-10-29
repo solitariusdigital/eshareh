@@ -144,6 +144,16 @@ export default function TaskBox() {
                   <Tooltip title="Project Admin">
                     <ShieldOutlinedIcon sx={{ fontSize: 18 }} />
                   </Tooltip>
+                  <Tooltip title="Add Tasks">
+                    <AddIcon
+                      className="icon"
+                      sx={{ fontSize: 18 }}
+                      onClick={() => {
+                        setAssignmentPopup(true);
+                        setProjectId(project._id);
+                      }}
+                    />
+                  </Tooltip>
                   <Tooltip title="Delete">
                     <DeleteOutlineIcon
                       className="icon"
@@ -210,18 +220,6 @@ export default function TaskBox() {
                   >
                     {project.users.length}
                   </p>
-                </div>
-                <div className={classes.row}>
-                  <Tooltip title="Add Tasks">
-                    <AddIcon
-                      className="icon"
-                      sx={{ fontSize: 18 }}
-                      onClick={() => {
-                        setAssignmentPopup(true);
-                        setProjectId(project._id);
-                      }}
-                    />
-                  </Tooltip>
                 </div>
               </div>
               <div className={classes.progress}>

@@ -173,7 +173,7 @@ export default function Assignment({
   const createNotification = async (usersId, resultData) => {
     let baseNotificationObject = {
       itemId: resultData._id,
-      type: type,
+      type: "chat",
       isRead: false,
     };
 
