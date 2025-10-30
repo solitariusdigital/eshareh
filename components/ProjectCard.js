@@ -8,6 +8,7 @@ import TimelapseIcon from "@mui/icons-material/Timelapse";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import DatePicker from "@hassanmojab/react-modern-calendar-datepicker";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import ToggleOnIcon from "@mui/icons-material/ToggleOn";
@@ -31,6 +32,7 @@ export default function ProjectCard({ projectId }) {
   const [taskDatadisplay, setTaskDataDisplay] = useState([]);
   const [tasksFormData, setTasksFormData] = useState({});
   const [editProject, setEditProject] = useState(false);
+  const [addTasks, setAddTasks] = useState(false);
 
   useEffect(() => {
     fetchProject();
@@ -141,6 +143,7 @@ export default function ProjectCard({ projectId }) {
 
   const handleProjectUpdate = () => {
     setEditProject(false);
+    setAddTasks(false);
     fetchTasks();
     fetchProject();
   };
@@ -150,83 +153,91 @@ export default function ProjectCard({ projectId }) {
       {!editProject ? (
         <div className={classes.projectCard}>
           <div
-            className={classes.row}
+            className={classes.topBar}
             style={{
               fontFamily: "FarsiBold",
             }}
           >
-            <h4
-              style={{
-                marginRight: "12px",
-              }}
-            >
-              <span
+            <div className={classes.row}>
+              <h4
                 style={{
-                  fontFamily: "EnglishMedium",
+                  marginRight: "12px",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "EnglishMedium",
+                    marginRight: "4px",
+                  }}
+                >
+                  {calculateProgress() || 0}%
+                </span>
+                تکمیل
+              </h4>
+            </div>
+            <div className={classes.row}>
+              <p
+                style={{
                   marginRight: "4px",
                 }}
               >
-                {calculateProgress() || 0}%
-              </span>
-              تکمیل
-            </h4>
-            <p
-              style={{
-                marginRight: "4px",
-              }}
-            >
-              {(() => {
-                const dateStr = convertDate(projectDataDisplay?.dueDate) || "-";
-                const commaIndex = dateStr.indexOf(",");
-                return commaIndex !== -1
-                  ? dateStr.slice(0, commaIndex)
-                  : dateStr;
-              })()}
-            </p>
-            <Tooltip title="Due Date">
-              <TimelapseIcon sx={{ fontSize: 18 }} />
-            </Tooltip>
-          </div>
-          <div className={classes.row}>
-            {projectDataDisplay.adminsId?.includes(currentUser._id) && (
-              <Tooltip
-                title={projectDataDisplay.completed ? "Progress" : "Complete"}
-              >
-                {!projectDataDisplay.completed ? (
-                  <ToggleOffIcon
-                    className="icon"
-                    style={{
-                      marginRight: "12px",
-                    }}
-                    sx={{ fontSize: 32, color: "#a70237" }}
-                    onClick={() => {
-                      completeProject("complete");
-                    }}
-                  />
-                ) : (
-                  <ToggleOnIcon
-                    className="icon"
-                    style={{
-                      marginRight: "12px",
-                    }}
-                    sx={{ fontSize: 32, color: "#6b8745" }}
-                    onClick={() => {
-                      completeProject("progress");
-                    }}
-                  />
-                )}
+                {(() => {
+                  const dateStr =
+                    convertDate(projectDataDisplay?.dueDate) || "-";
+                  const commaIndex = dateStr.indexOf(",");
+                  return commaIndex !== -1
+                    ? dateStr.slice(0, commaIndex)
+                    : dateStr;
+                })()}
+              </p>
+              <Tooltip title="Due Date">
+                <TimelapseIcon sx={{ fontSize: 18 }} />
               </Tooltip>
+            </div>
+            {projectDataDisplay.adminsId?.includes(currentUser._id) && (
+              <div className={classes.row}>
+                <Tooltip
+                  title={projectDataDisplay.completed ? "Progress" : "Complete"}
+                >
+                  {!projectDataDisplay.completed ? (
+                    <ToggleOffIcon
+                      className="icon"
+                      sx={{ fontSize: 32, color: "#a70237" }}
+                      onClick={() => {
+                        completeProject("complete");
+                      }}
+                    />
+                  ) : (
+                    <ToggleOnIcon
+                      className="icon"
+                      sx={{ fontSize: 32, color: "#6b8745" }}
+                      onClick={() => {
+                        completeProject("progress");
+                      }}
+                    />
+                  )}
+                </Tooltip>
+                <Tooltip title="Add Tasks">
+                  <AddCircleIcon
+                    className="icon"
+                    style={{
+                      margin: "0px 8px",
+                    }}
+                    sx={{ fontSize: 18 }}
+                    onClick={() => {
+                      setAddTasks(!addTasks);
+                    }}
+                  />
+                </Tooltip>
+                <Tooltip title="Edit Project">
+                  <EditIcon
+                    className="icon"
+                    sx={{ fontSize: 20 }}
+                    onClick={() => setEditProject(true)}
+                  />
+                </Tooltip>
+              </div>
             )}
-            <Tooltip title="Edit Project">
-              <EditIcon
-                className="icon"
-                style={{
-                  margin: "8px 0px",
-                }}
-                sx={{ fontSize: 20 }}
-                onClick={() => setEditProject(true)}
-              />
-            </Tooltip>
           </div>
           <h3
             style={{
@@ -235,9 +246,23 @@ export default function ProjectCard({ projectId }) {
           >
             {projectDataDisplay?.title}
           </h3>
-          <p className={classes.description}>
+          <h3 className={classes.description}>
             {projectDataDisplay?.description}
-          </p>
+          </h3>
+          {taskDatadisplay?.length === 0 && (
+            <p className={classes.note}>
+              وظایف اضافه شده در اینجا نمایش داده می‌شوند
+            </p>
+          )}
+          {addTasks && (
+            <Assignment
+              selectedData={projectDataDisplay}
+              floatChat={false}
+              projectId={projectId}
+              type="project"
+              onProjectUpdate={handleProjectUpdate}
+            />
+          )}
           <div className={classes.taskBox}>
             {taskDatadisplay.map((task, index) => (
               <div key={index} className={classes.task}>

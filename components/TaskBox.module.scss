@@ -131,8 +131,32 @@
     }
   }
 
+  .topBar {
+    width: 70%;
+    background: config.$generalMessage;
+    padding: 0px 8px;
+    margin-bottom: 12px;
+    @include mixins.border-radius(5px);
+    @include mixins.row-space-between-center();
+
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+    }
+    @include mixins.tabletPortrait {
+      width: config.$content-widthTablet;
+    }
+    @include mixins.tablet {
+      width: config.$content-widthTablet;
+    }
+  }
+
   .row {
     @include mixins.row-space-between-center();
+  }
+
+  .note {
+    color: config.$grey;
+    margin-top: 12px;
   }
 
   .description {
@@ -156,7 +180,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
     gap: 8px;
-    margin-top: 8px;
+    margin-top: 24px;
     direction: rtl;
     max-width: config.$max-widthHeigh;
 

@@ -36,6 +36,7 @@ export default function Assignment({
   type,
   projectId,
   onProjectUpdate,
+  onProjectAdd,
 }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
@@ -56,14 +57,10 @@ export default function Assignment({
   const router = useRouter();
 
   useEffect(() => {
-    if (!projectId) return;
+    if (!selectedProjectId) return;
     const fetchData = async () => {
-      try {
-        const projectData = await getSingleProjectApi(projectId);
-        enrichUserData(projectData.users);
-      } catch (error) {
-        console.error(error);
-      }
+      const projectData = await getSingleProjectApi(selectedProjectId);
+      enrichUserData(projectData.users);
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -241,7 +238,8 @@ export default function Assignment({
       };
       await createTaskApi(taskObject);
     }
-    router.reload(router.asPath);
+    onProjectAdd?.();
+    onProjectUpdate?.();
   };
 
   const assingProjectDate = (day) => {
@@ -445,7 +443,7 @@ export default function Assignment({
               }}
               onClick={() => createNewData()}
             >
-              {editData ? "ویرایش" : "ذخیره"}
+              ذخیره
             </button>
           </div>
         </Fragment>
@@ -593,7 +591,7 @@ export default function Assignment({
               }}
               onClick={() => createTasks()}
             >
-              {editData ? "ویرایش" : "ذخیره"}
+              ذخیره
             </button>
           </div>
         </Fragment>

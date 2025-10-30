@@ -94,6 +94,11 @@ export default function TaskBox() {
     }
   };
 
+  const handleProjectAdd = () => {
+    setAssignmentPopup(false);
+    handleTaskUpdated();
+  };
+
   return (
     <Fragment>
       <div className={classes.container}>
@@ -115,25 +120,30 @@ export default function TaskBox() {
                 {projectsDataDisplay.length}
               </h5>
             </div>
-            <Tooltip title="Refresh">
-              <RefreshIcon
-                className="icon"
-                sx={{ fontSize: 20 }}
-                onClick={() => {
-                  handleTaskUpdated();
-                }}
-              />
-            </Tooltip>
-            <Tooltip title="New Project">
-              <AddCircleIcon
-                className="icon"
-                sx={{ fontSize: 20 }}
-                onClick={() => {
-                  setAssignmentPopup(true);
-                  setProjectId(null);
-                }}
-              />
-            </Tooltip>
+            <div className={classes.row}>
+              <Tooltip title="Refresh">
+                <RefreshIcon
+                  className="icon"
+                  sx={{ fontSize: 20 }}
+                  onClick={() => {
+                    handleTaskUpdated();
+                  }}
+                />
+              </Tooltip>
+              <Tooltip title="New Project">
+                <AddCircleIcon
+                  className="icon"
+                  style={{
+                    marginRight: "4px",
+                  }}
+                  sx={{ fontSize: 20 }}
+                  onClick={() => {
+                    setAssignmentPopup(true);
+                    setProjectId(null);
+                  }}
+                />
+              </Tooltip>
+            </div>
           </div>
           {projectsDataDisplay.map((project, index) => (
             <div key={index} className={classes.project}>
@@ -153,19 +163,6 @@ export default function TaskBox() {
                         className="icon"
                         sx={{ fontSize: 16 }}
                         onClick={() => deleteProject(project._id)}
-                      />
-                    </Tooltip>
-                    <Tooltip title="Add Tasks">
-                      <AddCircleIcon
-                        className="icon"
-                        style={{
-                          marginRight: "4px",
-                        }}
-                        sx={{ fontSize: 18 }}
-                        onClick={() => {
-                          setAssignmentPopup(true);
-                          setProjectId(project._id);
-                        }}
                       />
                     </Tooltip>
                   </div>
@@ -341,6 +338,7 @@ export default function TaskBox() {
             floatChat={false}
             type="project"
             projectId={projectId}
+            onProjectAdd={handleProjectAdd}
           />
         </div>
       )}
