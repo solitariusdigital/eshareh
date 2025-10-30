@@ -37,11 +37,11 @@
     position: relative;
     padding: 8px;
     margin: 8px 0px;
-    background: config.$generalMessage;
-    color: config.$black !important;
+    border: 1px solid config.$lightgrey;
     @include mixins.border-radius(5px);
 
     &:hover {
+      border: 1px solid config.$yellowShade;
       background: config.$yellowShade;
       color: config.$black !important;
     }

@@ -6,7 +6,7 @@ import Tooltip from "@mui/material/Tooltip";
 import SendIcon from "@mui/icons-material/Send";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CircleIcon from "@mui/icons-material/Circle";
-import AddIcon from "@mui/icons-material/Add";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CloseIcon from "@mui/icons-material/Close";
 import GroupIcon from "@mui/icons-material/Group";
 import EditIcon from "@mui/icons-material/Edit";
@@ -476,7 +476,6 @@ export default function ChatBox({ floatChat }) {
                     }}
                   ></p>
                   <p
-                    className={classes.fileType}
                     style={{
                       fontFamily: "English",
                     }}
@@ -511,7 +510,7 @@ export default function ChatBox({ floatChat }) {
                   )}
                 </div>
               </div>
-              <p className={classes.date}>{convertDate(document.updatedAt)}</p>
+              <p>{convertDate(document.updatedAt)}</p>
             </div>
           ))}
         </div>
@@ -529,6 +528,7 @@ export default function ChatBox({ floatChat }) {
                     <p
                       style={{
                         fontFamily: "English",
+                        margin: "0px 4px",
                       }}
                     >
                       {selectedChat.users.length}
@@ -627,9 +627,7 @@ export default function ChatBox({ floatChat }) {
                           <p>{chat.user.title["fa"]}</p>
                         </div>
                       </div>
-                      <p className={classes.date}>
-                        {convertDate(chat.updatedAt)}
-                      </p>
+                      <p>{convertDate(chat.updatedAt)}</p>
                     </div>
                     <p
                       className={classes.content}
@@ -742,7 +740,7 @@ export default function ChatBox({ floatChat }) {
       {(fullSizeChatBox || chatPanel === "group") && (
         <div className={classes.groupBox}>
           <Tooltip title="New Chat">
-            <AddIcon
+            <AddCircleIcon
               className="icon"
               sx={{ fontSize: 20 }}
               onClick={() => createNewChat()}
@@ -754,7 +752,7 @@ export default function ChatBox({ floatChat }) {
               className={chat.active ? classes.groupActive : classes.group}
               onClick={() => handleChatSelection(index)}
             >
-              <div className={classes.info}>
+              <div className={classes.row}>
                 <div className={classes.indicator}>
                   <Tooltip title="Chat">
                     <ArrowBackIosNewIcon
@@ -771,11 +769,21 @@ export default function ChatBox({ floatChat }) {
                     </div>
                   )}
                 </div>
-                <p className={classes.date}>{convertDate(chat.updatedAt)}</p>
+                <h4
+                  style={{
+                    fontFamily: "FarsiBold",
+                  }}
+                >
+                  {chat.title}
+                </h4>
+              </div>
+              <div className={classes.row}>
+                <p>{convertDate(chat.updatedAt)}</p>
                 <div className={classes.row}>
                   <p
                     style={{
                       fontFamily: "English",
+                      marginRight: "4px",
                     }}
                   >
                     {chat.users.length}
@@ -784,13 +792,6 @@ export default function ChatBox({ floatChat }) {
                     <GroupIcon sx={{ fontSize: 16 }} />
                   </Tooltip>
                 </div>
-                <h4
-                  style={{
-                    fontFamily: "FarsiBold",
-                  }}
-                >
-                  {chat.title}
-                </h4>
               </div>
             </div>
           ))}

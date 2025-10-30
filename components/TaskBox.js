@@ -2,7 +2,7 @@ import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./TaskBox.module.scss";
 import Tooltip from "@mui/material/Tooltip";
-import AddIcon from "@mui/icons-material/Add";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CloseIcon from "@mui/icons-material/Close";
 import GroupIcon from "@mui/icons-material/Group";
 import ListIcon from "@mui/icons-material/List";
@@ -125,7 +125,7 @@ export default function TaskBox() {
               />
             </Tooltip>
             <Tooltip title="New Project">
-              <AddIcon
+              <AddCircleIcon
                 className="icon"
                 sx={{ fontSize: 20 }}
                 onClick={() => {
@@ -147,23 +147,28 @@ export default function TaskBox() {
                   <Tooltip title="Project Admin">
                     <ShieldOutlinedIcon sx={{ fontSize: 18 }} />
                   </Tooltip>
-                  <Tooltip title="Add Tasks">
-                    <AddIcon
-                      className="icon"
-                      sx={{ fontSize: 18 }}
-                      onClick={() => {
-                        setAssignmentPopup(true);
-                        setProjectId(project._id);
-                      }}
-                    />
-                  </Tooltip>
-                  <Tooltip title="Delete">
-                    <DeleteOutlineIcon
-                      className="icon"
-                      sx={{ fontSize: 18 }}
-                      onClick={() => deleteProject(project._id)}
-                    />
-                  </Tooltip>
+                  <div className={classes.row}>
+                    <Tooltip title="Delete">
+                      <DeleteOutlineIcon
+                        className="icon"
+                        sx={{ fontSize: 16 }}
+                        onClick={() => deleteProject(project._id)}
+                      />
+                    </Tooltip>
+                    <Tooltip title="Add Tasks">
+                      <AddCircleIcon
+                        className="icon"
+                        style={{
+                          marginRight: "4px",
+                        }}
+                        sx={{ fontSize: 18 }}
+                        onClick={() => {
+                          setAssignmentPopup(true);
+                          setProjectId(project._id);
+                        }}
+                      />
+                    </Tooltip>
+                  </div>
                 </div>
               )}
               <div className={classes.row}>
@@ -181,7 +186,7 @@ export default function TaskBox() {
                       setProjectPopup(true);
                       setProjectId(project._id);
                     }}
-                    sx={{ fontSize: 16 }}
+                    sx={{ fontSize: 18 }}
                   />
                 </Tooltip>
               </div>

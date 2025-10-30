@@ -9,11 +9,6 @@
   border: 1px solid config.$lightgrey;
   @include mixins.border-radius(5px);
 
-  .date {
-    color: config.$grey !important;
-    font-size: small;
-  }
-
   .indocators {
     @include mixins.row-space-between-center();
   }
@@ -23,14 +18,9 @@
     padding: 0px 12px;
     width: 100%;
     border-bottom: 1px solid config.$lightgrey;
-    height: 50px;
-  }
 
-  .row {
-    @include mixins.row-space-between-center();
-    p {
-      margin: 0px 4px;
-      font-size: small;
+    .row {
+      @include mixins.row-space-between-center();
     }
   }
 
@@ -41,7 +31,6 @@
     padding-top: 12px;
     height: 100%;
     max-height: config.$max-widthHeigh !important;
-    height: calc(100dvh - 102px);
 
     @include mixins.mobile {
       height: calc(100dvh - 160px);
@@ -52,8 +41,7 @@
 
     .input {
       @include mixins.row-space-between-center();
-      height: 70px;
-      padding: 0px 12px;
+      padding: 4px 12px;
 
       .icon {
         display: flex;
@@ -76,16 +64,17 @@
     .messageBox {
       display: flex;
       flex-direction: column-reverse;
-      height: calc(100dvh - 230px);
+      height: 100%;
       max-height: 100%;
       overflow-y: auto;
       padding: 12px;
       border-bottom: 1px solid config.$lightgrey;
+      color: config.$black !important;
 
       .message,
       .senderMsg {
         margin: 4px 0px;
-        padding: 4px 8px;
+        padding: 8px;
         background: config.$generalMessage;
         @include mixins.border-radius(5px);
 
@@ -95,12 +84,11 @@
           margin-bottom: 4px;
 
           .title {
-            color: config.$black !important;
             margin: 0px 8px;
+          }
 
-            p {
-              font-size: x-small;
-            }
+          p {
+            font-size: small;
           }
         }
 
@@ -139,7 +127,6 @@
     padding: 12px;
     max-height: 100%;
     overflow-y: auto;
-    flex: 1;
 
     @include mixins.mobile {
       height: calc(100dvh - 155px);
@@ -150,10 +137,8 @@
 
     .group,
     .groupActive {
-      position: relative;
-      @include mixins.row-space-between-center();
-      height: 50px;
       margin-bottom: 8px;
+      padding: 8px;
       border: 1px solid config.$lightgrey;
       @include mixins.border-radius(5px);
 
@@ -164,24 +149,22 @@
         cursor: pointer;
       }
 
-      .info {
+      .row {
         @include mixins.row-space-between-center();
-        justify-content: space-around;
-        width: 100%;
 
-        .row {
-          @include mixins.row-space-between-center();
-          width: fit-content;
+        p {
+          font-size: small;
         }
+      }
 
-        .indicator {
-          @include mixins.row-space-between-center();
+      .indicator {
+        position: relative;
+        @include mixins.row-space-between-center();
 
-          .notification {
-            position: absolute;
-            left: 10px;
-            top: 15px;
-          }
+        .notification {
+          position: absolute;
+          left: 20px;
+          top: 0px;
         }
       }
     }
@@ -197,7 +180,6 @@
     padding: 12px;
     max-height: 100%;
     overflow-y: auto;
-    flex: 1;
 
     @include mixins.mobile {
       height: calc(100dvh - 155px);
@@ -208,15 +190,10 @@
 
     .document {
       margin-bottom: 8px;
-      padding: 4px;
+      padding: 8px;
       text-align: left;
       border: 1px solid config.$lightgrey;
       @include mixins.border-radius(5px);
-
-      .row {
-        @include mixins.row-space-between-center();
-        margin-bottom: 8px;
-      }
 
       &:hover {
         color: config.$black !important;
@@ -224,8 +201,13 @@
         background: config.$generalMessage;
       }
 
-      .fileType {
-        font-size: x-small;
+      .row {
+        @include mixins.row-space-between-center();
+        margin-bottom: 8px;
+      }
+
+      p {
+        font-size: small;
       }
     }
   }
@@ -247,6 +229,10 @@
     grid-template-columns: 1.1fr 2fr 1.1fr;
   }
 
+  .chat {
+    height: calc(100dvh - 102px);
+  }
+
   .groupBox {
     @include mixins.tablet {
       border-left: 1px solid config.$lightgrey;
@@ -256,10 +242,6 @@
     }
     @include mixins.fourK {
       border-left: 1px solid config.$lightgrey;
-    }
-
-    .notification {
-      left: -5px !important;
     }
   }
 

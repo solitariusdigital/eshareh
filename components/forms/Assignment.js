@@ -35,6 +35,7 @@ export default function Assignment({
   floatChat,
   type,
   projectId,
+  onProjectUpdate,
 }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
@@ -132,7 +133,7 @@ export default function Assignment({
         if (editData) {
           projectObject.id = editData._id;
           resultData = await updateProjectApi(projectObject);
-          showAlert("تغییرات انجام شد");
+          onProjectUpdate();
         } else {
           resultData = await createProjectApi(projectObject);
           setSelectedProjectId(resultData._id);

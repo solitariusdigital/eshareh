@@ -122,8 +122,8 @@ export default function ProjectCard({ projectId }) {
   };
 
   const calculateProgress = () => {
-    let doneTasks = taskDatadisplay.filter((task) => task.status === "done");
-    return (doneTasks.length / taskDatadisplay.length) * 100;
+    const doneTasks = taskDatadisplay.filter((task) => task.status === "done");
+    return Math.round((doneTasks.length / taskDatadisplay.length) * 100);
   };
 
   const completeProject = async (type) => {
@@ -139,6 +139,12 @@ export default function ProjectCard({ projectId }) {
     fetchTasks();
   };
 
+  const handleProjectUpdate = () => {
+    setEditProject(false);
+    fetchTasks();
+    fetchProject();
+  };
+
   return (
     <>
       {!editProject ? (
@@ -149,35 +155,6 @@ export default function ProjectCard({ projectId }) {
               fontFamily: "FarsiBold",
             }}
           >
-            {projectDataDisplay.adminsId?.includes(currentUser._id) && (
-              <Tooltip
-                title={projectDataDisplay.completed ? "Progress" : "Complete"}
-              >
-                {!projectDataDisplay.completed ? (
-                  <ToggleOffIcon
-                    className="icon"
-                    style={{
-                      marginRight: "12px",
-                    }}
-                    sx={{ fontSize: 32, color: "#a70237" }}
-                    onClick={() => {
-                      completeProject("complete");
-                    }}
-                  />
-                ) : (
-                  <ToggleOnIcon
-                    className="icon"
-                    style={{
-                      marginRight: "12px",
-                    }}
-                    sx={{ fontSize: 32, color: "#6b8745" }}
-                    onClick={() => {
-                      completeProject("progress");
-                    }}
-                  />
-                )}
-              </Tooltip>
-            )}
             <h4
               style={{
                 marginRight: "12px",
@@ -210,16 +187,47 @@ export default function ProjectCard({ projectId }) {
               <TimelapseIcon sx={{ fontSize: 18 }} />
             </Tooltip>
           </div>
-          <Tooltip title="Edit Project">
-            <EditIcon
-              className="icon"
-              style={{
-                margin: "8px 0px",
-              }}
-              sx={{ fontSize: 20 }}
-              onClick={() => setEditProject(true)}
-            />
-          </Tooltip>
+          <div className={classes.row}>
+            {projectDataDisplay.adminsId?.includes(currentUser._id) && (
+              <Tooltip
+                title={projectDataDisplay.completed ? "Progress" : "Complete"}
+              >
+                {!projectDataDisplay.completed ? (
+                  <ToggleOffIcon
+                    className="icon"
+                    style={{
+                      marginRight: "12px",
+                    }}
+                    sx={{ fontSize: 32, color: "#a70237" }}
+                    onClick={() => {
+                      completeProject("complete");
+                    }}
+                  />
+                ) : (
+                  <ToggleOnIcon
+                    className="icon"
+                    style={{
+                      marginRight: "12px",
+                    }}
+                    sx={{ fontSize: 32, color: "#6b8745" }}
+                    onClick={() => {
+                      completeProject("progress");
+                    }}
+                  />
+                )}
+              </Tooltip>
+            )}
+            <Tooltip title="Edit Project">
+              <EditIcon
+                className="icon"
+                style={{
+                  margin: "8px 0px",
+                }}
+                sx={{ fontSize: 20 }}
+                onClick={() => setEditProject(true)}
+              />
+            </Tooltip>
+          </div>
           <h3
             style={{
               fontFamily: "FarsiBold",
@@ -351,6 +359,7 @@ export default function ProjectCard({ projectId }) {
           selectedData={projectDataDisplay}
           floatChat={false}
           type="project"
+          onProjectUpdate={handleProjectUpdate}
         />
       )}
     </>
