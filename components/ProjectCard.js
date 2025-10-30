@@ -312,7 +312,7 @@ export default function ProjectCard({ projectId }) {
                       </Tooltip>
                     )}
                     {task.status === "done" && (
-                      <Tooltip title="Done">
+                      <Tooltip title="Completed">
                         <DoneOutlineIcon
                           sx={{ fontSize: 18, color: "green" }}
                         />

@@ -115,7 +115,7 @@ export default function TaskCard({ taskData, onTaskUpdate }) {
             </Tooltip>
           )}
           {taskData.status === "done" && (
-            <Tooltip title="Done">
+            <Tooltip title="Completed">
               <DoneOutlineIcon sx={{ fontSize: 18, color: "green" }} />
             </Tooltip>
           )}
