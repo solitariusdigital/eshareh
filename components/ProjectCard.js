@@ -175,6 +175,50 @@ export default function ProjectCard({ projectId }) {
                 تکمیل
               </h4>
             </div>
+            {projectDataDisplay.adminsId?.includes(currentUser._id) && (
+              <div className={classes.row}>
+                <Tooltip
+                  title={projectDataDisplay.completed ? "Progress" : "Complete"}
+                >
+                  {!projectDataDisplay.completed ? (
+                    <ToggleOffIcon
+                      className="icon"
+                      sx={{ fontSize: 30, color: "#a70237" }}
+                      onClick={() => {
+                        completeProject("complete");
+                      }}
+                    />
+                  ) : (
+                    <ToggleOnIcon
+                      className="icon"
+                      sx={{ fontSize: 30, color: "#6b8745" }}
+                      onClick={() => {
+                        completeProject("progress");
+                      }}
+                    />
+                  )}
+                </Tooltip>
+                <Tooltip title="Add Tasks">
+                  <AddCircleIcon
+                    className="icon"
+                    style={{
+                      margin: "0px 12px",
+                    }}
+                    sx={{ fontSize: 20 }}
+                    onClick={() => {
+                      setAddTasks(!addTasks);
+                    }}
+                  />
+                </Tooltip>
+                <Tooltip title="Edit Project">
+                  <EditIcon
+                    className="icon"
+                    sx={{ fontSize: 20 }}
+                    onClick={() => setEditProject(true)}
+                  />
+                </Tooltip>
+              </div>
+            )}
             <div className={classes.row}>
               <p
                 style={{
@@ -191,53 +235,9 @@ export default function ProjectCard({ projectId }) {
                 })()}
               </p>
               <Tooltip title="Due Date">
-                <TimelapseIcon sx={{ fontSize: 18 }} />
+                <TimelapseIcon sx={{ fontSize: 20 }} />
               </Tooltip>
             </div>
-            {projectDataDisplay.adminsId?.includes(currentUser._id) && (
-              <div className={classes.row}>
-                <Tooltip
-                  title={projectDataDisplay.completed ? "Progress" : "Complete"}
-                >
-                  {!projectDataDisplay.completed ? (
-                    <ToggleOffIcon
-                      className="icon"
-                      sx={{ fontSize: 32, color: "#a70237" }}
-                      onClick={() => {
-                        completeProject("complete");
-                      }}
-                    />
-                  ) : (
-                    <ToggleOnIcon
-                      className="icon"
-                      sx={{ fontSize: 32, color: "#6b8745" }}
-                      onClick={() => {
-                        completeProject("progress");
-                      }}
-                    />
-                  )}
-                </Tooltip>
-                <Tooltip title="Add Tasks">
-                  <AddCircleIcon
-                    className="icon"
-                    style={{
-                      margin: "0px 8px",
-                    }}
-                    sx={{ fontSize: 18 }}
-                    onClick={() => {
-                      setAddTasks(!addTasks);
-                    }}
-                  />
-                </Tooltip>
-                <Tooltip title="Edit Project">
-                  <EditIcon
-                    className="icon"
-                    sx={{ fontSize: 20 }}
-                    onClick={() => setEditProject(true)}
-                  />
-                </Tooltip>
-              </div>
-            )}
           </div>
           <h3
             style={{
