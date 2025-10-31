@@ -5,10 +5,19 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
   gap: 8px;
+  direction: rtl;
   height: calc(100dvh - 100px);
   max-height: config.$max-widthHeigh !important;
 
-  direction: rtl;
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+  }
+  @include mixins.tabletPortrait {
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  }
+  @include mixins.tablet {
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  }
 
   .column {
     padding: 12px;

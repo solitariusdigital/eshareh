@@ -149,6 +149,8 @@
         width: 100%;
         margin-top: 10px;
         height: 100dvh;
+        max-height: 100%;
+        overflow-y: auto;
       }
       @include mixins.tabletPortrait {
         width: 100%;
