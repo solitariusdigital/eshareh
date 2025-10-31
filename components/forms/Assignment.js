@@ -36,7 +36,7 @@ export default function Assignment({
   type,
   projectId,
   onProjectUpdate,
-  onProjectAdd,
+  onProjectChange,
 }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
@@ -238,7 +238,7 @@ export default function Assignment({
       };
       await createTaskApi(taskObject);
     }
-    onProjectAdd?.();
+    onProjectChange?.();
     onProjectUpdate?.();
   };
 

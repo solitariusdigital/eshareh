@@ -24,9 +24,10 @@ import {
   deleteTaskApi,
   updateTaskApi,
   updateProjectApi,
+  deleteProjectApi,
 } from "@/services/api";
 
-export default function ProjectCard({ projectId }) {
+export default function ProjectCard({ projectId, onProjectChange }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [projectDataDisplay, setProjectDataDisplay] = useState([]);
   const [taskDatadisplay, setTaskDataDisplay] = useState([]);
@@ -148,6 +149,23 @@ export default function ProjectCard({ projectId }) {
     fetchProject();
   };
 
+  const deleteProject = async () => {
+    let confirmationMessage = "حذف پروژه و وظایف مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      const tasksData = await getTasksApi();
+      let tasksToDelete = tasksData.filter(
+        (task) => task.projectId === projectId
+      );
+      const deletionPromises = tasksToDelete.map((task) =>
+        deleteTaskApi(task._id)
+      );
+      await Promise.all(deletionPromises);
+      await deleteProjectApi(projectId);
+      onProjectChange();
+    }
+  };
+
   return (
     <>
       {!editProject ? (
@@ -178,12 +196,14 @@ export default function ProjectCard({ projectId }) {
             {projectDataDisplay.adminsId?.includes(currentUser._id) && (
               <div className={classes.row}>
                 <Tooltip
-                  title={projectDataDisplay.completed ? "Progress" : "Complete"}
+                  title={
+                    projectDataDisplay.completed ? "Operational" : "Completed"
+                  }
                 >
                   {!projectDataDisplay.completed ? (
                     <ToggleOffIcon
                       className="icon"
-                      sx={{ fontSize: 30, color: "#a70237" }}
+                      sx={{ fontSize: 30 }}
                       onClick={() => {
                         completeProject("complete");
                       }}
@@ -198,11 +218,21 @@ export default function ProjectCard({ projectId }) {
                     />
                   )}
                 </Tooltip>
+                <Tooltip title="Delete Project">
+                  <DeleteOutlineIcon
+                    className="icon"
+                    style={{
+                      margin: "0px 8px",
+                    }}
+                    sx={{ fontSize: 20 }}
+                    onClick={() => deleteProject()}
+                  />
+                </Tooltip>
                 <Tooltip title="Add Tasks">
                   <AddCircleIcon
                     className="icon"
                     style={{
-                      margin: "0px 12px",
+                      margin: "0px 8px",
                     }}
                     sx={{ fontSize: 20 }}
                     onClick={() => {
@@ -242,6 +272,7 @@ export default function ProjectCard({ projectId }) {
           <h3
             style={{
               fontFamily: "FarsiBold",
+              marginTop: "12px",
             }}
           >
             {projectDataDisplay?.title}

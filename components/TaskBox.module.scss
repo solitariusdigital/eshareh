@@ -46,12 +46,9 @@
       color: config.$black !important;
     }
 
-    .row {
-      margin-bottom: 8px;
-
-      h4 {
-        width: 90%;
-      }
+    .bar {
+      @include mixins.row-space-between-center();
+      align-items: flex-start;
     }
 
     .indicator {

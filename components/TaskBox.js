@@ -8,8 +8,6 @@ import GroupIcon from "@mui/icons-material/Group";
 import ListIcon from "@mui/icons-material/List";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import TaskCard from "@/components/TaskCard";
@@ -18,12 +16,7 @@ import TaskCount from "@/components/TaskCount";
 import Assignment from "@/components/forms/Assignment";
 import ProjectCard from "@/components/ProjectCard";
 import { convertDate, sliceString } from "@/services/utility";
-import {
-  getProjectsApi,
-  getTasksApi,
-  deleteProjectApi,
-  deleteTaskApi,
-} from "@/services/api";
+import { getProjectsApi, getTasksApi } from "@/services/api";
 
 export default function TaskBox() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -79,23 +72,9 @@ export default function TaskBox() {
     setTasksDataDisplay(filteredTasks);
   };
 
-  const deleteProject = async (id) => {
-    let confirmationMessage = "حذف پروژه و وظایف مطمئنی؟";
-    let confirm = window.confirm(confirmationMessage);
-    if (confirm) {
-      const tasksData = await getTasksApi();
-      let tasksToDelete = tasksData.filter((task) => task.projectId === id);
-      const deletionPromises = tasksToDelete.map((task) =>
-        deleteTaskApi(task._id)
-      );
-      await Promise.all(deletionPromises);
-      await deleteProjectApi(id);
-      handleTaskUpdated();
-    }
-  };
-
-  const handleProjectAdd = () => {
+  const handleProjectChange = () => {
     setAssignmentPopup(false);
+    setProjectPopup(false);
     handleTaskUpdated();
   };
 
@@ -146,29 +125,20 @@ export default function TaskBox() {
             </div>
           </div>
           {projectsDataDisplay.map((project, index) => (
-            <div key={index} className={classes.project}>
+            <div
+              key={index}
+              className={classes.project}
+              onClick={() => {
+                setProjectPopup(true);
+                setProjectId(project._id);
+              }}
+            >
               {project.completed && (
                 <Tooltip title="Completed">
                   <DoneOutlineIcon sx={{ fontSize: 18, color: "green" }} />
                 </Tooltip>
               )}
-              {project.adminsId.includes(currentUser._id) && (
-                <div className={classes.row}>
-                  <Tooltip title="Project Admin">
-                    <ShieldOutlinedIcon sx={{ fontSize: 18 }} />
-                  </Tooltip>
-                  <div className={classes.row}>
-                    <Tooltip title="Delete">
-                      <DeleteOutlineIcon
-                        className="icon"
-                        sx={{ fontSize: 16 }}
-                        onClick={() => deleteProject(project._id)}
-                      />
-                    </Tooltip>
-                  </div>
-                </div>
-              )}
-              <div className={classes.row}>
+              <div className={classes.bar}>
                 <h4
                   style={{
                     fontFamily: "FarsiBold",
@@ -338,7 +308,7 @@ export default function TaskBox() {
             floatChat={false}
             type="project"
             projectId={projectId}
-            onProjectAdd={handleProjectAdd}
+            onProjectChange={handleProjectChange}
           />
         </div>
       )}
@@ -349,7 +319,10 @@ export default function TaskBox() {
             onClick={() => setProjectPopup(false)}
             sx={{ fontSize: 20 }}
           />
-          <ProjectCard projectId={projectId} />
+          <ProjectCard
+            projectId={projectId}
+            onProjectChange={handleProjectChange}
+          />
         </div>
       )}
     </Fragment>
