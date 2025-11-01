@@ -39,6 +39,15 @@ export default function TaskCard({ taskData, onTaskUpdate }) {
     return priorityColor[priority];
   };
 
+  const getNextStatus = (status) => {
+    const nextstatus = {
+      todo: "In-Progress",
+      progress: "Completed",
+      done: "Todo",
+    };
+    return nextstatus[status];
+  };
+
   const changeTaskStatus = async (status) => {
     const nextStatus = {
       todo: "progress",
@@ -83,7 +92,7 @@ export default function TaskCard({ taskData, onTaskUpdate }) {
           {taskData.title}
         </h4>
         <div className={classes.indicator}>
-          <Tooltip title="Next Status">
+          <Tooltip title={getNextStatus(taskData.status)}>
             <RedoIcon
               className="icon"
               sx={{ fontSize: 18 }}

@@ -197,7 +197,7 @@ export default function ProjectCard({ projectId, onProjectChange }) {
               <div className={classes.row}>
                 <Tooltip
                   title={
-                    projectDataDisplay.completed ? "Operational" : "Completed"
+                    projectDataDisplay.completed ? "In-Progress" : "Completed"
                   }
                 >
                   {!projectDataDisplay.completed ? (

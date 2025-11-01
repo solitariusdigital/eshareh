@@ -50,8 +50,7 @@
     @include mixins.border-radius(5px);
 
     &:hover {
-      border: 1px solid config.$yellowShade;
-      background: config.$yellowShade;
+      border: 1px solid config.$yellow;
       color: config.$black !important;
     }
 
@@ -89,8 +88,7 @@
   width: 100%;
   padding: 8px;
   margin: 8px 0px;
-  color: config.$black !important;
-  background: config.$generalMessage;
+  border: 1px solid config.$lightgrey;
   @include mixins.border-radius(5px);
 
   .indicator {

@@ -300,7 +300,7 @@ export default function TaskBox() {
         <div className={classes.popup}>
           <CloseIcon
             className="icon"
-            onClick={() => setAssignmentPopup(false)}
+            onClick={() => handleProjectChange()}
             sx={{ fontSize: 20 }}
           />
           <Assignment
@@ -316,7 +316,7 @@ export default function TaskBox() {
         <div className={classes.popup}>
           <CloseIcon
             className="icon"
-            onClick={() => setProjectPopup(false)}
+            onClick={() => handleProjectChange()}
             sx={{ fontSize: 20 }}
           />
           <ProjectCard

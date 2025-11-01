@@ -566,7 +566,7 @@ export default function Assignment({
                       }
                     >
                       <option value="default" disabled>
-                        Select
+                        Priority
                       </option>
                       {priorities.map((priority, index) => {
                         return (
