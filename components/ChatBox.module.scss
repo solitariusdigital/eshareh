@@ -144,7 +144,6 @@
 
       &:hover {
         border: 1px solid config.$yellow;
-        color: config.$black !important;
         cursor: pointer;
       }
 
@@ -170,7 +169,6 @@
 
     .groupActive {
       border: 1px solid config.$yellow;
-      color: config.$black !important;
     }
   }
 
@@ -194,7 +192,6 @@
       @include mixins.border-radius(5px);
 
       &:hover {
-        color: config.$black !important;
         border: 1px solid config.$yellow;
       }
 

@@ -391,7 +391,7 @@ export default function Portal({ adminNews, activeNews }) {
               </div>
               <div className={classes.board}>
                 {boardType === "chat" && <ChatBox floatChat={false} />}
-                {boardType === "tasks" && <TaskBox />}
+                {/* {boardType === "tasks" && <TaskBox />} */}
                 {boardType === "news" && (
                   <News
                     adminNews={adminNews}
