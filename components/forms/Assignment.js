@@ -1,6 +1,5 @@
 import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
-import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import ToggleOnIcon from "@mui/icons-material/ToggleOn";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";
@@ -37,6 +36,7 @@ export default function Assignment({
   projectId,
   onProjectUpdate,
   onProjectChange,
+  onChatChange,
 }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
@@ -54,7 +54,6 @@ export default function Assignment({
   const [tasksFormData, setTasksFormData] = useState({});
   const [selectedProjectId, setSelectedProjectId] = useState(projectId);
   const priorities = ["Low", "Medium", "High", "Urgent"];
-  const router = useRouter();
 
   useEffect(() => {
     if (!selectedProjectId) return;
@@ -157,7 +156,7 @@ export default function Assignment({
           resultData = await createChatApi(chatObject);
         }
         await createNotification(usersId, resultData);
-        router.reload(router.asPath);
+        onChatChange();
         break;
     }
   };
@@ -362,11 +361,11 @@ export default function Assignment({
             )}
             <div className={classes.indicatorAction}>
               {type === "chat" && editData && (
-                <Tooltip title={editData.archive ? "Deactive" : "Active"}>
+                <Tooltip title={editData.archive ? "Active" : "Archive"}>
                   {editData.archive ? (
                     <ToggleOffIcon
                       className="icon"
-                      sx={{ fontSize: 32, color: "#a70237" }}
+                      sx={{ fontSize: 32 }}
                       onClick={() => toggleChatActivation("deactive")}
                     />
                   ) : (

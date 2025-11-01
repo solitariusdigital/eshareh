@@ -7,6 +7,7 @@ import SendIcon from "@mui/icons-material/Send";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CircleIcon from "@mui/icons-material/Circle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import CloseIcon from "@mui/icons-material/Close";
 import GroupIcon from "@mui/icons-material/Group";
 import EditIcon from "@mui/icons-material/Edit";
@@ -43,7 +44,7 @@ export default function ChatBox({ floatChat }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [chatPanel, setChatPanel] = useState("group" || "chat" || "document");
-  const [displayPopup, setDisplayPopup] = useState(false);
+  const [assignmentPopup, setAssignmentPopup] = useState(false);
   const [chatsDataDisplay, setChatsDataDisplay] = useState([]);
   const [chatRender, setChatRender] = useState([]);
   const [documentsRender, setDocumentsRender] = useState([]);
@@ -323,7 +324,7 @@ export default function ChatBox({ floatChat }) {
   };
 
   const createNewChat = () => {
-    setDisplayPopup(true);
+    setAssignmentPopup(true);
     setSelectedChat(null);
     const updatedItems = chatsDataDisplay.map((item) => ({
       ...item,
@@ -448,6 +449,12 @@ export default function ChatBox({ floatChat }) {
     }
   };
 
+  const handleChatUpdate = () => {
+    setAssignmentPopup(false);
+    setSelectedChat(null);
+    fetchChats();
+  };
+
   return (
     <div className={floatChat ? classes.containerFloat : classes.containerGrid}>
       {(fullSizeChatBox || chatPanel === "document") && (
@@ -542,7 +549,7 @@ export default function ChatBox({ floatChat }) {
                           margin: "0px 4px",
                         }}
                         sx={{ fontSize: 20 }}
-                        onClick={() => setDisplayPopup(true)}
+                        onClick={() => setAssignmentPopup(true)}
                       />
                     </Tooltip>
                   )}
@@ -742,8 +749,20 @@ export default function ChatBox({ floatChat }) {
           <Tooltip title="New Chat">
             <AddCircleIcon
               className="icon"
+              style={{
+                marginRight: "4px",
+              }}
               sx={{ fontSize: 20 }}
               onClick={() => createNewChat()}
+            />
+          </Tooltip>
+          <Tooltip title="Refresh">
+            <RefreshIcon
+              className="icon"
+              sx={{ fontSize: 20 }}
+              onClick={() => {
+                handleChatUpdate();
+              }}
             />
           </Tooltip>
           {chatsDataDisplay.map((chat, index) => (
@@ -797,7 +816,7 @@ export default function ChatBox({ floatChat }) {
           ))}
         </div>
       )}
-      {displayPopup && (
+      {assignmentPopup && (
         <div
           className={classes.popup}
           style={{
@@ -807,13 +826,16 @@ export default function ChatBox({ floatChat }) {
         >
           <CloseIcon
             className="icon"
-            onClick={() => setDisplayPopup(false)}
+            onClick={() => {
+              handleChatUpdate();
+            }}
             sx={{ fontSize: 20 }}
           />
           <Assignment
             selectedData={selectedChat}
             floatChat={floatChat}
             type="chat"
+            onChatChange={handleChatUpdate}
           />
         </div>
       )}
