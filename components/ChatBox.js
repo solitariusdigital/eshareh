@@ -828,6 +828,7 @@ export default function ChatBox({ floatChat }) {
             className="icon"
             onClick={() => {
               handleChatUpdate();
+              setChatPanel("group");
             }}
             sx={{ fontSize: 20 }}
           />
