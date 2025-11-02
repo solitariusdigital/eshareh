@@ -535,6 +535,8 @@
 
     .row {
       @include mixins.row-space-between-center();
+      flex-direction: row-reverse;
+      direction: ltr;
 
       select {
         width: 40%;
