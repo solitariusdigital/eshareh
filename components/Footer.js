@@ -96,7 +96,7 @@ export default function Footer() {
             />
           </Link>
         )}
-        <p className={classes.copyright}>© eshareh 2024 all rights reserved</p>
+        <p className={classes.copyright}>© eshareh 2025 all rights reserved</p>
       </div>
       <div className={classes.container}>
         <nav
