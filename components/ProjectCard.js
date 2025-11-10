@@ -16,7 +16,11 @@ import ToggleOffIcon from "@mui/icons-material/ToggleOff";
 import { utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 import Assignment from "@/components/forms/Assignment";
-import { convertDate, convertPersianToGregorian } from "@/services/utility";
+import {
+  convertDate,
+  convertPersianToGregorian,
+  applyFontToEnglishWords,
+} from "@/services/utility";
 import {
   getSingleProjectApi,
   getTasksApi,
@@ -325,7 +329,16 @@ export default function ProjectCard({ projectId, onProjectChange }) {
                       </Tooltip>
                     )}
                   </div>
-                  <h4>{task.userData.title.fa}</h4>
+                  <h4
+                    dangerouslySetInnerHTML={{
+                      __html: applyFontToEnglishWords(
+                        task.userData.title.fa,
+                        "English",
+                        "16px",
+                        "fa"
+                      ),
+                    }}
+                  ></h4>
                 </div>
                 <div className={classes.row}>
                   <p>{task.title}</p>

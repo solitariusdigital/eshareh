@@ -498,6 +498,10 @@
         cursor: pointer;
         border: 1px solid config.$yellow;
       }
+
+      p {
+        direction: ltr;
+      }
     }
   }
 

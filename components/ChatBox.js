@@ -629,9 +629,18 @@ export default function ChatBox({ floatChat }) {
                               fontFamily: "FarsiBold",
                             }}
                           >
-                            {chat.user.name["fa"]}
+                            {chat.user.name.fa}
                           </h4>
-                          <p>{chat.user.title["fa"]}</p>
+                          <p
+                            dangerouslySetInnerHTML={{
+                              __html: applyFontToEnglishWords(
+                                chat.user.title.fa,
+                                "English",
+                                "16px",
+                                "fa"
+                              ),
+                            }}
+                          ></p>
                         </div>
                       </div>
                       <p>{convertDate(chat.updatedAt)}</p>
