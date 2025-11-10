@@ -365,24 +365,27 @@ export default function ProjectCard({ projectId, onProjectChange }) {
                       )}
                     </p>
                   </div>
-                  <p
-                    style={{
-                      fontFamily: "FarsiBold",
-                    }}
-                  >
-                    {getStatus(task.status)}
-                  </p>
-                  <div
-                    className={classes.priority}
-                    style={{ background: getPriorityColor(task.priority) }}
-                  >
+                  <div className={classes.row}>
                     <p
+                      className={classes.status}
                       style={{
-                        fontFamily: "English",
+                        fontFamily: "FarsiBold",
                       }}
                     >
-                      {task.priority}
+                      {getStatus(task.status)}
                     </p>
+                    <div
+                      className={classes.priority}
+                      style={{ background: getPriorityColor(task.priority) }}
+                    >
+                      <p
+                        style={{
+                          fontFamily: "English",
+                        }}
+                      >
+                        {task.priority}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 {projectDataDisplay.adminsId.includes(currentUser._id) && (

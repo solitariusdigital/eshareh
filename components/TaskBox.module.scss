@@ -214,12 +214,19 @@
         margin: 0px;
       }
 
-      .priority {
+      .priority,
+      .status {
         width: fit-content;
-        padding: 2px 8px;
+        padding: 2px 12px;
         color: config.$white;
         @include mixins.border-radius(5px);
         user-select: none;
+      }
+
+      .status {
+        color: config.$black;
+        border: 1px solid config.$black;
+        margin-left: 8px;
       }
     }
   }
