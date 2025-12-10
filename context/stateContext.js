@@ -15,7 +15,9 @@ export const StateProvider = (props) => {
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuColor, setMenuColor] = useState({});
   const [displayMenu, setDisplayMenu] = useState(
-    pathname.includes("nikibezabaneeshareh") ? false : true
+    pathname.includes("nikibezabaneeshareh") || pathname.includes("henkel")
+      ? false
+      : true
   );
   const [displayFooter, setDisplayFooter] = useState(true);
   const [displayFloatChat, setDisplayFloatChat] = useState(true);

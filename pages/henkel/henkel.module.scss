@@ -1,0 +1,88 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.background {
+  background-image: url("https://eshareh.storage.iran.liara.space/henkel/visual.jpg") !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100dvh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100dvh;
+  direction: rtl;
+  background: #981b1e;
+  user-select: none;
+
+  .logo {
+    position: relative;
+    aspect-ratio: 4 / 4;
+    height: 300px;
+  }
+
+  .text {
+    position: relative;
+    aspect-ratio: 16 / 4;
+    height: 10px;
+    scale: 8;
+    margin-bottom: 50px;
+  }
+}
+
+.input {
+  min-width: 30%;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+  @include mixins.tabletPortrait {
+    min-width: 50%;
+  }
+  @include mixins.tablet {
+    min-width: 50%;
+  }
+
+  .label {
+    display: flex;
+    justify-content: center;
+    color: config.$white;
+    margin-bottom: 12px;
+  }
+
+  .alert {
+    display: flex;
+    justify-content: center;
+    color: config.$white;
+    margin-top: 24px;
+  }
+
+  select,
+  input {
+    @include mixins.input();
+    width: 100%;
+  }
+}
+
+.mapBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  color: #981b1e;
+  user-select: none;
+
+  .map {
+    position: relative;
+    aspect-ratio: 4 / 4;
+    height: 45dvh;
+    margin: 24px 0px;
+  }
+}
