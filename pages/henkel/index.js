@@ -1197,6 +1197,8 @@ export default function Henkel() {
                 className={classes.input}
                 style={{
                   marginBottom: "24px",
+                  margin: "auto",
+                  marginBottom: "12px",
                 }}
               >
                 <select
@@ -1228,6 +1230,7 @@ export default function Henkel() {
                   <span
                     style={{
                       fontFamily: "Farsi",
+                      fontSize: "large",
                     }}
                   >
                     خوش آمدید
