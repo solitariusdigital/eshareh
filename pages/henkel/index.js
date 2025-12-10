@@ -1158,6 +1158,7 @@ export default function Henkel() {
                   objectFit="contain"
                   alt="map"
                   as="image"
+                  unoptimized
                 />
               </div>
               <div className={classes.text}>
@@ -1217,14 +1218,22 @@ export default function Henkel() {
                   )}
                 </select>
               </div>
-              <h2
-                style={{
-                  fontFamily: "FarsiBold",
-                }}
-              >
-                {userData.name}
-              </h2>
-              <h3>خوش آمدید</h3>
+              <div className={classes.row}>
+                <h2
+                  style={{
+                    fontFamily: "FarsiBold",
+                  }}
+                >
+                  {userData.name}{" "}
+                  <span
+                    style={{
+                      fontFamily: "Farsi",
+                    }}
+                  >
+                    خوش آمدید
+                  </span>
+                </h2>
+              </div>
               <div key={activeArea} className={classes.map}>
                 <Image
                   src={`https://eshareh.storage.iran.liara.space/henkel/maps/${activeArea}.svg`}
@@ -1248,20 +1257,22 @@ export default function Henkel() {
                 <Typewriter text={`RT : ${areaData[activeArea].rt}`} />
                 <Typewriter text={`WS : ${areaData[activeArea].ws}`} />
               </div>
-              <button
-                style={{
-                  fontFamily: "FarsiBold",
-                }}
-                onClick={() =>
-                  window.open(
-                    "/henkel/statement",
-                    "_blank",
-                    "noopener,noreferrer"
-                  )
-                }
-              >
-                بیانیه ارتش جاویدان
-              </button>
+              <div className={classes.button}>
+                <button
+                  style={{
+                    fontFamily: "FarsiBold",
+                  }}
+                  onClick={() =>
+                    window.open(
+                      "/henkel/statement",
+                      "_blank",
+                      "noopener,noreferrer"
+                    )
+                  }
+                >
+                  بیانیه ارتش جاویدان
+                </button>
+              </div>
             </div>
           )}
         </>
