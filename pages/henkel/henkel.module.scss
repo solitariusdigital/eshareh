@@ -73,16 +73,28 @@
 .mapBox {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100dvh;
   color: #981b1e;
   user-select: none;
+  padding-top: 24px;
 
   .map {
     position: relative;
     aspect-ratio: 4 / 4;
     height: 45dvh;
     margin: 24px 0px;
+  }
+
+  .info {
+    width: 100%;
+    padding: 24px;
+    color: #981b1e;
+    background: config.$lightgrey;
+
+    h2 {
+      direction: rtl;
+    }
   }
 }

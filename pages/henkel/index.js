@@ -1239,7 +1239,7 @@ export default function Henkel() {
                   as="image"
                 />
               </div>
-              <div>
+              <div className={classes.info}>
                 <h2
                   style={{
                     fontFamily: "FarsiBold",
@@ -1248,8 +1248,8 @@ export default function Henkel() {
                   استان {activeFarsi}
                 </h2>
                 <Typewriter text={`${areaData[activeArea].main}`} />
-                <Typewriter text={`RT: ${areaData[activeArea].rt}`} />
-                <Typewriter text={`WS: ${areaData[activeArea].ws}`} />
+                <Typewriter text={`RT : ${areaData[activeArea].rt}`} />
+                <Typewriter text={`WS : ${areaData[activeArea].ws}`} />
               </div>
             </div>
           )}
