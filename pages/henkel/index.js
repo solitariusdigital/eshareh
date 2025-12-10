@@ -1142,7 +1142,7 @@ export default function Henkel() {
       {landingLoad && (
         <>
           {!userData ? (
-            <div className={classes.container}>
+            <div className={classes.landing}>
               <div
                 className={`${classes.logo} animate__animated animate__pulse`}
               >
@@ -1225,10 +1225,7 @@ export default function Henkel() {
                 {userData.name}
               </h2>
               <h3>خوش آمدید</h3>
-              <div
-                key={activeArea}
-                className={`${classes.map} animate__animated animate__pulse`}
-              >
+              <div key={activeArea} className={classes.map}>
                 <Image
                   src={`https://eshareh.storage.iran.liara.space/henkel/maps/${activeArea}.svg`}
                   blurDataURL={`https://eshareh.storage.iran.liara.space/henkel/maps/${activeArea}.svg`}
@@ -1251,6 +1248,20 @@ export default function Henkel() {
                 <Typewriter text={`RT : ${areaData[activeArea].rt}`} />
                 <Typewriter text={`WS : ${areaData[activeArea].ws}`} />
               </div>
+              <button
+                style={{
+                  fontFamily: "FarsiBold",
+                }}
+                onClick={() =>
+                  window.open(
+                    "/henkel/statement",
+                    "_blank",
+                    "noopener,noreferrer"
+                  )
+                }
+              >
+                بیانیه ارتش جاویدان
+              </button>
             </div>
           )}
         </>

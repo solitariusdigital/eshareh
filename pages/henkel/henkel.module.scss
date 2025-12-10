@@ -10,7 +10,7 @@
   height: 100dvh;
 }
 
-.container {
+.landing {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,12 +21,6 @@
   background: #981b1e;
   user-select: none;
 
-  .logo {
-    position: relative;
-    aspect-ratio: 4 / 4;
-    height: 300px;
-  }
-
   .text {
     position: relative;
     aspect-ratio: 16 / 4;
@@ -34,6 +28,12 @@
     scale: 8;
     margin-bottom: 50px;
   }
+}
+
+.logo {
+  position: relative;
+  aspect-ratio: 4 / 4;
+  height: 300px;
 }
 
 .input {
@@ -95,6 +95,47 @@
 
     h2 {
       direction: rtl;
+    }
+  }
+
+  button {
+    @include mixins.button(#981b1e, config.$white);
+    & {
+      margin: 12px 0px;
+      height: 50px;
+    }
+    @include mixins.allDesktop {
+      &:hover {
+        color: #981b1e;
+      }
+    }
+  }
+}
+
+.statement {
+  display: flex;
+  flex-direction: column;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  direction: rtl;
+  margin: 50px auto;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+  @include mixins.tabletPortrait {
+    width: config.$content-widthTablet;
+  }
+
+  .info {
+    border-bottom: 1px solid config.$lightgrey;
+    padding: 12px;
+
+    p {
+      margin: 8px 0px;
     }
   }
 }
