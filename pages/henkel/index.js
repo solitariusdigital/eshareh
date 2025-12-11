@@ -1196,9 +1196,7 @@ export default function Henkel() {
               <div
                 className={classes.input}
                 style={{
-                  marginBottom: "24px",
                   margin: "auto",
-                  marginBottom: "12px",
                 }}
               >
                 <select
@@ -1220,7 +1218,7 @@ export default function Henkel() {
                   )}
                 </select>
               </div>
-              <div className={classes.row}>
+              <div className={classes.name}>
                 <h2
                   style={{
                     fontFamily: "FarsiBold",
