@@ -25,7 +25,7 @@ export default function Henkel() {
     document.body.style.marginTop = "0px";
     setTimeout(() => {
       setLandingLoad(true);
-    }, 1000);
+    }, 2000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
