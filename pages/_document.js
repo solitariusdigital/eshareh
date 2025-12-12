@@ -16,7 +16,6 @@ export default class MyDocument extends Document {
             crossOrigin="true"
           />
           <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/public/icon-192x192.png"></link>
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta name="theme-color" content="#981b1e" />
         </Head>
