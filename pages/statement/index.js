@@ -1,25 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState, useContext, useEffect } from "react";
-import { StateContext } from "@/context/stateContext";
+
 import classes from "./statement.module.scss";
 import Image from "next/legacy/image";
 import Router from "next/router";
 
 export default function Statement() {
-  const { displayFooter, setDisplayFooter } = useContext(StateContext);
-  const { displayMenu, setDisplayMenu } = useContext(StateContext);
-  const { language, setLanguage } = useContext(StateContext);
-  const { languageType, setLanguageType } = useContext(StateContext);
-
-  useEffect(() => {
-    setDisplayFooter(false);
-    setDisplayMenu(false);
-    setLanguageType("fa");
-    setLanguage(true);
-    document.body.style.marginTop = "0px";
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className={classes.statementContainer}>
       <div className={classes.statement}>

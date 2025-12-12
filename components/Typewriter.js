@@ -17,7 +17,7 @@ export default function Typewriter({ text, speed = 250 }) {
     <h3
       style={{
         fontFamily: "EnglishMedium",
-        letterSpacing: "0.2em",
+        letterSpacing: "0.1em",
       }}
     >
       {display}

@@ -6,10 +6,6 @@ import Typewriter from "@/components/Typewriter";
 import { toEnglishNumber, isEnglishNumber } from "@/services/utility";
 
 export default function Henkel() {
-  const { displayFooter, setDisplayFooter } = useContext(StateContext);
-  const { displayMenu, setDisplayMenu } = useContext(StateContext);
-  const { language, setLanguage } = useContext(StateContext);
-  const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [alert, setAlert] = useState("");
   const [code, setCode] = useState("");
@@ -18,11 +14,6 @@ export default function Henkel() {
   const [landingLoad, setLandingLoad] = useState(false);
 
   useEffect(() => {
-    setDisplayFooter(false);
-    setDisplayMenu(false);
-    setLanguageType("fa");
-    setLanguage(true);
-    document.body.style.marginTop = "0px";
     setTimeout(() => {
       setLandingLoad(true);
     }, 2000);
@@ -1255,8 +1246,8 @@ export default function Henkel() {
                   استان {activeFarsi}
                 </h2>
                 <Typewriter text={`${areaData[activeArea].main}`} />
-                <Typewriter text={`RT : ${areaData[activeArea].rt}`} />
-                <Typewriter text={`WS : ${areaData[activeArea].ws}`} />
+                <Typewriter text={`RT: ${areaData[activeArea].rt}`} />
+                <Typewriter text={`WS: ${areaData[activeArea].ws}`} />
               </div>
               <div className={classes.button}>
                 <button
