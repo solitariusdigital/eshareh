@@ -15,7 +15,6 @@ export default class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="true"
           />
-          <link rel="manifest" href="/manifest.json" />
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta name="theme-color" content="#981b1e" />
         </Head>

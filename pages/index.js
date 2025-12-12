@@ -16,7 +16,7 @@ export default function Henkel() {
   useEffect(() => {
     setTimeout(() => {
       setLandingLoad(true);
-    }, 2000);
+    }, 2500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
