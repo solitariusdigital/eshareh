@@ -291,20 +291,14 @@ export default function RootLayout({ children }) {
         </div>
       ) : (
         <div className="appload">
-          {loadImage && (
-            <Image
-              src={
-                pathname.includes("henkel")
-                  ? "https://eshareh.storage.iran.liara.space/henkel/logo.gif"
-                  : loadImage
-              }
-              layout="fill"
-              objectFit="contain"
-              alt="logo"
-              as="image"
-              priority
-            />
-          )}
+          <Image
+            src={"https://eshareh.storage.iran.liara.space/henkel/logo.gif"}
+            layout="fill"
+            objectFit="contain"
+            alt="logo"
+            as="image"
+            priority
+          />
         </div>
       )}
     </Fragment>

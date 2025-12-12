@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState, useContext, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./henkel.module.scss";
+import classes from "./statement.module.scss";
 import Image from "next/legacy/image";
 import Router from "next/router";
 
@@ -25,7 +25,7 @@ export default function Statement() {
       <div className={classes.statement}>
         <div
           className={`${classes.logo} animate__animated animate__pulse`}
-          onClick={() => Router.push("/henkel")}
+          onClick={() => Router.push("/")}
         >
           <Image
             src={"https://eshareh.storage.iran.liara.space/henkel/logo.gif"}
