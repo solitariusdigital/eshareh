@@ -98,12 +98,15 @@ p {
 .appload {
   display: flex;
   justify-content: center;
+  align-items: center;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   aspect-ratio: 4 / 4;
-  width: 20%;
+  width: 30%;
+  margin: auto;
+  color: #981b1e;
 
   @include mixins.mobile {
     width: 50%;

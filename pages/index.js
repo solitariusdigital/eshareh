@@ -936,6 +936,8 @@ export default function Henkel() {
     khorasanrazavi: "خراسان رضوی",
     khorasanshomali: "خراسان شمالی",
     khozestan: "خوزستان",
+    zanjan: "زنجان",
+    semnan: "سمنان",
     sistanbalochestan: "سیستان و بلوچستان",
     fars: "فارس",
     ghazvin: "قزوین",
@@ -945,13 +947,12 @@ export default function Henkel() {
     kermanshah: "کرمانشاه",
     golestan: "گلستان",
     gilan: "گیلان",
+    lorestan: "لرستان",
     mazanderan: "مازندران",
     markazi: "مرکزی",
     hormozgan: "هرمزگان",
     hamedan: "همدان",
     yazd: "یزد",
-    zanjan: "زنجان",
-    semnan: "سمنان",
   };
 
   const areaData = {
