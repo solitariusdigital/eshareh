@@ -108,7 +108,8 @@
   .button {
     display: flex;
     justify-content: center;
-    margin: 4px 0px;
+    padding: 4px 0px;
+    background: config.$lightgrey;
 
     button {
       @include mixins.button(#981b1e, config.$white);
