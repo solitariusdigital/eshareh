@@ -293,11 +293,7 @@ export default function RootLayout({ children }) {
         <div className="appload">
           {loadImage && (
             <Image
-              src={
-                pathname.includes("henkel")
-                  ? "https://eshareh.storage.iran.liara.space/henkel/logo.gif"
-                  : loadImage
-              }
+              src={loadImage}
               layout="fill"
               objectFit="contain"
               alt="logo"
