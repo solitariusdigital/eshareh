@@ -67,27 +67,42 @@ export default function RootLayout({ children }) {
           </section>
         </div>
       ) : (
-        <div className="appload">
-          {comingSoon ? (
-            <h2
-              style={{
-                fontFamily: "English",
-              }}
-            >
-              Coming Soon
-            </h2>
-          ) : (
-            <Image
-              src={"https://eshareh.storage.iran.liara.space/henkel/logo.gif"}
-              layout="fill"
-              objectFit="contain"
-              alt="logo"
-              as="image"
-              priority
-              unoptimized
-            />
+        <>
+          {comingSoon && (
+            <div className="table">
+              <Image
+                src={
+                  "https://eshareh.storage.iran.liara.space/henkel/table.jpg"
+                }
+                layout="fill"
+                objectFit="contain"
+                alt="logo"
+                as="image"
+                priority
+              />
+              <h3
+                style={{
+                  fontFamily: "English",
+                }}
+              >
+                Check out the site at 15:00
+              </h3>
+            </div>
           )}
-        </div>
+          {!comingSoon && (
+            <div className="appload">
+              <Image
+                src={"https://eshareh.storage.iran.liara.space/henkel/logo.gif"}
+                layout="fill"
+                objectFit="contain"
+                alt="logo"
+                as="image"
+                priority
+                unoptimized
+              />
+            </div>
+          )}
+        </>
       )}
     </Fragment>
   );

@@ -95,7 +95,8 @@ p {
   font-size: 1rem;
 }
 
-.appload {
+.appload,
+.table {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,10 +106,19 @@ p {
   transform: translate(-50%, -50%);
   aspect-ratio: 4 / 4;
   width: 30%;
-  margin: auto;
-  color: #981b1e;
 
   @include mixins.mobile {
     width: 50%;
+  }
+}
+
+.table {
+  @include mixins.mobile {
+    width: 100%;
+  }
+
+  h3 {
+    position: relative;
+    top: 150px;
   }
 }
