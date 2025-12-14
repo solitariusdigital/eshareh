@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
       const now = new Date();
       const hours = now.getHours();
 
-      if (hours >= 17) {
+      if (hours >= 15) {
         setComingSoon(false);
         setTimeout(() => {
           setAppLoader(true);
