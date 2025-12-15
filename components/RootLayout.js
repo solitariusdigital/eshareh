@@ -6,7 +6,6 @@ export default function RootLayout({ children }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { heroHeight, setHeroHeight } = useContext(StateContext);
   const [appLoader, setAppLoader] = useState(false);
-  const [comingSoon, setComingSoon] = useState(false);
 
   const handleResize = () => {
     let element = document.getElementById("detailsInformation");
@@ -35,23 +34,9 @@ export default function RootLayout({ children }) {
   }, []);
 
   useEffect(() => {
-    const checkTime = () => {
-      const now = new Date();
-      const hours = now.getHours();
-
-      if (hours >= 15) {
-        setComingSoon(false);
-        setTimeout(() => {
-          setAppLoader(true);
-        }, 1000);
-      } else {
-        setAppLoader(false);
-        setComingSoon(true);
-      }
-    };
-    checkTime();
-    const interval = setInterval(checkTime, 60 * 1000);
-    return () => clearInterval(interval);
+    setTimeout(() => {
+      setAppLoader(true);
+    }, 1000);
   }, []);
 
   return (
@@ -67,42 +52,17 @@ export default function RootLayout({ children }) {
           </section>
         </div>
       ) : (
-        <>
-          {comingSoon && (
-            <div className="table">
-              <Image
-                src={
-                  "https://eshareh.storage.iran.liara.space/henkel/table.jpg"
-                }
-                layout="fill"
-                objectFit="contain"
-                alt="logo"
-                as="image"
-                priority
-              />
-              <h3
-                style={{
-                  fontFamily: "English",
-                }}
-              >
-                Check out the site at 15:00
-              </h3>
-            </div>
-          )}
-          {!comingSoon && (
-            <div className="appload">
-              <Image
-                src={"https://eshareh.storage.iran.liara.space/henkel/logo.gif"}
-                layout="fill"
-                objectFit="contain"
-                alt="logo"
-                as="image"
-                priority
-                unoptimized
-              />
-            </div>
-          )}
-        </>
+        <div className="appload">
+          <Image
+            src={"https://eshareh.storage.iran.liara.space/henkel/logo.gif"}
+            layout="fill"
+            objectFit="contain"
+            alt="logo"
+            as="image"
+            priority
+            unoptimized
+          />
+        </div>
       )}
     </Fragment>
   );
