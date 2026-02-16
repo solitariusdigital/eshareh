@@ -334,6 +334,14 @@ label.file input[type="file"] {
 .swiper-button-prev::after {
   display: none;
 }
+.News_swiper__lKLOW {
+  .swiper-button-prev {
+    background-image: url("../assets/next.svg") !important;
+  }
+  .swiper-button-next {
+    background-image: url("../assets/prev.svg") !important;
+  }
+}
 
 // swiper gallery
 .GallerySlider_swiper__DIjwm {

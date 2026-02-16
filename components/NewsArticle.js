@@ -23,7 +23,7 @@ import {
   sliceString,
 } from "@/services/utility";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -44,22 +44,22 @@ export default function News({ news, newsTitle }) {
     let displayNews = null;
     if (permissionControl === "admin") {
       displayNews = news.find(
-        (p) => p.en.title === newsTitle || p.fa.title === newsTitle
+        (p) => p.en.title === newsTitle || p.fa.title === newsTitle,
       );
     } else {
       let activeNews = news.filter((news) => news.active);
       displayNews = activeNews.find(
-        (p) => p.en.title === newsTitle || p.fa.title === newsTitle
+        (p) => p.en.title === newsTitle || p.fa.title === newsTitle,
       );
     }
 
-    const categoriesArray = displayNews[languageType].category.split(" ");
+    const categoriesArray = displayNews[languageType]?.category.split(" ");
     const filterSimilarNews = news
       .filter(
         (news) =>
           categoriesArray.some((word) =>
-            news[languageType].category.includes(word)
-          ) && news._id !== displayNews._id
+            news[languageType].category.includes(word),
+          ) && news._id !== displayNews._id,
       )
       .slice(0, 2);
     setSimilarNews(filterSimilarNews);
@@ -115,7 +115,7 @@ export default function News({ news, newsTitle }) {
     size,
     language,
     keyword,
-    link
+    link,
   ) => {
     // Apply font to English words
     let fontSize = language ? size : null;
@@ -208,13 +208,13 @@ export default function News({ news, newsTitle }) {
             title={displayNews[languageType].titleSeo}
             description={displayNews[languageType].descriptionSeo}
             canonical={`https://eshareh.com/news/${replaceSpacesAndHyphens(
-              displayNews[languageType].title
+              displayNews[languageType].title,
             )}`}
             openGraph={{
               type: "article",
               locale: "fa_IR",
               url: `https://eshareh.com/news/${replaceSpacesAndHyphens(
-                displayNews[languageType].title
+                displayNews[languageType].title,
               )}`,
               title: `${displayNews[languageType].titleSeo}`,
               description: `${displayNews[languageType].descriptionSeo}`,
@@ -339,16 +339,10 @@ export default function News({ news, newsTitle }) {
                 <div className={classes.swiper}>
                   <Swiper
                     className={classes.slide}
-                    slidesPerView="auto"
                     spaceBetween={0}
-                    mousewheel={true}
                     loop={true}
-                    modules={[Autoplay]}
-                    autoplay={{
-                      delay: 3000,
-                      disableOnInteraction: true,
-                    }}
-                    speed={1500}
+                    navigation={true}
+                    modules={[Navigation]}
                   >
                     {displayNews.media.map((image, index) => (
                       <SwiperSlide key={index}>
@@ -417,7 +411,7 @@ export default function News({ news, newsTitle }) {
                         desc,
                         "English",
                         "16px",
-                        language
+                        language,
                       ),
                     }}
                   ></p>
@@ -446,7 +440,7 @@ export default function News({ news, newsTitle }) {
                               list[languageType].title,
                               "English",
                               "14px",
-                              "fa"
+                              "fa",
                             ),
                           }}
                         ></li>
@@ -483,7 +477,7 @@ export default function News({ news, newsTitle }) {
                             "16px",
                             "en",
                             list[languageType].word,
-                            list[languageType].link
+                            list[languageType].link,
                           ),
                         }}
                       />
@@ -503,7 +497,7 @@ export default function News({ news, newsTitle }) {
                 key={index}
                 className={classes.cover}
                 href={`/news/${replaceSpacesAndHyphens(
-                  news[languageType].title
+                  news[languageType].title,
                 )}`}
                 passHref
               >
