@@ -12,7 +12,7 @@
     aspect-ratio: 16 / 9;
     cursor: pointer;
 
-    @include mixins.desktop {
+    @include mixins.allDesktop {
       height: calc(100dvh - 100px);
     }
   }
