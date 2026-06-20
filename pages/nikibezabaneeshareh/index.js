@@ -34,7 +34,7 @@ export default function Nikibezabaneeshareh() {
       () => {
         setDisplayInfo(true);
       },
-      fullSizeChatBox ? 8500 : 7000
+      fullSizeChatBox ? 8500 : 7000,
     );
     return () => clearTimeout(timeoutId);
   }, [screenSize, fullSizeChatBox]);
@@ -78,7 +78,7 @@ export default function Nikibezabaneeshareh() {
             <video
               className={classes.video}
               src={
-                "https://eshareh.storage.iran.liara.space/nikibezabaneeshareh/motion-desktop.mp4"
+                "https://bucket.eshareh.com/nikibezabaneeshareh/motion-desktop.mp4"
               }
               autoPlay
               playsInline
@@ -102,7 +102,7 @@ export default function Nikibezabaneeshareh() {
             <video
               className={classes.video}
               src={
-                "https://eshareh.storage.iran.liara.space/nikibezabaneeshareh/motion-mobile.mp4"
+                "https://bucket.eshareh.com/nikibezabaneeshareh/motion-mobile.mp4"
               }
               autoPlay
               playsInline
@@ -168,7 +168,7 @@ export default function Nikibezabaneeshareh() {
               onClick={async () => {
                 updateCharityCount();
                 const fileUrl =
-                  "https://eshareh.storage.iran.liara.space/nikibezabaneeshareh/دفترچه_ارتباط_با_ناشنوایان_و_کم_شنوایان.pdf";
+                  "https://bucket.eshareh.com/nikibezabaneeshareh/دفترچه_ارتباط_با_ناشنوایان_و_کم_شنوایان.pdf";
                 const fileName = "دفترچه_ارتباط_با_ناشنوایان_و_کم_شنوایان.pdf";
                 window.open(fileUrl, "_blank", "noopener,noreferrer");
                 try {
