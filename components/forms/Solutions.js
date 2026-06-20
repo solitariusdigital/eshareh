@@ -19,32 +19,32 @@ export default function Solutions() {
   const [title, setTitle] = useState(
     editSolution
       ? { en: editSolution.en.title, fa: editSolution.fa.title }
-      : { en: "", fa: "" }
+      : { en: "", fa: "" },
   );
   const [subtitle, setSubtitle] = useState(
     editSolution
       ? { en: editSolution.en.subtitle, fa: editSolution.fa.subtitle }
-      : { en: "", fa: "" }
+      : { en: "", fa: "" },
   );
   const [brief, setBrief] = useState(
     editSolution
       ? { en: editSolution.en.brief, fa: editSolution.fa.brief }
-      : { en: "", fa: "" }
+      : { en: "", fa: "" },
   );
   const [solution, setSolution] = useState(
     editSolution
       ? { en: editSolution.en.solution, fa: editSolution.fa.solution }
-      : { en: "", fa: "" }
+      : { en: "", fa: "" },
   );
   const [year, setYear] = useState(
     editSolution
       ? { en: editSolution.en.year, fa: editSolution.fa.year }
-      : { en: "", fa: "" }
+      : { en: "", fa: "" },
   );
   const [category, setCategory] = useState(
     editSolution
       ? { en: editSolution.en.category, fa: editSolution.fa.category }
-      : { en: "", fa: "" }
+      : { en: "", fa: "" },
   );
   const [imagesPreview, setImagesPreview] = useState([]);
   const [videosPreview, setVideosPreview] = useState([]);
@@ -56,7 +56,7 @@ export default function Solutions() {
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
   const [progress, setProgress] = useState(0);
-  const sourceLink = "https://eshareh.storage.iran.liara.space";
+  const sourceLink = "https://bucket.eshareh.com";
   const categories = [
     "Advertising",
     "Media",
@@ -105,7 +105,7 @@ export default function Solutions() {
       array.map((item) => ({
         file: item,
         link: URL.createObjectURL(item),
-      }))
+      })),
     );
   };
   const handleVideoChange = (event) => {
@@ -115,7 +115,7 @@ export default function Solutions() {
       array.map((item) => ({
         file: item,
         link: URL.createObjectURL(item),
-      }))
+      })),
     );
   };
   const handleVoiceChange = (event) => {
@@ -125,7 +125,7 @@ export default function Solutions() {
       array.map((item) => ({
         file: item,
         link: URL.createObjectURL(item),
-      }))
+      })),
     );
   };
 

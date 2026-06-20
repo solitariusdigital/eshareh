@@ -32,7 +32,7 @@ export default function Home({ pages, mediaData }) {
   const [mediaTwo, setMediaTwo] = useState("");
   const [mediaOneType, setMediaOneType] = useState("image" || "gif");
   const [mediaTwoType, setMediaTwoType] = useState("image" || "gif");
-  const sourceLink = "https://eshareh.storage.iran.liara.space";
+  const sourceLink = "https://bucket.eshareh.com";
   const router = useRouter();
 
   useEffect(() => {
@@ -166,8 +166,8 @@ export default function Home({ pages, mediaData }) {
             mediaOneId,
             mediaFolder,
             subFolder,
-            mediaOneFormat
-          )
+            mediaOneFormat,
+          ),
         );
       }
       if (mediaTwo) {
@@ -177,8 +177,8 @@ export default function Home({ pages, mediaData }) {
             mediaTwoId,
             mediaFolder,
             subFolder,
-            mediaTwoFormat
-          )
+            mediaTwoFormat,
+          ),
         );
       }
       await Promise.all(uploadPromises);

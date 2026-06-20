@@ -7,6 +7,13 @@
   direction: rtl;
   user-select: none;
 
+  .prevdesk {
+    position: relative;
+    top: 0px;
+    height: 100dvh;
+    width: 100%;
+  }
+
   .videoContainer {
     .video {
       position: absolute;
@@ -15,102 +22,110 @@
       height: 100%;
       object-fit: cover;
     }
-  }
 
-  h1,
-  .title {
-    position: relative;
-    z-index: 1;
-    font-size: 6.5vw;
-    line-height: 12vh;
-    text-align: center;
-    color: config.$white;
-    text-shadow: 0.3vw 0.3vw 0.4vw rgba(0, 0, 0, 0.2);
+    .dot {
+      position: absolute;
+      top: 3vw;
+      right: 3vw;
+      width: 2vw;
+      height: 2vw;
+      border-radius: 50%;
+      background: config.$yellow;
 
-    @include mixins.mobile {
-      font-size: 11vw;
-      line-height: 6vh;
-      padding-top: 3vh;
-    }
-    @include mixins.tabletPortrait {
-      font-size: 11vw;
-      line-height: 8vh;
-      padding-top: 4vh;
-    }
-    @include mixins.tablet {
-      font-size: 5.8vw;
-      line-height: 8vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        position: relative;
+        top: 2vw;
+        font-size: 1.5vw;
+      }
     }
   }
 
   .information {
     position: absolute;
-    bottom: 0px;
+    bottom: 7vw;
+    left: 3vw;
     text-align: justify;
-    direction: rtl;
     width: 40vw;
-    margin: 0 auto;
-    padding-right: 2vw;
     color: config.$white;
 
     @include mixins.mobile {
       width: 100vw;
-      padding: 0px 4vw;
-      padding-top: 4vw;
-      @include mixins.transparentBackground(0.8, config.$black);
+      padding: 0px 2vw;
+      left: 0px;
     }
     @include mixins.tabletPortrait {
       width: 100vw;
       padding: 0px 3vw;
-      padding-top: 3vw;
-      @include mixins.transparentBackground(0.8, config.$black);
+      left: 0px;
     }
     @include mixins.tablet {
-      width: 36vw;
+      bottom: 12vw;
+      width: 50vw;
+    }
+
+    .text {
+      padding: 1vw;
+      @include mixins.transparentBackground(0.6, config.$black);
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      font-size: 6.5vw;
+      line-height: 12vh;
+      text-align: center;
+      color: config.$white;
+      text-shadow: 0.3vw 0.3vw 0.4vw rgba(0, 0, 0, 0.2);
+
+      @include mixins.mobile {
+        font-size: 16vw;
+        line-height: 6vh;
+        padding-top: 3vh;
+      }
+      @include mixins.tabletPortrait {
+        font-size: 15.5vw;
+        line-height: 8vh;
+        padding-top: 4vh;
+      }
+      @include mixins.tablet {
+        font-size: 8vw;
+      }
     }
 
     h2 {
-      font-size: 2.83vw;
+      font-size: 2.8vw;
       line-height: 7vh;
       text-align: center;
-      text-shadow: 0.1vw 0.15vw 0.1vw rgba(0, 0, 0, 0.2);
 
       @include mixins.mobile {
-        font-size: 5vw;
-        line-height: 5vh;
+        font-size: 6.8vw;
+        margin-top: 1vh;
       }
       @include mixins.tabletPortrait {
-        font-size: 5vw;
-        line-height: 6vh;
+        font-size: 6.8vw;
+        line-height: 11vh;
       }
       @include mixins.tablet {
-        font-size: 2.5vw;
+        font-size: 3.4vw;
         line-height: 5vh;
       }
     }
+
     p {
-      font-size: 1.15vw;
-      line-height: 2.5vh;
-      text-shadow: 0.1vw 0.1vw 0.1vw rgba(0, 0, 0, 0.2);
+      font-size: 1vw;
 
       @include mixins.mobile {
         font-size: 3vw;
       }
       @include mixins.tabletPortrait {
-        font-size: 2.5vw;
+        font-size: 2vw;
       }
       @include mixins.tablet {
-        font-size: 1.2vw;
-      }
-    }
-
-    .row {
-      @include mixins.row-space-between-center();
-      justify-content: flex-start;
-      align-items: baseline;
-
-      p {
-        margin-right: 0.5vw;
+        font-size: 1.5vw;
       }
     }
 
@@ -120,25 +135,22 @@
       align-items: center;
       height: 10vh;
       width: 65%;
-      margin: 2vw auto;
-      margin-top: 1vw;
+      margin: auto;
+      margin-top: 2vw;
       background: config.$yellow;
       box-shadow: config.$button-shadow;
       @include mixins.border-radius(5vw);
 
       @include mixins.mobile {
-        height: 6vh;
-        margin-bottom: 3vh;
-        width: 50%;
+        margin-top: 3vw;
+        height: 8vh;
       }
       @include mixins.tabletPortrait {
-        height: 6vh;
-        margin-bottom: 3vh;
-        width: 50%;
+        margin-top: 3vw;
       }
       @include mixins.tablet {
-        height: 6vh;
-        margin-bottom: 3vh;
+        margin-top: 2vw;
+        height: 8vh;
       }
 
       &:hover {
@@ -148,29 +160,28 @@
       }
 
       h2 {
-        text-shadow: none;
+        margin-top: 0vh;
       }
     }
   }
 
   .logo {
     position: absolute;
-    bottom: 0px;
-    left: 0px;
+    bottom: 2vw;
+    right: 3vw;
     width: 8vw;
-    height: 10vh;
-    margin-bottom: 2vw;
+    height: 8vh;
 
     @include mixins.mobile {
-      height: 6vh;
-      margin: 3vh;
+      width: 12vw;
+      bottom: 7vw;
     }
     @include mixins.tabletPortrait {
-      height: 6vh;
-      margin: 3vh;
+      width: 15vw;
+      bottom: 8vw;
     }
     @include mixins.tablet {
-      height: 6vh;
+      width: 12vw;
     }
   }
 }

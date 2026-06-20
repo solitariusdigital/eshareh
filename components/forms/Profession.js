@@ -24,7 +24,7 @@ export default function Profession({ pages, mediaData }) {
   const [media, setMedia] = useState("");
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
-  const sourceLink = "https://eshareh.storage.iran.liara.space";
+  const sourceLink = "https://bucket.eshareh.com";
   const router = useRouter();
 
   useEffect(() => {

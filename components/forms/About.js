@@ -46,7 +46,7 @@ export default function Team({ pages, mediaData }) {
   const [userActivation, setUserActivation] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedUserIndex, setSelectedUserIndex] = useState("default");
-  const sourceLink = "https://eshareh.storage.iran.liara.space";
+  const sourceLink = "https://bucket.eshareh.com";
   const router = useRouter();
 
   useEffect(() => {
@@ -103,7 +103,7 @@ export default function Team({ pages, mediaData }) {
       showAlert(
         language
           ? "پسورد باید حداقل 8 کاراکتر باشد"
-          : "Password must be minimum 8 characters"
+          : "Password must be minimum 8 characters",
       );
       return;
     }
@@ -145,7 +145,7 @@ export default function Team({ pages, mediaData }) {
   const cryptPassword = () => {
     return AES.encrypt(
       password.trim(),
-      process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY
+      process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY,
     ).toString();
   };
 

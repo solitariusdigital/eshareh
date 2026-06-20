@@ -31,41 +31,41 @@ export default function News() {
             en: { title: "", description: "", tag: "h2", word: "", link: "" },
             fa: { title: "", description: "", tag: "h2", word: "", link: "" },
           },
-        ]
+        ],
   );
   const [title, setTitle] = useState(
     editNews
       ? { en: editNews.en.title, fa: editNews.fa.title }
-      : { en: "", fa: "" }
+      : { en: "", fa: "" },
   );
   const [paragraph, setParagraph] = useState(
     editNews
       ? { en: editNews.en.paragraph, fa: editNews.fa.paragraph }
-      : { en: "", fa: "" }
+      : { en: "", fa: "" },
   );
   const [titleSeo, setTitleSeo] = useState(
     editNews
       ? { en: editNews.en.titleSeo, fa: editNews.fa.titleSeo }
-      : { en: "", fa: "" }
+      : { en: "", fa: "" },
   );
   const [descriptionSeo, setDescriptionSeo] = useState(
     editNews
       ? { en: editNews.en.descriptionSeo, fa: editNews.fa.descriptionSeo }
-      : { en: "", fa: "" }
+      : { en: "", fa: "" },
   );
   const [category, setCategory] = useState(
     editNews
       ? { en: editNews.en.category, fa: editNews.fa.category }
-      : { en: "", fa: "" }
+      : { en: "", fa: "" },
   );
   const [dateString, setDateString] = useState(
-    editNews ? editNews.dateString : ""
+    editNews ? editNews.dateString : "",
   );
   const [page, setPage] = useState(editNews ? editNews.page : "portal");
   const [alert, setAlert] = useState("");
   const [loader, setLoader] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
-  const sourceLink = "https://eshareh.storage.iran.liara.space";
+  const sourceLink = "https://bucket.eshareh.com";
   const router = useRouter();
 
   const [imagesPreview, setImagesPreview] = useState([]);
@@ -127,7 +127,7 @@ export default function News() {
       array.map((item) => ({
         file: item,
         link: URL.createObjectURL(item),
-      }))
+      })),
     );
   };
   const handleVideoChange = (event) => {
@@ -137,7 +137,7 @@ export default function News() {
       array.map((item) => ({
         file: item,
         link: URL.createObjectURL(item),
-      }))
+      })),
     );
   };
   const handleVoiceChange = (event) => {
@@ -147,7 +147,7 @@ export default function News() {
       array.map((item) => ({
         file: item,
         link: URL.createObjectURL(item),
-      }))
+      })),
     );
   };
 

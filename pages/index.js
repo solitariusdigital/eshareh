@@ -58,22 +58,22 @@ export default function Home({
   const [hoverTwo, setHoverTwo] = useState(false);
   const [hoverThree, setHoverThree] = useState(false);
   const [solutionsContent, setSolutionsContent] = useState(
-    solutionsData.content
+    solutionsData.content,
   );
   const [titleOneSetting, setTitleOneSetting] = useState(
-    pageData.content[0].setting
+    pageData.content[0].setting,
   );
   const [paragraphOneSetting, setParagraphOneSetting] = useState(
-    pageData.content[1].setting
+    pageData.content[1].setting,
   );
   const [titleTwoSetting, setTitleTwoSetting] = useState(
-    pageData.content[2].setting
+    pageData.content[2].setting,
   );
   const [titleThreeSetting, setTitleThreeSetting] = useState(
-    pageData.content[3].setting
+    pageData.content[3].setting,
   );
   const [paragraphTwoSetting, setParagraphTwoSetting] = useState(
-    pageData.content[4].setting
+    pageData.content[4].setting,
   );
 
   useEffect(() => {
@@ -175,8 +175,8 @@ export default function Home({
       <div className={classes.videoContainer}>
         <video
           className={classes.video}
-          src={"https://eshareh.storage.iran.liara.space/page/home/eshareh.mp4"}
-          poster="https://eshareh.storage.iran.liara.space/page/home/cover.jpg"
+          src={"https://bucket.eshareh.com/page/home/eshareh.mp4"}
+          poster="https://bucket.eshareh.com/page/home/cover.jpg"
           controls
           playsInline
           preload="metadata"
@@ -213,7 +213,7 @@ export default function Home({
                   paragraphTwoSetting
                     ? `${paragraphTwoSetting.split(" ")[1]}px`
                     : "22px",
-                  language
+                  language,
                 ),
               }}
             ></h2>
@@ -438,7 +438,7 @@ export async function getServerSideProps(context) {
       .filter((project) => project.active)
       .sort(
         (a, b) =>
-          parsePersianDate(b["fa"].year) - parsePersianDate(a["fa"].year)
+          parsePersianDate(b["fa"].year) - parsePersianDate(a["fa"].year),
       );
 
     let activeCovers = covers.filter((project) => project.active);

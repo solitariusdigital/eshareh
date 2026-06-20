@@ -30,7 +30,7 @@ export default function JobSend({ jobsId }) {
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
   const [resumeRecieved, setResumeRecieved] = useState(false);
-  const sourceLink = "https://eshareh.storage.iran.liara.space";
+  const sourceLink = "https://bucket.eshareh.com";
   const router = useRouter();
   const maxWords = 150;
 

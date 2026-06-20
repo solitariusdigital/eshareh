@@ -39,7 +39,7 @@ export default function Cover({ covers }) {
   const [loader, setLoader] = useState(false);
   const [text, setText] = useState({});
   const [coversGrid, setCoversGrid] = useState(covers);
-  const sourceLink = "https://eshareh.storage.iran.liara.space";
+  const sourceLink = "https://bucket.eshareh.com";
   const router = useRouter();
 
   const showAlert = (message) => {

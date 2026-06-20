@@ -52,7 +52,7 @@ export default function ChatBox({ floatChat }) {
   const [messageContent, setMessageContent] = useState("");
   const [isFarsi, setIsFarsi] = useState(false);
   const [media, setMedia] = useState(null);
-  const sourceLink = "https://eshareh.storage.iran.liara.space";
+  const sourceLink = "https://bucket.eshareh.com";
 
   const fullSizeChatBox =
     !floatChat &&
@@ -68,10 +68,10 @@ export default function ChatBox({ floatChat }) {
     const chatsData = await getChatsApi();
     const notificationsData = await getNotificationApi();
     let filterChats = chatsData.filter((chat) =>
-      chat.users.includes(currentUser._id)
+      chat.users.includes(currentUser._id),
     );
     let filterNotifications = notificationsData.filter(
-      (notification) => notification.userId === currentUser._id
+      (notification) => notification.userId === currentUser._id,
     );
     let addOption = filterChats.map((chat) => ({
       ...chat,
@@ -79,7 +79,7 @@ export default function ChatBox({ floatChat }) {
       adminAccess: chat.adminsId.includes(currentUser._id),
       isRead:
         filterNotifications.filter(
-          (notification) => notification.itemId === chat._id
+          (notification) => notification.itemId === chat._id,
         ).length === 0,
     }));
     addOption.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
@@ -139,11 +139,11 @@ export default function ChatBox({ floatChat }) {
       let filterNotifications = notificationsData.filter(
         (notification) =>
           notification.userId === currentUser._id &&
-          notification.itemId === selectedChat._id
+          notification.itemId === selectedChat._id,
       );
       if (filterNotifications.length > 0) {
         const deletionPromises = filterNotifications.map((notification) =>
-          deleteNotificationApi(notification._id)
+          deleteNotificationApi(notification._id),
         );
         await Promise.all(deletionPromises);
       }
@@ -193,7 +193,7 @@ export default function ChatBox({ floatChat }) {
     const chatData = await getMessagesApi({ signal });
     const usersData = await getUsersApi();
     const currentChat = chatData.filter(
-      (chat) => chat.chatId === selectedChat._id
+      (chat) => chat.chatId === selectedChat._id,
     );
     const chatFiles = currentChat
       .filter((chat) => chat.type === "document")
@@ -226,11 +226,11 @@ export default function ChatBox({ floatChat }) {
     let filterNotifications = notificationsData.filter(
       (notification) =>
         notification.userId === currentUser._id &&
-        notification.itemId === chatsDataDisplay[index]._id
+        notification.itemId === chatsDataDisplay[index]._id,
     );
     if (filterNotifications.length > 0) {
       const deletionPromises = filterNotifications.map((notification) =>
-        deleteNotificationApi(notification._id)
+        deleteNotificationApi(notification._id),
       );
       await Promise.all(deletionPromises);
     }
@@ -240,7 +240,7 @@ export default function ChatBox({ floatChat }) {
     type,
     content = "",
     fileName = "",
-    fileType = ""
+    fileType = "",
   ) => {
     if (type === "text" && !messageContent?.trim()) return;
     const textContent = messageContent?.trim() || "";
@@ -292,7 +292,7 @@ export default function ChatBox({ floatChat }) {
       isRead: false,
     };
     let filterCurrentUser = selectedChat.users.filter(
-      (user) => user !== currentUser._id
+      (user) => user !== currentUser._id,
     );
     for (const id of filterCurrentUser) {
       const notificationObject = {
@@ -407,7 +407,7 @@ export default function ChatBox({ floatChat }) {
     }
     try {
       const isImage = [".png", ".jpg", ".jpeg"].includes(
-        extension.toLowerCase()
+        extension.toLowerCase(),
       );
       const fileToUpload = isImage ? await compressImage(file) : file;
       const mediaFolder = "documents";
@@ -421,7 +421,7 @@ export default function ChatBox({ floatChat }) {
           mediaName,
           mediaFolder,
           subFolder,
-          mediaFormat
+          mediaFormat,
         ),
         createNewMessage("document", mediaLink, mediaName, mediaFormat),
       ]);
@@ -478,7 +478,7 @@ export default function ChatBox({ floatChat }) {
                         document.content,
                         "English",
                         "14px",
-                        "fa"
+                        "fa",
                       ),
                     }}
                   ></p>
@@ -499,7 +499,7 @@ export default function ChatBox({ floatChat }) {
                         window.open(
                           document.fileUrl,
                           "_blank",
-                          "noopener,noreferrer"
+                          "noopener,noreferrer",
                         )
                       }
                     />
@@ -637,7 +637,7 @@ export default function ChatBox({ floatChat }) {
                                 chat.user.title.fa,
                                 "English",
                                 "16px",
-                                "fa"
+                                "fa",
                               ),
                             }}
                           ></p>
@@ -652,7 +652,7 @@ export default function ChatBox({ floatChat }) {
                           chat.content,
                           "EnglishLight",
                           "14px",
-                          "fa"
+                          "fa",
                         ),
                       }}
                     ></p>
@@ -678,7 +678,7 @@ export default function ChatBox({ floatChat }) {
                               window.open(
                                 chat.fileUrl,
                                 "_blank",
-                                "noopener,noreferrer"
+                                "noopener,noreferrer",
                               )
                             }
                           />
