@@ -13,12 +13,20 @@ export default function Nikibezabaneeshareh() {
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [displayInfo, setDisplayInfo] = useState(false);
-  const [displayVideo, setDisplayVideo] = useState(false);
 
   const fullSizeScreen =
     screenSize === "desktop" || screenSize === "tablet-landscape";
 
   const videoRef = useRef(null);
+
+  useEffect(() => {
+    setDisplayFooter(false);
+    setDisplayMenu(false);
+    setLanguageType("fa");
+    setLanguage(true);
+    document.body.style.marginTop = "0px";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -38,32 +46,12 @@ export default function Nikibezabaneeshareh() {
   }, [fullSizeScreen]);
 
   useEffect(() => {
-    setDisplayFooter(false);
-    setDisplayMenu(false);
-    setLanguageType("fa");
-    setLanguage(true);
-    document.body.style.marginTop = "0px";
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     setDisplayInfo(false);
     const timeoutId = setTimeout(
       () => {
         setDisplayInfo(true);
       },
       fullSizeScreen ? 9000 : 7000,
-    );
-    return () => clearTimeout(timeoutId);
-  }, [fullSizeScreen]);
-
-  useEffect(() => {
-    setDisplayVideo(false);
-    const timeoutId = setTimeout(
-      () => {
-        setDisplayVideo(true);
-      },
-      fullSizeScreen ? 11000 : 9000,
     );
     return () => clearTimeout(timeoutId);
   }, [fullSizeScreen]);
@@ -123,7 +111,7 @@ export default function Nikibezabaneeshareh() {
             </h3>
           </div>
         )}
-        {displayVideo && (
+        {displayInfo && (
           <div
             className={`${classes.videoWrapper} animate__animated animate__slideInUp`}
           >
