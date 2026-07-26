@@ -24,9 +24,11 @@
 
     @include mixins.mobile {
       width: 100%;
+      padding: 0px 12px;
     }
     @include mixins.tabletPortrait {
       width: 100%;
+      padding: 0px 12px;
     }
   }
 
@@ -73,11 +75,11 @@
       margin: auto;
 
       @include mixins.mobile {
-        font-size: 16vw * $h1-h3-ratio;
+        font-size: 20vw * $h1-h3-ratio;
         width: 100%;
       }
       @include mixins.tabletPortrait {
-        font-size: 15.5vw * $h1-h3-ratio;
+        font-size: 16vw * $h1-h3-ratio;
         width: 100%;
       }
       @include mixins.tablet {
