@@ -83,7 +83,7 @@
         width: 100%;
       }
       @include mixins.tablet {
-        font-size: 8vw * $h1-h3-ratio;
+        font-size: 10vw * $h1-h3-ratio;
         width: 50%;
       }
     }
