@@ -1,4 +1,4 @@
-import { useContext, Fragment, useEffect, useState } from "react";
+import { useContext, Fragment, useEffect, useState, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./nikibezabaneeshareh.module.scss";
 import Image from "next/legacy/image";
@@ -17,6 +17,25 @@ export default function Nikibezabaneeshareh() {
 
   const fullSizeScreen =
     screenSize === "desktop" || screenSize === "tablet-landscape";
+
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.playsInline = true;
+
+    const handleCanPlay = () => {
+      video.play().catch((err) => console.warn("Autoplay blocked:", err));
+    };
+
+    video.addEventListener("canplay", handleCanPlay);
+    video.load();
+
+    return () => video.removeEventListener("canplay", handleCanPlay);
+  }, [fullSizeScreen]);
 
   useEffect(() => {
     setDisplayFooter(false);
@@ -53,14 +72,14 @@ export default function Nikibezabaneeshareh() {
     <Fragment>
       <NextSeo
         title="نیکی به زبان اشاره"
-        description="اشاره یک استودیوی طراحی چند رشته ای و مستقل است"
+        description="اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است"
         canonical="https://eshareh.com/nikibezabaneeshareh"
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: "https://eshareh.com/nikibezabaneeshareh",
           title: "نیکی به زبان اشاره",
-          description: "اشاره یک استودیوی طراحی چند رشته ای و مستقل است",
+          description: "اشاره یک استودیوی طراحی چند رشته‌ای و مستقل است",
           siteName: "آژانس تبلیغاتی اشاره",
           images: {
             url: logoFarsi,
@@ -79,7 +98,8 @@ export default function Nikibezabaneeshareh() {
               ? "https://bucket.eshareh.com/nikibezabaneeshareh/motion-desktop.mp4"
               : "https://bucket.eshareh.com/nikibezabaneeshareh/motion-mobile.mp4"
           }
-          preload="metadata"
+          ref={videoRef}
+          preload="auto"
           autoPlay
           playsInline
           muted
