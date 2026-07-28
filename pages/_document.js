@@ -7,6 +7,12 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <link
+            rel="preload"
+            as="video"
+            href="https://bucket.eshareh.com/nikibezabaneeshareh/motion-mobile.mp4"
+            type="video/mp4"
+          />
+          <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
           />

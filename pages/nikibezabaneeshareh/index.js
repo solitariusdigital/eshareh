@@ -105,9 +105,9 @@ export default function Nikibezabaneeshareh() {
             <div
               className={`${classes.action} animate__animated animate__slideInDown`}
             >
-              <h2>
+              <h3>
                 با تماشای ویدیوی زیر، قصه این نیکی را از زبان اشاره بشنوید
-              </h2>
+              </h3>
             </div>
           </div>
         )}
@@ -120,10 +120,10 @@ export default function Nikibezabaneeshareh() {
               src="https://bucket.eshareh.com/nikibezabaneeshareh/The-Making-of-Kindness-Campaign.mp4"
               playsInline
               preload="auto"
+              controls
               // loop
               // autoPlay
               // muted
-              controls
             />
           </div>
         )}
