@@ -36,34 +36,26 @@ export default function Nikibezabaneeshareh() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
     video.muted = true;
     video.playsInline = true;
-
     const handleCanPlay = () => {
       video.play().catch((err) => console.warn("Autoplay blocked:", err));
     };
-
     video.addEventListener("canplay", handleCanPlay);
     video.load();
-
     return () => video.removeEventListener("canplay", handleCanPlay);
   }, [fullSizeScreen]);
 
   useEffect(() => {
     const video = videoRefMain.current;
     if (!video) return;
-
     video.muted = true;
     video.playsInline = true;
-
     const handleCanPlay = () => {
       video.play().catch((err) => console.warn("Autoplay blocked:", err));
     };
-
     video.addEventListener("canplay", handleCanPlay);
     video.load();
-
     return () => video.removeEventListener("canplay", handleCanPlay);
   }, [fullSizeScreen]);
 
@@ -181,7 +173,7 @@ export default function Nikibezabaneeshareh() {
               loop
               autoPlay
               ref={videoRefMain}
-              muted={isMuted}
+              muted
               // controls
             />
           </div>
