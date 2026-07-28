@@ -94,17 +94,24 @@
       }
     }
 
+    .text {
+      @include mixins.glass-effect();
+      width: 50%;
+
+      @include mixins.mobile {
+        width: 100%;
+      }
+    }
     h3 {
       font-size: 7vw * $h1-h3-ratio;
-      width: 50%;
       margin: auto;
       padding: 4px;
-      @include mixins.glass-effect();
 
       @include mixins.mobile {
         font-size: 21vw * $h1-h3-ratio;
         width: 100%;
       }
+
       @include mixins.tabletPortrait {
         font-size: 16vw * $h1-h3-ratio;
         width: 100%;

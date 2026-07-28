@@ -14,7 +14,7 @@ export default function Nikibezabaneeshareh() {
   const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
-  const [displayInfo, setDisplayInfo] = useState(true);
+  const [displayInfo, setDisplayInfo] = useState(false);
 
   const fullSizeScreen =
     screenSize === "desktop" || screenSize === "tablet-landscape";
@@ -38,16 +38,16 @@ export default function Nikibezabaneeshareh() {
     video.play().catch((err) => console.warn("Autoplay blocked:", err));
   }, [fullSizeScreen]);
 
-  // useEffect(() => {
-  //   setDisplayInfo(false);
-  //   const timeoutId = setTimeout(
-  //     () => {
-  //       setDisplayInfo(true);
-  //     },
-  //     fullSizeScreen ? 9000 : 7000,
-  //   );
-  //   return () => clearTimeout(timeoutId);
-  // }, [fullSizeScreen]);
+  useEffect(() => {
+    setDisplayInfo(false);
+    const timeoutId = setTimeout(
+      () => {
+        setDisplayInfo(true);
+      },
+      fullSizeScreen ? 9000 : 7000,
+    );
+    return () => clearTimeout(timeoutId);
+  }, [fullSizeScreen]);
 
   return (
     <Fragment>
@@ -96,7 +96,7 @@ export default function Nikibezabaneeshareh() {
             >
               نیکی به زبان اشاره
             </h1>
-            <h3>
+            <h3 className={classes.text}>
               با همراهی و به نمایندگی از همه شما، صدای زندگی را به گوش تعدادی از
               کم‌شنواهای بی‌بضاعت سراسر ایران رساندیم؛ اما پشت این اتفاق، قصه‌ای
               است از ایده‌ها، آدم‌ها و لحظه‌هایی که ما را در ساختن این نیکی یاری
