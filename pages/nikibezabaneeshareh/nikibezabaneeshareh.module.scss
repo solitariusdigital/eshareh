@@ -25,9 +25,11 @@
     width: 50%;
 
     @include mixins.mobile {
+      padding: 0px 12px;
       width: 100%;
     }
     @include mixins.tabletPortrait {
+      padding: 0px 12px;
       width: 100%;
     }
   }
@@ -48,7 +50,7 @@
 
     @include mixins.mobile {
       padding: 0px 12px;
-      margin-bottom: 15vh;
+      margin-bottom: 5vh;
     }
     @include mixins.tabletPortrait {
       padding: 0px 12px;
@@ -57,19 +59,23 @@
     $h1-h3-ratio: 0.2;
     .action {
       text-align: center;
+      padding: 2vh;
+      border-radius: 8px;
+      margin: 5vh 0px;
+      width: 35%;
       color: config.$white;
       @include mixins.glass-effect();
       background: config.$yellow;
-      padding: 12px;
-      border-radius: 8px;
-      margin: 3vh 0px;
-      width: 50%;
 
       @include mixins.mobile {
         width: 100%;
+        margin-top: 10vh;
       }
       @include mixins.tabletPortrait {
         width: 80%;
+      }
+      @include mixins.tablet {
+        width: 50%;
       }
 
       p {
