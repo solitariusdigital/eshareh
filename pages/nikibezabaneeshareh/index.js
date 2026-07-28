@@ -36,7 +36,7 @@ export default function Nikibezabaneeshareh() {
     video.muted = true;
     video.playsInline = true;
     video.play().catch((err) => console.warn("Autoplay blocked:", err));
-  }, [fullSizeScreen]);
+  }, []);
 
   useEffect(() => {
     setDisplayInfo(false);
@@ -47,7 +47,8 @@ export default function Nikibezabaneeshareh() {
       fullSizeScreen ? 9000 : 7000,
     );
     return () => clearTimeout(timeoutId);
-  }, [fullSizeScreen]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Fragment>
