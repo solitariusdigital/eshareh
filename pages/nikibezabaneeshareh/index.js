@@ -14,13 +14,15 @@ export default function Nikibezabaneeshareh() {
   const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
-  const [displayInfo, setDisplayInfo] = useState(true);
+  const [displayInfo, setDisplayInfo] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [displayMute, setDisplayMute] = useState(false);
 
   const fullSizeScreen =
     screenSize === "desktop" || screenSize === "tablet-landscape";
 
   const videoRef = useRef(null);
+  const videoRefMain = useRef(null);
 
   useEffect(() => {
     setDisplayFooter(false);
@@ -48,7 +50,23 @@ export default function Nikibezabaneeshareh() {
     return () => video.removeEventListener("canplay", handleCanPlay);
   }, [fullSizeScreen]);
 
-  const videoRefMain = useRef(null);
+  useEffect(() => {
+    const video = videoRefMain.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.playsInline = true;
+
+    const handleCanPlay = () => {
+      video.play().catch((err) => console.warn("Autoplay blocked:", err));
+    };
+
+    video.addEventListener("canplay", handleCanPlay);
+    video.load();
+
+    return () => video.removeEventListener("canplay", handleCanPlay);
+  }, [fullSizeScreen]);
+
   const handleVideoClick = () => {
     if (videoRefMain.current) {
       const newMuted = !videoRefMain.current.muted;
@@ -57,16 +75,27 @@ export default function Nikibezabaneeshareh() {
     }
   };
 
-  // useEffect(() => {
-  //   setDisplayInfo(false);
-  //   const timeoutId = setTimeout(
-  //     () => {
-  //       setDisplayInfo(true);
-  //     },
-  //     fullSizeScreen ? 9000 : 7000,
-  //   );
-  //   return () => clearTimeout(timeoutId);
-  // }, [fullSizeScreen]);
+  useEffect(() => {
+    setDisplayInfo(false);
+    const timeoutId = setTimeout(
+      () => {
+        setDisplayInfo(true);
+      },
+      fullSizeScreen ? 9000 : 7000,
+    );
+    return () => clearTimeout(timeoutId);
+  }, [fullSizeScreen]);
+
+  useEffect(() => {
+    setDisplayMute(false);
+    const timeoutId = setTimeout(
+      () => {
+        setDisplayMute(true);
+      },
+      fullSizeScreen ? 11000 : 9000,
+    );
+    return () => clearTimeout(timeoutId);
+  }, [fullSizeScreen]);
 
   return (
     <Fragment>
@@ -128,16 +157,20 @@ export default function Nikibezabaneeshareh() {
             className={`${classes.videoWrapper} animate__animated animate__slideInUp`}
           >
             <div className={classes.control} onClick={handleVideoClick}>
-              {isMuted ? (
-                <MusicOffIcon
-                  className="icon"
-                  sx={{ fontSize: 24, color: "#fdb714" }}
-                />
-              ) : (
-                <AudiotrackIcon
-                  className="icon"
-                  sx={{ fontSize: 24, color: "#fdb714" }}
-                />
+              {displayMute && (
+                <>
+                  {isMuted ? (
+                    <MusicOffIcon
+                      className="icon"
+                      sx={{ fontSize: 24, color: "#fdb714" }}
+                    />
+                  ) : (
+                    <AudiotrackIcon
+                      className="icon"
+                      sx={{ fontSize: 24, color: "#fdb714" }}
+                    />
+                  )}
+                </>
               )}
             </div>
             <video
