@@ -31,21 +31,18 @@ export default function Nikibezabaneeshareh() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
     video.muted = true;
     video.playsInline = true;
+    video.playbackRate = 1.5;
     video.play().catch((err) => console.warn("Autoplay blocked:", err));
-  }, []);
 
-  useEffect(() => {
-    setDisplayInfo(false);
-    const timeoutId = setTimeout(
-      () => {
-        setDisplayInfo(true);
-      },
-      fullSizeScreen ? 9000 : 7000,
-    );
-    return () => clearTimeout(timeoutId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const handleEnded = () => setDisplayInfo(true);
+    video.addEventListener("ended", handleEnded);
+
+    return () => {
+      video.removeEventListener("ended", handleEnded);
+    };
   }, []);
 
   return (
