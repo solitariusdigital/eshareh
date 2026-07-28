@@ -38,12 +38,7 @@ export default function Nikibezabaneeshareh() {
     if (!video) return;
     video.muted = true;
     video.playsInline = true;
-    const handleCanPlay = () => {
-      video.play().catch((err) => console.warn("Autoplay blocked:", err));
-    };
-    video.addEventListener("canplay", handleCanPlay);
-    video.load();
-    return () => video.removeEventListener("canplay", handleCanPlay);
+    video.play().catch((err) => console.warn("Autoplay blocked:", err));
   }, [fullSizeScreen]);
 
   useEffect(() => {
@@ -51,12 +46,7 @@ export default function Nikibezabaneeshareh() {
     if (!video) return;
     video.muted = true;
     video.playsInline = true;
-    const handleCanPlay = () => {
-      video.play().catch((err) => console.warn("Autoplay blocked:", err));
-    };
-    video.addEventListener("canplay", handleCanPlay);
-    video.load();
-    return () => video.removeEventListener("canplay", handleCanPlay);
+    video.play().catch((err) => console.warn("Autoplay blocked:", err));
   }, [fullSizeScreen]);
 
   const handleVideoClick = () => {
