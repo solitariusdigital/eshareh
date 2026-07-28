@@ -72,12 +72,12 @@
         width: 100%;
       }
       @include mixins.tabletPortrait {
-        width: 80%;
         top: 5vh;
+        width: 80%;
       }
       @include mixins.tablet {
-        width: 50%;
         top: 5vh;
+        width: 50%;
       }
 
       p {
