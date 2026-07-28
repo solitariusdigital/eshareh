@@ -29,7 +29,6 @@
     }
     @include mixins.tabletPortrait {
       width: 100%;
-      padding: 0px 12px;
     }
   }
 
@@ -55,6 +54,7 @@
       padding: 0px 12px;
     }
 
+    $h1-h3-ratio: 0.2;
     .action {
       text-align: center;
       color: config.$white;
@@ -69,12 +69,24 @@
         width: 100%;
       }
       @include mixins.tabletPortrait {
-        width: 100%;
-        padding: 0px 12px;
+        width: 80%;
+      }
+
+      p {
+        font-size: 7vw * $h1-h3-ratio;
+
+        @include mixins.mobile {
+          font-size: 21vw * $h1-h3-ratio;
+        }
+        @include mixins.tabletPortrait {
+          font-size: 16vw * $h1-h3-ratio;
+        }
+        @include mixins.tablet {
+          font-size: 10vw * $h1-h3-ratio;
+        }
       }
     }
 
-    $h1-h3-ratio: 0.2;
     h1 {
       font-size: 6vw;
       text-align: center;
@@ -85,7 +97,7 @@
         margin-top: 5vh;
       }
       @include mixins.tabletPortrait {
-        font-size: 15.5vw;
+        font-size: 13vw;
         margin-top: 5vh;
       }
       @include mixins.tablet {
@@ -94,27 +106,20 @@
       }
     }
 
-    .text {
-      @include mixins.glass-effect();
-      width: 50%;
-
-      @include mixins.mobile {
-        width: 100%;
-      }
-    }
     h3 {
       font-size: 7vw * $h1-h3-ratio;
+      width: 50%;
       margin: auto;
       padding: 4px;
+      @include mixins.glass-effect();
 
       @include mixins.mobile {
         font-size: 21vw * $h1-h3-ratio;
         width: 100%;
       }
-
       @include mixins.tabletPortrait {
         font-size: 16vw * $h1-h3-ratio;
-        width: 100%;
+        width: 80%;
       }
       @include mixins.tablet {
         font-size: 10vw * $h1-h3-ratio;
@@ -133,7 +138,14 @@
     @include mixins.mobile {
       display: none;
     }
+    @include mixins.tabletPortrait {
+      display: none;
+    }
     @include mixins.allDesktop {
+      bottom: 2vw;
+      right: 0vw;
+    }
+    @include mixins.tablet {
       bottom: 2vw;
       right: 0vw;
     }

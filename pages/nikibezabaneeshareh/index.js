@@ -96,7 +96,7 @@ export default function Nikibezabaneeshareh() {
             >
               نیکی به زبان اشاره
             </h1>
-            <h3 className={classes.text}>
+            <h3>
               با همراهی و به نمایندگی از همه شما، صدای زندگی را به گوش تعدادی از
               کم‌شنواهای بی‌بضاعت سراسر ایران رساندیم؛ اما پشت این اتفاق، قصه‌ای
               است از ایده‌ها، آدم‌ها و لحظه‌هایی که ما را در ساختن این نیکی یاری
@@ -105,13 +105,13 @@ export default function Nikibezabaneeshareh() {
             <div
               className={`${classes.action} animate__animated animate__slideInDown`}
             >
-              <h3
+              <p
                 style={{
                   fontFamily: "FarsiBold",
                 }}
               >
                 با تماشای ویدیوی زیر، قصه این نیکی را از زبان اشاره بشنوید
-              </h3>
+              </p>
             </div>
           </div>
         )}
@@ -122,12 +122,10 @@ export default function Nikibezabaneeshareh() {
             <video
               className={classes.video}
               src="https://bucket.eshareh.com/nikibezabaneeshareh/The-Making-of-Kindness-Campaign.mp4"
+              poster="https://bucket.eshareh.com/page/home/cover.jpg"
               playsInline
               preload="auto"
               controls
-              // loop
-              // autoPlay
-              // muted
             />
           </div>
         )}
