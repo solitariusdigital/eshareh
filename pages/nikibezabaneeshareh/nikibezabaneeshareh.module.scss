@@ -11,6 +11,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  overflow: hidden;
 
   .backgroundVideo {
     position: absolute;
@@ -18,6 +19,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    overflow: hidden;
   }
 
   .videoWrapper {
