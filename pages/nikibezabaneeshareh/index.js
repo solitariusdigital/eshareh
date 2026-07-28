@@ -14,15 +14,12 @@ export default function Nikibezabaneeshareh() {
   const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
-  const [displayInfo, setDisplayInfo] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
-  const [displayMute, setDisplayMute] = useState(false);
+  const [displayInfo, setDisplayInfo] = useState(true);
 
   const fullSizeScreen =
     screenSize === "desktop" || screenSize === "tablet-landscape";
 
   const videoRef = useRef(null);
-  const videoRefMain = useRef(null);
 
   useEffect(() => {
     setDisplayFooter(false);
@@ -41,43 +38,16 @@ export default function Nikibezabaneeshareh() {
     video.play().catch((err) => console.warn("Autoplay blocked:", err));
   }, [fullSizeScreen]);
 
-  useEffect(() => {
-    const video = videoRefMain.current;
-    if (!video) return;
-    video.muted = true;
-    video.playsInline = true;
-    video.play().catch((err) => console.warn("Autoplay blocked:", err));
-  }, [fullSizeScreen]);
-
-  const handleVideoClick = () => {
-    if (videoRefMain.current) {
-      const newMuted = !videoRefMain.current.muted;
-      videoRefMain.current.muted = newMuted;
-      setIsMuted(newMuted);
-    }
-  };
-
-  useEffect(() => {
-    setDisplayInfo(false);
-    const timeoutId = setTimeout(
-      () => {
-        setDisplayInfo(true);
-      },
-      fullSizeScreen ? 9000 : 7000,
-    );
-    return () => clearTimeout(timeoutId);
-  }, [fullSizeScreen]);
-
-  useEffect(() => {
-    setDisplayMute(false);
-    const timeoutId = setTimeout(
-      () => {
-        setDisplayMute(true);
-      },
-      fullSizeScreen ? 11000 : 9000,
-    );
-    return () => clearTimeout(timeoutId);
-  }, [fullSizeScreen]);
+  // useEffect(() => {
+  //   setDisplayInfo(false);
+  //   const timeoutId = setTimeout(
+  //     () => {
+  //       setDisplayInfo(true);
+  //     },
+  //     fullSizeScreen ? 9000 : 7000,
+  //   );
+  //   return () => clearTimeout(timeoutId);
+  // }, [fullSizeScreen]);
 
   return (
     <Fragment>
@@ -130,41 +100,30 @@ export default function Nikibezabaneeshareh() {
               با همراهی و به نمایندگی از همه شما، صدای زندگی را به گوش تعدادی از
               کم‌شنواهای بی‌بضاعت سراسر ایران رساندیم؛ اما پشت این اتفاق، قصه‌ای
               است از ایده‌ها، آدم‌ها و لحظه‌هایی که ما را در ساختن این نیکی یاری
-              کردند. با تماشای ویدیوی زیر، قصه این نیکی را از زبان اشاره بشنوید.
+              کردند.
             </h3>
+            <div
+              className={`${classes.action} animate__animated animate__slideInDown`}
+            >
+              <h2>
+                با تماشای ویدیوی زیر، قصه این نیکی را از زبان اشاره بشنوید
+              </h2>
+            </div>
           </div>
         )}
         {displayInfo && (
           <div
             className={`${classes.videoWrapper} animate__animated animate__slideInUp`}
           >
-            <div className={classes.control} onClick={handleVideoClick}>
-              {displayMute && (
-                <>
-                  {isMuted ? (
-                    <MusicOffIcon
-                      className="icon"
-                      sx={{ fontSize: 24, color: "#fdb714" }}
-                    />
-                  ) : (
-                    <AudiotrackIcon
-                      className="icon"
-                      sx={{ fontSize: 24, color: "#fdb714" }}
-                    />
-                  )}
-                </>
-              )}
-            </div>
             <video
               className={classes.video}
               src="https://bucket.eshareh.com/nikibezabaneeshareh/The-Making-of-Kindness-Campaign.mp4"
               playsInline
               preload="auto"
-              loop
-              autoPlay
-              ref={videoRefMain}
-              muted
-              // controls
+              // loop
+              // autoPlay
+              // muted
+              controls
             />
           </div>
         )}

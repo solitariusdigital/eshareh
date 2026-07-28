@@ -21,46 +21,31 @@
   }
 
   .videoWrapper {
-    width: 50%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    width: 50%;
 
     @include mixins.mobile {
       width: 100%;
-      height: 100%;
     }
     @include mixins.tabletPortrait {
       width: 100%;
       padding: 0px 12px;
     }
-
-    .control {
-      display: flex;
-      width: fit-content;
-      position: relative;
-      height: 24px;
-      width: 24px;
-      right: 5%;
-      top: 10%;
-    }
   }
 
   .video {
     width: 100%;
-    height: 100%;
     object-fit: cover;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
-
-    @include mixins.mobile {
-      height: 100%;
-    }
   }
 
   .information {
     width: 100%;
     color: config.$white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     @include mixins.mobile {
       padding: 0px 12px;
@@ -68,6 +53,25 @@
     }
     @include mixins.tabletPortrait {
       padding: 0px 12px;
+    }
+
+    .action {
+      text-align: center;
+      color: config.$white;
+      @include mixins.glass-effect();
+      background: config.$yellow;
+      padding: 12px;
+      border-radius: 20px;
+      margin-top: 5vh;
+      width: 50%;
+
+      @include mixins.mobile {
+        width: 100%;
+      }
+      @include mixins.tabletPortrait {
+        width: 100%;
+        padding: 0px 12px;
+      }
     }
 
     $h1-h3-ratio: 0.2;
@@ -119,6 +123,9 @@
     width: 8vw;
     height: 8vh;
 
+    @include mixins.mobile {
+      display: none;
+    }
     @include mixins.allDesktop {
       bottom: 2vw;
       right: 0vw;
