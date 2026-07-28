@@ -5,8 +5,6 @@ import Image from "next/legacy/image";
 import { NextSeo } from "next-seo";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import esharehWhite from "@/assets/esharehWhite.svg";
-import MusicOffIcon from "@mui/icons-material/MusicOff";
-import AudiotrackIcon from "@mui/icons-material/Audiotrack";
 
 export default function Nikibezabaneeshareh() {
   const { language, setLanguage } = useContext(StateContext);
@@ -123,7 +121,7 @@ export default function Nikibezabaneeshareh() {
             <video
               className={classes.video}
               src="https://bucket.eshareh.com/nikibezabaneeshareh/The-Making-of-Kindness-Campaign.mp4"
-              poster="https://bucket.eshareh.com/page/home/cover.jpg"
+              poster="https://bucket.eshareh.com/nikibezabaneeshareh/cover.jpg"
               playsInline
               preload="auto"
               controls
