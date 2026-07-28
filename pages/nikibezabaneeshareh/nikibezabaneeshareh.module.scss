@@ -42,7 +42,7 @@
   .information {
     width: 100%;
     color: config.$white;
-    margin-bottom: 50px;
+    margin-bottom: 5vh;
 
     @include mixins.mobile {
       padding: 0px 12px;
@@ -59,25 +59,27 @@
 
       @include mixins.mobile {
         font-size: 16vw;
-        padding-top: 3vh;
+        margin-top: 5vh;
       }
       @include mixins.tabletPortrait {
         font-size: 15.5vw;
+        margin-top: 5vh;
       }
       @include mixins.tablet {
         font-size: 8vw;
+        margin-top: 5vh;
       }
     }
 
     h3 {
-      font-size: 6vw * $h1-h3-ratio;
-      width: 40%;
+      font-size: 7vw * $h1-h3-ratio;
+      width: 50%;
       margin: auto;
       padding: 4px;
       @include mixins.glass-effect();
 
       @include mixins.mobile {
-        font-size: 20vw * $h1-h3-ratio;
+        font-size: 21vw * $h1-h3-ratio;
         width: 100%;
       }
       @include mixins.tabletPortrait {
