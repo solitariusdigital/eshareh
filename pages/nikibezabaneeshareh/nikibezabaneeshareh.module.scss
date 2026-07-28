@@ -23,12 +23,26 @@
     width: 50%;
 
     @include mixins.mobile {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       width: 100%;
-      padding: 0px 12px;
+      position: absolute;
+      z-index: 3;
+      bottom: 0px;
+      aspect-ratio: 4 / 4;
     }
+
     @include mixins.tabletPortrait {
       width: 100%;
       padding: 0px 12px;
+    }
+
+    .control {
+      position: relative;
+      right: 5%;
+      top: 15%;
+      margin-bottom: 8px;
     }
   }
 
@@ -37,15 +51,19 @@
     object-fit: cover;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
+
+    @include mixins.mobile {
+      height: 100%;
+    }
   }
 
   .information {
     width: 100%;
     color: config.$white;
-    margin-bottom: 5vh;
 
     @include mixins.mobile {
       padding: 0px 12px;
+      margin-bottom: 15vh;
     }
     @include mixins.tabletPortrait {
       padding: 0px 12px;

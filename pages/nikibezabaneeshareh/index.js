@@ -5,6 +5,8 @@ import Image from "next/legacy/image";
 import { NextSeo } from "next-seo";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import esharehWhite from "@/assets/esharehWhite.svg";
+import MusicOffIcon from "@mui/icons-material/MusicOff";
+import AudiotrackIcon from "@mui/icons-material/Audiotrack";
 
 export default function Nikibezabaneeshareh() {
   const { language, setLanguage } = useContext(StateContext);
@@ -12,7 +14,8 @@ export default function Nikibezabaneeshareh() {
   const { displayFooter, setDisplayFooter } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
-  const [displayInfo, setDisplayInfo] = useState(false);
+  const [displayInfo, setDisplayInfo] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
 
   const fullSizeScreen =
     screenSize === "desktop" || screenSize === "tablet-landscape";
@@ -45,16 +48,25 @@ export default function Nikibezabaneeshareh() {
     return () => video.removeEventListener("canplay", handleCanPlay);
   }, [fullSizeScreen]);
 
-  useEffect(() => {
-    setDisplayInfo(false);
-    const timeoutId = setTimeout(
-      () => {
-        setDisplayInfo(true);
-      },
-      fullSizeScreen ? 9000 : 7000,
-    );
-    return () => clearTimeout(timeoutId);
-  }, [fullSizeScreen]);
+  const videoRefMain = useRef(null);
+  const handleVideoClick = () => {
+    if (videoRefMain.current) {
+      const newMuted = !videoRefMain.current.muted;
+      videoRefMain.current.muted = newMuted;
+      setIsMuted(newMuted);
+    }
+  };
+
+  // useEffect(() => {
+  //   setDisplayInfo(false);
+  //   const timeoutId = setTimeout(
+  //     () => {
+  //       setDisplayInfo(true);
+  //     },
+  //     fullSizeScreen ? 9000 : 7000,
+  //   );
+  //   return () => clearTimeout(timeoutId);
+  // }, [fullSizeScreen]);
 
   return (
     <Fragment>
@@ -115,15 +127,29 @@ export default function Nikibezabaneeshareh() {
           <div
             className={`${classes.videoWrapper} animate__animated animate__slideInUp`}
           >
+            <div className={classes.control} onClick={handleVideoClick}>
+              {isMuted ? (
+                <MusicOffIcon
+                  className="icon"
+                  sx={{ fontSize: 24, color: "#fdb714" }}
+                />
+              ) : (
+                <AudiotrackIcon
+                  className="icon"
+                  sx={{ fontSize: 24, color: "#fdb714" }}
+                />
+              )}
+            </div>
             <video
               className={classes.video}
               src="https://bucket.eshareh.com/nikibezabaneeshareh/The-Making-of-Kindness-Campaign.mp4"
-              poster="https://bucket.eshareh.com/page/home/cover.jpg"
               playsInline
-              preload="metadata"
-              controls
-              // autoPlay
-              // muted
+              preload="auto"
+              loop
+              autoPlay
+              ref={videoRefMain}
+              muted={isMuted}
+              // controls
             />
           </div>
         )}
