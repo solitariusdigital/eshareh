@@ -25,6 +25,7 @@
   .videoWrapper {
     display: flex;
     width: 50%;
+    overflow: hidden;
 
     @include mixins.mobile {
       padding: 0px 12px;
