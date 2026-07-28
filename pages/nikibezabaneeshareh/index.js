@@ -105,7 +105,11 @@ export default function Nikibezabaneeshareh() {
             <div
               className={`${classes.action} animate__animated animate__slideInDown`}
             >
-              <h3>
+              <h3
+                style={{
+                  fontFamily: "FarsiBold",
+                }}
+              >
                 با تماشای ویدیوی زیر، قصه این نیکی را از زبان اشاره بشنوید
               </h3>
             </div>
