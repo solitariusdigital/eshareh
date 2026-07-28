@@ -98,9 +98,7 @@ export default function Nikibezabaneeshareh() {
               است از ایده‌ها، آدم‌ها و لحظه‌هایی که ما را در ساختن این نیکی یاری
               کردند.
             </h3>
-            <div
-              className={`${classes.action} animate__animated animate__slideInDown`}
-            >
+            <div className={classes.action}>
               <p
                 style={{
                   fontFamily: "FarsiBold",
