@@ -102,15 +102,6 @@ export default function Nikibezabaneeshareh() {
               است از ایده‌ها، آدم‌ها و لحظه‌هایی که ما را در ساختن این نیکی یاری
               کردند.
             </h3>
-            <div className={classes.action}>
-              <p
-                style={{
-                  fontFamily: "FarsiBold",
-                }}
-              >
-                با تماشای ویدیوی زیر، قصه این نیکی را از زبان اشاره بشنوید
-              </p>
-            </div>
           </div>
         )}
         {displayInfo && (
@@ -121,6 +112,14 @@ export default function Nikibezabaneeshareh() {
                 : classes.videoWrapper
             }
           >
+            <div
+              className={classes.action}
+              style={{
+                fontFamily: "FarsiBold",
+              }}
+            >
+              <p>با تماشای ویدیوی زیر، قصه این نیکی را از زبان اشاره بشنوید</p>
+            </div>
             <video
               className={classes.video}
               src="https://bucket.eshareh.com/nikibezabaneeshareh/The-Making-of-Kindness-Campaign.mp4"

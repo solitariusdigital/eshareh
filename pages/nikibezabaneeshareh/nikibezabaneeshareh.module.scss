@@ -28,6 +28,7 @@
 
   .videoWrapper {
     display: flex;
+    flex-direction: column;
     width: 50%;
     overflow: hidden;
 
@@ -44,8 +45,31 @@
   .video {
     width: 100%;
     object-fit: cover;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
+  }
+
+  $h1-h3-ratio: 0.2;
+
+  .action {
+    text-align: center;
+    padding: 12px;
+    color: config.$white;
+    background: config.$yellow;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+
+    p {
+      font-size: 7vw * $h1-h3-ratio;
+
+      @include mixins.mobile {
+        font-size: 21vw * $h1-h3-ratio;
+      }
+      @include mixins.tabletPortrait {
+        font-size: 16vw * $h1-h3-ratio;
+      }
+      @include mixins.tablet {
+        font-size: 10vw * $h1-h3-ratio;
+      }
+    }
   }
 
   .information {
@@ -60,46 +84,6 @@
     }
     @include mixins.tabletPortrait {
       padding: 0px 12px;
-    }
-
-    $h1-h3-ratio: 0.2;
-    .action {
-      text-align: center;
-      padding: 2vh;
-      border-radius: 8px;
-      width: 35%;
-      color: config.$white;
-      @include mixins.glass-effect();
-      background: config.$yellow;
-      position: relative;
-      top: 2vh;
-
-      @include mixins.mobile {
-        top: 8vh;
-        width: 100%;
-      }
-      @include mixins.tabletPortrait {
-        top: 5vh;
-        width: 80%;
-      }
-      @include mixins.tablet {
-        top: 5vh;
-        width: 50%;
-      }
-
-      p {
-        font-size: 7vw * $h1-h3-ratio;
-
-        @include mixins.mobile {
-          font-size: 21vw * $h1-h3-ratio;
-        }
-        @include mixins.tabletPortrait {
-          font-size: 16vw * $h1-h3-ratio;
-        }
-        @include mixins.tablet {
-          font-size: 10vw * $h1-h3-ratio;
-        }
-      }
     }
 
     h1 {
