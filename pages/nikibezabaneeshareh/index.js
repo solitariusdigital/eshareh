@@ -83,7 +83,11 @@ export default function Nikibezabaneeshareh() {
         />
         {displayInfo && (
           <div
-            className={`${classes.information} animate__animated animate__slideInDown`}
+            className={
+              fullSizeScreen
+                ? `${classes.information} animate__animated animate__slideInDown`
+                : classes.information
+            }
           >
             <h1
               style={{
@@ -111,7 +115,11 @@ export default function Nikibezabaneeshareh() {
         )}
         {displayInfo && (
           <div
-            className={`${classes.videoWrapper} animate__animated animate__slideInUp`}
+            className={
+              fullSizeScreen
+                ? `${classes.videoWrapper} animate__animated animate__slideInUp`
+                : classes.videoWrapper
+            }
           >
             <video
               className={classes.video}
