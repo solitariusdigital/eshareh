@@ -122,7 +122,8 @@
       font-size: 7vw * $h1-h3-ratio;
       width: 50%;
       margin: auto;
-      padding: 4px;
+      padding: 8px;
+      border-radius: 8px;
       @include mixins.glass-effect();
 
       @include mixins.mobile {
