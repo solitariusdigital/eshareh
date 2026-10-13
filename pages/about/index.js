@@ -124,15 +124,15 @@ export default function About({ pageData }) {
           <h3
             style={{
               fontFamily: language ? "FarsiBold" : "EnglishMedium",
-              color: `#${pageContent[0].setting.split(" ")[0]}`,
-              fontSize: `${pageContent[0].setting.split(" ")[1]}px`,
+              color: `#${pageContent[0].setting?.split(" ")[0]}`,
+              fontSize: `${pageContent[0].setting?.split(" ")[1]}px`,
             }}
             dangerouslySetInnerHTML={{
               __html: applyFontToEnglishWords(
                 pageContent[0].data[languageType],
                 language ? "FarsiBold" : "EnglishMedium",
-                `${pageContent[0].setting.split(" ")[1]}px`,
-                language
+                `${pageContent[0].setting?.split(" ")[1]}px`,
+                language,
               ),
             }}
           ></h3>
@@ -145,8 +145,8 @@ export default function About({ pageData }) {
         >
           <h1
             style={{
-              color: `#${pageContent[1].setting.split(" ")[0]}`,
-              fontSize: `${pageContent[1].setting.split(" ")[1]}px`,
+              color: `#${pageContent[1].setting?.split(" ")[0]}`,
+              fontSize: `${pageContent[1].setting?.split(" ")[1]}px`,
             }}
           >
             {pageContent[1].data[languageType]}
@@ -154,8 +154,8 @@ export default function About({ pageData }) {
           <div>
             <h3
               style={{
-                color: `#${pageContent[2].setting.split(" ")[0]}`,
-                fontSize: `${pageContent[2].setting.split(" ")[1]}px`,
+                color: `#${pageContent[2].setting?.split(" ")[0]}`,
+                fontSize: `${pageContent[2].setting?.split(" ")[1]}px`,
               }}
             >
               {pageContent[2].data[languageType]}
@@ -211,7 +211,7 @@ export default function About({ pageData }) {
                     users[current].title[languageType],
                     "English",
                     "20px",
-                    language
+                    language,
                   ),
                 }}
               ></h3>

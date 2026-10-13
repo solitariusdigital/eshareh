@@ -140,8 +140,8 @@ export default function Home({
             style={{
               fontFamily: language ? "FarsiMedium" : "EnglishMedium",
               marginBottom: "12px",
-              color: `#${titleOneSetting.split(" ")[0]}`,
-              fontSize: `${titleOneSetting.split(" ")[1]}px`,
+              color: `#${titleOneSetting?.split(" ")[0]}`,
+              fontSize: `${titleOneSetting?.split(" ")[1]}px`,
             }}
           >
             {titleOne[languageType]}
@@ -152,8 +152,8 @@ export default function Home({
               style={{
                 fontFamily: language ? "FarsiLight" : "EnglishLight",
                 marginBottom: "12px",
-                color: `#${paragraphOneSetting.split(" ")[0]}`,
-                fontSize: `${paragraphOneSetting.split(" ")[1]}px`,
+                color: `#${paragraphOneSetting?.split(" ")[0]}`,
+                fontSize: `${paragraphOneSetting?.split(" ")[1]}px`,
               }}
             >
               {para}
@@ -163,9 +163,9 @@ export default function Home({
             style={{
               fontFamily: language ? "FarsiMedium" : "EnglishMedium",
               color: titleTwoSetting
-                ? `#${titleTwoSetting.split(" ")[0]}`
+                ? `#${titleTwoSetting?.split(" ")[0]}`
                 : "#fdb714",
-              fontSize: `${titleTwoSetting.split(" ")[1]}px`,
+              fontSize: `${titleTwoSetting?.split(" ")[1]}px`,
             }}
           >
             {titleTwo[languageType]}
@@ -191,8 +191,8 @@ export default function Home({
           <h1
             style={{
               fontFamily: language ? "FarsiMedium" : "EnglishMedium",
-              color: `#${titleThreeSetting.split(" ")[0]}`,
-              fontSize: `${titleThreeSetting.split(" ")[1]}px`,
+              color: `#${titleThreeSetting?.split(" ")[0]}`,
+              fontSize: `${titleThreeSetting?.split(" ")[1]}px`,
             }}
           >
             {titleThree[languageType]}
@@ -203,15 +203,15 @@ export default function Home({
               style={{
                 fontFamily: language ? "FarsiLight" : "EnglishLight",
                 marginBottom: "12px",
-                color: `#${paragraphTwoSetting.split(" ")[0]}`,
-                fontSize: `${paragraphTwoSetting.split(" ")[1]}px`,
+                color: `#${paragraphTwoSetting?.split(" ")[0]}`,
+                fontSize: `${paragraphTwoSetting?.split(" ")[1]}px`,
               }}
               dangerouslySetInnerHTML={{
                 __html: applyFontToEnglishWords(
                   para,
                   "English",
                   paragraphTwoSetting
-                    ? `${paragraphTwoSetting.split(" ")[1]}px`
+                    ? `${paragraphTwoSetting?.split(" ")[1]}px`
                     : "22px",
                   language,
                 ),
@@ -253,16 +253,16 @@ export default function Home({
               <h1
                 style={{
                   fontFamily: language ? "FarsiBold" : "English",
-                  color: `#${solutionsContent[0].setting.split(" ")[0]}`,
-                  fontSize: `${solutionsContent[0].setting.split(" ")[1]}px`,
+                  color: `#${solutionsContent[0].setting?.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[0].setting?.split(" ")[1]}px`,
                 }}
               >
                 {solutionsContent[0].data[languageType]}
               </h1>
               <h3
                 style={{
-                  color: `#${solutionsContent[1].setting.split(" ")[0]}`,
-                  fontSize: `${solutionsContent[1].setting.split(" ")[1]}px`,
+                  color: `#${solutionsContent[1].setting?.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[1].setting?.split(" ")[1]}px`,
                 }}
               >
                 {solutionsContent[1].data[languageType].split("\n\n")[0]}
@@ -299,16 +299,16 @@ export default function Home({
               <h1
                 style={{
                   fontFamily: language ? "FarsiBold" : "English",
-                  color: `#${solutionsContent[2].setting.split(" ")[0]}`,
-                  fontSize: `${solutionsContent[2].setting.split(" ")[1]}px`,
+                  color: `#${solutionsContent[2].setting?.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[2].setting?.split(" ")[1]}px`,
                 }}
               >
                 {solutionsContent[2].data[languageType]}
               </h1>
               <h3
                 style={{
-                  color: `#${solutionsContent[3].setting.split(" ")[0]}`,
-                  fontSize: `${solutionsContent[3].setting.split(" ")[1]}px`,
+                  color: `#${solutionsContent[3].setting?.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[3].setting?.split(" ")[1]}px`,
                 }}
               >
                 {solutionsContent[3].data[languageType].split("\n\n")[0]}
@@ -345,16 +345,16 @@ export default function Home({
               <h1
                 style={{
                   fontFamily: language ? "FarsiBold" : "English",
-                  color: `#${solutionsContent[4].setting.split(" ")[0]}`,
-                  fontSize: `${solutionsContent[4].setting.split(" ")[1]}px`,
+                  color: `#${solutionsContent[4].setting?.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[4].setting?.split(" ")[1]}px`,
                 }}
               >
                 {solutionsContent[4].data[languageType]}
               </h1>
               <h3
                 style={{
-                  color: `#${solutionsContent[5].setting.split(" ")[0]}`,
-                  fontSize: `${solutionsContent[5].setting.split(" ")[1]}px`,
+                  color: `#${solutionsContent[5].setting?.split(" ")[0]}`,
+                  fontSize: `${solutionsContent[5].setting?.split(" ")[1]}px`,
                 }}
               >
                 {solutionsContent[5].data[languageType].split("\n\n")[0]}

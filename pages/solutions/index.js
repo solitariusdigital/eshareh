@@ -36,16 +36,16 @@ export default function Solutions({
         adminSolutions.sort(
           (a, b) =>
             parsePersianDate(b[languageType].year) -
-            parsePersianDate(a[languageType].year)
-        )
+            parsePersianDate(a[languageType].year),
+        ),
       );
     } else {
       setSolutions(
         activeSolutions.sort(
           (a, b) =>
             parsePersianDate(b[languageType].year) -
-            parsePersianDate(a[languageType].year)
-        )
+            parsePersianDate(a[languageType].year),
+        ),
       );
     }
   }, [activeSolutions, adminSolutions, languageType, permissionControl]);
@@ -71,18 +71,18 @@ export default function Solutions({
   const information = {
     advertising: {
       content: pageData.content[1].data[languageType].split("\n\n"),
-      color: `#${pageData.content[1].setting.split(" ")[0]}`,
-      size: `${pageData.content[1].setting.split(" ")[1]}px`,
+      color: `#${pageData.content[1].setting?.split(" ")[0]}`,
+      size: `${pageData.content[1].setting?.split(" ")[1]}px`,
     },
     media: {
       content: pageData.content[3].data[languageType].split("\n\n"),
-      color: `#${pageData.content[3].setting.split(" ")[0]}`,
-      size: `${pageData.content[3].setting.split(" ")[1]}px`,
+      color: `#${pageData.content[3].setting?.split(" ")[0]}`,
+      size: `${pageData.content[3].setting?.split(" ")[1]}px`,
     },
     digital: {
       content: pageData.content[5].data[languageType].split("\n\n"),
-      color: `#${pageData.content[5].setting.split(" ")[0]}`,
-      size: `${pageData.content[5].setting.split(" ")[1]}px`,
+      color: `#${pageData.content[5].setting?.split(" ")[0]}`,
+      size: `${pageData.content[5].setting?.split(" ")[1]}px`,
     },
   };
 
@@ -198,12 +198,12 @@ export default function Solutions({
             .filter(
               (project) =>
                 project[languageType].category.includes(solutionsCategory) ||
-                solutionsCategory === "all"
+                solutionsCategory === "all",
             )
             .map((project, index) => {
               const { title } = project[languageType];
               const projectLink = `/solutions/${replaceSpacesAndHyphens(
-                project[languageType].title
+                project[languageType].title,
               )}`;
               const { coverMedia } = project;
               return (

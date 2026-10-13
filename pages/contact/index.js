@@ -31,22 +31,22 @@ export default function Contact({ pageData, mediaData }) {
     fa: [pageData.content[6].data.fa.split("\n\n")][0],
   });
   const [headOfficeSetting, setHeadOfficeSetting] = useState(
-    pageData.content[0].setting
+    pageData.content[0].setting,
   );
   const [headAddressSetting, setHeadAddressSetting] = useState(
-    pageData.content[1].setting
+    pageData.content[1].setting,
   );
   const [headContactSetting, setHeadContactSetting] = useState(
-    pageData.content[2].setting
+    pageData.content[2].setting,
   );
   const [secOfficeSetting, setSecOfficeSetting] = useState(
-    pageData.content[4].setting
+    pageData.content[4].setting,
   );
   const [secAddressSetting, setSecAddressSetting] = useState(
-    pageData.content[5].setting
+    pageData.content[5].setting,
   );
   const [secContactSetting, setSecContactSetting] = useState(
-    pageData.content[6].setting
+    pageData.content[6].setting,
   );
   const headLocationLink = pageData.content[3].data.en;
   const secLocationLink = pageData.content[7].data.en;
@@ -111,9 +111,9 @@ export default function Contact({ pageData, mediaData }) {
               className={language ? classes.row : classes.rowReverse}
               style={{
                 color: headOfficeSetting
-                  ? `#${headOfficeSetting.split(" ")[0]}`
+                  ? `#${headOfficeSetting?.split(" ")[0]}`
                   : "#fdb714",
-                fontSize: `${headOfficeSetting.split(" ")[1]}px`,
+                fontSize: `${headOfficeSetting?.split(" ")[1]}px`,
                 fontFamily: language ? "FarsiBold" : "EnglishBold",
               }}
               onClick={() => window.open(headLocationLink)}
@@ -132,8 +132,8 @@ export default function Contact({ pageData, mediaData }) {
                     <p
                       className={classes.click}
                       style={{
-                        color: `#${headAddressSetting.split(" ")[0]}`,
-                        fontSize: `${headAddressSetting.split(" ")[1]}px`,
+                        color: `#${headAddressSetting?.split(" ")[0]}`,
+                        fontSize: `${headAddressSetting?.split(" ")[1]}px`,
                       }}
                     >
                       {address}
@@ -149,7 +149,7 @@ export default function Contact({ pageData, mediaData }) {
                     onClick={() =>
                       window.open(
                         `tel:+${convertPhoneNumber(headContact.en[0])}`,
-                        "_self"
+                        "_self",
                       )
                     }
                     className={language ? classes.row : classes.rowReverse}
@@ -159,8 +159,8 @@ export default function Contact({ pageData, mediaData }) {
                         className={classes.email}
                         style={{
                           fontFamily: language ? "English" : "English",
-                          color: `#${headContactSetting.split(" ")[0]}`,
-                          fontSize: `${headContactSetting.split(" ")[1]}px`,
+                          color: `#${headContactSetting?.split(" ")[0]}`,
+                          fontSize: `${headContactSetting?.split(" ")[1]}px`,
                         }}
                       >
                         {contact}
@@ -169,8 +169,8 @@ export default function Contact({ pageData, mediaData }) {
                       <p
                         className={classes.click}
                         style={{
-                          color: `#${headContactSetting.split(" ")[0]}`,
-                          fontSize: `${headContactSetting.split(" ")[1]}px`,
+                          color: `#${headContactSetting?.split(" ")[0]}`,
+                          fontSize: `${headContactSetting?.split(" ")[1]}px`,
                         }}
                       >
                         {contact}
@@ -199,9 +199,9 @@ export default function Contact({ pageData, mediaData }) {
               className={language ? classes.row : classes.rowReverse}
               style={{
                 color: secOfficeSetting
-                  ? `#${secOfficeSetting.split(" ")[0]}`
+                  ? `#${secOfficeSetting?.split(" ")[0]}`
                   : "#fdb714",
-                fontSize: `${secOfficeSetting.split(" ")[1]}px`,
+                fontSize: `${secOfficeSetting?.split(" ")[1]}px`,
                 fontFamily: language ? "FarsiBold" : "EnglishBold",
               }}
               onClick={() => window.open(secLocationLink)}
@@ -220,8 +220,8 @@ export default function Contact({ pageData, mediaData }) {
                     <p
                       className={classes.click}
                       style={{
-                        color: `#${secAddressSetting.split(" ")[0]}`,
-                        fontSize: `${secAddressSetting.split(" ")[1]}px`,
+                        color: `#${secAddressSetting?.split(" ")[0]}`,
+                        fontSize: `${secAddressSetting?.split(" ")[1]}px`,
                       }}
                     >
                       {address}
@@ -237,7 +237,7 @@ export default function Contact({ pageData, mediaData }) {
                     onClick={() =>
                       window.open(
                         `tel:+${convertPhoneNumber(secContact.en[0])}`,
-                        "_self"
+                        "_self",
                       )
                     }
                     className={language ? classes.row : classes.rowReverse}
@@ -245,8 +245,8 @@ export default function Contact({ pageData, mediaData }) {
                     <p
                       className={classes.click}
                       style={{
-                        color: `#${secContactSetting.split(" ")[0]}`,
-                        fontSize: `${secContactSetting.split(" ")[1]}px`,
+                        color: `#${secContactSetting?.split(" ")[0]}`,
+                        fontSize: `${secContactSetting?.split(" ")[1]}px`,
                       }}
                     >
                       {contact}

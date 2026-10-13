@@ -64,8 +64,8 @@ export default function Profession({ pageData, mediaData }) {
           <h3
             style={{
               fontFamily: language ? "FarsiBold" : "EnglishMedium",
-              color: `#${pageData.content[0].setting.split(" ")[0]}`,
-              fontSize: `${pageData.content[0].setting.split(" ")[1]}px`,
+              color: `#${pageData.content[0].setting?.split(" ")[0]}`,
+              fontSize: `${pageData.content[0].setting?.split(" ")[1]}px`,
             }}
           >
             {pageData.content[0].data[languageType]}
@@ -90,15 +90,15 @@ export default function Profession({ pageData, mediaData }) {
               />
               <h3
                 style={{
-                  color: `#${pageData.content[1].setting.split(" ")[0]}`,
-                  fontSize: `${pageData.content[1].setting.split(" ")[1]}px`,
+                  color: `#${pageData.content[1].setting?.split(" ")[0]}`,
+                  fontSize: `${pageData.content[1].setting?.split(" ")[1]}px`,
                 }}
                 dangerouslySetInnerHTML={{
                   __html: applyFontToEnglishWords(
                     para,
                     "English",
-                    `${pageData.content[1].setting.split(" ")[1]}px`,
-                    language
+                    `${pageData.content[1].setting?.split(" ")[1]}px`,
+                    language,
                   ),
                 }}
               ></h3>
