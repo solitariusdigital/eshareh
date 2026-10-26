@@ -9,6 +9,7 @@ import loaderImage from "@/assets/loader.png";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import Tooltip from "@mui/material/Tooltip";
+import jalaali from "jalaali-js";
 import {
   areAllStatesValid,
   extractParagraphs,
@@ -18,7 +19,6 @@ import {
   toFarsiNumber,
   isValidDateFormat,
 } from "@/services/utility";
-const jalaali = require("jalali-date");
 
 export default function News() {
   const { editNews, setEditNews } = useContext(StateContext);
@@ -164,31 +164,37 @@ export default function News() {
     input.value = null;
   };
 
-  const transformDate = async (date) => {
-    const monthNames = [
-      "فروردین",
-      "اردیبهشت",
-      "خرداد",
-      "تیر",
-      "مرداد",
-      "شهریور",
-      "مهر",
-      "آبان",
-      "آذر",
-      "دی",
-      "بهمن",
-      "اسفند",
-    ];
+  const PERSIAN_MONTHS = [
+    "فروردین",
+    "اردیبهشت",
+    "خرداد",
+    "تیر",
+    "مرداد",
+    "شهریور",
+    "مهر",
+    "آبان",
+    "آذر",
+    "دی",
+    "بهمن",
+    "اسفند",
+  ];
+
+  const transformDate = (date) => {
     const [day, month, year] = date.split("/").map(Number);
-    const gregorian = jalaali.toGregorian(year, month, day);
-    const parts = gregorian.toString().split(" ");
-    const gregorianDateString = `${parts[1]} ${parts[3]}`;
-    const persianDateString = `${toFarsiNumber(year)} ${
-      monthNames[month - 1]
-    } ماه`;
+
+    if (!jalaali.isValidJalaaliDate(year, month, day)) {
+      throw new Error(`Invalid Jalali date: ${date}`);
+    }
+
+    const { gy, gm, gd } = jalaali.toGregorian(year, month, day);
+    const en = new Date(gy, gm - 1, gd).toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
+    }); // e.g. "Oct 2026"
+
     return {
-      fa: persianDateString,
-      en: gregorianDateString,
+      fa: `${toFarsiNumber(year)} ${PERSIAN_MONTHS[month - 1]} ماه`,
+      en,
     };
   };
 
