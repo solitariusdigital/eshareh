@@ -2,7 +2,7 @@ import { Fragment, useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import loaderImage from "@/assets/loader.png";
 import dot from "@/assets/dot.png";
 import CloseIcon from "@mui/icons-material/Close";

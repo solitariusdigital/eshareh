@@ -2,7 +2,7 @@
 import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { NextSeo } from "next-seo";
 import { getUsersApi } from "@/services/api";
 import logoEnglish from "@/assets/logoEnglish.svg";
@@ -189,8 +189,8 @@ export default function About({ pageData }) {
                     blurDataURL={user.media}
                     placeholder="blur"
                     alt={user.name[languageType]}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: "cover" }}
                     as="image"
                     priority
                   />

@@ -1,7 +1,7 @@
 import { useContext, Fragment, useEffect, useState, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./nikibezabaneeshareh.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { NextSeo } from "next-seo";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import esharehWhite from "@/assets/esharehWhite.svg";
@@ -136,8 +136,8 @@ export default function Nikibezabaneeshareh() {
         >
           <Image
             src={esharehWhite}
-            layout="fill"
-            objectFit="contain"
+            fill
+            style={{ objectFit: "contain" }}
             alt="logo"
             as="image"
           />

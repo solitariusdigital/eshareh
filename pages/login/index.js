@@ -6,7 +6,7 @@ import Router from "next/router";
 import secureLocalStorage from "react-secure-storage";
 import AES from "crypto-js/aes";
 import { enc } from "crypto-js";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import portal from "@/assets/portal.png";
 import { getUsersApi } from "@/services/api";
 import { validateEmail } from "@/services/utility";
@@ -54,7 +54,9 @@ export default function Login() {
   const handleLogin = () => {
     if (!email || !password) {
       showAlert(
-        language ? "ایمیل و رمز عبور الزامیست" : "Email & Password are required"
+        language
+          ? "ایمیل و رمز عبور الزامیست"
+          : "Email & Password are required",
       );
       return;
     }
@@ -66,7 +68,7 @@ export default function Login() {
       showAlert(
         language
           ? "رمز عبور باید حداقل 8 کاراکتر باشد"
-          : "Password must be minimum 8 characters"
+          : "Password must be minimum 8 characters",
       );
       return;
     }
@@ -95,7 +97,7 @@ export default function Login() {
   const decryptPassword = (password) => {
     let decryptedBytes = AES.decrypt(
       password,
-      process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY
+      process.env.NEXT_PUBLIC_CRYPTO_SECRETKEY,
     );
     return decryptedBytes.toString(enc.Utf8);
   };
@@ -191,11 +193,9 @@ export default function Login() {
             <div className={classes.imageBox}>
               <Image
                 src={portal}
-                blurDataURL={portal}
-                placeholder="blur"
                 alt="image"
-                layout="responsive"
-                objectFit="contain"
+                fill
+                style={{ objectFit: "contain" }}
                 as="image"
                 priority
               />

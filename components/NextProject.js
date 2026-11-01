@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./NextProject.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import {
   replaceSpacesAndHyphens,
@@ -17,7 +17,7 @@ export default function NextProject({ project }) {
     <Link
       className={classes.container}
       href={`/solutions/${replaceSpacesAndHyphens(
-        project[languageType].title
+        project[languageType].title,
       )}`}
       passHref
     >
@@ -65,7 +65,7 @@ export default function NextProject({ project }) {
                   project[languageType].brief,
                   "English",
                   "16px",
-                  language
+                  language,
                 ),
               }}
             ></h3>
@@ -80,8 +80,8 @@ export default function NextProject({ project }) {
             blurDataURL={project.coverMedia.link}
             placeholder="blur"
             alt={project[languageType].title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             as="image"
             priority
           />

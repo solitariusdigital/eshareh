@@ -3,7 +3,7 @@ import { useContext, Fragment, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./profession.module.scss";
 import { NextSeo } from "next-seo";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import CircleIcon from "@mui/icons-material/Circle";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
@@ -121,8 +121,8 @@ export default function Profession({ pageData, mediaData }) {
             placeholder="blur"
             alt={mediaData.content[0].type}
             as={mediaData.content[0].type}
-            layout="fill"
-            objectFit="contain"
+            fill
+            style={{ objectFit: "contain" }}
             unoptimized={mediaData.content[0].type === "gif"}
             priority
           />

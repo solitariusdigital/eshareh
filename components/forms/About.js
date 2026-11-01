@@ -8,7 +8,7 @@ import loaderImage from "@/assets/loader.png";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import AES from "crypto-js/aes";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import {
   createUserApi,
   updatePageApi,
@@ -914,7 +914,7 @@ export default function Team({ pages, mediaData }) {
                     className={classes.image}
                     width={170}
                     height={200}
-                    objectFit="contain"
+                    style={{ objectFit: "contain" }}
                     src={URL.createObjectURL(media)}
                     alt="image"
                     priority

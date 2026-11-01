@@ -3,7 +3,7 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./search.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { NextSeo } from "next-seo";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import dbConnect from "@/services/dbConnect";
 import solutionModel from "@/models/Solution";
 import { replaceSpacesAndHyphens } from "@/services/utility";
@@ -28,8 +28,8 @@ export default function Search({ activeSolutions }) {
     const trimmedSearch = event.trim().slice(0, 20).toLowerCase();
     const searchSolutions = activeSolutions.filter((item) =>
       Object.values(item[languageType]).some((val) =>
-        String(val).toLowerCase().includes(trimmedSearch)
-      )
+        String(val).toLowerCase().includes(trimmedSearch),
+      ),
     );
     setSolutions(searchSolutions);
     setSearchEmpty(searchSolutions.length === 0);
@@ -116,7 +116,7 @@ export default function Search({ activeSolutions }) {
             solutions.map((project, index) => {
               const { title } = project[languageType];
               const projectLink = `/solutions/${replaceSpacesAndHyphens(
-                project[languageType].title
+                project[languageType].title,
               )}`;
               const { coverMedia } = project;
               return (
@@ -133,8 +133,8 @@ export default function Search({ activeSolutions }) {
                         placeholder="blur"
                         blurDataURL={coverMedia.link}
                         alt={title}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{ objectFit: "cover" }}
                         as="image"
                         priority
                       />

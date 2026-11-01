@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./CardGrid.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { replaceSpacesAndHyphens } from "@/services/utility";
 import Link from "next/link";
 
@@ -51,7 +51,7 @@ export default function CardGrid({ solutions, direction }) {
             <Link
               className={classes.box}
               href={`/solutions/${replaceSpacesAndHyphens(
-                solutions[0][languageType].title
+                solutions[0][languageType].title,
               )}`}
               passHref
             >
@@ -59,11 +59,11 @@ export default function CardGrid({ solutions, direction }) {
                 <Image
                   className={classes.image}
                   src={solutions[0].coverMedia.link}
-                  blurDataURL={solutions[0].coverMedia.link}
-                  placeholder="blur"
+                  // blurDataURL={solutions[0].coverMedia.link}
+                  // placeholder="blur"
                   alt={solutions[0][languageType].title}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                   as="image"
                   priority
                 />
@@ -80,7 +80,7 @@ export default function CardGrid({ solutions, direction }) {
             <Link
               className={language ? classes.details : classes.detailsReverse}
               href={`/solutions/${replaceSpacesAndHyphens(
-                solutions[0][languageType].title
+                solutions[0][languageType].title,
               )}`}
               passHref
             >
@@ -100,7 +100,7 @@ export default function CardGrid({ solutions, direction }) {
                   <div className={classes.box}>
                     <Link
                       href={`/solutions/${replaceSpacesAndHyphens(
-                        project[languageType].title
+                        project[languageType].title,
                       )}`}
                       passHref
                     >
@@ -108,11 +108,11 @@ export default function CardGrid({ solutions, direction }) {
                         <Image
                           className={classes.image}
                           src={project.coverMedia.link}
-                          blurDataURL={project.coverMedia.link}
-                          placeholder="blur"
+                          // blurDataURL={project.coverMedia.link}
+                          // placeholder="blur"
                           alt={project[languageType].title}
-                          layout="fill"
-                          objectFit="cover"
+                          fill
+                          style={{ objectFit: "cover" }}
                           as="image"
                           priority
                         />
@@ -133,7 +133,7 @@ export default function CardGrid({ solutions, direction }) {
                       language ? classes.details : classes.detailsReverse
                     }
                     href={`/solutions/${replaceSpacesAndHyphens(
-                      project[languageType].title
+                      project[languageType].title,
                     )}`}
                     passHref
                   >
@@ -158,7 +158,7 @@ export default function CardGrid({ solutions, direction }) {
               <div className={classes.box}>
                 <Link
                   href={`/solutions/${replaceSpacesAndHyphens(
-                    project[languageType].title
+                    project[languageType].title,
                   )}`}
                   passHref
                 >
@@ -166,11 +166,11 @@ export default function CardGrid({ solutions, direction }) {
                     <Image
                       className={classes.image}
                       src={project.coverMedia.link}
-                      blurDataURL={project.coverMedia.link}
-                      placeholder="blur"
+                      // blurDataURL={project.coverMedia.link}
+                      // placeholder="blur"
                       alt={project[languageType].title}
-                      layout="fill"
-                      objectFit="cover"
+                      fill
+                      style={{ objectFit: "cover" }}
                       as="image"
                       priority
                     />
@@ -188,7 +188,7 @@ export default function CardGrid({ solutions, direction }) {
               <Link
                 className={language ? classes.details : classes.detailsReverse}
                 href={`/solutions/${replaceSpacesAndHyphens(
-                  project[languageType].title
+                  project[languageType].title,
                 )}`}
                 passHref
               >

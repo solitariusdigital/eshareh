@@ -10,7 +10,7 @@ import Progress from "@/components/Progress";
 import cover from "@/assets/therighthint/cover.png";
 import popup from "@/assets/therighthint/popup.png";
 import button from "@/assets/therighthint/button.png";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import starOne from "@/assets/therighthint/starOne.gif";
@@ -52,7 +52,7 @@ export default function Therighthint() {
 
   useEffect(() => {
     setCurrentString(
-      stingsArray[Math.floor(Math.random() * stingsArray.length)]
+      stingsArray[Math.floor(Math.random() * stingsArray.length)],
     );
   }, [stingsArray]);
 
@@ -146,8 +146,8 @@ export default function Therighthint() {
               blurDataURL={starOne}
               placeholder="blur"
               alt="star"
-              layout="responsive"
-              objectFit="contain"
+              fill
+              style={{ objectFit: "contain" }}
               as="image"
               unoptimized
             />
@@ -158,8 +158,8 @@ export default function Therighthint() {
               blurDataURL={starThree}
               placeholder="blur"
               alt="star"
-              layout="responsive"
-              objectFit="contain"
+              fill
+              style={{ objectFit: "contain" }}
               as="image"
               unoptimized
             />
@@ -170,8 +170,8 @@ export default function Therighthint() {
               blurDataURL={starFour}
               placeholder="blur"
               alt="star"
-              layout="responsive"
-              objectFit="contain"
+              fill
+              style={{ objectFit: "contain" }}
               as="image"
               unoptimized
             />
@@ -182,8 +182,8 @@ export default function Therighthint() {
               blurDataURL={starFive}
               placeholder="blur"
               alt="star"
-              layout="responsive"
-              objectFit="contain"
+              fill
+              style={{ objectFit: "contain" }}
               as="image"
               unoptimized
             />
@@ -194,8 +194,8 @@ export default function Therighthint() {
               blurDataURL={starOne}
               placeholder="blur"
               alt="star"
-              layout="responsive"
-              objectFit="contain"
+              fill
+              style={{ objectFit: "contain" }}
               as="image"
               unoptimized
             />
@@ -206,8 +206,8 @@ export default function Therighthint() {
               blurDataURL={starTwo}
               placeholder="blur"
               alt="star"
-              layout="responsive"
-              objectFit="contain"
+              fill
+              style={{ objectFit: "contain" }}
               as="image"
               unoptimized
             />
@@ -217,8 +217,8 @@ export default function Therighthint() {
             blurDataURL={cover}
             placeholder="blur"
             alt="cover"
-            layout="responsive"
-            objectFit="contain"
+            fill
+            style={{ objectFit: "contain" }}
             as="image"
             priority
           />
@@ -309,8 +309,8 @@ export default function Therighthint() {
                   blurDataURL={button}
                   placeholder="blur"
                   alt="button"
-                  layout="responsive"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                   as="image"
                   priority
                 />
@@ -344,8 +344,8 @@ export default function Therighthint() {
                 blurDataURL={starTwo}
                 placeholder="blur"
                 alt="star"
-                layout="responsive"
-                objectFit="contain"
+                fill
+                style={{ objectFit: "contain" }}
                 as="image"
                 unoptimized
               />
@@ -386,8 +386,8 @@ export default function Therighthint() {
               blurDataURL={popup}
               placeholder="blur"
               alt="popup"
-              layout="responsive"
-              objectFit="contain"
+              fill
+              style={{ objectFit: "contain" }}
               as="image"
               priority
             />
@@ -397,8 +397,8 @@ export default function Therighthint() {
                 blurDataURL={starTwo}
                 placeholder="blur"
                 alt="star"
-                layout="responsive"
-                objectFit="contain"
+                fill
+                style={{ objectFit: "contain" }}
                 as="image"
                 unoptimized
               />

@@ -1,7 +1,7 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./jobs.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import jobsImage from "@/assets/jobsImage.png";
 import { NextSeo } from "next-seo";
 import logoEnglish from "@/assets/logoEnglish.svg";
@@ -62,7 +62,7 @@ export default function Jobs({ jobs }) {
     // Filter out duplicates based on the 'type'
     jobTypes = jobTypes.filter(
       (jobType, index, self) =>
-        index === self.findIndex((t) => t.type === jobType.type)
+        index === self.findIndex((t) => t.type === jobType.type),
     );
     // Assign the unique jobTypes to setJobTypes
     setJobTypes(jobTypes);
@@ -85,7 +85,7 @@ export default function Jobs({ jobs }) {
         setDisplayJobs(jobs.filter((job) => job["fa"].department === type));
       } else {
         setDisplayJobs(
-          jobs.filter((job) => job["fa"].department === type && job.active)
+          jobs.filter((job) => job["fa"].department === type && job.active),
         );
       }
       jobTypes.forEach((t) => {
@@ -267,8 +267,8 @@ export default function Jobs({ jobs }) {
                   blurDataURL={jobsImage}
                   placeholder="blur"
                   alt="image"
-                  layout="responsive"
-                  objectFit="contain"
+                  fill
+                  style={{ objectFit: "contain" }}
                   as="image"
                   priority
                 />

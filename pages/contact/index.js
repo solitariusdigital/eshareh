@@ -1,7 +1,7 @@
 import { useContext, Fragment, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./contact.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { NextSeo } from "next-seo";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
@@ -94,8 +94,8 @@ export default function Contact({ pageData, mediaData }) {
             blurDataURL={mediaData.content[0].link}
             placeholder="blur"
             alt={mediaData.content[0].type}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             as="image"
             priority
           />
@@ -188,8 +188,8 @@ export default function Contact({ pageData, mediaData }) {
               placeholder="blur"
               alt={mediaData.content[1].type}
               as={mediaData.content[1].type}
-              layout="fill"
-              objectFit="contain"
+              fill
+              style={{ objectFit: "contain" }}
               unoptimized={mediaData.content[1].type === "gif"}
               priority
             />

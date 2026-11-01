@@ -5,7 +5,7 @@ import CoverSlider from "@/components/CoverSlider";
 import CardGrid from "@/components/CardGrid";
 import classes from "./home.module.scss";
 import Router from "next/router";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import arrow from "@/assets/arrow.svg";
 import moreArrow from "@/assets/moreArrow.svg";
 import moreArrowHover from "@/assets/moreArrowHover.svg";
@@ -224,12 +224,12 @@ export default function Home({
         <div className={classes.anime}>
           <Image
             src={mediaData.content[0].link}
-            blurDataURL={mediaData.content[0].link}
-            placeholder="blur"
+            // blurDataURL={mediaData.content[0].link}
+            // placeholder="blur"
             alt={mediaData.content[0].type}
             as={mediaData.content[0].type}
-            layout="fill"
-            objectFit="contain"
+            fill
+            style={{ objectFit: "contain" }}
             unoptimized={mediaData.content[0].type === "gif"}
             priority
           />
@@ -286,7 +286,7 @@ export default function Home({
               <div className={classes.icon}>
                 <Image
                   src={!hoverOne ? moreArrow : moreArrowHover}
-                  blurDataURL={!hoverOne ? moreArrow : moreArrowHover}
+                  // blurDataURL={!hoverOne ? moreArrow : moreArrowHover}
                   alt="image"
                   width={20}
                   priority
@@ -332,7 +332,7 @@ export default function Home({
               <div className={classes.icon}>
                 <Image
                   src={!hoverTwo ? moreArrow : moreArrowHover}
-                  blurDataURL={!hoverTwo ? moreArrow : moreArrowHover}
+                  // blurDataURL={!hoverTwo ? moreArrow : moreArrowHover}
                   alt="image"
                   width={20}
                   priority
@@ -378,7 +378,7 @@ export default function Home({
               <div className={classes.icon}>
                 <Image
                   src={!hoverThree ? moreArrow : moreArrowHover}
-                  blurDataURL={!hoverThree ? moreArrow : moreArrowHover}
+                  // blurDataURL={!hoverThree ? moreArrow : moreArrowHover}
                   alt="image"
                   width={20}
                   priority
@@ -391,12 +391,12 @@ export default function Home({
       <section className={classes.imageContainer}>
         <Image
           src={mediaData.content[1].link}
-          blurDataURL={mediaData.content[1].link}
-          placeholder="blur"
+          // blurDataURL={mediaData.content[1].link}
+          // placeholder="blur"
           alt={mediaData.content[1].type}
           as={mediaData.content[1].type}
-          layout="fill"
-          objectFit="contain"
+          fill
+          style={{ objectFit: "contain" }}
           unoptimized={mediaData.content[1].type === "gif"}
           priority
         />
@@ -404,8 +404,8 @@ export default function Home({
       <div className={classes.arrowDown}>
         <Image
           src={arrow}
-          blurDataURL={arrow}
-          placeholder="blur"
+          // blurDataURL={arrow}
+          // placeholder="blur"
           alt="image"
           width={40}
         />

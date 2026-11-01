@@ -10,7 +10,7 @@ import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import loaderImage from "@/assets/loader.png";
 import Router from "next/router";
 import {
@@ -347,7 +347,7 @@ export default function Cover({ covers }) {
                     className={classes.media}
                     width={170}
                     height={200}
-                    objectFit="contain"
+                    style={{ objectFit: "contain" }}
                     src={URL.createObjectURL(media)}
                     alt="image"
                     priority
@@ -500,8 +500,8 @@ export default function Cover({ covers }) {
                     blurDataURL={cover.coverMedia.link}
                     placeholder="blur"
                     alt={cover.title[languageType]}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: "cover" }}
                     as="image"
                     priority
                   />

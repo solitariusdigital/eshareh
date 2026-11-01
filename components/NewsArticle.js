@@ -2,7 +2,7 @@ import { useState, useContext, Fragment, useEffect, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./News.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Router from "next/router";
 import { NextSeo } from "next-seo";
 import logoEnglish from "@/assets/logoEnglish.svg";
@@ -377,8 +377,8 @@ export default function News({ news, newsTitle }) {
                               blurDataURL={image.link}
                               placeholder="blur"
                               alt={image.link}
-                              layout="fill"
-                              objectFit="cover"
+                              fill
+                              style={{ objectFit: "cover" }}
                               as="image"
                               priority
                             />
@@ -516,8 +516,8 @@ export default function News({ news, newsTitle }) {
                       placeholder="blur"
                       blurDataURL={news.media[news.media.length - 1].link}
                       alt={news[languageType].subtitle}
-                      layout="fill"
-                      objectFit="cover"
+                      fill
+                      style={{ objectFit: "cover" }}
                       as="image"
                       priority
                     />

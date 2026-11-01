@@ -2,7 +2,7 @@ import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./solutions.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { replaceSpacesAndHyphens, parsePersianDate } from "@/services/utility";
 import { NextSeo } from "next-seo";
 import dbConnect from "@/services/dbConnect";
@@ -234,8 +234,8 @@ export default function Solutions({
                         placeholder="blur"
                         blurDataURL={coverMedia.link}
                         alt={title}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{ objectFit: "cover" }}
                         as="image"
                         priority
                       />

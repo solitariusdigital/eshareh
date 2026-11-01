@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import classes from "./TaskBox.module.scss";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Tooltip from "@mui/material/Tooltip";
@@ -53,11 +53,11 @@ export default function ProjectCard({ projectId, onProjectChange }) {
   const fetchTasks = async () => {
     const tasksData = await getTasksApi();
     const filteredTasks = tasksData.filter(
-      (task) => task.projectId === projectId
+      (task) => task.projectId === projectId,
     );
     const enrichedTask = await enrichTaskWithUser(filteredTasks);
     setTaskDataDisplay(
-      enrichedTask.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
+      enrichedTask.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)),
     );
   };
 
@@ -159,10 +159,10 @@ export default function ProjectCard({ projectId, onProjectChange }) {
     if (confirm) {
       const tasksData = await getTasksApi();
       let tasksToDelete = tasksData.filter(
-        (task) => task.projectId === projectId
+        (task) => task.projectId === projectId,
       );
       const deletionPromises = tasksToDelete.map((task) =>
-        deleteTaskApi(task._id)
+        deleteTaskApi(task._id),
       );
       await Promise.all(deletionPromises);
       await deleteProjectApi(projectId);
@@ -308,8 +308,8 @@ export default function ProjectCard({ projectId, onProjectChange }) {
                         className={classes.image}
                         blurDataURL={task.userData.media}
                         src={task.userData.media}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{ objectFit: "cover" }}
                         alt="image"
                       />
                     </div>
@@ -322,7 +322,7 @@ export default function ProjectCard({ projectId, onProjectChange }) {
                       {task.userData.name.fa}
                     </h3>
                     {task.users.some((id) =>
-                      projectDataDisplay.adminsId.includes(id)
+                      projectDataDisplay.adminsId.includes(id),
                     ) && (
                       <Tooltip title="Project Admin">
                         <ShieldOutlinedIcon sx={{ fontSize: 18 }} />
@@ -335,7 +335,7 @@ export default function ProjectCard({ projectId, onProjectChange }) {
                         task.userData.title.fa,
                         "English",
                         "16px",
-                        "fa"
+                        "fa",
                       ),
                     }}
                   ></h4>
@@ -374,7 +374,7 @@ export default function ProjectCard({ projectId, onProjectChange }) {
                     >
                       {convertDate(task.dueDate).slice(
                         0,
-                        convertDate(task.dueDate).indexOf(",")
+                        convertDate(task.dueDate).indexOf(","),
                       )}
                     </p>
                   </div>

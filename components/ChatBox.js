@@ -1,7 +1,7 @@
 import { Fragment, useContext, useState, useEffect, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./ChatBox.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Tooltip from "@mui/material/Tooltip";
 import SendIcon from "@mui/icons-material/Send";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
@@ -606,8 +606,8 @@ export default function ChatBox({ floatChat }) {
                             className={classes.image}
                             src={chat.user.media}
                             blurDataURL={chat.user.media}
-                            layout="fill"
-                            objectFit="cover"
+                            fill
+                            style={{ objectFit: "cover" }}
                             alt="image"
                           />
                           {chat.senderId !== currentUser._id && (

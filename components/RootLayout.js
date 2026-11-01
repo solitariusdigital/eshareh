@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Router from "next/router";
 import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import logoLoadEnglish from "@/assets/logoLoadEnglish.svg";
 import logoLoadFarsi from "@/assets/logoLoadFarsi.svg";
 import arrowUp from "@/assets/arrowUp.svg";
@@ -98,13 +98,13 @@ export default function RootLayout({ children }) {
     const handleUserDataApi = async () => {
       try {
         const currentUser = JSON.parse(
-          secureLocalStorage.getItem("currentUser")
+          secureLocalStorage.getItem("currentUser"),
         );
         if (currentUser) {
           const userData = await getSingleUserApi(currentUser._id);
           const notificationRecords = await getNotificationApi();
           const hasNotification = notificationRecords.some(
-            (notification) => notification.userId === currentUser._id
+            (notification) => notification.userId === currentUser._id,
           );
           const updateUserData = {
             ...userData,
@@ -115,7 +115,7 @@ export default function RootLayout({ children }) {
           setPermissionControl(updateUserData.permission);
           secureLocalStorage.setItem(
             "currentUser",
-            JSON.stringify(updateUserData)
+            JSON.stringify(updateUserData),
           );
         }
         const colorObject = await getControlsApi();
@@ -197,8 +197,8 @@ export default function RootLayout({ children }) {
               }
             >
               <Image
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "cover" }}
                 src={arrowUp}
                 alt="logo"
                 as="image"
@@ -267,8 +267,8 @@ export default function RootLayout({ children }) {
                       className="image"
                       src={currentUser.media}
                       blurDataURL={currentUser.media}
-                      layout="fill"
-                      objectFit="cover"
+                      fill
+                      style={{ objectFit: "cover" }}
                       alt="image"
                       as="image"
                       priority
@@ -294,8 +294,8 @@ export default function RootLayout({ children }) {
           {loadImage && (
             <Image
               src={loadImage}
-              layout="fill"
-              objectFit="contain"
+              fill
+              style={{ objectFit: "contain" }}
               alt="logo"
               as="image"
               priority

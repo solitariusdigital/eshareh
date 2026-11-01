@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { createNewsApi, updateNewsApi } from "@/services/api";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import loaderImage from "@/assets/loader.png";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
@@ -728,7 +728,7 @@ export default function News() {
                   key={index}
                   width={300}
                   height={200}
-                  objectFit="contain"
+                  style={{ objectFit: "contain" }}
                   src={image.link}
                   alt="image"
                   priority

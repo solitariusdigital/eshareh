@@ -2,7 +2,7 @@ import { useState, useContext, Fragment, useEffect, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./solutions.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -61,7 +61,7 @@ export default function Solution({ solutions, projectTitle }) {
       try {
         let getCovers = await getCoversApi();
         const foundCover = getCovers.find(
-          (cover) => cover.title.en === project?.en.title
+          (cover) => cover.title.en === project?.en.title,
         );
         if (foundCover) {
           setCoverSlide(true);
@@ -83,7 +83,7 @@ export default function Solution({ solutions, projectTitle }) {
 
     if (permissionControl === "admin") {
       project = solutions.find(
-        (p) => p.en.title === projectTitle || p.fa.title === projectTitle
+        (p) => p.en.title === projectTitle || p.fa.title === projectTitle,
       );
       solutionsData = solutions;
     } else {
@@ -91,7 +91,7 @@ export default function Solution({ solutions, projectTitle }) {
         .filter((project) => project.active)
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       project = activeSolutions.find(
-        (p) => p.en.title === projectTitle || p.fa.title === projectTitle
+        (p) => p.en.title === projectTitle || p.fa.title === projectTitle,
       );
       solutionsData = activeSolutions;
     }
@@ -153,8 +153,8 @@ export default function Solution({ solutions, projectTitle }) {
         if (event.deltaY > 0) {
           Router.push(
             `/solutions/${replaceSpacesAndHyphens(
-              nextProject[languageType].title
-            )}`
+              nextProject[languageType].title,
+            )}`,
           );
           // Clean up the event listener and timeout
           window.removeEventListener("wheel", handleScrollDown);
@@ -334,7 +334,7 @@ export default function Solution({ solutions, projectTitle }) {
         await updateSolutionApi(dataObject);
         let getCovers = await getCoversApi();
         const foundCover = getCovers.find(
-          (cover) => cover.title.en === project.en.title
+          (cover) => cover.title.en === project.en.title,
         );
         // Update cover if found
         if (foundCover) {
@@ -404,7 +404,7 @@ export default function Solution({ solutions, projectTitle }) {
   const removeQuadruple = async (index) => {
     let media = [...project.media, project.mediaQuadruple[index]];
     let findIndex = project.mediaQuadruple.indexOf(
-      project.mediaQuadruple[index]
+      project.mediaQuadruple[index],
     );
     project.mediaQuadruple.splice(findIndex, 1);
     let dataObject = {
@@ -448,13 +448,13 @@ export default function Solution({ solutions, projectTitle }) {
             title={project[languageType].title}
             description={project[languageType].subtitle}
             canonical={`https://eshareh.com/solutions/${replaceSpacesAndHyphens(
-              project[languageType].title
+              project[languageType].title,
             )}`}
             openGraph={{
               type: "article",
               locale: "fa_IR",
               url: `https://eshareh.com/solutions/${replaceSpacesAndHyphens(
-                project[languageType].title
+                project[languageType].title,
               )}`,
               title: `${project[languageType].title}`,
               description: `${project[languageType].subtitle}`,
@@ -588,7 +588,7 @@ export default function Solution({ solutions, projectTitle }) {
                         project[languageType].brief,
                         "English",
                         "16px",
-                        language
+                        language,
                       ),
                     }}
                   ></h3>
@@ -647,8 +647,8 @@ export default function Solution({ solutions, projectTitle }) {
                             blurDataURL={image.link}
                             placeholder="blur"
                             alt={project[languageType].title}
-                            layout="fill"
-                            objectFit="contain"
+                            fill
+                            style={{ objectFit: "contain" }}
                             as="image"
                             priority
                           />
@@ -759,7 +759,7 @@ export default function Solution({ solutions, projectTitle }) {
                       )}
                     {image.type === "image" && (
                       <div
-                        style={{ aspectRatio: "16 / 9" }}
+                        style={{ aspectRatio: "16 / 9", position: "relative" }}
                         onClick={() => gallerySlider()}
                       >
                         <Image
@@ -772,8 +772,8 @@ export default function Solution({ solutions, projectTitle }) {
                           blurDataURL={image.link}
                           placeholder="blur"
                           alt={project[languageType].title}
-                          layout="fill"
-                          objectFit="cover"
+                          fill
+                          style={{ objectFit: "cover" }}
                           as="image"
                           priority
                         />
@@ -860,7 +860,7 @@ export default function Solution({ solutions, projectTitle }) {
                                 project[languageType].solution,
                                 "English",
                                 "16px",
-                                language
+                                language,
                               ),
                             }}
                           ></h3>
@@ -903,8 +903,8 @@ export default function Solution({ solutions, projectTitle }) {
                                 blurDataURL={image.link}
                                 placeholder="blur"
                                 alt={project[languageType].title}
-                                layout="fill"
-                                objectFit="cover"
+                                fill
+                                style={{ objectFit: "cover" }}
                                 as="image"
                                 priority
                               />
@@ -968,8 +968,8 @@ export default function Solution({ solutions, projectTitle }) {
                                   blurDataURL={image.link}
                                   placeholder="blur"
                                   alt={project[languageType].title}
-                                  layout="fill"
-                                  objectFit="cover"
+                                  fill
+                                  style={{ objectFit: "cover" }}
                                   as="image"
                                   priority
                                 />
@@ -1006,8 +1006,8 @@ export default function Solution({ solutions, projectTitle }) {
                     onClick={() =>
                       Router.push(
                         `/solutions/${replaceSpacesAndHyphens(
-                          previousProject[languageType].title
-                        )}`
+                          previousProject[languageType].title,
+                        )}`,
                       )
                     }
                   />
@@ -1017,8 +1017,8 @@ export default function Solution({ solutions, projectTitle }) {
                     onClick={() =>
                       Router.push(
                         `/solutions/${replaceSpacesAndHyphens(
-                          nextProject[languageType].title
-                        )}`
+                          nextProject[languageType].title,
+                        )}`,
                       )
                     }
                   />
@@ -1065,7 +1065,7 @@ export async function getServerSideProps(context) {
       props: {
         solutions: JSON.parse(JSON.stringify(solutions)),
         projectTitle: JSON.parse(
-          JSON.stringify(replaceSpacesAndHyphens(context.query.solutions))
+          JSON.stringify(replaceSpacesAndHyphens(context.query.solutions)),
         ),
       },
     };

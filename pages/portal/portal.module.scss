@@ -47,7 +47,6 @@
         position: relative;
         width: 65px;
         height: 65px;
-        margin-left: 30px;
         @include mixins.border-radius(50px);
       }
     }
@@ -90,6 +89,7 @@
         flex-direction: row-reverse;
         padding: 0px 24px;
       }
+
       .box {
         @include mixins.mobile {
           @include mixins.row-space-between-center();
@@ -111,10 +111,11 @@
 
       .item,
       .itemActive {
+        position: relative;
         display: flex;
         flex-direction: column;
-        text-align: center;
         justify-content: center;
+        align-items: center;
         color: config.$black;
         width: 65px;
         height: 65px;

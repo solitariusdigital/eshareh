@@ -1,7 +1,7 @@
 import { Fragment, useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Form.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";
 import { createSolutionApi, updateSolutionApi } from "@/services/api";
@@ -718,7 +718,7 @@ export default function Solutions() {
                   key={index}
                   width={300}
                   height={200}
-                  objectFit="contain"
+                  style={{ objectFit: "contain" }}
                   src={image.link}
                   alt="image"
                   priority

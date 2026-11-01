@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./CoverSlider.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { toFarsiNumber } from "@/services/utility";
 import Router from "next/router";
 import Progress from "@/components/Progress";
@@ -55,11 +55,11 @@ export default function CoverSlider({ covers }) {
                 {project.coverMedia.type === "image" ? (
                   <Image
                     src={project.coverMedia.link}
-                    blurDataURL={project.coverMedia.link}
-                    placeholder="blur"
+                    // blurDataURL={project.coverMedia.link}
+                    // placeholder="blur"
                     alt={project.title[languageType]}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: "cover" }}
                     as="image"
                     priority
                   />

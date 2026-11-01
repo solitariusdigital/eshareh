@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import CloseIcon from "@mui/icons-material/Close";
 import loaderImage from "@/assets/loader.png";
 import { updatePageApi, updateMediaApi } from "@/services/api";
@@ -798,7 +798,7 @@ export default function Home({ pages, mediaData }) {
                   className={classes.media}
                   width={170}
                   height={200}
-                  objectFit="contain"
+                  style={{ objectFit: "contain" }}
                   src={URL.createObjectURL(mediaOne)}
                   alt="image"
                   priority
@@ -869,7 +869,7 @@ export default function Home({ pages, mediaData }) {
                   className={classes.media}
                   width={170}
                   height={200}
-                  objectFit="contain"
+                  style={{ objectFit: "contain" }}
                   src={URL.createObjectURL(mediaTwo)}
                   alt="image"
                   priority

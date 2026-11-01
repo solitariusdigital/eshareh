@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import classes from "./Setting.module.scss";
 import Password from "./forms/Password";

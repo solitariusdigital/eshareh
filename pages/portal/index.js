@@ -1,7 +1,7 @@
 import { Fragment, useContext, useState, useEffect, useMemo } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./portal.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { NextSeo } from "next-seo";
 import Router from "next/router";
 import logoFarsi from "@/assets/logoFarsi.svg";
@@ -46,7 +46,7 @@ export default function Portal({ adminNews, activeNews }) {
 
   const [themeMode, setThemeMode] = useState("light");
   const [boardType, setBoardType] = useState(
-    "chat" || "tasks" || "news" || "setting" || "admin"
+    "chat" || "tasks" || "news" || "setting" || "admin",
   );
 
   const backgroundColor = useMemo(() => {
@@ -153,10 +153,10 @@ export default function Portal({ adminNews, activeNews }) {
   const handleClickMenu = (index, menuType) => {
     if (menuType === "top") {
       setMenuItemsTop((prev) =>
-        prev.map((item, idx) => ({ ...item, active: idx === index }))
+        prev.map((item, idx) => ({ ...item, active: idx === index })),
       );
       setMenuItemsBottom((prev) =>
-        prev.map((item) => ({ ...item, active: false }))
+        prev.map((item) => ({ ...item, active: false })),
       );
       menuItemsTop[index].onClick();
     } else if (menuType === "bottom") {
@@ -169,10 +169,13 @@ export default function Portal({ adminNews, activeNews }) {
       });
 
       setMenuItemsBottom((prev) =>
-        accessibleItems.map((item, idx) => ({ ...item, active: idx === index }))
+        accessibleItems.map((item, idx) => ({
+          ...item,
+          active: idx === index,
+        })),
       );
       setMenuItemsTop((prev) =>
-        prev.map((item) => ({ ...item, active: false }))
+        prev.map((item) => ({ ...item, active: false })),
       );
       accessibleItems[index].onClick();
     }
@@ -251,15 +254,18 @@ export default function Portal({ adminNews, activeNews }) {
                   <Image
                     className={classes.image}
                     src={currentUser.media}
-                    blurDataURL={currentUser.media}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: "cover" }}
                     alt="image"
                     as="image"
                     priority
                   />
                 </div>
-                <div>
+                <div
+                  style={{
+                    marginRight: "30px",
+                  }}
+                >
                   <h3
                     style={{
                       fontFamily: "FarsiBold",
@@ -332,8 +338,8 @@ export default function Portal({ adminNews, activeNews }) {
                               isHovered
                                 ? item.hoverSrc()
                                 : item.active || boardType === item.alt
-                                ? item.hoverSrc()
-                                : item.src()
+                                  ? item.hoverSrc()
+                                  : item.src()
                             }
                             alt={item.alt}
                           />
@@ -378,8 +384,8 @@ export default function Portal({ adminNews, activeNews }) {
                               isHovered
                                 ? item.hoverSrc()
                                 : item.active || boardType === item.alt
-                                ? item.hoverSrc()
-                                : item.src()
+                                  ? item.hoverSrc()
+                                  : item.src()
                             }
                             alt={item.alt}
                           />

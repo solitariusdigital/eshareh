@@ -59,6 +59,7 @@
     .imageBox {
       position: relative;
       width: 50%;
+      height: 550px;
 
       @include mixins.mobile {
         width: 100%;

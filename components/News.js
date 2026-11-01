@@ -4,7 +4,7 @@ import classes from "./News.module.scss";
 import { NextSeo } from "next-seo";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Tooltip from "@mui/material/Tooltip";
@@ -28,7 +28,7 @@ export default function News({ adminNews, activeNews, portal }) {
       .filter((news) => news.page === pageFilter)
       .sort(
         (a, b) =>
-          parsePersianDate(b.dateString) - parsePersianDate(a.dateString)
+          parsePersianDate(b.dateString) - parsePersianDate(a.dateString),
       );
     setNews(filteredAndSortedNews);
   }, [activeNews, adminNews, permissionControl, portal]);
@@ -82,7 +82,7 @@ export default function News({ adminNews, activeNews, portal }) {
                 } = news[0];
                 const lastMedia = media[media.length - 1];
                 const newsLink = `/news/${replaceSpacesAndHyphens(
-                  news[0][languageType].title
+                  news[0][languageType].title,
                 )}`;
                 return (
                   <Link
@@ -100,8 +100,8 @@ export default function News({ adminNews, activeNews, portal }) {
                           placeholder="blur"
                           blurDataURL={lastMedia.link}
                           alt={title}
-                          layout="fill"
-                          objectFit="cover"
+                          fill
+                          style={{ objectFit: "cover" }}
                           as="image"
                           priority
                         />
@@ -153,7 +153,7 @@ export default function News({ adminNews, activeNews, portal }) {
               const { media } = item;
               const lastMedia = media[media.length - 1];
               const newsLink = `/news/${replaceSpacesAndHyphens(
-                item[languageType].title
+                item[languageType].title,
               )}`;
               return (
                 <Link
@@ -185,8 +185,8 @@ export default function News({ adminNews, activeNews, portal }) {
                         placeholder="blur"
                         blurDataURL={lastMedia.link}
                         alt={title}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{ objectFit: "cover" }}
                         as="image"
                         priority
                       />

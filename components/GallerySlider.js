@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import classes from "./GallerySlider.module.scss";
 import Progress from "@/components/Progress";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -46,8 +46,8 @@ export default function GallerySlider({ media }) {
                       blurDataURL={image.link}
                       placeholder="blur"
                       alt={image.link}
-                      layout="fill"
-                      objectFit="contain"
+                      fill
+                      style={{ objectFit: "contain" }}
                       as="image"
                       priority
                     />

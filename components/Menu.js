@@ -5,7 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Router from "next/router";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import logoEnglish from "@/assets/logoEnglish.svg";
 import logoFarsi from "@/assets/logoFarsi.svg";
 import { CompactPicker } from "react-color";
@@ -111,8 +111,8 @@ export default function Menu() {
               <Link href="/" passHref>
                 <Image
                   className={classes.image}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                   src={language ? logoFarsi : logoEnglish}
                   alt="logo"
                   as="image"
@@ -340,8 +340,8 @@ export default function Menu() {
                 <Link href="/" passHref>
                   <Image
                     className={classes.image}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: "cover" }}
                     src={!language ? logoEnglish : logoFarsi}
                     alt="logo"
                     as="image"
