@@ -65,11 +65,11 @@ export async function uploadMedia(
   mediaId,
   mediaFolder,
   subFolder,
-  format
+  format,
 ) {
   const file = media;
   const res = await fetch(
-    `/api/upload?file=${mediaFolder}/${subFolder}/${mediaId}${format}`
+    `/api/upload?file=${mediaFolder}/${subFolder}/${mediaId}${format}`,
   );
   const { url, fields } = await res.json();
 
@@ -158,7 +158,7 @@ export function convertPersianToGregorian(persianDate) {
   const { day, month, year } = persianDate;
   const gregorianDate = moment(
     `${year}/${month}/${day} 00:00`,
-    "jYYYY/jM/jD HH:mm"
+    "jYYYY/jM/jD HH:mm",
   );
   return gregorianDate.format("YYYY-MM-DDTHH:mm:ssZ");
 }

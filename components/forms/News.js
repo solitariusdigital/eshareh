@@ -9,7 +9,7 @@ import loaderImage from "@/assets/loader.png";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import Tooltip from "@mui/material/Tooltip";
-import jalaali from "jalaali-js";
+import { toJalaali, toGregorian } from "jalaali-js";
 import {
   areAllStatesValid,
   extractParagraphs,
@@ -182,11 +182,11 @@ export default function News() {
   const transformDate = (date) => {
     const [day, month, year] = date.split("/").map(Number);
 
-    if (!jalaali.isValidJalaaliDate(year, month, day)) {
+    if (!toJalaali(year, month, day)) {
       throw new Error(`Invalid Jalali date: ${date}`);
     }
 
-    const { gy, gm, gd } = jalaali.toGregorian(year, month, day);
+    const { gy, gm, gd } = toGregorian(year, month, day);
     const en = new Date(gy, gm - 1, gd).toLocaleDateString("en-US", {
       month: "short",
       year: "numeric",
@@ -655,7 +655,7 @@ export default function News() {
                 style={{
                   fontFamily: "Farsi",
                 }}
-                id={index}
+                id={index + "desc"}
                 placeholder="..."
                 type="text"
                 value={field.fa.description}
@@ -670,7 +670,7 @@ export default function News() {
                   fontFamily: "Farsi",
                   marginBottom: "12px",
                 }}
-                id={index}
+                id={index + "word"}
                 placeholder="آژانس تبلیغاتی"
                 type="text"
                 value={field.fa.word}
@@ -682,7 +682,7 @@ export default function News() {
                   fontFamily: "English",
                   marginBottom: "12px",
                 }}
-                id={index}
+                id={index + "add"}
                 placeholder="Link address"
                 type="text"
                 value={field.fa.link}

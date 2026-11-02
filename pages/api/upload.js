@@ -1,22 +1,32 @@
-import aws from "aws-sdk";
-// upload media to s3 bucket on liara
-export default async function uploadHandler(req, res) {
-  res.setHeader("Cache-Control", "s-maxage=10");
-  aws.config.update({
-    endpoint: process.env.NEXT_PUBLIC_LIARA_ENDPOINT,
+const { S3Client } = require("@aws-sdk/client-s3");
+const { createPresignedPost } = require("@aws-sdk/s3-presigned-post");
+
+const client = new S3Client({
+  region: "default",
+  endpoint: process.env.NEXT_PUBLIC_LIARA_ENDPOINT,
+  forcePathStyle: true,
+  credentials: {
     accessKeyId: process.env.NEXT_PUBLIC_LIARA_ACCESS_KEY,
     secretAccessKey: process.env.NEXT_PUBLIC_LIARA_SECRET_KEY,
-    region: "default",
-  });
+  },
+});
 
-  const client = new aws.S3();
-  const post = await client.createPresignedPost({
-    Bucket: process.env.NEXT_PUBLIC_LIARA_BUCKET_NAME,
-    Fields: {
-      key: req.query.file,
-    },
-    ACL: "public-read",
-  });
+export default async function uploadHandler(req, res) {
+  res.setHeader("Cache-Control", "s-maxage=10");
 
-  res.status(200).json(post);
+  try {
+    const post = await createPresignedPost(client, {
+      Bucket: process.env.NEXT_PUBLIC_LIARA_BUCKET_NAME,
+      Key: req.query.file,
+      Fields: {
+        acl: "public-read",
+      },
+      Expires: 60,
+    });
+
+    res.status(200).json(post);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to create presigned post" });
+  }
 }
