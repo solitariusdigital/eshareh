@@ -55,8 +55,6 @@ export default function CoverSlider({ covers }) {
                 {project.coverMedia.type === "image" ? (
                   <Image
                     src={project.coverMedia.link}
-                    // blurDataURL={project.coverMedia.link}
-                    // placeholder="blur"
                     alt={project.title[languageType]}
                     fill
                     style={{ objectFit: "cover" }}

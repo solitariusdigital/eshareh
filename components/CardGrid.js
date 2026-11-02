@@ -59,8 +59,6 @@ export default function CardGrid({ solutions, direction }) {
                 <Image
                   className={classes.image}
                   src={solutions[0].coverMedia.link}
-                  // blurDataURL={solutions[0].coverMedia.link}
-                  // placeholder="blur"
                   alt={solutions[0][languageType].title}
                   fill
                   style={{ objectFit: "cover" }}
@@ -108,8 +106,6 @@ export default function CardGrid({ solutions, direction }) {
                         <Image
                           className={classes.image}
                           src={project.coverMedia.link}
-                          // blurDataURL={project.coverMedia.link}
-                          // placeholder="blur"
                           alt={project[languageType].title}
                           fill
                           style={{ objectFit: "cover" }}
@@ -166,8 +162,6 @@ export default function CardGrid({ solutions, direction }) {
                     <Image
                       className={classes.image}
                       src={project.coverMedia.link}
-                      // blurDataURL={project.coverMedia.link}
-                      // placeholder="blur"
                       alt={project[languageType].title}
                       fill
                       style={{ objectFit: "cover" }}

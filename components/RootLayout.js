@@ -266,7 +266,6 @@ export default function RootLayout({ children }) {
                     <Image
                       className="image"
                       src={currentUser.media}
-                      blurDataURL={currentUser.media}
                       fill
                       style={{ objectFit: "cover" }}
                       alt="image"

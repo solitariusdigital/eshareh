@@ -91,8 +91,6 @@ export default function Contact({ pageData, mediaData }) {
           <Image
             className={classes.image}
             src={mediaData.content[0].link}
-            blurDataURL={mediaData.content[0].link}
-            placeholder="blur"
             alt={mediaData.content[0].type}
             fill
             style={{ objectFit: "cover" }}
@@ -184,8 +182,6 @@ export default function Contact({ pageData, mediaData }) {
           <div className={classes.animeContainer}>
             <Image
               src={mediaData.content[1].link}
-              blurDataURL={mediaData.content[1].link}
-              placeholder="blur"
               alt={mediaData.content[1].type}
               as={mediaData.content[1].type}
               fill

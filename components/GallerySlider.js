@@ -43,8 +43,6 @@ export default function GallerySlider({ media }) {
                   {image.type === "image" ? (
                     <Image
                       src={image.link}
-                      blurDataURL={image.link}
-                      placeholder="blur"
                       alt={image.link}
                       fill
                       style={{ objectFit: "contain" }}

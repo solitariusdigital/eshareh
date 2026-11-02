@@ -177,7 +177,7 @@ export default function About({ pageData }) {
               onSlideChange={updateIndex}
               speed={1000}
               autoplay={{
-                delay: 500,
+                delay: 1000,
                 disableOnInteraction: true,
               }}
               // slideToClickedSlide={true}
@@ -186,8 +186,6 @@ export default function About({ pageData }) {
                 <SwiperSlide key={index} className={classes.swiperSlide}>
                   <Image
                     src={user.media}
-                    blurDataURL={user.media}
-                    placeholder="blur"
                     alt={user.name[languageType]}
                     fill
                     style={{ objectFit: "cover" }}

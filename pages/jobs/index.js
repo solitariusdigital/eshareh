@@ -209,9 +209,6 @@ export default function Jobs({ jobs }) {
                       <Image
                         className={classes.jobIcon}
                         src={screenSize === "mobile" ? nextYellow : next}
-                        blurDataURL={
-                          screenSize === "mobile" ? nextYellow : next
-                        }
                         alt="image"
                         width={10}
                         priority
@@ -264,8 +261,6 @@ export default function Jobs({ jobs }) {
                 <Image
                   className={classes.image}
                   src={jobsImage}
-                  blurDataURL={jobsImage}
-                  placeholder="blur"
                   alt="image"
                   fill
                   style={{ objectFit: "contain" }}

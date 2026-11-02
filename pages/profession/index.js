@@ -117,8 +117,6 @@ export default function Profession({ pageData, mediaData }) {
         >
           <Image
             src={mediaData.content[0].link}
-            blurDataURL={mediaData.content[0].link}
-            placeholder="blur"
             alt={mediaData.content[0].type}
             as={mediaData.content[0].type}
             fill

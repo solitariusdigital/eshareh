@@ -77,8 +77,6 @@ export default function NextProject({ project }) {
           <Image
             className={classes.image}
             src={project.coverMedia.link}
-            blurDataURL={project.coverMedia.link}
-            placeholder="blur"
             alt={project[languageType].title}
             fill
             style={{ objectFit: "cover" }}

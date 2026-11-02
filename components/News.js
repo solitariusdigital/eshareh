@@ -97,8 +97,6 @@ export default function News({ adminNews, activeNews, portal }) {
                       {lastMedia.type === "image" ? (
                         <Image
                           src={lastMedia.link}
-                          placeholder="blur"
-                          blurDataURL={lastMedia.link}
                           alt={title}
                           fill
                           style={{ objectFit: "cover" }}
@@ -182,8 +180,6 @@ export default function News({ adminNews, activeNews, portal }) {
                     {lastMedia.type === "image" ? (
                       <Image
                         src={lastMedia.link}
-                        placeholder="blur"
-                        blurDataURL={lastMedia.link}
                         alt={title}
                         fill
                         style={{ objectFit: "cover" }}

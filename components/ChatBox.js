@@ -605,7 +605,6 @@ export default function ChatBox({ floatChat }) {
                           <Image
                             className={classes.image}
                             src={chat.user.media}
-                            blurDataURL={chat.user.media}
                             fill
                             style={{ objectFit: "cover" }}
                             alt="image"

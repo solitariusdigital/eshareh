@@ -644,8 +644,6 @@ export default function Solution({ solutions, projectTitle }) {
                           <Image
                             className={classes.image}
                             src={image.link}
-                            blurDataURL={image.link}
-                            placeholder="blur"
                             alt={project[languageType].title}
                             fill
                             style={{ objectFit: "contain" }}
@@ -769,8 +767,6 @@ export default function Solution({ solutions, projectTitle }) {
                               : ""
                           }
                           src={image.link}
-                          blurDataURL={image.link}
-                          placeholder="blur"
                           alt={project[languageType].title}
                           fill
                           style={{ objectFit: "cover" }}
@@ -900,8 +896,6 @@ export default function Solution({ solutions, projectTitle }) {
                                     : classes.imageFrame
                                 }
                                 src={image.link}
-                                blurDataURL={image.link}
-                                placeholder="blur"
                                 alt={project[languageType].title}
                                 fill
                                 style={{ objectFit: "cover" }}
@@ -965,8 +959,6 @@ export default function Solution({ solutions, projectTitle }) {
                                       : ""
                                   }
                                   src={image.link}
-                                  blurDataURL={image.link}
-                                  placeholder="blur"
                                   alt={project[languageType].title}
                                   fill
                                   style={{ objectFit: "cover" }}

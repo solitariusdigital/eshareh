@@ -231,8 +231,6 @@ export default function Solutions({
                       <Image
                         className={classes.image}
                         src={coverMedia.link}
-                        placeholder="blur"
-                        blurDataURL={coverMedia.link}
                         alt={title}
                         fill
                         style={{ objectFit: "cover" }}

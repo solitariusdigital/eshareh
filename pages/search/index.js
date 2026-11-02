@@ -130,8 +130,6 @@ export default function Search({ activeSolutions }) {
                     {coverMedia.type === "image" ? (
                       <Image
                         src={coverMedia.link}
-                        placeholder="blur"
-                        blurDataURL={coverMedia.link}
                         alt={title}
                         fill
                         style={{ objectFit: "cover" }}

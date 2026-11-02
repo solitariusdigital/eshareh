@@ -306,7 +306,6 @@ export default function ProjectCard({ projectId, onProjectChange }) {
                     <div className={classes.image}>
                       <Image
                         className={classes.image}
-                        blurDataURL={task.userData.media}
                         src={task.userData.media}
                         fill
                         style={{ objectFit: "cover" }}

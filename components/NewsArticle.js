@@ -374,8 +374,6 @@ export default function News({ news, newsTitle }) {
                           {image.type === "image" ? (
                             <Image
                               src={image.link}
-                              blurDataURL={image.link}
-                              placeholder="blur"
                               alt={image.link}
                               fill
                               style={{ objectFit: "cover" }}
@@ -513,8 +511,6 @@ export default function News({ news, newsTitle }) {
                     <Image
                       className={classes.image}
                       src={news.media[news.media.length - 1].link}
-                      placeholder="blur"
-                      blurDataURL={news.media[news.media.length - 1].link}
                       alt={news[languageType].subtitle}
                       fill
                       style={{ objectFit: "cover" }}

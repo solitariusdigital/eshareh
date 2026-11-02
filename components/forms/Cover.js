@@ -497,8 +497,6 @@ export default function Cover({ covers }) {
                 {cover.coverMedia.type === "image" ? (
                   <Image
                     src={cover.coverMedia.link}
-                    blurDataURL={cover.coverMedia.link}
-                    placeholder="blur"
                     alt={cover.title[languageType]}
                     fill
                     style={{ objectFit: "cover" }}
