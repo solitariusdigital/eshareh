@@ -224,8 +224,6 @@ export default function Home({
         <div className={classes.anime}>
           <Image
             src={mediaData.content[0].link}
-            // blurDataURL={mediaData.content[0].link}
-            // placeholder="blur"
             alt={mediaData.content[0].type}
             as={mediaData.content[0].type}
             fill
@@ -286,7 +284,6 @@ export default function Home({
               <div className={classes.icon}>
                 <Image
                   src={!hoverOne ? moreArrow : moreArrowHover}
-                  // blurDataURL={!hoverOne ? moreArrow : moreArrowHover}
                   alt="image"
                   width={20}
                   priority
@@ -332,7 +329,6 @@ export default function Home({
               <div className={classes.icon}>
                 <Image
                   src={!hoverTwo ? moreArrow : moreArrowHover}
-                  // blurDataURL={!hoverTwo ? moreArrow : moreArrowHover}
                   alt="image"
                   width={20}
                   priority
@@ -378,7 +374,6 @@ export default function Home({
               <div className={classes.icon}>
                 <Image
                   src={!hoverThree ? moreArrow : moreArrowHover}
-                  // blurDataURL={!hoverThree ? moreArrow : moreArrowHover}
                   alt="image"
                   width={20}
                   priority
@@ -391,8 +386,6 @@ export default function Home({
       <section className={classes.imageContainer}>
         <Image
           src={mediaData.content[1].link}
-          // blurDataURL={mediaData.content[1].link}
-          // placeholder="blur"
           alt={mediaData.content[1].type}
           as={mediaData.content[1].type}
           fill
@@ -402,13 +395,7 @@ export default function Home({
         />
       </section>
       <div className={classes.arrowDown}>
-        <Image
-          src={arrow}
-          // blurDataURL={arrow}
-          // placeholder="blur"
-          alt="image"
-          width={40}
-        />
+        <Image src={arrow} alt="image" width={40} />
       </div>
       {solutions.length >= 10 && (
         <section className={classes.gridWorks}>
