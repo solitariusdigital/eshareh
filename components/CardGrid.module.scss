@@ -51,13 +51,6 @@
 
     .image {
       height: 100%;
-
-      &:hover {
-        @include mixins.background-anime();
-        & {
-          filter: none;
-        }
-      }
     }
 
     .video {
@@ -103,13 +96,6 @@
 
       .image {
         height: 100%;
-
-        &:hover {
-          @include mixins.background-anime();
-          & {
-            filter: none;
-          }
-        }
       }
 
       .video {
@@ -178,15 +164,6 @@
     .detailsReverse {
       text-align: left;
       direction: ltr;
-    }
-
-    .image {
-      &:hover {
-        @include mixins.background-anime();
-        & {
-          filter: none;
-        }
-      }
     }
 
     .video {
